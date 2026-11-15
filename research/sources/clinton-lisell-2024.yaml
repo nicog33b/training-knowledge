@@ -1,0 +1,21 @@
+id: clinton-lisell-2024
+title: "Learning styles matching: is it really a neuromyth? (meta-analysis)"
+authors:
+  - Clinton-Lisell
+  - Litzinger
+year: 2024
+venue: Frontiers in Psychology
+url: https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2024.1428732/full
+kind: meta-analysis
+verified: abstract
+retrieved: 2026-11-15
+summary: "Meta-análisis reciente: efecto promedio pequeño de igualar estilo,
+  pero casi sin el patrón cruzado que exige la hipótesis."
+facts:
+  - 21 estudios, 101 tamaños de efecto, 1.712 participantes; g global = 0.31 (IC
+    0.05-0.57).
+  - Solo 26% de las medidas mostró beneficio cruzado para al menos dos estilos
+    (lo que la hipótesis necesita).
+caveats:
+  - "Resultado promedio positivo pero frágil: no revierte la conclusión de
+    Pashler 2008; el título exacto es aproximado."

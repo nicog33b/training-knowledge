@@ -1,0 +1,12 @@
+questions:
+  - q: ¿Por qué una SCP no da permisos aunque diga Allow?
+    kind: por-que
+    uses:
+      - iam
+  - q: ¿Qué pasa si una SCP deniega una acción que la política IAM de un usuario permite?
+    kind: que-pasa-si
+    uses: []
+  - q: ¿Cómo darías acceso con un solo login a 50 cuentas de AWS?
+    kind: aplicar
+    uses: []
+sims: []

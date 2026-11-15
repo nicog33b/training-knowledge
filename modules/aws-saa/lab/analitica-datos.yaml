@@ -1,0 +1,11 @@
+questions:
+  - q: ¿Por qué Athena cobra por datos escaneados y cómo reduces el coste con Parquet y particiones?
+    kind: por-que
+    uses: []
+  - q: "Compara Athena y Redshift: ¿consultas puntuales o un almacén de datos constante?"
+    kind: comparar
+    uses: []
+  - q: ¿Qué hace Glue en un pipeline de datos de S3 a Athena?
+    kind: aplicar
+    uses: []
+sims: []

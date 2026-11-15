@@ -1,0 +1,12 @@
+questions:
+  - q: ¿Por qué la replicación de S3 exige tener el versionado activado?
+    kind: por-que
+    uses: []
+  - q: ¿Qué pasa con un objeto si borras sin indicar versión en un bucket versionado?
+    kind: que-pasa-si
+    uses: []
+  - q: "Compara SSE-S3, SSE-KMS y SSE-C: ¿quién controla la clave en cada uno?"
+    kind: comparar
+    uses:
+      - kms-cifrado
+sims: []

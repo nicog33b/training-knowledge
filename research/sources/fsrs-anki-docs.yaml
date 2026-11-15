@@ -1,0 +1,23 @@
+id: fsrs-anki-docs
+title: What spaced repetition algorithm does Anki use? (FSRS)
+authors: []
+year: 2025
+venue: Anki manual
+url: https://docs.ankiweb.net/faqs/what-spaced-repetition-algorithm
+kind: docs
+verified: secondary
+retrieved: 2026-11-15
+summary: FSRS permite fijar retención objetivo y suele requerir menos repasos
+  que SM-2 para igual retención.
+facts:
+  - FSRS se configura con retención deseada; más retención = más repasos diarios.
+  - "Documentación oficial: con FSRS se hacen menos repasos que con el algoritmo
+    por defecto para el mismo nivel de retención."
+  - Benchmarks de terceros (blogs) citan 20-30% menos repasos; no verificado en
+    el benchmark primario.
+caveats:
+  - El año es aproximado (documentación viva).
+  - Un usuario del foro de Anki reportó más repasos con FSRS bajo sus supuestos
+    (siempre 'Bien').
+  - Verificar cifras en el repositorio open-spaced-repetition antes de prometer
+    ahorros.

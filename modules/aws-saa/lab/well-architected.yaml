@@ -1,0 +1,11 @@
+questions:
+  - q: ¿Por qué el pilar de sostenibilidad se añadió como sexto pilar?
+    kind: por-que
+    uses: []
+  - q: Elige un pilar y di qué decisión de arquitectura lo mejora y cuál lo empeora.
+    kind: aplicar
+    uses: []
+  - q: "Compara fiabilidad y eficiencia del rendimiento: ¿qué pregunta responde cada uno?"
+    kind: comparar
+    uses: []
+sims: []

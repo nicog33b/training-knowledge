@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import { getData } from '../lib/data';
+const { modules } = await getData();
+const stats = modules.map((m) => {
+  const planned = Math.max(m.outline.sections.reduce((n, s) => n + s.topics.length, 0), m.topics.length);
+  const done = m.topics.filter((t) => t.status === 'done').length;
+  return { m, planned, done, pct: planned ? Math.round((done / planned) * 100) : 0 };
+});
+---
+<Base title="Training Knowledge">
+  <h1>Sistemas de aprendizaje</h1>
+  {stats.map(({ m, planned, done, pct }) => (
+    <div class="card">
+      <h2 style="margin:0"><a href={`/${m.manifest.id}/`}>{m.manifest.title}</a></h2>
+      <p class="muted" style="margin:.3rem 0 .6rem">{m.manifest.summary}</p>
+      <div class="bar"><i style={`width:${pct}%`}></i></div>
+      <p class="muted" style="margin:.4rem 0 0">{done}/{planned} subtemas · {m.glossary.length} términos · {pct}%</p>
+    </div>
+  ))}
+  <p><a href="/progreso/">Ver panel de progreso →</a></p>
+</Base>

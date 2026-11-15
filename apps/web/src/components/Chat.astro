@@ -1,0 +1,226 @@
+---
+/**
+ * Chat flotante del tutor: acompaña la lectura y sabe en qué curso/subtema está el alumno.
+ * Habla con apps/tutor-api (la clave nunca llega al navegador). El historial que devuelve
+ * el servidor se guarda tal cual por página (append-only → el caché de la API funciona).
+ * Decisión: research/decisions/preguntas-sugeridas-y-contexto-minimo.md
+ */
+interface Props { module: string; course: string; topic?: string; topicTitle?: string }
+const { module, course, topic, topicTitle } = Astro.props;
+const api = import.meta.env.PUBLIC_TUTOR_URL ?? 'http://127.0.0.1:4322';
+---
+<div id="tk-chat" data-module={module} data-topic={topic ?? ''} data-api={api}>
+  <button type="button" class="tk-fab" aria-expanded="false" aria-controls="tk-panel">💬 Pregúntale al tutor</button>
+  <section id="tk-panel" class="tk-panel" hidden aria-label="Chat con el tutor">
+    <header>
+      <div>
+        <strong>Tutor</strong>
+        <span class="tk-ctx" title="La IA recibe este subtema como contexto">{topicTitle ? `${topicTitle} · ${course}` : course}</span>
+      </div>
+      <div class="tk-actions">
+        <select class="tk-prov" aria-label="Modelo de IA" hidden></select>
+        <button type="button" class="tk-new" title="Empezar una conversación nueva">Nueva</button>
+        <button type="button" class="tk-close" aria-label="Cerrar">✕</button>
+      </div>
+    </header>
+    <ol class="tk-log" aria-live="polite"></ol>
+    <div class="tk-sel" hidden><span></span><button type="button" aria-label="Quitar fragmento">✕</button></div>
+    <form class="tk-form">
+      <textarea rows="2" maxlength="2000" placeholder={topicTitle ? `Tu duda sobre ${topicTitle}…` : 'Tu duda sobre el curso…'}></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+    <p class="tk-hint">Selecciona texto de la página para preguntar sobre ese fragmento. Enter envía · Shift+Enter salto de línea.</p>
+  </section>
+</div>
+
+<style is:global>
+  #tk-chat { position: fixed; right: 16px; bottom: 16px; z-index: 50; font-size: .93rem; }
+  #tk-chat button { font: inherit; cursor: pointer; }
+  .tk-fab { border: 0; border-radius: 99px; padding: .65rem 1.1rem; background: var(--accent); color: #fff; box-shadow: 0 4px 16px rgb(0 0 0 / .2); }
+  .tk-panel { width: min(400px, calc(100vw - 32px)); height: min(560px, calc(100vh - 32px)); display: flex; flex-direction: column;
+    background: var(--bg); border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 8px 32px rgb(0 0 0 / .22); overflow: hidden; }
+  .tk-panel[hidden] { display: none; }
+  .tk-panel header { display: flex; justify-content: space-between; align-items: center; gap: .5rem; padding: .6rem .8rem; background: var(--card); border-bottom: 1px solid var(--line); }
+  .tk-panel header > div:first-child { min-width: 0; display: flex; flex-direction: column; }
+  .tk-ctx { color: var(--muted); font-size: .8rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .tk-actions { display: flex; gap: .3rem; flex-shrink: 0; align-items: center; }
+  .tk-prov { font: inherit; font-size: .78rem; max-width: 8.5rem; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 8px; padding: .1rem .2rem; }
+  .tk-prov[hidden] { display: none; }
+  .tk-actions button, .tk-sel button { border: 1px solid var(--line); background: var(--bg); color: var(--fg); border-radius: 8px; padding: .15rem .55rem; }
+  .tk-log { flex: 1; overflow-y: auto; list-style: none; margin: 0; padding: .8rem; display: flex; flex-direction: column; gap: .6rem; }
+  .tk-log li { max-width: 88%; padding: .5rem .75rem; border-radius: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+  .tk-log li.user { align-self: flex-end; background: var(--accent); color: #fff; border-bottom-right-radius: 4px; }
+  .tk-log li.bot { align-self: flex-start; background: var(--card); border: 1px solid var(--line); border-bottom-left-radius: 4px; }
+  .tk-log li.err { align-self: stretch; max-width: none; border: 1px solid var(--warn); color: var(--fg); font-size: .85rem; }
+  .tk-log li.sys { align-self: center; color: var(--muted); font-size: .8rem; background: none; padding: 0; }
+  .tk-log li p { margin: 0 0 .4rem; } .tk-log li p:last-child { margin: 0; }
+  .tk-log li ul { margin: .2rem 0 .4rem; padding-left: 1.1rem; }
+  .tk-log li .meta { display: block; color: var(--muted); font-size: .72rem; margin-top: .3rem; }
+  .tk-log li.user .quote { display: block; opacity: .85; font-size: .8rem; border-left: 2px solid rgb(255 255 255 / .6); padding-left: .4rem; margin-bottom: .3rem; }
+  .tk-sel { display: flex; gap: .4rem; align-items: flex-start; margin: 0 .8rem; padding: .35rem .5rem; border-left: 3px solid var(--accent); background: var(--card); font-size: .8rem; color: var(--muted); }
+  .tk-sel[hidden] { display: none; }
+  .tk-sel span { flex: 1; max-height: 3.2em; overflow: hidden; }
+  .tk-form { display: flex; gap: .4rem; padding: .6rem .8rem .2rem; }
+  .tk-form textarea { flex: 1; resize: none; font: inherit; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 10px; padding: .45rem .6rem; }
+  .tk-form button { border: 0; border-radius: 10px; padding: 0 .9rem; background: var(--accent); color: #fff; }
+  .tk-form button:disabled { opacity: .5; cursor: default; }
+  .tk-hint { margin: 0; padding: .2rem .8rem .6rem; color: var(--muted); font-size: .72rem; }
+  @media (max-width: 520px) { #tk-chat { right: 8px; left: 8px; bottom: 8px; } .tk-fab { float: right; } .tk-panel { width: 100%; } }
+</style>
+
+<script>
+  type View = { role: 'user' | 'bot' | 'err' | 'sys'; text: string; quote?: string; meta?: string };
+  type State = { messages: any[]; view: View[] };
+
+  const root = document.getElementById('tk-chat')!;
+  const mod = root.dataset.module!;
+  const topic = root.dataset.topic || undefined;
+  const api = root.dataset.api!;
+  const key = `tk-chat:${mod}:${topic ?? ''}`;
+  const fab = root.querySelector<HTMLButtonElement>('.tk-fab')!;
+  const panel = root.querySelector<HTMLElement>('.tk-panel')!;
+  const log = root.querySelector<HTMLOListElement>('.tk-log')!;
+  const form = root.querySelector<HTMLFormElement>('.tk-form')!;
+  const input = form.querySelector('textarea')!;
+  const sendBtn = form.querySelector<HTMLButtonElement>('button')!;
+  const selBox = root.querySelector<HTMLElement>('.tk-sel')!;
+  const provSel = root.querySelector<HTMLSelectElement>('.tk-prov')!;
+
+  // localStorage puede faltar (modo privado): todo envuelto, la UI funciona igual.
+  const store = {
+    get<T>(k: string, d: T): T { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
+    set(k: string, v: unknown) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+    del(k: string) { try { localStorage.removeItem(k); } catch {} },
+  };
+  let state: State = store.get(key, { messages: [], view: [] });
+  let selection = '';
+  let busy = false;
+
+  // Markdown mínimo y seguro: se escapa todo y solo se reconstruyen **negrita**, `código` y listas.
+  const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
+  const inline = (s: string) => esc(s).replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  function md(text: string) {
+    const out: string[] = [];
+    let list: string[] = [];
+    const flush = () => { if (list.length) out.push(`<ul>${list.map((l) => `<li>${l}</li>`).join('')}</ul>`); list = []; };
+    for (const line of text.split('\n')) {
+      const m = line.match(/^\s*(?:[-*•]|\d+\.)\s+(.*)$/);
+      if (m) list.push(inline(m[1]));
+      else { flush(); if (line.trim()) out.push(`<p>${inline(line.replace(/^#+\s*/, ''))}</p>`); }
+    }
+    flush();
+    return out.join('');
+  }
+
+  function render() {
+    log.replaceChildren(...(state.view.length ? state.view : [{ role: 'sys', text: topic ? 'Pregunta lo que no te quede claro de este subtema.' : 'Pregunta lo que quieras del curso.' } as View]).map((v) => {
+      const li = document.createElement('li');
+      li.className = v.role;
+      if (v.role === 'bot') li.innerHTML = md(v.text);
+      else {
+        if (v.quote) { const q = document.createElement('span'); q.className = 'quote'; q.textContent = `«${v.quote}»`; li.append(q); }
+        li.append(v.text);
+      }
+      if (v.meta) { const m = document.createElement('span'); m.className = 'meta'; m.textContent = v.meta; li.append(m); }
+      return li;
+    }));
+    log.scrollTop = log.scrollHeight;
+  }
+  function save() { store.set(key, state); }
+  function setOpen(open: boolean) {
+    panel.hidden = !open;
+    fab.hidden = open;
+    fab.setAttribute('aria-expanded', String(open));
+    store.set('tk-chat-open', open); // se mantiene abierto al cambiar de página
+    if (open) { render(); input.focus(); }
+  }
+  function setSelection(s: string) {
+    selection = s.replace(/\s+/g, ' ').trim().slice(0, 1200);
+    selBox.hidden = !selection;
+    selBox.querySelector('span')!.textContent = selection ? `Sobre: «${selection}»` : '';
+  }
+
+  async function send(question: string) {
+    question = question.trim();
+    if (!question || busy) return;
+    busy = true;
+    sendBtn.disabled = true;
+    const quote = selection || undefined;
+    state.view.push({ role: 'user', text: question, quote: quote && quote.length > 140 ? quote.slice(0, 140) + '…' : quote });
+    const thinking: View = { role: 'sys', text: 'Pensando…' };
+    state.view.push(thinking);
+    render();
+    input.value = '';
+    setSelection('');
+    try {
+      const res = await fetch(`${api}/chat`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ module: mod, topic, question, selection: quote, history: state.messages, provider: provSel.value || undefined }),
+      });
+      const data = await res.json().catch(() => ({ error: `respuesta inválida (${res.status})` }));
+      state.view.splice(state.view.indexOf(thinking), 1);
+      if (!res.ok || data.error) state.view.push({ role: 'err', text: data.error ?? `error ${res.status}` });
+      else {
+        state.messages = data.messages;
+        const label = provSel.selectedOptions[0]?.dataset.label ?? data.provider;
+        const meta = [data.name ?? `${label} · ${data.model}`, data.read?.length ? `consultó: ${data.read.join(', ')}` : '', typeof data.cost === 'number' && data.cost > 0 ? `~$${data.cost.toFixed(4)}` : ''].filter(Boolean).join(' · ');
+        document.dispatchEvent(new CustomEvent('tk-spent'));
+        state.view.push({ role: 'bot', text: data.text, meta: meta || undefined });
+      }
+    } catch {
+      state.view.splice(state.view.indexOf(thinking), 1);
+      state.view.push({ role: 'err', text: `No conecto con el tutor en ${api}. Arráncalo con "pnpm dev" (web + tutor).` });
+    } finally {
+      busy = false;
+      sendBtn.disabled = false;
+      save();
+      render();
+    }
+  }
+
+  // Proveedores con clave en el servidor (Claude, ChatGPT, …). El historial sirve para todos.
+  async function loadProviders() {
+    try {
+      const j = await (await fetch(`${api}/health`)).json();
+      const list: { id: string; label: string; model: string }[] = j.providers ?? [];
+      const saved = store.get('tk-chat-provider', '');
+      provSel.replaceChildren(...list.map((p) => {
+        const o = document.createElement('option');
+        o.value = p.id;
+        o.textContent = p.label;
+        o.title = p.model;
+        o.dataset.label = p.label;
+        return o;
+      }));
+      if (list.some((p) => p.id === saved)) provSel.value = saved;
+      provSel.hidden = list.length < 2;
+    } catch { provSel.hidden = true; }
+  }
+  provSel.addEventListener('change', () => store.set('tk-chat-provider', provSel.value));
+  loadProviders();
+
+  fab.addEventListener('click', () => setOpen(true));
+  root.querySelector('.tk-close')!.addEventListener('click', () => setOpen(false));
+  root.querySelector('.tk-new')!.addEventListener('click', () => { state = { messages: [], view: [] }; store.del(key); render(); input.focus(); });
+  selBox.querySelector('button')!.addEventListener('click', () => setSelection(''));
+  form.addEventListener('submit', (e) => { e.preventDefault(); send(input.value); });
+  input.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(input.value); } });
+
+  // Fragmento seleccionado en el contenido (no dentro del propio chat).
+  document.addEventListener('mouseup', () => {
+    const s = window.getSelection();
+    const text = s?.toString() ?? '';
+    if (!text.trim() || !s?.anchorNode || root.contains(s.anchorNode)) return;
+    setSelection(text);
+  });
+
+  // Las preguntas sugeridas del laboratorio se mandan aquí (evento de Lab.astro).
+  document.addEventListener('tk-ask', (e) => {
+    const q = (e as CustomEvent<string>).detail;
+    setOpen(true);
+    send(q);
+  });
+
+  if (store.get('tk-chat-open', false)) setOpen(true);
+</script>

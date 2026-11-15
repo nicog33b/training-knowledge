@@ -1,0 +1,18 @@
+id: kobayashi-2019
+title: "Learning by Preparing-to-Teach and Teaching: A Meta-Analysis"
+authors:
+  - Kobayashi
+year: 2019
+venue: Japanese Psychological Research
+url: https://www.scinapse.io/papers/2886178087
+kind: meta-analysis
+verified: secondary
+retrieved: 2026-11-15
+summary: Estudiar para enseñar y enseñar mejora el aprendizaje, más si la
+  enseñanza es interactiva.
+facts:
+  - 28 estudios; g = 0.35 preparar-para-enseñar y g = 0.56 enseñar tras preparar.
+  - Mayor beneficio cuando se espera y se hace enseñanza interactiva que no
+    interactiva.
+caveats:
+  - Cifras de un listado de terceros (scinapse).

@@ -1,0 +1,27 @@
+id: bastani-2025
+title: "Generative AI without guardrails can harm learning: Evidence from high
+  school mathematics"
+authors:
+  - Bastani
+  - Bastani
+  - Sungu
+  - Ge
+  - Kabakcı
+  - Mariman
+year: 2025
+venue: PNAS 122
+url: https://econpapers.repec.org/RePEc:nas:journl:v:122:y:2025:p:e2422633122
+kind: rct
+verified: abstract
+retrieved: 2026-11-15
+summary: Una IA sin restricciones crea dependencia y empeora el rendimiento sin
+  ayuda; con guardrails el daño casi desaparece.
+facts:
+  - Experimento de campo con casi mil estudiantes de secundaria (matemáticas).
+  - "Acceso a un asistente tipo ChatGPT sin restricciones: peor desempeño al
+    quitar la IA (≈17% según resúmenes)."
+  - "Tutor con guardrails: efecto cercano a cero (mitiga el daño)."
+caveats:
+  - Cifra del 17% de resúmenes de terceros; lista de autores aproximada.
+  - "Un resumen mencionaba otro ensayo (2.379 alumnos, -0.37 SD) con atribución
+    dudosa: NO usar."

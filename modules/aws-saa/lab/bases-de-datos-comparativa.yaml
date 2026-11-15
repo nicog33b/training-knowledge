@@ -1,0 +1,44 @@
+questions:
+  - q: ¿Por qué DynamoDB escala mejor que RDS para millones de lecturas por clave?
+    kind: por-que
+    uses:
+      - dynamodb
+      - rds-aurora
+  - q: ¿Qué base eliges para un grafo de relaciones de una red social?
+    kind: aplicar
+    uses: []
+  - q: "Error común: ¿por qué Redshift no sirve como base transaccional de una tienda?"
+    kind: error-comun
+    uses: []
+sims:
+  - id: elige-base
+    title: Elige la base de datos
+    type: clasificar
+    prompt: ¿Qué servicio de base de datos encaja con cada caso?
+    categories:
+      - id: rds
+        label: RDS / Aurora
+      - id: dynamodb
+        label: DynamoDB
+      - id: redshift
+        label: Redshift
+      - id: neptune
+        label: Neptune
+      - id: elasticache
+        label: ElastiCache
+    items:
+      - text: Tienda con pedidos, joins y transacciones SQL
+        category: rds
+        why: Relacional OLTP con SQL y transacciones.
+      - text: Carrito de compra con millones de accesos por clave y latencia de ms
+        category: dynamodb
+        why: NoSQL clave-valor que escala horizontalmente.
+      - text: Informes analíticos sobre años de ventas (OLAP)
+        category: redshift
+        why: Data warehouse columnar para analítica.
+      - text: Recomendaciones de 'amigos de tus amigos'
+        category: neptune
+        why: Base de grafos.
+      - text: Guardar sesiones y resultados de consultas caras durante minutos
+        category: elasticache
+        why: Caché en memoria.

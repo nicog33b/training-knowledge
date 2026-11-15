@@ -1,0 +1,13 @@
+{
+  "name": "@tk/research",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@tk/contracts": "workspace:*",
+    "yaml": "^2.9.1"
+  }
+}

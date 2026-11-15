@@ -1,0 +1,77 @@
+questions:
+  - q: ¿Por qué una cola estándar puede entregar el mismo mensaje dos veces?
+    kind: por-que
+    uses: []
+  - q: ¿Qué pasa si el procesamiento tarda más que el visibility timeout?
+    kind: que-pasa-si
+    uses: []
+  - q: ¿En qué se diferencia SQS de SNS al entregar un mensaje a varios consumidores?
+    kind: comparar
+    uses:
+      - sns-fanout
+  - q: "Error común: ¿por qué subir el visibility timeout a 12 h no es la solución para trabajos que fallan?"
+    kind: error-comun
+    uses: []
+  - q: ¿Cómo escalarías los consumidores según el tamaño de la cola?
+    kind: aplicar
+    uses:
+      - asg
+sims:
+  - id: visibilidad-y-dlq
+    title: Visibility timeout y DLQ
+    type: predecir-observar
+    context: Un consumidor recibe un mensaje de una cola estándar. Ajusta cuánto tarda en procesarlo, el visibility timeout, si su código falla siempre con ese mensaje y el MaximumReceives de la redrive policy.
+    params:
+      - id: proceso
+        label: Tiempo de procesamiento
+        min: 5
+        max: 120
+        step: 5
+        default: 20
+        unit: s
+      - id: timeout
+        label: Visibility timeout
+        min: 5
+        max: 120
+        step: 5
+        default: 30
+        unit: s
+      - id: falla
+        label: ¿El consumidor falla con este mensaje? (0 = no, 1 = sí)
+        min: 0
+        max: 1
+        step: 1
+        default: 0
+      - id: max_receives
+        label: MaximumReceives
+        min: 1
+        max: 10
+        step: 1
+        default: 3
+    predict:
+      question: ¿Qué le pasa al mensaje?
+      options:
+        - id: una-vez
+          label: Se procesa una vez y se borra
+        - id: duplicado
+          label: Se vuelve visible y se procesa dos veces
+        - id: dlq
+          label: Acaba en la dead-letter queue
+    outcomes:
+      - when: falla == 1
+        answer: dlq
+        show: Cada fallo deja que el timeout venza y el mensaje vuelve a la cola; tras MaximumReceives recepciones, SQS lo mueve a la DLQ.
+      - when: proceso > timeout
+        answer: duplicado
+        show: "El timeout vence antes del DeleteMessage: el mensaje reaparece y otro consumidor lo procesa de nuevo."
+      - when: "1"
+        answer: una-vez
+        show: El consumidor termina y borra el mensaje antes de que venza el timeout.
+    explain:
+      prompt: Explica por qué pasó y cómo evitarías el duplicado sin perder mensajes.
+      rubric:
+        - El mensaje queda invisible solo durante el visibility timeout
+        - Si no se borra antes, vuelve a ser visible
+        - Se puede extender con ChangeMessageVisibility o subir el timeout por encima del tiempo de proceso
+        - El consumidor debe ser idempotente porque la cola estándar entrega al menos una vez
+        - La DLQ recoge los mensajes que superan MaximumReceives

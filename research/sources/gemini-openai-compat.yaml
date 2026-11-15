@@ -1,0 +1,17 @@
+id: gemini-openai-compat
+title: Gemini API OpenAI compatibility
+authors:
+  - Google
+year: 2026
+url: https://aistudio.google.com/docs/openai
+kind: docs
+verified: abstract
+retrieved: 2026-11-15
+summary: Gemini acepta peticiones en formato OpenAI en un endpoint compatible,
+  con function calling.
+facts:
+  - URL base https://generativelanguage.googleapis.com/v1beta/openai/; los
+    ejemplos de function calling usan tools con tool_choice 'auto'.
+caveats:
+  - "No documenta tool_choice 'none' ni da una tabla de equivalencias de
+    modelos: no fijamos modelo predeterminado para Gemini."

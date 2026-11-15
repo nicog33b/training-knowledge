@@ -1,0 +1,23 @@
+id: alfieri-2013
+title: "Learning Through Case Comparisons: A Meta-Analytic Review"
+authors:
+  - Alfieri
+  - Nokes-Malach
+  - Schunn
+year: 2013
+venue: Educational Psychologist
+url: https://www.lrdc.pitt.edu/Schunn/papers/ContrastingCasesMeta-AlfieriEtAl2013.pdf
+kind: meta-analysis
+verified: abstract
+retrieved: 2026-11-15
+summary: Comparar casos lado a lado supera a los métodos tradicionales; funciona
+  mejor si el principio se da después de comparar.
+facts:
+  - 57 experimentos, 336 pruebas; efecto medio d ≈ 0.50 (otro resumen dice 0.60).
+  - Mayor aprendizaje con contenido perceptual que procedimental, dando el
+    principio DESPUÉS de las comparaciones y con test inmediato.
+  - "Ejemplos concretos vs abstractos: evidencia mixta; depende del conocimiento
+    previo y de la calidad del ejemplo."
+caveats:
+  - Heterogeneidad significativa.
+  - "d = 0.50 vs 0.60: confirmar en el paper."

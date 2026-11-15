@@ -1,0 +1,42 @@
+questions:
+  - q: ¿Por qué Intelligent-Tiering conviene cuando no conoces el patrón de acceso?
+    kind: por-que
+    uses: []
+  - q: ¿Qué pasa si mueves a Glacier Deep Archive datos que necesitas leer en minutos?
+    kind: que-pasa-si
+    uses: []
+  - q: "Diseña una lifecycle rule para logs: frecuentes 30 días, raros 1 año, borrar a los 7 años."
+    kind: aplicar
+    uses: []
+sims:
+  - id: clase-de-s3
+    title: Elige la clase de almacenamiento
+    type: clasificar
+    prompt: ¿Qué clase de S3 eliges para cada dato?
+    categories:
+      - id: standard
+        label: Standard
+      - id: intelligent
+        label: Intelligent-Tiering
+      - id: one-zone-ia
+        label: One Zone-IA
+      - id: glacier-ir
+        label: Glacier Instant Retrieval
+      - id: deep-archive
+        label: Glacier Deep Archive
+    items:
+      - text: Imágenes de la web que se leen miles de veces al día
+        category: standard
+        why: Acceso frecuente y baja latencia.
+      - text: Datos de un data lake cuyo patrón de acceso nadie conoce
+        category: intelligent
+        why: Mueve los objetos entre niveles automáticamente y sin cargo de recuperación.
+      - text: Miniaturas que se pueden regenerar y casi no se leen
+        category: one-zone-ia
+        why: "Infrecuente y recreable: 1 AZ y más barata."
+      - text: Radiografías que se consultan una vez por trimestre pero deben abrirse en milisegundos
+        category: glacier-ir
+        why: Archivo con recuperación en ms.
+      - text: Registros que la ley obliga a guardar 10 años y nadie consulta
+        category: deep-archive
+        why: La más barata; recuperación en horas aceptable.

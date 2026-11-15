@@ -1,0 +1,26 @@
+id: wisniewski-2020
+title: "The Power of Feedback Revisited: A Meta-Analysis of Educational Feedback
+  Research"
+authors:
+  - Wisniewski
+  - Zierer
+  - Hattie
+year: 2020
+venue: Frontiers in Psychology 10, art. 3087
+url: https://pmc.ncbi.nlm.nih.gov/articles/PMC6987456
+kind: meta-analysis
+verified: abstract
+retrieved: 2026-11-15
+summary: El feedback tiene efecto medio (d≈0.48) y depende mucho de qué
+  información contiene.
+facts:
+  - 435 estudios; d ≈ 0.48 (menor que el 0.79 histórico de Hattie & Timperley
+    2007) con alta heterogeneidad.
+  - El contenido informativo del feedback modera mucho el efecto.
+  - Mayor efecto en resultados cognitivos y motores que en motivacionales o
+    conductuales.
+caveats:
+  - "NO verificado: la comparación feedback elaborado vs solo respuesta correcta
+    (requiere tablas de moderadores del paper)."
+  - Crítica en blog 'Visible Learning' discute estudios incluidos (fuente de
+    parte).

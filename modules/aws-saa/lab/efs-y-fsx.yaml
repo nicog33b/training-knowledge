@@ -1,0 +1,43 @@
+questions:
+  - q: ¿Por qué EFS sirve para varias instancias a la vez y EBS (en general) no?
+    kind: por-que
+    uses:
+      - ebs
+  - q: ¿Qué servicio eliges para un sistema de archivos compartido de servidores Windows con Active Directory?
+    kind: aplicar
+    uses: []
+  - q: "Error común: ¿por qué elegir EFS para un cluster HPC que procesa datos de S3 suele ser peor que FSx for Lustre?"
+    kind: error-comun
+    uses: []
+sims:
+  - id: almacenamiento-de-archivos
+    title: ¿EBS, EFS, FSx o S3?
+    type: clasificar
+    prompt: Elige el almacenamiento para cada necesidad.
+    categories:
+      - id: ebs
+        label: EBS
+      - id: efs
+        label: EFS
+      - id: fsx-windows
+        label: FSx for Windows
+      - id: fsx-lustre
+        label: FSx for Lustre
+      - id: s3
+        label: S3
+    items:
+      - text: Disco de arranque y datos de una única instancia
+        category: ebs
+        why: Disco de bloques de red para una instancia, atado a una AZ.
+      - text: Carpeta compartida por 20 servidores Linux en varias AZ
+        category: efs
+        why: NFS gestionado, multi-AZ y compartido por muchas instancias Linux.
+      - text: Recurso compartido SMB para servidores Windows unidos al dominio
+        category: fsx-windows
+        why: SMB nativo e integración con Active Directory.
+      - text: Simulación HPC que necesita cientos de GB/s leyendo datos de S3
+        category: fsx-lustre
+        why: Lustre es para HPC y se integra con S3.
+      - text: Guardar millones de imágenes subidas por usuarios y servirlas por HTTP
+        category: s3
+        why: Almacenamiento de objetos, prácticamente ilimitado, accesible por HTTP.

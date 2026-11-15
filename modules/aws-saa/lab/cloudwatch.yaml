@@ -1,0 +1,11 @@
+questions:
+  - q: ¿Por qué la memoria de una EC2 no aparece en CloudWatch por defecto?
+    kind: por-que
+    uses: []
+  - q: ¿Qué pasa con una alarma en estado INSUFFICIENT_DATA?
+    kind: que-pasa-si
+    uses: []
+  - q: ¿Cómo reiniciarías automáticamente una instancia cuando falla su status check?
+    kind: aplicar
+    uses: []
+sims: []

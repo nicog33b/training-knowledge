@@ -1,0 +1,23 @@
+id: pan-rickard-2018
+title: "Transfer of Test-Enhanced Learning: Meta-Analytic Review and Synthesis"
+authors:
+  - Pan
+  - Rickard
+year: 2018
+venue: Psychological Bulletin 144(7), 710-756
+url: https://sc-pan.github.io/pdf/PR_2018.pdf
+kind: meta-analysis
+verified: secondary
+retrieved: 2026-11-15
+summary: La práctica de recuperación también transfiere a preguntas nuevas, bajo
+  ciertas condiciones.
+facts:
+  - Efecto medio ponderado de transferencia d ≈ 0.40 (192 tamaños de efecto,
+    según resúmenes de terceros).
+  - Transferencia mayor con información no practicada vista en el estudio y con
+    problemas con ejemplos resueltos.
+  - Sin ninguno de los moderadores propuestos no aparece transferencia positiva.
+caveats:
+  - Solo se confirmó el título del PDF; cifras y moderadores vienen de
+    resúmenes. No se verificó que inferencias o feedback elaborado sean
+    moderadores.

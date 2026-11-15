@@ -1,0 +1,12 @@
+questions:
+  - q: ¿Por qué CloudTrail responde 'quién hizo qué' y Config 'cómo estaba configurado'?
+    kind: comparar
+    uses: []
+  - q: ¿Qué pasa si alguien abre un security group al 0.0.0.0/0 y tienes una regla de Config?
+    kind: que-pasa-si
+    uses: []
+  - q: ¿Cómo ejecutarías una Lambda cada noche a las 2:00?
+    kind: aplicar
+    uses:
+      - lambda
+sims: []

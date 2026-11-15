@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+import { wordCount } from '@tk/content';
+import { getData } from '../lib/data';
+const { modules, issues } = await getData();
+const rows = modules.map((m) => {
+  const byId = new Map(m.topics.map((t) => [t.id, t]));
+  const sections = m.outline.sections.map((s) => {
+    const ts = s.topics.map((o) => ({ ...o, t: byId.get(o.id) }));
+    return { ...s, ts, done: ts.filter((x) => x.t?.status === 'done').length };
+  });
+  const words = m.topics.reduce((n, t) => n + wordCount(t.body), 0);
+  return { m, sections, words, done: m.topics.filter((t) => t.status === 'done').length };
+});
+---
+<Base title="Progreso">
+  <h1>Panel de progreso</h1>
+  {issues.length > 0 && (
+    <div class="card"><strong>⚠ {issues.length} problemas de validación</strong>
+      <ul>{issues.map((i) => <li><code>{i.where}</code> {i.message}</li>)}</ul></div>
+  )}
+  {rows.map(({ m, sections, words, done }) => (
+    <section class="card">
+      <h2 style="margin:0"><a href={`/${m.manifest.id}/`}>{m.manifest.title}</a></h2>
+      <p class="muted">{done}/{m.topics.length} subtemas listos · {words.toLocaleString('es')} palabras · {m.ownGlossary.length} términos propios</p>
+      {sections.length === 0 && <p class="muted">Sin outline.yaml (usa <code>pnpm tk plan sync</code>).</p>}
+      <table>
+        <tbody>
+          {sections.map((s) => (
+            <>
+              <tr><th colspan="2">{s.title}</th><th style="width:90px">{s.done}/{s.ts.length}</th></tr>
+              {s.ts.map((x) => (
+                <tr>
+                  <td style="width:90px"><span class={`badge ${x.t?.status ?? 'todo'}`}>{x.t?.status ?? 'sin crear'}</span></td>
+                  <td>{x.t?.status === 'done' || x.t?.status === 'draft' ? <a href={`/${m.manifest.id}/${x.id}/`}>{x.title}</a> : x.title}</td>
+                  <td class="muted">{x.t ? wordCount(x.t.body) : 0} pal.</td>
+                </tr>
+              ))}
+            </>
+          ))}
+        </tbody>
+      </table>
+    </section>
+  ))}
+</Base>

@@ -1,0 +1,22 @@
+id: sailer-homner-2019
+title: "The Gamification of Learning: a Meta-analysis"
+authors:
+  - Sailer
+  - Homner
+year: 2019
+venue: Educational Psychology Review 32, 77-112
+url: https://opus.bibliothek.uni-augsburg.de/opus4/frontdoor/index/index/docId/109056
+kind: meta-analysis
+verified: abstract
+retrieved: 2026-11-15
+summary: La gamificación tiene efectos pequeños en lo cognitivo y menos estables
+  en motivación y conducta.
+facts:
+  - "Resumen de terceros: cognitivo g = 0.49, motivacional g = 0.36, conductual
+    g = 0.25 (38 publicaciones, 40 experimentos)."
+  - Ficción de juego e interacción social modulan el efecto conductual; competir
+    más colaborar parece ayudar.
+caveats:
+  - Los conteos difieren entre resúmenes; el paper no evaluó sesgo de
+    publicación.
+  - Publicado online 2019, volumen 2020.

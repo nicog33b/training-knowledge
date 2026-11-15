@@ -1,0 +1,12 @@
+questions:
+  - q: ¿Qué servicio usas para enviar emails transaccionales a gran escala?
+    kind: aplicar
+    uses: []
+  - q: Compara AWS Batch y Lambda para trabajos de 2 horas.
+    kind: comparar
+    uses:
+      - lambda
+  - q: ¿Cómo detectarías que el gasto del mes va a superar el presupuesto?
+    kind: aplicar
+    uses: []
+sims: []

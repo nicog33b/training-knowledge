@@ -1,0 +1,25 @@
+id: deslauriers-2019
+title: Measuring actual learning versus feeling of learning in response to being
+  actively engaged in the classroom
+authors:
+  - Deslauriers
+  - McCarty
+  - Miller
+  - Callaghan
+  - Kestin
+year: 2019
+venue: PNAS 116(39)
+url: https://openlab.citytech.cuny.edu/gamelab/files/2023/01/Deslauriersa-et-al-2019.pdf
+kind: experiment
+verified: abstract
+retrieved: 2026-11-15
+summary: Con aprendizaje activo se aprende más pero se SIENTE aprender menos; la
+  sensación de aprendizaje no es un buen indicador.
+facts:
+  - "Física universitaria: asignación aleatoria a instrucción activa vs pasiva."
+  - Alumnos activos aprendieron más pero reportaron aprender menos (el esfuerzo
+    cognitivo se lee como peor aprendizaje).
+  - Una breve explicación de la evidencia mejoró las actitudes hacia el
+    aprendizaje activo.
+caveats:
+  - No prueba releer ni 'dificultades deseables' de Bjork directamente.

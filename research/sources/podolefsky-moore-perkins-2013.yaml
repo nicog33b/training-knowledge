@@ -1,0 +1,25 @@
+id: podolefsky-moore-perkins-2013
+title: "Implicit scaffolding in interactive simulations: Design strategies to
+  support multiple educational goals"
+authors:
+  - Noah S. Podolefsky
+  - Emily B. Moore
+  - Katherine K. Perkins
+year: 2013
+venue: arXiv 1306.6544 (PhET, CU Boulder)
+url: https://arxiv.org/abs/1306.6544
+kind: theory
+verified: abstract
+retrieved: 2026-11-15
+summary: "Marco de diseño de PhET: guiar la exploración con affordances,
+  restricciones, señales y feedback del propio simulador, sin instrucciones
+  explícitas."
+facts:
+  - "El andamiaje implícito usa cuatro recursos: affordances (qué se puede
+    hacer), restricciones (qué no), señales que dirigen la atención y feedback
+    inmediato a cada acción."
+  - Surgió de diseñar y probar unos 125 simuladores PhET; busca a la vez
+    objetivos de contenido, de proceso y afectivos (agencia del alumno).
+caveats:
+  - Marco de diseño con datos de entrevistas, no un experimento comparativo con
+    grupo control.

@@ -1,0 +1,24 @@
+id: hardy-2026-autoscoring
+title: "Autoscoring Anticlimax: A Meta-analytic Understanding of AI's
+  Short-answer Shortcomings and Wording Weaknesses"
+authors:
+  - Michael Hardy
+year: 2026
+venue: Proc. AIME-Con 2026 (arXiv 2603.04820)
+url: https://arxiv.org/abs/2603.04820
+kind: meta-analysis
+verified: abstract
+retrieved: 2026-11-15
+summary: "Metaanálisis de 890 resultados: los LLM generativos corrigen
+  respuestas cortas peor que los modelos encoder entrenados y fallan en tareas
+  fáciles para humanos."
+facts:
+  - "890 resultados de estudios de corrección de respuestas cortas con LLM: los
+    decoder-only (tipo chat) rinden en promedio 0.37 menos de acuerdo con
+    humanos que los encoder ajustados."
+  - "La dificultad para correctores humanos no predijo el rendimiento del LLM:
+    algunas tareas fáciles para humanos fueron las más difíciles para el LLM."
+  - Reporta sensibilidad a la redacción y sesgo en contextos de alto impacto.
+caveats:
+  - La métrica exacta de la diferencia de 0.37 no se confirma en el abstract
+    (probablemente QWK).

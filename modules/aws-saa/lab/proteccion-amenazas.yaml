@@ -1,0 +1,43 @@
+questions:
+  - q: "Compara GuardDuty, Inspector y Macie: ¿qué detecta cada uno?"
+    kind: comparar
+    uses: []
+  - q: "¿Dónde pones WAF para bloquear inyección SQL: en un NLB o en un ALB?"
+    kind: aplicar
+    uses:
+      - elb
+  - q: ¿Por qué Shield Advanced incluye protección de costes por DDoS?
+    kind: por-que
+    uses: []
+sims:
+  - id: servicio-de-seguridad
+    title: ¿Qué servicio de seguridad?
+    type: clasificar
+    prompt: Elige el servicio para cada necesidad.
+    categories:
+      - id: guardduty
+        label: GuardDuty
+      - id: inspector
+        label: Inspector
+      - id: macie
+        label: Macie
+      - id: waf
+        label: WAF
+      - id: shield
+        label: Shield
+    items:
+      - text: Detectar una instancia que se comunica con IPs de minería de criptomonedas
+        category: guardduty
+        why: Detección de amenazas analizando VPC Flow Logs, DNS y CloudTrail.
+      - text: Encontrar CVE conocidas en tus instancias EC2 e imágenes de ECR
+        category: inspector
+        why: Escaneo de vulnerabilidades.
+      - text: Saber qué buckets de S3 contienen números de tarjeta o datos personales
+        category: macie
+        why: Descubre datos sensibles en S3 con ML.
+      - text: Bloquear peticiones con inyección SQL antes de llegar a la app
+        category: waf
+        why: Firewall de capa 7 en ALB, API Gateway o CloudFront.
+      - text: Proteger contra un ataque DDoS volumétrico de capa 3/4
+        category: shield
+        why: Protección DDoS (Standard gratis, Advanced con equipo de respuesta).

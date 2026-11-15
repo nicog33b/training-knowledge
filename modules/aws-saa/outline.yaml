@@ -1,0 +1,103 @@
+sections:
+  - id: fundamentos
+    title: 1 · Fundamentos y seguridad básica
+    topics:
+      - {id: infraestructura-global, title: Infraestructura global, summary: "Regiones, AZs y cómo lograr alta disponibilidad."}
+      - {id: iam, title: "IAM: usuarios, grupos y políticas", summary: "Identidades, permisos, políticas JSON, MFA, roles y herramientas de auditoría de IAM."}
+      - {id: aws-cli-sdk, title: AWS CLI y SDK, summary: "Cómo interactuar con AWS por línea de comandos y código: credenciales, perfiles, CloudShell y buenas prácticas."}
+  - id: computo
+    title: 2 · Cómputo con EC2
+    topics:
+      - {id: ec2-instancias, title: "EC2: instancias y modelos de compra", summary: "Tipos de instancia, AMI, user data y modelos de compra: on-demand, reservadas, spot, dedicated."}
+      - {id: ec2-red-y-placement, title: "EC2: red, seguridad y placement groups", summary: "Security groups, IPs, ENI, placement groups, hibernación y conexión a instancias."}
+  - id: almacenamiento-bloques
+    title: 3 · Almacenamiento de instancias
+    topics:
+      - {id: ebs, title: EBS e Instance Store, summary: "Volúmenes EBS, tipos, snapshots, cifrado, Multi-Attach e Instance Store."}
+      - {id: efs-y-fsx, title: EFS y FSx, summary: "Sistemas de archivos compartidos: EFS (NFS/Linux) y la familia FSx (Windows, Lustre, NetApp, OpenZFS)."}
+  - id: escalabilidad
+    title: 4 · Alta disponibilidad y escalabilidad
+    topics:
+      - {id: elb, title: Elastic Load Balancing, summary: "ALB, NLB, GWLB, CLB, sticky sessions, cross-zone, SSL/SNI y connection draining."}
+      - {id: asg, title: Auto Scaling Groups, summary: "Grupos de escalado, launch templates, políticas de escalado y ciclo de vida de instancias."}
+  - id: datos-relacionales
+    title: 5 · Bases de datos relacionales y caché
+    topics:
+      - {id: rds-aurora, title: RDS y Aurora, summary: "Bases relacionales gestionadas: Multi-AZ, réplicas de lectura, Aurora, RDS Proxy y backups."}
+      - {id: elasticache, title: ElastiCache, summary: "Redis y Memcached como caché en memoria y estrategias de caching."}
+  - id: dns
+    title: 6 · DNS
+    topics:
+      - {id: route53, title: Route 53, summary: "DNS gestionado: tipos de registro, políticas de enrutamiento y health checks."}
+  - id: red
+    title: 7 · VPC y redes
+    topics:
+      - {id: vpc-fundamentos, title: "VPC: fundamentos", summary: "CIDR, subredes, route tables, IGW, NAT, NACL, security groups y Flow Logs."}
+      - {id: vpc-conectividad, title: "VPC: conectividad", summary: "Peering, endpoints, PrivateLink, VPN, Direct Connect, Transit Gateway y IPv6."}
+  - id: s3
+    title: 8 · Amazon S3
+    topics:
+      - {id: s3-fundamentos, title: "S3: fundamentos y seguridad", summary: "Buckets, objetos, bucket policies, versionado, replicación y cifrado."}
+      - {id: s3-clases-y-avanzado, title: "S3: clases, ciclo de vida y avanzado", summary: "Clases de almacenamiento, lifecycle, rendimiento, eventos, Object Lock y Access Points."}
+  - id: entrega-global
+    title: 9 · Entrega de contenido y red global
+    topics:
+      - {id: cloudfront, title: CloudFront, summary: "CDN: orígenes, caché, OAC, Lambda@Edge, signed URLs y geo-restricción."}
+      - {id: global-accelerator, title: Global Accelerator, summary: "IPs anycast estáticas y enrutamiento por la red global de AWS; comparación con CloudFront."}
+  - id: almacenamiento-hibrido
+    title: 10 · Almacenamiento híbrido y transferencia
+    topics:
+      - {id: snow-y-transferencia, title: "Snow Family, Storage Gateway y DataSync", summary: "Mover datos a AWS: Snowcone/Snowball/Snowmobile, Storage Gateway, DataSync y Transfer Family."}
+  - id: integracion
+    title: 11 · Integración y mensajería
+    topics:
+      - {id: sqs, title: SQS, summary: "Colas gestionadas: estándar vs FIFO, visibilidad, long polling, DLQ y patrones."}
+      - {id: sns-fanout, title: SNS y fan-out, summary: "Pub/sub con SNS, patrón fan-out SNS+SQS, filtros y entrega de eventos."}
+      - {id: kinesis-mq, title: Kinesis y Amazon MQ, summary: "Streaming de datos en tiempo real con Kinesis, Firehose y brokers Amazon MQ."}
+  - id: contenedores
+    title: 12 · Contenedores
+    topics:
+      - {id: ecs-eks, title: "ECS, Fargate, ECR y EKS", summary: "Orquestación de contenedores en AWS, tipos de lanzamiento, roles y App Runner."}
+  - id: serverless
+    title: 13 · Serverless
+    topics:
+      - {id: lambda, title: AWS Lambda, summary: "Funciones sin servidor: límites, concurrencia, triggers, VPC, SnapStart y Lambda@Edge."}
+      - {id: dynamodb, title: DynamoDB, summary: "NoSQL gestionada: claves, capacidad, índices, DAX, streams, tablas globales y TTL."}
+      - {id: api-gateway, title: API Gateway, summary: "APIs REST/HTTP/WebSocket: integraciones, stages, autenticación, throttling y caché."}
+      - {id: cognito-stepfunctions, title: Cognito y Step Functions, summary: "Identidad de usuarios de aplicaciones y orquestación de flujos serverless."}
+  - id: datos-especializados
+    title: 14 · Bases de datos especializadas
+    topics:
+      - {id: bases-de-datos-comparativa, title: Comparativa de bases de datos, summary: "Cuándo usar RDS, Aurora, DynamoDB, ElastiCache, DocumentDB, Neptune, Keyspaces, QLDB, Timestream y Redshift."}
+  - id: analitica
+    title: 15 · Analítica y Machine Learning
+    topics:
+      - {id: analitica-datos, title: Servicios de analítica, summary: "Athena, EMR, Redshift, OpenSearch, Glue, Lake Formation, QuickSight, MSK y Managed Flink."}
+      - {id: machine-learning, title: Servicios de Machine Learning, summary: "Rekognition, Transcribe, Polly, Translate, Lex, Comprehend, SageMaker, Kendra, Textract y más."}
+  - id: monitoreo
+    title: 16 · Monitoreo y auditoría
+    topics:
+      - {id: cloudwatch, title: CloudWatch, summary: "Métricas, alarmas, logs, Logs Insights, Synthetics y Container/Lambda Insights."}
+      - {id: eventbridge-cloudtrail-config, title: "EventBridge, CloudTrail y Config", summary: "Eventos, auditoría de API y cumplimiento de configuración; X-Ray y Health."}
+  - id: seguridad
+    title: 17 · Seguridad avanzada
+    topics:
+      - {id: kms-cifrado, title: "KMS, CloudHSM y gestión de secretos", summary: "Cifrado con KMS, SSM Parameter Store, Secrets Manager, ACM y CloudHSM."}
+      - {id: proteccion-amenazas, title: Protección contra amenazas, summary: "Shield, WAF, Firewall Manager, GuardDuty, Inspector, Macie, Detective y Security Hub."}
+      - {id: identidad-organizaciones, title: "Organizations, IAM Identity Center y Control Tower", summary: "Multi-cuenta, SCP, federación, Directory Service y gobierno."}
+  - id: dr-migracion
+    title: 18 · Recuperación de desastres y migraciones
+    topics:
+      - {id: recuperacion-desastres, title: Recuperación de desastres, summary: "RPO/RTO, estrategias de DR, backups y AWS Backup, Elastic Disaster Recovery."}
+      - {id: migraciones, title: Migraciones, summary: "Las 7 R, DMS, SCT, Application Migration Service, Migration Hub y VMware Cloud."}
+  - id: otros
+    title: 19 · Otros servicios
+    topics:
+      - {id: cloudformation-y-ops, title: CloudFormation y operaciones, summary: "IaC con CloudFormation, CDK, Elastic Beanstalk, Systems Manager, OpsWorks."}
+      - {id: otros-servicios, title: Otros servicios relevantes, summary: "SES, Pinpoint, Batch, AppFlow, Amplify, Elastic Transcoder, Cost Explorer y más."}
+  - id: arquitectura
+    title: 20 · Arquitectura y examen
+    topics:
+      - {id: well-architected, title: Well-Architected Framework, summary: "Los seis pilares, principios de diseño y herramientas de revisión."}
+      - {id: arquitecturas-de-referencia, title: Arquitecturas de referencia, summary: "Patrones de soluciones: web escalable, serverless, event-driven, híbridas."}
+      - {id: consejos-examen, title: Estrategia y consejos del examen, summary: "Estructura del SAA-C03, dominios, trucos de eliminación y cheat sheet de decisión."}

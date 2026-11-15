@@ -1,0 +1,12 @@
+questions:
+  - q: Compara rehost, replatform y refactor con un ejemplo cada uno.
+    kind: comparar
+    uses: []
+  - q: ¿Por qué necesitas SCT además de DMS al migrar de Oracle a Aurora PostgreSQL?
+    kind: por-que
+    uses:
+      - rds-aurora
+  - q: ¿Qué servicio usas para migrar servidores físicos casi sin parada (lift-and-shift)?
+    kind: aplicar
+    uses: []
+sims: []

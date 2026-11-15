@@ -1,0 +1,11 @@
+questions:
+  - q: ¿Por qué a veces es más rápido enviar un Snowball por camión que subir por la red?
+    kind: por-que
+    uses: []
+  - q: "Compara DataSync y Storage Gateway: ¿migrar una vez o integrar de forma continua?"
+    kind: comparar
+    uses: []
+  - q: "Tienes 80 TB y una línea de 100 Mbps: ¿qué servicio usas y por qué?"
+    kind: aplicar
+    uses: []
+sims: []

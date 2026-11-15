@@ -1,0 +1,23 @@
+id: sinha-kapur-2021
+title: "When Problem Solving Followed by Instruction Works: Evidence for
+  Productive Failure"
+authors:
+  - Sinha
+  - Kapur
+year: 2021
+venue: Review of Educational Research
+url: https://doi.org/10.3102/00346543211019105
+kind: meta-analysis
+verified: abstract
+retrieved: 2026-11-15
+summary: Intentar el problema antes de la instrucción mejora el aprendizaje
+  conceptual (efecto moderado), con matices de edad y tipo de habilidad.
+facts:
+  - 53 estudios, 166 comparaciones; g sin corregir = 0.36 (IC 0.20-0.51) a favor
+    de resolver-antes-de-instrucción.
+  - "Diseños fieles a Productive Failure: g entre 0.37 y 0.58."
+  - Ajustado por sesgo de publicación g = 0.87 (tratar con cautela).
+  - "Contra-tendencia: alumnos de 2º a 5º grado y habilidades de dominio general
+    favorecieron instrucción primero."
+caveats:
+  - La cifra ajustada (0.87) es especulativa; usar 0.36 como referencia prudente.

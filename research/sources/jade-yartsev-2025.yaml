@@ -1,0 +1,22 @@
+id: jade-yartsev-2025
+title: ChatGPT for automated grading of short answer questions in mechanical
+  ventilation
+authors:
+  - Tejas Jade
+  - Alex Yartsev
+year: 2025
+venue: arXiv 2505.04645 (luego Focus on Health Professional Education 2026)
+url: https://arxiv.org/abs/2505.04645
+kind: experiment
+verified: abstract
+retrieved: 2026-11-15
+summary: GPT-4o corrigiendo 557 respuestas de posgrado coincidió mal con
+  humanos; mejor en ítems tipo checklist, peor en ítems evaluativos.
+facts:
+  - "557 respuestas de 215 alumnos: acuerdo individual pobre (ICC1 = 0.086;
+    kappa = -0.08) y notas 1.34/10 más bajas que el humano en promedio."
+  - "Fue consistente consigo mismo entre 5 sesiones (G = 0.87) pero divergente
+    del humano: >60 % de notas fuera del margen aceptable para alto impacto."
+  - Los ítems de rúbrica tipo checklist/prescriptivos tuvieron el menor
+    desacuerdo; los evaluativos/analíticos, el mayor.
+caveats: []

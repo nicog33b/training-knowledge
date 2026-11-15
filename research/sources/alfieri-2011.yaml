@@ -1,0 +1,26 @@
+id: alfieri-2011
+title: Does discovery-based instruction enhance learning?
+authors:
+  - Louis Alfieri
+  - Patricia J. Brooks
+  - Naomi J. Aldrich
+  - Harriet R. Tenenbaum
+year: 2011
+venue: Journal of Educational Psychology 103(1)
+url: https://www.fisme.science.uu.nl/publicaties/literatuur/2011_alfieri_discovery_learning.pdf
+kind: meta-analysis
+verified: secondary
+retrieved: 2026-11-15
+summary: El descubrimiento sin ayuda rinde peor que la instrucción explícita; el
+  descubrimiento guiado (con explicaciones pedidas, feedback, ejemplos) rinde
+  mejor que otras formas.
+facts:
+  - "164 estudios: descubrimiento sin asistencia vs instrucción explícita d =
+    -0.38 (favorece a la explícita), p < .001."
+  - Descubrimiento guiado ('enhanced') vs otras formas de instrucción d = 0.30,
+    p < .001.
+caveats:
+  - Cifras tomadas de una reseña (texasldcenter.org) y de resultados de
+    búsqueda; el PDF no se pudo leer (binario).
+  - Un reanálisis en RPubs sugiere sesgo de publicación (faltan estudios con
+    efecto negativo).

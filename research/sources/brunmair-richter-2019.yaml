@@ -1,0 +1,22 @@
+id: brunmair-richter-2019
+title: "Similarity matters: A meta-analysis of interleaved learning and its
+  moderators"
+authors:
+  - Brunmair
+  - Richter
+year: 2019
+venue: Psychological Bulletin 145(11), 1029-1052
+url: https://pubmed.ncbi.nlm.nih.gov/31556629/
+kind: meta-analysis
+verified: abstract
+retrieved: 2026-11-15
+summary: Intercalar ayuda (g≈0.42) sobre todo cuando las categorías son
+  parecidas entre sí; con texto expositivo y palabras, con cautela.
+facts:
+  - Efecto global moderado, Hedges g = 0.42 (estudios hasta junio 2018).
+  - Mayor efecto con mayor similitud ENTRE categorías, menor similitud DENTRO de
+    categorías y material más complejo.
+  - Cautela con textos expositivos y material de palabras (g = -0.39 en estudios
+    de palabras).
+caveats:
+  - No se obtuvieron las cifras exactas de similar vs distinto.

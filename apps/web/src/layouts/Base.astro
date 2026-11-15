@@ -1,0 +1,40 @@
+---
+import '@tk/render/term.css';
+import Chat from '../components/Chat.astro';
+import Header from '../components/Header.astro';
+interface Props { title: string; chat?: { module: string; course: string; topic?: string; topicTitle?: string } }
+const { title, chat } = Astro.props;
+---
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <style is:global>
+      :root { --bg:#fff; --fg:#1b1f2a; --muted:#667085; --card:#f6f7fb; --line:#e4e7ee; --accent:#4f46e5; --ok:#16a34a; --warn:#d97706; --todo:#98a2b3; }
+      @media (prefers-color-scheme: dark) {
+        :root { --bg:#0f1219; --fg:#e6e9f2; --muted:#98a2b3; --card:#171b26; --line:#272d3c; --accent:#8b8bff; --ok:#4ade80; --warn:#fbbf24; --todo:#667085; }
+      }
+      * { box-sizing: border-box; }
+      body { background:var(--bg); color:var(--fg); font-family: system-ui, sans-serif; margin:0; line-height:1.65; }
+      main { max-width: 860px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+      a { color: var(--accent); }
+      code { background: var(--card); padding: 0.1em 0.3em; border-radius: 4px; }
+      pre { background: var(--card); padding: 1rem; border-radius: 8px; overflow-x: auto; }
+      table { border-collapse: collapse; width: 100%; }
+      th, td { border-bottom: 1px solid var(--line); padding: .45rem .5rem; text-align:left; }
+      .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:1rem 1.2rem; margin:1rem 0; }
+      .bar { height:8px; border-radius:99px; background:var(--line); overflow:hidden; }
+      .bar > i { display:block; height:100%; background:var(--ok); }
+      .badge { font-size:.72rem; padding:.1rem .5rem; border-radius:99px; border:1px solid currentColor; vertical-align:middle; }
+      .badge.done { color:var(--ok); } .badge.draft { color:var(--warn); } .badge.todo { color:var(--todo); }
+      .muted { color:var(--muted); font-size:.9rem; }
+      ul.clean { list-style:none; padding:0; } ul.clean li { padding:.35rem 0; border-bottom:1px solid var(--line); }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main><slot /></main>
+    {chat && <Chat {...chat} />}
+  </body>
+</html>

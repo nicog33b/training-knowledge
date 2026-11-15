@@ -1,0 +1,20 @@
+id: sundararajan-adesope-2020
+title: "Keep it Coherent: A Meta-Analysis of the Seductive Details Effect"
+authors:
+  - Sundararajan
+  - Adesope
+year: 2020
+venue: Educational Psychology Review 32(3), 707-734
+url: https://news.wsu.edu/press-release/2020/03/19/seductive-details-inhibit-learning
+kind: meta-analysis
+verified: secondary
+retrieved: 2026-11-15
+summary: Los detalles atractivos pero irrelevantes empeoran el aprendizaje,
+  sobre todo en lecciones cortas y para novatos.
+facts:
+  - Quienes aprendieron con detalles seductores rindieron menos.
+  - Efecto notable en lecciones <5 min; sin efecto significativo en >10 min.
+  - Más perjudicial para novatos que para quienes tienen conocimiento previo.
+caveats:
+  - Fuente es nota de prensa de WSU; no se obtuvo el tamaño de efecto (g).
+  - Conteo de estudios discrepa entre fuentes (58 vs 68).

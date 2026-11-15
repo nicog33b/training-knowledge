@@ -1,0 +1,20 @@
+id: openai-costs-api-no-balance
+title: "OpenAI: sin endpoint de saldo; Costs API con clave Admin (foro de la
+  comunidad)"
+authors:
+  - OpenAI Developer Community
+year: 2026
+url: https://community.openai.com/t/api-for-prepaid-credit-amount-left/1369351
+kind: docs
+verified: secondary
+retrieved: 2026-11-15
+summary: OpenAI no ofrece un endpoint oficial de saldo prepagado; el gasto se
+  lee con GET /v1/organization/costs y una clave Admin.
+facts:
+  - Varios hilos del foro piden un endpoint de saldo restante; los de billing
+    devuelven 401/403 incluso con clave Admin.
+  - GET /v1/organization/costs da gasto en buckets diarios (agrupable por
+    proyecto) y exige clave Admin creada por el Owner de la organización.
+caveats:
+  - Fuente comunitaria, no documentación oficial; un usuario reportó 404 en
+    /organization/costs.

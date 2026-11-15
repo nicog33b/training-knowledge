@@ -1,0 +1,55 @@
+questions:
+  - q: ¿Por qué bajar el RTO casi siempre sube el coste?
+    kind: por-que
+    uses: []
+  - q: "Compara pilot light y warm standby: ¿qué está encendido en cada uno?"
+    kind: comparar
+    uses: []
+  - q: "Error común: ¿por qué tener backups no garantiza un RPO bajo?"
+    kind: error-comun
+    uses: []
+sims:
+  - id: estrategia-dr
+    title: Elige la estrategia de DR
+    type: predecir-observar
+    context: Tu negocio fija el RTO (cuánto puede estar caído). Mueve el RTO objetivo y predice cuál es la estrategia más barata que lo cumple.
+    params:
+      - id: rto_min
+        label: RTO objetivo
+        min: 0
+        max: 600
+        step: 5
+        default: 240
+        unit: min
+    predict:
+      question: ¿Cuál es la estrategia más barata que cumple ese RTO?
+      options:
+        - id: backup
+          label: Backup & Restore
+        - id: pilot
+          label: Pilot Light
+        - id: warm
+          label: Warm Standby
+        - id: multisite
+          label: Multi-Site (activo-activo)
+    outcomes:
+      - when: rto_min >= 120
+        answer: backup
+        show: "Con horas de margen basta restaurar desde backups: la opción más barata."
+      - when: rto_min >= 30
+        answer: pilot
+        show: "Decenas de minutos: el núcleo (base de datos replicada) ya está vivo y el resto se enciende."
+      - when: rto_min >= 5
+        answer: warm
+        show: "Minutos: una versión reducida pero funcional ya corre y solo hay que escalarla."
+      - when: "1"
+        answer: multisite
+        show: "RTO casi cero: hace falta un duplicado completo recibiendo tráfico."
+    explain:
+      prompt: Explica qué está encendido en la estrategia elegida y por qué cuesta lo que cuesta.
+      rubric:
+        - RTO es el tiempo máximo de caída aceptable
+        - "Backup & Restore no tiene nada encendido: horas de recuperación"
+        - Pilot Light mantiene vivo solo el núcleo, como la base de datos
+        - Warm Standby tiene todo el sistema funcionando a escala reducida
+        - Más infraestructura encendida significa menor RTO y mayor coste

@@ -1,0 +1,11 @@
+questions:
+  - q: ¿Por qué un placement group cluster da poca latencia pero más riesgo?
+    kind: por-que
+    uses: []
+  - q: ¿Qué pasa con la IP pública de una instancia al pararla y arrancarla, y cómo lo evitas?
+    kind: que-pasa-si
+    uses: []
+  - q: Compara placement groups cluster, spread y partition con un caso de uso cada uno.
+    kind: comparar
+    uses: []
+sims: []

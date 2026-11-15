@@ -1,0 +1,20 @@
+id: anthropic-admin-cost-api
+title: "Anthropic Admin API: Usage and Cost (analytics/cost y cost_report)"
+authors:
+  - Anthropic
+year: 2026
+url: https://platform.claude.com/docs/en/manage-claude/usage-cost-api
+kind: docs
+verified: secondary
+retrieved: 2026-11-15
+summary: Anthropic informa gasto e uso de la organización con clave de
+  administrador, pero no expone el saldo de créditos restante.
+facts:
+  - El gasto se lee con GET /v1/organizations/analytics/cost (o el legado
+    cost_report, diario hasta la última medianoche UTC) y requiere clave Admin
+    (sk-ant-admin) o una clave con alcance de organización.
+  - No se encontró ningún endpoint de saldo o créditos prepagados restantes; el
+    error de falta de saldo solo aparece al llamar a la API.
+caveats:
+  - Leído en la documentación incluida en la skill claude-api y resultados de
+    búsqueda; no en la página en vivo.

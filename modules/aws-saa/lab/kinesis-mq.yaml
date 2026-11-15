@@ -1,0 +1,83 @@
+questions:
+  - q: ¿Por qué Kinesis garantiza orden solo dentro de una partition key?
+    kind: por-que
+    uses: []
+  - q: ¿Qué pasa si todas tus escrituras usan la misma partition key?
+    kind: que-pasa-si
+    uses: []
+  - q: "Compara Data Streams y Firehose: ¿cuál eliges si necesitas reprocesar datos de ayer?"
+    kind: comparar
+    uses: []
+  - q: "Una app on-premises usa AMQP y no quieres reescribirla: ¿qué servicio usas?"
+    kind: aplicar
+    uses: []
+sims:
+  - id: shards-y-throttling
+    title: ¿Cuántos shards necesito?
+    type: predecir-observar
+    context: Un stream de Kinesis Data Streams en modo provisionado. Cada shard acepta hasta 1 MB/s de escritura. Ajusta el volumen que envían los productores y el número de shards (claves bien repartidas).
+    params:
+      - id: entrada
+        label: Escritura de los productores
+        min: 1
+        max: 20
+        step: 1
+        default: 3
+        unit: MB/s
+      - id: shards
+        label: Shards
+        min: 1
+        max: 10
+        step: 1
+        default: 4
+    predict:
+      question: ¿Qué pasa con las escrituras?
+      options:
+        - id: ok
+          label: Se aceptan todas
+        - id: throttle
+          label: Algunas se rechazan (ProvisionedThroughputExceeded)
+    outcomes:
+      - when: entrada > shards
+        answer: throttle
+        show: "Se superó 1 MB/s por shard: Kinesis rechaza escrituras con ProvisionedThroughputExceeded. Hay que añadir shards (o usar On-Demand)."
+      - when: "1"
+        answer: ok
+        show: La capacidad (shards × 1 MB/s) cubre la escritura.
+    explain:
+      prompt: Explica la regla de capacidad y qué harías si una sola clave concentra el tráfico.
+      rubric:
+        - Cada shard admite 1 MB/s o 1 000 registros/s de entrada
+        - Shards necesarios = escritura total / 1 MB/s
+        - Una partition key caliente satura un shard aunque sobre capacidad total
+        - "Solución: repartir mejor las claves, añadir shards o pasar a On-Demand"
+  - id: sqs-sns-kinesis
+    title: ¿SQS, SNS o Kinesis?
+    type: clasificar
+    prompt: Elige el servicio de integración para cada caso.
+    categories:
+      - id: sqs
+        label: SQS
+      - id: sns
+        label: SNS
+      - id: kinesis
+        label: Kinesis Data Streams
+    items:
+      - text: Un pedido debe avisar a la vez a facturación, envíos y analítica
+        category: sns
+        why: "Pub/sub: un publish, varios suscriptores (fan-out)."
+      - text: Absorber picos de pedidos para que los workers los procesen a su ritmo
+        category: sqs
+        why: Cola pull como buffer que desacopla productor y consumidor.
+      - text: Varias aplicaciones leen el mismo flujo de clics y hay que poder reprocesar el de ayer
+        category: kinesis
+        why: Stream con varios lectores, retención y replay.
+      - text: Telemetría IoT en tiempo real, ordenada por dispositivo
+        category: kinesis
+        why: Orden por partition key (dispositivo) dentro de cada shard.
+      - text: Tareas de vídeo que un solo worker debe procesar y luego borrar
+        category: sqs
+        why: Cada mensaje lo procesa un consumidor y se borra.
+      - text: Enviar un SMS y un email cuando salta una alarma de CloudWatch
+        category: sns
+        why: Push a email/SMS; las alarmas publican en SNS.

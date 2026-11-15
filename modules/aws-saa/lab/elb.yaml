@@ -1,0 +1,38 @@
+questions:
+  - q: ¿Por qué un NLB puede darte una IP estática por AZ y un ALB no?
+    kind: por-que
+    uses: []
+  - q: ¿Qué pasa con la IP del cliente cuando pasa por un ALB, y cómo la recupera la aplicación?
+    kind: que-pasa-si
+    uses: []
+  - q: "Error común: ¿por qué activar sticky sessions puede desequilibrar la carga?"
+    kind: error-comun
+    uses: []
+sims:
+  - id: tipo-de-balanceador
+    title: ¿ALB, NLB o GWLB?
+    type: clasificar
+    prompt: Elige el balanceador para cada caso.
+    categories:
+      - id: alb
+        label: ALB
+      - id: nlb
+        label: NLB
+      - id: gwlb
+        label: GWLB
+    items:
+      - text: Enrutar /api a un servicio y /img a otro
+        category: alb
+        why: "Enrutamiento por path es capa 7: ALB."
+      - text: Juego en tiempo real por UDP con millones de conexiones
+        category: nlb
+        why: NLB es capa 4 (TCP/UDP) y de muy alto rendimiento.
+      - text: Un cliente exige permitir en su firewall una IP fija por AZ
+        category: nlb
+        why: NLB tiene una IP estática (o Elastic IP) por AZ; ALB solo DNS.
+      - text: Pasar todo el tráfico por firewalls virtuales de terceros de forma transparente
+        category: gwlb
+        why: GWLB (GENEVE, capa 3) distribuye tráfico a appliances de inspección.
+      - text: Invocar funciones Lambda detrás de un endpoint HTTP con reglas por host
+        category: alb
+        why: ALB admite Lambda como destino y reglas por host.

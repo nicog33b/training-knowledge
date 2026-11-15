@@ -1,0 +1,12 @@
+questions:
+  - q: ¿Por qué conviene descartar primero las opciones con más carga operativa?
+    kind: por-que
+    uses: []
+  - q: Ante 'mínimo coste' y 'mínimo esfuerzo operativo' a la vez, ¿cómo decides?
+    kind: aplicar
+    uses: []
+  - q: "Error común: ¿qué palabras del enunciado indican que piden alta disponibilidad y no escalado?"
+    kind: error-comun
+    uses:
+      - rds-aurora
+sims: []

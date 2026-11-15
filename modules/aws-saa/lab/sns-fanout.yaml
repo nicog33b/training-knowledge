@@ -1,0 +1,16 @@
+questions:
+  - q: ¿Por qué el fan-out pone colas SQS entre SNS y los consumidores en vez de suscribirlos directo?
+    kind: por-que
+    uses:
+      - sqs
+  - q: ¿Qué pasa si un consumidor HTTP suscrito a SNS está caído cuando se publica?
+    kind: que-pasa-si
+    uses: []
+  - q: ¿Cómo harías que el servicio de facturación reciba solo pedidos de más de 100 €?
+    kind: aplicar
+    uses: []
+  - q: Compara SNS y EventBridge para enrutar eventos por contenido.
+    kind: comparar
+    uses:
+      - eventbridge-cloudtrail-config
+sims: []

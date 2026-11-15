@@ -1,0 +1,12 @@
+questions:
+  - q: ¿Por qué Fargate reduce el trabajo operativo frente a ECS sobre EC2?
+    kind: por-que
+    uses: []
+  - q: "Compara el task role y el execution role de ECS: ¿qué permite cada uno?"
+    kind: comparar
+    uses:
+      - iam
+  - q: "Tu empresa ya usa Kubernetes on-premises: ¿ECS o EKS, y por qué?"
+    kind: aplicar
+    uses: []
+sims: []

@@ -1,0 +1,25 @@
+id: cepeda-2008
+title: "Spacing effects in learning: A temporal ridgeline of optimal retention"
+authors:
+  - Cepeda
+  - Vul
+  - Rohrer
+  - Wixted
+  - Pashler
+year: 2008
+venue: Psychological Science 19(11)
+url: https://www.evullab.org/pdf/CepedaVulRohrerWixtedPashler-PS-2008.pdf
+kind: experiment
+verified: abstract
+retrieved: 2026-11-15
+summary: El intervalo óptimo entre sesiones crece con el tiempo que se quiere
+  retener; no hay regla de proporción fija.
+facts:
+  - 26 condiciones combinando separación entre estudios y retraso hasta el test.
+  - El hueco óptimo aumenta con el intervalo de retención.
+  - La regla popular '10-20% del intervalo' es una simplificación de terceros;
+    el propio paper dice que una proporción fija no se observa.
+  - "Resúmenes divergentes: 20-40% para test a 1 semana, 5-10% para test a 1
+    año."
+caveats:
+  - Leído parcialmente; confirmar cifras exactas en el PDF antes de citarlas.

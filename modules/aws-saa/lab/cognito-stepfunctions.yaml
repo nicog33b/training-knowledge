@@ -1,0 +1,13 @@
+questions:
+  - q: "¿Por qué hay dos piezas en Cognito: user pools e identity pools?"
+    kind: por-que
+    uses: []
+  - q: ¿Qué ventaja da Step Functions frente a encadenar Lambdas que se llaman entre sí?
+    kind: comparar
+    uses:
+      - lambda
+  - q: "Una app móvil necesita que cada usuario suba fotos a su carpeta de S3: ¿qué pieza de Cognito usas?"
+    kind: aplicar
+    uses:
+      - s3-fundamentos
+sims: []

@@ -1,0 +1,26 @@
+id: bisra-2018
+title: "Inducing Self-Explanation: a Meta-Analysis"
+authors:
+  - Bisra
+  - Liu
+  - Nesbit
+  - Salimi
+  - Winne
+year: 2018
+venue: Educational Psychology Review
+url: https://www.clearinghouse.edu.tum.de/wp-content/uploads/2023/09/CHU-KR-25_ENG_Bisra_2018_Selbsterklaerungen.pdf
+kind: meta-analysis
+verified: secondary
+retrieved: 2026-11-15
+summary: Pedir al alumno que se explique el material mejora el aprendizaje
+  (g≈0.55) y más si el prompt es concreto.
+facts:
+  - 69 tamaños de efecto de 64 informes; g medio = 0.55 (modelo de efectos
+    aleatorios).
+  - "Por tipo de prompt: interrogativo g = 0.56 (k=36), imperativo 0.40 (k=12),
+    predirigido 0.70 (k=8)."
+  - Los autores lo comparan en eficacia con tutoría entre pares y aprendizaje
+    por dominio.
+caveats:
+  - Fuente es la ficha del Clearinghouse Unterricht (TUM) sobre el paper, no el
+    paper.

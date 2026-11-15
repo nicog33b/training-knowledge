@@ -1,0 +1,20 @@
+id: anthropic-pricing-docs
+title: Claude API pricing and prompt caching (Anthropic docs)
+authors:
+  - Anthropic
+year: 2026
+url: https://platform.claude.com/docs/en/about-claude/pricing
+kind: docs
+verified: secondary
+retrieved: 2026-11-15
+summary: Precios por token de los modelos Claude; el caché de prompt cobra ~0.1x
+  por leer un prefijo repetido.
+facts:
+  - Haiku 5.5 cuesta $0.10 por millón de tokens de entrada y $0.50 de salida;
+    Opus 5.5 $4 / $20; Fable 5.2 $8 / $40.
+  - Sonnet 5.5 cuesta $2 / $10 por millón de tokens, con lectura de caché a $0.10.
+  - Leer un prefijo cacheado cuesta ~0.1x del precio de entrada; Batch API tiene
+    50 % de descuento.
+caveats:
+  - Tomado de la tabla cacheada en la skill claude-api (2026-11-03), no de la
+    página en vivo; verificar antes de presupuestar.

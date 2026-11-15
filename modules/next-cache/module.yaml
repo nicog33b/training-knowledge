@@ -1,0 +1,7 @@
+id: next-cache
+title: Caché de Next.js
+summary: Las capas de caché de Next.js (App Router) y cómo invalidarlas.
+kind: framework
+locale: es
+tags: [nextjs, caching]
+glossaries: []

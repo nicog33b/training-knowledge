@@ -1,0 +1,19 @@
+{
+  "name": "@tk/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "dev:fake": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@tk/content": "workspace:*",
+    "@tk/contracts": "workspace:*",
+    "@tk/render": "workspace:*",
+    "@tk/sims": "workspace:*",
+    "astro": "^7.4.10"
+  }
+}

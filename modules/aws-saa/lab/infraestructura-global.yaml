@@ -1,0 +1,15 @@
+questions:
+  - q: ¿Por qué desplegar en dos AZ protege contra un fallo que una sola AZ no puede cubrir?
+    kind: por-que
+    uses: []
+  - q: ¿Qué pasa si eliges una Región solo por precio y tus usuarios están en otro continente?
+    kind: que-pasa-si
+    uses: []
+  - q: ¿En qué se diferencian una Región, una AZ y una Edge Location en lo que alojan?
+    kind: comparar
+    uses: []
+  - q: En el modelo de responsabilidad compartida, ¿quién parchea el SO de una EC2 y quién el de RDS?
+    kind: aplicar
+    uses:
+      - rds-aurora
+sims: []

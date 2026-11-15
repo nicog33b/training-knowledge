@@ -1,0 +1,21 @@
+id: openai-gpt-6-luna-model
+title: GPT-6 Luna model page
+authors:
+  - OpenAI
+year: 2026
+url: https://developers.openai.com/api/docs/models/gpt-6-luna
+kind: docs
+verified: abstract
+retrieved: 2026-11-15
+summary: gpt-6-luna es un modelo de razonamiento; en Chat Completions solo
+  admite function calling con reasoning_effort none.
+facts:
+  - "Endpoints: Chat Completions, Responses y Batch; contexto 1.05M tokens,
+    salida máx. 128K."
+  - "Chat Completions admite function calling solo cuando reasoning effort es
+    'none' (valores: none, low, medium, high, xhigh, max; por defecto medium)."
+  - Precio de escritura de caché $0.125 por millón; prompts >272K cuestan 2x
+    entrada y 1.5x salida.
+caveats:
+  - La página no dice si se usa max_completion_tokens o max_tokens; usamos
+    max_completion_tokens (el recomendado para modelos de razonamiento).

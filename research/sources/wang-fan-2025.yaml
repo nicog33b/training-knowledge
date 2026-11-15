@@ -1,0 +1,24 @@
+id: wang-fan-2025
+title: "The effect of ChatGPT on students' learning performance, learning
+  perception, and higher-order thinking: a meta-analysis"
+authors:
+  - Wang
+  - Fan
+year: 2025
+venue: Humanities and Social Sciences Communications 12
+url: https://ideas.repec.org/a/pal/palcom/v12y2025i1d10.1057_s41599-025-04787-y.html
+kind: meta-analysis
+verified: secondary
+retrieved: 2026-11-15
+summary: Meta-análisis de ChatGPT en educación; efectos grandes en rendimiento
+  inmediato pero base pequeña para pensamiento de orden superior.
+facts:
+  - "51 estudios (nov 2022 a feb 2025): rendimiento g = 0.867; percepción g =
+    0.456; pensamiento de orden superior g = 0.457."
+  - El efecto en pensamiento de orden superior depende del tipo de curso y del
+    rol de ChatGPT.
+caveats:
+  - Cifras de resúmenes de terceros; el análisis de pensamiento superior se
+    apoyaría en ~9 estudios.
+  - "Probable inflación por diseños de corto plazo y medidas con IA disponible:
+    contrastar con bastani-2025 (daño sin guardrails)."

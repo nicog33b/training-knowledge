@@ -1,0 +1,11 @@
+questions:
+  - q: ¿Por qué CloudShell no necesita que configures credenciales?
+    kind: por-que
+    uses: []
+  - q: ¿Qué pasa si subes a un repositorio público el archivo ~/.aws/credentials?
+    kind: que-pasa-si
+    uses: []
+  - q: ¿Cómo elegirías un perfil distinto para cada cuenta desde la CLI?
+    kind: aplicar
+    uses: []
+sims: []

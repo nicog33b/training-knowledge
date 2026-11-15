@@ -1,0 +1,15 @@
+questions:
+  - q: ¿Por qué se prefiere un rol a guardar access keys dentro de una EC2?
+    kind: por-que
+    uses: []
+  - q: ¿Qué pasa si una política permite una acción y otra la deniega explícitamente?
+    kind: que-pasa-si
+    uses: []
+  - q: ¿En qué se diferencia una política de identidad de una política de recurso?
+    kind: comparar
+    uses:
+      - s3-fundamentos
+  - q: "Error común: ¿por qué usar el usuario root para el día a día es un problema aunque tenga MFA?"
+    kind: error-comun
+    uses: []
+sims: []

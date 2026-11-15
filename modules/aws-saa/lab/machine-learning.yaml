@@ -1,0 +1,11 @@
+questions:
+  - q: ¿Qué servicio usas para extraer texto y tablas de facturas escaneadas?
+    kind: aplicar
+    uses: []
+  - q: "Compara Comprehend y Kendra: ¿analizar sentimiento o buscar en documentos?"
+    kind: comparar
+    uses: []
+  - q: ¿Por qué elegir SageMaker en vez de un servicio de IA ya entrenado?
+    kind: por-que
+    uses: []
+sims: []

@@ -1,0 +1,20 @@
+---
+import Base from '../../layouts/Base.astro';
+import { renderMarkdown } from '@tk/render';
+import { getData } from '../../lib/data';
+import Lab from '../../components/Lab.astro';
+export async function getStaticPaths() {
+  const { modules } = await getData();
+  return modules.flatMap((m) =>
+    m.topics.map((t) => ({ params: { module: m.manifest.id, topic: t.id }, props: { m, t } })),
+  );
+}
+const { m, t } = Astro.props;
+const { html } = await renderMarkdown(t.body, m.glossary);
+---
+<Base title={t.title} chat={{ module: m.manifest.id, course: m.manifest.title, topic: t.id, topicTitle: t.title }}>
+  <p><a href={`/${m.manifest.id}/`}>← {m.manifest.title}</a></p>
+  <h1>{t.title}</h1>
+  <article set:html={html} />
+  <Lab lab={t.lab} moduleId={m.manifest.id} topicId={t.id} />
+</Base>

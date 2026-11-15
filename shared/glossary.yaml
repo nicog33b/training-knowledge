@@ -1,0 +1,12 @@
+- term: API
+  aliases: []
+  definition: Application Programming Interface. Contrato por el cual un programa expone funciones a otro.
+  see: []
+- term: Latencia
+  aliases: [latency]
+  definition: Tiempo que tarda una petición en recibir respuesta.
+  see: []
+- term: TTL
+  aliases: [Time To Live]
+  definition: Time To Live. Duración tras la cual un dato guardado se considera vencido.
+  see: []

@@ -1,0 +1,54 @@
+questions:
+  - q: ¿Por qué un cold start afecta más a Java que a Python y cómo lo mitiga SnapStart?
+    kind: por-que
+    uses: []
+  - q: ¿Qué pasa si una función tarda más de 15 minutos?
+    kind: que-pasa-si
+    uses: []
+  - q: "Compara reserved y provisioned concurrency: ¿cuál evita cold starts?"
+    kind: comparar
+    uses: []
+  - q: "Error común: ¿por qué poner una Lambda en una VPC privada le quita salida a Internet?"
+    kind: error-comun
+    uses:
+      - vpc-fundamentos
+sims:
+  - id: concurrencia
+    title: Concurrencia y throttling
+    type: predecir-observar
+    context: Una API invoca una función de forma síncrona. La concurrencia necesaria es aproximadamente peticiones por segundo × duración. La cuenta tiene el límite por defecto de 1 000 ejecuciones concurrentes en la Región.
+    params:
+      - id: rps
+        label: Peticiones por segundo
+        min: 50
+        max: 2000
+        step: 50
+        default: 200
+      - id: duracion
+        label: Duración media
+        min: 0.5
+        max: 5
+        step: 0.5
+        default: 1
+        unit: s
+    predict:
+      question: ¿Qué reciben los clientes en el pico?
+      options:
+        - id: ok
+          label: Todas las respuestas bien
+        - id: throttle
+          label: Parte recibe error 429 (throttling)
+    outcomes:
+      - when: rps * duracion > 1000
+        answer: throttle
+        show: "Se necesitan más de 1 000 ejecuciones simultáneas: las invocaciones síncronas que sobran reciben 429."
+      - when: "1"
+        answer: ok
+        show: La concurrencia necesaria cabe en el límite de 1 000.
+    explain:
+      prompt: Explica el cálculo y dos formas de resolver el throttling.
+      rubric:
+        - Concurrencia = peticiones por segundo × duración
+        - El límite por defecto es 1 000 por Región y se puede ampliar
+        - Las invocaciones síncronas devuelven 429; las asíncronas se reintentan
+        - Reducir la duración, pedir más límite o poner una cola SQS delante

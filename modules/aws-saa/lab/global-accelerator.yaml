@@ -1,0 +1,12 @@
+questions:
+  - q: ¿Por qué Global Accelerator mejora la latencia aunque no cachee nada?
+    kind: por-que
+    uses: []
+  - q: Compara Global Accelerator y CloudFront para un juego por UDP.
+    kind: comparar
+    uses:
+      - cloudfront
+  - q: ¿Qué ventaja dan dos IP anycast estáticas a un cliente con listas blancas de firewall?
+    kind: aplicar
+    uses: []
+sims: []

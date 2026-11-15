@@ -1,0 +1,13 @@
+{
+  "name": "@tk/sims",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./rule": "./src/rule.ts"
+  },
+  "dependencies": {
+    "@tk/contracts": "workspace:*"
+  }
+}

@@ -1,0 +1,43 @@
+questions:
+  - q: ¿Por qué Spot es barato y qué precio pagas por ese descuento?
+    kind: por-que
+    uses: []
+  - q: ¿Qué pasa con un trabajo largo sin checkpoints si corre en Spot y AWS reclama la instancia?
+    kind: que-pasa-si
+    uses: []
+  - q: "Compara Reserved Instances y Savings Plans: ¿cuándo conviene cada uno?"
+    kind: comparar
+    uses: []
+  - q: "Una carga estable 24/7 durante 3 años: ¿qué modelo de compra eliges y por qué?"
+    kind: aplicar
+    uses: []
+sims:
+  - id: modelo-de-compra
+    title: Elige el modelo de compra de EC2
+    type: clasificar
+    prompt: Asigna a cada carga el modelo de compra más adecuado.
+    categories:
+      - id: on-demand
+        label: On-Demand
+      - id: reservadas
+        label: Reservadas / Savings Plans
+      - id: spot
+        label: Spot
+      - id: dedicado
+        label: Dedicated Host
+    items:
+      - text: Base de datos que corre 24/7 durante los próximos 3 años
+        category: reservadas
+        why: "Uso estable y predecible: el compromiso a 1-3 años da el mayor descuento sin riesgo de interrupción."
+      - text: Renderizado por lotes tolerante a interrupciones, con checkpoints
+        category: spot
+        why: Spot es lo más barato y la carga soporta que AWS reclame la instancia.
+      - text: Prueba de 2 días de una aplicación nueva con carga impredecible
+        category: on-demand
+        why: "Corto e impredecible: sin compromiso ni riesgo de interrupción."
+      - text: Software con licencia por socket físico que exige servidor propio
+        category: dedicado
+        why: Dedicated Host da visibilidad y control del servidor físico para licencias BYOL.
+      - text: Pico de tráfico inesperado este fin de semana que no puede caerse
+        category: on-demand
+        why: No puede interrumpirse (descarta Spot) y es temporal (descarta comprometerse).

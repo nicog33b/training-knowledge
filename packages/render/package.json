@@ -1,0 +1,19 @@
+{
+  "name": "@tk/render",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./term.css": "./src/term.css"
+  },
+  "dependencies": {
+    "@tk/contracts": "workspace:*",
+    "@tk/glossary": "workspace:*",
+    "rehype-stringify": "^10.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.2",
+    "unified": "^11.0.5"
+  }
+}

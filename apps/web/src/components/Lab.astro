@@ -1,0 +1,146 @@
+---
+/**
+ * Preguntas sugeridas + simulaciones de un subtema (modules/<id>/lab/<subtema>.yaml).
+ * Las simulaciones corren en el navegador con el evaluador seguro de @tk/sims/rule.
+ * Decisiones: simulaciones-por-primitivas-y-recetas, preguntas-sugeridas-y-contexto-minimo,
+ *             correccion-ia-solo-formativa-con-checklist.
+ */
+import type { LabFile } from '@tk/contracts';
+interface Props { lab: LabFile; moduleId: string; topicId: string }
+const { lab, moduleId, topicId } = Astro.props;
+const KIND: Record<string, string> = { 'por-que': 'Por qué', 'que-pasa-si': 'Qué pasa si', comparar: 'Comparar', aplicar: 'Aplicar', 'error-comun': 'Error común' };
+---
+{lab.sims.length > 0 && (
+  <section class="lab">
+    <h2>Laboratorio</h2>
+    {lab.sims.map((s) => (
+      <div class="card sim" data-sim>
+        <script type="application/json" set:html={JSON.stringify(s).replace(/</g, '\\u003c')} />
+        <h3>{s.title} <span class="badge">{s.type === 'predecir-observar' ? 'predecir → observar → explicar' : 'clasificar'}</span></h3>
+        <div class="sim-body"><p class="muted">Cargando simulación…</p></div>
+      </div>
+    ))}
+  </section>
+)}
+{lab.questions.length > 0 && (
+  <section class="lab">
+    <h2>Preguntas para pensar (o para el tutor)</h2>
+    <p class="muted">Intenta responderlas tú antes; luego contrasta con el tutor, que ya sabe que estás en este subtema.</p>
+    <ul class="clean questions">
+      {lab.questions.map((q) => (
+        <li><span class="badge">{KIND[q.kind]}</span> {q.q}
+          <button type="button" class="copy" data-q={q.q}>preguntar</button></li>
+      ))}
+    </ul>
+  </section>
+)}
+
+<style is:global>
+  .lab h3 { margin-top: 0; }
+  .sim label.param { display:block; margin:.5rem 0; }
+  .sim input[type=range] { width:100%; }
+  .sim .opts { display:flex; flex-wrap:wrap; gap:.5rem; margin:.5rem 0; }
+  .sim button, .lab button.copy { font:inherit; border:1px solid var(--line); background:var(--bg); color:var(--fg); border-radius:8px; padding:.35rem .8rem; cursor:pointer; }
+  .sim button[aria-pressed=true] { border-color:var(--accent); outline:2px solid var(--accent); }
+  .sim button:disabled { opacity:.5; cursor:default; }
+  .sim .result { border-left:4px solid var(--line); padding:.4rem .8rem; margin:.7rem 0; }
+  .sim .result.ok { border-color:var(--ok); } .sim .result.bad { border-color:var(--warn); }
+  .sim textarea { width:100%; min-height:5rem; font:inherit; background:var(--bg); color:var(--fg); border:1px solid var(--line); border-radius:8px; padding:.5rem; }
+  .sim .rubric li { list-style:none; } .sim .rubric input { margin-right:.4rem; }
+  .sim select { font:inherit; background:var(--bg); color:var(--fg); border:1px solid var(--line); border-radius:6px; padding:.2rem; max-width:100%; }
+  .sim .item { padding:.45rem 0; border-bottom:1px solid var(--line); display:flex; flex-wrap:wrap; gap:.5rem; align-items:center; justify-content:space-between; }
+  .sim .why { flex-basis:100%; font-size:.9rem; color:var(--muted); }
+  .lab button.copy { font-size:.75rem; padding:.05rem .5rem; margin-left:.4rem; }
+</style>
+
+<script>
+  import { pickOutcome } from '@tk/sims/rule';
+
+  // Constructor de DOM con textContent (las recetas son datos, nunca HTML).
+  function el<K extends keyof HTMLElementTagNameMap>(tag: K, attrs: Record<string, any> = {}, ...kids: (Node | string)[]) {
+    const n = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) k === 'class' ? (n.className = v) : k in n ? ((n as any)[k] = v) : n.setAttribute(k, String(v));
+    n.append(...kids);
+    return n;
+  }
+
+  function predictObserve(root: HTMLElement, s: any) {
+    const vals: Record<string, number> = Object.fromEntries(s.params.map((p: any) => [p.id, p.default]));
+    let chosen = '';
+    const sliders = s.params.map((p: any) => {
+      const out = el('strong', {}, `${p.default}${p.unit ? ' ' + p.unit : ''}`);
+      const input = el('input', { type: 'range', min: p.min, max: p.max, step: p.step, value: p.default });
+      input.addEventListener('input', () => {
+        vals[p.id] = Number(input.value);
+        out.textContent = `${input.value}${p.unit ? ' ' + p.unit : ''}`;
+        reset();
+      });
+      return el('label', { class: 'param' }, `${p.label}: `, out, input);
+    });
+    const opts = s.predict.options.map((o: any) => {
+      const b = el('button', { type: 'button' }, o.label);
+      b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', () => {
+        chosen = o.id;
+        opts.forEach((x: HTMLElement) => x.setAttribute('aria-pressed', String(x === b)));
+        run.disabled = false;
+      });
+      return b;
+    });
+    const run = el('button', { type: 'button', disabled: true }, 'Observar resultado');
+    const result = el('div');
+    const explain = el('div');
+    function reset() { result.replaceChildren(); explain.replaceChildren(); }
+    run.addEventListener('click', () => {
+      const o = pickOutcome(s.outcomes, vals);
+      if (!o) return;
+      const ok = o.answer === chosen;
+      result.replaceChildren(el('div', { class: `result ${ok ? 'ok' : 'bad'}` },
+        el('strong', {}, ok ? '✔ Predicción correcta. ' : '✖ No era eso. '), o.show));
+      const ta = el('textarea', { placeholder: s.explain.prompt });
+      const check = el('button', { type: 'button' }, 'Comparar con la lista de ideas');
+      const list = el('ul', { class: 'rubric' });
+      check.addEventListener('click', () => {
+        list.replaceChildren(...s.explain.rubric.map((idea: string) => el('li', {}, el('label', {}, el('input', { type: 'checkbox' }), idea))));
+        list.after(el('p', { class: 'muted' }, 'Marca las ideas que tu explicación incluye. Las que falten, vuelve a leerlas en el subtema.'));
+      });
+      explain.replaceChildren(el('p', {}, el('strong', {}, 'Explica: '), s.explain.prompt), ta, check, list);
+    });
+    root.replaceChildren(el('p', {}, s.context), ...sliders,
+      el('p', {}, el('strong', {}, 'Antes de observar, predice: '), s.predict.question),
+      el('div', { class: 'opts' }, ...opts), run, result, explain);
+  }
+
+  function classify(root: HTMLElement, s: any) {
+    const selects = s.items.map(() => {
+      const sel = el('select', {}, el('option', { value: '' }, '— elige —'), ...s.categories.map((c: any) => el('option', { value: c.id }, c.label)));
+      return sel;
+    });
+    const rows = s.items.map((it: any, i: number) => el('div', { class: 'item' }, el('span', {}, it.text), selects[i]));
+    const score = el('p');
+    const check = el('button', { type: 'button' }, 'Corregir');
+    check.addEventListener('click', () => {
+      let ok = 0;
+      s.items.forEach((it: any, i: number) => {
+        const good = selects[i].value === it.category;
+        ok += +good;
+        rows[i].querySelector('.why')?.remove();
+        const label = s.categories.find((c: any) => c.id === it.category)?.label;
+        rows[i].append(el('span', { class: 'why' }, `${good ? '✔' : '✖ Era ' + label + '.'} ${it.why}`));
+      });
+      score.replaceChildren(el('strong', {}, `${ok}/${s.items.length} correctas`));
+    });
+    root.replaceChildren(el('p', {}, s.prompt), ...rows, check, score);
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-sim]').forEach((box) => {
+    const s = JSON.parse(box.querySelector('script')!.textContent!);
+    const body = box.querySelector<HTMLElement>('.sim-body')!;
+    if (s.type === 'predecir-observar') predictObserve(body, s);
+    else if (s.type === 'clasificar') classify(body, s);
+  });
+  // Manda la pregunta sugerida al chat flotante (Chat.astro escucha 'tk-ask').
+  document.querySelectorAll<HTMLButtonElement>('button.copy').forEach((b) =>
+    b.addEventListener('click', () => document.dispatchEvent(new CustomEvent('tk-ask', { detail: b.dataset.q }))),
+  );
+</script>

@@ -1,0 +1,12 @@
+- term: Revalidación
+  aliases: [revalidate, revalidation]
+  definition: Proceso de marcar datos cacheados como obsoletos para regenerarlos bajo demanda o por tiempo.
+  see: [TTL]
+- term: Data Cache
+  aliases: []
+  definition: Caché persistente del servidor que guarda resultados de fetch entre peticiones y despliegues.
+  see: []
+- term: Router Cache
+  aliases: []
+  definition: Caché en memoria del cliente que guarda segmentos de rutas ya visitadas para navegar más rápido.
+  see: []

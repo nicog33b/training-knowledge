@@ -1,0 +1,15 @@
+questions:
+  - q: ¿Por qué una partition key con pocos valores distintos causa una partición caliente?
+    kind: por-que
+    uses: []
+  - q: ¿Qué pasa si superas la capacidad provisionada de escritura?
+    kind: que-pasa-si
+    uses: []
+  - q: "Compara un GSI y un LSI: ¿cuál puedes crear después de crear la tabla?"
+    kind: comparar
+    uses: []
+  - q: ¿Cuándo pondrías DAX delante y cuándo ElastiCache?
+    kind: aplicar
+    uses:
+      - elasticache
+sims: []

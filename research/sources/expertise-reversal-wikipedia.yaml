@@ -1,0 +1,23 @@
+id: expertise-reversal-wikipedia
+title: Expertise reversal effect (Wikipedia)
+authors: []
+year: 2025
+venue: Wikipedia
+url: https://en.wikipedia.org/wiki/Expertise_reversal_effect
+kind: other
+verified: secondary
+retrieved: 2026-11-15
+summary: Los ejemplos resueltos ayudan a novatos pero pierden valor (o
+  perjudican) con la experiencia; hay que retirar ayudas progresivamente.
+facts:
+  - "Kalyuga, Ayres, Chandler & Sweller (2003): un diseño mejor para novatos
+    puede dejar de serlo o invertirse con más experiencia."
+  - "Remedio práctico: ejemplos con pasos retirados (fading) adaptados a la
+    experiencia del alumno."
+  - Un estudio de 2023 (Adeniji) en matemáticas halló inversión total en alumnos
+    de alta capacidad.
+caveats:
+  - Fuente terciaria. Pendiente reemplazar por Kalyuga et al. 2003 / Kalyuga
+    2007 (Educational Psychology Review).
+  - "Críticas: muchos estudios usan medidas subjetivas de carga cognitiva;
+    Aditomo (2009) ve poca evidencia para la versión fuerte de la teoría."

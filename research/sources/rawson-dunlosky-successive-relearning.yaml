@@ -1,0 +1,26 @@
+id: rawson-dunlosky-successive-relearning
+title: Successive relearning (revisión en Current Directions in Psychological Science)
+authors:
+  - Rawson
+  - Dunlosky
+year: 2022
+venue: Current Directions in Psychological Science
+url: https://doi.org/10.1177/09637214221100484
+kind: review
+verified: secondary
+retrieved: 2026-11-15
+summary: Practicar hasta acertar y volver a practicar en sesiones separadas
+  protege contra el olvido.
+facts:
+  - "Diseño: recordar cada ítem hasta criterio y repetir en varias sesiones
+    separadas (p. ej. semanales)."
+  - Recordar 3 veces en la sesión inicial mejoró la retención a 1 semana frente
+    a 1 vez; la ventaja dejó de ser significativa tras 3 sesiones de relearning.
+  - "Rawson, Dunlosky & Sciartelli (2013): el relearning sucesivo protege contra
+    el olvido en un curso real."
+  - "Estudio con control de restudio igualado en tiempo: el relearning aún
+    rindió más."
+caveats:
+  - Título exacto del artículo no confirmado (se registra como revisión en CDPS
+    2022 por el DOI).
+  - Algunos estudios carecían de control de restudio igualado en exposición.

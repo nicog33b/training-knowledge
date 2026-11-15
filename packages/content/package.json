@@ -1,0 +1,14 @@
+{
+  "name": "@tk/content",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@tk/contracts": "workspace:*",
+    "@tk/sims": "workspace:*",
+    "yaml": "^2.9.1"
+  }
+}

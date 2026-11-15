@@ -1,0 +1,26 @@
+id: freeman-2014
+title: Active learning increases student performance in science, engineering,
+  and mathematics
+authors:
+  - Freeman
+  - Eddy
+  - McDonough
+  - Smith
+  - Okoroafor
+  - Jordt
+  - Wenderoth
+year: 2014
+venue: PNAS 111(23)
+url: https://ece.northeastern.edu/edsnu/mcgruer/USC/Freeman-S-Proc-Natl-Acad-Sci-USA-2014-Active-learning.pdf
+kind: meta-analysis
+verified: abstract
+retrieved: 2026-11-15
+summary: En STEM, el aprendizaje activo supera a la clase magistral en notas y
+  reduce reprobaciones.
+facts:
+  - 225 estudios; mejora de exámenes de 0.47 desviaciones estándar (~6% en nota
+    media).
+  - "Reprobación: 21.8% con aprendizaje activo vs 33.8% con clase magistral (1.5
+    veces más riesgo)."
+caveats:
+  - Solo STEM universitario; 'aprendizaje activo' agrupa prácticas muy distintas.

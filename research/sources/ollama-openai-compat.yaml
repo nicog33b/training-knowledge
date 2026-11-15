@@ -1,0 +1,17 @@
+id: ollama-openai-compat
+title: Ollama OpenAI compatibility
+authors:
+  - Ollama
+year: 2026
+url: https://docs.ollama.com/api/openai-compatibility
+kind: docs
+verified: abstract
+retrieved: 2026-11-15
+summary: Ollama expone /v1/chat/completions compatible con OpenAI, con tools
+  pero sin tool_choice.
+facts:
+  - URL base local http://localhost:11434/v1/; la clave es obligatoria en el
+    cliente pero se ignora.
+  - /v1/chat/completions soporta tools y max_tokens; tool_choice no está
+    soportado.
+caveats: []

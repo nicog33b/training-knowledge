@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "sharedTerms": 3,
+  "research": {
+    "sources": 47,
+    "decisions": 14
+  },
+  "modules": [
+    {
+      "id": "aws-saa",
+      "title": "AWS Solutions Architect Associate",
+      "summary": "Preparación para la certificación AWS SAA-C03, organizada por dominios.",
+      "kind": "certification",
+      "topics": 42,
+      "done": 42,
+      "planned": 42,
+      "terms": 344
+    },
+    {
+      "id": "next-cache",
+      "title": "Caché de Next.js",
+      "summary": "Las capas de caché de Next.js (App Router) y cómo invalidarlas.",
+      "kind": "framework",
+      "topics": 1,
+      "done": 0,
+      "planned": 1,
+      "terms": 3
+    }
+  ]
+}

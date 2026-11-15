@@ -1,0 +1,26 @@
+id: kestin-2025
+title: "AI tutoring outperforms in-class active learning: an RCT in a Harvard
+  physics course"
+authors:
+  - Kestin
+  - Miller
+  - Annala
+  - Finkelstein
+  - Savelka
+year: 2025
+venue: Scientific Reports
+url: https://pmc.ncbi.nlm.nih.gov/articles/PMC12179260/
+kind: rct
+verified: abstract
+retrieved: 2026-11-15
+summary: Un tutor IA diseñado con buenas prácticas superó al aprendizaje activo
+  presencial en un ECA pequeño.
+facts:
+  - ECA con 194 universitarios de física en Harvard.
+  - "Según resúmenes: ganancias de aprendizaje más del doble y mediana de tiempo
+    49 vs 75 minutos."
+caveats:
+  - Estudio pequeño, dos temas, pruebas a corto plazo.
+  - Cifras de ganancia y tiempo vienen de resúmenes de terceros; verificar en el
+    paper.
+  - Lista de autores aproximada (confirmar).

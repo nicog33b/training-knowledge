@@ -1,0 +1,2433 @@
+- term: Región
+  aliases:
+    - Region
+  definition: Ubicación geográfica de AWS compuesta por varias Zonas de
+    Disponibilidad aisladas.
+  see:
+    - Zona de Disponibilidad
+- term: Zona de Disponibilidad
+  aliases:
+    - AZ
+    - Availability Zone
+  definition: Uno o más centros de datos independientes dentro de una Región, con
+    energía y red propias.
+  see: []
+- term: Alta disponibilidad
+  aliases:
+    - HA
+  definition: Diseño que tolera fallos de componentes manteniendo el servicio en pie.
+  see:
+    - Zona de Disponibilidad
+- term: Edge Location
+  aliases:
+    - Edge Locations
+    - ubicación de borde
+    - Puntos de presencia
+  definition: Punto de presencia de AWS cercano al usuario final usado por
+    CloudFront, Route 53 y Global Accelerator para cachear y enrutar tráfico.
+  see: []
+- term: Modelo de responsabilidad compartida
+  aliases:
+    - Shared Responsibility Model
+  definition: AWS protege la nube (hardware, red, hipervisor); el cliente protege
+    lo que pone en ella (datos, IAM, SO, configuración).
+  see: []
+- term: IAM
+  aliases:
+    - Identity and Access Management
+  definition: Servicio global de AWS para gestionar identidades (usuarios, grupos,
+    roles) y sus permisos mediante políticas.
+  see: []
+- term: Usuario root
+  aliases:
+    - root
+    - cuenta root
+  definition: Identidad creada con la cuenta de AWS con acceso total e
+    irrestricto; debe protegerse con MFA y usarse lo mínimo.
+  see:
+    - MFA
+- term: Grupo IAM
+  aliases: []
+  definition: Conjunto de usuarios IAM al que se adjuntan políticas; no puede
+    contener otros grupos.
+  see:
+    - IAM
+- term: Rol IAM
+  aliases:
+    - IAM Role
+  definition: Identidad sin credenciales permanentes que puede asumir un servicio,
+    otra cuenta o usuario; entrega credenciales temporales.
+  see:
+    - STS
+- term: Política IAM
+  aliases:
+    - IAM Policy
+  definition: Documento JSON con Statements (Effect, Action, Resource, Condition)
+    que define permisos.
+  see:
+    - IAM
+- term: Mínimo privilegio
+  aliases:
+    - Least privilege
+    - principio de mínimo privilegio
+  definition: Conceder solo los permisos estrictamente necesarios para una tarea.
+  see: []
+- term: Permission boundary
+  aliases:
+    - Permissions boundary
+    - límite de permisos
+  definition: Política que fija el máximo de permisos que una entidad IAM puede
+    obtener, aunque se le adjunten otras más amplias.
+  see:
+    - Política IAM
+- term: MFA
+  aliases:
+    - Multi-Factor Authentication
+    - autenticación multifactor
+  definition: Segundo factor de autenticación (app, llave FIDO, token hardware)
+    además de la contraseña.
+  see: []
+- term: STS
+  aliases:
+    - Security Token Service
+  definition: Servicio que emite credenciales temporales de acceso a AWS
+    (AssumeRole, GetSessionToken, federación).
+  see: []
+- term: Access Key
+  aliases:
+    - Access Keys
+    - access keys
+    - claves de acceso
+  definition: Par Access Key ID + Secret Access Key que firma peticiones a la API
+    de AWS desde CLI/SDK.
+  see: []
+- term: Credential Report
+  aliases:
+    - informe de credenciales
+  definition: CSV a nivel de cuenta con el estado de las credenciales
+    (contraseñas, claves, MFA) de todos los usuarios IAM.
+  see:
+    - IAM
+- term: Access Advisor
+  aliases:
+    - IAM Access Advisor
+  definition: Muestra, por usuario o rol, los servicios permitidos y cuándo se
+    usaron por última vez, para recortar permisos.
+  see:
+    - IAM
+- term: IAM Access Analyzer
+  aliases:
+    - Access Analyzer
+  definition: Identifica recursos (buckets, roles, claves KMS) compartidos con
+    entidades externas a tu cuenta u organización.
+  see:
+    - IAM
+- term: ARN
+  aliases:
+    - Amazon Resource Name
+  definition: Identificador único global de un recurso AWS con la forma
+    arn:partition:service:region:account:resource.
+  see: []
+- term: AWS CLI
+  aliases:
+    - CLI
+    - línea de comandos de AWS
+  definition: Herramienta de línea de comandos para llamar a la API de AWS,
+    configurada con aws configure.
+  see:
+    - Access Key
+- term: SDK
+  aliases:
+    - Software Development Kit
+  definition: Biblioteca por lenguaje (boto3, JS, Java…) para llamar a la API de
+    AWS desde código.
+  see:
+    - AWS CLI
+- term: CloudShell
+  aliases:
+    - AWS CloudShell
+  definition: Terminal gratuita en el navegador con la CLI preinstalada y las
+    credenciales de la sesión de consola.
+  see:
+    - AWS CLI
+- term: Exponential backoff
+  aliases:
+    - backoff exponencial
+  definition: Estrategia de reintentos que duplica la espera entre intentos para
+    no saturar el servicio.
+  see: []
+- term: EC2
+  aliases:
+    - Elastic Compute Cloud
+  definition: Servicio de máquinas virtuales (IaaS) bajo demanda de AWS.
+  see: []
+- term: AMI
+  aliases:
+    - Amazon Machine Image
+  definition: Plantilla regional (SO + software + configuración) para lanzar
+    instancias EC2.
+  see:
+    - EC2
+- term: User Data
+  aliases:
+    - user data
+  definition: Script que EC2 ejecuta como root solo en el primer arranque de la instancia.
+  see:
+    - EC2
+- term: EC2 Image Builder
+  aliases:
+    - Image Builder
+  definition: Servicio que automatiza la creación, prueba y distribución de AMIs.
+  see:
+    - AMI
+- term: On-Demand
+  aliases:
+    - On Demand
+    - bajo demanda
+  definition: Modelo de compra EC2 de pago por uso sin compromiso.
+  see:
+    - EC2
+- term: Reserved Instances
+  aliases:
+    - Reserved Instance
+    - Instancias reservadas
+    - RI
+  definition: Compromiso de 1 o 3 años en EC2 con descuento de hasta ~72 % frente
+    a On-Demand.
+  see:
+    - Savings Plans
+- term: Savings Plans
+  aliases:
+    - Savings Plan
+  definition: Compromiso de gasto por hora a 1-3 años que otorga descuentos;
+    Compute Savings Plans cubre EC2, Fargate y Lambda.
+  see:
+    - Reserved Instances
+- term: Spot Instances
+  aliases:
+    - Spot Instance
+    - Spot
+    - instancias spot
+  definition: Capacidad sobrante de EC2 con hasta ~90 % de descuento que AWS puede
+    reclamar con 2 minutos de aviso.
+  see:
+    - EC2
+- term: Spot Fleet
+  aliases:
+    - Spot Fleets
+  definition: Conjunto de instancias Spot (y opcionalmente On-Demand) que cumple
+    una capacidad objetivo según una estrategia.
+  see:
+    - Spot Instances
+- term: Dedicated Host
+  aliases:
+    - Dedicated Hosts
+    - Host dedicado
+  definition: Servidor físico completo reservado para ti; permite control de
+    licencias por socket o núcleo.
+  see:
+    - EC2
+- term: Dedicated Instances
+  aliases:
+    - Dedicated Instance
+  definition: Instancias que corren en hardware dedicado a tu cuenta sin control
+    del host físico.
+  see:
+    - Dedicated Host
+- term: Capacity Reservation
+  aliases:
+    - Capacity Reservations
+    - Reserva de capacidad
+  definition: Reserva de capacidad EC2 en una AZ concreta, sin compromiso de plazo.
+  see:
+    - EC2
+- term: Security Group
+  aliases:
+    - Security Groups
+    - SG
+    - grupo de seguridad
+  definition: Firewall con estado a nivel de instancia/ENI; solo reglas Allow,
+    entrada bloqueada por defecto.
+  see:
+    - NACL
+- term: Elastic IP
+  aliases:
+    - EIP
+    - Elastic IPs
+  definition: Dirección IPv4 pública estática que puedes asociar y mover entre instancias.
+  see: []
+- term: ENI
+  aliases:
+    - Elastic Network Interface
+  definition: Interfaz de red virtual con IP privada, SG y MAC; puede moverse
+    entre instancias de la misma AZ.
+  see:
+    - Security Group
+- term: Placement Group
+  aliases:
+    - Placement Groups
+    - grupo de ubicación
+  definition: "Estrategia de ubicación física de instancias: cluster, spread o partition."
+  see: []
+- term: Hibernate
+  aliases:
+    - Hibernación
+    - hibernación
+  definition: Estado en que EC2 guarda la RAM en EBS para reanudar luego con los
+    procesos intactos.
+  see:
+    - EBS
+- term: Instance Connect
+  aliases:
+    - EC2 Instance Connect
+  definition: Permite SSH desde el navegador usando claves efímeras enviadas por IAM.
+  see:
+    - EC2
+- term: Session Manager
+  aliases:
+    - SSM Session Manager
+  definition: Acceso a shell de instancias sin SSH ni puertos abiertos, controlado
+    por IAM y con logs.
+  see:
+    - Systems Manager
+- term: IMDS
+  aliases:
+    - Instance Metadata Service
+    - IMDSv2
+    - metadatos de instancia
+  definition: Servicio en 169.254.169.254 que expone metadatos de la instancia;
+    IMDSv2 exige token de sesión.
+  see: []
+- term: EBS
+  aliases:
+    - Elastic Block Store
+  definition: Disco de red persistente para EC2, atado a una AZ.
+  see:
+    - Instance Store
+- term: gp3
+  aliases:
+    - gp2
+    - SSD de propósito general
+  definition: Volúmenes EBS SSD de uso general; gp3 permite fijar IOPS y
+    throughput sin depender del tamaño.
+  see:
+    - EBS
+- term: io2
+  aliases:
+    - io1
+    - io2 Block Express
+    - IOPS aprovisionados
+  definition: Volúmenes EBS SSD de IOPS aprovisionados para bases de datos
+    críticas; soportan Multi-Attach.
+  see:
+    - EBS
+- term: st1
+  aliases:
+    - sc1
+    - HDD
+  definition: "Volúmenes EBS HDD: st1 para throughput, sc1 para acceso
+    infrecuente; no sirven como arranque."
+  see:
+    - EBS
+- term: Multi-Attach
+  aliases:
+    - EBS Multi-Attach
+  definition: Permite conectar un volumen io1/io2 a hasta 16 instancias de la misma AZ.
+  see:
+    - io2
+- term: Snapshot
+  aliases:
+    - Snapshots
+    - snapshots
+    - instantánea
+  definition: Copia incremental de un volumen EBS (o base de datos) almacenada en
+    S3 gestionado por AWS.
+  see:
+    - EBS
+- term: Recycle Bin
+  aliases:
+    - Papelera de reciclaje
+  definition: Retiene snapshots y AMIs eliminados por un tiempo para poder recuperarlos.
+  see:
+    - Snapshot
+- term: Fast Snapshot Restore
+  aliases:
+    - FSR
+  definition: Elimina la latencia de inicialización de un volumen restaurado desde
+    snapshot.
+  see:
+    - Snapshot
+- term: Data Lifecycle Manager
+  aliases:
+    - DLM
+  definition: Servicio que automatiza la creación y retención de snapshots EBS y AMIs.
+  see:
+    - Snapshot
+- term: Instance Store
+  aliases:
+    - almacén de instancia
+  definition: "Disco físico del host con IOPS extremos pero efímero: los datos se
+    pierden al parar o fallar."
+  see:
+    - EBS
+- term: EFS
+  aliases:
+    - Elastic File System
+  definition: Sistema de archivos NFS elástico y multi-AZ, montable en cientos de
+    instancias Linux.
+  see:
+    - FSx
+- term: FSx
+  aliases:
+    - Amazon FSx
+  definition: "Familia de sistemas de archivos gestionados: Windows File Server,
+    Lustre, NetApp ONTAP y OpenZFS."
+  see:
+    - EFS
+- term: Lustre
+  aliases:
+    - FSx for Lustre
+  definition: Sistema de archivos paralelo de alto rendimiento (HPC/ML) integrable con S3.
+  see:
+    - FSx
+- term: NFS
+  aliases:
+    - Network File System
+  definition: Protocolo de archivos en red típico de Linux/Unix.
+  see: []
+- term: SMB
+  aliases:
+    - Server Message Block
+  definition: Protocolo de archivos en red típico de Windows.
+  see: []
+- term: IOPS
+  aliases:
+    - operaciones de entrada/salida por segundo
+  definition: Operaciones de lectura/escritura por segundo; medida de rendimiento
+    de almacenamiento.
+  see: []
+- term: Throughput
+  aliases:
+    - rendimiento sostenido
+  definition: Volumen de datos transferido por unidad de tiempo (MB/s).
+  see: []
+- term: BYOL
+  aliases:
+    - Bring Your Own License
+  definition: Usar licencias de software que ya posees en la nube.
+  see: []
+- term: Load Balancer
+  aliases:
+    - balanceador de carga
+    - balanceador
+    - ELB
+    - Elastic Load Balancing
+    - LB
+  definition: Reparte el tráfico entrante entre varios destinos sanos y expone un
+    único punto de entrada.
+  see: []
+- term: ALB
+  aliases:
+    - Application Load Balancer
+  definition: Balanceador de capa 7 (HTTP/HTTPS/gRPC) con enrutamiento por ruta,
+    host y headers.
+  see:
+    - Load Balancer
+- term: NLB
+  aliases:
+    - Network Load Balancer
+  definition: Balanceador de capa 4 (TCP/UDP/TLS) de ultra rendimiento con una IP
+    estática por AZ.
+  see:
+    - Load Balancer
+- term: GWLB
+  aliases:
+    - Gateway Load Balancer
+  definition: Balanceador de capa 3 (GENEVE) para desplegar y escalar appliances
+    virtuales de red y seguridad.
+  see:
+    - Load Balancer
+- term: Target Group
+  aliases:
+    - Target Groups
+    - grupo de destino
+  definition: Conjunto de destinos (instancias, IPs, Lambda) a los que un
+    balanceador enruta tráfico.
+  see:
+    - Load Balancer
+- term: Health Check
+  aliases:
+    - Health Checks
+    - health checks
+    - comprobación de estado
+  definition: Sonda periódica que determina si un destino puede recibir tráfico.
+  see: []
+- term: Sticky Sessions
+  aliases:
+    - sticky sessions
+    - afinidad de sesión
+    - Session Affinity
+  definition: Enruta al mismo cliente siempre al mismo destino mediante una cookie.
+  see:
+    - Load Balancer
+- term: Cross-Zone Load Balancing
+  aliases:
+    - cross-zone
+    - balanceo entre zonas
+  definition: Distribuye el tráfico uniformemente entre destinos de todas las AZ
+    habilitadas.
+  see:
+    - Load Balancer
+- term: SNI
+  aliases:
+    - Server Name Indication
+  definition: Extensión TLS que permite servir varios certificados en un mismo
+    listener según el hostname solicitado.
+  see:
+    - Load Balancer
+- term: Connection Draining
+  aliases:
+    - Deregistration Delay
+    - drenado de conexiones
+  definition: Tiempo que se da a las peticiones en vuelo para terminar antes de
+    retirar un destino.
+  see:
+    - Load Balancer
+- term: GENEVE
+  aliases: []
+  definition: Protocolo de encapsulación (puerto 6081) usado por Gateway Load Balancer.
+  see:
+    - GWLB
+- term: Auto Scaling Group
+  aliases:
+    - ASG
+    - Auto Scaling Groups
+    - grupo de Auto Scaling
+  definition: Grupo de instancias EC2 con tamaño mínimo/deseado/máximo que se
+    autorrepara y escala.
+  see:
+    - Launch Template
+- term: Launch Template
+  aliases:
+    - Launch Templates
+    - plantilla de lanzamiento
+    - Launch Configuration
+  definition: Plantilla versionada con AMI, tipo, user data y red usada por un ASG
+    para lanzar instancias.
+  see:
+    - AMI
+- term: Target Tracking
+  aliases:
+    - target tracking
+  definition: Política de escalado que mantiene una métrica en un valor objetivo,
+    como CPU media al 50 %.
+  see:
+    - Auto Scaling Group
+- term: Step Scaling
+  aliases:
+    - Simple Scaling
+  definition: Política de escalado por pasos basada en alarmas de CloudWatch.
+  see:
+    - Auto Scaling Group
+- term: Predictive Scaling
+  aliases:
+    - escalado predictivo
+  definition: Escalado que usa ML sobre el histórico de carga para anticiparse a
+    la demanda.
+  see:
+    - Auto Scaling Group
+- term: Cooldown
+  aliases:
+    - periodo de enfriamiento
+  definition: Pausa tras una acción de escalado durante la que no se lanzan otras.
+  see:
+    - Auto Scaling Group
+- term: Lifecycle Hook
+  aliases:
+    - Lifecycle Hooks
+    - lifecycle hooks
+  definition: Pausa una instancia al lanzarse o terminarse para ejecutar acciones
+    personalizadas.
+  see:
+    - Auto Scaling Group
+- term: Instance Refresh
+  aliases: []
+  definition: Reemplazo gradual de las instancias de un ASG con una nueva plantilla o AMI.
+  see:
+    - Auto Scaling Group
+- term: Warm Pool
+  aliases:
+    - Warm Pools
+  definition: Instancias preinicializadas que acortan el tiempo de escalado de un ASG.
+  see:
+    - Auto Scaling Group
+- term: RDS
+  aliases:
+    - Relational Database Service
+  definition: "Servicio de bases de datos relacionales gestionadas: MySQL,
+    PostgreSQL, MariaDB, Oracle, SQL Server, Db2."
+  see:
+    - Aurora
+- term: Multi-AZ
+  aliases:
+    - Multi AZ
+    - multi-AZ
+  definition: Réplica síncrona en otra AZ para failover automático; da alta
+    disponibilidad, no escalado de lectura.
+  see:
+    - Alta disponibilidad
+- term: Read Replica
+  aliases:
+    - Read Replicas
+    - réplica de lectura
+    - réplicas de lectura
+  definition: Copia asíncrona de solo lectura para escalar lecturas; puede estar
+    en otra Región y promoverse.
+  see:
+    - RDS
+- term: Point-in-time recovery
+  aliases:
+    - PITR
+    - recuperación a un punto en el tiempo
+  definition: Restaurar una base de datos a cualquier instante dentro del periodo
+    de retención de backups.
+  see:
+    - RDS
+- term: RDS Proxy
+  aliases: []
+  definition: Pool de conexiones gestionado para RDS/Aurora que mejora resiliencia
+    y reduce carga; ideal con Lambda.
+  see:
+    - RDS
+- term: Aurora
+  aliases:
+    - Amazon Aurora
+  definition: Base de datos relacional de AWS compatible con MySQL y PostgreSQL,
+    con almacenamiento distribuido en 3 AZ y hasta 15 réplicas.
+  see:
+    - RDS
+- term: Aurora Serverless
+  aliases:
+    - Aurora Serverless v2
+    - ACU
+  definition: Variante de Aurora que ajusta automáticamente la capacidad (ACU) a la carga.
+  see:
+    - Aurora
+- term: Aurora Global Database
+  aliases:
+    - Global Database
+  definition: Base Aurora multi-Región con replicación <1 s hacia hasta 5 Regiones
+    secundarias.
+  see:
+    - Aurora
+- term: Backtrack
+  aliases: []
+  definition: Función de Aurora MySQL para rebobinar la base a un instante previo
+    sin restaurar un backup.
+  see:
+    - Aurora
+- term: ElastiCache
+  aliases: []
+  definition: Caché en memoria gestionada con motores Redis/Valkey y Memcached.
+  see:
+    - Redis
+- term: Redis
+  aliases:
+    - Valkey
+  definition: Almacén clave-valor en memoria con estructuras avanzadas,
+    persistencia, réplicas y Multi-AZ.
+  see:
+    - ElastiCache
+- term: Memcached
+  aliases: []
+  definition: Caché clave-valor en memoria, multihilo y sin persistencia ni replicación.
+  see:
+    - ElastiCache
+- term: Lazy Loading
+  aliases:
+    - cache-aside
+    - lazy loading
+  definition: Estrategia de caché que carga datos solo al ocurrir un miss.
+  see:
+    - ElastiCache
+- term: Write-Through
+  aliases:
+    - write-through
+  definition: Estrategia que actualiza la caché cada vez que se escribe en la base
+    de datos.
+  see:
+    - ElastiCache
+- term: Route 53
+  aliases:
+    - Route53
+  definition: DNS global gestionado de AWS con registro de dominios, health checks
+    y políticas de enrutamiento.
+  see: []
+- term: Hosted Zone
+  aliases:
+    - Hosted Zones
+    - zona alojada
+  definition: Contenedor de registros DNS de un dominio; pública o privada (dentro
+    de una VPC).
+  see:
+    - Route 53
+- term: Alias
+  aliases:
+    - registro Alias
+    - Alias record
+  definition: Registro de Route 53 que apunta a recursos AWS, válido en el apex,
+    gratuito y con health checks nativos.
+  see:
+    - Route 53
+- term: CNAME
+  aliases: []
+  definition: Registro DNS que apunta un nombre a otro nombre; no permitido en el
+    apex del dominio.
+  see:
+    - Alias
+- term: Enrutamiento ponderado
+  aliases:
+    - Weighted routing
+    - Weighted
+  definition: Política DNS que reparte tráfico según pesos asignados a cada registro.
+  see:
+    - Route 53
+- term: Enrutamiento por latencia
+  aliases:
+    - Latency routing
+    - Latency-based routing
+  definition: Política DNS que dirige al recurso con menor latencia para el usuario.
+  see:
+    - Route 53
+- term: Failover routing
+  aliases:
+    - Enrutamiento failover
+    - DNS failover
+  definition: Política DNS activo-pasivo basada en un health check del recurso primario.
+  see:
+    - Route 53
+- term: Geolocation
+  aliases:
+    - Enrutamiento por geolocalización
+  definition: Política DNS que decide según el país o continente del usuario.
+  see:
+    - Route 53
+- term: Geoproximity
+  aliases:
+    - Enrutamiento por geoproximidad
+  definition: Política DNS por distancia entre usuario y recurso con un bias ajustable.
+  see:
+    - Route 53
+- term: Multi-value answer
+  aliases:
+    - Multi-value
+    - enrutamiento multivalor
+  definition: Política DNS que devuelve hasta 8 registros sanos elegidos con health checks.
+  see:
+    - Route 53
+- term: VPC
+  aliases:
+    - Virtual Private Cloud
+  definition: Red virtual privada y aislada de tu cuenta dentro de una Región, con
+    rangos IP, subredes y reglas propias.
+  see:
+    - CIDR
+- term: CIDR
+  aliases:
+    - bloque CIDR
+    - Classless Inter-Domain Routing
+  definition: Notación de rangos IP (p. ej. 10.0.0.0/16) donde el sufijo indica
+    los bits de red.
+  see:
+    - VPC
+- term: Subred
+  aliases:
+    - subnet
+    - Subnet
+    - subredes
+  definition: Segmento del rango de la VPC que reside en una única AZ.
+  see:
+    - VPC
+- term: Subred pública
+  aliases:
+    - public subnet
+  definition: Subred cuya route table tiene una ruta a un Internet Gateway.
+  see:
+    - Internet Gateway
+- term: Subred privada
+  aliases:
+    - private subnet
+    - subredes privadas
+  definition: Subred sin ruta directa a Internet; la salida se hace vía NAT Gateway.
+  see:
+    - NAT Gateway
+- term: Route Table
+  aliases:
+    - route tables
+    - tabla de rutas
+  definition: Conjunto de reglas que determina hacia dónde se envía el tráfico de
+    una subred.
+  see:
+    - VPC
+- term: Internet Gateway
+  aliases:
+    - IGW
+  definition: Componente gestionado que permite comunicación entre una VPC e Internet.
+  see:
+    - VPC
+- term: NAT Gateway
+  aliases:
+    - NAT
+    - NAT Instance
+    - NAT gateway
+  definition: Servicio que permite a instancias privadas iniciar tráfico saliente
+    a Internet sin ser accesibles desde fuera.
+  see:
+    - Subred privada
+- term: Egress-only Internet Gateway
+  aliases:
+    - Egress-Only IGW
+  definition: Gateway que permite solo tráfico de salida IPv6 desde la VPC.
+  see:
+    - Internet Gateway
+- term: Bastion Host
+  aliases:
+    - bastion
+    - Bastión
+  definition: Instancia en subred pública usada como salto para administrar
+    instancias privadas.
+  see:
+    - Session Manager
+- term: NACL
+  aliases:
+    - Network ACL
+    - Network Access Control List
+    - NACLs
+  definition: Firewall sin estado a nivel de subred con reglas Allow y Deny
+    evaluadas por número.
+  see:
+    - Security Group
+- term: Puertos efímeros
+  aliases:
+    - ephemeral ports
+    - puerto efímero
+  definition: Rango 1024-65535 usado por clientes para el tráfico de retorno; debe
+    permitirse en NACL.
+  see:
+    - NACL
+- term: VPC Flow Logs
+  aliases:
+    - Flow Logs
+    - flow logs
+  definition: Registro de metadatos del tráfico IP de una VPC, subred o ENI hacia
+    CloudWatch, S3 o Firehose.
+  see:
+    - VPC
+- term: Traffic Mirroring
+  aliases: []
+  definition: Copia el tráfico de una ENI hacia appliances de inspección para analizarlo.
+  see:
+    - ENI
+- term: VPC Peering
+  aliases:
+    - peering
+    - Peering
+  definition: Conexión privada 1 a 1 entre dos VPC; sin solapamiento de CIDR y no
+    transitiva.
+  see:
+    - VPC
+- term: VPC Endpoint
+  aliases:
+    - VPC Endpoints
+    - Gateway Endpoint
+    - Interface Endpoint
+    - endpoint de VPC
+  definition: "Acceso privado a servicios AWS sin Internet: Gateway (S3, DynamoDB)
+    o Interface (PrivateLink)."
+  see:
+    - PrivateLink
+- term: PrivateLink
+  aliases:
+    - AWS PrivateLink
+  definition: Tecnología para consumir o exponer servicios entre VPC de forma
+    privada mediante ENIs.
+  see:
+    - VPC Endpoint
+- term: Site-to-Site VPN
+  aliases:
+    - VPN
+    - Site to Site VPN
+    - VPN Site-to-Site
+  definition: Túneles IPsec cifrados entre tu red on-premises y una VPC a través
+    de Internet.
+  see:
+    - Virtual Private Gateway
+- term: Virtual Private Gateway
+  aliases:
+    - VGW
+  definition: Extremo AWS de una conexión VPN o Direct Connect asociado a una VPC.
+  see:
+    - Site-to-Site VPN
+- term: Customer Gateway
+  aliases:
+    - CGW
+  definition: Recurso que representa el dispositivo VPN de tu lado.
+  see:
+    - Site-to-Site VPN
+- term: Direct Connect
+  aliases:
+    - DX
+    - AWS Direct Connect
+  definition: Enlace de red físico dedicado y privado entre tu centro de datos y AWS.
+  see:
+    - Site-to-Site VPN
+- term: Client VPN
+  aliases:
+    - AWS Client VPN
+  definition: VPN gestionada para que usuarios remotos accedan a recursos de AWS u
+    on-premises.
+  see:
+    - Site-to-Site VPN
+- term: Transit Gateway
+  aliases:
+    - TGW
+  definition: Hub regional transitivo que interconecta VPC y redes on-premises en
+    topología estrella.
+  see:
+    - VPC Peering
+- term: RAM
+  aliases:
+    - Resource Access Manager
+  definition: Servicio para compartir recursos AWS (subredes, Transit Gateway…)
+    entre cuentas.
+  see: []
+- term: S3
+  aliases:
+    - Simple Storage Service
+    - Amazon S3
+  definition: Almacenamiento de objetos escalable con 11 nueves de durabilidad.
+  see:
+    - Bucket
+- term: Bucket
+  aliases:
+    - buckets
+  definition: Contenedor de objetos en S3 con nombre global único creado en una Región.
+  see:
+    - S3
+- term: Objeto S3
+  aliases:
+    - object key
+    - key de objeto
+  definition: Archivo almacenado en S3 identificado por su key, de hasta 5 TB.
+  see:
+    - Bucket
+- term: Bucket Policy
+  aliases:
+    - Bucket Policies
+    - política de bucket
+  definition: Política JSON basada en recurso asociada a un bucket; habilita
+    acceso cross-account o público.
+  see:
+    - Política IAM
+- term: Block Public Access
+  aliases:
+    - S3 Block Public Access
+  definition: Control a nivel de bucket o cuenta que impide la exposición pública
+    accidental de datos.
+  see:
+    - Bucket
+- term: Pre-signed URL
+  aliases:
+    - Pre-signed URLs
+    - presigned URL
+    - URL prefirmada
+  definition: URL temporal firmada que otorga acceso a un objeto con los permisos
+    de quien la generó.
+  see:
+    - S3
+- term: CORS
+  aliases:
+    - Cross-Origin Resource Sharing
+  definition: Mecanismo de cabeceras HTTP para permitir que un origen cargue
+    recursos de otro.
+  see: []
+- term: Versionado
+  aliases:
+    - Versioning
+    - versioning
+    - versionado de S3
+  definition: Conserva cada versión de un objeto S3 protegiendo de borrados y
+    sobrescrituras.
+  see:
+    - S3
+- term: Replicación S3
+  aliases:
+    - CRR
+    - SRR
+    - Cross-Region Replication
+    - Same-Region Replication
+  definition: Copia asíncrona de objetos a otro bucket en otra Región (CRR) o en
+    la misma (SRR); requiere versionado.
+  see:
+    - Versionado
+- term: SSE-S3
+  aliases: []
+  definition: Cifrado en el servidor con claves gestionadas por S3 (AES-256).
+  see:
+    - S3
+- term: SSE-KMS
+  aliases:
+    - DSSE-KMS
+  definition: Cifrado en el servidor con claves de KMS, con auditoría en CloudTrail.
+  see:
+    - KMS
+- term: SSE-C
+  aliases: []
+  definition: Cifrado en el servidor con una clave proporcionada por el cliente en
+    cada petición HTTPS.
+  see:
+    - S3
+- term: Clases de almacenamiento S3
+  aliases:
+    - Standard-IA
+    - One Zone-IA
+    - Intelligent-Tiering
+    - storage class
+  definition: "Niveles de coste/acceso de S3: Standard, Intelligent-Tiering,
+    Standard-IA, One Zone-IA y Glacier."
+  see:
+    - S3
+- term: Glacier
+  aliases:
+    - S3 Glacier
+    - Glacier Flexible Retrieval
+    - Glacier Deep Archive
+    - Glacier Instant Retrieval
+    - Deep Archive
+  definition: Clases de archivo de S3 de muy bajo coste con distintos tiempos de
+    recuperación.
+  see:
+    - Clases de almacenamiento S3
+- term: Lifecycle Rules
+  aliases:
+    - Lifecycle
+    - lifecycle
+    - reglas de ciclo de vida
+  definition: Reglas que transicionan objetos entre clases o los expiran automáticamente.
+  see:
+    - S3
+- term: Transfer Acceleration
+  aliases:
+    - S3 Transfer Acceleration
+  definition: Acelera subidas a S3 usando edge locations y la red global de AWS.
+  see:
+    - Edge Location
+- term: Multi-Part Upload
+  aliases:
+    - multipart upload
+    - multi-part upload
+  definition: Subida de un objeto en partes paralelas; recomendada >100 MB y
+    obligatoria >5 GB.
+  see:
+    - S3
+- term: Byte-Range Fetch
+  aliases:
+    - Byte-Range Fetches
+  definition: Descarga de rangos de bytes de un objeto para paralelizar o
+    recuperar solo una parte.
+  see:
+    - S3
+- term: S3 Select
+  aliases:
+    - Glacier Select
+  definition: Filtra el contenido de un objeto con SQL en el servidor para
+    transferir menos datos.
+  see:
+    - S3
+- term: Object Lock
+  aliases:
+    - S3 Object Lock
+    - WORM
+    - Vault Lock
+  definition: Impide borrar o modificar objetos durante un periodo (modo
+    Governance o Compliance, Legal Hold).
+  see:
+    - Versionado
+- term: MFA Delete
+  aliases: []
+  definition: Exige MFA para eliminar versiones o cambiar el versionado de un bucket.
+  see:
+    - MFA
+- term: Access Point
+  aliases:
+    - S3 Access Point
+    - Access Points
+    - Multi-Region Access Point
+  definition: Endpoint con política propia para simplificar el acceso a datasets
+    compartidos de S3.
+  see:
+    - S3
+- term: S3 Object Lambda
+  aliases:
+    - Object Lambda
+  definition: Transforma los objetos con Lambda al recuperarlos desde S3.
+  see:
+    - Lambda
+- term: Storage Lens
+  aliases:
+    - S3 Storage Lens
+  definition: Herramienta de visibilidad y métricas de uso de almacenamiento S3 a
+    nivel de organización.
+  see:
+    - S3
+- term: Requester Pays
+  aliases: []
+  definition: Configuración de bucket en la que quien descarga paga el coste de
+    transferencia.
+  see:
+    - Bucket
+- term: CloudFront
+  aliases:
+    - CDN
+    - Content Delivery Network
+  definition: Red de distribución de contenido global que cachea objetos en edge
+    locations para reducir latencia.
+  see:
+    - Edge Location
+- term: OAC
+  aliases:
+    - Origin Access Control
+    - OAI
+    - Origin Access Identity
+  definition: Mecanismo para que un bucket S3 solo acepte peticiones procedentes
+    de CloudFront.
+  see:
+    - CloudFront
+- term: Origin Group
+  aliases:
+    - Origin Groups
+  definition: Par de orígenes primario y secundario de CloudFront con failover automático.
+  see:
+    - CloudFront
+- term: Cache Key
+  aliases:
+    - Cache Policy
+    - clave de caché
+  definition: Conjunto de elementos (host, ruta, headers, cookies, query strings)
+    que identifica un objeto cacheado.
+  see:
+    - CloudFront
+- term: Invalidación
+  aliases:
+    - Invalidation
+    - invalidaciones
+    - CreateInvalidation
+  definition: Operación que elimina objetos de la caché de CloudFront antes de su TTL.
+  see:
+    - CloudFront
+- term: Signed URL
+  aliases:
+    - Signed URLs
+    - Signed Cookies
+    - URL firmada
+  definition: URL o cookie firmada de CloudFront que da acceso temporal a
+    contenido privado.
+  see:
+    - CloudFront
+- term: Geo-restriction
+  aliases:
+    - restricción geográfica
+    - Geo Restriction
+  definition: Bloqueo o permiso de acceso a CloudFront según el país del usuario.
+  see:
+    - CloudFront
+- term: CloudFront Functions
+  aliases: []
+  definition: Funciones JavaScript ligeras ejecutadas en el edge con latencia
+    sub-milisegundo.
+  see:
+    - CloudFront
+- term: Lambda@Edge
+  aliases:
+    - Lambda Edge
+  definition: Funciones Lambda que se ejecutan en edge locations de CloudFront
+    para personalizar peticiones y respuestas.
+  see:
+    - CloudFront
+- term: Price Class
+  aliases:
+    - Price Classes
+  definition: Opción de CloudFront para limitar las edge locations usadas y
+    reducir el coste.
+  see:
+    - CloudFront
+- term: Global Accelerator
+  aliases:
+    - AWS Global Accelerator
+  definition: Servicio con 2 IPs anycast estáticas que enruta tráfico TCP/UDP por
+    la red global de AWS hacia tus endpoints.
+  see:
+    - Edge Location
+- term: Anycast
+  aliases:
+    - IP anycast
+  definition: Una misma dirección IP anunciada desde varias ubicaciones; el
+    tráfico va a la más cercana.
+  see:
+    - Global Accelerator
+- term: Snow Family
+  aliases:
+    - Snowcone
+    - Snowball
+    - Snowball Edge
+    - Snowmobile
+  definition: "Dispositivos físicos para migrar datos offline o computar en el
+    edge: Snowcone, Snowball Edge y Snowmobile."
+  see: []
+- term: Storage Gateway
+  aliases:
+    - AWS Storage Gateway
+    - File Gateway
+    - Volume Gateway
+    - Tape Gateway
+  definition: Servicio híbrido que expone S3/EBS/FSx a sistemas locales vía NFS,
+    SMB, iSCSI o VTL con caché local.
+  see:
+    - S3
+- term: DataSync
+  aliases:
+    - AWS DataSync
+  definition: Servicio para transferir y sincronizar grandes volúmenes entre
+    on-premises y AWS con un agente.
+  see: []
+- term: Transfer Family
+  aliases:
+    - AWS Transfer Family
+    - SFTP
+  definition: Servidores SFTP, FTPS y FTP gestionados con destino S3 o EFS.
+  see:
+    - S3
+- term: SQS
+  aliases:
+    - Simple Queue Service
+    - Amazon SQS
+  definition: Cola de mensajes gestionada para desacoplar productores y
+    consumidores; modelo pull.
+  see: []
+- term: Visibility Timeout
+  aliases:
+    - visibility timeout
+  definition: Tiempo en que un mensaje recibido queda invisible a otros
+    consumidores de SQS.
+  see:
+    - SQS
+- term: Long Polling
+  aliases:
+    - long polling
+    - short polling
+  definition: Espera de hasta 20 s en SQS a que haya mensajes, reduciendo llamadas
+    y latencia.
+  see:
+    - SQS
+- term: Dead-Letter Queue
+  aliases:
+    - DLQ
+    - cola de mensajes muertos
+  definition: Cola donde se aparcan mensajes que fallaron repetidamente para depurarlos.
+  see:
+    - SQS
+- term: Cola FIFO
+  aliases:
+    - FIFO
+    - SQS FIFO
+    - FIFO queue
+  definition: Cola con orden estricto y entrega exactly-once mediante
+    MessageGroupId y deduplicación.
+  see:
+    - SQS
+- term: SNS
+  aliases:
+    - Simple Notification Service
+    - Amazon SNS
+  definition: "Servicio pub/sub: publica en un topic y envía (push) a todos los
+    suscriptores."
+  see: []
+- term: Fan-out
+  aliases:
+    - fan-out
+    - fanout
+  definition: Patrón que replica un mensaje de un topic SNS a múltiples colas SQS
+    o destinos.
+  see:
+    - SNS
+- term: Filter Policy
+  aliases:
+    - filtrado de suscripciones
+    - filter policy
+  definition: Política JSON de una suscripción SNS que filtra mensajes por atributos.
+  see:
+    - SNS
+- term: Kinesis Data Streams
+  aliases:
+    - Kinesis
+    - KDS
+  definition: Servicio de streaming en tiempo real con shards, retención
+    configurable y replay.
+  see: []
+- term: Shard
+  aliases:
+    - shards
+    - fragmento
+  definition: Unidad de capacidad de un stream de Kinesis (1 MB/s de entrada y 2
+    MB/s de salida).
+  see:
+    - Kinesis Data Streams
+- term: Partition Key
+  aliases:
+    - clave de partición
+  definition: Clave que determina a qué shard (Kinesis) o partición (DynamoDB) va
+    un registro.
+  see: []
+- term: Enhanced Fan-Out
+  aliases:
+    - EFO
+  definition: Modo de Kinesis con 2 MB/s dedicados por consumidor por shard.
+  see:
+    - Kinesis Data Streams
+- term: Firehose
+  aliases:
+    - Kinesis Data Firehose
+    - Data Firehose
+    - Amazon Data Firehose
+  definition: Servicio de entrega casi en tiempo real de streams a S3, Redshift,
+    OpenSearch y otros destinos.
+  see:
+    - Kinesis Data Streams
+- term: Managed Service for Apache Flink
+  aliases:
+    - Apache Flink
+    - Kinesis Data Analytics
+    - Flink
+  definition: Servicio gestionado para analizar streams en tiempo real con Flink o SQL.
+  see:
+    - Kinesis Data Streams
+- term: Amazon MQ
+  aliases:
+    - MQ
+    - ActiveMQ
+    - RabbitMQ
+  definition: Broker gestionado de ActiveMQ y RabbitMQ para migrar apps con MQTT,
+    AMQP, STOMP u OpenWire.
+  see: []
+- term: Contenedor
+  aliases:
+    - contenedores
+    - Docker
+    - container
+  definition: Paquete aislado de aplicación y dependencias que comparte el kernel del host.
+  see: []
+- term: ECR
+  aliases:
+    - Elastic Container Registry
+  definition: Registro gestionado de imágenes de contenedor con escaneo de
+    vulnerabilidades e integración IAM.
+  see:
+    - Contenedor
+- term: ECS
+  aliases:
+    - Elastic Container Service
+  definition: Orquestador de contenedores propio de AWS, con lanzamiento en EC2 o Fargate.
+  see:
+    - Fargate
+- term: Fargate
+  aliases:
+    - AWS Fargate
+  definition: Motor serverless para ejecutar contenedores en ECS o EKS sin
+    gestionar servidores.
+  see:
+    - ECS
+- term: Task Definition
+  aliases:
+    - Task Definitions
+    - definición de tarea
+  definition: Plantilla JSON de ECS con imagen, CPU/RAM, puertos y roles de una tarea.
+  see:
+    - ECS
+- term: Task Role
+  aliases:
+    - rol de tarea
+    - Execution Role
+  definition: Rol IAM que asume una tarea ECS para acceder a servicios AWS.
+  see:
+    - ECS
+- term: EKS
+  aliases:
+    - Elastic Kubernetes Service
+  definition: Kubernetes gestionado por AWS con nodos EC2 o Fargate.
+  see:
+    - Kubernetes
+- term: Kubernetes
+  aliases:
+    - K8s
+  definition: Orquestador de contenedores de código abierto.
+  see:
+    - Contenedor
+- term: App Runner
+  aliases:
+    - AWS App Runner
+  definition: Servicio para desplegar webs y APIs desde código o imagen con
+    escalado y HTTPS automáticos.
+  see:
+    - Contenedor
+- term: Lambda
+  aliases:
+    - AWS Lambda
+    - función Lambda
+  definition: Cómputo serverless que ejecuta funciones bajo demanda, hasta 15
+    minutos, facturadas por ms.
+  see: []
+- term: Serverless
+  aliases:
+    - sin servidor
+    - sin servidores
+  definition: Modelo donde AWS gestiona la infraestructura y se escala
+    automáticamente; pagas por uso.
+  see: []
+- term: Cold Start
+  aliases:
+    - cold start
+    - arranque en frío
+  definition: Latencia extra al inicializar un nuevo entorno de ejecución, p. ej.
+    de Lambda.
+  see:
+    - Lambda
+- term: SnapStart
+  aliases:
+    - Lambda SnapStart
+  definition: Característica de Lambda (Java) que reduce los cold starts
+    restaurando una instantánea inicializada.
+  see:
+    - Cold Start
+- term: Reserved Concurrency
+  aliases:
+    - concurrencia reservada
+  definition: Límite y garantía de ejecuciones simultáneas asignadas a una función Lambda.
+  see:
+    - Lambda
+- term: Provisioned Concurrency
+  aliases:
+    - concurrencia aprovisionada
+  definition: Entornos Lambda precalentados para eliminar cold starts, con coste fijo.
+  see:
+    - Lambda
+- term: Lambda Layer
+  aliases:
+    - Layers
+    - Layer
+    - Lambda Layers
+  definition: Paquete de bibliotecas o código compartido que varias funciones
+    Lambda pueden reutilizar.
+  see:
+    - Lambda
+- term: Function URL
+  aliases:
+    - Lambda Function URL
+  definition: Endpoint HTTPS dedicado de una función Lambda sin necesidad de API Gateway.
+  see:
+    - Lambda
+- term: Event Source Mapping
+  aliases:
+    - event source mapping
+  definition: Componente de Lambda que sondea SQS, Kinesis o DynamoDB Streams y la
+    invoca con lotes.
+  see:
+    - Lambda
+- term: DynamoDB
+  aliases:
+    - Dynamo DB
+  definition: Base de datos NoSQL clave-valor gestionada y serverless con latencia
+    de milisegundos de un dígito.
+  see: []
+- term: Primary Key
+  aliases:
+    - clave primaria
+    - Sort Key
+    - Partition Key y Sort Key
+  definition: En DynamoDB, la partition key sola o combinada con una sort key;
+    identifica cada item.
+  see:
+    - DynamoDB
+- term: RCU
+  aliases:
+    - WCU
+    - Read Capacity Unit
+    - Write Capacity Unit
+    - capacidad de lectura
+  definition: "Unidades de capacidad de DynamoDB: 1 RCU = una lectura consistente
+    de 4 KB/s; 1 WCU = una escritura de 1 KB/s."
+  see:
+    - DynamoDB
+- term: GSI
+  aliases:
+    - Global Secondary Index
+    - LSI
+    - Local Secondary Index
+    - índice secundario
+  definition: Índices secundarios de DynamoDB; el global usa otras claves, el
+    local comparte la partition key.
+  see:
+    - DynamoDB
+- term: DAX
+  aliases:
+    - DynamoDB Accelerator
+  definition: Caché en memoria compatible con DynamoDB que ofrece latencia de
+    microsegundos.
+  see:
+    - DynamoDB
+- term: DynamoDB Streams
+  aliases:
+    - Streams de DynamoDB
+  definition: Flujo ordenado de cambios de una tabla DynamoDB durante 24 horas.
+  see:
+    - DynamoDB
+- term: Global Tables
+  aliases:
+    - Tablas globales
+    - DynamoDB Global Tables
+  definition: Replicación activa-activa de una tabla DynamoDB en varias Regiones.
+  see:
+    - DynamoDB
+- term: Hot partition
+  aliases:
+    - hot shard
+    - partición caliente
+  definition: Partición que recibe tráfico desproporcionado por mala elección de clave.
+  see:
+    - DynamoDB
+- term: API Gateway
+  aliases:
+    - Amazon API Gateway
+  definition: Servicio gestionado para crear y proteger APIs REST, HTTP y WebSocket.
+  see:
+    - API
+- term: REST API
+  aliases:
+    - HTTP API
+    - WebSocket API
+    - REST
+  definition: "Tipos de API de API Gateway: REST (completa), HTTP (simple y
+    barata) y WebSocket (bidireccional)."
+  see:
+    - API Gateway
+- term: Stage
+  aliases:
+    - stages
+    - Stage variables
+  definition: Entorno de despliegue de una API en API Gateway (dev, prod).
+  see:
+    - API Gateway
+- term: Lambda Authorizer
+  aliases:
+    - Custom Authorizer
+  definition: Función Lambda que decide si autorizar una petición a API Gateway
+    con lógica propia.
+  see:
+    - API Gateway
+- term: Throttling
+  aliases:
+    - throttling
+    - limitación de tasa
+  definition: Limitación de la tasa de peticiones; el exceso se rechaza (HTTP 429).
+  see: []
+- term: JWT
+  aliases:
+    - JSON Web Token
+  definition: Token firmado en JSON que transporta identidad y claims de un
+    usuario autenticado.
+  see: []
+- term: Cognito
+  aliases:
+    - Amazon Cognito
+  definition: "Servicio de identidad para usuarios de aplicaciones: User Pools e
+    Identity Pools."
+  see:
+    - JWT
+- term: User Pool
+  aliases:
+    - Cognito User Pool
+    - User Pools
+  definition: Directorio de usuarios de Cognito que autentica y emite tokens JWT.
+  see:
+    - Cognito
+- term: Identity Pool
+  aliases:
+    - Cognito Identity Pool
+    - Identity Pools
+    - Federated Identities
+  definition: Canjea tokens por credenciales temporales de AWS para acceder
+    directamente a recursos.
+  see:
+    - Cognito
+- term: Step Functions
+  aliases:
+    - AWS Step Functions
+    - State Machine
+    - máquina de estados
+  definition: Orquestador serverless de flujos de trabajo definidos como máquinas
+    de estado.
+  see:
+    - Lambda
+- term: Amazon States Language
+  aliases:
+    - ASL
+  definition: Lenguaje JSON para definir máquinas de estado de Step Functions.
+  see:
+    - Step Functions
+- term: DocumentDB
+  aliases:
+    - Amazon DocumentDB
+    - MongoDB
+  definition: Base de datos de documentos gestionada compatible con MongoDB, con
+    almacenamiento tipo Aurora.
+  see: []
+- term: Neptune
+  aliases:
+    - Amazon Neptune
+    - base de datos de grafos
+    - Gremlin
+    - SPARQL
+  definition: Base de datos de grafos gestionada para relaciones complejas
+    (recomendaciones, fraude).
+  see: []
+- term: Keyspaces
+  aliases:
+    - Amazon Keyspaces
+    - Cassandra
+  definition: Servicio serverless compatible con Apache Cassandra (CQL).
+  see: []
+- term: QLDB
+  aliases:
+    - Quantum Ledger Database
+  definition: Base de datos de libro mayor inmutable y verificable criptográficamente.
+  see: []
+- term: Managed Blockchain
+  aliases:
+    - Amazon Managed Blockchain
+  definition: Servicio para crear redes blockchain con Hyperledger Fabric o Ethereum.
+  see: []
+- term: Timestream
+  aliases:
+    - Amazon Timestream
+  definition: Base de datos serverless de series temporales para IoT y telemetría.
+  see: []
+- term: MemoryDB
+  aliases:
+    - MemoryDB for Redis
+    - Amazon MemoryDB
+  definition: Base de datos compatible con Redis, durable y multi-AZ, usable como
+    almacén primario.
+  see:
+    - Redis
+- term: Redshift
+  aliases:
+    - Amazon Redshift
+  definition: Data warehouse columnar MPP (OLAP) basado en PostgreSQL que escala a
+    petabytes.
+  see: []
+- term: Redshift Spectrum
+  aliases:
+    - Spectrum
+  definition: Función de Redshift para consultar datos en S3 sin cargarlos en el cluster.
+  see:
+    - Redshift
+- term: OLTP
+  aliases:
+    - procesamiento transaccional
+  definition: "Procesamiento transaccional en línea: muchas operaciones cortas de
+    lectura/escritura."
+  see: []
+- term: OLAP
+  aliases:
+    - procesamiento analítico
+  definition: "Procesamiento analítico en línea: consultas complejas sobre grandes
+    volúmenes de datos."
+  see:
+    - Redshift
+- term: ETL
+  aliases:
+    - Extract Transform Load
+  definition: Proceso de extraer, transformar y cargar datos de un sistema a otro.
+  see:
+    - Glue
+- term: Athena
+  aliases:
+    - Amazon Athena
+  definition: Servicio serverless de consultas SQL sobre datos en S3, facturado
+    por TB escaneado.
+  see:
+    - S3
+- term: Parquet
+  aliases:
+    - ORC
+    - formato columnar
+    - formatos columnares
+  definition: Formatos de archivo columnares comprimidos que reducen el coste de
+    consulta en Athena y Redshift Spectrum.
+  see:
+    - Athena
+- term: EMR
+  aliases:
+    - Elastic MapReduce
+    - Amazon EMR
+    - Hadoop
+    - Spark
+  definition: Servicio de clusters gestionados de big data con Hadoop, Spark,
+    Hive, Presto y Flink.
+  see: []
+- term: OpenSearch
+  aliases:
+    - OpenSearch Service
+    - Elasticsearch
+  definition: Servicio de búsqueda y analítica de logs y texto, sucesor de Elasticsearch.
+  see: []
+- term: QuickSight
+  aliases:
+    - Amazon QuickSight
+    - SPICE
+  definition: Servicio de BI serverless con dashboards interactivos y motor en
+    memoria SPICE.
+  see: []
+- term: Glue
+  aliases:
+    - AWS Glue
+    - Glue Data Catalog
+    - Crawler
+    - Glue Crawler
+    - DataBrew
+  definition: Servicio ETL serverless con catálogo de metadatos, crawlers y jobs Spark.
+  see:
+    - ETL
+- term: Lake Formation
+  aliases:
+    - AWS Lake Formation
+    - data lake
+  definition: Servicio para crear data lakes en S3 con control de acceso
+    centralizado por fila, columna y celda.
+  see:
+    - Glue
+- term: MSK
+  aliases:
+    - Managed Streaming for Apache Kafka
+    - Kafka
+    - Amazon MSK
+  definition: Apache Kafka gestionado en tu VPC, con mensajes de hasta 10 MB.
+  see:
+    - Kinesis Data Streams
+- term: Rekognition
+  aliases:
+    - Amazon Rekognition
+  definition: "Servicio de visión por computador para analizar imágenes y vídeo:
+    objetos, rostros, moderación."
+  see: []
+- term: Transcribe
+  aliases:
+    - Amazon Transcribe
+  definition: Convierte voz en texto (ASR) con redacción automática de PII.
+  see: []
+- term: Polly
+  aliases:
+    - Amazon Polly
+  definition: Convierte texto en voz realista (TTS).
+  see: []
+- term: Translate
+  aliases:
+    - Amazon Translate
+  definition: Traducción automática de idiomas con redes neuronales.
+  see: []
+- term: Lex
+  aliases:
+    - Amazon Lex
+  definition: Servicio para crear chatbots conversacionales con voz y texto
+    (tecnología de Alexa).
+  see: []
+- term: Amazon Connect
+  aliases:
+    - Connect
+  definition: Centro de contacto omnicanal en la nube.
+  see:
+    - Lex
+- term: Comprehend
+  aliases:
+    - Amazon Comprehend
+    - Comprehend Medical
+  definition: NLP para extraer sentimiento, entidades, frases clave e idioma de textos.
+  see: []
+- term: SageMaker
+  aliases:
+    - Amazon SageMaker
+  definition: Plataforma completa para construir, entrenar y desplegar modelos de ML.
+  see: []
+- term: Forecast
+  aliases:
+    - Amazon Forecast
+  definition: Servicio de previsión de series temporales basado en ML.
+  see: []
+- term: Kendra
+  aliases:
+    - Amazon Kendra
+  definition: Búsqueda documental empresarial en lenguaje natural basada en ML.
+  see: []
+- term: Personalize
+  aliases:
+    - Amazon Personalize
+  definition: Servicio de recomendaciones personalizadas en tiempo real.
+  see: []
+- term: Textract
+  aliases:
+    - Amazon Textract
+  definition: OCR avanzado que extrae texto, formularios y tablas de documentos escaneados.
+  see: []
+- term: Bedrock
+  aliases:
+    - Amazon Bedrock
+  definition: Acceso por API a modelos fundacionales de IA generativa, con RAG,
+    agentes y guardrails.
+  see: []
+- term: CloudWatch
+  aliases:
+    - Amazon CloudWatch
+  definition: "Servicio de observabilidad: métricas, logs, alarmas y dashboards."
+  see: []
+- term: CloudWatch Agent
+  aliases:
+    - Unified CloudWatch Agent
+    - agente de CloudWatch
+  definition: Agente que envía métricas del sistema (memoria, disco) y logs de
+    instancias a CloudWatch.
+  see:
+    - CloudWatch
+- term: Métrica personalizada
+  aliases:
+    - Custom Metric
+    - custom metric
+    - métricas personalizadas
+    - PutMetricData
+  definition: Métrica enviada por el usuario a CloudWatch con PutMetricData, con
+    resolución estándar o alta.
+  see:
+    - CloudWatch
+- term: Alarma de CloudWatch
+  aliases:
+    - CloudWatch Alarm
+    - alarma
+    - alarmas
+    - Composite alarm
+  definition: Evalúa una métrica y dispara acciones (SNS, EC2, Auto Scaling) al
+    superar un umbral.
+  see:
+    - CloudWatch
+- term: Log Group
+  aliases:
+    - Log Stream
+    - Log Groups
+    - grupo de logs
+  definition: Contenedor de logs de CloudWatch (por aplicación) que agrupa streams
+    de logs de cada fuente.
+  see:
+    - CloudWatch
+- term: Logs Insights
+  aliases:
+    - CloudWatch Logs Insights
+  definition: Lenguaje de consulta interactivo para analizar logs en CloudWatch.
+  see:
+    - Log Group
+- term: Subscription Filter
+  aliases:
+    - Subscription Filters
+  definition: Filtro que envía logs de CloudWatch en tiempo real a Kinesis,
+    Firehose o Lambda.
+  see:
+    - Log Group
+- term: Metric Filter
+  aliases:
+    - Metric Filters
+  definition: Extrae métricas a partir de patrones en logs de CloudWatch.
+  see:
+    - Log Group
+- term: CloudWatch Synthetics
+  aliases:
+    - Synthetics
+    - canary
+    - Canaries
+  definition: Scripts programados (canaries) que prueban APIs y sitios web de
+    forma continua.
+  see:
+    - CloudWatch
+- term: EventBridge
+  aliases:
+    - Amazon EventBridge
+    - CloudWatch Events
+    - Event Bus
+    - bus de eventos
+  definition: Bus de eventos serverless que enruta eventos de AWS, SaaS y apps a
+    targets mediante reglas.
+  see: []
+- term: CloudTrail
+  aliases:
+    - AWS CloudTrail
+  definition: Registra las llamadas a la API de AWS (quién, qué, cuándo) para
+    auditoría y cumplimiento.
+  see: []
+- term: AWS Config
+  aliases:
+    - Config
+    - Config Rules
+    - Config Rule
+  definition: Registra la configuración de recursos y evalúa su cumplimiento con reglas.
+  see:
+    - CloudTrail
+- term: X-Ray
+  aliases:
+    - AWS X-Ray
+  definition: Servicio de trazado distribuido para analizar latencias y errores en
+    aplicaciones.
+  see:
+    - CloudWatch
+- term: Trusted Advisor
+  aliases:
+    - AWS Trusted Advisor
+  definition: Herramienta con recomendaciones de coste, rendimiento, seguridad,
+    tolerancia a fallos y límites.
+  see: []
+- term: AWS Health Dashboard
+  aliases:
+    - Personal Health Dashboard
+    - Health Dashboard
+  definition: Estado de servicios AWS y eventos que afectan a tus recursos.
+  see: []
+- term: KMS
+  aliases:
+    - Key Management Service
+    - AWS KMS
+    - KMS key
+    - claves KMS
+  definition: Servicio gestionado para crear y controlar claves criptográficas,
+    integrado con IAM y auditado con CloudTrail.
+  see: []
+- term: Envelope Encryption
+  aliases:
+    - envelope encryption
+    - cifrado de sobre
+  definition: Técnica en que una clave de datos cifra la información y una clave
+    maestra cifra esa clave de datos.
+  see:
+    - KMS
+- term: Customer Managed Key
+  aliases:
+    - CMK
+    - customer managed key
+    - AWS managed key
+  definition: Clave KMS creada y controlada por el cliente, con key policy y
+    rotación opcional.
+  see:
+    - KMS
+- term: Key Policy
+  aliases:
+    - key policy
+    - política de clave
+  definition: Política de recurso obligatoria que controla quién puede usar y
+    administrar una clave KMS.
+  see:
+    - KMS
+- term: Multi-Region Keys
+  aliases:
+    - claves multi-Región
+    - Multi-Region Key
+  definition: Claves KMS con el mismo ID y material replicado en varias Regiones.
+  see:
+    - KMS
+- term: S3 Bucket Keys
+  aliases:
+    - Bucket Key
+    - Bucket Keys
+  definition: Reducen las llamadas a KMS de SSE-KMS en S3, bajando costes.
+  see:
+    - SSE-KMS
+- term: CloudHSM
+  aliases:
+    - AWS CloudHSM
+    - HSM
+  definition: Módulo de seguridad de hardware dedicado donde solo tú controlas las
+    claves (FIPS 140-2 Nivel 3).
+  see:
+    - KMS
+- term: Parameter Store
+  aliases:
+    - SSM Parameter Store
+    - SecureString
+    - Systems Manager Parameter Store
+  definition: Almacén seguro y jerárquico de configuración y secretos de Systems
+    Manager, con versionado.
+  see:
+    - Systems Manager
+- term: Secrets Manager
+  aliases:
+    - AWS Secrets Manager
+  definition: Servicio para almacenar secretos con rotación automática y
+    replicación multi-Región.
+  see:
+    - KMS
+- term: ACM
+  aliases:
+    - AWS Certificate Manager
+    - Certificate Manager
+  definition: Servicio que aprovisiona y renueva automáticamente certificados TLS
+    para ELB, CloudFront y API Gateway.
+  see: []
+- term: Systems Manager
+  aliases:
+    - SSM
+    - AWS Systems Manager
+  definition: "Conjunto de herramientas para operar flotas: Session Manager,
+    Parameter Store, Patch Manager, Run Command, Automation."
+  see: []
+- term: Shield
+  aliases:
+    - AWS Shield
+    - Shield Standard
+    - Shield Advanced
+  definition: "Protección DDoS: Standard (gratuita, capas 3/4) y Advanced (de
+    pago, con equipo de respuesta y protección de costes)."
+  see: []
+- term: DDoS
+  aliases:
+    - denegación de servicio distribuida
+  definition: Ataque que satura un servicio con tráfico desde muchas fuentes.
+  see:
+    - Shield
+- term: WAF
+  aliases:
+    - AWS WAF
+    - Web ACL
+    - Web Application Firewall
+  definition: Firewall de capa 7 que filtra HTTP/S por IP, geografía, SQLi, XSS y
+    límites de tasa.
+  see: []
+- term: Rate-based rule
+  aliases:
+    - rate-based rules
+    - regla basada en tasa
+  definition: Regla de WAF que bloquea IPs que superan un número de peticiones por periodo.
+  see:
+    - WAF
+- term: Firewall Manager
+  aliases:
+    - AWS Firewall Manager
+  definition: Aplica reglas de WAF, Shield, SG y Network Firewall de forma
+    centralizada en una Organization.
+  see:
+    - WAF
+- term: Network Firewall
+  aliases:
+    - AWS Network Firewall
+  definition: Firewall gestionado de VPC con inspección profunda y filtrado por dominio.
+  see:
+    - VPC
+- term: GuardDuty
+  aliases:
+    - Amazon GuardDuty
+  definition: Detección inteligente de amenazas con ML sobre CloudTrail, Flow Logs
+    y DNS logs.
+  see:
+    - CloudTrail
+- term: Inspector
+  aliases:
+    - Amazon Inspector
+  definition: Escáner automático de vulnerabilidades para EC2, imágenes ECR y
+    funciones Lambda.
+  see: []
+- term: Macie
+  aliases:
+    - Amazon Macie
+  definition: Descubre datos sensibles y PII en S3 usando ML.
+  see:
+    - S3
+- term: PII
+  aliases:
+    - datos personales
+    - Personally Identifiable Information
+  definition: Información de identificación personal, como nombres, tarjetas o documentos.
+  see:
+    - Macie
+- term: Detective
+  aliases:
+    - Amazon Detective
+  definition: Analiza y visualiza logs para encontrar la causa raíz de incidentes
+    de seguridad.
+  see:
+    - GuardDuty
+- term: Security Hub
+  aliases:
+    - AWS Security Hub
+  definition: Panel central que agrega hallazgos de seguridad y comprueba
+    estándares de cumplimiento.
+  see:
+    - GuardDuty
+- term: AWS Artifact
+  aliases:
+    - Artifact
+  definition: Portal de informes de cumplimiento y acuerdos de AWS (ISO, SOC, PCI).
+  see: []
+- term: Organizations
+  aliases:
+    - AWS Organizations
+    - Organization
+    - OU
+    - Organizational Unit
+  definition: Servicio para gestionar varias cuentas AWS con facturación
+    consolidada, OUs y SCPs.
+  see:
+    - SCP
+- term: SCP
+  aliases:
+    - Service Control Policy
+    - Service Control Policies
+  definition: Política de Organizations que limita los permisos máximos de cuentas
+    u OUs; no concede permisos.
+  see:
+    - Organizations
+- term: IAM Identity Center
+  aliases:
+    - AWS SSO
+    - SSO
+    - Single Sign-On
+  definition: Inicio de sesión único para varias cuentas AWS y apps, con
+    permission sets e IdPs externos.
+  see:
+    - Organizations
+- term: Directory Service
+  aliases:
+    - AWS Directory Service
+    - Managed Microsoft AD
+    - AD Connector
+    - Simple AD
+    - Active Directory
+  definition: "Directorios gestionados: Managed Microsoft AD, AD Connector (proxy)
+    y Simple AD."
+  see: []
+- term: Control Tower
+  aliases:
+    - AWS Control Tower
+    - landing zone
+    - guardrails
+  definition: Configura una landing zone multi-cuenta con guardrails y Account Factory.
+  see:
+    - Organizations
+- term: Cost Explorer
+  aliases:
+    - AWS Cost Explorer
+  definition: Herramienta para visualizar, analizar y prever costes y uso de AWS.
+  see: []
+- term: RPO
+  aliases:
+    - Recovery Point Objective
+  definition: Máxima pérdida de datos aceptable medida en tiempo.
+  see:
+    - RTO
+- term: RTO
+  aliases:
+    - Recovery Time Objective
+  definition: Tiempo máximo aceptable para restablecer el servicio tras un desastre.
+  see:
+    - RPO
+- term: Disaster Recovery
+  aliases:
+    - DR
+    - recuperación de desastres
+    - Recuperación de desastres
+  definition: "Estrategias para restaurar sistemas tras un fallo grave: Backup &
+    Restore, Pilot Light, Warm Standby, Multi-Site."
+  see:
+    - RPO
+- term: Pilot Light
+  aliases: []
+  definition: Estrategia DR con el núcleo mínimo (p. ej. BD) siempre activo y el
+    resto apagado.
+  see:
+    - Disaster Recovery
+- term: Warm Standby
+  aliases: []
+  definition: Estrategia DR con una versión reducida pero funcional del sistema
+    siempre ejecutándose.
+  see:
+    - Disaster Recovery
+- term: Multi-Site
+  aliases:
+    - Hot Site
+    - activo-activo
+    - Active-Active
+  definition: Estrategia DR con réplica completa activa en otra Región que recibe tráfico.
+  see:
+    - Disaster Recovery
+- term: AWS Backup
+  aliases:
+    - Backup Vault
+    - plan de backup
+  definition: Servicio centralizado de backups con planes, retención, cross-region
+    y Vault Lock.
+  see:
+    - Disaster Recovery
+- term: Elastic Disaster Recovery
+  aliases:
+    - DRS
+    - AWS DRS
+    - CloudEndure Disaster Recovery
+  definition: Replicación continua de servidores a AWS para recuperarlos
+    rápidamente tras un desastre.
+  see:
+    - Disaster Recovery
+- term: 7 R
+  aliases:
+    - 7 Rs
+    - estrategias de migración
+    - lift-and-shift
+    - Rehost
+    - Replatform
+    - Refactor
+  definition: "Estrategias de migración: Retire, Retain, Relocate, Rehost,
+    Replatform, Repurchase y Refactor."
+  see: []
+- term: Application Migration Service
+  aliases:
+    - MGN
+    - AWS MGN
+  definition: Servicio de lift-and-shift con replicación continua de servidores hacia EC2.
+  see:
+    - 7 R
+- term: Migration Hub
+  aliases:
+    - AWS Migration Hub
+    - Application Discovery Service
+  definition: Panel central para seguir migraciones; Discovery Service inventaría
+    servidores on-premises.
+  see: []
+- term: VMware Cloud on AWS
+  aliases:
+    - VMC
+  definition: Stack VMware ejecutándose sobre hardware de AWS para extender o
+    migrar centros de datos.
+  see: []
+- term: DMS
+  aliases:
+    - Database Migration Service
+    - AWS DMS
+    - CDC
+    - Change Data Capture
+  definition: Migra bases de datos con replicación continua y mínimo downtime.
+  see:
+    - SCT
+- term: SCT
+  aliases:
+    - Schema Conversion Tool
+    - AWS SCT
+  definition: Convierte esquemas y código entre motores de base de datos distintos.
+  see:
+    - DMS
+- term: CloudFormation
+  aliases:
+    - AWS CloudFormation
+    - plantilla
+    - plantillas
+    - stack
+    - stacks
+  definition: Servicio de infraestructura como código que crea recursos AWS desde
+    plantillas JSON/YAML agrupadas en stacks.
+  see:
+    - IaC
+- term: IaC
+  aliases:
+    - Infrastructure as Code
+    - infraestructura como código
+  definition: Gestionar infraestructura mediante archivos de definición
+    versionables y automatizables.
+  see: []
+- term: Change Set
+  aliases:
+    - Change Sets
+  definition: Vista previa de los cambios que una actualización aplicaría a una
+    stack de CloudFormation.
+  see:
+    - CloudFormation
+- term: StackSets
+  aliases:
+    - StackSet
+  definition: Despliega stacks de CloudFormation en múltiples cuentas y Regiones a la vez.
+  see:
+    - CloudFormation
+- term: Drift Detection
+  aliases:
+    - drift
+  definition: Detecta cambios manuales en recursos respecto a la plantilla de
+    CloudFormation.
+  see:
+    - CloudFormation
+- term: CDK
+  aliases:
+    - Cloud Development Kit
+    - AWS CDK
+  definition: Framework para definir infraestructura en lenguajes de programación
+    que genera plantillas CloudFormation.
+  see:
+    - CloudFormation
+- term: SAM
+  aliases:
+    - Serverless Application Model
+  definition: Extensión de CloudFormation que simplifica definir aplicaciones serverless.
+  see:
+    - CloudFormation
+- term: Elastic Beanstalk
+  aliases:
+    - Beanstalk
+  definition: PaaS que despliega y escala aplicaciones desde el código,
+    gestionando EC2, ASG, ELB y más.
+  see: []
+- term: Run Command
+  aliases:
+    - SSM Run Command
+  definition: Función de Systems Manager para ejecutar comandos en flotas sin SSH.
+  see:
+    - Systems Manager
+- term: Patch Manager
+  aliases:
+    - SSM Patch Manager
+  definition: Automatiza la aplicación de parches del SO en instancias gestionadas.
+  see:
+    - Systems Manager
+- term: OpsWorks
+  aliases:
+    - AWS OpsWorks
+  definition: Servicio gestionado de Chef y Puppet para configuración de servidores.
+  see: []
+- term: CodeDeploy
+  aliases:
+    - CodeBuild
+    - CodePipeline
+    - CodeArtifact
+    - CodeCommit
+  definition: "Servicios CI/CD de AWS: construcción (CodeBuild), despliegue
+    (CodeDeploy), orquestación (CodePipeline)."
+  see: []
+- term: SES
+  aliases:
+    - Simple Email Service
+    - Amazon SES
+  definition: Servicio de envío de correo electrónico masivo y transaccional.
+  see: []
+- term: Pinpoint
+  aliases:
+    - Amazon Pinpoint
+  definition: Servicio de marketing multicanal (email, SMS, push) con segmentación.
+  see: []
+- term: AWS Batch
+  aliases:
+    - Batch
+  definition: Ejecuta trabajos por lotes como contenedores con dimensionamiento automático.
+  see: []
+- term: Lightsail
+  aliases:
+    - Amazon Lightsail
+  definition: Servidores privados virtuales con precios fijos y simples para
+    aplicaciones pequeñas.
+  see: []
+- term: MediaConvert
+  aliases:
+    - Elastic Transcoder
+  definition: Servicios de transcodificación de vídeo bajo demanda.
+  see: []
+- term: AppFlow
+  aliases:
+    - Amazon AppFlow
+  definition: Transferencia de datos sin código entre aplicaciones SaaS y servicios AWS.
+  see: []
+- term: AppSync
+  aliases:
+    - AWS AppSync
+    - GraphQL
+  definition: Servicio gestionado de GraphQL con suscripciones en tiempo real.
+  see: []
+- term: Amplify
+  aliases:
+    - AWS Amplify
+  definition: Conjunto de herramientas para construir y alojar apps web y móviles
+    full-stack.
+  see: []
+- term: WorkSpaces
+  aliases:
+    - Amazon WorkSpaces
+    - AppStream
+    - AppStream 2.0
+  definition: Escritorios virtuales (DaaS) y streaming de aplicaciones.
+  see: []
+- term: IoT Core
+  aliases:
+    - AWS IoT Core
+    - Greengrass
+  definition: Conecta dispositivos IoT con MQTT; Greengrass ejecuta cómputo local
+    en el borde.
+  see: []
+- term: Outposts
+  aliases:
+    - AWS Outposts
+  definition: Infraestructura AWS instalada en tu centro de datos.
+  see: []
+- term: Local Zones
+  aliases:
+    - Local Zone
+    - Wavelength
+  definition: Extensiones de infraestructura AWS cercanas a grandes ciudades
+    (Local Zones) o redes 5G (Wavelength).
+  see: []
+- term: Budgets
+  aliases:
+    - AWS Budgets
+  definition: Alertas de gasto y uso frente a un presupuesto definido.
+  see:
+    - Cost Explorer
+- term: Compute Optimizer
+  aliases:
+    - AWS Compute Optimizer
+    - rightsizing
+  definition: Recomienda tamaños óptimos de recursos con ML.
+  see: []
+- term: Well-Architected Framework
+  aliases:
+    - Well-Architected
+    - Well-Architected Tool
+    - pilares
+  definition: "Buenas prácticas de AWS organizadas en seis pilares: excelencia
+    operativa, seguridad, fiabilidad, rendimiento, costes y sostenibilidad."
+  see: []
+- term: Cloud Adoption Framework
+  aliases:
+    - CAF
+    - AWS CAF
+  definition: Guía de AWS para planificar la adopción de la nube desde
+    perspectivas de negocio, personas, gobierno, plataforma, seguridad y
+    operaciones.
+  see: []
+- term: Graviton
+  aliases:
+    - procesadores Graviton
+  definition: Procesadores ARM diseñados por AWS con mejor relación
+    precio-rendimiento y eficiencia energética.
+  see:
+    - EC2
+- term: Acoplamiento débil
+  aliases:
+    - loose coupling
+    - desacoplar
+    - desacople
+  definition: Diseño en que los componentes se comunican mediante colas o eventos
+    para fallar y escalar de forma independiente.
+  see:
+    - SQS

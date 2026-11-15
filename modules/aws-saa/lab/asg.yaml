@@ -1,0 +1,13 @@
+questions:
+  - q: ¿Por qué escalar por backlog por instancia de SQS es mejor que por CPU para un worker?
+    kind: por-que
+    uses:
+      - sqs
+  - q: ¿Qué pasa si el health check del ASG es solo de EC2 y la aplicación devuelve errores 500?
+    kind: que-pasa-si
+    uses:
+      - elb
+  - q: Compara target tracking, step scaling y scheduled scaling.
+    kind: comparar
+    uses: []
+sims: []

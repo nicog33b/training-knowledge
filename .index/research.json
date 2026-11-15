@@ -1,0 +1,646 @@
+{
+  "sources": [
+    {
+      "id": "alfieri-2011",
+      "title": "Does discovery-based instruction enhance learning?",
+      "year": 2011,
+      "kind": "meta-analysis",
+      "verified": "secondary",
+      "summary": "El descubrimiento sin ayuda rinde peor que la instrucción explícita; el descubrimiento guiado (con explicaciones pedidas, feedback, ejemplos) rinde mejor que otras formas."
+    },
+    {
+      "id": "alfieri-2013",
+      "title": "Learning Through Case Comparisons: A Meta-Analytic Review",
+      "year": 2013,
+      "kind": "meta-analysis",
+      "verified": "abstract",
+      "summary": "Comparar casos lado a lado supera a los métodos tradicionales; funciona mejor si el principio se da después de comparar."
+    },
+    {
+      "id": "anthropic-admin-cost-api",
+      "title": "Anthropic Admin API: Usage and Cost (analytics/cost y cost_report)",
+      "year": 2026,
+      "kind": "docs",
+      "verified": "secondary",
+      "summary": "Anthropic informa gasto e uso de la organización con clave de administrador, pero no expone el saldo de créditos restante."
+    },
+    {
+      "id": "anthropic-pricing-docs",
+      "title": "Claude API pricing and prompt caching (Anthropic docs)",
+      "year": 2026,
+      "kind": "docs",
+      "verified": "secondary",
+      "summary": "Precios por token de los modelos Claude; el caché de prompt cobra ~0.1x por leer un prefijo repetido."
+    },
+    {
+      "id": "bastani-2025",
+      "title": "Generative AI without guardrails can harm learning: Evidence from high school mathematics",
+      "year": 2025,
+      "kind": "rct",
+      "verified": "abstract",
+      "summary": "Una IA sin restricciones crea dependencia y empeora el rendimiento sin ayuda; con guardrails el daño casi desaparece."
+    },
+    {
+      "id": "bisra-2018",
+      "title": "Inducing Self-Explanation: a Meta-Analysis",
+      "year": 2018,
+      "kind": "meta-analysis",
+      "verified": "secondary",
+      "summary": "Pedir al alumno que se explique el material mejora el aprendizaje (g≈0.55) y más si el prompt es concreto."
+    },
+    {
+      "id": "brunmair-richter-2019",
+      "title": "Similarity matters: A meta-analysis of interleaved learning and its moderators",
+      "year": 2019,
+      "kind": "meta-analysis",
+      "verified": "abstract",
+      "summary": "Intercalar ayuda (g≈0.42) sobre todo cuando las categorías son parecidas entre sí; con texto expositivo y palabras, con cautela."
+    },
+    {
+      "id": "cepeda-2008",
+      "title": "Spacing effects in learning: A temporal ridgeline of optimal retention",
+      "year": 2008,
+      "kind": "experiment",
+      "verified": "abstract",
+      "summary": "El intervalo óptimo entre sesiones crece con el tiempo que se quiere retener; no hay regla de proporción fija."
+    },
+    {
+      "id": "chernikova-2020",
+      "title": "Simulation-Based Learning in Higher Education: A Meta-Analysis",
+      "year": 2020,
+      "kind": "meta-analysis",
+      "verified": "abstract",
+      "summary": "Las simulaciones tienen efecto grande en habilidades complejas, con andamiaje según conocimiento previo."
+    },
+    {
+      "id": "clinton-lisell-2024",
+      "title": "Learning styles matching: is it really a neuromyth? (meta-analysis)",
+      "year": 2024,
+      "kind": "meta-analysis",
+      "verified": "abstract",
+      "summary": "Meta-análisis reciente: efecto promedio pequeño de igualar estilo, pero casi sin el patrón cruzado que exige la hipótesis."
+    },
+    {
+      "id": "costa-2022-4cid",
+      "title": "Four-component instructional design (4C/ID) model: a meta-analysis on use and effect",
+      "year": 2022,
+      "kind": "meta-analysis",
+      "verified": "secondary",
+      "summary": "Diseñar con tareas completas (4C/ID) tiene efecto grande en adquisición de conocimiento, más en educación superior."
+    },
+    {
+      "id": "deslauriers-2019",
+      "title": "Measuring actual learning versus feeling of learning in response to being actively engaged in the classroom",
+      "year": 2019,
+      "kind": "experiment",
+      "verified": "abstract",
+      "summary": "Con aprendizaje activo se aprende más pero se SIENTE aprender menos; la sensación de aprendizaje no es un buen indicador."
+    },
+    {
+      "id": "dunlosky-2013",
+      "title": "Improving Students' Learning With Effective Learning Techniques: Promising Directions From Cognitive and Educational Psychology",
+      "year": 2013,
+      "kind": "review",
+      "verified": "abstract",
+      "summary": "Ranking de 10 técnicas de estudio por utilidad; base para priorizar práctica de recuperación y espaciada."
+    },
+    {
+      "id": "expertise-reversal-wikipedia",
+      "title": "Expertise reversal effect (Wikipedia)",
+      "year": 2025,
+      "kind": "other",
+      "verified": "secondary",
+      "summary": "Los ejemplos resueltos ayudan a novatos pero pierden valor (o perjudican) con la experiencia; hay que retirar ayudas progresivamente."
+    },
+    {
+      "id": "fiorella-mayer-2016",
+      "title": "Eight Ways to Promote Generative Learning",
+      "year": 2016,
+      "kind": "review",
+      "verified": "secondary",
+      "summary": "Catálogo de 8 estrategias generativas (resumir, mapear, dibujar, imaginar, autoevaluarse, autoexplicar, enseñar, actuar)."
+    },
+    {
+      "id": "freeman-2014",
+      "title": "Active learning increases student performance in science, engineering, and mathematics",
+      "year": 2014,
+      "kind": "meta-analysis",
+      "verified": "abstract",
+      "summary": "En STEM, el aprendizaje activo supera a la clase magistral en notas y reduce reprobaciones."
+    },
+    {
+      "id": "fsrs-anki-docs",
+      "title": "What spaced repetition algorithm does Anki use? (FSRS)",
+      "year": 2025,
+      "kind": "docs",
+      "verified": "secondary",
+      "summary": "FSRS permite fijar retención objetivo y suele requerir menos repasos que SM-2 para igual retención."
+    },
+    {
+      "id": "gemini-openai-compat",
+      "title": "Gemini API OpenAI compatibility",
+      "year": 2026,
+      "kind": "docs",
+      "verified": "abstract",
+      "summary": "Gemini acepta peticiones en formato OpenAI en un endpoint compatible, con function calling."
+    },
+    {
+      "id": "gentner-loewenstein-thompson-2003",
+      "title": "Learning and transfer: A general role for analogical encoding",
+      "year": 2003,
+      "kind": "experiment",
+      "verified": "secondary",
+      "summary": "Comparar dos casos juntos (en vez de estudiarlos por separado) mejora mucho la transferencia del principio común a casos nuevos."
+    },
+    {
+      "id": "hardy-2026-autoscoring",
+      "title": "Autoscoring Anticlimax: A Meta-analytic Understanding of AI's Short-answer Shortcomings and Wording Weaknesses",
+      "year": 2026,
+      "kind": "meta-analysis",
+      "verified": "abstract",
+      "summary": "Metaanálisis de 890 resultados: los LLM generativos corrigen respuestas cortas peor que los modelos encoder entrenados y fallan en tareas fáciles para humanos."
+    },
+    {
+      "id": "jade-yartsev-2025",
+      "title": "ChatGPT for automated grading of short answer questions in mechanical ventilation",
+      "year": 2025,
+      "kind": "experiment",
+      "verified": "abstract",
+      "summary": "GPT-4o corrigiendo 557 respuestas de posgrado coincidió mal con humanos; mejor en ítems tipo checklist, peor en ítems evaluativos."
+    },
+    {
+      "id": "kestin-2025",
+      "title": "AI tutoring outperforms in-class active learning: an RCT in a Harvard physics course",
+      "year": 2025,
+      "kind": "rct",
+      "verified": "abstract",
+      "summary": "Un tutor IA diseñado con buenas prácticas superó al aprendizaje activo presencial en un ECA pequeño."
+    },
+    {
+      "id": "kirschner-sweller-clark-2006",
+      "title": "Why minimal guidance during instruction does not work",
+      "year": 2006,
+      "kind": "review",
+      "verified": "abstract",
+      "summary": "La enseñanza con guía mínima es menos eficaz para novatos e intermedios; la ventaja de guiar solo se reduce cuando el alumno ya sabe bastante."
+    },
+    {
+      "id": "kobayashi-2019",
+      "title": "Learning by Preparing-to-Teach and Teaching: A Meta-Analysis",
+      "year": 2019,
+      "kind": "meta-analysis",
+      "verified": "secondary",
+      "summary": "Estudiar para enseñar y enseñar mejora el aprendizaje, más si la enseñanza es interactiva."
+    },
+    {
+      "id": "kobayashi-2024",
+      "title": "Learning by teaching: meta-analysis of teaching after studying (teaching expectancy)",
+      "year": 2024,
+      "kind": "meta-analysis",
+      "verified": "secondary",
+      "summary": "Enseñar solo ayuda si el alumno estudió sabiendo que iba a enseñar; sin esa expectativa el efecto es nulo."
+    },
+    {
+      "id": "koyunlu-unlu-2024-poe",
+      "title": "Effect of the Predict-Observe-Explain (POE) Strategy on Achievement in Science Education: A Meta-Analysis Study",
+      "year": 2024,
+      "kind": "meta-analysis",
+      "verified": "secondary",
+      "summary": "Predecir-observar-explicar tiene un efecto grande sobre el rendimiento en ciencias, con evidencia de calidad modesta."
+    },
+    {
+      "id": "mayer-multimedia-chartered",
+      "title": "How multimedia can improve learning and instruction (Chartered College of Teaching)",
+      "year": 2021,
+      "kind": "review",
+      "verified": "secondary",
+      "summary": "Resumen de principios multimedia de Mayer con medianas de tamaño de efecto; diseño sin ruido, segmentado y señalizado."
+    },
+    {
+      "id": "moore-herzog-perkins-2013",
+      "title": "Interactive simulations as implicit support for guided-inquiry",
+      "year": 2013,
+      "kind": "experiment",
+      "verified": "secondary",
+      "summary": "En una clase grande, estudiantes exploraron un simulador PhET 10 minutos sin instrucciones y lo usaron productivamente sin frustrarse."
+    },
+    {
+      "id": "myers-hausman-rhodes-2023",
+      "title": "Self-generated questions as a study strategy (Myers, Hausman & Rhodes)",
+      "year": 2023,
+      "kind": "experiment",
+      "verified": "secondary",
+      "summary": "Las preguntas que inventan los alumnos a menudo no apuntan a lo importante; en algunas condiciones rindieron peor que otras estrategias."
+    },
+    {
+      "id": "ollama-openai-compat",
+      "title": "Ollama OpenAI compatibility",
+      "year": 2026,
+      "kind": "docs",
+      "verified": "abstract",
+      "summary": "Ollama expone /v1/chat/completions compatible con OpenAI, con tools pero sin tool_choice."
+    },
+    {
+      "id": "openai-costs-api-no-balance",
+      "title": "OpenAI: sin endpoint de saldo; Costs API con clave Admin (foro de la comunidad)",
+      "year": 2026,
+      "kind": "docs",
+      "verified": "secondary",
+      "summary": "OpenAI no ofrece un endpoint oficial de saldo prepagado; el gasto se lee con GET /v1/organization/costs y una clave Admin."
+    },
+    {
+      "id": "openai-gpt-6-luna-model",
+      "title": "GPT-6 Luna model page",
+      "year": 2026,
+      "kind": "docs",
+      "verified": "abstract",
+      "summary": "gpt-6-luna es un modelo de razonamiento; en Chat Completions solo admite function calling con reasoning_effort none."
+    },
+    {
+      "id": "openai-pricing-docs",
+      "title": "OpenAI API pricing",
+      "year": 2026,
+      "kind": "docs",
+      "verified": "abstract",
+      "summary": "Tabla oficial de precios de OpenAI: gpt-6-luna cuesta lo mismo que Claude Haiku 5.5 y gpt-6.1-sol lo mismo que Claude Sonnet 5.5."
+    },
+    {
+      "id": "pan-carpenter-2023",
+      "title": "Prequestioning and pretesting effects: a review of empirical research, theoretical perspectives, and implications for educational practice",
+      "year": 2023,
+      "kind": "review",
+      "verified": "secondary",
+      "summary": "Preguntar o evaluar ANTES de enseñar ayuda al aprendizaje posterior aunque se falle, si luego se ve la respuesta correcta."
+    },
+    {
+      "id": "pan-rickard-2018",
+      "title": "Transfer of Test-Enhanced Learning: Meta-Analytic Review and Synthesis",
+      "year": 2018,
+      "kind": "meta-analysis",
+      "verified": "secondary",
+      "summary": "La práctica de recuperación también transfiere a preguntas nuevas, bajo ciertas condiciones."
+    },
+    {
+      "id": "pashler-2008",
+      "title": "Learning Styles: Concepts and Evidence",
+      "year": 2008,
+      "kind": "review",
+      "verified": "abstract",
+      "summary": "No hay evidencia sólida de que adaptar la instrucción al 'estilo' del alumno (visual/auditivo...) mejore resultados."
+    },
+    {
+      "id": "peer-mcq-meta-2025",
+      "title": "A Systematic Review and Meta-Analysis on the Impact of Peer-Made MCQ Question-Bank Usage on Summative Assessments in Medical Education",
+      "year": 2025,
+      "kind": "meta-analysis",
+      "verified": "secondary",
+      "summary": "Usar bancos de preguntas hechos por compañeros tiene un efecto pequeño-positivo o nulo en exámenes de medicina."
+    },
+    {
+      "id": "podolefsky-moore-perkins-2013",
+      "title": "Implicit scaffolding in interactive simulations: Design strategies to support multiple educational goals",
+      "year": 2013,
+      "kind": "theory",
+      "verified": "abstract",
+      "summary": "Marco de diseño de PhET: guiar la exploración con affordances, restricciones, señales y feedback del propio simulador, sin instrucciones explícitas."
+    },
+    {
+      "id": "rawson-dunlosky-successive-relearning",
+      "title": "Successive relearning (revisión en Current Directions in Psychological Science)",
+      "year": 2022,
+      "kind": "review",
+      "verified": "secondary",
+      "summary": "Practicar hasta acertar y volver a practicar en sesiones separadas protege contra el olvido."
+    },
+    {
+      "id": "sailer-homner-2019",
+      "title": "The Gamification of Learning: a Meta-analysis",
+      "year": 2019,
+      "kind": "meta-analysis",
+      "verified": "abstract",
+      "summary": "La gamificación tiene efectos pequeños en lo cognitivo y menos estables en motivación y conducta."
+    },
+    {
+      "id": "schroeder-2018",
+      "title": "Studying and Constructing Concept Maps: a Meta-Analysis",
+      "year": 2018,
+      "kind": "meta-analysis",
+      "verified": "abstract",
+      "summary": "Construir mapas conceptuales rinde más que estudiar mapas ya hechos."
+    },
+    {
+      "id": "sinha-kapur-2021",
+      "title": "When Problem Solving Followed by Instruction Works: Evidence for Productive Failure",
+      "year": 2021,
+      "kind": "meta-analysis",
+      "verified": "abstract",
+      "summary": "Intentar el problema antes de la instrucción mejora el aprendizaje conceptual (efecto moderado), con matices de edad y tipo de habilidad."
+    },
+    {
+      "id": "sundararajan-adesope-2020",
+      "title": "Keep it Coherent: A Meta-Analysis of the Seductive Details Effect",
+      "year": 2020,
+      "kind": "meta-analysis",
+      "verified": "secondary",
+      "summary": "Los detalles atractivos pero irrelevantes empeoran el aprendizaje, sobre todo en lecciones cortas y para novatos."
+    },
+    {
+      "id": "wang-fan-2025",
+      "title": "The effect of ChatGPT on students' learning performance, learning perception, and higher-order thinking: a meta-analysis",
+      "year": 2025,
+      "kind": "meta-analysis",
+      "verified": "secondary",
+      "summary": "Meta-análisis de ChatGPT en educación; efectos grandes en rendimiento inmediato pero base pequeña para pensamiento de orden superior."
+    },
+    {
+      "id": "wisniewski-2020",
+      "title": "The Power of Feedback Revisited: A Meta-Analysis of Educational Feedback Research",
+      "year": 2020,
+      "kind": "meta-analysis",
+      "verified": "abstract",
+      "summary": "El feedback tiene efecto medio (d≈0.48) y depende mucho de qué información contiene."
+    },
+    {
+      "id": "yan-bjork-bjork-2016",
+      "title": "On the difficulty of mending metacognitive illusions: A priori theories, fluency effects, and misattributions of the interleaving benefit",
+      "year": 2016,
+      "kind": "experiment",
+      "verified": "secondary",
+      "summary": "Los alumnos creen que bloquear temas funciona mejor que intercalar aunque lo contrario sea cierto; la ilusión es difícil de corregir."
+    },
+    {
+      "id": "yang-2021",
+      "title": "Testing (quizzing) boosts classroom learning: A systematic and meta-analytic review",
+      "year": 2021,
+      "kind": "meta-analysis",
+      "verified": "abstract",
+      "summary": "Meta-análisis de práctica de recuperación en AULA REAL (no laboratorio); efecto medio."
+    }
+  ],
+  "decisions": [
+    {
+      "id": "correccion-ia-solo-formativa-con-checklist",
+      "title": "Corrección con IA solo formativa, contra rúbricas tipo checklist",
+      "summary": "La IA corrige explicaciones libres solo para dar feedback (nunca nota de examen), contra una lista de ideas concretas; lo que pueda corregirse con código, se corrige con código.",
+      "status": "proposed",
+      "confidence": "medium",
+      "date": "2026-11-15",
+      "sources": [
+        "hardy-2026-autoscoring",
+        "jade-yartsev-2025",
+        "anthropic-pricing-docs",
+        "wisniewski-2020"
+      ],
+      "affects": [
+        "package:sims",
+        "package:tutor"
+      ]
+    },
+    {
+      "id": "descartar-tecnicas-de-baja-evidencia",
+      "title": "No basar el producto en releer, subrayar, estilos de aprendizaje ni gamificación de puntos",
+      "summary": "Tratar como bajo valor: releer/subrayar/resumir, adaptar por \"estilo\" visual/auditivo y puntos/medallas como motor del aprendizaje.",
+      "status": "proposed",
+      "confidence": "high",
+      "date": "2026-11-15",
+      "sources": [
+        "dunlosky-2013",
+        "pashler-2008",
+        "clinton-lisell-2024",
+        "sailer-homner-2019"
+      ],
+      "affects": [
+        "all"
+      ]
+    },
+    {
+      "id": "diseno-de-contenido-sin-ruido",
+      "title": "Explicaciones segmentadas, coherentes y sin detalles decorativos",
+      "summary": "Texto en bloques cortos, señalización de ideas clave, imagen junto al texto y nada decorativo que no enseñe.",
+      "status": "proposed",
+      "confidence": "medium",
+      "date": "2026-11-15",
+      "sources": [
+        "mayer-multimedia-chartered",
+        "sundararajan-adesope-2020"
+      ],
+      "affects": [
+        "all"
+      ]
+    },
+    {
+      "id": "ejemplos-resueltos-simulacion-y-problema-previo",
+      "title": "Ejemplos resueltos con andamiaje que se retira, comparación de casos y simulaciones",
+      "summary": "Novatos reciben ejemplos resueltos y contrastes; con avance se retira ayuda y se pasa a problemas/simulaciones y a intentar antes de la explicación.",
+      "status": "proposed",
+      "confidence": "medium",
+      "date": "2026-11-15",
+      "sources": [
+        "freeman-2014",
+        "chernikova-2020",
+        "sinha-kapur-2021",
+        "alfieri-2013",
+        "expertise-reversal-wikipedia",
+        "costa-2022-4cid"
+      ],
+      "affects": [
+        "all"
+      ]
+    },
+    {
+      "id": "estrategias-generativas-autoexplicacion-y-ensenar",
+      "title": "Cierre de subtema con autoexplicación, mapa propio y \"explícalo a otro\"",
+      "summary": "El alumno genera: se explica el porqué, construye su mapa conceptual y explica el tema como si enseñara, con estructura guiada.",
+      "status": "proposed",
+      "confidence": "medium",
+      "date": "2026-11-15",
+      "sources": [
+        "bisra-2018",
+        "schroeder-2018",
+        "kobayashi-2019",
+        "kobayashi-2024",
+        "fiorella-mayer-2016"
+      ],
+      "affects": [
+        "all",
+        "package:practice"
+      ]
+    },
+    {
+      "id": "feedback-explicativo-y-calibracion",
+      "title": "Feedback que explica y medición de calibración, no de \"sensación\"",
+      "summary": "Cada opción tiene explicación; se pide confianza antes de responder y el panel muestra calibración frente a aciertos reales.",
+      "status": "proposed",
+      "confidence": "medium",
+      "date": "2026-11-15",
+      "sources": [
+        "wisniewski-2020",
+        "deslauriers-2019",
+        "dunlosky-2013"
+      ],
+      "affects": [
+        "all",
+        "package:practice"
+      ]
+    },
+    {
+      "id": "intercalar-conceptos-confundibles",
+      "title": "Intercalar solo conceptos parecidos y confundibles",
+      "summary": "Sesiones de práctica mezclan servicios/conceptos similares (SQS/SNS/Kinesis); no intercalar material no relacionado.",
+      "status": "proposed",
+      "confidence": "medium",
+      "date": "2026-11-15",
+      "sources": [
+        "brunmair-richter-2019",
+        "yan-bjork-bjork-2016",
+        "dunlosky-2013"
+      ],
+      "affects": [
+        "all",
+        "package:practice"
+      ]
+    },
+    {
+      "id": "practica-de-recuperacion",
+      "title": "Cada subtema termina en práctica de recuperación con feedback",
+      "summary": "Preguntar (con feedback) en vez de releer; incluir pregunta previa y ítems de aplicación, no solo de recuerdo.",
+      "status": "proposed",
+      "confidence": "high",
+      "date": "2026-11-15",
+      "sources": [
+        "dunlosky-2013",
+        "yang-2021",
+        "pan-rickard-2018",
+        "pan-carpenter-2023"
+      ],
+      "affects": [
+        "all",
+        "package:practice"
+      ]
+    },
+    {
+      "id": "preguntas-sugeridas-y-contexto-minimo",
+      "title": "Preguntas sugeridas por subtema y contexto mínimo para la IA",
+      "summary": "Cada subtema trae preguntas concretas para hacerle a la IA; la IA recibe el subtema + requisitos + glosario usado, y solo pide otros subtemas por herramienta si los necesita.",
+      "status": "proposed",
+      "confidence": "medium",
+      "date": "2026-11-15",
+      "sources": [
+        "myers-hausman-rhodes-2023",
+        "peer-mcq-meta-2025",
+        "bisra-2018",
+        "kirschner-sweller-clark-2006",
+        "bastani-2025",
+        "anthropic-pricing-docs"
+      ],
+      "affects": [
+        "all",
+        "package:tutor",
+        "package:indexer"
+      ]
+    },
+    {
+      "id": "proveedores-llm-intercambiables-y-saldo-estimado",
+      "title": "Proveedores LLM intercambiables por función y saldo estimado",
+      "summary": "Cada función pide un nivel de modelo (rápido/equilibrado/potente) y cada proveedor declara su equivalente al mismo precio; el saldo se estima (declarado − gasto medido) porque no hay API de saldo.",
+      "status": "superseded",
+      "confidence": "medium",
+      "date": "2026-11-15",
+      "sources": [
+        "anthropic-pricing-docs",
+        "openai-pricing-docs",
+        "openai-gpt-6-luna-model",
+        "ollama-openai-compat",
+        "gemini-openai-compat",
+        "anthropic-admin-cost-api",
+        "openai-costs-api-no-balance"
+      ],
+      "affects": [
+        "all",
+        "package:llm",
+        "package:tutor",
+        "app:web"
+      ]
+    },
+    {
+      "id": "proveedores-llm-y-contador-de-gasto",
+      "title": "Proveedores LLM intercambiables por función y contador de gasto por modelo",
+      "summary": "Cada función pide un nivel de modelo y cada proveedor declara su equivalente; el header cuenta lo gastado (tokens × precio del modelo que respondió), por modelo y por día, sin pedir el saldo.",
+      "status": "proposed",
+      "confidence": "medium",
+      "date": "2026-11-15",
+      "sources": [
+        "anthropic-pricing-docs",
+        "openai-pricing-docs",
+        "openai-gpt-6-luna-model",
+        "ollama-openai-compat",
+        "gemini-openai-compat",
+        "anthropic-admin-cost-api",
+        "openai-costs-api-no-balance"
+      ],
+      "affects": [
+        "all",
+        "package:llm",
+        "package:tutor",
+        "app:web"
+      ]
+    },
+    {
+      "id": "repeticion-espaciada-fsrs",
+      "title": "Repaso espaciado con planificador FSRS y relearning sucesivo",
+      "summary": "Los ítems se reprograman con un algoritmo de repetición espaciada; el intervalo crece con el tiempo de retención deseado.",
+      "status": "proposed",
+      "confidence": "high",
+      "date": "2026-11-15",
+      "sources": [
+        "cepeda-2008",
+        "rawson-dunlosky-successive-relearning",
+        "fsrs-anki-docs",
+        "dunlosky-2013"
+      ],
+      "affects": [
+        "all",
+        "package:practice"
+      ]
+    },
+    {
+      "id": "simulaciones-por-primitivas-y-recetas",
+      "title": "Simulaciones como primitivas fijas + recetas declarativas por subtema",
+      "summary": "Pocas primitivas de simulación programadas una vez (predecir-observar, clasificar...) que ejecutan recetas YAML validadas; la IA escribe recetas, no HTML.",
+      "status": "proposed",
+      "confidence": "medium",
+      "date": "2026-11-15",
+      "sources": [
+        "podolefsky-moore-perkins-2013",
+        "moore-herzog-perkins-2013",
+        "alfieri-2011",
+        "kirschner-sweller-clark-2006",
+        "chernikova-2020",
+        "koyunlu-unlu-2024-poe",
+        "gentner-loewenstein-thompson-2003",
+        "anthropic-pricing-docs"
+      ],
+      "affects": [
+        "all",
+        "package:sims",
+        "app:web"
+      ]
+    },
+    {
+      "id": "tutor-ia-con-restricciones",
+      "title": "Tutor de IA con guardrails (pistas y explicación), nunca respuesta directa",
+      "summary": "Si hay tutor IA, que dé pistas, pida al alumno explicar y verifique con práctica sin ayuda; no un chatbot libre.",
+      "status": "proposed",
+      "confidence": "medium",
+      "date": "2026-11-15",
+      "sources": [
+        "kestin-2025",
+        "bastani-2025",
+        "wang-fan-2025"
+      ],
+      "affects": [
+        "package:practice"
+      ]
+    }
+  ]
+}

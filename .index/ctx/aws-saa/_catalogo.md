@@ -1,0 +1,45 @@
+# Catálogo del curso AWS Solutions Architect Associate [aws-saa]
+Preparación para la certificación AWS SAA-C03, organizada por dominios.
+Subtemas (id: título — resumen). Pide uno con leer_subtema solo si la pregunta lo necesita.
+- infraestructura-global (1 · Fundamentos y seguridad básica): Infraestructura global — Regiones, AZs y cómo lograr alta disponibilidad.
+- iam (1 · Fundamentos y seguridad básica): IAM: usuarios, grupos y políticas — Identidades, permisos, políticas JSON, MFA, roles y herramientas de auditoría de IAM.
+- aws-cli-sdk (1 · Fundamentos y seguridad básica): AWS CLI y SDK — Cómo interactuar con AWS por línea de comandos y código: credenciales, perfiles, CloudShell y buenas prácticas.
+- ec2-instancias (2 · Cómputo con EC2): EC2: instancias y modelos de compra — Tipos de instancia, AMI, user data y modelos de compra: on-demand, reservadas, spot, dedicated.
+- ec2-red-y-placement (2 · Cómputo con EC2): EC2: red, seguridad y placement groups — Security groups, IPs, ENI, placement groups, hibernación y conexión a instancias.
+- ebs (3 · Almacenamiento de instancias): EBS e Instance Store — Volúmenes EBS, tipos, snapshots, cifrado, Multi-Attach e Instance Store.
+- efs-y-fsx (3 · Almacenamiento de instancias): EFS y FSx — Sistemas de archivos compartidos: EFS (NFS/Linux) y la familia FSx (Windows, Lustre, NetApp, OpenZFS).
+- elb (4 · Alta disponibilidad y escalabilidad): Elastic Load Balancing — ALB, NLB, GWLB, CLB, sticky sessions, cross-zone, SSL/SNI y connection draining.
+- asg (4 · Alta disponibilidad y escalabilidad): Auto Scaling Groups — Grupos de escalado, launch templates, políticas de escalado y ciclo de vida de instancias.
+- rds-aurora (5 · Bases de datos relacionales y caché): RDS y Aurora — Bases relacionales gestionadas: Multi-AZ, réplicas de lectura, Aurora, RDS Proxy y backups.
+- elasticache (5 · Bases de datos relacionales y caché): ElastiCache — Redis y Memcached como caché en memoria y estrategias de caching.
+- route53 (6 · DNS): Route 53 — DNS gestionado: tipos de registro, políticas de enrutamiento y health checks.
+- vpc-fundamentos (7 · VPC y redes): VPC: fundamentos — CIDR, subredes, route tables, IGW, NAT, NACL, security groups y Flow Logs.
+- vpc-conectividad (7 · VPC y redes): VPC: conectividad — Peering, endpoints, PrivateLink, VPN, Direct Connect, Transit Gateway y IPv6.
+- s3-fundamentos (8 · Amazon S3): S3: fundamentos y seguridad — Buckets, objetos, bucket policies, versionado, replicación y cifrado.
+- s3-clases-y-avanzado (8 · Amazon S3): S3: clases, ciclo de vida y avanzado — Clases de almacenamiento, lifecycle, rendimiento, eventos, Object Lock y Access Points.
+- cloudfront (9 · Entrega de contenido y red global): CloudFront — CDN: orígenes, caché, OAC, Lambda@Edge, signed URLs y geo-restricción.
+- global-accelerator (9 · Entrega de contenido y red global): Global Accelerator — IPs anycast estáticas y enrutamiento por la red global de AWS; comparación con CloudFront.
+- snow-y-transferencia (10 · Almacenamiento híbrido y transferencia): Snow Family, Storage Gateway y DataSync — Mover datos a AWS: Snowcone/Snowball/Snowmobile, Storage Gateway, DataSync y Transfer Family.
+- sqs (11 · Integración y mensajería): SQS — Colas gestionadas: estándar vs FIFO, visibilidad, long polling, DLQ y patrones.
+- sns-fanout (11 · Integración y mensajería): SNS y fan-out — Pub/sub con SNS, patrón fan-out SNS+SQS, filtros y entrega de eventos.
+- kinesis-mq (11 · Integración y mensajería): Kinesis y Amazon MQ — Streaming de datos en tiempo real con Kinesis, Firehose y brokers Amazon MQ.
+- ecs-eks (12 · Contenedores): ECS, Fargate, ECR y EKS — Orquestación de contenedores en AWS, tipos de lanzamiento, roles y App Runner.
+- lambda (13 · Serverless): AWS Lambda — Funciones sin servidor: límites, concurrencia, triggers, VPC, SnapStart y Lambda@Edge.
+- dynamodb (13 · Serverless): DynamoDB — NoSQL gestionada: claves, capacidad, índices, DAX, streams, tablas globales y TTL.
+- api-gateway (13 · Serverless): API Gateway — APIs REST/HTTP/WebSocket: integraciones, stages, autenticación, throttling y caché.
+- cognito-stepfunctions (13 · Serverless): Cognito y Step Functions — Identidad de usuarios de aplicaciones y orquestación de flujos serverless.
+- bases-de-datos-comparativa (14 · Bases de datos especializadas): Comparativa de bases de datos — Cuándo usar RDS, Aurora, DynamoDB, ElastiCache, DocumentDB, Neptune, Keyspaces, QLDB, Timestream y Redshift.
+- analitica-datos (15 · Analítica y Machine Learning): Servicios de analítica — Athena, EMR, Redshift, OpenSearch, Glue, Lake Formation, QuickSight, MSK y Managed Flink.
+- machine-learning (15 · Analítica y Machine Learning): Servicios de Machine Learning — Rekognition, Transcribe, Polly, Translate, Lex, Comprehend, SageMaker, Kendra, Textract y más.
+- cloudwatch (16 · Monitoreo y auditoría): CloudWatch — Métricas, alarmas, logs, Logs Insights, Synthetics y Container/Lambda Insights.
+- eventbridge-cloudtrail-config (16 · Monitoreo y auditoría): EventBridge, CloudTrail y Config — Eventos, auditoría de API y cumplimiento de configuración; X-Ray y Health.
+- kms-cifrado (17 · Seguridad avanzada): KMS, CloudHSM y gestión de secretos — Cifrado con KMS, SSM Parameter Store, Secrets Manager, ACM y CloudHSM.
+- proteccion-amenazas (17 · Seguridad avanzada): Protección contra amenazas — Shield, WAF, Firewall Manager, GuardDuty, Inspector, Macie, Detective y Security Hub.
+- identidad-organizaciones (17 · Seguridad avanzada): Organizations, IAM Identity Center y Control Tower — Multi-cuenta, SCP, federación, Directory Service y gobierno.
+- recuperacion-desastres (18 · Recuperación de desastres y migraciones): Recuperación de desastres — RPO/RTO, estrategias de DR, backups y AWS Backup, Elastic Disaster Recovery.
+- migraciones (18 · Recuperación de desastres y migraciones): Migraciones — Las 7 R, DMS, SCT, Application Migration Service, Migration Hub y VMware Cloud.
+- cloudformation-y-ops (19 · Otros servicios): CloudFormation y operaciones — IaC con CloudFormation, CDK, Elastic Beanstalk, Systems Manager, OpsWorks.
+- otros-servicios (19 · Otros servicios): Otros servicios relevantes — SES, Pinpoint, Batch, AppFlow, Amplify, Elastic Transcoder, Cost Explorer y más.
+- well-architected (20 · Arquitectura y examen): Well-Architected Framework — Los seis pilares, principios de diseño y herramientas de revisión.
+- arquitecturas-de-referencia (20 · Arquitectura y examen): Arquitecturas de referencia — Patrones de soluciones: web escalable, serverless, event-driven, híbridas.
+- consejos-examen (20 · Arquitectura y examen): Estrategia y consejos del examen — Estructura del SAA-C03, dominios, trucos de eliminación y cheat sheet de decisión.

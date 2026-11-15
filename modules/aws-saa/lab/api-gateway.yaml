@@ -1,0 +1,13 @@
+questions:
+  - q: ¿Por qué una API HTTP es más barata que una REST y qué pierdes?
+    kind: por-que
+    uses: []
+  - q: ¿Qué pasa si un cliente supera el throttling configurado en el stage?
+    kind: que-pasa-si
+    uses: []
+  - q: Compara autorizar con Cognito, con un Lambda authorizer y con IAM.
+    kind: comparar
+    uses:
+      - cognito-stepfunctions
+      - iam
+sims: []

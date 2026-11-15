@@ -1,0 +1,16 @@
+{
+  "name": "@tk/tutor-api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/server.ts",
+    "dev:fake": "node --watch src/server.ts --fake",
+    "start": "node src/server.ts"
+  },
+  "dependencies": {
+    "@tk/content": "workspace:*",
+    "@tk/llm": "workspace:*",
+    "@tk/tutor": "workspace:*"
+  }
+}

@@ -1,0 +1,12 @@
+questions:
+  - q: ¿Por qué OAC impide que alguien salte CloudFront y lea directo del bucket?
+    kind: por-que
+    uses:
+      - s3-fundamentos
+  - q: ¿Qué pasa con el contenido cacheado si actualizas un archivo en el origen y el TTL es de 24 h?
+    kind: que-pasa-si
+    uses: []
+  - q: "Compara signed URLs y signed cookies: ¿cuál para un archivo y cuál para muchos?"
+    kind: comparar
+    uses: []
+sims: []

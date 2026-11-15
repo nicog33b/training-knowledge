@@ -1,0 +1,15 @@
+questions:
+  - q: ¿Por qué no puedes adjuntar un volumen EBS a una instancia de otra AZ?
+    kind: por-que
+    uses: []
+  - q: ¿Qué pasa con los datos de un Instance Store si paras la instancia?
+    kind: que-pasa-si
+    uses: []
+  - q: ¿Cómo moverías un volumen EBS a otra Región?
+    kind: aplicar
+    uses:
+      - infraestructura-global
+  - q: "Compara gp3 e io2: ¿cuándo se justifica pagar IOPS aprovisionadas?"
+    kind: comparar
+    uses: []
+sims: []

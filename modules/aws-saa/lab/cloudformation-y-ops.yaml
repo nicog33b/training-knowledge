@@ -1,0 +1,11 @@
+questions:
+  - q: ¿Por qué un change set evita sorpresas al actualizar un stack?
+    kind: por-que
+    uses: []
+  - q: ¿Qué pasa con los recursos si borras un stack sin DeletionPolicy Retain?
+    kind: que-pasa-si
+    uses: []
+  - q: "Compara Elastic Beanstalk y CloudFormation: ¿cuánto controlas en cada uno?"
+    kind: comparar
+    uses: []
+sims: []

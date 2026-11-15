@@ -1,0 +1,15 @@
+questions:
+  - q: ¿Por qué el cifrado de sobre (envelope) permite cifrar datos grandes con KMS?
+    kind: por-que
+    uses: []
+  - q: "Compara Secrets Manager y Parameter Store: ¿cuál rota secretos de forma nativa?"
+    kind: comparar
+    uses: []
+  - q: ¿Qué pasa con un snapshot cifrado si quieres compartirlo con otra cuenta?
+    kind: que-pasa-si
+    uses:
+      - ebs
+  - q: ¿Cuándo exigirías CloudHSM en vez de KMS?
+    kind: aplicar
+    uses: []
+sims: []

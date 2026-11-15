@@ -1,0 +1,15 @@
+questions:
+  - q: ¿Por qué en una web de tres capas la base de datos va en subredes privadas?
+    kind: por-que
+    uses:
+      - vpc-fundamentos
+  - q: ¿Qué pasa con los pedidos si el backend cae y no hay una cola entre medias?
+    kind: que-pasa-si
+    uses:
+      - sqs
+  - q: Diseña el procesamiento de imágenes subidas a S3 con miniaturas y metadatos en DynamoDB.
+    kind: aplicar
+    uses:
+      - lambda
+      - dynamodb
+sims: []

@@ -1,0 +1,25 @@
+id: chernikova-2020
+title: "Simulation-Based Learning in Higher Education: A Meta-Analysis"
+authors:
+  - Chernikova
+  - Heitzmann
+  - Stadler
+  - Holzberger
+  - Seidel
+  - Fischer
+year: 2020
+venue: Review of Educational Research 90(4), 499-541
+url: https://epub.ub.uni-muenchen.de/84298/1/0034654320933544.pdf
+kind: meta-analysis
+verified: abstract
+retrieved: 2026-11-15
+summary: Las simulaciones tienen efecto grande en habilidades complejas, con
+  andamiaje según conocimiento previo.
+facts:
+  - 145 estudios; efecto global g = 0.85 (IC 0.69-1.02).
+  - Andamiaje y tecnología tuvieron efectos positivos; robusto entre dominios
+    (medicina, docencia, gestión).
+  - "Conocimiento previo alto: más beneficio de fases de reflexión; bajo:
+    aprenden mejor con ejemplos."
+caveats:
+  - Desglose por tipo de andamiaje no obtenido.

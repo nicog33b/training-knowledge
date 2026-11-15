@@ -1,0 +1,20 @@
+{
+  "name": "training-knowledge",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.21.0",
+  "scripts": {
+    "tk": "node packages/cli/src/bin.ts",
+    "index": "node packages/cli/src/bin.ts index",
+    "validate": "node packages/cli/src/bin.ts validate",
+    "test": "node --test \"packages/*/test/*.test.ts\" \"apps/*/test/*.test.ts\"",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "dev": "pnpm --filter @tk/web --filter @tk/tutor-api --parallel dev",
+    "dev:fake": "pnpm --filter @tk/web --filter @tk/tutor-api --parallel dev:fake",
+    "build": "pnpm index && pnpm --filter @tk/web build"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "typescript": "^7.0.2"
+  }
+}

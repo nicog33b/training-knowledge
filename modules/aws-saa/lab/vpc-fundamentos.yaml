@@ -1,0 +1,36 @@
+questions:
+  - q: ¿Por qué en una NACL hay que abrir los puertos efímeros y en un security group no?
+    kind: por-que
+    uses: []
+  - q: ¿Qué pasa si pones un NAT Gateway en una subred privada?
+    kind: que-pasa-si
+    uses: []
+  - q: "Quieres bloquear una IP concreta que ataca tu web: ¿SG o NACL, y por qué?"
+    kind: aplicar
+    uses: []
+sims:
+  - id: sg-o-nacl
+    title: ¿Security Group o NACL?
+    type: clasificar
+    prompt: ¿A cuál describe cada afirmación?
+    categories:
+      - id: sg
+        label: Security Group
+      - id: nacl
+        label: NACL
+    items:
+      - text: "Es stateful: el tráfico de retorno se permite solo"
+        category: sg
+        why: Los SG recuerdan la conexión; las NACL evalúan cada paquete.
+      - text: Puede tener reglas DENY explícitas
+        category: nacl
+        why: Los SG solo tienen reglas de permitir.
+      - text: Se aplica a nivel de subred
+        category: nacl
+        why: La NACL protege la subred; el SG, la interfaz (ENI) de la instancia.
+      - text: Las reglas se evalúan en orden por número
+        category: nacl
+        why: La NACL aplica la primera regla que coincide; el SG evalúa todas.
+      - text: Por defecto deniega todo el tráfico de entrada
+        category: sg
+        why: Un SG nuevo no permite entrada; la NACL por defecto permite todo.

@@ -1,0 +1,75 @@
+# tasks.md — registro de avance
+
+Fuente de verdad de qué se hizo y qué sigue. Lo mantiene el agente (ver CLAUDE.md): al terminar algo, muévelo a **Hecho** con la fecha; al descubrir trabajo, añádelo a **Pendiente**.
+
+**Formato:** `- [ ] T-NNN título — nota breve · decisión: <id> · deps: T-NNN`
+Estados: `[ ]` pendiente · `[~]` en curso · `[x]` hecho · `[!]` bloqueado (di por qué). IDs correlativos, nunca se reutilizan. Si una tarea nace de evidencia, enlaza la decisión de `research/decisions/`.
+
+## En curso
+
+_(nada)_
+
+## Pendiente
+
+### Prioridad 1: capa de práctica (lo que más rinde según la evidencia)
+- [ ] T-010 Contrato de ítems de práctica en `packages/contracts` — tipos: recuerdo, opción múltiple con explicación por opción, escenario, comparación de confundibles, pregunta previa, autoexplicación, ejemplo resuelto con pasos retirados · decisión: practica-de-recuperacion
+- [ ] T-011 Formato de archivo de ítems por subtema (p. ej. `modules/<id>/items/<subtema>.yaml`) y validación en `loadAll` · deps: T-010
+- [ ] T-012 Generar ítems de práctica para `aws-saa` (42 subtemas), empezando por los de servicios confundibles (SQS/SNS/Kinesis, EBS/EFS/FSx) · deps: T-011
+- [ ] T-013 Plantilla fija de subtema: pregunta previa → explicación segmentada → ejemplo resuelto → contraste → comprobación → autoexplicación · decisión: ejemplos-resueltos-simulacion-y-problema-previo, estrategias-generativas-autoexplicacion-y-ensenar
+- [ ] T-014 Reglas en `pnpm validate`: subtema `done` exige ≥N ítems, ≥1 escenario y explicación en cada opción · deps: T-011 · decisión: practica-de-recuperacion
+- [ ] T-015 Paquete `packages/practice`: planificador FSRS (retención objetivo, fecha de examen) — decidir librería vs implementación propia · decisión: repeticion-espaciada-fsrs · deps: T-010
+- [ ] T-016 Sesiones que intercalan conceptos confundibles (usar `see` del glosario + pares por módulo) · decisión: intercalar-conceptos-confundibles · deps: T-015
+- [ ] T-017 Confianza antes de responder + panel `/progreso` con retención estimada y calibración · decisión: feedback-explicativo-y-calibracion · deps: T-015
+
+### Prioridad 2
+- [~] T-020 Modo simulación por `kind` — laboratorios predecir→observar→explicar ya existen (T-050); falta examen cronometrado para `certification`: examen cronometrado (certification), laboratorios predecir→ejecutar→explicar (framework) · decisión: ejemplos-resueltos-simulacion-y-problema-previo · deps: T-011
+- [ ] T-021 Actividades generativas en UI: mapa conceptual propio y "explícalo a otro" con aviso previo · decisión: estrategias-generativas-autoexplicacion-y-ensenar
+- [ ] T-022 Aviso en `validate` de subtemas largos sin segmentar · decisión: diseno-de-contenido-sin-ruido
+- [x] T-023 Tutor IA con guardrails — CLI (T-053) y chat web (T-068) (pistas, sin respuesta directa) — decidir si se construye o solo se documenta el patrón · decisión: tutor-ia-con-restricciones · deps: T-015
+
+### Verificación de evidencia (deuda de investigación)
+- [ ] T-030 Leer texto completo de las fuentes `secondary`/`abstract` que sostienen decisiones de confianza alta: pan-rickard-2018, cepeda-2008, rawson-dunlosky-successive-relearning, yang-2021 y subir `verified` a `full-text`
+- [ ] T-031 Reemplazar `expertise-reversal-wikipedia` por Kalyuga et al. 2003/2007 · decisión: ejemplos-resueltos-simulacion-y-problema-previo
+- [ ] T-032 Confirmar título/autores de pan-carpenter-2023, kestin-2025, bastani-2025 y kobayashi-2024 (se infirieron de resúmenes)
+- [ ] T-033 Investigar y guardar fuente de hipercorrección y de feedback elaborado vs solo corrección (wisniewski-2020 moderadores) · decisión: feedback-explicativo-y-calibracion
+- [ ] T-034 Verificar el benchmark FSRS vs SM-2 en el repo open-spaced-repetition antes de prometer ahorro de repasos · decisión: repeticion-espaciada-fsrs
+- [ ] T-035 Revisar las 12 decisiones (`status: proposed`) con el dueño del repo y pasar a `accepted` las ratificadas
+
+### Laboratorio e IA (decisiones: simulaciones-por-primitivas-y-recetas, correccion-ia-solo-formativa-con-checklist, preguntas-sugeridas-y-contexto-minimo)
+- [ ] T-060 Medir el acuerdo del corrector IA con un humano: corregir a mano ~30 explicaciones de las sims y comparar antes de activar la corrección con IA · decisión: correccion-ia-solo-formativa-con-checklist
+- [ ] T-061 Corrección IA formativa de la explicación libre (`tk grade` o en web): marcar ideas de la rúbrica presentes/ausentes + una pista; nunca cuenta como acierto · deps: T-060
+- [ ] T-063 Primitivas nuevas cuando haya recetas que las pidan: `ordenar-pasos`, `encontrar-el-error` · decisión: simulaciones-por-primitivas-y-recetas
+- [ ] T-064 Nivel 2 de costo: generar una receta nueva con modelo barato, validarla con `checkLab` y cachearla en `lab/` · deps: T-063
+- [ ] T-065 Leer el texto completo de alfieri-2011 (el PDF no se pudo leer) y de moore-herzog-perkins-2013; confirmar título de myers-hausman-rhodes-2023
+- [ ] T-066 Verificar precios de anthropic-pricing-docs y openai-pricing-docs en las páginas en vivo antes de presupuestar (tabla `PRICES` de `packages/llm`)
+- [ ] T-069 Probar el chat con la API real (clave en `.env`) y medir costo/caché por turno; ajustar `MAX_USER_TURNS` y longitud de respuesta · deps: T-068
+- [ ] T-070 Respuestas en streaming en el chat (hoy se espera la respuesta completa) · deps: T-069
+- [ ] T-071 Tope de gasto diario en `tutor-api` (hoy solo límite de 30 preguntas/min); puede usar `.data/gasto.json` (gasto por día) · deps: T-069
+- [ ] T-074 Probar el chat con ChatGPT real (gpt-6-luna) y comparar calidad de respuestas con Haiku 5.5 en 10 preguntas sugeridas · decisión: proveedores-llm-y-contador-de-gasto · deps: T-069
+- [ ] T-075 Contrastar el contador de gasto con el gasto que factura el proveedor (Admin API: Anthropic `/v1/organizations/analytics/cost`, OpenAI `/v1/organization/costs`) para detectar desvíos de la tabla de precios — opcional y con clave Admin aparte, nunca la del tutor
+- [ ] T-076 Fijar equivalencias verificadas para Gemini (modelo y precio) si se va a usar · decisión: proveedores-llm-y-contador-de-gasto
+- [ ] T-077 Menú del header: añadir entradas (búsqueda, curso actual) cuando haga falta, sin pasar de una línea fina
+- [ ] T-067 Registrar qué preguntas sugeridas se usan y si cambian los aciertos, para validar la decisión · decisión: preguntas-sugeridas-y-contexto-minimo
+
+### Contenido
+- [ ] T-040 Completar el módulo `next-cache` (1 subtema, 0 hechos)
+
+## Hecho
+
+- [x] T-050 2026-11-15 Simulaciones por primitivas + recetas: contratos `LabFile`/`SimSpec`, paquete `packages/sims` (reglas seguras, validación de cobertura, corrección determinista) y componente `Lab.astro` (predecir→observar→explicar con checklist; clasificar) · decisión: simulaciones-por-primitivas-y-recetas
+- [x] T-051 2026-11-15 Preguntas sugeridas por subtema y `tk lab import`; `validate` exige ≥3 en subtemas `done` · decisión: preguntas-sugeridas-y-contexto-minimo
+- [x] T-052 2026-11-15 Contexto mínimo para IA en el índice: `.index/ctx/<módulo>/_catalogo.md` + `<subtema>.md` (cuerpo + resumen de requires/uses + glosario usado), regenerado con cada cambio de contenido
+- [x] T-053 2026-11-15 Paquete `packages/tutor` + `tk ask`: Haiku 5.5, prefijo cacheado, herramienta `leer_subtema` con tope de 3 lecturas, reglas de tutor con pistas; tests con cliente falso · decisión: tutor-ia-con-restricciones
+- [x] T-054 2026-11-15 Lab de `aws-saa`: 140 preguntas en 42 subtemas y 14 simulaciones (SQS, Kinesis, Lambda, DR, ELB, Route 53, S3, RDS, VPC, EC2, almacenamiento, bases de datos, seguridad); `next-cache`: 3 preguntas
+- [x] T-072 2026-11-15 Paquete `packages/llm`: proveedores Claude, ChatGPT, Gemini, Ollama y compatibles; modelo por función y nivel (Haiku 5.5 ↔ gpt-6-luna, Sonnet 5.5 ↔ gpt-6.1-sol, Opus 5.5 ↔ gpt-6-astra); adaptador Chat Completions; precios; `tk ask --provider`; selector de modelo en el chat; conversación portable entre proveedores · decisión: proveedores-llm-intercambiables-y-saldo-estimado
+- [x] T-073 2026-11-15 Header discreto (34 px, se esconde al bajar) con saldo estimado por proveedor · decisión: proveedores-llm-intercambiables-y-saldo-estimado (reemplazada)
+- [x] T-078 2026-11-15 Contador de gasto en lugar de saldo: cada respuesta suma tokens × precio del modelo que respondió, por modelo y por día; header "hoy · mes" + panel con hoy/mes/total y fila por modelo con su precio; `tk gasto [--reset]`, `GET /gasto`, `POST /gasto/reset` · decisión: proveedores-llm-y-contador-de-gasto
+- [x] T-068 2026-11-15 Chat flotante contextual: `chat()` de varios turnos en `@tk/tutor` (historial append-only validado, fragmento seleccionado, portada sin subtema), servidor `apps/tutor-api` (CORS, límites, modo `--fake`), `Chat.astro` en todas las páginas de curso, preguntas sugeridas → chat; tests de tutor y handler · decisión: preguntas-sugeridas-y-contexto-minimo
+- [x] T-055 2026-11-15 Investigación: 11 fuentes (descubrimiento guiado, PhET, POE, comparación de casos, corrección con LLM, preguntas generadas por alumnos, precios) y 3 decisiones `proposed`
+
+- [x] T-001 2026-11-15 Investigación de ciencia del aprendizaje (retrieval, espaciado, intercalado, ejemplos, simulación, feedback, multimedia, IA) con 30 fuentes
+- [x] T-002 2026-11-15 Harness de evidencia: contratos `Source`/`Decision`, paquete `packages/research` (carga, validación, búsqueda, índice) y tests
+- [x] T-003 2026-11-15 CLI: `tk source add|import`, `tk decision new`, `tk research find|status`; `index` y `validate` incluyen la evidencia
+- [x] T-004 2026-11-15 Indexación: `.index/research.{json,md}`, conteo en `root.json` y decisiones aplicables dentro de cada `.index/<módulo>.md`
+- [x] T-005 2026-11-15 Carga inicial de 30 fuentes y 9 decisiones en `research/` (todas `proposed`)
+- [x] T-006 2026-11-15 `tasks.md` y protocolo de evidencia/tareas en CLAUDE.md

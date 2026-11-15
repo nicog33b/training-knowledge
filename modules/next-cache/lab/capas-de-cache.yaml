@@ -1,0 +1,11 @@
+questions:
+  - q: ¿Por qué el Data Cache vive en el servidor y el Router Cache en el cliente?
+    kind: por-que
+    uses: []
+  - q: ¿Qué pasa con un dato cacheado si la API cambia antes de que venza el TTL?
+    kind: que-pasa-si
+    uses: []
+  - q: "Compara vencer por TTL y revalidar de forma explícita: ¿cuándo usarías cada una?"
+    kind: comparar
+    uses: []
+sims: []

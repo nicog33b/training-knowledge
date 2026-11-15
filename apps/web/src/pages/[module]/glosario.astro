@@ -1,0 +1,22 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getData } from '../../lib/data';
+export async function getStaticPaths() {
+  const { modules } = await getData();
+  return modules.map((m) => ({ params: { module: m.manifest.id }, props: { m } }));
+}
+const { m } = Astro.props;
+const terms = [...m.glossary].sort((a, b) => a.term.localeCompare(b.term));
+---
+<Base title={`Glosario · ${m.manifest.title}`} chat={{ module: m.manifest.id, course: m.manifest.title }}>
+  <p><a href={`/${m.manifest.id}/`}>← {m.manifest.title}</a></p>
+  <h1>Glosario</h1>
+  <dl>
+    {terms.map((t) => (
+      <>
+        <dt><strong>{t.term}</strong>{t.aliases.length > 0 && <small> ({t.aliases.join(', ')})</small>}</dt>
+        <dd>{t.definition}</dd>
+      </>
+    ))}
+  </dl>
+</Base>

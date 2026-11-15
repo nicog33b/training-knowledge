@@ -1,0 +1,41 @@
+{
+  "id": "next-cache",
+  "title": "Caché de Next.js",
+  "summary": "Las capas de caché de Next.js (App Router) y cómo invalidarlas.",
+  "kind": "framework",
+  "tags": [
+    "nextjs",
+    "caching"
+  ],
+  "topics": [
+    {
+      "id": "capas-de-cache",
+      "title": "Las capas de caché",
+      "summary": "Qué cachea Next.js y dónde vive cada capa.",
+      "order": 1,
+      "requires": [],
+      "status": "draft",
+      "words": 54,
+      "headings": [
+        "Visión general",
+        "Cuándo se vence algo"
+      ],
+      "terms": [
+        "api",
+        "data-cache",
+        "latencia",
+        "revalidacion",
+        "router-cache",
+        "ttl"
+      ],
+      "questions": 3,
+      "sims": []
+    }
+  ],
+  "sections": [],
+  "ownTerms": [
+    "data-cache",
+    "revalidacion",
+    "router-cache"
+  ]
+}

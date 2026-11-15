@@ -1,0 +1,11 @@
+questions:
+  - q: ¿Por qué lazy loading puede devolver datos viejos y cómo lo mitiga un TTL?
+    kind: por-que
+    uses: []
+  - q: ¿Qué pasa con la caché si el nodo de Memcached se reinicia?
+    kind: que-pasa-si
+    uses: []
+  - q: "Compara Redis y Memcached: ¿cuál eliges para sesiones que no pueden perderse?"
+    kind: comparar
+    uses: []
+sims: []

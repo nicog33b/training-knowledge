@@ -1,0 +1,31 @@
+id: yang-2021
+title: "Testing (quizzing) boosts classroom learning: A systematic and
+  meta-analytic review"
+authors:
+  - Yang
+  - Luo
+  - Vadillo
+  - Yu
+  - Shanks
+year: 2021
+venue: Psychological Bulletin 147(4), 399-435
+url: https://doi.org/10.1037/bul0000309
+kind: meta-analysis
+verified: abstract
+retrieved: 2026-11-15
+summary: Meta-análisis de práctica de recuperación en AULA REAL (no
+  laboratorio); efecto medio.
+facts:
+  - 222 estudios independientes, 48.478 estudiantes; efecto global g = 0.499.
+  - "Moderadores: estrategia del grupo control, consistencia de formato del
+    test, feedback correctivo, repeticiones del test, duración del tratamiento."
+  - Ventaja del testing en conocimiento factual, comprensión de conceptos y
+    aplicación.
+  - "Resumen de terceros: g = 0.61 vs sin actividad y g = 0.33 vs releer
+    (comparaciones distintas, no contradictorias)."
+caveats:
+  - Heterogeneidad alta (I2 ~88% según resumen de terceros).
+  - Una cifra de 573 tamaños de efecto viene de un blog; no verificada.
+  - "Procedencia: en la investigación inicial se enlazó por error PMC10950551
+    (Yan, Sana & Carvalho 2023) como si fuera este artículo; la URL correcta es
+    el DOI de arriba."

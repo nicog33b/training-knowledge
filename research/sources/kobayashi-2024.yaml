@@ -1,0 +1,20 @@
+id: kobayashi-2024
+title: "Learning by teaching: meta-analysis of teaching after studying (teaching
+  expectancy)"
+authors:
+  - Kobayashi
+year: 2024
+venue: Educational Psychology Review
+url: https://doi.org/10.1007/s10648-024-09871-4
+kind: meta-analysis
+verified: secondary
+retrieved: 2026-11-15
+summary: Enseñar solo ayuda si el alumno estudió sabiendo que iba a enseñar; sin
+  esa expectativa el efecto es nulo.
+facts:
+  - 39 estudios; efecto global g = 0.27.
+  - Con expectativa de enseñar g = 0.48; sin expectativa g = -0.02 (no distinto
+    de cero).
+caveats:
+  - "Título aproximado: el resumen no lo daba completo. Difiere de Kobayashi
+    2019 por distinto conjunto de estudios."

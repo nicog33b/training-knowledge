@@ -1,0 +1,41 @@
+questions:
+  - q: ¿Por qué un TTL alto hace que un cambio de DNS tarde en verse?
+    kind: por-que
+    uses: []
+  - q: ¿Qué pasa con la política Failover si el primario no tiene health check?
+    kind: que-pasa-si
+    uses: []
+  - q: "Compara geolocation y latency: ¿cuál eliges para cumplir leyes de datos por país?"
+    kind: comparar
+    uses: []
+  - q: "Error común: ¿por qué multi-value answer no sustituye a un balanceador?"
+    kind: error-comun
+    uses:
+      - elb
+sims:
+  - id: politica-de-enrutamiento
+    title: Elige la política de enrutamiento
+    type: clasificar
+    prompt: ¿Qué política de Route 53 usas en cada caso?
+    categories:
+      - id: weighted
+        label: Weighted
+      - id: latency
+        label: Latency
+      - id: failover
+        label: Failover
+      - id: geolocation
+        label: Geolocation
+    items:
+      - text: Mandar el 10 % del tráfico a la versión nueva
+        category: weighted
+        why: "Reparto por pesos: pruebas A/B y migraciones graduales."
+      - text: Usuarios de Alemania deben ser atendidos solo por la Región de Fráncfort
+        category: geolocation
+        why: Según la ubicación del usuario (cumplimiento, contenido por país).
+      - text: Que cada usuario vaya a la Región que le responda más rápido
+        category: latency
+        why: Elige el recurso con menor latencia para el usuario.
+      - text: Si el sitio principal cae, servir una página estática desde S3
+        category: failover
+        why: Activo-pasivo con health check del primario.

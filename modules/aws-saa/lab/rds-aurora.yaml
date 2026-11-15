@@ -1,0 +1,37 @@
+questions:
+  - q: ¿Por qué Multi-AZ no mejora el rendimiento de lectura?
+    kind: por-que
+    uses: []
+  - q: ¿Qué pasa con las lecturas de una réplica justo después de escribir en la principal?
+    kind: que-pasa-si
+    uses: []
+  - q: ¿Cuándo pondrías RDS Proxy delante de la base de datos?
+    kind: aplicar
+    uses:
+      - lambda
+  - q: Compara Aurora con RDS MySQL en réplicas, almacenamiento y failover.
+    kind: comparar
+    uses: []
+sims:
+  - id: multi-az-o-replica
+    title: ¿Multi-AZ o réplica de lectura?
+    type: clasificar
+    prompt: Para cada requisito, elige la característica de RDS que lo resuelve.
+    categories:
+      - id: multi-az
+        label: Multi-AZ
+      - id: replica
+        label: Read Replica
+    items:
+      - text: Que la base siga disponible si cae la AZ, sin cambiar el endpoint
+        category: multi-az
+        why: Multi-AZ es réplica síncrona para failover automático con el mismo DNS.
+      - text: Un panel de informes hace consultas pesadas que ralentizan la app
+        category: replica
+        why: Las réplicas de lectura descargan los SELECT de la principal.
+      - text: Tener una copia en otra Región que puedas promover si hay desastre
+        category: replica
+        why: Las réplicas pueden ser cross-Region y promoverse a base independiente.
+      - text: "Replicación síncrona: no perder ninguna transacción confirmada"
+        category: multi-az
+        why: Multi-AZ replica de forma síncrona; las réplicas son asíncronas.

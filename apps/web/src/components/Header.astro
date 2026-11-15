@@ -1,0 +1,144 @@
+---
+/**
+ * Header discreto: una línea fina que se esconde al bajar leyendo y vuelve al subir.
+ * Izquierda: menú mínimo. Derecha: contador de gasto de IA (de apps/tutor-api, GET /gasto):
+ * cada respuesta suma sus tokens × el precio del modelo que respondió (Haiku, Opus, GPT-6 Luna…).
+ */
+const api = import.meta.env.PUBLIC_TUTOR_URL ?? 'http://127.0.0.1:4322';
+---
+<header class="tk-top" data-api={api}>
+  <nav>
+    <a href="/" class="tk-brand" title="Training Knowledge">TK</a>
+    <a href="/">Cursos</a>
+    <a href="/progreso/">Progreso</a>
+  </nav>
+  <div class="tk-spend">
+    <button type="button" class="tk-spend-btn" aria-expanded="false" aria-controls="tk-spend-pop" title="Gasto de IA">
+      <span class="tk-spend-label">gasto …</span>
+    </button>
+    <div id="tk-spend-pop" class="tk-spend-pop" hidden>
+      <div class="tk-spend-totals"></div>
+      <table class="tk-spend-models">
+        <thead><tr><th>Modelo</th><th title="USD por millón de tokens: entrada / salida">Precio</th><th>Resp.</th><th>Gasto</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <p class="tk-spend-note"></p>
+      <button type="button" class="tk-spend-reset">Reiniciar contador</button>
+    </div>
+  </div>
+</header>
+
+<style is:global>
+  .tk-top { position: sticky; top: 0; z-index: 40; height: 34px; display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    padding: 0 16px; font-size: .8rem; color: var(--muted); background: color-mix(in srgb, var(--bg) 82%, transparent);
+    backdrop-filter: blur(8px); border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent); transition: transform .2s ease; }
+  .tk-top.hide { transform: translateY(-100%); }
+  .tk-top nav { display: flex; gap: .9rem; align-items: center; min-width: 0; }
+  .tk-top nav a { color: var(--muted); text-decoration: none; white-space: nowrap; }
+  .tk-top nav a:hover { color: var(--fg); }
+  .tk-top .tk-brand { font-weight: 700; color: var(--fg); letter-spacing: .04em; }
+  .tk-spend { position: relative; }
+  .tk-spend-btn { font: inherit; color: var(--muted); background: none; border: 1px solid transparent; border-radius: 99px; padding: .1rem .55rem; cursor: pointer; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .tk-spend-btn:hover, .tk-spend-btn[aria-expanded=true] { border-color: var(--line); color: var(--fg); }
+  .tk-spend-btn b { font-weight: 600; color: var(--fg); }
+  .tk-spend-pop { position: absolute; right: 0; top: calc(100% + 6px); width: min(380px, calc(100vw - 32px)); background: var(--bg); color: var(--fg);
+    border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 8px 28px rgb(0 0 0 / .18); padding: .7rem .8rem; font-size: .8rem; }
+  .tk-spend-pop[hidden] { display: none; }
+  .tk-spend-totals { display: grid; grid-template-columns: repeat(3, 1fr); gap: .4rem; margin-bottom: .6rem; }
+  .tk-spend-totals div { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: .35rem .5rem; }
+  .tk-spend-totals span { display: block; color: var(--muted); font-size: .7rem; }
+  .tk-spend-totals strong { font-size: .95rem; font-variant-numeric: tabular-nums; }
+  .tk-spend-models { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  .tk-spend-models th { color: var(--muted); font-weight: 500; font-size: .7rem; text-align: left; padding: .2rem .3rem; border-bottom: 1px solid var(--line); }
+  .tk-spend-models td { padding: .3rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .tk-spend-models td:nth-child(n+2), .tk-spend-models th:nth-child(n+2) { text-align: right; white-space: nowrap; }
+  .tk-spend-models td small { display: block; color: var(--muted); font-size: .68rem; }
+  .tk-spend-models tr.unused td { color: var(--muted); }
+  .tk-spend-note { color: var(--muted); font-size: .72rem; margin: .5rem 0; }
+  .tk-spend-reset { font: inherit; font-size: .72rem; border: 1px solid var(--line); background: var(--card); color: var(--muted); border-radius: 6px; padding: .15rem .5rem; cursor: pointer; }
+  @media (max-width: 520px) { .tk-top nav a:not(.tk-brand):nth-child(n+3) { display: none; } }
+</style>
+
+<script>
+  const top = document.querySelector<HTMLElement>('.tk-top')!;
+  const api = top.dataset.api!;
+  const btn = top.querySelector<HTMLButtonElement>('.tk-spend-btn')!;
+  const label = btn.querySelector<HTMLElement>('.tk-spend-label')!;
+  const pop = top.querySelector<HTMLElement>('.tk-spend-pop')!;
+  const totals = pop.querySelector<HTMLElement>('.tk-spend-totals')!;
+  const tbody = pop.querySelector<HTMLElement>('.tk-spend-models tbody')!;
+  const note = pop.querySelector<HTMLElement>('.tk-spend-note')!;
+
+  type Row = { provider: string; providerLabel: string; model: string; name: string; price: { input: number; output: number } | null; turnos: number; sinPrecio: number; tokens: number; usd: number; usado: boolean };
+  type Summary = { desde: string; hoy: number; mes: number; total: number; modelos: Row[]; nota: string };
+
+  /** Céntimos con 2 decimales; gastos mínimos con 4 para que se vea que cuenta. */
+  const usd = (n: number) => `$${n > 0 && n < 0.01 ? n.toFixed(4) : n.toFixed(2)}`;
+  const kTok = (n: number) => (n >= 1e6 ? `${(n / 1e6).toFixed(1)}M` : n >= 1e3 ? `${(n / 1e3).toFixed(1)}K` : String(n));
+  const el = (tag: string, text = '', cls = '') => { const n = document.createElement(tag); if (text) n.textContent = text; if (cls) n.className = cls; return n; };
+
+  function paint(s: Summary | null) {
+    if (!s) {
+      label.textContent = 'gasto —';
+      btn.title = 'El tutor no está corriendo (pnpm dev)';
+      totals.replaceChildren();
+      tbody.replaceChildren();
+      note.textContent = btn.title;
+      return;
+    }
+    label.replaceChildren('hoy ', el('b', usd(s.hoy)), ` · mes ${usd(s.mes)}`);
+    btn.title = `Gasto de IA: hoy ${usd(s.hoy)}, este mes ${usd(s.mes)}, total ${usd(s.total)}`;
+    totals.replaceChildren(...([['Hoy', s.hoy], ['Este mes', s.mes], [`Total desde ${s.desde.slice(0, 10)}`, s.total]] as const).map(([t, v]) => {
+      const d = el('div');
+      d.append(el('span', t), el('strong', usd(v)));
+      return d;
+    }));
+    tbody.replaceChildren(...(s.modelos.length ? s.modelos : []).map((m) => {
+      const tr = el('tr', '', m.usado ? '' : 'unused');
+      const name = el('td', m.name);
+      name.append(el('small', `${m.providerLabel}${m.usado ? ` · ${kTok(m.tokens)} tokens` : ' · sin uso'}`));
+      tr.append(
+        name,
+        el('td', m.price ? (m.price.input === 0 && m.price.output === 0 ? 'gratis' : `$${m.price.input} / $${m.price.output}`) : '¿?'),
+        el('td', String(m.turnos)),
+        el('td', m.sinPrecio ? `${usd(m.usd)}*` : usd(m.usd)),
+      );
+      return tr;
+    }));
+    if (!s.modelos.length) tbody.append(Object.assign(el('tr'), { innerHTML: '<td colspan="4">Sin modelos configurados (ver .env.example)</td>' }));
+    const unknown = s.modelos.some((m) => m.sinPrecio || !m.price);
+    note.textContent = s.nota + (unknown ? ' * Algún modelo no tiene precio conocido: define <PROVEEDOR>_PRICE_IN/OUT en .env.' : '');
+  }
+
+  async function refresh() {
+    try {
+      paint(await (await fetch(`${api}/gasto`)).json());
+    } catch { paint(null); }
+  }
+
+  btn.addEventListener('click', () => {
+    const open = pop.hidden;
+    pop.hidden = !open;
+    btn.setAttribute('aria-expanded', String(open));
+    if (open) refresh();
+  });
+  pop.querySelector('.tk-spend-reset')!.addEventListener('click', async () => {
+    if (!confirm('¿Poner el contador de gasto a cero? El historial de gasto se pierde.')) return;
+    try { paint(await (await fetch(`${api}/gasto/reset`, { method: 'POST' })).json()); } catch { paint(null); }
+  });
+  document.addEventListener('click', (e) => {
+    if (!pop.hidden && !top.querySelector('.tk-spend')!.contains(e.target as Node)) { pop.hidden = true; btn.setAttribute('aria-expanded', 'false'); }
+  });
+  document.addEventListener('tk-spent', refresh); // el chat avisa tras cada respuesta
+
+  // Máximo espacio de lectura: se esconde al bajar y vuelve al subir.
+  let lastY = scrollY;
+  addEventListener('scroll', () => {
+    const y = scrollY;
+    if (Math.abs(y - lastY) < 6) return;
+    top.classList.toggle('hide', y > lastY && y > 80 && pop.hidden);
+    lastY = y;
+  }, { passive: true });
+
+  refresh();
+</script>

@@ -1,0 +1,34 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getData } from '../../lib/data';
+export async function getStaticPaths() {
+  const { modules } = await getData();
+  return modules.map((m) => ({ params: { module: m.manifest.id }, props: { m } }));
+}
+const { m } = Astro.props;
+const byId = new Map(m.topics.map((t) => [t.id, t]));
+const used = new Set(m.outline.sections.flatMap((s) => s.topics.map((t) => t.id)));
+const groups = [
+  ...m.outline.sections.map((s) => ({ title: s.title, topics: s.topics.map((o) => byId.get(o.id)).filter(Boolean) })),
+  ...(m.topics.some((t) => !used.has(t.id)) ? [{ title: 'Otros', topics: m.topics.filter((t) => !used.has(t.id)) }] : []),
+];
+---
+<Base title={m.manifest.title} chat={{ module: m.manifest.id, course: m.manifest.title }}>
+  <h1>{m.manifest.title}</h1>
+  <p>{m.manifest.summary}</p>
+  <p><a href={`/${m.manifest.id}/glosario/`}>Glosario ({m.glossary.length} términos)</a></p>
+  {groups.map((g) => (
+    <section class="card">
+      <h3 style="margin:0 0 .4rem">{g.title}</h3>
+      <ul class="clean">
+        {g.topics.map((t) => (
+          <li>
+            <a href={`/${m.manifest.id}/${t.id}/`}>{t.title}</a>
+            {t.status !== 'done' && <> <span class={`badge ${t.status}`}>{t.status}</span></>}
+            <div class="muted">{t.summary}</div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</Base>

@@ -1,0 +1,15 @@
+questions:
+  - q: ¿Por qué el VPC peering no es transitivo y qué problema causa con muchas VPC?
+    kind: por-que
+    uses: []
+  - q: ¿Qué pasa con el tráfico a S3 desde una subred privada si añades un gateway endpoint?
+    kind: que-pasa-si
+    uses:
+      - vpc-fundamentos
+  - q: Compara Site-to-Site VPN y Direct Connect en tiempo de puesta en marcha, coste y estabilidad.
+    kind: comparar
+    uses: []
+  - q: "Conectas 30 VPC y una oficina: ¿peering o Transit Gateway?"
+    kind: aplicar
+    uses: []
+sims: []
