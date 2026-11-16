@@ -231,7 +231,8 @@ switch (cmd === 'status' || cmd === 'fill' || cmd === 'ask' || cmd === 'gasto' ?
   }
   case 'lab import': {
     // tk lab import <módulo> <bundle.yaml>: mapa { <subtema>: { questions: [...], sims: [...] } }.
-    // Fusiona en modules/<m>/lab/<subtema>.yaml: no duplica preguntas (mismo texto) ni pisa sims (mismo id).
+    // Fusiona en modules/<m>/lab/<subtema>.yaml: una pregunta con el mismo texto se actualiza (p. ej. para
+    // añadirle la respuesta `a`), no se duplica; las sims con el mismo id no se pisan.
     const [mod, path] = rest;
     if (!mod || !path) die('uso: tk lab import <módulo> <bundle.yaml>');
     const bundle: any = parseYaml(await readFile(resolve(path), 'utf8'));
@@ -239,21 +240,29 @@ switch (cmd === 'status' || cmd === 'fill' || cmd === 'ask' || cmd === 'gasto' ?
     const data = await loadAll(new FsContentSource(ROOT));
     const m = data.modules.find((x) => x.manifest.id === mod) ?? die(`módulo inexistente: ${mod}`);
     const errors: string[] = [];
-    let q = 0, s = 0;
+    let q = 0, s = 0, upd = 0;
     for (const [topic, raw] of Object.entries(bundle)) {
       const t = m.topics.find((x) => x.id === topic);
       if (!t) { errors.push(`${topic}: subtema inexistente`); continue; }
       const inc = LabFile.safeParse(raw ?? {});
       if (!inc.success) { errors.push(`${topic}: ${inc.error.issues.map((i) => `${i.path.join('.')}: ${i.message}`).join('; ')}`); continue; }
       const merged = { questions: [...t.lab.questions], sims: [...t.lab.sims] };
-      for (const nq of inc.data.questions) if (!merged.questions.some((x) => x.q === nq.q)) { merged.questions.push(nq); q++; }
+      for (const nq of inc.data.questions) {
+        const i = merged.questions.findIndex((x) => x.q === nq.q);
+        if (i < 0) { merged.questions.push(nq); q++; }
+        else {
+          const old = merged.questions[i];
+          merged.questions[i] = { ...old, ...nq, uses: nq.uses.length ? nq.uses : old.uses, a: nq.a ?? old.a };
+          upd++;
+        }
+      }
       for (const ns of inc.data.sims) if (!merged.sims.some((x) => x.id === ns.id)) { merged.sims.push(ns); s++; }
       const file = join(ROOT, 'modules', mod, 'lab', `${topic}.yaml`);
       await mkdir(dirname(file), { recursive: true });
       await writeFile(file, yamlStringify(merged, { lineWidth: 0 }));
     }
     errors.forEach((e) => console.error(`✖ ${e}`));
-    console.log(`✔ ${q} preguntas y ${s} simulaciones añadidas a ${mod}`);
+    console.log(`✔ ${q} preguntas y ${s} simulaciones añadidas a ${mod}; ${upd} preguntas actualizadas`);
     if (errors.length) process.exitCode = 1;
     await reindex();
     break;

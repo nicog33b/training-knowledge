@@ -4,11 +4,26 @@ questions:
     uses:
       - dynamodb
       - rds-aurora
+    a: DynamoDB reparte los datos por **partition key** entre muchas particiones y escala **horizontalmente** sin límite práctico, con latencia de milisegundos de un dígito. RDS escala sobre todo **verticalmente** (instancia más grande) y con réplicas de lectura; las escrituras siguen yendo a una sola instancia. Para acceso por clave a gran escala, DynamoDB; para joins y transacciones relacionales, RDS.
   - q: ¿Qué base eliges para un grafo de relaciones de una red social?
     kind: aplicar
     uses: []
+    a: '**Amazon Neptune**, base de datos de grafos (Gremlin, openCypher, SPARQL). Consultas como "amigos de amigos que viven en X" recorren relaciones de varios saltos: en un grafo son baratas; en SQL serían cadenas de joins cada vez más lentas.'
   - q: "Error común: ¿por qué Redshift no sirve como base transaccional de una tienda?"
     kind: error-comun
+    uses: []
+    a: "Redshift es **OLAP**: columnar, optimizado para agregar millones de filas en pocas consultas analíticas. Una tienda es **OLTP**: muchas transacciones pequeñas y concurrentes que insertan o actualizan filas sueltas, para lo que Redshift es lento. La tienda va en RDS/Aurora o DynamoDB, y luego copias los datos a Redshift para analizarlos."
+  - q: ¿Qué base eliges para guardar lecturas de miles de sensores IoT por tiempo?
+    kind: aplicar
+    a: "**Amazon Timestream**, base de series temporales: almacena por tiempo, mueve datos viejos a un almacenamiento más barato de forma automática y trae funciones de agregación temporal (medias por ventana, interpolación)."
+    uses: []
+  - q: "Migras una aplicación que usa MongoDB y no quieres reescribirla: ¿qué servicio usas?"
+    kind: aplicar
+    a: "**Amazon DocumentDB**, base de documentos gestionada y **compatible con la API de MongoDB**: la aplicación sigue usando sus drivers y consultas. AWS gestiona réplicas, backups y parches."
+    uses: []
+  - q: "Tienes Apache Cassandra on-premises y quieres dejar de gestionar servidores: ¿qué servicio usas?"
+    kind: aplicar
+    a: "**Amazon Keyspaces (for Apache Cassandra)**: serverless y compatible con CQL, así que la aplicación sigue usando sus drivers. No gestionas nodos ni reparaciones del clúster y pagas por lectura/escritura o capacidad."
     uses: []
 sims:
   - id: elige-base

@@ -53,3 +53,5 @@ EventBridge ofrece enrutamiento por reglas de contenido, esquemas, SaaS partners
 - (que-pasa-si) ¿Qué pasa si un consumidor HTTP suscrito a SNS está caído cuando se publica?
 - (aplicar) ¿Cómo harías que el servicio de facturación reciba solo pedidos de más de 100 €?
 - (comparar) Compara SNS y EventBridge para enrutar eventos por contenido.
+- (aplicar) Necesitas fan-out a varias colas manteniendo el orden de los mensajes: ¿cómo?
+- (error-comun) Error común: ¿por qué un topic SNS no consigue entregar en una cola SQS recién suscrita?

@@ -2,12 +2,27 @@ questions:
   - q: "¿Por qué hay dos piezas en Cognito: user pools e identity pools?"
     kind: por-que
     uses: []
+    a: "Resuelven dos problemas distintos. **User pools** = autenticación: directorio de usuarios, registro, login, MFA y federación (Google, SAML); emiten **JWT** para tu app o API. **Identity pools** = autorización en AWS: cambian un token (de un user pool u otro proveedor) por **credenciales temporales de AWS** con un rol IAM, para llamar directamente a S3 o DynamoDB."
   - q: ¿Qué ventaja da Step Functions frente a encadenar Lambdas que se llaman entre sí?
     kind: comparar
     uses:
       - lambda
+    a: "Step Functions modela el flujo como una **máquina de estados visible**: reintentos y captura de errores declarativos, pasos en paralelo, esperas largas sin pagar cómputo y el historial de cada ejecución. Encadenar Lambdas acopla las funciones, paga mientras una espera a otra, choca con el límite de 15 minutos y hace muy difícil saber dónde falló algo."
   - q: "Una app móvil necesita que cada usuario suba fotos a su carpeta de S3: ¿qué pieza de Cognito usas?"
     kind: aplicar
     uses:
       - s3-fundamentos
+    a: El usuario inicia sesión con un **user pool**, y un **identity pool** le da credenciales temporales con un rol cuya política limita S3 al prefijo de su identidad, usando la variable `${cognito-identity.amazonaws.com:sub}` en el ARN. Así cada usuario solo puede escribir en su carpeta, sin pasar las fotos por tu backend.
+  - q: Compara los workflows Standard y Express de Step Functions.
+    kind: comparar
+    a: "**Standard**: duran hasta **1 año**, ejecución exactly-once, historial completo; pagas por transición de estado. Para procesos de negocio largos. **Express**: hasta **5 minutos**, altísimo volumen (eventos, streaming), at-least-once; pagas por número de ejecuciones y duración."
+    uses: []
+  - q: "Un paso del flujo necesita que una persona apruebe antes de seguir: ¿cómo lo haces con Step Functions?"
+    kind: aplicar
+    a: "Con una tarea de **callback** (`.waitForTaskToken`): Step Functions pasa un **task token** (p. ej. en un email o a una cola) y la ejecución queda en pausa, sin coste de cómputo, hasta que alguien llama a `SendTaskSuccess` o `SendTaskFailure` con ese token."
+    uses: []
+  - q: ¿Qué pasa si un paso de Step Functions falla por un error temporal?
+    kind: que-pasa-si
+    a: Si el estado tiene un bloque **Retry**, se reintenta con backoff (`IntervalSeconds`, `BackoffRate`, `MaxAttempts`). Si se agotan los reintentos, un bloque **Catch** puede llevar a un estado alternativo (compensar, notificar). Sin Retry ni Catch, la ejecución entera falla.
+    uses: []
 sims: []

@@ -113,3 +113,6 @@ Organizations con OUs (prod/dev/seguridad/log), SCPs, IAM Identity Center, Cloud
 - (por-que) ¿Por qué en una web de tres capas la base de datos va en subredes privadas?
 - (que-pasa-si) ¿Qué pasa con los pedidos si el backend cae y no hay una cola entre medias?
 - (aplicar) Diseña el procesamiento de imágenes subidas a S3 con miniaturas y metadatos en DynamoDB.
+- (por-que) ¿Por qué guardar la sesión del usuario fuera de las instancias (ElastiCache o DynamoDB)?
+- (que-pasa-si) ¿Qué pasa si sirves una web estática muy visitada en todo el mundo directamente desde S3, sin CloudFront?
+- (aplicar) Diseña una API serverless con usuarios registrados y datos por clave.

@@ -1,0 +1,31 @@
+id: zorzi-2012-letter-spacing
+title: Extra-large letter spacing improves reading in dyslexia
+authors:
+  - Marco Zorzi
+  - Chiara Barbiero
+  - Andrea Facoetti
+  - Isabella Lonciari
+  - Marco Carrozzi
+  - Marcella Montico
+  - Laura Bravar
+  - Florence George
+  - Catherine Pech-Georgel
+  - Johannes C. Ziegler
+year: 2012
+venue: PNAS 109(28), 11455–11459
+url: https://doi.org/10.1073/pnas.1205566109
+kind: experiment
+verified: secondary
+retrieved: 2026-11-15
+summary: Más espacio entre letras ayuda a niños con dislexia (menos apiñamiento
+  visual); no a lectores sin dificultades.
+facts:
+  - "Niños con dislexia de 8 a 14 años (italianos y franceses): con espaciado
+    extra entre letras, la precisión casi se duplicó y la velocidad subió más de
+    un 20 %; los lectores más débiles ganaron más."
+  - Los niños sin dificultades lectoras no leyeron más rápido con el espaciado
+    extra.
+caveats:
+  - Cifras de prensa (ScienceDaily) y diapositivas; el tamaño de la muestra
+    italiana difiere entre fuentes (34 o 54).
+  - Estudio con niños; la extrapolación a adultos no está demostrada.

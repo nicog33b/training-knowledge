@@ -3,13 +3,28 @@ questions:
     kind: por-que
     uses:
       - vpc-fundamentos
+    a: "La base no necesita que nadie de Internet llegue a ella: solo la capa de aplicación. En una subred privada no hay ruta al Internet Gateway, así que reduces la **superficie de ataque**. Su security group permite el puerto de la base solo desde el security group de la aplicación; el ALB es lo único que queda en las subredes públicas."
   - q: ¿Qué pasa con los pedidos si el backend cae y no hay una cola entre medias?
     kind: que-pasa-si
     uses:
       - sqs
+    a: Con llamadas síncronas, cada pedido que llega mientras el backend está caído **falla o se pierde**, y los picos lo tumban. Con **SQS** entre medias, el frontal deja el pedido en la cola y responde; el backend lo procesa cuando vuelve, a su ritmo, y los que fallan repetidamente van a una DLQ. La cola desacopla y absorbe picos.
   - q: Diseña el procesamiento de imágenes subidas a S3 con miniaturas y metadatos en DynamoDB.
     kind: aplicar
     uses:
       - lambda
       - dynamodb
+    a: "Evento `ObjectCreated` del bucket de subida → **Lambda** (directo o vía SQS para absorber picos) que genera la miniatura y la guarda en **otro bucket o prefijo**, para no volver a dispararse en bucle. La misma función escribe tamaño, autor y rutas en **DynamoDB**. Las imágenes se sirven con **CloudFront**. Todo serverless: escala con las subidas y no pagas en reposo."
+  - q: ¿Por qué guardar la sesión del usuario fuera de las instancias (ElastiCache o DynamoDB)?
+    kind: por-que
+    a: "Así las instancias son **stateless**: el ASG puede terminar o añadir cualquiera y el ALB puede mandar cada petición a cualquier instancia sin cerrar sesiones. Con la sesión en memoria local necesitarías sticky sessions, que desequilibran la carga y pierden sesiones cuando una instancia muere."
+    uses: []
+  - q: ¿Qué pasa si sirves una web estática muy visitada en todo el mundo directamente desde S3, sin CloudFront?
+    kind: que-pasa-si
+    a: Los usuarios lejos de la Región tienen **más latencia**, pagas toda la transferencia desde S3 y el endpoint de sitio web de S3 **no admite HTTPS**. Con **CloudFront** delante (y OAC con bucket privado) cacheas en el edge, sirves HTTPS con tu dominio y certificado de ACM y bajas el coste de transferencia.
+    uses: []
+  - q: Diseña una API serverless con usuarios registrados y datos por clave.
+    kind: aplicar
+    a: "**API Gateway** (con authorizer de **Cognito** para los usuarios) → **Lambda** con la lógica → **DynamoDB** para los datos por clave. Escala sola, no hay servidores que parchear y en reposo cuesta casi cero. Añade CloudFront para el frontal estático en S3."
+    uses: []
 sims: []

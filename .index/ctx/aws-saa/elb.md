@@ -52,6 +52,9 @@ Un **load balancer** reparte el tráfico entre múltiples destinos, expone un ú
 - (por-que) ¿Por qué un NLB puede darte una IP estática por AZ y un ALB no?
 - (que-pasa-si) ¿Qué pasa con la IP del cliente cuando pasa por un ALB, y cómo la recupera la aplicación?
 - (error-comun) Error común: ¿por qué activar sticky sessions puede desequilibrar la carga?
+- (comparar) Compara ALB, NLB y Gateway Load Balancer.
+- (que-pasa-si) ¿Qué pasa si desactivas el cross-zone load balancing y una AZ tiene 2 instancias y otra 8?
+- (aplicar) Quieres servir tres dominios HTTPS distintos desde un solo ALB: ¿cómo?
 
 ## Simulaciones del subtema
 - clasificar: ¿ALB, NLB o GWLB?

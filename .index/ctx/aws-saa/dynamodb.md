@@ -36,6 +36,7 @@ Aplicaciones serverless, sesiones, carritos, juegos, IoT, y todo lo que necesite
 
 ## Subtemas relacionados (solo resumen; el cuerpo con leer_subtema)
 - elasticache: ElastiCache — Redis y Memcached como caché en memoria y estrategias de caching. [secciones: ElastiCache · Redis vs Memcached · Estrategias de caching · Sesiones · Seguridad]
+- lambda: AWS Lambda — Funciones sin servidor: límites, concurrencia, triggers, VPC, SnapStart y Lambda@Edge. [secciones: AWS Lambda · Límites clave (por Región / ejecución) · Invocación · Concurrencia · Rendimiento, red y seguridad · Patrones · Lambda vs contenedores]
 
 ## Glosario usado
 - API: Application Programming Interface. Contrato por el cual un programa expone funciones a otro.
@@ -74,3 +75,6 @@ Aplicaciones serverless, sesiones, carritos, juegos, IoT, y todo lo que necesite
 - (que-pasa-si) ¿Qué pasa si superas la capacidad provisionada de escritura?
 - (comparar) Compara un GSI y un LSI: ¿cuál puedes crear después de crear la tabla?
 - (aplicar) ¿Cuándo pondrías DAX delante y cuándo ElastiCache?
+- (comparar) Compara los modos on-demand y provisioned de DynamoDB.
+- (aplicar) Quieres enviar un email cada vez que se crea un pedido en una tabla de DynamoDB: ¿cómo?
+- (aplicar) Necesitas la misma tabla con escrituras en dos continentes y latencia local: ¿qué usas?

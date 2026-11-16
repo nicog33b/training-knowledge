@@ -2,10 +2,25 @@ questions:
   - q: ¿Por qué el pilar de sostenibilidad se añadió como sexto pilar?
     kind: por-que
     uses: []
+    a: Se añadió en 2021 porque el **impacto ambiental** de las cargas en la nube pasó a ser un objetivo explícito de diseño, no un efecto secundario del coste. Pide maximizar el uso de lo que se aprovisiona, elegir Regiones y servicios gestionados eficientes, y reducir datos y cómputo innecesarios.
   - q: Elige un pilar y di qué decisión de arquitectura lo mejora y cuál lo empeora.
     kind: aplicar
     uses: []
+    a: "Ejemplo con **fiabilidad**: lo **mejora** desplegar en varias AZ detrás de un balanceador con un ASG y la base en Multi-AZ (se recupera sola de un fallo). Lo **empeora** una única instancia con la base en el mismo servidor y sin backups probados (un fallo es una caída total y quizá pérdida de datos). Practica lo mismo con los otros pilares."
   - q: "Compara fiabilidad y eficiencia del rendimiento: ¿qué pregunta responde cada uno?"
     kind: comparar
+    uses: []
+    a: "**Fiabilidad**: ¿la carga **sigue cumpliendo su función** ante fallos y cambios y se **recupera** sola? (Multi-AZ, backups, autorreparación, límites de servicio.) **Eficiencia del rendimiento**: ¿usas los **recursos adecuados** y los ajustas cuando cambia la demanda o la tecnología? (tipo de instancia, serverless, caché, CDN.)"
+  - q: ¿Cuáles son los seis pilares de Well-Architected y qué pregunta clave responde cada uno?
+    kind: comparar
+    a: "**Excelencia operativa**: ¿cómo operas, cambias y mejoras? **Seguridad**: ¿cómo proteges datos, identidades y sistemas? **Fiabilidad**: ¿se recupera de fallos? **Eficiencia del rendimiento**: ¿usas los recursos adecuados? **Optimización de costes**: ¿pagas solo lo que aporta valor? **Sostenibilidad**: ¿minimizas el impacto ambiental?"
+    uses: []
+  - q: ¿Qué herramienta usas para revisar una carga de trabajo contra el marco Well-Architected?
+    kind: aplicar
+    a: "La **AWS Well-Architected Tool**, gratis en la consola: respondes las preguntas de cada pilar sobre tu carga, te marca los **riesgos altos y medios** con recomendaciones y guarda hitos para ver la mejora. Admite **lenses** especializadas (serverless, SaaS, datos…)."
+    uses: []
+  - q: "Error común: ¿por qué optimizar costes no significa elegir siempre lo más barato?"
+    kind: error-comun
+    a: "El pilar busca **el mejor valor**, no el menor precio: lo barato que cae, que exige mucho trabajo manual o que pone en riesgo los datos sale caro en conjunto. Optimizar es pagar solo por lo que usas (dimensionar bien, elasticidad, el modelo de compra adecuado), equilibrado con fiabilidad, seguridad y rendimiento."
     uses: []
 sims: []

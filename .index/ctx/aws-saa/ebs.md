@@ -32,6 +32,7 @@ Disco **físicamente unido** al host: IOPS extremos y latencia mínima, pero **e
 
 ## Subtemas relacionados (solo resumen; el cuerpo con leer_subtema)
 - infraestructura-global: Infraestructura global — Regiones, AZs y cómo lograr alta disponibilidad. [secciones: Regiones, AZs y Edge Locations · Cómo elegir una Región · Alcance de los servicios · Alta disponibilidad · Modelo de responsabilidad compartida]
+- kms-cifrado: KMS, CloudHSM y gestión de secretos — Cifrado con KMS, SSM Parameter Store, Secrets Manager, ACM y CloudHSM. [secciones: KMS, CloudHSM y gestión de secretos · Conceptos de cifrado · AWS KMS (Key Management Service) · CloudHSM · SSM Parameter Store · Secrets Manager · AWS Certificate Manager (ACM) · Elegir]
 
 ## Glosario usado
 - Latencia: Tiempo que tarda una petición en recibir respuesta.
@@ -59,3 +60,6 @@ Disco **físicamente unido** al host: IOPS extremos y latencia mínima, pero **e
 - (que-pasa-si) ¿Qué pasa con los datos de un Instance Store si paras la instancia?
 - (aplicar) ¿Cómo moverías un volumen EBS a otra Región?
 - (comparar) Compara gp3 e io2: ¿cuándo se justifica pagar IOPS aprovisionadas?
+- (que-pasa-si) ¿Qué pasa con los volúmenes EBS cuando terminas la instancia?
+- (comparar) Compara st1 y sc1: ¿para qué sirve cada HDD?
+- (aplicar) ¿Cómo cifras un volumen EBS existente que se creó sin cifrar?

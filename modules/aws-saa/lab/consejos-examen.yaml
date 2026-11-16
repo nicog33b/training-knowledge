@@ -2,11 +2,30 @@ questions:
   - q: ¿Por qué conviene descartar primero las opciones con más carga operativa?
     kind: por-que
     uses: []
+    a: "El examen premia lo que AWS recomienda: **servicios gestionados y serverless** antes que montarlo tú en EC2. Muchas preguntas piden explícitamente *least operational overhead*, y las opciones con scripts propios, cron en una instancia o software autogestionado suelen ser distractores cuando existe un servicio que ya lo hace."
   - q: Ante 'mínimo coste' y 'mínimo esfuerzo operativo' a la vez, ¿cómo decides?
     kind: aplicar
     uses: []
+    a: Primero descarta lo que **no cumple los requisitos funcionales**. Entre lo que queda, busca la opción gestionada que también sea barata (lifecycle de S3, serverless, Spot donde se tolere interrupción). Si de verdad chocan, manda el superlativo que pregunta la frase final ("MOST cost-effective" frente a "LEAST operational overhead").
   - q: "Error común: ¿qué palabras del enunciado indican que piden alta disponibilidad y no escalado?"
     kind: error-comun
     uses:
       - rds-aurora
+    a: "Alta disponibilidad: *highly available*, *fault tolerant*, *survive the failure of an AZ*, *minimize downtime* → Multi-AZ, varias instancias en varias AZ, failover. Escalado: *scale*, *handle increased load*, *unpredictable traffic*, *performance* → ASG, réplicas de lectura, caché. Confundirlas lleva a elegir réplicas de lectura cuando pedían Multi-AZ, o al revés."
+  - q: "Error común: ¿por qué Multi-AZ no responde a una pregunta de recuperación ante la caída de una Región entera?"
+    kind: error-comun
+    a: "Multi-AZ protege **dentro de una Región**; si cae la Región, caen todas sus AZ. Para DR regional necesitas copias en **otra Región**: réplicas cross-Region, Aurora Global Database, DynamoDB global tables, backups copiados a otra Región, replicación entre Regiones de S3."
+    uses:
+      - recuperacion-desastres
+  - q: "Te piden desacoplar componentes: ¿qué servicios suelen ser la respuesta y cuándo cada uno?"
+    kind: aplicar
+    a: "**SQS**: cola donde un consumidor procesa cada mensaje a su ritmo. **SNS**: pub/sub, una copia a cada suscriptor (fan-out). **EventBridge**: eventos enrutados por reglas de contenido, incluidos los de servicios AWS y SaaS. **Kinesis**: streaming con orden por clave, varios lectores y reproceso."
+    uses:
+      - sqs
+      - sns-fanout
+      - kinesis-mq
+  - q: ¿Por qué conviene leer primero la última frase del enunciado?
+    kind: por-que
+    a: "Ahí suele estar **lo que de verdad preguntan** (el requisito y el superlativo: más barato, menos operación, más disponible). Sabiéndolo, lees el escenario filtrando qué detalles importan y cuáles son ruido, y descartas antes las opciones que no responden a esa pregunta."
+    uses: []
 sims: []

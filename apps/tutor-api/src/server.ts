@@ -6,11 +6,12 @@
  * Proveedores: Claude, ChatGPT, Gemini, Ollama y compatibles (ver .env.example y @tk/llm).
  */
 import { createServer } from 'node:http';
-import { dirname, resolve } from 'node:path';
+import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
+import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { FsContentSource, loadAll, type Loaded } from '@tk/content';
 import { addUsage, availableProviders, createClient, loadDotEnv, readLedger, resetLedger, type ProviderId, type Usage } from '@tk/llm';
-import { fakeClient, handleChat, spendView, type ProviderSlot } from './handler.ts';
+import { fakeClient, handleChat, handleGenerate, handleListGenerated, spendView, type ProviderSlot, type QuestionStore } from './handler.ts';
 
 const ROOT = process.env.TK_ROOT ?? resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 loadDotEnv(ROOT);
@@ -42,6 +43,26 @@ else
   }
 const onSpend = FAKE ? undefined : (p: ProviderId, model: string, u: Usage, usd: number | null) => addUsage(DATA_ROOT, p, model, u, usd);
 
+// Preguntas generadas con IA: .data/preguntas/<módulo>/<subtema>.json (en modo prueba, aparte para no mezclarlas).
+// Para pasarlas al curso tras revisarlas: tk lab import (son datos, no se publican solas).
+const store: QuestionStore = {
+  file: (mod: string, topic: string) => join(DATA_ROOT, '.data', FAKE ? 'preguntas-prueba' : 'preguntas', mod, `${topic}.json`),
+  async read(mod, topic) {
+    try {
+      const list = JSON.parse(await readFile(this.file(mod, topic), 'utf8'));
+      return Array.isArray(list) ? list : [];
+    } catch {
+      return [];
+    }
+  },
+  async write(mod, topic, list) {
+    const f = this.file(mod, topic);
+    await mkdir(dirname(f), { recursive: true });
+    await writeFile(`${f}.tmp`, JSON.stringify(list, null, 2));
+    await rename(`${f}.tmp`, f);
+  },
+} as QuestionStore & { file(mod: string, topic: string): string };
+
 const hits: number[] = [];
 const limited = () => {
   const now = Date.now();
@@ -69,13 +90,18 @@ createServer(async (req, res) => {
     return res.end();
   }
   if (origin && !ORIGINS.includes(origin)) return send(403, { error: 'origen no permitido' });
-  const route = `${req.method} ${req.url}`;
+  const url = new URL(req.url ?? '/', 'http://x');
+  const route = `${req.method} ${url.pathname}`;
   if (route === 'GET /health')
     return send(200, { ok: true, mode: FAKE ? 'fake' : providers.size ? 'api' : 'sin-clave', providers: [...providers].map(([id, s]) => ({ id, label: s.label, model: s.model })) });
   if (route === 'GET /gasto') return send(200, spendView(await readLedger(DATA_ROOT), providers));
   if (route === 'POST /gasto/reset') return send(200, spendView(await resetLedger(DATA_ROOT), providers));
-  if (route !== 'POST /chat') return send(404, { error: 'no encontrado' });
-  if (route === 'POST /chat' && limited()) return send(429, { error: `máx. ${RATE_PER_MIN} preguntas por minuto` });
+  if (route === 'GET /preguntas') {
+    const r = await handleListGenerated(url.searchParams.get('module'), url.searchParams.get('topic'), { load, providers, store });
+    return send(r.status, r.body);
+  }
+  if (route !== 'POST /chat' && route !== 'POST /preguntas') return send(404, { error: 'no encontrado' });
+  if (limited()) return send(429, { error: `máx. ${RATE_PER_MIN} peticiones de IA por minuto` });
 
   let size = 0;
   const chunks: Buffer[] = [];
@@ -90,7 +116,7 @@ createServer(async (req, res) => {
   } catch {
     return send(400, { error: 'JSON inválido' });
   }
-  const r = await handleChat(body, { load, providers, onSpend });
+  const r = route === 'POST /chat' ? await handleChat(body, { load, providers, onSpend }) : await handleGenerate(body, { load, providers, onSpend, store });
   send(r.status, r.body);
 }).listen(PORT, '127.0.0.1', () => {
   const list = [...providers.values()].map((s) => `${s.label} (${s.model})`).join(', ');

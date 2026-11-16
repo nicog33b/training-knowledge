@@ -60,6 +60,9 @@ Las instancias **T** son *burstable*: acumulan créditos de CPU y gastan al nece
 - (que-pasa-si) ¿Qué pasa con un trabajo largo sin checkpoints si corre en Spot y AWS reclama la instancia?
 - (comparar) Compara Reserved Instances y Savings Plans: ¿cuándo conviene cada uno?
 - (aplicar) Una carga estable 24/7 durante 3 años: ¿qué modelo de compra eliges y por qué?
+- (comparar) Compara Dedicated Hosts y Dedicated Instances.
+- (aplicar) Necesitas capacidad garantizada en una AZ para un evento de dos días, sin compromiso largo: ¿qué usas?
+- (aplicar) ¿Qué familia de instancia eliges para una base de datos en memoria y cuál para cálculo intensivo?
 
 ## Simulaciones del subtema
 - clasificar: Elige el modelo de compra de EC2

@@ -2,10 +2,13 @@ questions:
   - q: ¿Por qué el Data Cache vive en el servidor y el Router Cache en el cliente?
     kind: por-que
     uses: []
+    a: Cachean cosas distintas para ahorrar trabajo distinto. El **Data Cache** guarda en el **servidor** los resultados de `fetch`, para no volver a llamar a una API lenta en cada render y compartirlos entre usuarios y peticiones. El **Router Cache** guarda en el **navegador** lo que el usuario ya visitó, para que navegar entre páginas sea casi instantáneo sin volver a pedirlas al servidor.
   - q: ¿Qué pasa con un dato cacheado si la API cambia antes de que venza el TTL?
     kind: que-pasa-si
     uses: []
+    a: "Se sigue sirviendo **el dato viejo** hasta que vence el TTL: la caché no sabe que la API cambió. Si no puedes esperar a que venza, hay que **revalidar de forma explícita** cuando sabes que el dato cambió (p. ej. tras guardar un formulario), para que la siguiente petición traiga el valor nuevo."
   - q: "Compara vencer por TTL y revalidar de forma explícita: ¿cuándo usarías cada una?"
     kind: comparar
     uses: []
+    a: "**Por TTL**: sencillo y automático; vale cuando tolerar unos minutos de desfase es aceptable (precios de catálogo, noticias). **Revalidación explícita**: la provocas tú cuando sabes que el dato cambió; vale cuando el usuario debe ver su cambio en el acto (editar su perfil). Muchas apps combinan las dos: un TTL de seguridad y revalidación al escribir."
 sims: []

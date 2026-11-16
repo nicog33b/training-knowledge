@@ -1,0 +1,24 @@
+id: nngroup-dark-mode
+title: "Dark Mode vs. Light Mode: Which Is Better?"
+authors:
+  - Nielsen Norman Group
+year: 2020
+venue: Nielsen Norman Group
+url: https://www.nngroup.com/articles/dark-mode/
+kind: review
+verified: full-text
+retrieved: 2026-11-15
+summary: Con visión normal el modo claro rinde mejor casi siempre; el oscuro
+  conviene como opción (preferencia, visión con medios oculares turbios).
+facts:
+  - "Dobres et al. 2017: de día la polaridad no afectó la lectura de un vistazo;
+    de noche el modo claro fue mejor y la letra pequeña costó más en modo
+    oscuro."
+  - "Legge et al. 1985: los 7 participantes con medios oculares turbios (p. ej.
+    cataratas) leyeron más rápido en modo oscuro."
+  - "Aleman et al. 2018 (7 participantes): leer en modo claro se asoció a
+    adelgazamiento de la coroides (marcador ligado a miopía); evidencia muy
+    preliminar."
+caveats:
+  - Es una reseña divulgativa de un grupo de usabilidad; año de publicación no
+    confirmado en la página leída.

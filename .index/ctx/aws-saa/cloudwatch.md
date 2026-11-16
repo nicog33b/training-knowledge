@@ -68,3 +68,6 @@ CloudWatch Alarms → SNS (notificar) o EC2 action; **EventBridge** reacciona a 
 - (por-que) ¿Por qué la memoria de una EC2 no aparece en CloudWatch por defecto?
 - (que-pasa-si) ¿Qué pasa con una alarma en estado INSUFFICIENT_DATA?
 - (aplicar) ¿Cómo reiniciarías automáticamente una instancia cuando falla su status check?
+- (comparar) Compara la monitorización estándar y la detallada de EC2.
+- (aplicar) Quieres una alerta cuando aparezcan más de 10 líneas con ERROR en los logs en 5 minutos: ¿cómo?
+- (que-pasa-si) ¿Qué pasa con el coste de CloudWatch Logs si nunca configuras retención?

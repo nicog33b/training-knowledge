@@ -1,0 +1,25 @@
+id: rello-pielot-marcos-2016
+title: Make It Big! The Effect of Font Size and Line Spacing on Online Readability
+authors:
+  - Luz Rello
+  - Martin Pielot
+  - Mari-Carmen Marcos
+year: 2016
+venue: CHI 2016, pp. 3637–3648 (doi 10.1145/2858036.2858204)
+url: https://doi.org/10.1145/2858036.2858204
+kind: experiment
+verified: secondary
+retrieved: 2026-11-15
+summary: En pantalla, letra más grande = lectura más fluida y mejor comprensión
+  hasta ~18 pt; el interlineado importa poco salvo en los extremos.
+facts:
+  - "Eye-tracking con Wikipedia en Arial, tamaños de 10 a 26 pt e interlineados
+    de 0,8 a 1,8: la legibilidad (duración media de fijación) mejoró de forma
+    significativa al crecer el tamaño; la comprensión fue mayor con 18 y 26 pt."
+  - "Interlineado: solo efectos marginales; los extremos 0,8 y 1,8 empeoraron la
+    legibilidad. Recomendación de los autores: 18 pt e interlineado 1,0–1,4."
+caveats:
+  - Leído en resúmenes (researchr, diapositivas de los autores), no el artículo
+    completo.
+  - Los 'pt' son del navegador del estudio; la equivalencia exacta a px CSS no
+    está confirmada.

@@ -29,6 +29,12 @@ importers:
 
   apps/web:
     dependencies:
+      '@fontsource-variable/literata':
+        specifier: 5.2.5
+        version: 5.2.5
+      '@fontsource/atkinson-hyperlegible':
+        specifier: 5.2.5
+        version: 5.2.5
       '@tk/content':
         specifier: workspace:*
         version: link:../../packages/content
@@ -381,6 +387,12 @@ packages:
 
   '@emnapi/wasi-threads@1.2.3':
     resolution: {integrity: sha512-ELEBe8PsLvvJ6QMr0zLt8ffvOHW/dc1m3CEzNMg7aJUv3bMaoDtw2TXyDAwkYBuroxxuHEwhRTLJSe5sya547g==}
+
+  '@fontsource-variable/literata@5.2.5':
+    resolution: {integrity: sha512-BXOybCun33h7jO+ViyfIz/+m0IPKJt59dYw5KfTzQqqkCfEekGPpFrK6sXGiu7NkyyjZibLUMAXtFHOIXqq8Eg==}
+
+  '@fontsource/atkinson-hyperlegible@5.2.5':
+    resolution: {integrity: sha512-looo8B/DHWsKG439j4hHsr2Fq3/CRkM9gpwxUu35aID4q24tYgxLmQqHbwAKA8+uV7y/fHnPkqBNsM83g+cu2A==}
 
   '@img/colour@1.1.0':
     resolution: {integrity: sha512-Td76q7j57o/tLVdgS746cYARfSyxk8iEfRxewL9h4OMzYhbW4TAcppl0mT4eyqXddh6L/jwoM75mo7ixa/pCeQ==}
@@ -1923,6 +1935,10 @@ snapshots:
     dependencies:
       tslib: 2.9.1
     optional: true
+
+  '@fontsource-variable/literata@5.2.5': {}
+
+  '@fontsource/atkinson-hyperlegible@5.2.5': {}
 
   '@img/colour@1.1.0':
     optional: true

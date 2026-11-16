@@ -2,14 +2,31 @@ questions:
   - q: ¿Por qué no puedes adjuntar un volumen EBS a una instancia de otra AZ?
     kind: por-que
     uses: []
+    a: "Un volumen EBS es almacenamiento en red que **vive y se replica dentro de una sola AZ**, cerca de las instancias para dar baja latencia. Para usarlo en otra AZ: **snapshot** (se guarda en S3, a nivel de Región) → crear un volumen nuevo desde el snapshot en la AZ de destino."
   - q: ¿Qué pasa con los datos de un Instance Store si paras la instancia?
     kind: que-pasa-si
     uses: []
+    a: "**Se pierden**. El Instance Store es un disco físico del host: al parar o terminar la instancia, esta puede volver en otro host y el disco se borra. Solo sobrevive a un **reinicio** (reboot). Úsalo para caché, buffers o datos replicados en otra parte, nunca como único almacenamiento."
   - q: ¿Cómo moverías un volumen EBS a otra Región?
     kind: aplicar
     uses:
       - infraestructura-global
+    a: Crea un **snapshot**, **cópialo a la Región de destino** (puedes cifrarlo o cambiar la clave KMS al copiar) y crea un volumen desde la copia. Si es el volumen raíz, lo normal es copiar la **AMI** a la otra Región y lanzar ahí la instancia.
   - q: "Compara gp3 e io2: ¿cuándo se justifica pagar IOPS aprovisionadas?"
     kind: comparar
     uses: []
+    a: "**gp3** (SSD de uso general) da una base de 3.000 IOPS y 125 MB/s **sea cual sea el tamaño**, y puedes subir IOPS y rendimiento por separado; sirve para casi todo. **io2** se justifica en bases de datos críticas que necesitan **IOPS sostenidas muy altas con latencia constante**, más durabilidad (99,999 %) o **Multi-Attach**."
+  - q: ¿Qué pasa con los volúmenes EBS cuando terminas la instancia?
+    kind: que-pasa-si
+    a: "Depende de `DeleteOnTermination`: por defecto es **true en el volumen raíz** (se borra) y **false en los volúmenes adicionales** (se conservan y siguen costando). Puedes cambiarlo para conservar el raíz o borrar los extra."
+    uses: []
+  - q: "Compara st1 y sc1: ¿para qué sirve cada HDD?"
+    kind: comparar
+    a: "**st1** (throughput optimized): acceso **secuencial frecuente** con mucho rendimiento (big data, logs, data warehouses). **sc1** (cold): datos **poco accedidos**, el almacenamiento en bloque más barato. Ninguno de los dos puede ser **volumen de arranque**, y ninguno sirve para cargas de muchas IOPS aleatorias."
+    uses: []
+  - q: ¿Cómo cifras un volumen EBS existente que se creó sin cifrar?
+    kind: aplicar
+    a: No se puede cifrar en el sitio. Haz un **snapshot**, **cópialo activando el cifrado** con una clave KMS, crea un volumen desde la copia cifrada y sustituye el original en la instancia. Para el futuro, activa el **cifrado por defecto de EBS** en la Región.
+    uses:
+      - kms-cifrado
 sims: []

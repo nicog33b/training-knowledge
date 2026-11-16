@@ -1,0 +1,24 @@
+id: schneider-2018-signaling
+title: A meta-analysis of how signaling affects learning with media
+authors:
+  - Sascha Schneider
+  - Maik Beege
+  - Steve Nebel
+  - Günter Daniel Rey
+year: 2018
+venue: Educational Research Review 23, 1–24 (doi 10.1016/j.edurev.2017.11.001)
+url: https://doi.org/10.1016/j.edurev.2017.11.001
+kind: meta-analysis
+verified: secondary
+retrieved: 2026-11-15
+summary: Señalar lo importante (color, negrita, flechas, etiquetas) mejora la
+  retención y algo la transferencia.
+facts:
+  - "103 estudios, 12.201 participantes: la señalización mejora la retención g =
+    0,53 y la transferencia g = 0,33."
+  - "Richter et al. 2016 (27 estudios, N = 2.464): el beneficio de señalizar
+    texto-imagen es mayor en alumnos con poco conocimiento previo."
+caveats:
+  - Cifras de resúmenes secundarios; el número de tamaños de efecto difiere
+    entre fuentes (103 estudios vs 145 efectos).
+  - No se encontró el efecto del color por separado de otros tipos de señal.

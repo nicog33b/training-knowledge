@@ -48,7 +48,7 @@ Toda decisión de diseño que se apoye en información externa debe quedar traza
 3. Escribir el bundle de lab (preguntas sugeridas de cada subtema + simulaciones donde haya conceptos confundibles o parámetros) → `tk lab import`.
    Se hace AL CREAR el curso (con la suscripción, costo 0 en uso), no al vuelo con la API.
 4. `tk status` hasta 100 %, `pnpm validate`, ver panel en `/progreso` (`pnpm dev`).
-   Frontmatter nuevo: `section` (id del outline) y `status` (todo|draft|done; done exige ≥60 palabras y ≥3 preguntas en el lab).
+   Frontmatter nuevo: `section` (id del outline) y `status` (todo|draft|done; done exige ≥60 palabras y ≥6 preguntas en el lab, todas con respuesta `a`).
    Cada comando que cambia contenido regenera `.index/`, incluido el contexto para IA de cada subtema (`.index/ctx/<módulo>/`).
 
 ## Reglas de contenido
@@ -56,7 +56,8 @@ Toda decisión de diseño que se apoye en información externa debe quedar traza
   La UI subraya automáticamente los términos y muestra la definición al pasar el mouse; no hay que marcarlos en el markdown.
   Si escribes un tecnicismo nuevo → `tk glossary add`. Término genérico y reutilizable → `_shared`.
 - Un módulo puede heredar el glosario de otro con `glossaries: [otro-modulo]` en `module.yaml`.
-- Lab: `lab/<subtema>.yaml` con `questions` (kind: por-que|que-pasa-si|comparar|aplicar|error-comun; `uses: [subtema]` si la respuesta necesita otro) y `sims`.
+- Lab: `lab/<subtema>.yaml` con `questions` (kind: por-que|que-pasa-si|comparar|aplicar|error-comun; `a:` respuesta modelo de 40–90 palabras, markdown corto; `uses: [subtema]` si la respuesta necesita otro) y `sims`.
+  La web muestra cada pregunta como tarjeta: intentar → "Ver respuesta" → autoevaluarse (sin IA). "Generar preguntas" (POST /preguntas de tutor-api, cuesta) guarda las generadas en `.data/preguntas/<módulo>/<subtema>.json`; si valen, se pasan al curso con `tk lab import` (la importación actualiza preguntas existentes por texto).
   Simulaciones = **recetas** de primitivas fijas, nunca HTML: `predecir-observar` (params + predicción + `outcomes` con reglas `when` + checklist `rubric`) y `clasificar` (categorías + items con `why`).
   Las reglas `when` usan un mini-lenguaje seguro (variables de `params`, + - * / %, comparaciones, && || !); `validate` comprueba variables, cobertura (pon un `when: "1"` final) y que haya algo que predecir.
   Rúbricas = ideas concretas verificables ("menciona ChangeMessageVisibility"), no criterios vagos. Ver `research/decisions/simulaciones-por-primitivas-y-recetas.md`.
@@ -75,7 +76,7 @@ llm        ← proveedores (Claude SDK; ChatGPT/compatibles vía Chat Completion
 tutor      ← tutor IA barato: catálogo del curso (prefijo cacheado) + contexto del subtema + herramienta leer_subtema
 render     ← markdown → HTML con términos subrayados (+ term.css)
 cli (tk)   ← harness de scaffolding
-apps/web   ← vista Astro (una de muchas posibles; solo consume content+render) + chat flotante que habla con tutor-api
+apps/web   ← vista Astro (una de muchas posibles; solo consume content+render) + chat flotante que habla con tutor-api + menú al seleccionar texto (acciones y preguntas del lab → chat, evento `tk-ask`)
 apps/tutor-api ← servidor local (127.0.0.1) del chat: valida, llama a @tk/tutor; la clave nunca llega al navegador
 ```
 - Cambiar una forma de datos = cambiar `packages/contracts` primero.

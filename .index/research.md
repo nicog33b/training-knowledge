@@ -2,7 +2,8 @@
 ANTES de investigar algo, busca aquí (`pnpm tk research find <texto>`). Datos completos: research/sources/<id>.yaml; razonamiento: research/decisions/<id>.md.
 verified: full-text > abstract > secondary (resumen de terceros, citar con cautela).
 
-## Decisiones (14)
+## Decisiones (17)
+- color-con-funcion-y-contraste [proposed·medium] Color para señalar y contrastar, no por psicología del color — Modo claro por defecto con oscuro disponible, contraste ≥4,5:1 (objetivo 7:1 en texto), color con significado fijo para señalar lo importante; ignorar afirmaciones de que un color concreto mejora el rendimiento. {fuentes: piepenbrock-2013-polarity,nngroup-dark-mode,wcag-22-contrast-spacing,schneider-2018-signaling,gnambs-2020-red,brom-2018-emotional-design} {afecta: all,package:web}
 - correccion-ia-solo-formativa-con-checklist [proposed·medium] Corrección con IA solo formativa, contra rúbricas tipo checklist — La IA corrige explicaciones libres solo para dar feedback (nunca nota de examen), contra una lista de ideas concretas; lo que pueda corregirse con código, se corrige con código. {fuentes: hardy-2026-autoscoring,jade-yartsev-2025,anthropic-pricing-docs,wisniewski-2020} {afecta: package:sims,package:tutor}
 - descartar-tecnicas-de-baja-evidencia [proposed·high] No basar el producto en releer, subrayar, estilos de aprendizaje ni gamificación de puntos — Tratar como bajo valor: releer/subrayar/resumir, adaptar por "estilo" visual/auditivo y puntos/medallas como motor del aprendizaje. {fuentes: dunlosky-2013,pashler-2008,clinton-lisell-2024,sailer-homner-2019} {afecta: all}
 - diseno-de-contenido-sin-ruido [proposed·medium] Explicaciones segmentadas, coherentes y sin detalles decorativos — Texto en bloques cortos, señalización de ideas clave, imagen junto al texto y nada decorativo que no enseñe. {fuentes: mayer-multimedia-chartered,sundararajan-adesope-2020} {afecta: all}
@@ -16,15 +17,20 @@ verified: full-text > abstract > secondary (resumen de terceros, citar con caute
 - proveedores-llm-y-contador-de-gasto [proposed·medium] Proveedores LLM intercambiables por función y contador de gasto por modelo — Cada función pide un nivel de modelo y cada proveedor declara su equivalente; el header cuenta lo gastado (tokens × precio del modelo que respondió), por modelo y por día, sin pedir el saldo. {fuentes: anthropic-pricing-docs,openai-pricing-docs,openai-gpt-6-luna-model,ollama-openai-compat,gemini-openai-compat,anthropic-admin-cost-api,openai-costs-api-no-balance} {afecta: all,package:llm,package:tutor,app:web}
 - repeticion-espaciada-fsrs [proposed·high] Repaso espaciado con planificador FSRS y relearning sucesivo — Los ítems se reprograman con un algoritmo de repetición espaciada; el intervalo crece con el tiempo de retención deseado. {fuentes: cepeda-2008,rawson-dunlosky-successive-relearning,fsrs-anki-docs,dunlosky-2013} {afecta: all,package:practice}
 - simulaciones-por-primitivas-y-recetas [proposed·medium] Simulaciones como primitivas fijas + recetas declarativas por subtema — Pocas primitivas de simulación programadas una vez (predecir-observar, clasificar...) que ejecutan recetas YAML validadas; la IA escribe recetas, no HTML. {fuentes: podolefsky-moore-perkins-2013,moore-herzog-perkins-2013,alfieri-2011,kirschner-sweller-clark-2006,chernikova-2020,koyunlu-unlu-2024-poe,gentner-loewenstein-thompson-2003,anthropic-pricing-docs} {afecta: all,package:sims,app:web}
+- sin-tipografias-milagro [proposed·high] Nada de fuentes difíciles ni fuentes para dislexia como truco de aprendizaje — No usar fuentes disfluentes (Sans Forgetica) ni fuentes especiales para dislexia; para dislexia, ofrecer más tamaño y espaciado entre letras. {fuentes: taylor-2020-sans-forgetica,huff-2022-sans-forgetica-drm,xie-zhou-liu-2018-disfluency,weissgerber-brunmair-rummer-2021,wery-diliberto-2017,zorzi-2012-letter-spacing} {afecta: all,package:web}
+- tipografia-y-medidas-de-lectura [proposed·medium] Tipografía de lectura: tamaño generoso, línea de ~65 caracteres y ajustes por persona — Cuerpo de 18–20 px con altura de x grande, interlineado ~1,5, línea de 60–75 caracteres; serif o sans da igual; el alumno puede cambiar fuente, tamaño y espaciado. {fuentes: rello-pielot-marcos-2016,legge-bigelow-2011,dyson-2004,arditi-cho-2005,wallace-2022-individuated,wcag-22-contrast-spacing,literata-typetogether,atkinson-hyperlegible} {afecta: all,package:web}
 - tutor-ia-con-restricciones [proposed·medium] Tutor de IA con guardrails (pistas y explicación), nunca respuesta directa — Si hay tutor IA, que dé pistas, pida al alumno explicar y verifique con práctica sin ayuda; no un chatbot libre. {fuentes: kestin-2025,bastani-2025,wang-fan-2025} {afecta: package:practice}
 
-## Fuentes (47)
+## Fuentes (66)
 - alfieri-2011 (2011·meta-analysis·secondary): El descubrimiento sin ayuda rinde peor que la instrucción explícita; el descubrimiento guiado (con explicaciones pedidas, feedback, ejemplos) rinde mejor que otras formas.
 - alfieri-2013 (2013·meta-analysis·abstract): Comparar casos lado a lado supera a los métodos tradicionales; funciona mejor si el principio se da después de comparar.
 - anthropic-admin-cost-api (2026·docs·secondary): Anthropic informa gasto e uso de la organización con clave de administrador, pero no expone el saldo de créditos restante.
 - anthropic-pricing-docs (2026·docs·secondary): Precios por token de los modelos Claude; el caché de prompt cobra ~0.1x por leer un prefijo repetido.
+- arditi-cho-2005 (2005·experiment·abstract): Con o sin serifas no cambia la legibilidad a tamaños normales; la pequeña ventaja de las serifas venía del espaciado extra.
+- atkinson-hyperlegible (2020·docs·secondary): Sans gratuita diseñada para baja visión, con letras confundibles (I/l/1, O/0, b/d) muy diferenciadas.
 - bastani-2025 (2025·rct·abstract): Una IA sin restricciones crea dependencia y empeora el rendimiento sin ayuda; con guardrails el daño casi desaparece.
 - bisra-2018 (2018·meta-analysis·secondary): Pedir al alumno que se explique el material mejora el aprendizaje (g≈0.55) y más si el prompt es concreto.
+- brom-2018-emotional-design (2018·meta-analysis·secondary): Colores agradables y formas amables en materiales multimedia pueden ayudar algo; en el estudio primario el color cálido solo no cambió las emociones.
 - brunmair-richter-2019 (2019·meta-analysis·abstract): Intercalar ayuda (g≈0.42) sobre todo cuando las categorías son parecidas entre sí; con texto expositivo y palabras, con cautela.
 - cepeda-2008 (2008·experiment·abstract): El intervalo óptimo entre sesiones crece con el tiempo que se quiere retener; no hay regla de proporción fija.
 - chernikova-2020 (2020·meta-analysis·abstract): Las simulaciones tienen efecto grande en habilidades complejas, con andamiaje según conocimiento previo.
@@ -32,22 +38,28 @@ verified: full-text > abstract > secondary (resumen de terceros, citar con caute
 - costa-2022-4cid (2022·meta-analysis·secondary): Diseñar con tareas completas (4C/ID) tiene efecto grande en adquisición de conocimiento, más en educación superior.
 - deslauriers-2019 (2019·experiment·abstract): Con aprendizaje activo se aprende más pero se SIENTE aprender menos; la sensación de aprendizaje no es un buen indicador.
 - dunlosky-2013 (2013·review·abstract): Ranking de 10 técnicas de estudio por utilidad; base para priorizar práctica de recuperación y espaciada.
+- dyson-2004 (2004·review·secondary): Los caracteres por línea son la variable clave; las líneas largas se leen algo más rápido, pero se prefieren y a veces se comprenden mejor las medias (~55 cpl).
 - expertise-reversal-wikipedia (2025·other·secondary): Los ejemplos resueltos ayudan a novatos pero pierden valor (o perjudican) con la experiencia; hay que retirar ayudas progresivamente.
 - fiorella-mayer-2016 (2016·review·secondary): Catálogo de 8 estrategias generativas (resumir, mapear, dibujar, imaginar, autoevaluarse, autoexplicar, enseñar, actuar).
 - freeman-2014 (2014·meta-analysis·abstract): En STEM, el aprendizaje activo supera a la clase magistral en notas y reduce reprobaciones.
 - fsrs-anki-docs (2025·docs·secondary): FSRS permite fijar retención objetivo y suele requerir menos repasos que SM-2 para igual retención.
 - gemini-openai-compat (2026·docs·abstract): Gemini acepta peticiones en formato OpenAI en un endpoint compatible, con function calling.
 - gentner-loewenstein-thompson-2003 (2003·experiment·secondary): Comparar dos casos juntos (en vez de estudiarlos por separado) mejora mucho la transferencia del principio común a casos nuevos.
+- gnambs-2020-red (2020·meta-analysis·abstract): El supuesto efecto del rojo sobre el rendimiento intelectual desaparece al corregir sesgo de publicación.
 - hardy-2026-autoscoring (2026·meta-analysis·abstract): Metaanálisis de 890 resultados: los LLM generativos corrigen respuestas cortas peor que los modelos encoder entrenados y fallan en tareas fáciles para humanos.
+- huff-2022-sans-forgetica-drm (2022·experiment·abstract): Réplica independiente; Sans Forgetica no cambió el recuerdo correcto ni el falso.
 - jade-yartsev-2025 (2025·experiment·abstract): GPT-4o corrigiendo 557 respuestas de posgrado coincidió mal con humanos; mejor en ítems tipo checklist, peor en ítems evaluativos.
 - kestin-2025 (2025·rct·abstract): Un tutor IA diseñado con buenas prácticas superó al aprendizaje activo presencial en un ECA pequeño.
 - kirschner-sweller-clark-2006 (2006·review·abstract): La enseñanza con guía mínima es menos eficaz para novatos e intermedios; la ventaja de guiar solo se reduce cuando el alumno ya sabe bastante.
 - kobayashi-2019 (2019·meta-analysis·secondary): Estudiar para enseñar y enseñar mejora el aprendizaje, más si la enseñanza es interactiva.
 - kobayashi-2024 (2024·meta-analysis·secondary): Enseñar solo ayuda si el alumno estudió sabiendo que iba a enseñar; sin esa expectativa el efecto es nulo.
 - koyunlu-unlu-2024-poe (2024·meta-analysis·secondary): Predecir-observar-explicar tiene un efecto grande sobre el rendimiento en ciencias, con evidencia de calidad modesta.
+- legge-bigelow-2011 (2011·review·full-text): Por encima del tamaño crítico la velocidad de lectura es máxima en un rango amplio; la altura de x (no el cuerpo en puntos) es lo que cuenta.
+- literata-typetogether (2019·docs·secondary): Serif gratuita (SIL OFL 1.1), variable, creada como fuente de lectura de Google Play Books para leer en cualquier pantalla y tamaño.
 - mayer-multimedia-chartered (2021·review·secondary): Resumen de principios multimedia de Mayer con medianas de tamaño de efecto; diseño sin ruido, segmentado y señalizado.
 - moore-herzog-perkins-2013 (2013·experiment·secondary): En una clase grande, estudiantes exploraron un simulador PhET 10 minutos sin instrucciones y lo usaron productivamente sin frustrarse.
 - myers-hausman-rhodes-2023 (2023·experiment·secondary): Las preguntas que inventan los alumnos a menudo no apuntan a lo importante; en algunas condiciones rindieron peor que otras estrategias.
+- nngroup-dark-mode (2020·review·full-text): Con visión normal el modo claro rinde mejor casi siempre; el oscuro conviene como opción (preferencia, visión con medios oculares turbios).
 - ollama-openai-compat (2026·docs·abstract): Ollama expone /v1/chat/completions compatible con OpenAI, con tools pero sin tool_choice.
 - openai-costs-api-no-balance (2026·docs·secondary): OpenAI no ofrece un endpoint oficial de saldo prepagado; el gasto se lee con GET /v1/organization/costs y una clave Admin.
 - openai-gpt-6-luna-model (2026·docs·abstract): gpt-6-luna es un modelo de razonamiento; en Chat Completions solo admite function calling con reasoning_effort none.
@@ -56,13 +68,23 @@ verified: full-text > abstract > secondary (resumen de terceros, citar con caute
 - pan-rickard-2018 (2018·meta-analysis·secondary): La práctica de recuperación también transfiere a preguntas nuevas, bajo ciertas condiciones.
 - pashler-2008 (2008·review·abstract): No hay evidencia sólida de que adaptar la instrucción al 'estilo' del alumno (visual/auditivo...) mejore resultados.
 - peer-mcq-meta-2025 (2025·meta-analysis·secondary): Usar bancos de preguntas hechos por compañeros tiene un efecto pequeño-positivo o nulo en exámenes de medicina.
+- piepenbrock-2013-polarity (2013·experiment·abstract): Texto oscuro sobre fondo claro da mejor agudeza y corrección de textos que el modo oscuro, en jóvenes y mayores.
 - podolefsky-moore-perkins-2013 (2013·theory·abstract): Marco de diseño de PhET: guiar la exploración con affordances, restricciones, señales y feedback del propio simulador, sin instrucciones explícitas.
 - rawson-dunlosky-successive-relearning (2022·review·secondary): Practicar hasta acertar y volver a practicar en sesiones separadas protege contra el olvido.
+- rello-pielot-marcos-2016 (2016·experiment·secondary): En pantalla, letra más grande = lectura más fluida y mejor comprensión hasta ~18 pt; el interlineado importa poco salvo en los extremos.
 - sailer-homner-2019 (2019·meta-analysis·abstract): La gamificación tiene efectos pequeños en lo cognitivo y menos estables en motivación y conducta.
+- schneider-2018-signaling (2018·meta-analysis·secondary): Señalar lo importante (color, negrita, flechas, etiquetas) mejora la retención y algo la transferencia.
 - schroeder-2018 (2018·meta-analysis·abstract): Construir mapas conceptuales rinde más que estudiar mapas ya hechos.
 - sinha-kapur-2021 (2021·meta-analysis·abstract): Intentar el problema antes de la instrucción mejora el aprendizaje conceptual (efecto moderado), con matices de edad y tipo de habilidad.
 - sundararajan-adesope-2020 (2020·meta-analysis·secondary): Los detalles atractivos pero irrelevantes empeoran el aprendizaje, sobre todo en lecciones cortas y para novatos.
+- taylor-2020-sans-forgetica (2020·experiment·secondary): Sans Forgetica se siente más difícil de leer pero no mejora la memoria; a veces la empeora.
+- wallace-2022-individuated (2022·experiment·secondary): No hay una fuente mejor para todos; la más rápida varía por persona y la preferencia no la predice.
 - wang-fan-2025 (2025·meta-analysis·secondary): Meta-análisis de ChatGPT en educación; efectos grandes en rendimiento inmediato pero base pequeña para pensamiento de orden superior.
+- wcag-22-contrast-spacing (2023·docs·secondary): Contraste mínimo 4,5:1 (texto grande 3:1; nivel AAA 7:1) y el diseño no debe romperse si el usuario sube el espaciado.
+- weissgerber-brunmair-rummer-2021 (2021·review·abstract): El meta-análisis de disfluencia tiene errores en recuerdo; en transferencia su resultado nulo es robusto.
+- wery-diliberto-2017 (2017·experiment·abstract): OpenDyslexic no mejora la velocidad ni la precisión lectora de alumnos con dislexia frente a Arial o Times.
 - wisniewski-2020 (2020·meta-analysis·abstract): El feedback tiene efecto medio (d≈0.48) y depende mucho de qué información contiene.
+- xie-zhou-liu-2018-disfluency (2018·meta-analysis·secondary): Las fuentes difíciles de leer (disfluencia perceptiva) no mejoran el aprendizaje.
 - yan-bjork-bjork-2016 (2016·experiment·secondary): Los alumnos creen que bloquear temas funciona mejor que intercalar aunque lo contrario sea cierto; la ilusión es difícil de corregir.
 - yang-2021 (2021·meta-analysis·abstract): Meta-análisis de práctica de recuperación en AULA REAL (no laboratorio); efecto medio.
+- zorzi-2012-letter-spacing (2012·experiment·secondary): Más espacio entre letras ayuda a niños con dislexia (menos apiñamiento visual); no a lectores sin dificultades.

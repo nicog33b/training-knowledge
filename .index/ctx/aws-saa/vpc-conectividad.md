@@ -70,3 +70,6 @@ IPv6 en VPC es opcional y los direccionamientos son todos públicos; se usa Egre
 - (que-pasa-si) ¿Qué pasa con el tráfico a S3 desde una subred privada si añades un gateway endpoint?
 - (comparar) Compara Site-to-Site VPN y Direct Connect en tiempo de puesta en marcha, coste y estabilidad.
 - (aplicar) Conectas 30 VPC y una oficina: ¿peering o Transit Gateway?
+- (aplicar) Quieres ofrecer un servicio a VPC de otras cuentas sin peering y sin exponer toda tu red: ¿qué usas?
+- (aplicar) ¿Cómo das redundancia a una conexión Direct Connect?
+- (comparar) Compara un gateway endpoint y un interface endpoint.

@@ -1,0 +1,28 @@
+id: legge-bigelow-2011
+title: Does print size matter for reading? A review of findings from vision
+  science and typography
+authors:
+  - Gordon E. Legge
+  - Charles A. Bigelow
+year: 2011
+venue: Journal of Vision 11(5):8
+url: https://pmc.ncbi.nlm.nih.gov/articles/PMC3428264
+kind: review
+verified: full-text
+retrieved: 2026-11-15
+summary: Por encima del tamaño crítico la velocidad de lectura es máxima en un
+  rango amplio; la altura de x (no el cuerpo en puntos) es lo que cuenta.
+facts:
+  - Tamaño crítico de impresión (CPS) ≈ 0,2° de altura de x para lectores con
+    visión normal; la velocidad máxima se mantiene en un rango de 0,2° a 2°
+    (factor 10).
+  - A 40 cm, 0,2° ≈ 1,4 mm de altura de x; el texto de artículos en pantalla
+    medido promediaba 0,21°, justo encima del mínimo.
+  - Las tipografías pensadas para pantalla tienen mayor fracción de altura de x
+    (media 0,52 vs 0,42–0,48 en libros y periódicos), asociada a mejor
+    legibilidad en pantalla.
+caveats:
+  - Se leyó ~70 % del texto (hasta parte de la discusión); las conclusiones
+    finales no se leyeron completas.
+  - El CPS sube con la edad (estudios MNREAD citados en búsqueda) y en dislexia;
+    el mínimo para población general no vale para todos.

@@ -2,14 +2,30 @@ questions:
   - q: ¿Por qué Spot es barato y qué precio pagas por ese descuento?
     kind: por-que
     uses: []
+    a: "Spot vende la **capacidad sobrante** de AWS con descuentos de hasta un 90 % sobre On-Demand. El precio es la **interrupción**: AWS puede reclamar la instancia con solo **2 minutos de aviso** cuando necesita la capacidad. Sirve para cargas tolerantes a fallos y sin estado: batch, CI, análisis, workers de una cola."
   - q: ¿Qué pasa con un trabajo largo sin checkpoints si corre en Spot y AWS reclama la instancia?
     kind: que-pasa-si
     uses: []
+    a: "**Se pierde todo el progreso** y el trabajo tiene que empezar de cero, quizá una y otra vez. Solución: guardar **checkpoints** periódicos (p. ej. en S3), dividir en tareas cortas que se repartan desde una cola, reaccionar al aviso de 2 minutos, o usar On-Demand para la parte que no puede interrumpirse."
   - q: "Compara Reserved Instances y Savings Plans: ¿cuándo conviene cada uno?"
     kind: comparar
     uses: []
+    a: "**Reserved Instances**: compromiso a 1 o 3 años sobre una familia de instancia y Región (las Convertible dejan cambiar de tipo con menos descuento). **Savings Plans**: compromiso de **gasto por hora**; el **Compute Savings Plan** se aplica a cualquier familia, Región, Fargate y Lambda. Si quieres flexibilidad, Savings Plans; si la carga es fija y conocida, RI o EC2 Instance Savings Plan."
   - q: "Una carga estable 24/7 durante 3 años: ¿qué modelo de compra eliges y por qué?"
     kind: aplicar
+    uses: []
+    a: "**Reserved Instances Standard a 3 años** (o un **EC2 Instance Savings Plan** a 3 años), mejor con pago total por adelantado: es el **mayor descuento**, y como el uso es fijo y previsible no pierdes nada por comprometerte. Spot no sirve porque no puede interrumpirse."
+  - q: Compara Dedicated Hosts y Dedicated Instances.
+    kind: comparar
+    a: "Las dos dan hardware no compartido con otras cuentas. **Dedicated Host**: reservas el **servidor físico entero** y ves sus sockets y núcleos; necesario para **licencias por socket o núcleo** (BYOL) y algunos requisitos de cumplimiento. **Dedicated Instance**: hardware dedicado pero **sin control** sobre el host."
+    uses: []
+  - q: "Necesitas capacidad garantizada en una AZ para un evento de dos días, sin compromiso largo: ¿qué usas?"
+    kind: aplicar
+    a: "**On-Demand Capacity Reservations**: reservan capacidad de un tipo de instancia en una AZ, se crean y cancelan cuando quieras, sin compromiso de 1 o 3 años. Pagas la reserva aunque no lances instancias, y puedes combinarla con Savings Plans para tener descuento."
+    uses: []
+  - q: ¿Qué familia de instancia eliges para una base de datos en memoria y cuál para cálculo intensivo?
+    kind: aplicar
+    a: "En memoria (Redis propio, SAP HANA, analítica en RAM): familia **R** (o X), optimizada en memoria. Cálculo intensivo (codificación de vídeo, HPC, servidores de juego): familia **C**, optimizada en cómputo. Otras: **I** para disco local de muchas IOPS, **G/P** para GPU, **T** burstable para cargas ligeras."
     uses: []
 sims:
   - id: modelo-de-compra

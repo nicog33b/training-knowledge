@@ -1,0 +1,18 @@
+id: literata-typetogether
+title: Literata — tipografía serif para lectura larga en pantalla (OFL)
+authors:
+  - TypeTogether
+year: 2019
+venue: TypeTogether / Google Fonts
+url: https://github.com/googlefonts/literata
+kind: docs
+verified: secondary
+retrieved: 2026-11-15
+summary: Serif gratuita (SIL OFL 1.1), variable, creada como fuente de lectura
+  de Google Play Books para leer en cualquier pantalla y tamaño.
+facts:
+  - Licencia SIL Open Font License 1.1 (uso comercial y modificación libres);
+    fuente variable; latín, griego y cirílico.
+caveats:
+  - Es descripción del fabricante; no hay estudio de legibilidad propio; se
+    elige por diseño para pantalla y licencia, no por evidencia de aprendizaje.

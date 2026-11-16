@@ -1,0 +1,21 @@
+id: arditi-cho-2005
+title: Serifs and font legibility
+authors:
+  - Aries Arditi
+  - Jianna Cho
+year: 2005
+venue: Vision Research 45(23), 2926–2933
+url: https://pmc.ncbi.nlm.nih.gov/articles/PMC4612630
+kind: experiment
+verified: abstract
+retrieved: 2026-11-15
+summary: Con o sin serifas no cambia la legibilidad a tamaños normales; la
+  pequeña ventaja de las serifas venía del espaciado extra.
+facts:
+  - "Fuentes idénticas salvo serifas de 0 %, 5 % o 10 % de la altura de
+    mayúscula: las de serifa fueron algo más legibles en umbral, atribuible al
+    mayor espaciado entre letras; los autores concluyen que el efecto es
+    improbable que importe a tamaños de lectura normales."
+caveats:
+  - Muestra muy pequeña (4 participantes en umbral) y tareas con palabras
+    aisladas, no lectura normal.

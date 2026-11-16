@@ -2,11 +2,27 @@ questions:
   - q: ¿Por qué Global Accelerator mejora la latencia aunque no cachee nada?
     kind: por-que
     uses: []
+    a: "El tráfico del usuario entra a la red de AWS en la **edge location más cercana** (gracias a las IP anycast) y desde ahí viaja por la **red troncal privada de AWS** hasta la Región, en vez de cruzar Internet salto a salto. Hay menos saltos, menos pérdida y menos variación: mejora la latencia de cualquier tráfico TCP o UDP, cacheable o no."
   - q: Compara Global Accelerator y CloudFront para un juego por UDP.
     kind: comparar
     uses:
       - cloudfront
+    a: "**CloudFront** es una CDN para **HTTP(S)** que cachea contenido; no soporta UDP. **Global Accelerator** acelera **TCP y UDP** por la red de AWS, con IP fijas y failover rápido, sin cachear. Un juego por UDP → Global Accelerator."
   - q: ¿Qué ventaja dan dos IP anycast estáticas a un cliente con listas blancas de firewall?
     kind: aplicar
     uses: []
+    a: El cliente añade **dos IP una sola vez** a su firewall y **nunca cambian**, aunque tú cambies de Región, de balanceador o de instancias por detrás. Con un ALB (IP cambiantes) o con DNS tendría que actualizar sus reglas cada vez.
+  - q: ¿Qué pasa si el endpoint de una Región deja de estar sano detrás de Global Accelerator?
+    kind: que-pasa-si
+    a: Global Accelerator lo detecta con sus health checks y **redirige el tráfico a otro endpoint sano en otra Región en segundos**, sin cambiar las IP. No depende de que los clientes caduquen una caché DNS, que es lo que hace lento un failover por DNS.
+    uses: []
+  - q: ¿Cómo pasarías poco a poco el tráfico de una Región a otra con Global Accelerator?
+    kind: aplicar
+    a: "Con el **traffic dial** de cada endpoint group (porcentaje de tráfico que recibe esa Región) y los **pesos** de los endpoints dentro del grupo. Bajas el dial de la Región vieja por pasos (100 → 50 → 0) mientras observas la nueva: sirve para migraciones y blue/green."
+    uses: []
+  - q: Compara un failover con Route 53 y uno con Global Accelerator.
+    kind: comparar
+    a: "**Route 53** cambia la respuesta DNS, pero los clientes y resolvers siguen usando la respuesta cacheada hasta que caduca el **TTL**, y algunos clientes lo ignoran. **Global Accelerator** mantiene las **mismas IP** y cambia el destino dentro de la red de AWS, así que el failover es casi inmediato para todos."
+    uses:
+      - route53
 sims: []

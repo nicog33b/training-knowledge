@@ -75,3 +75,6 @@ Construye y securiza **data lakes** en S3 en días: ingesta, limpieza, catálogo
 - (por-que) ¿Por qué Athena cobra por datos escaneados y cómo reduces el coste con Parquet y particiones?
 - (comparar) Compara Athena y Redshift: ¿consultas puntuales o un almacén de datos constante?
 - (aplicar) ¿Qué hace Glue en un pipeline de datos de S3 a Athena?
+- (que-pasa-si) ¿Qué pasa si consultas en Athena una tabla particionada por fecha sin filtrar por la columna de partición?
+- (aplicar) Negocio quiere paneles interactivos sobre datos de Athena y Redshift sin montar servidores: ¿qué servicio usas?
+- (comparar) Compara EMR y Glue para transformar grandes volúmenes de datos.

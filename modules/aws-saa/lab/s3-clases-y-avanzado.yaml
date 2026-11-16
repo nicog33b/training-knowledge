@@ -2,11 +2,26 @@ questions:
   - q: ¿Por qué Intelligent-Tiering conviene cuando no conoces el patrón de acceso?
     kind: por-que
     uses: []
+    a: Intelligent-Tiering **mueve cada objeto solo** entre capas (acceso frecuente, infrecuente, archivo instantáneo y, si lo activas, archivo) según cuánto lleva sin leerse, y lo devuelve a frecuente si se lee. **No cobra recuperación**, solo una pequeña tarifa de monitorización por objeto. No tienes que adivinar el patrón ni escribir reglas de lifecycle.
   - q: ¿Qué pasa si mueves a Glacier Deep Archive datos que necesitas leer en minutos?
     kind: que-pasa-si
     uses: []
+    a: "No los podrás leer a tiempo: en Deep Archive primero hay que **restaurar** el objeto, y eso tarda **horas** (unas 12 h en estándar, hasta 48 h en bulk). Si necesitas lecturas inmediatas de datos raramente usados, **Glacier Instant Retrieval** (milisegundos) o Standard-IA."
   - q: "Diseña una lifecycle rule para logs: frecuentes 30 días, raros 1 año, borrar a los 7 años."
     kind: aplicar
+    uses: []
+    a: "Una regla para el prefijo `logs/`: los primeros 30 días en **Standard**. A los **30 días**, transición a **Standard-IA**. A los **365 días**, a **Glacier Flexible Retrieval** o **Deep Archive**, porque ya casi no se leen. **Expiración** a los **2.555 días** (7 años). Ojo: Standard-IA exige que el objeto tenga al menos 30 días, y las clases de archivo tienen duraciones mínimas que se cobran igual."
+  - q: ¿Cómo subes rápido archivos de varios GB a un bucket desde otro continente?
+    kind: aplicar
+    a: "**Multipart upload**: divide el archivo en partes que se suben en paralelo y se reintentan por separado (recomendado a partir de unos 100 MB, obligatorio por encima de 5 GB). Con **Transfer Acceleration**, las partes entran por la edge location más cercana y viajan por la red de AWS hasta la Región del bucket."
+    uses: []
+  - q: Compara los modos governance y compliance de S3 Object Lock.
+    kind: comparar
+    a: "Los dos impiden borrar o sobrescribir versiones durante el periodo de retención (modelo WORM). **Governance**: usuarios con un permiso especial (`s3:BypassGovernanceRetention`) pueden saltárselo. **Compliance**: **nadie**, ni el usuario root, puede borrar ni acortar la retención hasta que venza. Para normativa estricta → compliance."
+    uses: []
+  - q: "Quieres que un cliente descargue un objeto privado durante una hora sin darle credenciales: ¿cómo?"
+    kind: aplicar
+    a: "Genera una **presigned URL** con tu identidad y una caducidad de 1 hora: quien tenga la URL puede hacer ese `GET` concreto hasta que caduque, con tus permisos. El bucket sigue privado. (También existen presigned URL para subidas con `PUT`.)"
     uses: []
 sims:
   - id: clase-de-s3

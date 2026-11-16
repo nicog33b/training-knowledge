@@ -61,6 +61,8 @@ Puedes comprar el dominio en otro registrador y usar Route 53 como DNS cambiando
 - (que-pasa-si) ¿Qué pasa con la política Failover si el primario no tiene health check?
 - (comparar) Compara geolocation y latency: ¿cuál eliges para cumplir leyes de datos por país?
 - (error-comun) Error común: ¿por qué multi-value answer no sustituye a un balanceador?
+- (comparar) Compara un registro CNAME y un registro Alias.
+- (aplicar) Quieres mandar el 10 % del tráfico a la nueva versión de tu web: ¿qué política de Route 53 usas?
 
 ## Simulaciones del subtema
 - clasificar: Elige la política de enrutamiento

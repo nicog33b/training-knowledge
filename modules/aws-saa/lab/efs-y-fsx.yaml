@@ -3,11 +3,26 @@ questions:
     kind: por-que
     uses:
       - ebs
+    a: "**EFS** es un sistema de archivos de red (NFS) con mount targets en cada AZ: **muchas instancias de varias AZ** montan el mismo sistema a la vez, y crece solo. **EBS** es almacenamiento en bloque que se conecta a **una instancia**; la excepción es Multi-Attach de io1/io2, limitado a la misma AZ y que exige un sistema de archivos preparado para clúster."
   - q: ¿Qué servicio eliges para un sistema de archivos compartido de servidores Windows con Active Directory?
     kind: aplicar
     uses: []
+    a: "**FSx for Windows File Server**: recurso compartido **SMB** nativo con permisos NTFS, integración con **Active Directory**, DFS, shadow copies y despliegue Multi-AZ. EFS no sirve para Windows porque es NFS."
   - q: "Error común: ¿por qué elegir EFS para un cluster HPC que procesa datos de S3 suele ser peor que FSx for Lustre?"
     kind: error-comun
+    uses: []
+    a: "**FSx for Lustre** está hecho para HPC: rendimiento de cientos de GB/s, latencia de submilisegundos e **integración nativa con S3** (presenta los objetos como archivos, los carga al acceder y puede escribir resultados de vuelta). EFS es un sistema de archivos de uso general: no da ese rendimiento y no se conecta a S3, así que tendrías que copiar los datos."
+  - q: ¿Cómo abaratas un sistema EFS donde la mayoría de archivos casi no se leen?
+    kind: aplicar
+    a: "Con **lifecycle management**: los archivos que no se acceden en N días (p. ej. 30) pasan solos a la clase **Infrequent Access** (o a Archive), mucho más barata, y vuelven si se leen. Si no necesitas varias AZ, la variante **One Zone** cuesta aún menos."
+    uses: []
+  - q: "Migras un NAS de NetApp que sirve NFS y SMB con snapshots y deduplicación: ¿qué servicio usas?"
+    kind: aplicar
+    a: "**FSx for NetApp ONTAP**: el mismo sistema ONTAP gestionado, con NFS, SMB e iSCSI a la vez, snapshots, clones, deduplicación y compresión, y replicación con SnapMirror desde el NAS de origen. Para sistemas ZFS existe **FSx for OpenZFS**."
+    uses: []
+  - q: "Error común: ¿por qué no puedes montar EFS en un servidor Windows?"
+    kind: error-comun
+    a: EFS habla **NFS** y está pensado para Linux (POSIX); Windows no lo admite. Para compartir archivos entre servidores Windows, la respuesta es **FSx for Windows File Server** (SMB).
     uses: []
 sims:
   - id: almacenamiento-de-archivos

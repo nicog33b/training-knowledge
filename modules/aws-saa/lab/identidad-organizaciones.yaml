@@ -3,10 +3,25 @@ questions:
     kind: por-que
     uses:
       - iam
+    a: 'Una SCP es un **guardarraíl**: define el **máximo** de acciones posibles en las cuentas de una OU. El permiso efectivo es la **intersección** entre la SCP y las políticas IAM de la identidad. Un `Allow` en la SCP solo significa "esto no está bloqueado": alguien necesita además una política IAM que lo permita.'
   - q: ¿Qué pasa si una SCP deniega una acción que la política IAM de un usuario permite?
     kind: que-pasa-si
     uses: []
+    a: "**Queda denegada**: la SCP recorta lo que permite IAM. Afecta a todos los usuarios y roles de la cuenta miembro, **incluido su usuario root**. La única excepción es la cuenta de administración de la organización, a la que las SCP no se aplican."
   - q: ¿Cómo darías acceso con un solo login a 50 cuentas de AWS?
     kind: aplicar
+    uses: []
+    a: "Con **IAM Identity Center** (antes AWS SSO) sobre **Organizations**: los usuarios entran una vez (con su directorio, Active Directory o un IdP externo por SAML) y eligen cuenta y **permission set**. Identity Center crea los roles en cada cuenta; no hay usuarios IAM repartidos por 50 cuentas."
+  - q: ¿Por qué la facturación consolidada de Organizations puede salir más barata?
+    kind: por-que
+    a: Con una sola factura para todas las cuentas, el **uso se suma** para alcanzar antes los tramos de descuento por volumen (p. ej. en S3 o en transferencia), y los descuentos de **Reserved Instances y Savings Plans se comparten** entre cuentas que no los usan del todo.
+    uses: []
+  - q: ¿Cómo impides que cualquier cuenta de la organización use Regiones fuera de la UE?
+    kind: aplicar
+    a: Una **SCP** en la raíz o en la OU con `Deny` sobre todas las acciones cuando `aws:RequestedRegion` no está en tu lista de Regiones europeas, exceptuando los servicios globales (IAM, Organizations, Route 53, CloudFront…), que se llaman en `us-east-1`.
+    uses: []
+  - q: Compara AWS Control Tower con usar Organizations a mano.
+    kind: comparar
+    a: "**Organizations** es la base: cuentas, OU, SCP y facturación consolidada; lo demás lo montas tú. **Control Tower** monta encima una **landing zone** con buenas prácticas: cuentas de log y auditoría, guardrails preventivos (SCP) y detectivos (Config), una account factory para crear cuentas ya configuradas y un panel de cumplimiento."
     uses: []
 sims: []

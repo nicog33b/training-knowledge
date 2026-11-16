@@ -1,0 +1,26 @@
+id: wallace-2022-individuated
+title: "Towards Individuated Reading Experiences: Different Fonts Increase
+  Reading Speed for Different Individuals"
+authors:
+  - Shaun Wallace
+year: 2022
+venue: ACM Transactions on Computer-Human Interaction 29(4), art. 38 (doi
+  10.1145/3502222)
+url: https://jeffhuang.com/papers/Readability_TOCHI22.pdf
+kind: experiment
+verified: secondary
+retrieved: 2026-11-15
+summary: No hay una fuente mejor para todos; la más rápida varía por persona y
+  la preferencia no la predice.
+facts:
+  - "16 fuentes comunes, cientos de participantes, tamaño normalizado
+    perceptivamente: dentro de cada persona, la diferencia entre su fuente más
+    rápida y la más lenta fue ~35 % de velocidad sin perder comprensión."
+  - Ningún factor único predijo la velocidad, y la fuente preferida no predijo
+    la más rápida.
+caveats:
+  - El 35 % es mejor vs peor fuente de cada persona, no la ganancia media al
+    cambiar de fuente.
+  - El PDF no se pudo leer (binario); datos de resúmenes de Adobe y
+    readabilitymatters.org. Solo se confirmó el primer autor (Shaun Wallace y
+    colaboradores, Adobe/Brown).

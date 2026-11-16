@@ -73,3 +73,6 @@ SES, Pinpoint, Batch, AppFlow, Amplify, Elastic Transcoder, Cost Explorer y más
 - (aplicar) ¿Qué servicio usas para enviar emails transaccionales a gran escala?
 - (comparar) Compara AWS Batch y Lambda para trabajos de 2 horas.
 - (aplicar) ¿Cómo detectarías que el gasto del mes va a superar el presupuesto?
+- (aplicar) Necesitas una API GraphQL con actualizaciones en tiempo real para una app móvil: ¿qué servicio usas?
+- (aplicar) ¿Qué servicio te revisa la cuenta y sugiere mejoras de coste, seguridad y límites de servicio?
+- (aplicar) Una petición tarda 3 segundos y pasa por 5 microservicios: ¿cómo encuentras cuál es el lento?

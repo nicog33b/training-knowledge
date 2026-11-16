@@ -118,3 +118,21 @@ test('checkHistory: rechaza historiales manipulados o demasiado largos', () => {
   assert.match((checkHistory(long) as any).error, /empieza una nueva/);
   assert.ok(checkHistory(undefined).ok);
 });
+
+test('generar preguntas: JSON validado, sin repetidas, con respuesta', async () => {
+  const { generateQuestions, parseGenerated } = await import('../src/index.ts');
+  const reply = '```json\n{"preguntas":[' +
+    '{"q":"¿Qué pasa si el consumidor falla siempre?","kind":"que-pasa-si","a":"El mensaje vuelve una y otra vez hasta ir a la DLQ configurada."},' +
+    '{"q":"¿En qué se diferencia de SNS?","kind":"comparar","a":"Repetida: ya existe en el lab y debe descartarse aunque sea válida."},' +
+    '{"q":"Sin respuesta","kind":"aplicar","a":"corta"},' +
+    '{"q":"¿Tipo inventado?","kind":"inventado","a":"Una respuesta suficientemente larga para pasar."}]}\n```';
+  const calls: any[] = [];
+  const client = { messages: { async create(p: any) { calls.push(p); return { stop_reason: 'end_turn', content: [{ type: 'text', text: reply }], usage: { input_tokens: 50, output_tokens: 80 } }; } } };
+  const g = await generateQuestions(client as any, m, 'sqs', { count: 3 });
+  assert.deepEqual(g.questions.map((q) => q.q), ['¿Qué pasa si el consumidor falla siempre?']);
+  assert.equal(g.usage.output, 80);
+  assert.match(calls[0].system[0].text, /^Eres el GENERADOR/);
+  assert.match(calls[0].messages[0].content, /no las repitas[\s\S]*¿En qué se diferencia de SNS\?/);
+  assert.equal(calls[0].tools, undefined);
+  assert.deepEqual(parseGenerated('no hay json'), []);
+});

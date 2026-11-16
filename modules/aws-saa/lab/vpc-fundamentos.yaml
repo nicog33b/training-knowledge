@@ -2,11 +2,26 @@ questions:
   - q: ¿Por qué en una NACL hay que abrir los puertos efímeros y en un security group no?
     kind: por-que
     uses: []
+    a: "El **security group es stateful**: si entra una petición permitida, la respuesta sale automáticamente. La **NACL es stateless**: evalúa cada paquete por separado y no recuerda conexiones, así que la respuesta del servidor (que va a un **puerto efímero** del cliente, 1024-65535) necesita su propia regla de salida."
   - q: ¿Qué pasa si pones un NAT Gateway en una subred privada?
     kind: que-pasa-si
     uses: []
+    a: "**No funciona**: el NAT Gateway necesita salir a Internet, y una subred privada no tiene ruta al Internet Gateway. Va en una **subred pública**, con una Elastic IP, y las subredes privadas apuntan su ruta `0.0.0.0/0` a él."
   - q: "Quieres bloquear una IP concreta que ataca tu web: ¿SG o NACL, y por qué?"
     kind: aplicar
+    uses: []
+    a: "**NACL**: admite reglas **Deny** y se evalúan en orden por número, así que pones un Deny para esa IP con número más bajo que el Allow general. Los security groups **solo tienen Allow**: no se puede denegar una IP concreta con ellos. (Para tráfico web, WAF también puede bloquear IPs.)"
+  - q: ¿Qué hace que una subred sea pública o privada?
+    kind: comparar
+    a: "Solo su **tabla de rutas**: una subred es **pública** si su tabla tiene una ruta `0.0.0.0/0` hacia un **Internet Gateway** (y las instancias necesitan IP pública para usarla). Es **privada** si no la tiene; puede salir a Internet a través de un NAT Gateway, pero desde Internet no se puede iniciar una conexión hacia ella."
+    uses: []
+  - q: ¿Cómo haces altamente disponible la salida a Internet de subredes privadas en tres AZ?
+    kind: aplicar
+    a: "**Un NAT Gateway por AZ**, cada uno en la subred pública de su AZ, y la tabla de rutas de cada subred privada apuntando al NAT **de su misma AZ**. Si cae una AZ, las demás siguen saliendo, y además evitas cobros por tráfico entre AZ. Un solo NAT Gateway es un punto único de fallo."
+    uses: []
+  - q: "Una conexión a tu instancia falla y no sabes si la bloquea el SG o la NACL: ¿cómo lo diagnosticas?"
+    kind: aplicar
+    a: "Activa los **VPC Flow Logs** (de la VPC, la subred o la ENI) hacia CloudWatch Logs o S3: cada flujo aparece como **ACCEPT** o **REJECT**. Si la entrada se acepta pero la respuesta se rechaza, es la NACL (stateless) bloqueando los puertos efímeros de salida."
     uses: []
 sims:
   - id: sg-o-nacl

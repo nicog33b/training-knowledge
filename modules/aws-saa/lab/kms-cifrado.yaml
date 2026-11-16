@@ -2,14 +2,26 @@ questions:
   - q: ¿Por qué el cifrado de sobre (envelope) permite cifrar datos grandes con KMS?
     kind: por-que
     uses: []
+    a: "KMS solo cifra directamente hasta **4 KB**. Con envelope encryption pides a KMS una **data key** (`GenerateDataKey`): usas la versión en claro para cifrar tus datos **localmente** y guardas junto a ellos la versión **cifrada** de esa data key. Para descifrar, KMS descifra solo la data key. Tus datos nunca viajan a KMS."
   - q: "Compara Secrets Manager y Parameter Store: ¿cuál rota secretos de forma nativa?"
     kind: comparar
     uses: []
+    a: "**Secrets Manager** rota secretos de forma nativa (con integración directa para RDS, Aurora, Redshift o DocumentDB y una Lambda de rotación), y permite replicarlos entre Regiones; cuesta por secreto. **Parameter Store** guarda configuración y secretos (SecureString cifrado con KMS), es más barato (el nivel estándar es gratis), pero **no rota** por sí mismo."
   - q: ¿Qué pasa con un snapshot cifrado si quieres compartirlo con otra cuenta?
     kind: que-pasa-si
     uses:
       - ebs
+    a: "Si está cifrado con la clave gestionada por AWS (`aws/ebs`), **no se puede compartir**. Necesitas una **customer managed key**: das permiso a la otra cuenta en la **key policy** y compartes el snapshot. La otra cuenta suele hacer una copia cifrada con su propia clave."
   - q: ¿Cuándo exigirías CloudHSM en vez de KMS?
     kind: aplicar
+    uses: []
+    a: Cuando necesitas **control exclusivo de las claves en HSM dedicados a tu cuenta** (AWS no puede usarlas), por normativa o contrato. También para integraciones que necesitan interfaces de HSM estándar (PKCS#11, JCE, CNG), como descargar SSL/TLS en el HSM u Oracle TDE. Pagas más y gestionas tú usuarios, claves y alta disponibilidad del clúster.
+  - q: Compara una clave gestionada por AWS y una customer managed key en KMS.
+    kind: comparar
+    a: "**Gestionada por AWS** (`aws/s3`, `aws/ebs`…): la crea el servicio, la clave no tiene cuota mensual y rota sola, pero **no puedes editar su política** ni compartirla con otras cuentas. **Customer managed**: tú controlas la **key policy**, la rotación, desactivarla o programar su borrado y darle acceso a otras cuentas; tiene coste mensual por clave."
+    uses: []
+  - q: "Replicas datos cifrados entre dos Regiones y no quieres descifrar y volver a cifrar al moverlos: ¿qué usas?"
+    kind: aplicar
+    a: "**Claves multi-Región de KMS**: una clave principal y réplicas en otras Regiones con el **mismo material de clave y el mismo id**. Lo cifrado en una Región se descifra en la otra con la réplica local, sin llamadas entre Regiones. Sirve para DR o apps activas en varias Regiones."
     uses: []
 sims: []

@@ -2,10 +2,26 @@ questions:
   - q: ¿Por qué a veces es más rápido enviar un Snowball por camión que subir por la red?
     kind: por-que
     uses: []
+    a: "Con poco ancho de banda, la red es el cuello de botella: **100 Mbps a pleno uso son ~1 TB al día**, así que 80 TB tardarían más de dos meses y saturarían la línea. Un Snowball se llena en local a la velocidad de tu red interna y se envía en días. La regla del curso: si la transferencia tarda más de una semana, usa Snow."
   - q: "Compara DataSync y Storage Gateway: ¿migrar una vez o integrar de forma continua?"
     kind: comparar
     uses: []
+    a: "**DataSync** **mueve datos** (de NFS, SMB, HDFS u otros almacenamientos a S3, EFS o FSx) de forma rápida, programada y verificada: migraciones y sincronizaciones periódicas. **Storage Gateway** **integra** de forma continua: tus aplicaciones on-premises siguen usando NFS, SMB o iSCSI, pero los datos viven en AWS, con caché local."
   - q: "Tienes 80 TB y una línea de 100 Mbps: ¿qué servicio usas y por qué?"
     kind: aplicar
     uses: []
+    a: "**Snowball Edge Storage Optimized**: por red tardarías más de dos meses (~1 TB al día) ocupando toda la línea, y el dispositivo cubre los 80 TB con un envío de días. Snowmobile es para petabytes. (Esa es la respuesta del examen; en la práctica, consulta qué dispositivos Snow ofrece AWS hoy.)"
+  - q: "Socios externos te envían archivos por SFTP y quieres que acaben en S3 sin mantener servidores: ¿qué usas?"
+    kind: aplicar
+    a: "**AWS Transfer Family**: endpoint gestionado de **SFTP, FTPS, FTP o AS2** que guarda directamente en S3 o EFS. Los socios siguen usando su cliente SFTP y tú gestionas usuarios con claves SSH o un proveedor de identidad, sin servidor propio."
+    uses: []
+  - q: Compara File Gateway, Volume Gateway y Tape Gateway.
+    kind: comparar
+    a: "**File Gateway**: recursos compartidos **NFS/SMB** cuyos archivos se guardan como objetos en S3. **Volume Gateway**: volúmenes **iSCSI** respaldados en S3 con snapshots de EBS (modo cached: datos en AWS y caché local; modo stored: datos en local y copia en AWS). **Tape Gateway**: **cintas virtuales** para tu software de backup, archivadas en S3 Glacier."
+    uses: []
+  - q: "Tienes 50 TB y una conexión Direct Connect de 10 Gbps: ¿Snowball o red?"
+    kind: aplicar
+    a: "**Red** (p. ej. con DataSync): 10 Gbps a pleno uso son ~100 TB al día, así que 50 TB pasan en un día o dos. Un Snowball tardaría más solo en pedirlo, llenarlo y enviarlo. Snow compensa cuando la red tardaría semanas, no siempre que hay muchos datos."
+    uses:
+      - vpc-conectividad
 sims: []

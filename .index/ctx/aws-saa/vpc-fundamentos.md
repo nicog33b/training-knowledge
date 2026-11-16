@@ -66,6 +66,9 @@ Una **VPC (Virtual Private Cloud)** es tu red privada y aislada dentro de una Re
 - (por-que) ¿Por qué en una NACL hay que abrir los puertos efímeros y en un security group no?
 - (que-pasa-si) ¿Qué pasa si pones un NAT Gateway en una subred privada?
 - (aplicar) Quieres bloquear una IP concreta que ataca tu web: ¿SG o NACL, y por qué?
+- (comparar) ¿Qué hace que una subred sea pública o privada?
+- (aplicar) ¿Cómo haces altamente disponible la salida a Internet de subredes privadas en tres AZ?
+- (aplicar) Una conexión a tu instancia falla y no sabes si la bloquea el SG o la NACL: ¿cómo lo diagnosticas?
 
 ## Simulaciones del subtema
 - clasificar: ¿Security Group o NACL?

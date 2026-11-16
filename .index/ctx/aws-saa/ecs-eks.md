@@ -36,6 +36,8 @@ Despliegue completamente gestionado de aplicaciones web/APIs desde código o ima
 
 ## Subtemas relacionados (solo resumen; el cuerpo con leer_subtema)
 - iam: IAM: usuarios, grupos y políticas — Identidades, permisos, políticas JSON, MFA, roles y herramientas de auditoría de IAM. [secciones: IAM: Identity and Access Management · Entidades · Políticas · Política de contraseñas y MFA · Roles: casos típicos · Herramientas de seguridad de IAM]
+- elb: Elastic Load Balancing — ALB, NLB, GWLB, CLB, sticky sessions, cross-zone, SSL/SNI y connection draining. [secciones: Elastic Load Balancing · Tipos · Funciones clave · Elegir]
+- asg: Auto Scaling Groups — Grupos de escalado, launch templates, políticas de escalado y ciclo de vida de instancias. [secciones: Auto Scaling Groups · Launch Template · Parámetros · Políticas de escalado · Hooks y refresco]
 
 ## Glosario usado
 - API: Application Programming Interface. Contrato por el cual un programa expone funciones a otro.
@@ -70,3 +72,6 @@ Despliegue completamente gestionado de aplicaciones web/APIs desde código o ima
 - (por-que) ¿Por qué Fargate reduce el trabajo operativo frente a ECS sobre EC2?
 - (comparar) Compara el task role y el execution role de ECS: ¿qué permite cada uno?
 - (aplicar) Tu empresa ya usa Kubernetes on-premises: ¿ECS o EKS, y por qué?
+- (aplicar) ¿Dónde guardas las imágenes de contenedor para ECS o EKS y qué te aporta?
+- (comparar) Compara ECS sobre EC2 y ECS sobre Fargate en coste y control.
+- (aplicar) ¿Cómo escalas un servicio de ECS según las peticiones que recibe del ALB?

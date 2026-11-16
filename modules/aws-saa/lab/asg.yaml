@@ -3,11 +3,26 @@ questions:
     kind: por-que
     uses:
       - sqs
+    a: "La CPU no dice cuánto trabajo **queda**: un worker que espera I/O puede tener la CPU baja con miles de mensajes acumulados. El backlog por instancia (`ApproximateNumberOfMessagesVisible` ÷ instancias en servicio) mide lo pendiente. Con target tracking fijas el objetivo = latencia aceptable ÷ tiempo de proceso por mensaje, y el ASG añade o quita workers para cumplirlo."
   - q: ¿Qué pasa si el health check del ASG es solo de EC2 y la aplicación devuelve errores 500?
     kind: que-pasa-si
     uses:
       - elb
+    a: 'El ASG solo mira los status checks de EC2: la instancia "está viva", así que **no la reemplaza** aunque la app esté rota. Activa los **ELB health checks** en el ASG: si la instancia falla el health check del target group, el ASG la termina y lanza otra.'
   - q: Compara target tracking, step scaling y scheduled scaling.
     kind: comparar
+    uses: []
+    a: "**Target tracking**: mantiene una métrica en un valor (p. ej. CPU al 50 %) y crea las alarmas solo; la opción por defecto. **Step scaling**: añades o quitas distintas cantidades según cuánto se pasa la alarma; más control fino. **Scheduled**: cambia la capacidad a horas conocidas (campañas, horario laboral). **Predictive** aprende patrones cíclicos y escala antes."
+  - q: ¿Qué pasa si el ASG no tiene en cuenta cuánto tarda en arrancar cada instancia?
+    kind: que-pasa-si
+    a: Mientras las instancias nuevas arrancan, la métrica sigue alta, así que el ASG **sigue lanzando de más** y luego tiene que quitar (oscila). El **warm-up** de instancia (o el cooldown en políticas simples) hace que no cuenten en la métrica hasta estar listas y evita escalar dos veces por el mismo pico.
+    uses: []
+  - q: "Tu tráfico se dispara cada lunes a las 9:00: ¿cómo lo preparas con el ASG?"
+    kind: aplicar
+    a: Una **acción programada** que suba la capacidad mínima un rato antes de las 9:00 (o **predictive scaling**, que aprende el patrón semanal), combinada con **target tracking** para lo imprevisto. Así las instancias ya están calientes cuando llega el pico, en vez de arrancar cuando los usuarios ya esperan.
+    uses: []
+  - q: ¿Por qué un ASG con mínimo 1 y máximo 1 sigue siendo útil?
+    kind: por-que
+    a: "No escala, pero **se autorrepara**: si la instancia falla el health check, el ASG la reemplaza automáticamente, y si la configuras en varias AZ puede relanzarla en otra AZ. Es la forma barata de tener alta disponibilidad básica para algo que solo puede tener una instancia."
     uses: []
 sims: []

@@ -69,3 +69,6 @@ Lambda (la más común), HTTP (backend on-premises/ALB), servicios AWS (publicar
 - (por-que) ¿Por qué una API HTTP es más barata que una REST y qué pierdes?
 - (que-pasa-si) ¿Qué pasa si un cliente supera el throttling configurado en el stage?
 - (comparar) Compara autorizar con Cognito, con un Lambda authorizer y con IAM.
+- (aplicar) ¿Cómo reduces la carga del backend para respuestas que cambian poco?
+- (que-pasa-si) ¿Qué pasa si la Lambda integrada tarda más que el timeout de integración de API Gateway?
+- (comparar) Compara los endpoints edge-optimized, regional y private de una API REST.

@@ -1,0 +1,24 @@
+id: gnambs-2020-red
+title: Meta-análisis del efecto del color rojo sobre el rendimiento cognitivo
+  (Gnambs 2020)
+authors:
+  - Timo Gnambs
+year: 2020
+venue: Psychonomic Bulletin & Review (doi 10.3758/s13423-020-01772-1)
+url: https://pmc.ncbi.nlm.nih.gov/articles/PMC7704521/
+kind: meta-analysis
+verified: abstract
+retrieved: 2026-11-15
+summary: El supuesto efecto del rojo sobre el rendimiento intelectual desaparece
+  al corregir sesgo de publicación.
+facts:
+  - "67 tamaños de efecto de 38 muestras: puntuaciones algo más bajas con rojo,
+    pero los primeros estudios mostraban efectos mucho mayores que los
+    posteriores y, corrigiendo el sesgo de publicación, no queda evidencia del
+    efecto."
+  - Cuatro intentos de réplica (Gnambs, Kovacs y Stiglbauer 2020) no hallaron
+    efecto de la palabra 'rojo' sobre razonamiento verbal.
+caveats:
+  - Título exacto no confirmado (se registró descriptivo).
+  - No se encontró réplica directa de Mehta y Zhu 2009 (rojo = detalle, azul =
+    creatividad), que sigue citándose sin confirmar.

@@ -2,11 +2,28 @@ questions:
   - q: ¿Por qué Fargate reduce el trabajo operativo frente a ECS sobre EC2?
     kind: por-que
     uses: []
+    a: "Con **Fargate** no hay instancias: no eliges tipos, no parcheas el sistema operativo ni escalas un clúster de EC2. Defines CPU y memoria por tarea y pagas por eso mientras corre. Con ECS sobre EC2 tú gestionas las instancias del clúster y su capacidad."
   - q: "Compara el task role y el execution role de ECS: ¿qué permite cada uno?"
     kind: comparar
     uses:
       - iam
+    a: "**Task role**: los permisos que usa **el código de tu contenedor** (p. ej. leer de S3 o escribir en DynamoDB). **Execution role**: los permisos que usa **el agente de ECS para arrancar la tarea**: descargar la imagen de ECR, enviar logs a CloudWatch, leer secretos de Secrets Manager o Parameter Store."
   - q: "Tu empresa ya usa Kubernetes on-premises: ¿ECS o EKS, y por qué?"
     kind: aplicar
     uses: []
+    a: "**EKS**: es Kubernetes gestionado, así que reutilizas manifiestos, Helm, `kubectl` y el conocimiento del equipo, y mantienes portabilidad entre on-premises y nube. ECS es más simple, pero obligaría a rehacer despliegues y herramientas."
+  - q: ¿Dónde guardas las imágenes de contenedor para ECS o EKS y qué te aporta?
+    kind: aplicar
+    a: "En **Amazon ECR**: registro privado gestionado, con acceso controlado por IAM, imágenes cifradas, **escaneo de vulnerabilidades**, políticas de ciclo de vida para borrar imágenes viejas y replicación entre Regiones. ECS y EKS descargan de ECR sin credenciales extra (con el execution role)."
+    uses: []
+  - q: Compara ECS sobre EC2 y ECS sobre Fargate en coste y control.
+    kind: comparar
+    a: "**EC2**: más control (GPU, tipos concretos, acceso al host) y puede ser más barato con instancias reservadas o Spot y un clúster bien aprovechado, pero lo operas tú. **Fargate**: pagas por tarea sin gestionar nada; mejor para cargas variables o equipos pequeños. **Fargate Spot** abarata tareas que toleran interrupción."
+    uses: []
+  - q: ¿Cómo escalas un servicio de ECS según las peticiones que recibe del ALB?
+    kind: aplicar
+    a: "Con **Service Auto Scaling** y target tracking sobre `ALBRequestCountPerTarget` (o CPU/memoria): ECS añade o quita **tareas**. Si el clúster es de EC2, además necesitas **capacity providers** con un ASG para que haya instancias donde colocar las tareas nuevas; con Fargate no hace falta."
+    uses:
+      - elb
+      - asg
 sims: []

@@ -2,12 +2,27 @@ questions:
   - q: "Compara GuardDuty, Inspector y Macie: ¿qué detecta cada uno?"
     kind: comparar
     uses: []
+    a: "**GuardDuty**: **amenazas activas** analizando CloudTrail, VPC Flow Logs y DNS (instancias que minan criptomonedas, credenciales usadas desde IP sospechosas). **Inspector**: **vulnerabilidades** (CVE) y exposición de red en EC2, imágenes de ECR y Lambda. **Macie**: **datos sensibles** (datos personales, tarjetas) en buckets de S3."
   - q: "¿Dónde pones WAF para bloquear inyección SQL: en un NLB o en un ALB?"
     kind: aplicar
     uses:
       - elb
+    a: En el **ALB**. WAF inspecciona **HTTP en capa 7** (rutas, headers, cuerpo), y el NLB trabaja en capa 4 sin ver HTTP, así que **no admite WAF**. WAF también se asocia a CloudFront, API Gateway, AppSync y Cognito. Usa las reglas gestionadas de SQLi.
   - q: ¿Por qué Shield Advanced incluye protección de costes por DDoS?
     kind: por-que
+    uses: []
+    a: Un DDoS puede hacer que tu infraestructura **escale** para absorber el tráfico (más EC2, más ELB, más CloudFront o Route 53) y te llegue una factura enorme por un ataque. Shield Advanced te devuelve en **créditos** ese gasto extra, además de darte acceso al equipo de respuesta DDoS (SRT) y detección avanzada.
+  - q: Compara Shield Standard y Shield Advanced.
+    kind: comparar
+    a: "**Standard**: gratis y automático para todos; protege de los ataques DDoS más comunes de **capa 3 y 4**. **Advanced**: de pago (suscripción mensual), protección ampliada para EC2, ELB, CloudFront, Global Accelerator y Route 53, mitigación de **capa 7** con WAF, equipo de respuesta 24/7 y **protección de costes**."
+    uses: []
+  - q: "Quieres ver en un solo panel los hallazgos de GuardDuty, Inspector y Macie de todas las cuentas: ¿qué usas?"
+    kind: aplicar
+    a: "**AWS Security Hub**: agrega y normaliza hallazgos de esos servicios (y de Config y terceros) de todas las cuentas de la organización y comprueba estándares como CIS o AWS Foundational Best Practices. Para investigar un hallazgo a fondo, **Amazon Detective**."
+    uses: []
+  - q: "Una IP hace miles de peticiones por minuto a tu login: ¿cómo la frenas con WAF?"
+    kind: aplicar
+    a: "Con una **rate-based rule** de WAF: bloquea (o pide CAPTCHA a) cualquier IP que supere N peticiones en la ventana de tiempo, y opcionalmente solo para la ruta `/login`. Se aplica sola a las IP que se pasan y las libera cuando bajan."
     uses: []
 sims:
   - id: servicio-de-seguridad

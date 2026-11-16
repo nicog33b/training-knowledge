@@ -61,6 +61,9 @@ RPO/RTO, estrategias de DR, backups y AWS Backup, Elastic Disaster Recovery.
 - (por-que) ¿Por qué bajar el RTO casi siempre sube el coste?
 - (comparar) Compara pilot light y warm standby: ¿qué está encendido en cada uno?
 - (error-comun) Error común: ¿por qué tener backups no garantiza un RPO bajo?
+- (comparar) Compara backup and restore y multi-site active/active.
+- (aplicar) Quieres centralizar y automatizar los backups de EBS, RDS, DynamoDB y EFS con copias en otra Región: ¿qué usas?
+- (aplicar) Necesitas recuperar servidores on-premises en AWS en minutos si cae tu centro de datos: ¿qué servicio usas?
 
 ## Simulaciones del subtema
 - predecir-observar: Elige la estrategia de DR

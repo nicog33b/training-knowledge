@@ -66,3 +66,6 @@ Requiere versionado en origen y destino.
 - (por-que) ¿Por qué la replicación de S3 exige tener el versionado activado?
 - (que-pasa-si) ¿Qué pasa con un objeto si borras sin indicar versión en un bucket versionado?
 - (comparar) Compara SSE-S3, SSE-KMS y SSE-C: ¿quién controla la clave en cada uno?
+- (que-pasa-si) ¿Qué pasa si Block Public Access está activado y añades una bucket policy que hace público el bucket?
+- (comparar) Compara bucket policies y ACL para dar acceso a S3.
+- (por-que) ¿Por qué después de escribir un objeto en S3 puedes leerlo al instante con su contenido nuevo?

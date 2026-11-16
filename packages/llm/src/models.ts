@@ -10,6 +10,7 @@ export type Role = 'rapido' | 'equilibrado' | 'potente';
 /** Qué nivel usa cada funcionalidad (las marcadas "futuro" aún no existen: tasks.md T-061, T-064). */
 export const FUNCTIONS = {
   tutor: 'rapido',
+  'generar-preguntas': 'rapido', // botón "generar más preguntas" del lab (cada una con su respuesta)
   corregir: 'rapido', // futuro: corrección formativa de explicaciones
   'generar-receta': 'rapido', // futuro: receta nueva de una primitiva existente
   'sim-a-medida': 'potente', // futuro: simulación HTML excepcional, revisada

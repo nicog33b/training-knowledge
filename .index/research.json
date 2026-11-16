@@ -33,6 +33,22 @@
       "summary": "Precios por token de los modelos Claude; el caché de prompt cobra ~0.1x por leer un prefijo repetido."
     },
     {
+      "id": "arditi-cho-2005",
+      "title": "Serifs and font legibility",
+      "year": 2005,
+      "kind": "experiment",
+      "verified": "abstract",
+      "summary": "Con o sin serifas no cambia la legibilidad a tamaños normales; la pequeña ventaja de las serifas venía del espaciado extra."
+    },
+    {
+      "id": "atkinson-hyperlegible",
+      "title": "Atkinson Hyperlegible (Braille Institute)",
+      "year": 2020,
+      "kind": "docs",
+      "verified": "secondary",
+      "summary": "Sans gratuita diseñada para baja visión, con letras confundibles (I/l/1, O/0, b/d) muy diferenciadas."
+    },
+    {
       "id": "bastani-2025",
       "title": "Generative AI without guardrails can harm learning: Evidence from high school mathematics",
       "year": 2025,
@@ -47,6 +63,14 @@
       "kind": "meta-analysis",
       "verified": "secondary",
       "summary": "Pedir al alumno que se explique el material mejora el aprendizaje (g≈0.55) y más si el prompt es concreto."
+    },
+    {
+      "id": "brom-2018-emotional-design",
+      "title": "How effective is emotional design? A meta-analysis on facial anthropomorphisms and pleasant colors during multimedia learning",
+      "year": 2018,
+      "kind": "meta-analysis",
+      "verified": "secondary",
+      "summary": "Colores agradables y formas amables en materiales multimedia pueden ayudar algo; en el estudio primario el color cálido solo no cambió las emociones."
     },
     {
       "id": "brunmair-richter-2019",
@@ -105,6 +129,14 @@
       "summary": "Ranking de 10 técnicas de estudio por utilidad; base para priorizar práctica de recuperación y espaciada."
     },
     {
+      "id": "dyson-2004",
+      "title": "How physical text layout affects reading from screen",
+      "year": 2004,
+      "kind": "review",
+      "verified": "secondary",
+      "summary": "Los caracteres por línea son la variable clave; las líneas largas se leen algo más rápido, pero se prefieren y a veces se comprenden mejor las medias (~55 cpl)."
+    },
+    {
       "id": "expertise-reversal-wikipedia",
       "title": "Expertise reversal effect (Wikipedia)",
       "year": 2025,
@@ -153,12 +185,28 @@
       "summary": "Comparar dos casos juntos (en vez de estudiarlos por separado) mejora mucho la transferencia del principio común a casos nuevos."
     },
     {
+      "id": "gnambs-2020-red",
+      "title": "Meta-análisis del efecto del color rojo sobre el rendimiento cognitivo (Gnambs 2020)",
+      "year": 2020,
+      "kind": "meta-analysis",
+      "verified": "abstract",
+      "summary": "El supuesto efecto del rojo sobre el rendimiento intelectual desaparece al corregir sesgo de publicación."
+    },
+    {
       "id": "hardy-2026-autoscoring",
       "title": "Autoscoring Anticlimax: A Meta-analytic Understanding of AI's Short-answer Shortcomings and Wording Weaknesses",
       "year": 2026,
       "kind": "meta-analysis",
       "verified": "abstract",
       "summary": "Metaanálisis de 890 resultados: los LLM generativos corrigen respuestas cortas peor que los modelos encoder entrenados y fallan en tareas fáciles para humanos."
+    },
+    {
+      "id": "huff-2022-sans-forgetica-drm",
+      "title": "Distinctive Sans Forgetica font does not benefit memory accuracy in the DRM paradigm",
+      "year": 2022,
+      "kind": "experiment",
+      "verified": "abstract",
+      "summary": "Réplica independiente; Sans Forgetica no cambió el recuerdo correcto ni el falso."
     },
     {
       "id": "jade-yartsev-2025",
@@ -209,6 +257,22 @@
       "summary": "Predecir-observar-explicar tiene un efecto grande sobre el rendimiento en ciencias, con evidencia de calidad modesta."
     },
     {
+      "id": "legge-bigelow-2011",
+      "title": "Does print size matter for reading? A review of findings from vision science and typography",
+      "year": 2011,
+      "kind": "review",
+      "verified": "full-text",
+      "summary": "Por encima del tamaño crítico la velocidad de lectura es máxima en un rango amplio; la altura de x (no el cuerpo en puntos) es lo que cuenta."
+    },
+    {
+      "id": "literata-typetogether",
+      "title": "Literata — tipografía serif para lectura larga en pantalla (OFL)",
+      "year": 2019,
+      "kind": "docs",
+      "verified": "secondary",
+      "summary": "Serif gratuita (SIL OFL 1.1), variable, creada como fuente de lectura de Google Play Books para leer en cualquier pantalla y tamaño."
+    },
+    {
       "id": "mayer-multimedia-chartered",
       "title": "How multimedia can improve learning and instruction (Chartered College of Teaching)",
       "year": 2021,
@@ -231,6 +295,14 @@
       "kind": "experiment",
       "verified": "secondary",
       "summary": "Las preguntas que inventan los alumnos a menudo no apuntan a lo importante; en algunas condiciones rindieron peor que otras estrategias."
+    },
+    {
+      "id": "nngroup-dark-mode",
+      "title": "Dark Mode vs. Light Mode: Which Is Better?",
+      "year": 2020,
+      "kind": "review",
+      "verified": "full-text",
+      "summary": "Con visión normal el modo claro rinde mejor casi siempre; el oscuro conviene como opción (preferencia, visión con medios oculares turbios)."
     },
     {
       "id": "ollama-openai-compat",
@@ -297,6 +369,14 @@
       "summary": "Usar bancos de preguntas hechos por compañeros tiene un efecto pequeño-positivo o nulo en exámenes de medicina."
     },
     {
+      "id": "piepenbrock-2013-polarity",
+      "title": "Positive display polarity is advantageous for both younger and older adults",
+      "year": 2013,
+      "kind": "experiment",
+      "verified": "abstract",
+      "summary": "Texto oscuro sobre fondo claro da mejor agudeza y corrección de textos que el modo oscuro, en jóvenes y mayores."
+    },
+    {
       "id": "podolefsky-moore-perkins-2013",
       "title": "Implicit scaffolding in interactive simulations: Design strategies to support multiple educational goals",
       "year": 2013,
@@ -313,12 +393,28 @@
       "summary": "Practicar hasta acertar y volver a practicar en sesiones separadas protege contra el olvido."
     },
     {
+      "id": "rello-pielot-marcos-2016",
+      "title": "Make It Big! The Effect of Font Size and Line Spacing on Online Readability",
+      "year": 2016,
+      "kind": "experiment",
+      "verified": "secondary",
+      "summary": "En pantalla, letra más grande = lectura más fluida y mejor comprensión hasta ~18 pt; el interlineado importa poco salvo en los extremos."
+    },
+    {
       "id": "sailer-homner-2019",
       "title": "The Gamification of Learning: a Meta-analysis",
       "year": 2019,
       "kind": "meta-analysis",
       "verified": "abstract",
       "summary": "La gamificación tiene efectos pequeños en lo cognitivo y menos estables en motivación y conducta."
+    },
+    {
+      "id": "schneider-2018-signaling",
+      "title": "A meta-analysis of how signaling affects learning with media",
+      "year": 2018,
+      "kind": "meta-analysis",
+      "verified": "secondary",
+      "summary": "Señalar lo importante (color, negrita, flechas, etiquetas) mejora la retención y algo la transferencia."
     },
     {
       "id": "schroeder-2018",
@@ -345,6 +441,22 @@
       "summary": "Los detalles atractivos pero irrelevantes empeoran el aprendizaje, sobre todo en lecciones cortas y para novatos."
     },
     {
+      "id": "taylor-2020-sans-forgetica",
+      "title": "Disfluent difficulties are not desirable difficulties: the (lack of) effect of Sans Forgetica on memory",
+      "year": 2020,
+      "kind": "experiment",
+      "verified": "secondary",
+      "summary": "Sans Forgetica se siente más difícil de leer pero no mejora la memoria; a veces la empeora."
+    },
+    {
+      "id": "wallace-2022-individuated",
+      "title": "Towards Individuated Reading Experiences: Different Fonts Increase Reading Speed for Different Individuals",
+      "year": 2022,
+      "kind": "experiment",
+      "verified": "secondary",
+      "summary": "No hay una fuente mejor para todos; la más rápida varía por persona y la preferencia no la predice."
+    },
+    {
       "id": "wang-fan-2025",
       "title": "The effect of ChatGPT on students' learning performance, learning perception, and higher-order thinking: a meta-analysis",
       "year": 2025,
@@ -353,12 +465,44 @@
       "summary": "Meta-análisis de ChatGPT en educación; efectos grandes en rendimiento inmediato pero base pequeña para pensamiento de orden superior."
     },
     {
+      "id": "wcag-22-contrast-spacing",
+      "title": "WCAG 2.2 Understanding — 1.4.3 Contrast (Minimum) y 1.4.12 Text Spacing",
+      "year": 2023,
+      "kind": "docs",
+      "verified": "secondary",
+      "summary": "Contraste mínimo 4,5:1 (texto grande 3:1; nivel AAA 7:1) y el diseño no debe romperse si el usuario sube el espaciado."
+    },
+    {
+      "id": "weissgerber-brunmair-rummer-2021",
+      "title": "Null and Void? Errors in Meta-analysis on Perceptual Disfluency and Recommendations to Improve Meta-analytical Reproducibility",
+      "year": 2021,
+      "kind": "review",
+      "verified": "abstract",
+      "summary": "El meta-análisis de disfluencia tiene errores en recuerdo; en transferencia su resultado nulo es robusto."
+    },
+    {
+      "id": "wery-diliberto-2017",
+      "title": "The effect of a specialized dyslexia font, OpenDyslexic, on reading rate and accuracy",
+      "year": 2017,
+      "kind": "experiment",
+      "verified": "abstract",
+      "summary": "OpenDyslexic no mejora la velocidad ni la precisión lectora de alumnos con dislexia frente a Arial o Times."
+    },
+    {
       "id": "wisniewski-2020",
       "title": "The Power of Feedback Revisited: A Meta-Analysis of Educational Feedback Research",
       "year": 2020,
       "kind": "meta-analysis",
       "verified": "abstract",
       "summary": "El feedback tiene efecto medio (d≈0.48) y depende mucho de qué información contiene."
+    },
+    {
+      "id": "xie-zhou-liu-2018-disfluency",
+      "title": "The disfluency effect on learning: a meta-analysis",
+      "year": 2018,
+      "kind": "meta-analysis",
+      "verified": "secondary",
+      "summary": "Las fuentes difíciles de leer (disfluencia perceptiva) no mejoran el aprendizaje."
     },
     {
       "id": "yan-bjork-bjork-2016",
@@ -375,9 +519,37 @@
       "kind": "meta-analysis",
       "verified": "abstract",
       "summary": "Meta-análisis de práctica de recuperación en AULA REAL (no laboratorio); efecto medio."
+    },
+    {
+      "id": "zorzi-2012-letter-spacing",
+      "title": "Extra-large letter spacing improves reading in dyslexia",
+      "year": 2012,
+      "kind": "experiment",
+      "verified": "secondary",
+      "summary": "Más espacio entre letras ayuda a niños con dislexia (menos apiñamiento visual); no a lectores sin dificultades."
     }
   ],
   "decisions": [
+    {
+      "id": "color-con-funcion-y-contraste",
+      "title": "Color para señalar y contrastar, no por psicología del color",
+      "summary": "Modo claro por defecto con oscuro disponible, contraste ≥4,5:1 (objetivo 7:1 en texto), color con significado fijo para señalar lo importante; ignorar afirmaciones de que un color concreto mejora el rendimiento.",
+      "status": "proposed",
+      "confidence": "medium",
+      "date": "2026-11-16",
+      "sources": [
+        "piepenbrock-2013-polarity",
+        "nngroup-dark-mode",
+        "wcag-22-contrast-spacing",
+        "schneider-2018-signaling",
+        "gnambs-2020-red",
+        "brom-2018-emotional-design"
+      ],
+      "affects": [
+        "all",
+        "package:web"
+      ]
+    },
     {
       "id": "correccion-ia-solo-formativa-con-checklist",
       "title": "Corrección con IA solo formativa, contra rúbricas tipo checklist",
@@ -624,6 +796,48 @@
         "all",
         "package:sims",
         "app:web"
+      ]
+    },
+    {
+      "id": "sin-tipografias-milagro",
+      "title": "Nada de fuentes difíciles ni fuentes para dislexia como truco de aprendizaje",
+      "summary": "No usar fuentes disfluentes (Sans Forgetica) ni fuentes especiales para dislexia; para dislexia, ofrecer más tamaño y espaciado entre letras.",
+      "status": "proposed",
+      "confidence": "high",
+      "date": "2026-11-16",
+      "sources": [
+        "taylor-2020-sans-forgetica",
+        "huff-2022-sans-forgetica-drm",
+        "xie-zhou-liu-2018-disfluency",
+        "weissgerber-brunmair-rummer-2021",
+        "wery-diliberto-2017",
+        "zorzi-2012-letter-spacing"
+      ],
+      "affects": [
+        "all",
+        "package:web"
+      ]
+    },
+    {
+      "id": "tipografia-y-medidas-de-lectura",
+      "title": "Tipografía de lectura: tamaño generoso, línea de ~65 caracteres y ajustes por persona",
+      "summary": "Cuerpo de 18–20 px con altura de x grande, interlineado ~1,5, línea de 60–75 caracteres; serif o sans da igual; el alumno puede cambiar fuente, tamaño y espaciado.",
+      "status": "proposed",
+      "confidence": "medium",
+      "date": "2026-11-16",
+      "sources": [
+        "rello-pielot-marcos-2016",
+        "legge-bigelow-2011",
+        "dyson-2004",
+        "arditi-cho-2005",
+        "wallace-2022-individuated",
+        "wcag-22-contrast-spacing",
+        "literata-typetogether",
+        "atkinson-hyperlegible"
+      ],
+      "affects": [
+        "all",
+        "package:web"
       ]
     },
     {

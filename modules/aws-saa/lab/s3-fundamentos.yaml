@@ -2,11 +2,26 @@ questions:
   - q: ¿Por qué la replicación de S3 exige tener el versionado activado?
     kind: por-que
     uses: []
+    a: "La replicación funciona **sobre versiones de objetos**: rastrea cada nueva versión y la copia con su id. Sin versionado, una sobrescritura destruiría el objeto anterior y S3 no podría saber qué copiar ni en qué orden. Por eso hace falta versionado **en el bucket de origen y en el de destino**."
   - q: ¿Qué pasa con un objeto si borras sin indicar versión en un bucket versionado?
     kind: que-pasa-si
     uses: []
+    a: 'No se borra nada: S3 añade un **delete marker** como versión actual, así que el objeto "desaparece" de los listados y un `GET` da 404. Las versiones anteriores **siguen ahí (y se cobran)**. Borrar el delete marker restaura el objeto; para borrarlo de verdad hay que borrar cada versión por su id.'
   - q: "Compara SSE-S3, SSE-KMS y SSE-C: ¿quién controla la clave en cada uno?"
     kind: comparar
     uses:
       - kms-cifrado
+    a: "**SSE-S3**: S3 gestiona las claves por completo; no controlas nada, pero no cuesta nada (es el cifrado por defecto). **SSE-KMS**: la clave está en **KMS**; controlas quién puede usarla con la key policy y cada uso queda en **CloudTrail**. **SSE-C**: **tú** envías la clave en cada petición (por HTTPS) y AWS no la guarda; si la pierdes, pierdes los datos."
+  - q: ¿Qué pasa si Block Public Access está activado y añades una bucket policy que hace público el bucket?
+    kind: que-pasa-si
+    a: "**Block Public Access gana**: S3 rechaza guardar una política pública (o la ignora si ya existía), así que el bucket sigue privado. Es la red de seguridad contra exposiciones accidentales; para publicar algo de verdad lo correcto suele ser CloudFront con OAC, no desactivarlo."
+    uses: []
+  - q: Compara bucket policies y ACL para dar acceso a S3.
+    kind: comparar
+    a: "La **bucket policy** es JSON de IAM a nivel de bucket o prefijo: condiciones (IP, VPC endpoint, cifrado obligatorio), acceso de otras cuentas; es la forma recomendada. Las **ACL** son un mecanismo antiguo de permisos por objeto. Los buckets nuevos las tienen **desactivadas** por defecto (Object Ownership: bucket owner enforced)."
+    uses: []
+  - q: ¿Por qué después de escribir un objeto en S3 puedes leerlo al instante con su contenido nuevo?
+    kind: por-que
+    a: "S3 ofrece **consistencia fuerte de lectura tras escritura** para `PUT` y `DELETE` (también al listar): en cuanto la escritura responde, cualquier lectura ve la versión nueva. No hace falta esperar ni añadir lógica de reintento por datos desfasados."
+    uses: []
 sims: []

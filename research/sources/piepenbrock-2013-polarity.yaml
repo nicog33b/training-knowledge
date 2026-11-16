@@ -1,0 +1,24 @@
+id: piepenbrock-2013-polarity
+title: Positive display polarity is advantageous for both younger and older adults
+authors:
+  - Cosima Piepenbrock
+  - Susanne Mayr
+  - Axel Buchner
+year: 2013
+venue: Ergonomics (2013)
+url: https://doi.org/10.1080/00140139.2013.790485
+kind: experiment
+verified: abstract
+retrieved: 2026-11-15
+summary: Texto oscuro sobre fondo claro da mejor agudeza y corrección de textos
+  que el modo oscuro, en jóvenes y mayores.
+facts:
+  - "Jóvenes (18–33) y mayores (60–85) con visión normal: ventaja del texto
+    oscuro sobre claro en agudeza visual y en una tarea de corrección de textos;
+    sin efecto en fatiga."
+  - En un estudio hermano (Human Factors 2013) la ventaja del modo claro crece
+    cuanto más pequeña es la letra, aunque los participantes no notaron
+    diferencia.
+caveats:
+  - Puede haber más coautores; autores y segundo estudio tomados de la reseña de
+    Nielsen Norman Group; con cataratas la ventaja puede invertirse.

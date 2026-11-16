@@ -3,10 +3,25 @@ questions:
     kind: por-que
     uses:
       - s3-fundamentos
+    a: Con **Origin Access Control** el bucket queda privado y su bucket policy solo permite leer a la principal de servicio `cloudfront.amazonaws.com` con la condición `AWS:SourceArn` = **tu distribución**. CloudFront firma sus peticiones al origen; una petición directa a la URL de S3 no viene firmada así y S3 la deniega.
   - q: ¿Qué pasa con el contenido cacheado si actualizas un archivo en el origen y el TTL es de 24 h?
     kind: que-pasa-si
     uses: []
+    a: "Cada edge location sigue sirviendo **la versión vieja** hasta que le caduque el TTL, así que distintos usuarios pueden ver versiones distintas durante horas. Para forzarlo: una **invalidación** (`/app.js` o `/*`) o, mejor, **nombres versionados** (`app.v42.js`), que cambian la URL y no necesitan invalidar nada."
   - q: "Compara signed URLs y signed cookies: ¿cuál para un archivo y cuál para muchos?"
     kind: comparar
+    uses: []
+    a: "**Signed URL**: da acceso a **un archivo** concreto; útil para una descarga puntual o clientes que no admiten cookies. **Signed cookies**: dan acceso a **muchos archivos** sin cambiar sus URL, p. ej. toda el área de suscriptores o los segmentos de un vídeo en streaming. Las dos llevan caducidad y se firman con una clave de confianza de la distribución."
+  - q: ¿Qué pasa si el origen de CloudFront deja de responder?
+    kind: que-pasa-si
+    a: "Lo que está en caché y sin caducar se sigue sirviendo; lo que no, falla. Con un **origin group** (origen primario y secundario), CloudFront reintenta en el secundario cuando el primario devuelve los códigos de error que elijas (p. ej. 5xx) o no responde: **origin failover** sin tocar DNS."
+    uses: []
+  - q: "Por licencias, un vídeo no puede verse desde ciertos países: ¿cómo lo resuelves en CloudFront?"
+    kind: aplicar
+    a: "Con la **restricción geográfica** de la distribución: una lista de países permitidos o bloqueados. CloudFront deduce el país de la IP del usuario y responde 403 a los países bloqueados. Si necesitas lógica más fina (por usuario, no solo por país), se hace en la aplicación o con funciones en el edge."
+    uses: []
+  - q: Compara CloudFront Functions y Lambda@Edge.
+    kind: comparar
+    a: "**CloudFront Functions**: JavaScript ligero en cada edge location, latencia de submilisegundos y muy barato; para tareas simples sobre la petición o respuesta del visitante (reescribir URL, headers, redirecciones). **Lambda@Edge**: Node.js o Python, más tiempo y memoria, acceso a red y también en los eventos de origen; para lógica más pesada. Simple y masivo → Functions; complejo → Lambda@Edge."
     uses: []
 sims: []

@@ -55,3 +55,6 @@ Orquestador **serverless de flujos** de trabajo con máquinas de estado en JSON 
 - (por-que) ¿Por qué hay dos piezas en Cognito: user pools e identity pools?
 - (comparar) ¿Qué ventaja da Step Functions frente a encadenar Lambdas que se llaman entre sí?
 - (aplicar) Una app móvil necesita que cada usuario suba fotos a su carpeta de S3: ¿qué pieza de Cognito usas?
+- (comparar) Compara los workflows Standard y Express de Step Functions.
+- (aplicar) Un paso del flujo necesita que una persona apruebe antes de seguir: ¿cómo lo haces con Step Functions?
+- (que-pasa-si) ¿Qué pasa si un paso de Step Functions falla por un error temporal?

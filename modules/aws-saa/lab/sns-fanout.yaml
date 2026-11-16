@@ -3,14 +3,26 @@ questions:
     kind: por-que
     uses:
       - sqs
+    a: "SNS es **push y no guarda mensajes**: si un consumidor está caído o va lento, solo puede reintentar un tiempo. Con una **cola SQS por consumidor**, cada uno recibe su copia, la procesa **a su ritmo**, con reintentos y DLQ, y si cae, los mensajes lo esperan en la cola. Además los consumidores quedan desacoplados entre sí."
   - q: ¿Qué pasa si un consumidor HTTP suscrito a SNS está caído cuando se publica?
     kind: que-pasa-si
     uses: []
+    a: SNS **reintenta** la entrega según la política de reintentos del endpoint (con esperas crecientes durante un tiempo). Si se agotan los reintentos, el mensaje **se pierde**, salvo que la suscripción tenga una **DLQ** (cola SQS) donde guardar los mensajes no entregados para reprocesarlos después.
   - q: ¿Cómo harías que el servicio de facturación reciba solo pedidos de más de 100 €?
     kind: aplicar
     uses: []
+    a: 'Con una **filter policy** en la suscripción de facturación, sobre un atributo del mensaje (o sobre el cuerpo): `{"importe": [{"numeric": [">", 100]}]}`. SNS solo entrega a esa suscripción los mensajes que cumplen el filtro; los demás suscriptores siguen recibiendo todo.'
   - q: Compara SNS y EventBridge para enrutar eventos por contenido.
     kind: comparar
     uses:
       - eventbridge-cloudtrail-config
+    a: "**SNS**: filtros por suscripción, rendimiento muy alto y fan-out simple a SQS, Lambda, HTTP, email o SMS. **EventBridge**: **reglas con patrones** de contenido más ricos, recibe eventos de servicios AWS y de aplicaciones SaaS, transforma la entrada, admite muchos tipos de destino, y tiene **archivo y reproducción** de eventos y registro de esquemas."
+  - q: "Necesitas fan-out a varias colas manteniendo el orden de los mensajes: ¿cómo?"
+    kind: aplicar
+    a: "Un **topic SNS FIFO** con **colas SQS FIFO** suscritas: los mensajes del mismo `MessageGroupId` llegan en orden a cada cola y se deduplican. Un topic estándar no garantiza orden."
+    uses: []
+  - q: "Error común: ¿por qué un topic SNS no consigue entregar en una cola SQS recién suscrita?"
+    kind: error-comun
+    a: "Falta la **access policy de la cola**: SQS tiene que permitir `sqs:SendMessage` a la principal `sns.amazonaws.com` con la condición `aws:SourceArn` = el ARN del topic. Si la cola está cifrada con una clave KMS propia, la key policy también debe dejar usarla a SNS."
+    uses: []
 sims: []

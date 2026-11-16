@@ -200,6 +200,9 @@ export async function loadAll(source: ContentSource): Promise<Loaded> {
         bad(`${b.manifest.id}/topics/${t.id}`, `status=done pero el cuerpo tiene <60 palabras (¿es andamiaje?)`);
       if (t.status === 'done' && t.lab.questions.length < MIN_QUESTIONS)
         bad(`${b.manifest.id}/topics/${t.id}`, `status=done exige ≥${MIN_QUESTIONS} preguntas sugeridas en lab/${t.id}.yaml (tk lab import)`);
+      const sinRespuesta = t.lab.questions.filter((q) => !q.a).length;
+      if (t.status === 'done' && sinRespuesta)
+        bad(`${b.manifest.id}/lab/${t.id}`, `status=done exige respuesta escrita (a:) en cada pregunta; faltan ${sinRespuesta}`);
     }
     return { manifest: b.manifest, topics: b.topics, outline: b.outline, ownGlossary: b.own, glossary: [...merged.values()] };
   });
@@ -207,7 +210,7 @@ export async function loadAll(source: ContentSource): Promise<Loaded> {
   return { shared, modules, issues };
 }
 
-/** Decisión preguntas-sugeridas-y-contexto-minimo: todo subtema terminado trae preguntas. */
-export const MIN_QUESTIONS = 3;
+/** Decisión preguntas-sugeridas-y-contexto-minimo: todo subtema terminado trae preguntas con su respuesta. */
+export const MIN_QUESTIONS = 6;
 
 export const wordCount =(md: string) => (md.match(/[\p{L}\p{N}]+/gu) ?? []).length;

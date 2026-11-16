@@ -2,11 +2,26 @@ questions:
   - q: ¿Qué servicio usas para enviar emails transaccionales a gran escala?
     kind: aplicar
     uses: []
+    a: "**Amazon SES** (Simple Email Service): envío de emails transaccionales y de marketing por API o SMTP, con gestión de rebotes y quejas, dominios verificados (DKIM, SPF) y métricas de entrega. SNS también envía emails, pero solo como notificaciones simples a suscriptores."
   - q: Compara AWS Batch y Lambda para trabajos de 2 horas.
     kind: comparar
     uses:
       - lambda
+    a: "**Lambda** no sirve: su máximo son **15 minutos**. **AWS Batch** gestiona colas de trabajos y los ejecuta en contenedores sobre EC2, Spot o Fargate **sin límite de duración**, eligiendo y escalando la capacidad por ti. Para trabajos de horas, Batch."
   - q: ¿Cómo detectarías que el gasto del mes va a superar el presupuesto?
     kind: aplicar
+    uses: []
+    a: "Con **AWS Budgets**: un presupuesto mensual con alerta sobre el **gasto previsto** (forecasted), no solo el real, que avisa por email o SNS antes de llegar al límite. Puede incluso ejecutar acciones (aplicar una política restrictiva). **Cost Anomaly Detection** avisa de picos raros y **Cost Explorer** sirve para analizar en qué se va."
+  - q: "Necesitas una API GraphQL con actualizaciones en tiempo real para una app móvil: ¿qué servicio usas?"
+    kind: aplicar
+    a: "**AWS AppSync**: GraphQL gestionado que resuelve consultas contra DynamoDB, Lambda, RDS u OpenSearch, con **suscripciones en tiempo real** por WebSockets y caché. No mantienes servidor GraphQL propio."
+    uses: []
+  - q: ¿Qué servicio te revisa la cuenta y sugiere mejoras de coste, seguridad y límites de servicio?
+    kind: aplicar
+    a: "**AWS Trusted Advisor**: comprueba la cuenta contra buenas prácticas (instancias infrautilizadas, puertos abiertos, MFA en root, límites de servicio cerca del máximo). Con soporte Basic hay pocas comprobaciones; con **Business o Enterprise** están todas."
+    uses: []
+  - q: "Una petición tarda 3 segundos y pasa por 5 microservicios: ¿cómo encuentras cuál es el lento?"
+    kind: aplicar
+    a: "Con **AWS X-Ray**: instrumentas los servicios (SDK o agente/OpenTelemetry) y cada petición deja una **traza** con el tiempo de cada segmento y de cada llamada a otro servicio. El **service map** muestra latencias y errores por servicio, así que el cuello de botella se ve de un vistazo."
     uses: []
 sims: []

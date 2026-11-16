@@ -12,9 +12,9 @@ export async function getStaticPaths() {
 const { m, t } = Astro.props;
 const { html } = await renderMarkdown(t.body, m.glossary);
 ---
-<Base title={t.title} chat={{ module: m.manifest.id, course: m.manifest.title, topic: t.id, topicTitle: t.title }}>
+<Base title={t.title} chat={{ module: m.manifest.id, course: m.manifest.title, topic: t.id, topicTitle: t.title, questions: t.lab.questions }}>
   <p><a href={`/${m.manifest.id}/`}>← {m.manifest.title}</a></p>
   <h1>{t.title}</h1>
-  <article set:html={html} />
-  <Lab lab={t.lab} moduleId={m.manifest.id} topicId={t.id} />
+  <article class="prose" set:html={html} />
+  <Lab lab={t.lab} moduleId={m.manifest.id} topicId={t.id} glossary={m.glossary} />
 </Base>

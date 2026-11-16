@@ -2,16 +2,28 @@ questions:
   - q: ¿Por qué un TTL alto hace que un cambio de DNS tarde en verse?
     kind: por-que
     uses: []
+    a: "Los resolvers y clientes **guardan en caché** la respuesta DNS durante el **TTL** y no vuelven a preguntar hasta que caduca. Con un TTL de 24 h, quien preguntó hace poco seguirá yendo a la IP vieja hasta un día. Truco: **bajar el TTL** unos días antes de una migración y subirlo después."
   - q: ¿Qué pasa con la política Failover si el primario no tiene health check?
     kind: que-pasa-si
     uses: []
+    a: "Route 53 considera el primario **siempre sano**, así que **nunca responde con el secundario** aunque el primario esté caído: el failover no funciona. El registro primario necesita un **health check** asociado (o ser un alias con evaluación de salud del destino)."
   - q: "Compara geolocation y latency: ¿cuál eliges para cumplir leyes de datos por país?"
     kind: comparar
     uses: []
+    a: "**Geolocation** responde según **dónde está el usuario** (país o continente): garantiza que los usuarios de un país van a los recursos de ese país, que es lo que pide una ley de datos. **Latency** elige la Región con **menor latencia medida**, que puede cambiar y no respeta fronteras. Para cumplimiento → geolocation."
   - q: "Error común: ¿por qué multi-value answer no sustituye a un balanceador?"
     kind: error-comun
     uses:
       - elb
+    a: "Multi-value devuelve hasta 8 IP sanas y **el cliente elige**: no reparte la carga de verdad, depende de la caché DNS (un cliente puede seguir con una IP caída hasta el TTL), no termina TLS ni enruta por ruta o host. Un **ELB** reparte petición a petición, detecta fallos al momento y escala."
+  - q: Compara un registro CNAME y un registro Alias.
+    kind: comparar
+    a: "**CNAME** apunta un nombre a otro nombre, pero **no se puede usar en el apex** de la zona (`ejemplo.com`) y las consultas se cobran. **Alias** es propio de Route 53: apunta a recursos de AWS (ELB, CloudFront, bucket de S3 con sitio web, API Gateway), **funciona en el apex**, sigue los cambios de IP del recurso y las consultas a recursos de AWS son **gratis**."
+    uses: []
+  - q: "Quieres mandar el 10 % del tráfico a la nueva versión de tu web: ¿qué política de Route 53 usas?"
+    kind: aplicar
+    a: "**Weighted routing**: dos registros con el mismo nombre y pesos 90 y 10. Route 53 responde en esa proporción. Subes el peso de la nueva poco a poco (canary). Recuerda que el TTL hace que el reparto no sea exacto al instante."
+    uses: []
 sims:
   - id: politica-de-enrutamiento
     title: Elige la política de enrutamiento

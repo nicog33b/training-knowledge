@@ -29,7 +29,7 @@ const api = import.meta.env.PUBLIC_TUTOR_URL ?? 'http://127.0.0.1:4322';
       <textarea rows="2" maxlength="2000" placeholder={topicTitle ? `Tu duda sobre ${topicTitle}…` : 'Tu duda sobre el curso…'}></textarea>
       <button type="submit">Enviar</button>
     </form>
-    <p class="tk-hint">Selecciona texto de la página para preguntar sobre ese fragmento. Enter envía · Shift+Enter salto de línea.</p>
+    <p class="tk-hint">Selecciona texto de la página y elige una acción para preguntar sobre ese fragmento. Enter envía · Shift+Enter salto de línea.</p>
   </section>
 </div>
 
@@ -208,18 +208,15 @@ const api = import.meta.env.PUBLIC_TUTOR_URL ?? 'http://127.0.0.1:4322';
   input.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(input.value); } });
 
   // Fragmento seleccionado en el contenido (no dentro del propio chat).
-  document.addEventListener('mouseup', () => {
-    const s = window.getSelection();
-    const text = s?.toString() ?? '';
-    if (!text.trim() || !s?.anchorNode || root.contains(s.anchorNode)) return;
-    setSelection(text);
-  });
-
-  // Las preguntas sugeridas del laboratorio se mandan aquí (evento de Lab.astro).
+  // Entrada única al chat desde la página (Lab.astro y SelectionMenu.astro):
+  //   detail: "pregunta"  |  { q?, selection?, send? }  (send=false: adjunta y deja escribir)
   document.addEventListener('tk-ask', (e) => {
-    const q = (e as CustomEvent<string>).detail;
+    const d = (e as CustomEvent<string | { q?: string; selection?: string; send?: boolean }>).detail;
+    const { q = '', selection: frag, send: doSend = true } = typeof d === 'string' ? { q: d } : d ?? {};
     setOpen(true);
-    send(q);
+    if (frag) setSelection(frag);
+    if (doSend && q) send(q);
+    else input.focus();
   });
 
   if (store.get('tk-chat-open', false)) setOpen(true);

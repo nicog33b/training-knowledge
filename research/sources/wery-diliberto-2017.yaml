@@ -1,0 +1,21 @@
+id: wery-diliberto-2017
+title: The effect of a specialized dyslexia font, OpenDyslexic, on reading rate
+  and accuracy
+authors:
+  - Jessica J. Wery
+  - Jennifer A. Diliberto
+year: 2017
+venue: Annals of Dyslexia 67 (en línea 2016)
+url: https://pmc.ncbi.nlm.nih.gov/articles/PMC5629233
+kind: experiment
+verified: abstract
+retrieved: 2026-11-15
+summary: OpenDyslexic no mejora la velocidad ni la precisión lectora de alumnos
+  con dislexia frente a Arial o Times.
+facts:
+  - "12 alumnos con dislexia, diseño de tratamientos alternos (nombrar letras,
+    leer palabras y pseudopalabras): sin mejora de velocidad ni precisión con
+    OpenDyslexic, individual ni grupal; ninguno la prefirió."
+caveats:
+  - Muestra pequeña. Un estudio de 2018 con la fuente Dyslexie tampoco halló
+    beneficio (citado por Edutopia; autores no confirmados).

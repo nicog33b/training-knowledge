@@ -32,6 +32,7 @@ Registra la **configuración de recursos** a lo largo del tiempo y evalúa su **
 
 ## Subtemas relacionados (solo resumen; el cuerpo con leer_subtema)
 - lambda: AWS Lambda — Funciones sin servidor: límites, concurrencia, triggers, VPC, SnapStart y Lambda@Edge. [secciones: AWS Lambda · Límites clave (por Región / ejecución) · Invocación · Concurrencia · Rendimiento, red y seguridad · Patrones · Lambda vs contenedores]
+- iam: IAM: usuarios, grupos y políticas — Identidades, permisos, políticas JSON, MFA, roles y herramientas de auditoría de IAM. [secciones: IAM: Identity and Access Management · Entidades · Políticas · Política de contraseñas y MFA · Roles: casos típicos · Herramientas de seguridad de IAM]
 
 ## Glosario usado
 - API: Application Programming Interface. Contrato por el cual un programa expone funciones a otro.
@@ -66,3 +67,6 @@ Registra la **configuración de recursos** a lo largo del tiempo y evalúa su **
 - (comparar) ¿Por qué CloudTrail responde 'quién hizo qué' y Config 'cómo estaba configurado'?
 - (que-pasa-si) ¿Qué pasa si alguien abre un security group al 0.0.0.0/0 y tienes una regla de Config?
 - (aplicar) ¿Cómo ejecutarías una Lambda cada noche a las 2:00?
+- (que-pasa-si) ¿Qué pasa con el historial de CloudTrail si no creas ningún trail?
+- (aplicar) Quieres un aviso inmediato cada vez que alguien inicia sesión con el usuario root: ¿cómo?
+- (aplicar) ¿Cómo demuestras que nadie alteró los logs de CloudTrail?

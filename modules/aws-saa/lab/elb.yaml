@@ -2,11 +2,26 @@ questions:
   - q: ¿Por qué un NLB puede darte una IP estática por AZ y un ALB no?
     kind: por-que
     uses: []
+    a: "El **NLB** trabaja en capa 4 y expone **una IP fija por AZ** (puedes asignarle tus Elastic IP). El **ALB** escala cambiando sus nodos por detrás, así que sus IP cambian y siempre se accede por nombre DNS. Si necesitas IP fija con un ALB: un NLB delante o **Global Accelerator**."
   - q: ¿Qué pasa con la IP del cliente cuando pasa por un ALB, y cómo la recupera la aplicación?
     kind: que-pasa-si
     uses: []
+    a: El ALB **termina la conexión** y abre otra hacia el backend, así que la aplicación ve la **IP privada del ALB**. La IP original llega en el header **`X-Forwarded-For`** (con `X-Forwarded-Proto` y `X-Forwarded-Port`). El NLB, en cambio, puede preservar la IP del cliente.
   - q: "Error común: ¿por qué activar sticky sessions puede desequilibrar la carga?"
     kind: error-comun
+    uses: []
+    a: Con sticky sessions una cookie ata a cada cliente **al mismo target**. Si unos clientes generan mucho más tráfico, sus instancias se saturan mientras otras están ociosas, y las instancias nuevas del ASG apenas reciben usuarios. Mejor guardar la sesión fuera (ElastiCache o DynamoDB) y no necesitar stickiness.
+  - q: Compara ALB, NLB y Gateway Load Balancer.
+    kind: comparar
+    a: "**ALB** (capa 7): HTTP/HTTPS, reglas por ruta, host o header, targets Lambda, WebSockets. **NLB** (capa 4): TCP/UDP/TLS, millones de peticiones por segundo, latencia ultrabaja, IP estática. **GWLB** (capa 3): reparte tráfico hacia **appliances de seguridad de terceros** (firewalls, IDS) de forma transparente, con GENEVE."
+    uses: []
+  - q: ¿Qué pasa si desactivas el cross-zone load balancing y una AZ tiene 2 instancias y otra 8?
+    kind: que-pasa-si
+    a: "Cada nodo del balanceador reparte **solo entre los targets de su AZ**: el tráfico se divide a medias entre AZ, así que las 2 instancias reciben tanto como las 8 juntas y se saturan. Con cross-zone activado se reparte igual entre las 10. En el ALB viene activado; en el NLB no (y el tráfico entre AZ se cobra)."
+    uses: []
+  - q: "Quieres servir tres dominios HTTPS distintos desde un solo ALB: ¿cómo?"
+    kind: aplicar
+    a: "Pon **varios certificados de ACM** en el listener 443: el ALB usa **SNI** para elegir el certificado según el dominio que pide el cliente. Después, **reglas por host** (`host-header`) envían cada dominio a su target group."
     uses: []
 sims:
   - id: tipo-de-balanceador

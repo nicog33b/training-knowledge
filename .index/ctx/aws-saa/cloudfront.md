@@ -66,3 +66,6 @@ CloudFront: contenido global estático **cacheado** (TTL), ideal para archivos e
 - (por-que) ¿Por qué OAC impide que alguien salte CloudFront y lea directo del bucket?
 - (que-pasa-si) ¿Qué pasa con el contenido cacheado si actualizas un archivo en el origen y el TTL es de 24 h?
 - (comparar) Compara signed URLs y signed cookies: ¿cuál para un archivo y cuál para muchos?
+- (que-pasa-si) ¿Qué pasa si el origen de CloudFront deja de responder?
+- (aplicar) Por licencias, un vídeo no puede verse desde ciertos países: ¿cómo lo resuelves en CloudFront?
+- (comparar) Compara CloudFront Functions y Lambda@Edge.

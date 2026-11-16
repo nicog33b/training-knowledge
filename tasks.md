@@ -48,6 +48,12 @@ _(nada)_
 - [ ] T-074 Probar el chat con ChatGPT real (gpt-6-luna) y comparar calidad de respuestas con Haiku 5.5 en 10 preguntas sugeridas · decisión: proveedores-llm-y-contador-de-gasto · deps: T-069
 - [ ] T-075 Contrastar el contador de gasto con el gasto que factura el proveedor (Admin API: Anthropic `/v1/organizations/analytics/cost`, OpenAI `/v1/organization/costs`) para detectar desvíos de la tabla de precios — opcional y con clave Admin aparte, nunca la del tutor
 - [ ] T-076 Fijar equivalencias verificadas para Gemini (modelo y precio) si se va a usar · decisión: proveedores-llm-y-contador-de-gasto
+- [ ] T-080 Probar el menú de selección en móvil real (iOS/Android: convivencia con el menú nativo de copiar) y en Firefox/Safari
+- [ ] T-082 Revisar preguntas generadas con IA (`.data/preguntas/`) y pasar las buenas al curso con `tk lab import`; quizá un comando `tk lab promote` · deps: T-081
+- [ ] T-083 Usar las marcas Sí / Más o menos / No de la práctica (hoy en localStorage) como entrada del planificador FSRS · deps: T-015, T-081
+- [ ] T-086 Leer el texto completo de rello-pielot-marcos-2016, wallace-2022-individuated (el PDF no se pudo leer), schneider-2018-signaling y brom-2018-emotional-design (falta URL verificada del original) y subir `verified` · decisión: tipografia-y-medidas-de-lectura, color-con-funcion-y-contraste
+- [ ] T-087 Prueba corta de velocidad de lectura (≈1 min, 3 fuentes) para recomendar fuente a cada alumno en vez de dejarlo a la preferencia, que no predice la velocidad · decisión: tipografia-y-medidas-de-lectura · deps: T-085
+- [ ] T-088 Revisar contraste de `term.css` (subrayado de glosario) y del chat con los tokens nuevos; comprobar 1.4.12 (espaciado amplio) en móvil · deps: T-085
 - [ ] T-077 Menú del header: añadir entradas (búsqueda, curso actual) cuando haga falta, sin pasar de una línea fina
 - [ ] T-067 Registrar qué preguntas sugeridas se usan y si cambian los aciertos, para validar la decisión · decisión: preguntas-sugeridas-y-contexto-minimo
 
@@ -56,6 +62,11 @@ _(nada)_
 
 ## Hecho
 
+- [x] T-084 2026-11-16 Investigación de tipografía, tamaño, medida, color, contraste y polaridad: 19 fuentes y 3 decisiones `proposed` (tipografia-y-medidas-de-lectura, sin-tipografias-milagro, color-con-funcion-y-contraste)
+- [x] T-085 2026-11-16 Aplicado a la web: texto de estudio a 19 px, medida 68ch, interlineado 1,65; tokens de color con contraste ≥4,5:1 en claro y oscuro (antes el ámbar/verde/cian claros daban 3,2–3,7); botón "Aa" en el header (fuente Sistema/Literata/Atkinson Hyperlegible servidas desde el sitio, tamaño 15–26 px, espaciado amplio de WCAG 1.4.12, tema Auto/Claro/Oscuro) guardado por navegador y aplicado antes de pintar · decisión: tipografia-y-medidas-de-lectura, color-con-funcion-y-contraste, sin-tipografias-milagro
+
+- [x] T-081 2026-11-15 Práctica con respuestas escritas: campo `a` en `LabQuestion`; `validate` exige ≥6 preguntas con respuesta en subtemas `done`; 259 preguntas con respuesta en `aws-saa` (6–7 por subtema) y 3 en `next-cache`; tarjetas en `Lab.astro` (intentar → ver respuesta → Sí/Más o menos/No, progreso, filtros "Sin responder"/"A repasar"/por tipo, "Profundizar con el tutor"); botón "Generar 3 preguntas" (`generateQuestions` en `@tk/tutor`, `GET/POST /preguntas` en tutor-api, guardadas y reutilizadas gratis); el menú de selección lleva a la tarjeta en vez de gastar IA; rediseño visual del lab · decisión: practica-de-recuperacion, preguntas-sugeridas-y-contexto-minimo
+
 - [x] T-050 2026-11-15 Simulaciones por primitivas + recetas: contratos `LabFile`/`SimSpec`, paquete `packages/sims` (reglas seguras, validación de cobertura, corrección determinista) y componente `Lab.astro` (predecir→observar→explicar con checklist; clasificar) · decisión: simulaciones-por-primitivas-y-recetas
 - [x] T-051 2026-11-15 Preguntas sugeridas por subtema y `tk lab import`; `validate` exige ≥3 en subtemas `done` · decisión: preguntas-sugeridas-y-contexto-minimo
 - [x] T-052 2026-11-15 Contexto mínimo para IA en el índice: `.index/ctx/<módulo>/_catalogo.md` + `<subtema>.md` (cuerpo + resumen de requires/uses + glosario usado), regenerado con cada cambio de contenido
@@ -63,6 +74,7 @@ _(nada)_
 - [x] T-054 2026-11-15 Lab de `aws-saa`: 140 preguntas en 42 subtemas y 14 simulaciones (SQS, Kinesis, Lambda, DR, ELB, Route 53, S3, RDS, VPC, EC2, almacenamiento, bases de datos, seguridad); `next-cache`: 3 preguntas
 - [x] T-072 2026-11-15 Paquete `packages/llm`: proveedores Claude, ChatGPT, Gemini, Ollama y compatibles; modelo por función y nivel (Haiku 5.5 ↔ gpt-6-luna, Sonnet 5.5 ↔ gpt-6.1-sol, Opus 5.5 ↔ gpt-6-astra); adaptador Chat Completions; precios; `tk ask --provider`; selector de modelo en el chat; conversación portable entre proveedores · decisión: proveedores-llm-intercambiables-y-saldo-estimado
 - [x] T-073 2026-11-15 Header discreto (34 px, se esconde al bajar) con saldo estimado por proveedor · decisión: proveedores-llm-intercambiables-y-saldo-estimado (reemplazada)
+- [x] T-079 2026-11-15 Menú propio al seleccionar texto (`SelectionMenu.astro`): "¿Qué es «X»?" (selección corta), Explícame esto, Dame un ejemplo, ¿Por qué?, Pregúntame, Preguntar… (adjunta y deja escribir) + hasta 3 preguntas del laboratorio relacionadas (palabras de la selección y del título de su sección, ponderadas por rareza en la página); todo va al chat con el fragmento citado · decisión: preguntas-sugeridas-y-contexto-minimo
 - [x] T-078 2026-11-15 Contador de gasto en lugar de saldo: cada respuesta suma tokens × precio del modelo que respondió, por modelo y por día; header "hoy · mes" + panel con hoy/mes/total y fila por modelo con su precio; `tk gasto [--reset]`, `GET /gasto`, `POST /gasto/reset` · decisión: proveedores-llm-y-contador-de-gasto
 - [x] T-068 2026-11-15 Chat flotante contextual: `chat()` de varios turnos en `@tk/tutor` (historial append-only validado, fragmento seleccionado, portada sin subtema), servidor `apps/tutor-api` (CORS, límites, modo `--fake`), `Chat.astro` en todas las páginas de curso, preguntas sugeridas → chat; tests de tutor y handler · decisión: preguntas-sugeridas-y-contexto-minimo
 - [x] T-055 2026-11-15 Investigación: 11 fuentes (descubrimiento guiado, PhET, POE, comparación de casos, corrección con LLM, preguntas generadas por alumnos, precios) y 3 decisiones `proposed`

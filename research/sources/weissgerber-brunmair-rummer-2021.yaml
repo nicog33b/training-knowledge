@@ -1,0 +1,23 @@
+id: weissgerber-brunmair-rummer-2021
+title: Null and Void? Errors in Meta-analysis on Perceptual Disfluency and
+  Recommendations to Improve Meta-analytical Reproducibility
+authors:
+  - Sophia C. Weissgerber
+  - Matthias Brunmair
+  - Ralf Rummer
+year: 2021
+venue: Educational Psychology Review (2021)
+url: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7854329/
+kind: review
+verified: abstract
+retrieved: 2026-11-15
+summary: El meta-análisis de disfluencia tiene errores en recuerdo; en
+  transferencia su resultado nulo es robusto.
+facts:
+  - Al aplicar comprobaciones de reproducibilidad, el efecto nulo de la
+    disfluencia sobre la transferencia se mantiene (robusto); el de recuerdo
+    queda en duda por errores de codificación.
+caveats:
+  - "Otros trabajos del mismo grupo (Weissgerber y Reinhard 2017) vieron una
+    ventaja diferida a 2 semanas en un estudio: la evidencia no es totalmente
+    uniforme."

@@ -66,3 +66,6 @@ Define AMI, tipo de instancia, user data, EBS, security groups, rol IAM, red y c
 - (por-que) ¿Por qué escalar por backlog por instancia de SQS es mejor que por CPU para un worker?
 - (que-pasa-si) ¿Qué pasa si el health check del ASG es solo de EC2 y la aplicación devuelve errores 500?
 - (comparar) Compara target tracking, step scaling y scheduled scaling.
+- (que-pasa-si) ¿Qué pasa si el ASG no tiene en cuenta cuánto tarda en arrancar cada instancia?
+- (aplicar) Tu tráfico se dispara cada lunes a las 9:00: ¿cómo lo preparas con el ASG?
+- (por-que) ¿Por qué un ASG con mínimo 1 y máximo 1 sigue siendo útil?

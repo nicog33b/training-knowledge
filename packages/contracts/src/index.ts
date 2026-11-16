@@ -79,6 +79,8 @@ export const LabQuestion = z
   .object({
     q: z.string().min(8),
     kind: QuestionKind,
+    /** respuesta escrita del curso (markdown corto): el alumno la ve tras intentar responder, sin gastar IA. */
+    a: z.string().min(20).optional(),
     /** otros subtemas que la respuesta necesita (el tutor los recibe en contexto). */
     uses: z.array(Slug).default([]),
   })

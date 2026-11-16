@@ -73,6 +73,9 @@ AWS ofrece bases de datos especializadas ("la herramienta correcta para cada tra
 - (por-que) ¿Por qué DynamoDB escala mejor que RDS para millones de lecturas por clave?
 - (aplicar) ¿Qué base eliges para un grafo de relaciones de una red social?
 - (error-comun) Error común: ¿por qué Redshift no sirve como base transaccional de una tienda?
+- (aplicar) ¿Qué base eliges para guardar lecturas de miles de sensores IoT por tiempo?
+- (aplicar) Migras una aplicación que usa MongoDB y no quieres reescribirla: ¿qué servicio usas?
+- (aplicar) Tienes Apache Cassandra on-premises y quieres dejar de gestionar servidores: ¿qué servicio usas?
 
 ## Simulaciones del subtema
 - clasificar: Elige la base de datos

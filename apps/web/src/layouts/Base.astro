@@ -1,8 +1,17 @@
 ---
 import '@tk/render/term.css';
+// Fuentes gratuitas (SIL OFL) servidas desde el propio sitio: solo se descargan si el alumno las elige.
+// Decisión: research/decisions/tipografia-y-medidas-de-lectura.md
+import '@fontsource-variable/literata/index.css';
+import '@fontsource-variable/literata/wght-italic.css';
+import '@fontsource/atkinson-hyperlegible/400.css';
+import '@fontsource/atkinson-hyperlegible/700.css';
+import '@fontsource/atkinson-hyperlegible/400-italic.css';
 import Chat from '../components/Chat.astro';
 import Header from '../components/Header.astro';
-interface Props { title: string; chat?: { module: string; course: string; topic?: string; topicTitle?: string } }
+import SelectionMenu from '../components/SelectionMenu.astro';
+import type { LabQuestion } from '@tk/contracts';
+interface Props { title: string; chat?: { module: string; course: string; topic?: string; topicTitle?: string; questions?: LabQuestion[] } }
 const { title, chat } = Astro.props;
 ---
 <html lang="es">
@@ -10,14 +19,61 @@ const { title, chat } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
+    <!-- Preferencias de lectura (Header "Aa") antes de pintar, para que no parpadee. -->
+    <script is:inline>
+      try {
+        const p = JSON.parse(localStorage.getItem('tk-read') || '{}');
+        const r = document.documentElement;
+        if (p.theme === 'light' || p.theme === 'dark') r.dataset.theme = p.theme;
+        if (p.font) r.dataset.font = p.font;
+        if (p.spacing) r.dataset.spacing = p.spacing;
+        if (p.size) r.style.setProperty('--read-size', p.size + 'px');
+      } catch {}
+    </script>
     <style is:global>
-      :root { --bg:#fff; --fg:#1b1f2a; --muted:#667085; --card:#f6f7fb; --line:#e4e7ee; --accent:#4f46e5; --ok:#16a34a; --warn:#d97706; --todo:#98a2b3; }
-      @media (prefers-color-scheme: dark) {
-        :root { --bg:#0f1219; --fg:#e6e9f2; --muted:#98a2b3; --card:#171b26; --line:#272d3c; --accent:#8b8bff; --ok:#4ade80; --warn:#fbbf24; --todo:#667085; }
+      /* Tokens. Contraste verificado: texto ≥ 4,5:1 sobre --bg y --card en ambos temas
+         (research/decisions/color-con-funcion-y-contraste.md). --k-* = color fijo por tipo de pregunta. */
+      :root {
+        color-scheme: light;
+        --bg:#fff; --fg:#1b1f2a; --muted:#5d6678; --card:#f6f7fb; --line:#e4e7ee; --accent:#4f46e5; --on-accent:#fff;
+        --ok:#15803d; --warn:#b45309; --bad:#b91c1c; --todo:#98a2b3;
+        --k-por-que:#4338ca; --k-que-pasa-si:#b45309; --k-comparar:#0e7490; --k-aplicar:#15803d; --k-error-comun:#b91c1c;
+        /* Lectura: 18–20 px, línea ≤ ~68 caracteres, interlineado ~1,6 */
+        --read-size: 19px; --read-lh: 1.65; --read-ls: normal; --read-ws: normal; --measure: 68ch;
+        --read-font: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        --ui-font: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
       }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          color-scheme: dark;
+          --bg:#0f1219; --fg:#e6e9f2; --muted:#a3acbd; --card:#171b26; --line:#272d3c; --accent:#8b8bff; --on-accent:#0f1219;
+          --ok:#4ade80; --warn:#fbbf24; --bad:#fca5a5; --todo:#667085;
+          --k-por-que:#a5b4fc; --k-que-pasa-si:#fbbf24; --k-comparar:#67e8f9; --k-aplicar:#86efac; --k-error-comun:#fca5a5;
+        }
+      }
+      :root[data-theme="dark"] {
+        color-scheme: dark;
+        --bg:#0f1219; --fg:#e6e9f2; --muted:#a3acbd; --card:#171b26; --line:#272d3c; --accent:#8b8bff; --on-accent:#0f1219;
+        --ok:#4ade80; --warn:#fbbf24; --bad:#fca5a5; --todo:#667085;
+        --k-por-que:#a5b4fc; --k-que-pasa-si:#fbbf24; --k-comparar:#67e8f9; --k-aplicar:#86efac; --k-error-comun:#fca5a5;
+      }
+      :root[data-font="literata"] { --read-font: 'Literata Variable', Georgia, serif; --read-lh: 1.7; }
+      :root[data-font="atkinson"] { --read-font: 'Atkinson Hyperlegible', system-ui, sans-serif; }
+      /* Espaciado amplio: valores de WCAG 1.4.12 (ayuda sobre todo con dislexia; decisión sin-tipografias-milagro). */
+      :root[data-spacing="amplio"] { --read-lh: 1.9; --read-ls: .08em; --read-ws: .16em; }
       * { box-sizing: border-box; }
-      body { background:var(--bg); color:var(--fg); font-family: system-ui, sans-serif; margin:0; line-height:1.65; }
-      main { max-width: 860px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+      body { background:var(--bg); color:var(--fg); font-family: var(--ui-font); margin:0; line-height:1.6; -webkit-font-smoothing: antialiased; }
+      main { max-width: 860px; margin: 0 auto; padding: 1.5rem 16px 4rem; }
+      /* Texto de estudio: tamaño, fuente y medida de lectura. */
+      .prose { font-family: var(--read-font); font-size: var(--read-size); line-height: var(--read-lh); letter-spacing: var(--read-ls); word-spacing: var(--read-ws); max-width: var(--measure); }
+      .prose h2 { font-size: 1.4em; line-height: 1.3; margin: 2em 0 .6em; letter-spacing: -.01em; }
+      .prose h3 { font-size: 1.15em; line-height: 1.35; margin: 1.6em 0 .5em; }
+      .prose p, .prose ul, .prose ol { margin: 0 0 1em; }
+      .prose li { margin: .3em 0; }
+      .prose strong { font-weight: 700; }
+      .prose code { font-size: .85em; }
+      .prose table { font-size: .9em; }
+      h1 { font-size: clamp(1.7rem, 4vw, 2.3rem); line-height: 1.2; letter-spacing: -.02em; margin: .4rem 0 1.2rem; }
       a { color: var(--accent); }
       code { background: var(--card); padding: 0.1em 0.3em; border-radius: 4px; }
       pre { background: var(--card); padding: 1rem; border-radius: 8px; overflow-x: auto; }
@@ -30,11 +86,13 @@ const { title, chat } = Astro.props;
       .badge.done { color:var(--ok); } .badge.draft { color:var(--warn); } .badge.todo { color:var(--todo); }
       .muted { color:var(--muted); font-size:.9rem; }
       ul.clean { list-style:none; padding:0; } ul.clean li { padding:.35rem 0; border-bottom:1px solid var(--line); }
+      @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
     </style>
   </head>
   <body>
     <Header />
     <main><slot /></main>
-    {chat && <Chat {...chat} />}
+    {chat && <Chat module={chat.module} course={chat.course} topic={chat.topic} topicTitle={chat.topicTitle} />}
+    {chat && <SelectionMenu questions={chat.questions} />}
   </body>
 </html>

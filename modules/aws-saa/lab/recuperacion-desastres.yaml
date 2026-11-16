@@ -2,11 +2,26 @@ questions:
   - q: ¿Por qué bajar el RTO casi siempre sube el coste?
     kind: por-que
     uses: []
+    a: El **RTO** es cuánto tardas en volver a funcionar. Para volver rápido necesitas tener **más infraestructura ya creada, replicada y encendida** en el sitio de recuperación. Restaurar desde backups es barato pero lento (horas); tenerlo todo corriendo en paralelo (multi-site) recupera en segundos pero pagas dos entornos.
   - q: "Compara pilot light y warm standby: ¿qué está encendido en cada uno?"
     kind: comparar
     uses: []
+    a: "**Pilot light**: solo **lo crítico encendido**, normalmente la base de datos replicando; los servidores de aplicación están definidos (AMI, plantillas) pero apagados y se lanzan durante el desastre. **Warm standby**: una **copia completa pero reducida** de todo el entorno corriendo, lista para escalar y recibir tráfico. Más caro, menor RTO."
   - q: "Error común: ¿por qué tener backups no garantiza un RPO bajo?"
     kind: error-comun
+    uses: []
+    a: "El **RPO** es cuántos datos puedes perder: el tiempo desde la última copia válida. Con un backup diario puedes perder **hasta 24 horas** de datos. Un RPO de segundos o minutos exige **replicación continua** (réplicas, Aurora Global Database, recuperación a un momento dado), no backups periódicos."
+  - q: Compara backup and restore y multi-site active/active.
+    kind: comparar
+    a: "Son los extremos. **Backup and restore**: solo copias en otra Región; el más barato y el más lento (RTO y RPO de horas). **Multi-site active/active**: el entorno completo funcionando en varias Regiones a la vez y recibiendo tráfico; RTO y RPO casi cero, coste máximo. Pilot light y warm standby están en medio."
+    uses: []
+  - q: "Quieres centralizar y automatizar los backups de EBS, RDS, DynamoDB y EFS con copias en otra Región: ¿qué usas?"
+    kind: aplicar
+    a: "**AWS Backup**: **planes de backup** con frecuencia y retención, aplicados a recursos por etiquetas, copias automáticas **entre Regiones y entre cuentas**, y **Vault Lock** para que nadie pueda borrar las copias antes de tiempo."
+    uses: []
+  - q: "Necesitas recuperar servidores on-premises en AWS en minutos si cae tu centro de datos: ¿qué servicio usas?"
+    kind: aplicar
+    a: "**AWS Elastic Disaster Recovery (DRS)**: replica de forma continua los discos de tus servidores a un área de staging barata en AWS. En un desastre lanza las instancias recuperadas en minutos (RTO de minutos, RPO de segundos), y luego permite volver al origen."
     uses: []
 sims:
   - id: estrategia-dr

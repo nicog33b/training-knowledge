@@ -2,10 +2,25 @@ questions:
   - q: ¿Por qué Athena cobra por datos escaneados y cómo reduces el coste con Parquet y particiones?
     kind: por-que
     uses: []
+    a: "Athena es serverless: no hay clúster que pagar, así que cobra por los **bytes que lee de S3** en cada consulta. Parquet es **columnar y comprimido**: la consulta lee solo las columnas que usa y menos bytes por columna. Las **particiones** (p. ej. `s3://logs/year=2026/month=11/`) dejan saltar carpetas enteras si filtras por esa columna en el `WHERE`. Menos bytes escaneados = consulta más barata y más rápida."
   - q: "Compara Athena y Redshift: ¿consultas puntuales o un almacén de datos constante?"
     kind: comparar
     uses: []
+    a: "**Athena** consulta con SQL directamente los archivos de S3, sin infraestructura y pagando por consulta: ideal para consultas puntuales sobre logs o data lakes. **Redshift** es un data warehouse columnar (clúster o Serverless) donde cargas los datos: rinde de forma constante con consultas complejas y frecuentes de BI. Si el uso es esporádico, Athena; si hay paneles y analistas consultando todo el día, Redshift (que además puede leer S3 con Spectrum)."
   - q: ¿Qué hace Glue en un pipeline de datos de S3 a Athena?
     kind: aplicar
+    uses: []
+    a: Dos cosas. Los **crawlers** recorren S3, deducen el esquema y registran tablas en el **Glue Data Catalog**, que Athena usa como catálogo para saber qué columnas y particiones hay. Los **jobs ETL** (Spark serverless) transforman los datos, por ejemplo de CSV a Parquet particionado por fecha, para que Athena escanee menos.
+  - q: ¿Qué pasa si consultas en Athena una tabla particionada por fecha sin filtrar por la columna de partición?
+    kind: que-pasa-si
+    a: "Athena tiene que leer **todas las particiones**: escanea la tabla entera y pagas como si no estuviera particionada. Las particiones solo ahorran cuando el `WHERE` filtra por la columna de partición (p. ej. `WHERE year = '2026' AND month = '11'`). Por eso conviene particionar por la columna con la que realmente filtras."
+    uses: []
+  - q: "Negocio quiere paneles interactivos sobre datos de Athena y Redshift sin montar servidores: ¿qué servicio usas?"
+    kind: aplicar
+    a: "**Amazon QuickSight**: BI serverless que se conecta a Athena, Redshift, RDS o S3 y crea paneles compartibles. Su motor en memoria **SPICE** acelera los paneles sin consultar la fuente en cada clic. No gestionas servidores y pagas por usuario o por sesión."
+    uses: []
+  - q: Compara EMR y Glue para transformar grandes volúmenes de datos.
+    kind: comparar
+    a: "**Glue** es ETL serverless: escribes el job y AWS pone la capacidad; poca operación, ideal para transformaciones típicas del data lake. **EMR** es un clúster gestionado de Hadoop/Spark/Hive/Presto donde eliges instancias y frameworks: más control y mejor para big data muy grande, persistente o con herramientas específicas, a cambio de gestionar el clúster. Mínimo esfuerzo operativo → Glue; control y ecosistema Hadoop → EMR."
     uses: []
 sims: []

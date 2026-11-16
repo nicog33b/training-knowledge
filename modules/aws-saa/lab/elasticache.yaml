@@ -2,10 +2,25 @@ questions:
   - q: ¿Por qué lazy loading puede devolver datos viejos y cómo lo mitiga un TTL?
     kind: por-que
     uses: []
+    a: "Con lazy loading solo se escribe en caché cuando hay un **miss**. Si el dato cambia en la base, la caché sigue devolviendo **el valor viejo** porque nadie lo actualiza. Un **TTL** pone un límite: pasado ese tiempo la clave expira y la siguiente lectura va a la base y trae el valor nuevo. Cuanto más corto el TTL, menos desfase y más misses."
   - q: ¿Qué pasa con la caché si el nodo de Memcached se reinicia?
     kind: que-pasa-si
     uses: []
+    a: '**Se pierde todo**: Memcached guarda solo en memoria, sin persistencia ni réplicas. La aplicación sigue funcionando porque va a la base, pero con la caché vacía ("fría") hay un **pico de carga** en la base hasta que se vuelve a llenar.'
   - q: "Compara Redis y Memcached: ¿cuál eliges para sesiones que no pueden perderse?"
     kind: comparar
+    uses: []
+    a: "**Redis**: réplicas con **failover automático Multi-AZ**, persistencia y backups, y estructuras de datos ricas → sesiones que no pueden perderse. **Memcached**: caché simple y multihilo, sin réplicas ni persistencia; si el nodo cae, los datos se van."
+  - q: Compara write-through y lazy loading.
+    kind: comparar
+    a: "**Lazy loading**: carga en caché al leer y fallar; solo cachea lo que se lee, pero puede tener datos viejos y el primer acceso es lento. **Write-through**: actualiza la caché **en cada escritura** a la base; datos siempre frescos, pero cada escritura cuesta más y la caché se llena de datos que quizá nadie lea. Lo habitual es combinarlos con un TTL."
+    uses: []
+  - q: "Necesitas un ranking en tiempo real de puntuaciones de un juego: ¿qué usas?"
+    kind: aplicar
+    a: "**ElastiCache for Redis** con **sorted sets**: `ZADD` actualiza la puntuación y `ZREVRANGE` devuelve el top N ya ordenado en memoria, en milisegundos y para millones de jugadores. Hacerlo con `ORDER BY` en la base en cada consulta sería mucho más caro."
+    uses: []
+  - q: "Error común: ¿por qué poner ElastiCache no ayuda si tus lecturas casi nunca se repiten?"
+    kind: error-comun
+    a: "Una caché solo ahorra cuando hay **cache hits**: la misma clave leída muchas veces. Si cada lectura pide algo distinto o el dato cambia constantemente, casi todo son **misses**: pagas el clúster, añades un salto de red y la base recibe la misma carga. Mide el hit ratio antes de añadirla."
     uses: []
 sims: []

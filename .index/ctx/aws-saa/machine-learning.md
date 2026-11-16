@@ -56,3 +56,7 @@ Incluye Studio, Ground Truth (etiquetado), Feature Store, entrenamiento distribu
 - (aplicar) ¿Qué servicio usas para extraer texto y tablas de facturas escaneadas?
 - (comparar) Compara Comprehend y Kendra: ¿analizar sentimiento o buscar en documentos?
 - (por-que) ¿Por qué elegir SageMaker en vez de un servicio de IA ya entrenado?
+- (aplicar) Quieres transcribir las llamadas de soporte y medir el enfado de los clientes: ¿qué servicios encadenas?
+- (aplicar) ¿Qué servicio usas para detectar contenido inapropiado o caras en las fotos que suben los usuarios?
+- (comparar) Compara Lex y Polly en un asistente de voz.
+- (aplicar) Una tienda quiere recomendaciones de productos personalizadas sin un equipo de ML: ¿qué servicio usa?

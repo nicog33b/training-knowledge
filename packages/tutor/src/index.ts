@@ -206,3 +206,80 @@ export function ask(client: TutorClient, m: LoadedModule, topicId: string, quest
   return chat(client, m, topicId, [], question, opts);
 }
 
+
+// ───────── Generar preguntas nuevas (botón del lab; cuesta tokens) ─────────
+// Mismo contexto mínimo que el chat (catálogo + subtema), salida JSON validada con el contrato
+// LabQuestion y respuesta obligatoria: el alumno practica igual que con las preguntas escritas.
+
+export const MAX_GENERATE = 5;
+const KINDS = ['por-que', 'que-pasa-si', 'comparar', 'aplicar', 'error-comun'] as const;
+
+export const GENERATOR_RULES = `Eres el GENERADOR DE PREGUNTAS de práctica de un curso. Con el contenido del subtema que se te da:
+1. Escribe preguntas NUEVAS que obliguen a recuperar, razonar o aplicar (no definiciones de memoria). Varía el tipo: por-que, que-pasa-si, comparar, aplicar, error-comun.
+2. Cada pregunta trae su respuesta modelo en español: 40–90 palabras, concreta, con la razón de fondo; puedes usar \`código\` y **negrita**. Sin listas largas ni títulos.
+3. Básate en el subtema y en el catálogo del curso. No inventes cifras, límites ni nombres de servicios que no estén en el contexto; si dudas, no hagas esa pregunta.
+4. No repitas ni parafrasees las preguntas que ya existen.
+5. Responde SOLO con JSON válido, sin texto alrededor: {"preguntas":[{"q":"…","kind":"por-que","a":"…"}]}`;
+
+export interface GeneratedQuestion { q: string; kind: (typeof KINDS)[number]; a: string }
+
+const norm = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+
+/** Extrae y valida las preguntas del texto del modelo (tolera ```json y texto alrededor). Descarta repetidas. */
+export function parseGenerated(text: string, existing: string[] = []): GeneratedQuestion[] {
+  const start = text.indexOf('{');
+  const end = text.lastIndexOf('}');
+  if (start < 0 || end <= start) return [];
+  let raw: any;
+  try {
+    raw = JSON.parse(text.slice(start, end + 1));
+  } catch {
+    return [];
+  }
+  const seen = new Set(existing.map(norm));
+  const out: GeneratedQuestion[] = [];
+  for (const x of Array.isArray(raw?.preguntas) ? raw.preguntas : []) {
+    const q = typeof x?.q === 'string' ? x.q.trim() : '';
+    const a = typeof x?.a === 'string' ? x.a.trim() : '';
+    if (q.length < 8 || q.length > 400 || a.length < 20 || a.length > 2000 || !KINDS.includes(x?.kind) || seen.has(norm(q))) continue;
+    seen.add(norm(q));
+    out.push({ q, kind: x.kind, a });
+  }
+  return out;
+}
+
+export function buildGenerateRequest(m: LoadedModule, topicId: string, count: number, existing: string[], model = DEFAULT_MODEL) {
+  return {
+    model,
+    max_tokens: 400 + count * 260,
+    system: [
+      { type: 'text' as const, text: `${GENERATOR_RULES}\n\n${buildCourseCatalog(m)}`, cache_control: { type: 'ephemeral' as const } },
+      { type: 'text' as const, text: buildTopicContext(m, topicId), cache_control: { type: 'ephemeral' as const } },
+    ],
+    messages: [{
+      role: 'user' as const,
+      content: `Genera ${count} preguntas nuevas con su respuesta.${existing.length ? `\nYa existen (no las repitas):\n${existing.map((q) => `- ${q}`).join('\n')}` : ''}`,
+    }],
+  };
+}
+
+/** Genera `count` preguntas nuevas del subtema con su respuesta. `existing`: todas las que el alumno ya tiene. */
+export async function generateQuestions(
+  client: TutorClient,
+  m: LoadedModule,
+  topicId: string,
+  opts: { model?: string; count?: number; existing?: string[] } = {},
+): Promise<{ questions: GeneratedQuestion[]; usage: TutorAnswer['usage'] }> {
+  if (!m.topics.some((t) => t.id === topicId)) throw new Error(`subtema inexistente: ${m.manifest.id}/${topicId}`);
+  const count = Math.max(1, Math.min(MAX_GENERATE, opts.count ?? 3));
+  const existing = opts.existing ?? m.topics.find((t) => t.id === topicId)!.lab.questions.map((q) => q.q);
+  const res = await client.messages.create(buildGenerateRequest(m, topicId, count, existing, opts.model));
+  const text = res.content.filter((b) => b.type === 'text').map((b) => b.text).join('\n');
+  const usage = {
+    input: res.usage?.input_tokens ?? 0,
+    output: res.usage?.output_tokens ?? 0,
+    cacheRead: res.usage?.cache_read_input_tokens ?? 0,
+    cacheWrite: res.usage?.cache_creation_input_tokens ?? 0,
+  };
+  return { questions: parseGenerated(text, existing).slice(0, count), usage };
+}

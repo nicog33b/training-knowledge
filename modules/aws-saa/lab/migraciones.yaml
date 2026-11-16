@@ -2,11 +2,26 @@ questions:
   - q: Compara rehost, replatform y refactor con un ejemplo cada uno.
     kind: comparar
     uses: []
+    a: "**Rehost** (lift-and-shift): llevas la VM tal cual a EC2, p. ej. con Application Migration Service. **Replatform** (lift-tinker-and-shift): cambios pequeños para ganar algo, p. ej. la base de datos a RDS o la app a Elastic Beanstalk sin tocar el código. **Refactor**: rediseñas para la nube, p. ej. un monolito pasa a Lambda + DynamoDB. Más esfuerzo cuanto más abajo, y más beneficio también."
   - q: ¿Por qué necesitas SCT además de DMS al migrar de Oracle a Aurora PostgreSQL?
     kind: por-que
     uses:
       - rds-aurora
+    a: "**DMS mueve datos**, pero no traduce el esquema ni el código entre motores distintos. **SCT** (Schema Conversion Tool, o la conversión de esquemas integrada en DMS) convierte tablas, vistas, procedimientos y funciones de Oracle a PostgreSQL y marca lo que hay que reescribir a mano. Migración heterogénea = SCT para el esquema + DMS para los datos."
   - q: ¿Qué servicio usas para migrar servidores físicos casi sin parada (lift-and-shift)?
     kind: aplicar
+    uses: []
+    a: "**AWS Application Migration Service (MGN)**: un agente replica **continuamente y a nivel de bloque** los discos del servidor (físico, virtual u otra nube) a AWS. Haces pruebas sin afectar al origen y el corte final dura minutos."
+  - q: Antes de migrar 300 servidores, ¿cómo descubres qué tienen y de qué dependen?
+    kind: aplicar
+    a: "Con **AWS Application Discovery Service** (con agente o sin agente sobre VMware): recoge configuración, uso de CPU y memoria y **conexiones de red** entre servidores, para agruparlos en aplicaciones y dimensionar EC2. Los datos se ven y se siguen en **Migration Hub**."
+    uses: []
+  - q: ¿Qué pasa con los cambios que se hacen en la base de origen mientras DMS la migra?
+    kind: que-pasa-si
+    a: Con el modo **full load + CDC** (change data capture), DMS copia primero todo y luego **sigue replicando los cambios** de la base de origen hasta el corte. La aplicación puede seguir usando la base de origen durante la migración y la parada final es mínima.
+    uses: []
+  - q: Compara retain, retire y repurchase entre las estrategias de migración.
+    kind: comparar
+    a: "**Retain**: dejarla donde está de momento (dependencias, no compensa todavía). **Retire**: apagarla, porque nadie la usa. **Repurchase**: cambiarla por un SaaS (p. ej. un CRM propio por uno en la nube). Junto a rehost, relocate, replatform y refactor forman las 7 R."
     uses: []
 sims: []

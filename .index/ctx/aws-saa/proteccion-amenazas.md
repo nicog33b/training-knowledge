@@ -86,6 +86,9 @@ DDoS → Shield. Inyecciones/XSS/rate limit → WAF. Política multi-cuenta → 
 - (comparar) Compara GuardDuty, Inspector y Macie: ¿qué detecta cada uno?
 - (aplicar) ¿Dónde pones WAF para bloquear inyección SQL: en un NLB o en un ALB?
 - (por-que) ¿Por qué Shield Advanced incluye protección de costes por DDoS?
+- (comparar) Compara Shield Standard y Shield Advanced.
+- (aplicar) Quieres ver en un solo panel los hallazgos de GuardDuty, Inspector y Macie de todas las cuentas: ¿qué usas?
+- (aplicar) Una IP hace miles de peticiones por minuto a tu login: ¿cómo la frenas con WAF?
 
 ## Simulaciones del subtema
 - clasificar: ¿Qué servicio de seguridad?

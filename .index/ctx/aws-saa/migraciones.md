@@ -57,3 +57,6 @@ Snow Family y DataSync (ver tema de transferencia), Transfer Family, Direct Conn
 - (comparar) Compara rehost, replatform y refactor con un ejemplo cada uno.
 - (por-que) ¿Por qué necesitas SCT además de DMS al migrar de Oracle a Aurora PostgreSQL?
 - (aplicar) ¿Qué servicio usas para migrar servidores físicos casi sin parada (lift-and-shift)?
+- (aplicar) Antes de migrar 300 servidores, ¿cómo descubres qué tienen y de qué dependen?
+- (que-pasa-si) ¿Qué pasa con los cambios que se hacen en la base de origen mientras DMS la migra?
+- (comparar) Compara retain, retire y repurchase entre las estrategias de migración.

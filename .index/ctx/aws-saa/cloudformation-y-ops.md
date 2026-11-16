@@ -33,6 +33,9 @@ CodeCommit (repos Git, descontinuado para nuevos clientes), **CodeBuild** (compi
 ### Elegir
 Plantillas declarativas → CloudFormation; simplemente "sube tu código" → Beanstalk; operar flotas → Systems Manager; infraestructura con lenguajes de programación → CDK.
 
+## Subtemas relacionados (solo resumen; el cuerpo con leer_subtema)
+- identidad-organizaciones: Organizations, IAM Identity Center y Control Tower — Multi-cuenta, SCP, federación, Directory Service y gobierno. [secciones: Organizations, IAM Identity Center y Control Tower · AWS Organizations · IAM avanzado · IAM Identity Center (antes AWS SSO) · Directory Service · Control Tower y gobierno]
+
 ## Glosario usado
 - Rol IAM: Identidad sin credenciales permanentes que puede asumir un servicio, otra cuenta o usuario; entrega credenciales temporales.
 - EC2: Servicio de máquinas virtuales (IaaS) bajo demanda de AWS.
@@ -67,3 +70,6 @@ Plantillas declarativas → CloudFormation; simplemente "sube tu código" → Be
 - (por-que) ¿Por qué un change set evita sorpresas al actualizar un stack?
 - (que-pasa-si) ¿Qué pasa con los recursos si borras un stack sin DeletionPolicy Retain?
 - (comparar) Compara Elastic Beanstalk y CloudFormation: ¿cuánto controlas en cada uno?
+- (aplicar) Tienes que desplegar la misma plantilla en 20 cuentas y 3 Regiones: ¿cómo lo haces?
+- (que-pasa-si) ¿Qué pasa si alguien cambia a mano un security group que creó CloudFormation?
+- (comparar) Compara Session Manager de Systems Manager con un bastion SSH para entrar en instancias privadas.

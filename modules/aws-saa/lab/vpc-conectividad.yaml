@@ -2,14 +2,30 @@ questions:
   - q: ¿Por qué el VPC peering no es transitivo y qué problema causa con muchas VPC?
     kind: por-que
     uses: []
+    a: "Un peering es una conexión **punto a punto** entre dos VPC: si A está conectada con B y B con C, **A no llega a C** a través de B. Con N VPC que deben hablar todas entre sí necesitas N·(N−1)/2 peerings y rutas en cada tabla; con 10 VPC ya son 45. Por eso a partir de unas pocas se usa **Transit Gateway**."
   - q: ¿Qué pasa con el tráfico a S3 desde una subred privada si añades un gateway endpoint?
     kind: que-pasa-si
     uses:
       - vpc-fundamentos
+    a: "Se añade a la tabla de rutas una ruta hacia la **prefix list de S3** que apunta al endpoint: el tráfico a S3 va **por la red privada de AWS**, sin pasar por el NAT Gateway ni por Internet. Ahorras el coste de procesamiento del NAT y puedes limitar con una **endpoint policy** a qué buckets se accede."
   - q: Compara Site-to-Site VPN y Direct Connect en tiempo de puesta en marcha, coste y estabilidad.
     kind: comparar
     uses: []
+    a: "**Site-to-Site VPN**: lista en **minutos**, barata, **cifrada (IPsec)** pero sobre Internet, con latencia y ancho de banda variables. **Direct Connect**: línea dedicada que tarda **semanas** en instalarse, más cara, con **latencia estable** y gran ancho de banda; no va cifrada por defecto (se añade VPN encima o MACsec)."
   - q: "Conectas 30 VPC y una oficina: ¿peering o Transit Gateway?"
     kind: aplicar
+    uses: []
+    a: "**Transit Gateway**: un hub regional al que se conecta cada VPC y la oficina (por VPN o Direct Connect) **una vez**. Con tablas de rutas del TGW controlas quién habla con quién. Con peering serían 435 conexiones entre VPC y una VPN por cada VPC hacia la oficina."
+  - q: "Quieres ofrecer un servicio a VPC de otras cuentas sin peering y sin exponer toda tu red: ¿qué usas?"
+    kind: aplicar
+    a: "**AWS PrivateLink**: publicas el servicio como **endpoint service** detrás de un **NLB**, y cada consumidor crea un **interface endpoint** en su VPC. Solo se expone ese servicio, el tráfico va por la red de AWS y no importa que los rangos de IP se solapen."
+    uses: []
+  - q: ¿Cómo das redundancia a una conexión Direct Connect?
+    kind: aplicar
+    a: "Opción económica: una **Site-to-Site VPN de respaldo** por Internet, que entra en uso si cae el Direct Connect. Para máxima resiliencia: **un segundo Direct Connect en otra ubicación** de Direct Connect, para que un fallo de un sitio o de un proveedor no te deje sin conexión."
+    uses: []
+  - q: Compara un gateway endpoint y un interface endpoint.
+    kind: comparar
+    a: "**Gateway endpoint**: solo para **S3 y DynamoDB**, **gratis**, funciona con rutas en la tabla de rutas y solo desde dentro de la VPC. **Interface endpoint** (PrivateLink): una ENI con IP privada en tu subred, para casi todos los servicios, accesible también **desde on-premises** por VPN o Direct Connect; se cobra por hora y por GB."
     uses: []
 sims: []

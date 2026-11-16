@@ -86,3 +86,5 @@ Aprovisiona, administra y **renueva automáticamente** certificados TLS **públi
 - (comparar) Compara Secrets Manager y Parameter Store: ¿cuál rota secretos de forma nativa?
 - (que-pasa-si) ¿Qué pasa con un snapshot cifrado si quieres compartirlo con otra cuenta?
 - (aplicar) ¿Cuándo exigirías CloudHSM en vez de KMS?
+- (comparar) Compara una clave gestionada por AWS y una customer managed key en KMS.
+- (aplicar) Replicas datos cifrados entre dos Regiones y no quieres descifrar y volver a cifrar al moverlos: ¿qué usas?

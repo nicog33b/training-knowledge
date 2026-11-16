@@ -2,14 +2,27 @@ questions:
   - q: ¿Por qué Kinesis garantiza orden solo dentro de una partition key?
     kind: por-que
     uses: []
+    a: "Un stream se divide en **shards**, y el hash de la **partition key** decide a qué shard va cada registro. Cada shard es una secuencia ordenada, así que los registros con la misma clave quedan en orden. Entre shards distintos no hay un orden global: se procesan en paralelo."
   - q: ¿Qué pasa si todas tus escrituras usan la misma partition key?
     kind: que-pasa-si
     uses: []
+    a: Todo va al **mismo shard** (hot shard), que admite en escritura solo 1 MB/s o 1.000 registros/s. Te limitan las escrituras aunque el stream tenga muchos shards ociosos. Usa una clave con muchos valores distintos (p. ej. id de dispositivo o de usuario).
   - q: "Compara Data Streams y Firehose: ¿cuál eliges si necesitas reprocesar datos de ayer?"
     kind: comparar
     uses: []
+    a: "**Data Streams** guarda los registros (24 h por defecto, ampliable hasta 365 días) y varios consumidores pueden **releerlos** desde cualquier punto: sirve para reprocesar. **Firehose** entrega casi en tiempo real a destinos (S3, Redshift, OpenSearch) sin código, pero **no guarda nada para releer**. Reprocesar lo de ayer → Data Streams."
   - q: "Una app on-premises usa AMQP y no quieres reescribirla: ¿qué servicio usas?"
     kind: aplicar
+    uses: []
+    a: "**Amazon MQ**: brokers de ActiveMQ o RabbitMQ gestionados, con protocolos estándar (AMQP, MQTT, STOMP, OpenWire, JMS). La aplicación cambia solo la dirección del broker. SQS y SNS usan su propia API y obligarían a reescribir."
+  - q: Compara Kinesis Data Streams y SQS.
+    kind: comparar
+    a: "**Kinesis Data Streams**: varios consumidores leen **los mismos datos**, con orden por shard y posibilidad de releer; para streaming y analítica en tiempo real. **SQS**: cada mensaje lo procesa **un consumidor** y se borra; no hay que planificar shards y escala sola; para repartir trabajo."
+    uses:
+      - sqs
+  - q: "Quieres calcular métricas de clics por minuto en tiempo real sobre un stream: ¿qué usas?"
+    kind: aplicar
+    a: "**Amazon Managed Service for Apache Flink** (antes Kinesis Data Analytics) leyendo de Kinesis Data Streams: aplica ventanas de tiempo, agregaciones y SQL o código Flink sobre el flujo continuo y escribe los resultados en otro stream, en S3 o en una base de datos."
     uses: []
 sims:
   - id: shards-y-throttling

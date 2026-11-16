@@ -23,6 +23,7 @@ Ambos usan la red global de AWS y las edge locations y protegen frente a DDoS.
 
 ## Subtemas relacionados (solo resumen; el cuerpo con leer_subtema)
 - cloudfront: CloudFront — CDN: orígenes, caché, OAC, Lambda@Edge, signed URLs y geo-restricción. [secciones: CloudFront · Orígenes · Caché · Seguridad · Computación en el edge · Price Classes · CloudFront vs S3 Cross-Region Replication]
+- route53: Route 53 — DNS gestionado: tipos de registro, políticas de enrutamiento y health checks. [secciones: Route 53 · Registros · TTL · Políticas de enrutamiento · Health Checks · Dominios de terceros]
 
 ## Glosario usado
 - Latencia: Tiempo que tarda una petición en recibir respuesta.
@@ -44,3 +45,6 @@ Ambos usan la red global de AWS y las edge locations y protegen frente a DDoS.
 - (por-que) ¿Por qué Global Accelerator mejora la latencia aunque no cachee nada?
 - (comparar) Compara Global Accelerator y CloudFront para un juego por UDP.
 - (aplicar) ¿Qué ventaja dan dos IP anycast estáticas a un cliente con listas blancas de firewall?
+- (que-pasa-si) ¿Qué pasa si el endpoint de una Región deja de estar sano detrás de Global Accelerator?
+- (aplicar) ¿Cómo pasarías poco a poco el tráfico de una Región a otra con Global Accelerator?
+- (comparar) Compara un failover con Route 53 y uno con Global Accelerator.

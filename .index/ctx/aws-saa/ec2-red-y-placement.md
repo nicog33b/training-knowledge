@@ -58,3 +58,6 @@ SSH (22), **EC2 Instance Connect** (SSH vía navegador con claves temporales) y 
 - (por-que) ¿Por qué un placement group cluster da poca latencia pero más riesgo?
 - (que-pasa-si) ¿Qué pasa con la IP pública de una instancia al pararla y arrancarla, y cómo lo evitas?
 - (comparar) Compara placement groups cluster, spread y partition con un caso de uso cada uno.
+- (comparar) Compara ENI, ENA y EFA.
+- (que-pasa-si) ¿Qué pasa con la RAM si hibernas una instancia en vez de pararla?
+- (aplicar) ¿Cómo harías un failover rápido de una aplicación que depende de una IP privada fija?

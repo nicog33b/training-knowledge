@@ -51,3 +51,6 @@ Security groups, cifrado en tránsito (TLS) y en reposo, IAM para administració
 - (por-que) ¿Por qué lazy loading puede devolver datos viejos y cómo lo mitiga un TTL?
 - (que-pasa-si) ¿Qué pasa con la caché si el nodo de Memcached se reinicia?
 - (comparar) Compara Redis y Memcached: ¿cuál eliges para sesiones que no pueden perderse?
+- (comparar) Compara write-through y lazy loading.
+- (aplicar) Necesitas un ranking en tiempo real de puntuaciones de un juego: ¿qué usas?
+- (error-comun) Error común: ¿por qué poner ElastiCache no ayuda si tus lecturas casi nunca se repiten?

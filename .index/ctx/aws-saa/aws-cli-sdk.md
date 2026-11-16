@@ -50,3 +50,6 @@ Terminal en el navegador, gratuita, con la CLI preinstalada y las credenciales d
 - (por-que) ¿Por qué CloudShell no necesita que configures credenciales?
 - (que-pasa-si) ¿Qué pasa si subes a un repositorio público el archivo ~/.aws/credentials?
 - (aplicar) ¿Cómo elegirías un perfil distinto para cada cuenta desde la CLI?
+- (comparar) Compara la CLI y los SDK: ¿cuándo usas cada uno?
+- (por-que) ¿Por qué una app en EC2 con rol puede acabar usando otras credenciales que las del rol?
+- (aplicar) ¿Cómo compruebas si tienes permiso para lanzar una instancia sin lanzarla de verdad?

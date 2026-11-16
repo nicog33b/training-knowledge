@@ -1,0 +1,20 @@
+id: atkinson-hyperlegible
+title: Atkinson Hyperlegible (Braille Institute)
+authors:
+  - Braille Institute of America
+  - Applied Design Works
+year: 2020
+venue: Braille Institute
+url: https://en.wikipedia.org/wiki/Atkinson_Hyperlegible
+kind: docs
+verified: secondary
+retrieved: 2026-11-15
+summary: Sans gratuita diseñada para baja visión, con letras confundibles
+  (I/l/1, O/0, b/d) muy diferenciadas.
+facts:
+  - Gratuita (SIL OFL); diseñada con aportes de lectores con baja visión para
+    distinguir caracteres parecidos; versión Next de 2025 con 7 pesos.
+caveats:
+  - No se encontró un estudio revisado por pares con datos de legibilidad; el
+    Braille Institute anunció uno (CSUN 2024) sin datos publicados. Opción
+    razonable, no probada.

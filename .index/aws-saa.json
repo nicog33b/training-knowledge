@@ -49,7 +49,7 @@
         "waf",
         "zona-de-disponibilidad"
       ],
-      "questions": 4,
+      "questions": 6,
       "sims": []
     },
     {
@@ -88,7 +88,7 @@
         "sts",
         "usuario-root"
       ],
-      "questions": 4,
+      "questions": 6,
       "sims": []
     },
     {
@@ -123,7 +123,7 @@
         "sdk",
         "throttling"
       ],
-      "questions": 3,
+      "questions": 6,
       "sims": []
     },
     {
@@ -164,7 +164,7 @@
         "usuario-root",
         "zona-de-disponibilidad"
       ],
-      "questions": 4,
+      "questions": 7,
       "sims": [
         "clasificar:modelo-de-compra"
       ]
@@ -213,7 +213,7 @@
         "vpc",
         "zona-de-disponibilidad"
       ],
-      "questions": 3,
+      "questions": 6,
       "sims": []
     },
     {
@@ -254,7 +254,7 @@
         "throughput",
         "zona-de-disponibilidad"
       ],
-      "questions": 4,
+      "questions": 7,
       "sims": []
     },
     {
@@ -293,7 +293,7 @@
         "snapshot",
         "throughput"
       ],
-      "questions": 3,
+      "questions": 6,
       "sims": [
         "clasificar:almacenamiento-de-archivos"
       ]
@@ -335,7 +335,7 @@
         "sticky-sessions",
         "zona-de-disponibilidad"
       ],
-      "questions": 3,
+      "questions": 6,
       "sims": [
         "clasificar:tipo-de-balanceador"
       ]
@@ -387,7 +387,7 @@
         "warm-pool",
         "zona-de-disponibilidad"
       ],
-      "questions": 3,
+      "questions": 6,
       "sims": []
     },
     {
@@ -429,7 +429,7 @@
         "snapshot",
         "zona-de-disponibilidad"
       ],
-      "questions": 4,
+      "questions": 7,
       "sims": [
         "clasificar:multi-az-o-replica"
       ]
@@ -468,7 +468,7 @@
         "ttl",
         "write-through"
       ],
-      "questions": 3,
+      "questions": 6,
       "sims": []
     },
     {
@@ -512,7 +512,7 @@
         "ttl",
         "vpc"
       ],
-      "questions": 4,
+      "questions": 6,
       "sims": [
         "clasificar:politica-de-enrutamiento"
       ]
@@ -560,7 +560,7 @@
         "vpc-flow-logs",
         "zona-de-disponibilidad"
       ],
-      "questions": 3,
+      "questions": 6,
       "sims": [
         "clasificar:sg-o-nacl"
       ]
@@ -610,7 +610,7 @@
         "vpc-endpoint",
         "vpc-peering"
       ],
-      "questions": 4,
+      "questions": 7,
       "sims": []
     },
     {
@@ -653,7 +653,7 @@
         "sse-s3",
         "versionado"
       ],
-      "questions": 3,
+      "questions": 6,
       "sims": []
     },
     {
@@ -704,7 +704,7 @@
         "vpc",
         "zona-de-disponibilidad"
       ],
-      "questions": 3,
+      "questions": 6,
       "sims": [
         "clasificar:clase-de-s3"
       ]
@@ -754,7 +754,7 @@
         "ttl",
         "waf"
       ],
-      "questions": 3,
+      "questions": 6,
       "sims": []
     },
     {
@@ -787,7 +787,7 @@
         "shield",
         "ttl"
       ],
-      "questions": 3,
+      "questions": 6,
       "sims": []
     },
     {
@@ -826,7 +826,7 @@
         "storage-gateway",
         "transfer-family"
       ],
-      "questions": 3,
+      "questions": 6,
       "sims": []
     },
     {
@@ -866,7 +866,7 @@
         "throughput",
         "visibility-timeout"
       ],
-      "questions": 5,
+      "questions": 7,
       "sims": [
         "predecir-observar:visibilidad-y-dlq"
       ]
@@ -908,7 +908,7 @@
         "sns",
         "sqs"
       ],
-      "questions": 4,
+      "questions": 6,
       "sims": []
     },
     {
@@ -957,7 +957,7 @@
         "vpc",
         "vpc-endpoint"
       ],
-      "questions": 4,
+      "questions": 6,
       "sims": [
         "predecir-observar:shards-y-throttling",
         "clasificar:sqs-sns-kinesis"
@@ -1009,7 +1009,7 @@
         "task-role",
         "versionado"
       ],
-      "questions": 3,
+      "questions": 6,
       "sims": []
     },
     {
@@ -1071,7 +1071,7 @@
         "throttling",
         "vpc"
       ],
-      "questions": 4,
+      "questions": 6,
       "sims": [
         "predecir-observar:concurrencia"
       ]
@@ -1125,7 +1125,7 @@
         "vpc-endpoint",
         "zona-de-disponibilidad"
       ],
-      "questions": 4,
+      "questions": 7,
       "sims": []
     },
     {
@@ -1177,7 +1177,7 @@
         "waf",
         "x-ray"
       ],
-      "questions": 3,
+      "questions": 6,
       "sims": []
     },
     {
@@ -1222,7 +1222,7 @@
         "sts",
         "user-pool"
       ],
-      "questions": 3,
+      "questions": 6,
       "sims": []
     },
     {
@@ -1268,7 +1268,7 @@
         "timestream",
         "zona-de-disponibilidad"
       ],
-      "questions": 3,
+      "questions": 6,
       "sims": [
         "clasificar:elige-base"
       ]
@@ -1328,7 +1328,7 @@
         "spot-instances",
         "vpc"
       ],
-      "questions": 3,
+      "questions": 6,
       "sims": []
     },
     {
@@ -1366,7 +1366,7 @@
         "transcribe",
         "translate"
       ],
-      "questions": 3,
+      "questions": 7,
       "sims": []
     },
     {
@@ -1419,7 +1419,7 @@
         "vpc-flow-logs",
         "x-ray"
       ],
-      "questions": 3,
+      "questions": 6,
       "sims": []
     },
     {
@@ -1468,7 +1468,7 @@
         "usuario-root",
         "x-ray"
       ],
-      "questions": 3,
+      "questions": 6,
       "sims": []
     },
     {
@@ -1526,7 +1526,7 @@
         "ttl",
         "versionado"
       ],
-      "questions": 4,
+      "questions": 6,
       "sims": []
     },
     {
@@ -1595,7 +1595,7 @@
         "vpc-flow-logs",
         "waf"
       ],
-      "questions": 3,
+      "questions": 6,
       "sims": [
         "clasificar:servicio-de-seguridad"
       ]
@@ -1636,7 +1636,7 @@
         "scp",
         "usuario-root"
       ],
-      "questions": 3,
+      "questions": 6,
       "sims": []
     },
     {
@@ -1684,7 +1684,7 @@
         "subred",
         "warm-standby"
       ],
-      "questions": 3,
+      "questions": 6,
       "sims": [
         "predecir-observar:estrategia-dr"
       ]
@@ -1730,7 +1730,7 @@
         "transfer-family",
         "vmware-cloud-on-aws"
       ],
-      "questions": 3,
+      "questions": 6,
       "sims": []
     },
     {
@@ -1781,7 +1781,7 @@
         "stacksets",
         "systems-manager"
       ],
-      "questions": 3,
+      "questions": 6,
       "sims": []
     },
     {
@@ -1836,7 +1836,7 @@
         "well-architected-framework",
         "workspaces"
       ],
-      "questions": 3,
+      "questions": 6,
       "sims": []
     },
     {
@@ -1888,7 +1888,7 @@
         "well-architected-framework",
         "x-ray"
       ],
-      "questions": 3,
+      "questions": 6,
       "sims": []
     },
     {
@@ -1979,7 +1979,7 @@
         "waf",
         "zona-de-disponibilidad"
       ],
-      "questions": 3,
+      "questions": 6,
       "sims": []
     },
     {
@@ -2050,7 +2050,7 @@
         "waf",
         "zona-de-disponibilidad"
       ],
-      "questions": 3,
+      "questions": 6,
       "sims": []
     }
   ],

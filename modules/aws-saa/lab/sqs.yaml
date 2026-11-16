@@ -2,20 +2,33 @@ questions:
   - q: ¿Por qué una cola estándar puede entregar el mismo mensaje dos veces?
     kind: por-que
     uses: []
+    a: "Las colas estándar guardan cada mensaje **en varios servidores** para ser muy disponibles y escalar sin límite. A cambio, la entrega es **at-least-once**: a veces un servidor no se entera del borrado y el mensaje vuelve a entregarse. Por eso los consumidores deben ser **idempotentes**: procesar dos veces el mismo mensaje tiene que dar el mismo resultado."
   - q: ¿Qué pasa si el procesamiento tarda más que el visibility timeout?
     kind: que-pasa-si
     uses: []
+    a: "Al vencer el visibility timeout, el mensaje **vuelve a ser visible** y otro consumidor lo recibe **mientras el primero aún lo procesa**: doble procesamiento (y el primer borrado puede fallar). Ajusta el timeout al tiempo real de proceso, o alárgalo desde el consumidor con **`ChangeMessageVisibility`** mientras trabaja."
   - q: ¿En qué se diferencia SQS de SNS al entregar un mensaje a varios consumidores?
     kind: comparar
     uses:
       - sns-fanout
+    a: "En **SQS** los consumidores **compiten**: cada mensaje lo procesa **uno solo**, y así se reparte el trabajo. En **SNS** cada suscriptor recibe **su propia copia** (pub/sub). Para que varios sistemas reciban todo y cada uno lo procese con su propia cola: SNS + una cola SQS por sistema (fan-out)."
   - q: "Error común: ¿por qué subir el visibility timeout a 12 h no es la solución para trabajos que fallan?"
     kind: error-comun
     uses: []
+    a: Si el mensaje falla siempre (mensaje "venenoso"), con 12 h solo **tardas 12 h en reintentarlo y en enterarte**; nunca se arregla. La solución es una **DLQ** con `maxReceiveCount` (tras N intentos el mensaje se aparta para analizarlo) y un timeout ajustado al tiempo real de proceso.
   - q: ¿Cómo escalarías los consumidores según el tamaño de la cola?
     kind: aplicar
     uses:
       - asg
+    a: "Con un **ASG** y target tracking sobre el **backlog por instancia** (`ApproximateNumberOfMessagesVisible` ÷ instancias, como métrica personalizada), con objetivo = latencia aceptable ÷ tiempo por mensaje. O usa **Lambda** como consumidor: escala sola según los mensajes que hay en la cola."
+  - q: Compara las colas estándar y FIFO.
+    kind: comparar
+    a: "**Estándar**: rendimiento prácticamente ilimitado, entrega at-least-once y orden aproximado. **FIFO**: **orden estricto** dentro de cada `MessageGroupId` y **procesamiento exactly-once** (deduplicación en una ventana de 5 minutos), con un rendimiento más limitado (más alto con lotes o en modo de alto rendimiento). Si el orden o los duplicados importan → FIFO."
+    uses: []
+  - q: ¿Por qué activar long polling abarata y mejora una cola con poco tráfico?
+    kind: por-que
+    a: "Con short polling, `ReceiveMessage` responde al instante aunque no haya nada: muchas **respuestas vacías** que se pagan como peticiones. Con **long polling** (`WaitTimeSeconds` hasta 20 s), la llamada espera hasta que llega un mensaje o vence el tiempo: menos peticiones, menos coste y los mensajes se reciben antes."
+    uses: []
 sims:
   - id: visibilidad-y-dlq
     title: Visibility timeout y DLQ

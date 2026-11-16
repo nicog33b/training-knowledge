@@ -36,6 +36,7 @@ Lambda para eventos cortos (<15 min) y cargas variables; ECS/Fargate para proces
 
 ## Subtemas relacionados (solo resumen; el cuerpo con leer_subtema)
 - vpc-fundamentos: VPC: fundamentos — CIDR, subredes, route tables, IGW, NAT, NACL, security groups y Flow Logs. [secciones: VPC: fundamentos · Direccionamiento · Componentes · Seguridad de red · Monitoreo]
+- sqs: SQS — Colas gestionadas: estándar vs FIFO, visibilidad, long polling, DLQ y patrones. [secciones: SQS: Simple Queue Service · Cola estándar · Visibility Timeout · Long Polling · Dead-Letter Queue (DLQ) · Delay y otros · Patrón con Auto Scaling]
 
 ## Glosario usado
 - API: Application Programming Interface. Contrato por el cual un programa expone funciones a otro.
@@ -83,6 +84,8 @@ Lambda para eventos cortos (<15 min) y cargas variables; ECS/Fargate para proces
 - (que-pasa-si) ¿Qué pasa si una función tarda más de 15 minutos?
 - (comparar) Compara reserved y provisioned concurrency: ¿cuál evita cold starts?
 - (error-comun) Error común: ¿por qué poner una Lambda en una VPC privada le quita salida a Internet?
+- (aplicar) ¿Cómo procesas los mensajes de una cola SQS con Lambda sin perder ni duplicar trabajo?
+- (comparar) Compara la invocación síncrona y la asíncrona de Lambda.
 
 ## Simulaciones del subtema
 - predecir-observar: Concurrencia y throttling

@@ -59,6 +59,10 @@ Repasa los glosarios, haz un **examen de práctica completo** (el curso incluye 
 
 ## Subtemas relacionados (solo resumen; el cuerpo con leer_subtema)
 - rds-aurora: RDS y Aurora — Bases relacionales gestionadas: Multi-AZ, réplicas de lectura, Aurora, RDS Proxy y backups. [secciones: RDS y Aurora · Backups y recuperación · Alta disponibilidad vs escalado de lectura · Seguridad · RDS Proxy · Aurora]
+- recuperacion-desastres: Recuperación de desastres — RPO/RTO, estrategias de DR, backups y AWS Backup, Elastic Disaster Recovery. [secciones: Recuperación de desastres (DR) · Conceptos · Estrategias de DR (de menor a mayor coste y rapidez) · Servicios y técnicas · Elegir]
+- sqs: SQS — Colas gestionadas: estándar vs FIFO, visibilidad, long polling, DLQ y patrones. [secciones: SQS: Simple Queue Service · Cola estándar · Visibility Timeout · Long Polling · Dead-Letter Queue (DLQ) · Delay y otros · Patrón con Auto Scaling]
+- sns-fanout: SNS y fan-out — Pub/sub con SNS, patrón fan-out SNS+SQS, filtros y entrega de eventos. [secciones: SNS y fan-out · Suscriptores · Publicar · Seguridad · Patrón fan-out (SNS + SQS) · SNS FIFO · SNS vs EventBridge]
+- kinesis-mq: Kinesis y Amazon MQ — Streaming de datos en tiempo real con Kinesis, Firehose y brokers Amazon MQ. [secciones: Kinesis y Amazon MQ · Kinesis Data Streams · Kinesis Data Firehose (ahora Amazon Data Firehose) · Managed Service for Apache Flink (antes Kinesis Data Analytics) · Data Streams vs Firehose · Kinesis vs SQS vs SNS · Amazon MQ]
 
 ## Glosario usado
 - Latencia: Tiempo que tarda una petición en recibir respuesta.
@@ -114,3 +118,6 @@ Repasa los glosarios, haz un **examen de práctica completo** (el curso incluye 
 - (por-que) ¿Por qué conviene descartar primero las opciones con más carga operativa?
 - (aplicar) Ante 'mínimo coste' y 'mínimo esfuerzo operativo' a la vez, ¿cómo decides?
 - (error-comun) Error común: ¿qué palabras del enunciado indican que piden alta disponibilidad y no escalado?
+- (error-comun) Error común: ¿por qué Multi-AZ no responde a una pregunta de recuperación ante la caída de una Región entera?
+- (aplicar) Te piden desacoplar componentes: ¿qué servicios suelen ser la respuesta y cuándo cada uno?
+- (por-que) ¿Por qué conviene leer primero la última frase del enunciado?

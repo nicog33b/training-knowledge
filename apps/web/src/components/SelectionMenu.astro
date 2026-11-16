@@ -1,0 +1,141 @@
+---
+/**
+ * Menú propio al seleccionar texto de la página: acciones del tutor sobre ESE fragmento
+ * (explicar, ejemplo, por qué, pregúntame, preguntar libre) + las preguntas del laboratorio
+ * del subtema que tienen que ver con lo seleccionado. Todo se manda al chat flotante
+ * con el evento 'tk-ask' (Chat.astro), con el fragmento adjunto como contexto.
+ */
+import type { LabQuestion } from '@tk/contracts';
+interface Props { questions?: LabQuestion[] }
+const { questions = [] } = Astro.props;
+---
+<div id="tk-selmenu" class="tk-selmenu" role="toolbar" aria-label="Preguntar al tutor sobre el texto seleccionado" hidden>
+  <script type="application/json" set:html={JSON.stringify(questions.map((q) => q.q)).replace(/</g, '\\u003c')} />
+  <div class="tk-sel-actions"></div>
+  <div class="tk-sel-related" hidden>
+    <span>Preguntas del curso sobre esto (con respuesta, abajo)</span>
+    <div class="tk-sel-qs"></div>
+  </div>
+</div>
+
+<style is:global>
+  .tk-selmenu { position: fixed; z-index: 60; max-width: min(460px, calc(100vw - 32px)); background: var(--fg); color: var(--bg);
+    border-radius: 10px; box-shadow: 0 6px 24px rgb(0 0 0 / .25); padding: .3rem; font-size: .8rem; line-height: 1.35; }
+  .tk-selmenu[hidden] { display: none; }
+  .tk-sel-actions { display: flex; flex-wrap: wrap; gap: .15rem; }
+  .tk-selmenu button { font: inherit; color: inherit; background: none; border: 0; border-radius: 7px; padding: .3rem .55rem; cursor: pointer; text-align: left; }
+  .tk-selmenu button:hover, .tk-selmenu button:focus-visible { background: color-mix(in srgb, var(--bg) 18%, transparent); outline: none; }
+  .tk-selmenu button.main { font-weight: 600; }
+  .tk-sel-related { border-top: 1px solid color-mix(in srgb, var(--bg) 25%, transparent); margin-top: .25rem; padding-top: .25rem; }
+  .tk-sel-related > span { display: block; padding: .1rem .55rem; font-size: .68rem; opacity: .7; }
+  .tk-sel-qs button { display: block; width: 100%; }
+</style>
+
+<script>
+  const menu = document.getElementById('tk-selmenu')!;
+  const actionsBox = menu.querySelector<HTMLElement>('.tk-sel-actions')!;
+  const related = menu.querySelector<HTMLElement>('.tk-sel-related')!;
+  const qsBox = menu.querySelector<HTMLElement>('.tk-sel-qs')!;
+  const labQuestions: string[] = JSON.parse(menu.querySelector('script')!.textContent || '[]');
+  const coarse = matchMedia('(pointer: coarse)').matches; // táctil: debajo, para no tapar el menú nativo
+
+  type Action = { label: string; q?: string; main?: boolean };
+  const actionsFor = (sel: string): Action[] => {
+    const short = sel.length <= 40 && sel.split(/\s+/).length <= 4;
+    return [
+      ...(short ? [{ label: `¿Qué es «${sel}»?`, q: `¿Qué es «${sel}» y para qué sirve en este tema?`, main: true }] : []),
+      { label: 'Explícame esto', q: 'Explícame este fragmento con otras palabras, más simple.', main: !short },
+      { label: 'Dame un ejemplo', q: 'Dame un ejemplo concreto de esto en un caso real.' },
+      { label: '¿Por qué?', q: '¿Por qué es así? Explícame la razón de fondo.' },
+      { label: 'Pregúntame', q: 'Hazme una pregunta corta para comprobar si entendí este fragmento. No me des la respuesta todavía.' },
+      { label: 'Preguntar…' }, // adjunta el fragmento y deja escribir
+    ];
+  };
+
+  // Preguntas del laboratorio que comparten palabras significativas con la selección.
+  const STOP = new Set('para como esto esta este estos estas cuando donde entre sobre desde hasta porque pero tiene tienen puede pueden cada otro otra otros otras mismo misma solo también todos todas cual cuales hace hacer sido será sería usar usas'.split(' '));
+  const words = (s: string) => new Set((s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().match(/[a-z0-9]{4,}/g) ?? []).filter((w) => !STOP.has(w)));
+  // Peso por rareza en la página: "mensaje" en el subtema de SQS aparece en todas partes y no distingue;
+  // "visibility" o "timeout" sí. Raíz de 6 letras para emparejar singular/plural y variantes.
+  const stem = (w: string) => w.slice(0, 6);
+  const freq = new Map<string, number>();
+  for (const w of (document.querySelector('main')?.textContent ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().match(/[a-z0-9]{4,}/g) ?? [])
+    freq.set(stem(w), (freq.get(stem(w)) ?? 0) + 1);
+  const weight = (w: string) => 1 / Math.log2(2 + (freq.get(stem(w)) ?? 0));
+  /** Título de la sección (h2–h4 anterior) donde está la selección: da el tema aunque el párrafo no lo nombre. */
+  function sectionHeading(node: Element | null): string {
+    let block: Element | null = node;
+    while (block && block.parentElement && !block.parentElement.matches('article, main, section')) block = block.parentElement;
+    for (let el = block; el; el = el.previousElementSibling) if (/^H[2-4]$/.test(el.tagName)) return el.textContent ?? '';
+    return '';
+  }
+  function relatedTo(sel: string, heading = '') {
+    const ws = new Set([...words(`${sel} ${heading}`)].map(stem));
+    return labQuestions
+      .map((q) => ({ q, score: [...new Set([...words(q)].map(stem))].filter((s) => ws.has(s)).reduce((a, s) => a + weight(s), 0) }))
+      .filter((x) => x.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 3)
+      .map((x) => x.q);
+  }
+
+  let current = '';
+  const ask = (detail: { q?: string; selection: string; send?: boolean }) => {
+    hide();
+    document.dispatchEvent(new CustomEvent('tk-ask', { detail }));
+  };
+  const button = (label: string, onClick: () => void, cls = '') => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = label;
+    if (cls) b.className = cls;
+    b.addEventListener('click', onClick);
+    return b;
+  };
+
+  function hide() { menu.hidden = true; current = ''; }
+
+  function show(sel: string, rect: DOMRect, heading: string) {
+    current = sel;
+    actionsBox.replaceChildren(...actionsFor(sel).map((a) =>
+      button(a.label, () => ask(a.q ? { q: a.q, selection: current } : { selection: current, send: false }), a.main ? 'main' : '')));
+    const rel = relatedTo(sel, heading);
+    related.hidden = !rel.length;
+    // Las preguntas del curso ya tienen respuesta escrita: se lleva al alumno a la tarjeta (gratis), no al chat.
+    qsBox.replaceChildren(...rel.map((q) => button(q, () => {
+      hide();
+      getSelection()?.removeAllRanges();
+      document.dispatchEvent(new CustomEvent('tk-show-q', { detail: q }));
+    })));
+    menu.hidden = false;
+    // Posición: encima de la selección (debajo en táctil o si no cabe), dentro de la pantalla con 16 px de margen.
+    const m = menu.getBoundingClientRect();
+    const above = rect.top - m.height - 8;
+    const top = !coarse && above > 42 ? above : Math.min(rect.bottom + 8, innerHeight - m.height - 8);
+    const left = Math.max(16, Math.min(rect.left + rect.width / 2 - m.width / 2, innerWidth - m.width - 16));
+    menu.style.top = `${Math.max(8, top)}px`;
+    menu.style.left = `${left}px`;
+  }
+
+  /** Selección válida: dentro del contenido (main), fuera del chat, del menú y de campos de texto. */
+  function check() {
+    const s = getSelection();
+    const text = s?.toString().replace(/\s+/g, ' ').trim() ?? '';
+    if (!s || s.isCollapsed || text.length < 2 || !s.rangeCount) return hide();
+    const node = s.anchorNode instanceof Element ? s.anchorNode : s.anchorNode?.parentElement;
+    if (!node || !node.closest('main') || node.closest('#tk-chat, #tk-selmenu, textarea, input')) return hide();
+    const rect = s.getRangeAt(0).getBoundingClientRect();
+    if (!rect.width && !rect.height) return hide();
+    show(text.slice(0, 1200), rect, sectionHeading(node));
+  }
+
+  const later = () => setTimeout(check, 10); // deja que el navegador termine la selección
+  document.addEventListener('mouseup', (e) => { if (!menu.contains(e.target as Node)) later(); });
+  document.addEventListener('touchend', () => setTimeout(check, 350));
+  document.addEventListener('keyup', (e) => { if (e.key === 'Escape') hide(); else if (e.shiftKey || e.key === 'Shift') later(); });
+  document.addEventListener('selectionchange', () => { if (!menu.hidden && getSelection()?.isCollapsed) hide(); });
+  addEventListener('scroll', () => { if (!menu.hidden) hide(); }, { passive: true });
+  addEventListener('resize', hide);
+  // Clic en el menú: no perder la selección antes de leerla.
+  menu.addEventListener('mousedown', (e) => e.preventDefault());
+</script>

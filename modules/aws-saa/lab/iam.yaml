@@ -2,14 +2,26 @@ questions:
   - q: ¿Por qué se prefiere un rol a guardar access keys dentro de una EC2?
     kind: por-que
     uses: []
+    a: Con un **rol** (vía instance profile), la instancia obtiene **credenciales temporales** del servicio de metadatos y AWS las **rota sola**; no hay ningún secreto en disco. Las access keys guardadas en la instancia son permanentes y pueden filtrarse en una AMI, un snapshot, un log o un repositorio, y siguen sirviendo hasta que alguien las desactive.
   - q: ¿Qué pasa si una política permite una acción y otra la deniega explícitamente?
     kind: que-pasa-si
     uses: []
+    a: "**Gana el Deny explícito**, siempre. La evaluación es: todo empieza denegado por defecto (deny implícito) → un `Allow` lo permite → pero cualquier `Deny` explícito en cualquier política aplicable lo anula. No importa el orden ni cuántos Allow haya."
   - q: ¿En qué se diferencia una política de identidad de una política de recurso?
     kind: comparar
     uses:
       - s3-fundamentos
+    a: La **política de identidad** se adjunta a un usuario, grupo o rol y dice **qué puede hacer esa identidad**. La **política de recurso** se adjunta al recurso (bucket policy de S3, policy de una cola SQS, key policy de KMS), incluye un `Principal` y dice **quién puede usar ese recurso**; permite dar acceso a otra cuenta sin que asuma un rol.
   - q: "Error común: ¿por qué usar el usuario root para el día a día es un problema aunque tenga MFA?"
     kind: error-comun
+    uses: []
+    a: "El root tiene **todos los permisos y no se puede limitar con IAM**: un error o un script mal hecho con root puede borrar o exponer cualquier cosa. MFA dificulta que te roben el acceso, pero no limita lo que se puede hacer con él. Se reserva para las pocas tareas que lo exigen (cerrar la cuenta, cambiar el plan de soporte); para el día a día se usan identidades con mínimo privilegio."
+  - q: "Un desarrollador necesita acceso temporal a recursos de otra cuenta: ¿cómo se lo das sin crearle un usuario allí?"
+    kind: aplicar
+    a: Crea en la cuenta destino un **rol** con los permisos necesarios y una **trust policy** que permita asumirlo a la cuenta (o identidad) del desarrollador. Él llama a `sts:AssumeRole` y recibe **credenciales temporales** que caducan solas. Nada de usuarios ni claves permanentes duplicadas.
+    uses: []
+  - q: Compara un permissions boundary con una política de permisos normal.
+    kind: comparar
+    a: "Una política de permisos **concede** acciones. Un **permissions boundary** **no concede nada**: fija el **máximo** que una identidad puede llegar a tener; el permiso efectivo es la intersección de los dos. Se usa para delegar: un equipo puede crear roles, pero nunca con más permisos que el límite, así que no puede escalar privilegios."
     uses: []
 sims: []

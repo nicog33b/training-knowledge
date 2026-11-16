@@ -76,6 +76,9 @@ Eventos como `ObjectCreated` o `ObjectRemoved` se envían a **SNS, SQS, Lambda**
 - (por-que) ¿Por qué Intelligent-Tiering conviene cuando no conoces el patrón de acceso?
 - (que-pasa-si) ¿Qué pasa si mueves a Glacier Deep Archive datos que necesitas leer en minutos?
 - (aplicar) Diseña una lifecycle rule para logs: frecuentes 30 días, raros 1 año, borrar a los 7 años.
+- (aplicar) ¿Cómo subes rápido archivos de varios GB a un bucket desde otro continente?
+- (comparar) Compara los modos governance y compliance de S3 Object Lock.
+- (aplicar) Quieres que un cliente descargue un objeto privado durante una hora sin darle credenciales: ¿cómo?
 
 ## Simulaciones del subtema
 - clasificar: Elige la clase de almacenamiento

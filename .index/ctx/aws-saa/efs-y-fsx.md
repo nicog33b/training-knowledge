@@ -54,6 +54,9 @@ Sistemas de archivos de terceros gestionados:
 - (por-que) ¿Por qué EFS sirve para varias instancias a la vez y EBS (en general) no?
 - (aplicar) ¿Qué servicio eliges para un sistema de archivos compartido de servidores Windows con Active Directory?
 - (error-comun) Error común: ¿por qué elegir EFS para un cluster HPC que procesa datos de S3 suele ser peor que FSx for Lustre?
+- (aplicar) ¿Cómo abaratas un sistema EFS donde la mayoría de archivos casi no se leen?
+- (aplicar) Migras un NAS de NetApp que sirve NFS y SMB con snapshots y deduplicación: ¿qué servicio usas?
+- (error-comun) Error común: ¿por qué no puedes montar EFS en un servidor Windows?
 
 ## Simulaciones del subtema
 - clasificar: ¿EBS, EFS, FSx o S3?

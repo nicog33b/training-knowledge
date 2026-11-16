@@ -59,6 +59,8 @@ Una **ASG** escala según la métrica `ApproximateNumberOfMessages` (CloudWatch 
 - (comparar) ¿En qué se diferencia SQS de SNS al entregar un mensaje a varios consumidores?
 - (error-comun) Error común: ¿por qué subir el visibility timeout a 12 h no es la solución para trabajos que fallan?
 - (aplicar) ¿Cómo escalarías los consumidores según el tamaño de la cola?
+- (comparar) Compara las colas estándar y FIFO.
+- (por-que) ¿Por qué activar long polling abarata y mejora una cola con poco tráfico?
 
 ## Simulaciones del subtema
 - predecir-observar: Visibility timeout y DLQ

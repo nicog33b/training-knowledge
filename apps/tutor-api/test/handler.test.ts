@@ -102,3 +102,21 @@ test('contador de gasto: por modelo, hoy, mes y total; reinicio', async () => {
   const r = spendView(await resetLedger(dir), providers, now);
   assert.deepEqual([r.total, r.hoy, r.modelos.every((m) => !m.usado)], [0, 0, true]);
 });
+
+test('generar preguntas: guarda, no repite y suma gasto', async () => {
+  const { handleGenerate, handleListGenerated } = await import('../src/handler.ts');
+  const saved = new Map<string, any[]>();
+  const store = { async read(mm: string, t: string) { return saved.get(`${mm}/${t}`) ?? []; }, async write(mm: string, t: string, l: any[]) { saved.set(`${mm}/${t}`, l); } };
+  const d = { ...deps, store };
+  const before = spent.length;
+  const r = await handleGenerate({ module: 'aws-saa', topic: 'sqs', count: 2 }, d);
+  assert.equal(r.status, 200);
+  assert.equal(r.body.added.length, 2);
+  assert.ok(r.body.added.every((q: any) => q.a.length >= 20 && q.model === 'claude-haiku-5-5'));
+  assert.equal(spent.length, before + 1);
+  const l = await handleListGenerated('aws-saa', 'sqs', d);
+  assert.equal(l.body.questions.length, 2);
+  assert.equal((await handleGenerate({ module: 'aws-saa', topic: 'sqs', count: 9 }, d)).status, 400);
+  assert.equal((await handleGenerate({ module: '../x', topic: 'sqs' }, d)).status, 400);
+  assert.equal((await handleListGenerated('aws-saa', 'nope', d)).status, 404);
+});

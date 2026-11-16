@@ -2,10 +2,29 @@ questions:
   - q: ¿Qué servicio usas para extraer texto y tablas de facturas escaneadas?
     kind: aplicar
     uses: []
+    a: "**Amazon Textract**: OCR que además entiende la **estructura** del documento: extrae texto, pares clave-valor de formularios y tablas, y tiene un análisis específico para facturas y recibos. Rekognition también lee texto en imágenes, pero no entiende formularios ni tablas."
   - q: "Compara Comprehend y Kendra: ¿analizar sentimiento o buscar en documentos?"
     kind: comparar
     uses: []
+    a: '**Comprehend** es NLP: analiza el texto y saca **sentimiento**, entidades, frases clave, idioma o temas, y detecta datos personales. **Kendra** es **búsqueda inteligente** sobre tus documentos: responde preguntas en lenguaje natural ("¿cuántos días de vacaciones tengo?") buscando en wikis, SharePoint o S3.'
   - q: ¿Por qué elegir SageMaker en vez de un servicio de IA ya entrenado?
     kind: por-que
+    uses: []
+    a: "Los servicios ya entrenados (Rekognition, Comprehend…) resuelven **tareas genéricas** sin saber de ML. **SageMaker** es para cuando necesitas **tu propio modelo**: tus datos, tu algoritmo o un problema que ningún servicio cubre (p. ej. predecir abandono de tus clientes). Te da el entorno para preparar datos, entrenar, ajustar y desplegar."
+  - q: "Quieres transcribir las llamadas de soporte y medir el enfado de los clientes: ¿qué servicios encadenas?"
+    kind: aplicar
+    a: "**Transcribe** (voz → texto, con separación de interlocutores) y después **Comprehend** sobre la transcripción para el **sentimiento** y los temas. Para lo contrario, texto → voz, está **Polly**."
+    uses: []
+  - q: ¿Qué servicio usas para detectar contenido inapropiado o caras en las fotos que suben los usuarios?
+    kind: aplicar
+    a: "**Amazon Rekognition**: analiza imágenes y vídeo para **moderación de contenido**, detección y comparación de caras, objetos, texto y famosos, sin entrenar nada. Se puede disparar con un evento de S3 al subir cada foto."
+    uses: []
+  - q: Compara Lex y Polly en un asistente de voz.
+    kind: comparar
+    a: "**Lex** entiende al usuario: reconocimiento de voz y comprensión del lenguaje para detectar la **intención** y los datos (el mismo motor que Alexa); con él construyes el chatbot. **Polly** hace lo contrario: convierte el texto de la respuesta en **voz**. Un asistente de voz usa los dos."
+    uses: []
+  - q: "Una tienda quiere recomendaciones de productos personalizadas sin un equipo de ML: ¿qué servicio usa?"
+    kind: aplicar
+    a: "**Amazon Personalize**: le das el historial de interacciones (clics, compras) y el catálogo, y entrena y sirve recomendaciones personalizadas en tiempo real con la misma tecnología que Amazon.com, sin diseñar el modelo."
     uses: []
 sims: []

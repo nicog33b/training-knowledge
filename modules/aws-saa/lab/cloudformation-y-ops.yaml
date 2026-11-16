@@ -2,10 +2,26 @@ questions:
   - q: ¿Por qué un change set evita sorpresas al actualizar un stack?
     kind: por-que
     uses: []
+    a: El change set muestra **antes de ejecutar** qué recursos se añadirán, modificarán o **reemplazarán**. Algunos cambios (p. ej. el nombre de una base de datos) recrean el recurso y pueden perder datos. Viendo el reemplazo antes, decides si seguir, cambiar la plantilla o hacer un snapshot primero.
   - q: ¿Qué pasa con los recursos si borras un stack sin DeletionPolicy Retain?
     kind: que-pasa-si
     uses: []
+    a: "CloudFormation **borra todos los recursos** que creó el stack, datos incluidos (bases, volúmenes). Un bucket S3 con objetos hace fallar el borrado de ese recurso. Con `DeletionPolicy: Retain` el recurso se conserva; con `Snapshot` (RDS, EBS…) se guarda un snapshot antes de borrarlo."
   - q: "Compara Elastic Beanstalk y CloudFormation: ¿cuánto controlas en cada uno?"
     kind: comparar
+    uses: []
+    a: "**Elastic Beanstalk** es PaaS: subes el código y él crea y gestiona EC2, ASG, ELB, despliegues y monitorización; controlas poco pero operas poco. **CloudFormation** es infraestructura como código para casi cualquier recurso: controlas todo lo que defines, pero lo defines tú. Beanstalk usa CloudFormation por debajo."
+  - q: "Tienes que desplegar la misma plantilla en 20 cuentas y 3 Regiones: ¿cómo lo haces?"
+    kind: aplicar
+    a: "Con **CloudFormation StackSets**: una operación crea, actualiza o borra stacks en varias cuentas y Regiones. Integrado con **Organizations**, puede desplegar automáticamente en las cuentas nuevas que entren en una OU."
+    uses:
+      - identidad-organizaciones
+  - q: ¿Qué pasa si alguien cambia a mano un security group que creó CloudFormation?
+    kind: que-pasa-si
+    a: "El recurso queda en **drift**: ya no coincide con la plantilla. La **drift detection** lo detecta y muestra la diferencia. La próxima actualización del stack puede sobrescribir el cambio manual o fallar. La regla es cambiar siempre por plantilla."
+    uses: []
+  - q: Compara Session Manager de Systems Manager con un bastion SSH para entrar en instancias privadas.
+    kind: comparar
+    a: "**Session Manager** abre una shell por el agente de SSM: **sin puerto 22 abierto, sin llaves SSH ni bastion**, con acceso controlado por IAM y sesiones registradas en CloudTrail y S3 o CloudWatch. El **bastion** es una instancia pública que mantener y parchear, con llaves que gestionar. Para menos superficie de ataque y menos operación, Session Manager."
     uses: []
 sims: []

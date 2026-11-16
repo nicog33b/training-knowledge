@@ -2,11 +2,27 @@ questions:
   - q: ¿Por qué CloudTrail responde 'quién hizo qué' y Config 'cómo estaba configurado'?
     kind: comparar
     uses: []
+    a: "**CloudTrail** registra **llamadas a la API**: quién (identidad), qué acción, cuándo, desde qué IP y con qué resultado. **Config** registra **el estado de configuración de cada recurso a lo largo del tiempo** y evalúa reglas de cumplimiento. Ejemplo: Config te dice que el security group se abrió al mundo el martes; CloudTrail, quién hizo la llamada que lo abrió."
   - q: ¿Qué pasa si alguien abre un security group al 0.0.0.0/0 y tienes una regla de Config?
     kind: que-pasa-si
     uses: []
+    a: "Config detecta el cambio y marca el recurso **NON_COMPLIANT**, pero **no lo impide**: Config audita, no bloquea. Puedes añadir una **remediación automática** (documento de SSM Automation que cierre la regla) y notificar con EventBridge o SNS. Para impedirlo de antemano: SCP o permisos IAM."
   - q: ¿Cómo ejecutarías una Lambda cada noche a las 2:00?
     kind: aplicar
     uses:
       - lambda
+    a: "Con **EventBridge Scheduler** (o una regla programada de EventBridge) con una expresión `cron(0 2 * * ? *)` y la Lambda como destino. Ojo con la zona horaria: las reglas programadas usan **UTC**, mientras que Scheduler permite indicar la zona horaria."
+  - q: ¿Qué pasa con el historial de CloudTrail si no creas ningún trail?
+    kind: que-pasa-si
+    a: Solo tienes el **Event history** de los **últimos 90 días** de eventos de gestión de la Región. Para guardarlos más tiempo (y de todas las Regiones) crea un **trail** hacia S3 o usa CloudTrail Lake. Los **data events** (lecturas y escrituras de objetos S3, invocaciones de Lambda) no se registran si no los activas.
+    uses: []
+  - q: "Quieres un aviso inmediato cada vez que alguien inicia sesión con el usuario root: ¿cómo?"
+    kind: aplicar
+    a: "Una regla de **EventBridge** que capture el evento de CloudTrail `ConsoleLogin` cuya identidad sea `Root` y lo envíe a un topic de **SNS** (email o chat). Otra opción: un metric filter sobre los logs de CloudTrail en CloudWatch con una alarma."
+    uses:
+      - iam
+  - q: ¿Cómo demuestras que nadie alteró los logs de CloudTrail?
+    kind: aplicar
+    a: "Activa la **validación de integridad de los archivos de log**: CloudTrail entrega cada hora archivos de resumen con hashes firmados y puedes verificar que nada se modificó ni borró. Además, guarda los logs en un bucket de una **cuenta de logs separada** con acceso restringido y Object Lock."
+    uses: []
 sims: []

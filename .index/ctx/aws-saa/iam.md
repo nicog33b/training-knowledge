@@ -73,3 +73,5 @@ Puedes exigir longitud mínima, caracteres, rotación y reutilización. **MFA** 
 - (que-pasa-si) ¿Qué pasa si una política permite una acción y otra la deniega explícitamente?
 - (comparar) ¿En qué se diferencia una política de identidad de una política de recurso?
 - (error-comun) Error común: ¿por qué usar el usuario root para el día a día es un problema aunque tenga MFA?
+- (aplicar) Un desarrollador necesita acceso temporal a recursos de otra cuenta: ¿cómo se lo das sin crearle un usuario allí?
+- (comparar) Compara un permissions boundary con una política de permisos normal.

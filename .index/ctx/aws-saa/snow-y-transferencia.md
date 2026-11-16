@@ -34,6 +34,9 @@ SFTP, FTPS y FTP gestionados hacia S3/EFS, con autenticación (Directory Service
 | Migración programada online | DataSync |
 | Clientes SFTP existentes | Transfer Family |
 
+## Subtemas relacionados (solo resumen; el cuerpo con leer_subtema)
+- vpc-conectividad: VPC: conectividad — Peering, endpoints, PrivateLink, VPN, Direct Connect, Transit Gateway y IPv6. [secciones: VPC: conectividad · VPC Peering · VPC Endpoints · Conexión con on-premises · Transit Gateway · IPv6 y otros · Elegir]
+
 ## Glosario usado
 - EC2: Servicio de máquinas virtuales (IaaS) bajo demanda de AWS.
 - EBS: Disco de red persistente para EC2, atado a una AZ.
@@ -57,3 +60,6 @@ SFTP, FTPS y FTP gestionados hacia S3/EFS, con autenticación (Directory Service
 - (por-que) ¿Por qué a veces es más rápido enviar un Snowball por camión que subir por la red?
 - (comparar) Compara DataSync y Storage Gateway: ¿migrar una vez o integrar de forma continua?
 - (aplicar) Tienes 80 TB y una línea de 100 Mbps: ¿qué servicio usas y por qué?
+- (aplicar) Socios externos te envían archivos por SFTP y quieres que acaben en S3 sin mantener servidores: ¿qué usas?
+- (comparar) Compara File Gateway, Volume Gateway y Tape Gateway.
+- (aplicar) Tienes 50 TB y una conexión Direct Connect de 10 Gbps: ¿Snowball o red?

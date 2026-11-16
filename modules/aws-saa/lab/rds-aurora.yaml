@@ -2,16 +2,33 @@ questions:
   - q: ¿Por qué Multi-AZ no mejora el rendimiento de lectura?
     kind: por-que
     uses: []
+    a: "En un despliegue Multi-AZ clásico, la standby recibe la **replicación síncrona** pero **no acepta conexiones**: solo existe para tomar el relevo si cae la principal. Es alta disponibilidad, no escalado. Para escalar lecturas: **read replicas** (o el despliegue Multi-AZ DB cluster, cuyas standby sí admiten lecturas)."
   - q: ¿Qué pasa con las lecturas de una réplica justo después de escribir en la principal?
     kind: que-pasa-si
     uses: []
+    a: 'La replicación hacia las read replicas es **asíncrona**: durante el **lag** de réplica, la réplica puede devolver el valor anterior. Las lecturas que deben ver lo recién escrito (p. ej. "mi pedido" tras pagar) se mandan a la principal; el resto, a réplicas.'
   - q: ¿Cuándo pondrías RDS Proxy delante de la base de datos?
     kind: aplicar
     uses:
       - lambda
+    a: "Cuando muchas conexiones cortas saturan la base, el caso típico es **Lambda**: cada ejecución abre su conexión. **RDS Proxy** mantiene un **pool de conexiones** compartido, reduce el tiempo de failover (los clientes no pierden la conexión al proxy) y permite autenticación con IAM y Secrets Manager."
   - q: Compara Aurora con RDS MySQL en réplicas, almacenamiento y failover.
     kind: comparar
     uses: []
+    a: "**Aurora**: hasta 15 réplicas que comparten el **mismo volumen distribuido** (6 copias en 3 AZ, crece solo), lag de milisegundos y **failover más rápido** a una réplica. **RDS MySQL**: cada réplica tiene su propio almacenamiento EBS y recibe los cambios por replicación asíncrona del motor (más lag); el failover Multi-AZ es a la standby. Aurora cuesta algo más y rinde más."
+  - q: "Una base de datos con tráfico muy intermitente e impredecible: ¿qué opción de Aurora eliges?"
+    kind: aplicar
+    a: "**Aurora Serverless v2**: la capacidad (ACU) sube y baja en segundos según la carga, y pagas por la capacidad usada. Evitas dimensionar la instancia para el pico y pagarla todo el día. Para carga estable y alta, una instancia aprovisionada (con reservas) sale más barata."
+    uses: []
+  - q: ¿Qué pasa con los backups automáticos si borras una instancia de RDS?
+    kind: que-pasa-si
+    a: Por defecto los **backups automáticos se borran** con la instancia (puedes elegir conservarlos), y RDS ofrece un **snapshot final** al borrar. Los **snapshots manuales** se conservan hasta que los borres tú. Para guardar copias a largo plazo, snapshots manuales o AWS Backup.
+    uses: []
+  - q: "Necesitas DR en otra Región con RPO de segundos para Aurora: ¿qué usas?"
+    kind: aplicar
+    a: "**Aurora Global Database**: replica a nivel de almacenamiento a hasta 5 Regiones secundarias con **lag típico de menos de 1 segundo**, que además sirven lecturas locales. Si cae la Región principal, promueves una secundaria en **unos minutos o menos**."
+    uses:
+      - recuperacion-desastres
 sims:
   - id: multi-az-o-replica
     title: ¿Multi-AZ o réplica de lectura?

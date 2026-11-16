@@ -2,10 +2,25 @@ questions:
   - q: ¿Por qué un placement group cluster da poca latencia pero más riesgo?
     kind: por-que
     uses: []
+    a: "Coloca las instancias **muy juntas, en el mismo hardware de red de una sola AZ**: la red entre ellas tiene latencia mínima y gran ancho de banda (ideal para HPC). Por la misma razón comparten destino: un fallo de rack o de la AZ **afecta a todas a la vez**."
   - q: ¿Qué pasa con la IP pública de una instancia al pararla y arrancarla, y cómo lo evitas?
     kind: que-pasa-si
     uses: []
+    a: La IP pública automática **se libera al parar** y al arrancar recibes otra distinta (la IP privada se mantiene). Para una IP pública fija usa una **Elastic IP**, que es de tu cuenta hasta que la liberes, o mejor pon un nombre DNS o un balanceador delante para no depender de la IP.
   - q: Compara placement groups cluster, spread y partition con un caso de uso cada uno.
     kind: comparar
+    uses: []
+    a: "**Cluster**: todas juntas en una AZ, mínima latencia → HPC o cálculo distribuido muy acoplado. **Spread**: cada instancia en hardware distinto (máximo 7 por AZ y grupo) → pocas instancias críticas que no deben caer juntas. **Partition**: grupos de instancias en racks separados, cientos de instancias → Hadoop, Cassandra o Kafka, que saben en qué partición está cada nodo."
+  - q: Compara ENI, ENA y EFA.
+    kind: comparar
+    a: "**ENI**: tarjeta de red virtual con sus IP y security groups; puedes moverla de una instancia a otra. **ENA**: red mejorada (enhanced networking) para alto ancho de banda y baja latencia. **EFA**: ENA + baja latencia para **HPC y MPI**, que deja a la aplicación saltarse el sistema operativo en la comunicación entre nodos."
+    uses: []
+  - q: ¿Qué pasa con la RAM si hibernas una instancia en vez de pararla?
+    kind: que-pasa-si
+    a: 'El contenido de la RAM se **guarda en el volumen raíz EBS** (que debe estar cifrado y tener espacio suficiente) y al arrancar se restaura: procesos y cachés en memoria siguen donde estaban. Sirve para aplicaciones que tardan mucho en "calentar". Al parar normal, la RAM se pierde.'
+    uses: []
+  - q: ¿Cómo harías un failover rápido de una aplicación que depende de una IP privada fija?
+    kind: aplicar
+    a: "Pon la IP en una **ENI secundaria**. Si la instancia principal falla, **desconecta esa ENI y conéctala a una instancia de reserva** en la misma AZ: la IP privada (y su Elastic IP, si tiene) pasa con ella y los clientes no cambian nada."
     uses: []
 sims: []

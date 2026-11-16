@@ -34,6 +34,7 @@ BD propietaria de AWS compatible con **MySQL y PostgreSQL**, con 5× el rendimie
 
 ## Subtemas relacionados (solo resumen; el cuerpo con leer_subtema)
 - lambda: AWS Lambda — Funciones sin servidor: límites, concurrencia, triggers, VPC, SnapStart y Lambda@Edge. [secciones: AWS Lambda · Límites clave (por Región / ejecución) · Invocación · Concurrencia · Rendimiento, red y seguridad · Patrones · Lambda vs contenedores]
+- recuperacion-desastres: Recuperación de desastres — RPO/RTO, estrategias de DR, backups y AWS Backup, Elastic Disaster Recovery. [secciones: Recuperación de desastres (DR) · Conceptos · Estrategias de DR (de menor a mayor coste y rapidez) · Servicios y técnicas · Elegir]
 
 ## Glosario usado
 - Región: Ubicación geográfica de AWS compuesta por varias Zonas de Disponibilidad aisladas.
@@ -62,6 +63,9 @@ BD propietaria de AWS compatible con **MySQL y PostgreSQL**, con 5× el rendimie
 - (que-pasa-si) ¿Qué pasa con las lecturas de una réplica justo después de escribir en la principal?
 - (aplicar) ¿Cuándo pondrías RDS Proxy delante de la base de datos?
 - (comparar) Compara Aurora con RDS MySQL en réplicas, almacenamiento y failover.
+- (aplicar) Una base de datos con tráfico muy intermitente e impredecible: ¿qué opción de Aurora eliges?
+- (que-pasa-si) ¿Qué pasa con los backups automáticos si borras una instancia de RDS?
+- (aplicar) Necesitas DR en otra Región con RPO de segundos para Aurora: ¿qué usas?
 
 ## Simulaciones del subtema
 - clasificar: ¿Multi-AZ o réplica de lectura?

@@ -2,12 +2,27 @@ questions:
   - q: ¿Por qué una API HTTP es más barata que una REST y qué pierdes?
     kind: por-que
     uses: []
+    a: "La **API HTTP** es una versión más simple y ligera: menos funciones, menos latencia y precio por petición más bajo. Pierdes funciones de la **API REST** como API keys y usage plans, validación de peticiones, caché de respuestas, integración directa con WAF, transformaciones con mapping templates y endpoints privados o edge-optimized. Si solo necesitas un proxy a Lambda o HTTP con JWT, HTTP API; si necesitas esas funciones, REST."
   - q: ¿Qué pasa si un cliente supera el throttling configurado en el stage?
     kind: que-pasa-si
     uses: []
+    a: API Gateway rechaza el exceso con **429 Too Many Requests** sin llamar al backend, así que lo protege. El cliente debe reintentar con **backoff exponencial**. Los límites se aplican por cuenta y Región, por stage o método, y por cliente con **usage plans** y API keys (solo REST).
   - q: Compara autorizar con Cognito, con un Lambda authorizer y con IAM.
     kind: comparar
     uses:
       - cognito-stepfunctions
       - iam
+    a: "**IAM**: el cliente firma con SigV4; ideal para servicios o usuarios que ya tienen credenciales de AWS. **Cognito user pool authorizer**: valida el JWT de los usuarios de tu app sin escribir código. **Lambda authorizer**: tu función decide con lógica propia (tokens de otro proveedor, headers, reglas a medida) y devuelve una política; el resultado se puede cachear."
+  - q: ¿Cómo reduces la carga del backend para respuestas que cambian poco?
+    kind: aplicar
+    a: "Activa la **caché del stage** en una API REST: guarda respuestas por clave (ruta, parámetros, headers que elijas) durante un TTL (300 s por defecto, máximo 3600 s). Las peticiones repetidas no llegan a Lambda ni a la base. Para contenido global también puedes poner **CloudFront** delante."
+    uses: []
+  - q: ¿Qué pasa si la Lambda integrada tarda más que el timeout de integración de API Gateway?
+    kind: que-pasa-si
+    a: "API Gateway corta la espera (29 s por defecto) y devuelve **504** al cliente, aunque la Lambda siga ejecutándose. Para trabajos largos usa un patrón **asíncrono**: la API encola el trabajo (SQS o Step Functions), responde `202` con un id, y el cliente consulta el estado después."
+    uses: []
+  - q: Compara los endpoints edge-optimized, regional y private de una API REST.
+    kind: comparar
+    a: "**Edge-optimized**: las peticiones entran por la red de CloudFront; bueno para clientes repartidos por el mundo. **Regional**: para clientes en la misma Región, o cuando quieres poner tu propia distribución de CloudFront delante. **Private**: solo accesible desde tus VPC mediante un interface endpoint; nunca expuesto a Internet."
+    uses: []
 sims: []

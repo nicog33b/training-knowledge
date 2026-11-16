@@ -1,62 +1,228 @@
 ---
 /**
- * Preguntas sugeridas + simulaciones de un subtema (modules/<id>/lab/<subtema>.yaml).
- * Las simulaciones corren en el navegador con el evaluador seguro de @tk/sims/rule.
+ * Práctica de un subtema (modules/<id>/lab/<subtema>.yaml):
+ *  1. Preguntas con respuesta escrita: el alumno intenta responder, abre la respuesta y se autoevalúa
+ *     (Sí / Más o menos / No, guardado en este navegador). Sin IA, sin costo.
+ *  2. "Generar más preguntas": la IA crea preguntas nuevas con respuesta (cuesta; quedan guardadas en
+ *     tutor-api, así que la próxima visita aparecen gratis).
+ *  3. Simulaciones (recetas de primitivas fijas) con el evaluador seguro de @tk/sims/rule.
  * Decisiones: simulaciones-por-primitivas-y-recetas, preguntas-sugeridas-y-contexto-minimo,
- *             correccion-ia-solo-formativa-con-checklist.
+ *             practica-de-recuperacion, correccion-ia-solo-formativa-con-checklist.
  */
-import type { LabFile } from '@tk/contracts';
-interface Props { lab: LabFile; moduleId: string; topicId: string }
-const { lab, moduleId, topicId } = Astro.props;
+import type { GlossaryTerm, LabFile } from '@tk/contracts';
+import { renderMarkdown } from '@tk/render';
+interface Props { lab: LabFile; moduleId: string; topicId: string; glossary?: GlossaryTerm[] }
+const { lab, moduleId, topicId, glossary = [] } = Astro.props;
 const KIND: Record<string, string> = { 'por-que': 'Por qué', 'que-pasa-si': 'Qué pasa si', comparar: 'Comparar', aplicar: 'Aplicar', 'error-comun': 'Error común' };
+const api = import.meta.env.PUBLIC_TUTOR_URL ?? 'http://127.0.0.1:4322';
+const answers = await Promise.all(lab.questions.map((q) => (q.a ? renderMarkdown(q.a, glossary).then((r) => r.html) : Promise.resolve(''))));
+const kinds = Object.keys(KIND).filter((k) => lab.questions.some((q) => q.kind === k));
 ---
+<section class="lab practice" data-practice data-module={moduleId} data-topic={topicId} data-api={api}>
+  <header class="pr-head">
+    <div>
+      <p class="eyebrow">Práctica</p>
+      <h2>Ponte a prueba</h2>
+      <p class="pr-lead">Responde de memoria antes de abrir la respuesta: el esfuerzo de recordar es lo que fija lo aprendido. Luego marca si la sabías.</p>
+    </div>
+    <div class="pr-progress" aria-live="polite">
+      <div class="pr-ring"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15.5" /><circle class="fill" cx="18" cy="18" r="15.5" pathLength="100" /></svg><strong class="pr-count">0/0</strong></div>
+      <div class="pr-legend">
+        <span><i class="dot si"></i><b data-n="si">0</b> sabías</span>
+        <span><i class="dot casi"></i><b data-n="casi">0</b> dudas</span>
+        <span><i class="dot no"></i><b data-n="no">0</b> a repasar</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="pr-filters" role="toolbar" aria-label="Filtrar preguntas">
+    <button type="button" class="chip on" data-filter="all">Todas</button>
+    <button type="button" class="chip" data-filter="pending">Sin responder</button>
+    <button type="button" class="chip" data-filter="review">A repasar</button>
+    <span class="sep" aria-hidden="true"></span>
+    {kinds.map((k) => <button type="button" class={`chip k-${k}`} data-filter={`kind:${k}`}>{KIND[k]}</button>)}
+    <button type="button" class="chip reset" data-reset title="Borrar tus marcas de este subtema">Reiniciar</button>
+  </div>
+
+  <ol class="qcards">
+    {lab.questions.map((q, i) => (
+      <li class={`qcard k-${q.kind}`} data-qi={i} data-kind={q.kind} data-q={q.q}>
+        <div class="qc-top"><span class={`kind k-${q.kind}`}>{KIND[q.kind]}</span><span class="qc-n">{String(i + 1).padStart(2, '0')}</span></div>
+        <p class="qc-q">{q.q}</p>
+        {q.a ? (
+          <details class="qc-ans">
+            <summary><span class="btn soft"><span class="when-closed">Ver respuesta</span><span class="when-open">Ocultar respuesta</span></span></summary>
+            <div class="qc-body" set:html={answers[i]} />
+            <div class="qc-foot">
+              <div class="qc-rate" role="group" aria-label="¿La sabías?">
+                <span>¿La sabías?</span>
+                <button type="button" data-rate="si">Sí</button>
+                <button type="button" data-rate="casi">Más o menos</button>
+                <button type="button" data-rate="no">No</button>
+              </div>
+              <button type="button" class="btn ghost" data-deep>Profundizar con el tutor ↗</button>
+            </div>
+          </details>
+        ) : (
+          <button type="button" class="btn ghost" data-deep>Preguntar al tutor ↗</button>
+        )}
+      </li>
+    ))}
+  </ol>
+  <p class="pr-empty muted" hidden>No hay preguntas con este filtro.</p>
+
+  <div class="gen">
+    <div class="gen-head">
+      <div>
+        <h3>Más preguntas sobre este tema</h3>
+        <p class="muted">La IA escribe preguntas nuevas con su respuesta, distintas de las de arriba. Quedan guardadas: la próxima vez salen sin costo.</p>
+      </div>
+      <span class="cost-pill" title="Se suma al contador de gasto del header">usa IA · cuesta</span>
+    </div>
+    <ol class="qcards gen-list"></ol>
+    <div class="gen-actions">
+      <button type="button" class="btn accent" data-gen>✦ Generar 3 preguntas</button>
+      <span class="gen-status muted" aria-live="polite"></span>
+    </div>
+  </div>
+</section>
+
 {lab.sims.length > 0 && (
-  <section class="lab">
-    <h2>Laboratorio</h2>
+  <section class="lab sims">
+    <p class="eyebrow">Laboratorio</p>
+    <h2>Predice y comprueba</h2>
     {lab.sims.map((s) => (
-      <div class="card sim" data-sim>
+      <div class="sim" data-sim>
         <script type="application/json" set:html={JSON.stringify(s).replace(/</g, '\\u003c')} />
-        <h3>{s.title} <span class="badge">{s.type === 'predecir-observar' ? 'predecir → observar → explicar' : 'clasificar'}</span></h3>
+        <h3>{s.title} <span class="sim-type">{s.type === 'predecir-observar' ? 'predecir → observar → explicar' : 'clasificar'}</span></h3>
         <div class="sim-body"><p class="muted">Cargando simulación…</p></div>
       </div>
     ))}
   </section>
 )}
-{lab.questions.length > 0 && (
-  <section class="lab">
-    <h2>Preguntas para pensar (o para el tutor)</h2>
-    <p class="muted">Intenta responderlas tú antes; luego contrasta con el tutor, que ya sabe que estás en este subtema.</p>
-    <ul class="clean questions">
-      {lab.questions.map((q) => (
-        <li><span class="badge">{KIND[q.kind]}</span> {q.q}
-          <button type="button" class="copy" data-q={q.q}>preguntar</button></li>
-      ))}
-    </ul>
-  </section>
-)}
 
 <style is:global>
-  .lab h3 { margin-top: 0; }
-  .sim label.param { display:block; margin:.5rem 0; }
-  .sim input[type=range] { width:100%; }
-  .sim .opts { display:flex; flex-wrap:wrap; gap:.5rem; margin:.5rem 0; }
-  .sim button, .lab button.copy { font:inherit; border:1px solid var(--line); background:var(--bg); color:var(--fg); border-radius:8px; padding:.35rem .8rem; cursor:pointer; }
-  .sim button[aria-pressed=true] { border-color:var(--accent); outline:2px solid var(--accent); }
-  .sim button:disabled { opacity:.5; cursor:default; }
-  .sim .result { border-left:4px solid var(--line); padding:.4rem .8rem; margin:.7rem 0; }
-  .sim .result.ok { border-color:var(--ok); } .sim .result.bad { border-color:var(--warn); }
-  .sim textarea { width:100%; min-height:5rem; font:inherit; background:var(--bg); color:var(--fg); border:1px solid var(--line); border-radius:8px; padding:.5rem; }
-  .sim .rubric li { list-style:none; } .sim .rubric input { margin-right:.4rem; }
-  .sim select { font:inherit; background:var(--bg); color:var(--fg); border:1px solid var(--line); border-radius:6px; padding:.2rem; max-width:100%; }
-  .sim .item { padding:.45rem 0; border-bottom:1px solid var(--line); display:flex; flex-wrap:wrap; gap:.5rem; align-items:center; justify-content:space-between; }
-  .sim .why { flex-basis:100%; font-size:.9rem; color:var(--muted); }
-  .lab button.copy { font-size:.75rem; padding:.05rem .5rem; margin-left:.4rem; }
+  .lab { --k: var(--accent); --radius: 14px; --soft: color-mix(in srgb, var(--accent) 9%, var(--bg)); margin: 3rem 0 1rem; }
+  /* Un color fijo por tipo de pregunta (tokens --k-* de Base.astro, contraste ≥ 4,5:1 en ambos temas). */
+  .k-por-que { --k: var(--k-por-que); } .k-que-pasa-si { --k: var(--k-que-pasa-si); } .k-comparar { --k: var(--k-comparar); }
+  .k-aplicar { --k: var(--k-aplicar); } .k-error-comun { --k: var(--k-error-comun); }
+  .lab .eyebrow { margin: 0; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+  .lab h2 { margin: .15rem 0 .4rem; font-size: 1.55rem; letter-spacing: -.01em; }
+  .lab h3 { margin: 0; }
+
+  /* Botones */
+  .lab .btn { font: inherit; font-size: .88rem; font-weight: 600; display: inline-flex; align-items: center; gap: .35rem; border-radius: 10px; padding: .5rem .95rem;
+    border: 1px solid var(--line); background: var(--bg); color: var(--fg); cursor: pointer; transition: background .15s, border-color .15s, transform .1s, box-shadow .15s; }
+  .lab .btn:hover { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+  .lab .btn:active { transform: translateY(1px); }
+  .lab .btn:focus-visible, .lab .chip:focus-visible, .qc-rate button:focus-visible, .qc-ans summary:focus-visible .btn { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .lab .btn.soft { background: var(--soft); border-color: transparent; color: var(--accent); }
+  .lab .btn.soft:hover { background: color-mix(in srgb, var(--accent) 16%, var(--bg)); }
+  .lab .btn.ghost { background: none; border-color: transparent; color: var(--muted); font-weight: 500; padding-inline: .6rem; }
+  .lab .btn.ghost:hover { color: var(--accent); background: var(--soft); }
+  .lab .btn.primary, .lab .btn.accent { background: var(--accent); border-color: var(--accent); color: var(--on-accent); box-shadow: 0 2px 10px color-mix(in srgb, var(--accent) 30%, transparent); }
+  .lab .btn.primary:hover, .lab .btn.accent:hover { filter: brightness(1.08); }
+  .lab .btn:disabled { opacity: .55; cursor: default; transform: none; filter: none; }
+
+  /* Cabecera con progreso */
+  .pr-head { display: flex; gap: 1.5rem; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; }
+  .pr-head > div:first-child { flex: 1 1 320px; }
+  .pr-lead { margin: 0; color: var(--muted); max-width: 52ch; }
+  .pr-progress { display: flex; align-items: center; gap: .9rem; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: .7rem 1rem; }
+  .pr-ring { position: relative; width: 58px; height: 58px; flex: none; }
+  .pr-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .pr-ring circle { fill: none; stroke: var(--line); stroke-width: 3.2; }
+  .pr-ring circle.fill { stroke: var(--ok); stroke-linecap: round; stroke-dasharray: 0 100; transition: stroke-dasharray .4s; }
+  .pr-ring strong { position: absolute; inset: 0; display: grid; place-items: center; font-size: .78rem; font-variant-numeric: tabular-nums; }
+  .pr-legend { display: grid; gap: .1rem; font-size: .8rem; color: var(--muted); }
+  .pr-legend b { color: var(--fg); font-variant-numeric: tabular-nums; }
+  .dot { display: inline-block; width: .55rem; height: .55rem; border-radius: 50%; margin-right: .35rem; vertical-align: .05em; }
+  .dot.si { background: var(--ok); } .dot.casi { background: var(--warn); } .dot.no { background: var(--bad); }
+
+  /* Filtros */
+  .pr-filters { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; margin: 1.3rem 0 1rem; }
+  .lab .chip { font: inherit; font-size: .8rem; border: 1px solid var(--line); background: var(--bg); color: var(--muted); border-radius: 99px; padding: .28rem .8rem; cursor: pointer; transition: all .15s; }
+  .lab .chip:hover { color: var(--fg); border-color: color-mix(in srgb, var(--k) 50%, var(--line)); }
+  .lab .chip.on { background: color-mix(in srgb, var(--k) 14%, var(--bg)); border-color: color-mix(in srgb, var(--k) 55%, transparent); color: var(--k); font-weight: 600; }
+  .lab .chip.reset { margin-left: auto; border-style: dashed; }
+  .pr-filters .sep { width: 1px; height: 1.2rem; background: var(--line); margin: 0 .2rem; }
+
+  /* Tarjetas de pregunta */
+  .qcards { list-style: none; padding: 0; margin: 0; display: grid; gap: .8rem; }
+  .qcard { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem 1.15rem 1rem 1.3rem; overflow: hidden;
+    transition: border-color .2s, box-shadow .2s; }
+  .qcard::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 4px; background: var(--k); opacity: .75; }
+  .qcard:hover { box-shadow: 0 4px 18px rgb(0 0 0 / .06); }
+  .qcard[hidden] { display: none; }
+  .qcard.flash { animation: qflash 1.6s ease; }
+  @keyframes qflash { 0%, 40% { box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 55%, transparent); } 100% { box-shadow: none; } }
+  .qc-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: .35rem; }
+  .lab .kind { font-size: .7rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--k); background: color-mix(in srgb, var(--k) 13%, transparent);
+    border-radius: 6px; padding: .12rem .5rem; }
+  .qc-n { font-size: .75rem; color: var(--muted); font-variant-numeric: tabular-nums; opacity: .7; }
+  .qc-n.ai { font-weight: 700; color: var(--accent); opacity: 1; }
+  .qc-q { font-family: var(--read-font); font-size: calc(var(--read-size) * .98); font-weight: 600; line-height: 1.45; letter-spacing: var(--read-ls); word-spacing: var(--read-ws); margin: 0 0 .75rem; max-width: var(--measure); }
+  .qc-ans > summary { list-style: none; display: inline-block; cursor: pointer; }
+  .qc-ans > summary::-webkit-details-marker { display: none; }
+  .qc-ans .when-open, .qc-ans[open] .when-closed { display: none; }
+  .qc-ans[open] .when-open { display: inline; }
+  .qc-body { margin-top: .8rem; padding: .8rem 1rem; background: var(--bg); border: 1px solid var(--line); border-radius: 10px; font-family: var(--read-font); font-size: calc(var(--read-size) * .92); line-height: var(--read-lh); letter-spacing: var(--read-ls); word-spacing: var(--read-ws); animation: qopen .2s ease; }
+  .qc-body > :first-child { margin-top: 0; } .qc-body > :last-child { margin-bottom: 0; }
+  @keyframes qopen { from { opacity: 0; transform: translateY(-4px); } }
+  .qc-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .5rem; margin-top: .7rem; }
+  .qc-rate { display: inline-flex; flex-wrap: wrap; align-items: center; gap: .3rem; font-size: .82rem; color: var(--muted); }
+  .qc-rate > span { margin-right: .2rem; }
+  .qc-rate button { font: inherit; font-size: .8rem; border: 1px solid var(--line); background: var(--bg); color: var(--fg); border-radius: 99px; padding: .25rem .75rem; cursor: pointer; transition: all .15s; }
+  .qc-rate button[data-rate=si]:hover, .qc-rate button[data-rate=si][aria-pressed=true] { border-color: var(--ok); color: var(--ok); background: color-mix(in srgb, var(--ok) 12%, var(--bg)); }
+  .qc-rate button[data-rate=casi]:hover, .qc-rate button[data-rate=casi][aria-pressed=true] { border-color: var(--warn); color: var(--warn); background: color-mix(in srgb, var(--warn) 12%, var(--bg)); }
+  .qc-rate button[data-rate=no]:hover, .qc-rate button[data-rate=no][aria-pressed=true] { border-color: var(--bad); color: var(--bad); background: color-mix(in srgb, var(--bad) 10%, var(--bg)); }
+  .qc-rate button[aria-pressed=true] { font-weight: 700; }
+  .qcard.r-si { border-color: color-mix(in srgb, var(--ok) 45%, var(--line)); }
+  .qcard.r-casi { border-color: color-mix(in srgb, var(--warn) 45%, var(--line)); }
+  .qcard.r-no { border-color: color-mix(in srgb, var(--bad) 45%, var(--line)); }
+  .pr-empty { text-align: center; padding: 1rem; }
+
+  /* Generar con IA */
+  .gen { margin-top: 1.6rem; border: 1px dashed color-mix(in srgb, var(--accent) 40%, var(--line)); border-radius: var(--radius); padding: 1rem 1.15rem;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 6%, var(--bg)), var(--bg)); }
+  .gen-head { display: flex; justify-content: space-between; gap: 1rem; align-items: flex-start; }
+  .gen-head p { margin: .25rem 0 0; }
+  .cost-pill { flex: none; font-size: .7rem; font-weight: 700; color: var(--warn); border: 1px solid color-mix(in srgb, var(--warn) 50%, transparent); border-radius: 99px; padding: .15rem .55rem; white-space: nowrap; }
+  .gen-list:not(:empty) { margin-top: 1rem; }
+  .gen-actions { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; margin-top: 1rem; }
+  .gen-status.err { color: var(--bad); }
+
+  /* Simulaciones */
+  .sims .sim { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin: 1rem 0; }
+  .sims .sim h3 { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin-bottom: .5rem; }
+  .sim-type { font-size: .7rem; font-weight: 600; color: var(--accent); background: var(--soft); border-radius: 6px; padding: .12rem .5rem; }
+  .sim label.param { display: grid; grid-template-columns: 1fr auto; gap: .1rem .8rem; margin: .7rem 0; font-size: .92rem; }
+  .sim label.param strong { color: var(--accent); font-variant-numeric: tabular-nums; }
+  .sim input[type=range] { grid-column: 1 / -1; width: 100%; accent-color: var(--accent); }
+  .sim .opts { display: flex; flex-wrap: wrap; gap: .5rem; margin: .5rem 0 .8rem; }
+  .sim .opts .btn[aria-pressed=true] { border-color: var(--accent); background: var(--soft); color: var(--accent); }
+  .sim .result { border-radius: 10px; padding: .6rem .9rem; margin: .8rem 0; background: var(--bg); border: 1px solid var(--line); border-left-width: 4px; }
+  .sim .result.ok { border-left-color: var(--ok); } .sim .result.bad { border-left-color: var(--warn); }
+  .sim textarea { width: 100%; min-height: 5.5rem; font: inherit; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 10px; padding: .6rem .7rem; margin: .3rem 0 .6rem; }
+  .sim textarea:focus { outline: 2px solid color-mix(in srgb, var(--accent) 50%, transparent); border-color: var(--accent); }
+  .sim .rubric { padding: 0; } .sim .rubric li { list-style: none; padding: .2rem 0; } .sim .rubric input { margin-right: .5rem; accent-color: var(--ok); }
+  .sim select { font: inherit; font-size: .88rem; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 8px; padding: .3rem .4rem; max-width: 100%; }
+  .sim .item { padding: .6rem 0; border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; justify-content: space-between; }
+  .sim .why { flex-basis: 100%; font-size: .88rem; color: var(--muted); }
+  .sim .score { font-size: 1.05rem; }
+
+  @media (max-width: 560px) {
+    .pr-progress { width: 100%; }
+    .lab .chip.reset { margin-left: 0; }
+    .qcard { padding: .9rem .9rem .9rem 1.1rem; }
+    .gen-head { flex-direction: column; gap: .4rem; }
+  }
 </style>
 
 <script>
   import { pickOutcome } from '@tk/sims/rule';
 
-  // Constructor de DOM con textContent (las recetas son datos, nunca HTML).
+  // Constructor de DOM con textContent (las recetas y lo que devuelve la IA son datos, nunca HTML).
   function el<K extends keyof HTMLElementTagNameMap>(tag: K, attrs: Record<string, any> = {}, ...kids: (Node | string)[]) {
     const n = document.createElement(tag);
     for (const [k, v] of Object.entries(attrs)) k === 'class' ? (n.className = v) : k in n ? ((n as any)[k] = v) : n.setAttribute(k, String(v));
@@ -64,7 +230,154 @@ const KIND: Record<string, string> = { 'por-que': 'Por qué', 'que-pasa-si': 'Qu
     return n;
   }
 
-  function predictObserve(root: HTMLElement, s: any) {
+  // ───────── Práctica: autoevaluación, filtros, profundizar, generar ─────────
+  const root = document.querySelector<HTMLElement>('[data-practice]');
+  if (root) {
+    const { module: mod, topic, api } = root.dataset as { module: string; topic: string; api: string };
+    const KEY = `tk-practice:${mod}:${topic}`;
+    const KIND: Record<string, string> = { 'por-que': 'Por qué', 'que-pasa-si': 'Qué pasa si', comparar: 'Comparar', aplicar: 'Aplicar', 'error-comun': 'Error común' };
+    type Rate = 'si' | 'casi' | 'no';
+    let marks: Record<string, Rate> = {};
+    try { marks = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch {}
+    const save = () => { try { localStorage.setItem(KEY, JSON.stringify(marks)); } catch {} };
+    const cards = () => [...root.querySelectorAll<HTMLElement>('.qcard')];
+    let filter = 'all';
+
+    function paint(card: HTMLElement) {
+      const r = marks[card.dataset.q!];
+      card.classList.remove('r-si', 'r-casi', 'r-no');
+      if (r) card.classList.add(`r-${r}`);
+      card.querySelectorAll<HTMLButtonElement>('[data-rate]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.rate === r)));
+    }
+    function stats() {
+      const all = cards();
+      const n = { si: 0, casi: 0, no: 0 };
+      for (const c of all) { const r = marks[c.dataset.q!]; if (r) n[r]++; }
+      const done = n.si + n.casi + n.no;
+      root!.querySelector('.pr-count')!.textContent = `${done}/${all.length}`;
+      root!.querySelector<SVGCircleElement>('.pr-ring .fill')!.style.strokeDasharray = `${all.length ? (done / all.length) * 100 : 0} 100`;
+      for (const k of ['si', 'casi', 'no'] as const) root!.querySelector(`[data-n=${k}]`)!.textContent = String(n[k]);
+    }
+    function applyFilter() {
+      let shown = 0;
+      for (const c of cards()) {
+        const r = marks[c.dataset.q!];
+        const ok = filter === 'all' || (filter === 'pending' && !r) || (filter === 'review' && (r === 'no' || r === 'casi')) || filter === `kind:${c.dataset.kind}`;
+        c.hidden = !ok;
+        shown += +ok;
+      }
+      root!.querySelector<HTMLElement>('.pr-empty')!.hidden = shown > 0;
+    }
+    function wire(card: HTMLElement) {
+      paint(card);
+      card.querySelectorAll<HTMLButtonElement>('[data-rate]').forEach((b) => b.addEventListener('click', () => {
+        const q = card.dataset.q!;
+        marks[q] === b.dataset.rate ? delete marks[q] : (marks[q] = b.dataset.rate as Rate);
+        save(); paint(card); stats();
+      }));
+      card.querySelector('[data-deep]')?.addEventListener('click', () => {
+        const q = card.dataset.q!;
+        const answer = card.querySelector('.qc-body')?.textContent?.trim();
+        document.dispatchEvent(new CustomEvent('tk-ask', {
+          detail: answer
+            ? { q: `Sobre la pregunta «${q}»: te adjunto la respuesta del curso. Explícamela con otro ejemplo y dime qué se suele confundir.`, selection: answer }
+            : q,
+        }));
+      });
+    }
+    cards().forEach(wire);
+    stats();
+
+    root.querySelectorAll<HTMLButtonElement>('[data-filter]').forEach((b) => b.addEventListener('click', () => {
+      filter = b.dataset.filter!;
+      root.querySelectorAll('[data-filter]').forEach((x) => x.classList.toggle('on', x === b));
+      applyFilter();
+    }));
+    root.querySelector('[data-reset]')!.addEventListener('click', () => {
+      if (!confirm('¿Borrar tus marcas (sabías / dudas / a repasar) de este subtema?')) return;
+      marks = {}; save(); cards().forEach(paint); stats(); applyFilter();
+    });
+
+    // Desde el menú de selección: llevar a la pregunta (sin abrir la respuesta: primero intentar).
+    document.addEventListener('tk-show-q', (e) => {
+      const q = (e as CustomEvent<string>).detail;
+      const card = cards().find((c) => c.dataset.q === q);
+      if (!card) return;
+      if (card.hidden) { filter = 'all'; root.querySelectorAll('[data-filter]').forEach((x) => x.classList.toggle('on', (x as HTMLElement).dataset.filter === 'all')); applyFilter(); }
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      card.classList.remove('flash'); void card.offsetWidth; card.classList.add('flash');
+    });
+
+    // Respuesta de la IA → DOM seguro: escapa todo y solo reconoce **negrita** y `código`.
+    function inline(text: string) {
+      const p = el('p');
+      for (const part of text.split(/(\*\*[^*]+\*\*|`[^`]+`)/g)) {
+        if (!part) continue;
+        if (part.startsWith('**') && part.endsWith('**')) p.append(el('strong', {}, part.slice(2, -2)));
+        else if (part.startsWith('`') && part.endsWith('`')) p.append(el('code', {}, part.slice(1, -1)));
+        else p.append(part);
+      }
+      return p;
+    }
+    const genList = root.querySelector<HTMLElement>('.gen-list')!;
+    const status = root.querySelector<HTMLElement>('.gen-status')!;
+    const genBtn = root.querySelector<HTMLButtonElement>('[data-gen]')!;
+    function genCard(g: { q: string; kind: string; a: string }) {
+      const rate = el('div', { class: 'qc-rate', role: 'group' }, el('span', {}, '¿La sabías?'),
+        ...(['si', 'casi', 'no'] as const).map((r) => { const b = el('button', { type: 'button' }, { si: 'Sí', casi: 'Más o menos', no: 'No' }[r]); b.dataset.rate = r; return b; }));
+      const deep = el('button', { type: 'button', class: 'btn ghost' }, 'Profundizar con el tutor ↗');
+      deep.dataset.deep = '';
+      const body = el('div', { class: 'qc-body' }, ...g.a.split(/\n{2,}/).map(inline));
+      const card = el('li', { class: `qcard k-${g.kind}` },
+        el('div', { class: 'qc-top' }, el('span', { class: `kind k-${g.kind}` }, KIND[g.kind] ?? g.kind), el('span', { class: 'qc-n ai', title: 'Generada con IA' }, 'IA')),
+        el('p', { class: 'qc-q' }, g.q),
+        el('details', { class: 'qc-ans' },
+          el('summary', {}, el('span', { class: 'btn soft' }, el('span', { class: 'when-closed' }, 'Ver respuesta'), el('span', { class: 'when-open' }, 'Ocultar respuesta'))),
+          body, el('div', { class: 'qc-foot' }, rate, deep)));
+      card.dataset.q = g.q;
+      card.dataset.kind = g.kind;
+      wire(card);
+      return card;
+    }
+    const usd = (n: number | null) => (n === null ? 'precio desconocido' : `$${n < 0.01 ? n.toFixed(4) : n.toFixed(3)}`);
+
+    fetch(`${api}/preguntas?module=${encodeURIComponent(mod)}&topic=${encodeURIComponent(topic)}`)
+      .then((r) => (r.ok ? r.json() : { questions: [] }))
+      .then((d) => {
+        genList.replaceChildren(...(d.questions ?? []).map(genCard));
+        if (d.questions?.length) status.textContent = `${d.questions.length} generadas antes (gratis).`;
+        stats(); applyFilter();
+      })
+      .catch(() => { status.textContent = 'Para generar, arranca el tutor (pnpm dev).'; });
+
+    genBtn.addEventListener('click', async () => {
+      genBtn.disabled = true;
+      status.classList.remove('err');
+      status.textContent = 'Generando…';
+      let provider: string | undefined;
+      try { provider = localStorage.getItem('tk-chat-provider') || undefined; } catch {}
+      try {
+        const r = await fetch(`${api}/preguntas`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ module: mod, topic, count: 3, provider }) });
+        const d = await r.json();
+        if (!r.ok) throw new Error(d.error ?? `error ${r.status}`);
+        const added = (d.added ?? []).map(genCard);
+        genList.append(...added);
+        stats(); applyFilter();
+        added[0]?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        status.textContent = d.error ?? `${added.length} nuevas · ${usd(d.cost)} · ${d.name ?? d.model}`;
+        if (d.error) status.classList.add('err');
+        document.dispatchEvent(new CustomEvent('tk-spent'));
+      } catch (e: any) {
+        status.classList.add('err');
+        status.textContent = /fetch/i.test(String(e?.message)) ? 'No se pudo hablar con el tutor. ¿Está corriendo pnpm dev?' : e.message;
+      } finally {
+        genBtn.disabled = false;
+      }
+    });
+  }
+
+  // ───────── Simulaciones ─────────
+  function predictObserve(box: HTMLElement, s: any) {
     const vals: Record<string, number> = Object.fromEntries(s.params.map((p: any) => [p.id, p.default]));
     let chosen = '';
     const sliders = s.params.map((p: any) => {
@@ -75,10 +388,10 @@ const KIND: Record<string, string> = { 'por-que': 'Por qué', 'que-pasa-si': 'Qu
         out.textContent = `${input.value}${p.unit ? ' ' + p.unit : ''}`;
         reset();
       });
-      return el('label', { class: 'param' }, `${p.label}: `, out, input);
+      return el('label', { class: 'param' }, el('span', {}, p.label), out, input);
     });
     const opts = s.predict.options.map((o: any) => {
-      const b = el('button', { type: 'button' }, o.label);
+      const b = el('button', { type: 'button', class: 'btn' }, o.label);
       b.setAttribute('aria-pressed', 'false');
       b.addEventListener('click', () => {
         chosen = o.id;
@@ -87,7 +400,7 @@ const KIND: Record<string, string> = { 'por-que': 'Por qué', 'que-pasa-si': 'Qu
       });
       return b;
     });
-    const run = el('button', { type: 'button', disabled: true }, 'Observar resultado');
+    const run = el('button', { type: 'button', class: 'btn primary', disabled: true }, 'Observar resultado');
     const result = el('div');
     const explain = el('div');
     function reset() { result.replaceChildren(); explain.replaceChildren(); }
@@ -98,27 +411,24 @@ const KIND: Record<string, string> = { 'por-que': 'Por qué', 'que-pasa-si': 'Qu
       result.replaceChildren(el('div', { class: `result ${ok ? 'ok' : 'bad'}` },
         el('strong', {}, ok ? '✔ Predicción correcta. ' : '✖ No era eso. '), o.show));
       const ta = el('textarea', { placeholder: s.explain.prompt });
-      const check = el('button', { type: 'button' }, 'Comparar con la lista de ideas');
+      const check = el('button', { type: 'button', class: 'btn soft' }, 'Comparar con la lista de ideas');
       const list = el('ul', { class: 'rubric' });
       check.addEventListener('click', () => {
         list.replaceChildren(...s.explain.rubric.map((idea: string) => el('li', {}, el('label', {}, el('input', { type: 'checkbox' }), idea))));
-        list.after(el('p', { class: 'muted' }, 'Marca las ideas que tu explicación incluye. Las que falten, vuelve a leerlas en el subtema.'));
+        if (!list.nextElementSibling) list.after(el('p', { class: 'muted' }, 'Marca las ideas que tu explicación incluye. Las que falten, vuelve a leerlas en el subtema.'));
       });
       explain.replaceChildren(el('p', {}, el('strong', {}, 'Explica: '), s.explain.prompt), ta, check, list);
     });
-    root.replaceChildren(el('p', {}, s.context), ...sliders,
+    box.replaceChildren(el('p', {}, s.context), ...sliders,
       el('p', {}, el('strong', {}, 'Antes de observar, predice: '), s.predict.question),
       el('div', { class: 'opts' }, ...opts), run, result, explain);
   }
 
-  function classify(root: HTMLElement, s: any) {
-    const selects = s.items.map(() => {
-      const sel = el('select', {}, el('option', { value: '' }, '— elige —'), ...s.categories.map((c: any) => el('option', { value: c.id }, c.label)));
-      return sel;
-    });
+  function classify(box: HTMLElement, s: any) {
+    const selects = s.items.map(() => el('select', {}, el('option', { value: '' }, '— elige —'), ...s.categories.map((c: any) => el('option', { value: c.id }, c.label))));
     const rows = s.items.map((it: any, i: number) => el('div', { class: 'item' }, el('span', {}, it.text), selects[i]));
-    const score = el('p');
-    const check = el('button', { type: 'button' }, 'Corregir');
+    const score = el('p', { class: 'score' });
+    const check = el('button', { type: 'button', class: 'btn primary' }, 'Corregir');
     check.addEventListener('click', () => {
       let ok = 0;
       s.items.forEach((it: any, i: number) => {
@@ -130,7 +440,7 @@ const KIND: Record<string, string> = { 'por-que': 'Por qué', 'que-pasa-si': 'Qu
       });
       score.replaceChildren(el('strong', {}, `${ok}/${s.items.length} correctas`));
     });
-    root.replaceChildren(el('p', {}, s.prompt), ...rows, check, score);
+    box.replaceChildren(el('p', {}, s.prompt), ...rows, el('p', {}, check), score);
   }
 
   document.querySelectorAll<HTMLElement>('[data-sim]').forEach((box) => {
@@ -139,8 +449,4 @@ const KIND: Record<string, string> = { 'por-que': 'Por qué', 'que-pasa-si': 'Qu
     if (s.type === 'predecir-observar') predictObserve(body, s);
     else if (s.type === 'clasificar') classify(body, s);
   });
-  // Manda la pregunta sugerida al chat flotante (Chat.astro escucha 'tk-ask').
-  document.querySelectorAll<HTMLButtonElement>('button.copy').forEach((b) =>
-    b.addEventListener('click', () => document.dispatchEvent(new CustomEvent('tk-ask', { detail: b.dataset.q }))),
-  );
 </script>

@@ -56,3 +56,6 @@ Gestión **multi-cuenta**: una cuenta de administración (management) y cuentas 
 - (por-que) ¿Por qué una SCP no da permisos aunque diga Allow?
 - (que-pasa-si) ¿Qué pasa si una SCP deniega una acción que la política IAM de un usuario permite?
 - (aplicar) ¿Cómo darías acceso con un solo login a 50 cuentas de AWS?
+- (por-que) ¿Por qué la facturación consolidada de Organizations puede salir más barata?
+- (aplicar) ¿Cómo impides que cualquier cuenta de la organización use Regiones fuera de la UE?
+- (comparar) Compara AWS Control Tower con usar Organizations a mano.

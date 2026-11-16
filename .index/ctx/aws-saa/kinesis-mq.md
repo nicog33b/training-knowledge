@@ -32,6 +32,9 @@ SQS: cola, un consumidor por mensaje. SNS: pub/sub. Kinesis: stream ordenado por
 ### Amazon MQ
 Broker gestionado de **Apache ActiveMQ** y **RabbitMQ**: para migrar aplicaciones on-premises que usan **MQTT, AMQP, STOMP, OpenWire, WSS** sin reescribirlas. No escala tanto como SQS/SNS. Alta disponibilidad con **Multi-AZ** (active/standby) y almacenamiento EFS/EBS. Se despliega en una VPC.
 
+## Subtemas relacionados (solo resumen; el cuerpo con leer_subtema)
+- sqs: SQS — Colas gestionadas: estándar vs FIFO, visibilidad, long polling, DLQ y patrones. [secciones: SQS: Simple Queue Service · Cola estándar · Visibility Timeout · Long Polling · Dead-Letter Queue (DLQ) · Delay y otros · Patrón con Auto Scaling]
+
 ## Glosario usado
 - Latencia: Tiempo que tarda una petición en recibir respuesta.
 - Alta disponibilidad: Diseño que tolera fallos de componentes manteniendo el servicio en pie.
@@ -65,6 +68,8 @@ Broker gestionado de **Apache ActiveMQ** y **RabbitMQ**: para migrar aplicacione
 - (que-pasa-si) ¿Qué pasa si todas tus escrituras usan la misma partition key?
 - (comparar) Compara Data Streams y Firehose: ¿cuál eliges si necesitas reprocesar datos de ayer?
 - (aplicar) Una app on-premises usa AMQP y no quieres reescribirla: ¿qué servicio usas?
+- (comparar) Compara Kinesis Data Streams y SQS.
+- (aplicar) Quieres calcular métricas de clics por minuto en tiempo real sobre un stream: ¿qué usas?
 
 ## Simulaciones del subtema
 - predecir-observar: ¿Cuántos shards necesito?

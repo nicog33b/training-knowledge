@@ -2,16 +2,29 @@ questions:
   - q: ¿Por qué un cold start afecta más a Java que a Python y cómo lo mitiga SnapStart?
     kind: por-que
     uses: []
+    a: En un cold start Lambda crea el entorno y ejecuta la inicialización. Java tiene que arrancar la **JVM** y cargar clases y frameworks (Spring…), lo que puede tardar segundos; Python arranca mucho más rápido. **SnapStart** hace un **snapshot del entorno ya inicializado** al publicar una versión y restaura desde él en cada cold start, saltándose casi toda la inicialización.
   - q: ¿Qué pasa si una función tarda más de 15 minutos?
     kind: que-pasa-si
     uses: []
+    a: "15 minutos (900 s) es el **timeout máximo**: Lambda **corta la ejecución** y la marca como error; en invocaciones asíncronas se reintenta y vuelve a fallar. Para trabajos largos: dividirlos en pasos con **Step Functions**, o ejecutarlos en **ECS/Fargate** o **AWS Batch**, que no tienen ese límite."
   - q: "Compara reserved y provisioned concurrency: ¿cuál evita cold starts?"
     kind: comparar
     uses: []
+    a: "**Reserved concurrency** reserva y a la vez **limita** cuántas instancias simultáneas puede tener la función (protege a otras funciones o a una base de datos). No calienta nada y no tiene coste extra. **Provisioned concurrency** mantiene entornos **ya inicializados** esperando, así que **evita cold starts**; se paga aunque no se use."
   - q: "Error común: ¿por qué poner una Lambda en una VPC privada le quita salida a Internet?"
     kind: error-comun
     uses:
       - vpc-fundamentos
+    a: En una VPC, Lambda usa ENI de tus subredes **sin IP pública**, incluso si la subred es pública. Sin IP pública no puede salir por el Internet Gateway. Necesita una ruta a un **NAT Gateway** (en una subred pública) o **VPC endpoints** para llegar a servicios de AWS como S3 o DynamoDB sin Internet.
+  - q: ¿Cómo procesas los mensajes de una cola SQS con Lambda sin perder ni duplicar trabajo?
+    kind: aplicar
+    a: "Con un **event source mapping**: Lambda sondea la cola y te entrega lotes (batch size configurable). Pon el **visibility timeout de la cola en al menos 6 veces el timeout de la función**, usa **partial batch response** para devolver solo los mensajes que fallaron, y una **DLQ** para los que fallan siempre. Haz el código idempotente."
+    uses:
+      - sqs
+  - q: Compara la invocación síncrona y la asíncrona de Lambda.
+    kind: comparar
+    a: "**Síncrona** (API Gateway, una llamada `Invoke` normal): quien llama **espera la respuesta** y gestiona los errores y reintentos. **Asíncrona** (eventos de S3 o SNS): Lambda pone el evento en una cola interna, responde al momento y **reintenta 2 veces** si falla; los fallos van a un destino on-failure o a una DLQ."
+    uses: []
 sims:
   - id: concurrencia
     title: Concurrencia y throttling

@@ -64,3 +64,6 @@ El **AWS Well-Architected Framework** reúne mejores prácticas para diseñar y 
 - (por-que) ¿Por qué el pilar de sostenibilidad se añadió como sexto pilar?
 - (aplicar) Elige un pilar y di qué decisión de arquitectura lo mejora y cuál lo empeora.
 - (comparar) Compara fiabilidad y eficiencia del rendimiento: ¿qué pregunta responde cada uno?
+- (comparar) ¿Cuáles son los seis pilares de Well-Architected y qué pregunta clave responde cada uno?
+- (aplicar) ¿Qué herramienta usas para revisar una carga de trabajo contra el marco Well-Architected?
+- (error-comun) Error común: ¿por qué optimizar costes no significa elegir siempre lo más barato?

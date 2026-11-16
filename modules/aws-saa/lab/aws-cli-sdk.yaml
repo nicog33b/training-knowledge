@@ -2,10 +2,25 @@ questions:
   - q: ¿Por qué CloudShell no necesita que configures credenciales?
     kind: por-que
     uses: []
+    a: CloudShell se abre desde la consola ya autenticada y usa **las credenciales temporales de la identidad con la que entraste** (usuario o rol). No hay access keys en disco que guardar ni rotar, y tiene los mismos permisos que tú en la consola.
   - q: ¿Qué pasa si subes a un repositorio público el archivo ~/.aws/credentials?
     kind: que-pasa-si
     uses: []
+    a: "Expones **access keys de larga duración**: hay bots que escanean repositorios públicos y las usan en minutos (minería, recursos caros, robo de datos). Hay que **desactivar y rotar** la clave de inmediato, revisar en CloudTrail qué se hizo con ella y borrar lo creado. Prevención: credenciales temporales (IAM Identity Center, roles) en vez de claves fijas."
   - q: ¿Cómo elegirías un perfil distinto para cada cuenta desde la CLI?
     kind: aplicar
+    uses: []
+    a: Crea perfiles con `aws configure --profile cliente-a` (o `aws configure sso` con IAM Identity Center) y úsalos con `--profile cliente-a` o la variable `AWS_PROFILE`. Un perfil también puede **asumir un rol** en otra cuenta con `role_arn` + `source_profile` en `~/.aws/config`.
+  - q: "Compara la CLI y los SDK: ¿cuándo usas cada uno?"
+    kind: comparar
+    a: La **CLI** sirve para la terminal y scripts de automatización; los **SDK** (boto3, JavaScript, Java…) para el código de tu aplicación. Los dos llaman a la misma API, firman con SigV4 y buscan credenciales con la misma **cadena de proveedores**; los SDK añaden reintentos, paginadores y waiters integrados en tu lenguaje.
+    uses: []
+  - q: ¿Por qué una app en EC2 con rol puede acabar usando otras credenciales que las del rol?
+    kind: por-que
+    a: "La **cadena de credenciales** tiene un orden: primero las variables de entorno (`AWS_ACCESS_KEY_ID`…), luego los archivos de config/credentials del perfil y al final el rol del contenedor o de la instancia. Si alguien dejó access keys en variables de entorno o en `~/.aws/credentials`, **ganan al rol**. Quítalas para que se use el rol."
+    uses: []
+  - q: ¿Cómo compruebas si tienes permiso para lanzar una instancia sin lanzarla de verdad?
+    kind: aplicar
+    a: "Con `--dry-run`: `aws ec2 run-instances ... --dry-run` responde `DryRunOperation` si tendrías permiso y `UnauthorizedOperation` si no, sin crear nada. Para políticas en general, el **IAM Policy Simulator** evalúa qué acciones permite una identidad."
     uses: []
 sims: []

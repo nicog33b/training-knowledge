@@ -1,0 +1,22 @@
+id: dyson-2004
+title: How physical text layout affects reading from screen
+authors:
+  - Mary C. Dyson
+year: 2004
+venue: Behaviour & Information Technology 23(6), 377–393
+url: https://stu.westga.edu/~ssynan1/literacy/Dyson.pdf
+kind: review
+verified: secondary
+retrieved: 2026-11-15
+summary: Los caracteres por línea son la variable clave; las líneas largas se
+  leen algo más rápido, pero se prefieren y a veces se comprenden mejor las
+  medias (~55 cpl).
+facts:
+  - Líneas de ~100 caracteres se leyeron más rápido que de 25 sin cambio de
+    comprensión (Dyson y Kipping), pero con 55 cpl la comprensión fue mejor que
+    con 100 (Dyson y Haselgrove).
+  - Los lectores prefieren líneas cortas o medias (45–72 caracteres).
+caveats:
+  - Datos tomados de resúmenes secundarios; no se leyó el artículo.
+  - La propia autora pide más estudios sobre la interacción con el
+    desplazamiento y la familiaridad con el formato.

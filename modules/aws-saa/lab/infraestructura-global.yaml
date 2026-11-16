@@ -2,14 +2,26 @@ questions:
   - q: ¿Por qué desplegar en dos AZ protege contra un fallo que una sola AZ no puede cubrir?
     kind: por-que
     uses: []
+    a: "Cada AZ son uno o más centros de datos con **energía, refrigeración y red independientes**, separados físicamente pero conectados con baja latencia. Un incendio, un corte eléctrico o una inundación en una AZ no afecta a la otra. Con una sola AZ no hay a dónde fallar: si cae, cae todo."
   - q: ¿Qué pasa si eliges una Región solo por precio y tus usuarios están en otro continente?
     kind: que-pasa-si
     uses: []
+    a: Los usuarios sufren **más latencia** en cada petición. Además puedes incumplir requisitos de **soberanía de datos** (leyes que exigen guardar los datos en un país) y quizá algún servicio que necesitas no esté disponible ahí. La Región se elige por cumplimiento, latencia, servicios disponibles y, después, precio.
   - q: ¿En qué se diferencian una Región, una AZ y una Edge Location en lo que alojan?
     kind: comparar
     uses: []
+    a: "**Región**: zona geográfica aislada con varias AZ y los servicios regionales. **AZ**: los centros de datos donde corren de verdad tus recursos (EC2, RDS, subredes). **Edge Location**: punto de presencia cerca de los usuarios para CloudFront, Route 53 y Global Accelerator; cachea y enruta, no aloja tus servidores."
   - q: En el modelo de responsabilidad compartida, ¿quién parchea el SO de una EC2 y quién el de RDS?
     kind: aplicar
     uses:
       - rds-aurora
+    a: "En **EC2** (IaaS) el sistema operativo invitado es **tuyo**: parches, antivirus, firewall del SO. En **RDS** (servicio gestionado) **AWS** parchea el SO y el motor de base de datos; tú eliges la ventana de mantenimiento y sigues siendo responsable de los datos, los usuarios de la base y la configuración de acceso."
+  - q: "Necesitas latencia de milisegundos de un dígito para usuarios de una ciudad sin Región de AWS: ¿qué opciones hay?"
+    kind: aplicar
+    a: "**Local Zones**: extensiones de una Región en grandes ciudades donde lanzas EC2, EBS y otros servicios cerca de los usuarios. **Wavelength**: dentro de redes 5G de operadores, para apps móviles. **Outposts**: hardware de AWS en tu propio centro de datos."
+    uses: []
+  - q: ¿Por qué tus datos no salen de una Región salvo que tú los muevas?
+    kind: por-que
+    a: "Las Regiones están **aisladas** a propósito: los servicios regionales guardan los datos solo en esa Región, lo que da tolerancia a fallos y ayuda a cumplir leyes de **soberanía de datos**. Copiar a otra Región siempre es una acción explícita tuya: replicación entre Regiones de S3, copia de snapshots, réplicas cross-Region."
+    uses: []
 sims: []

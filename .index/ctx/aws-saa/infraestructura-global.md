@@ -58,3 +58,5 @@ Desplegar en **más de una AZ** es la base de la alta disponibilidad: si una AZ 
 - (que-pasa-si) ¿Qué pasa si eliges una Región solo por precio y tus usuarios están en otro continente?
 - (comparar) ¿En qué se diferencian una Región, una AZ y una Edge Location en lo que alojan?
 - (aplicar) En el modelo de responsabilidad compartida, ¿quién parchea el SO de una EC2 y quién el de RDS?
+- (aplicar) Necesitas latencia de milisegundos de un dígito para usuarios de una ciudad sin Región de AWS: ¿qué opciones hay?
+- (por-que) ¿Por qué tus datos no salen de una Región salvo que tú los muevas?

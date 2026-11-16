@@ -2,14 +2,31 @@ questions:
   - q: ¿Por qué una partition key con pocos valores distintos causa una partición caliente?
     kind: por-que
     uses: []
+    a: DynamoDB decide la partición con el **hash de la partition key**. Con pocos valores (p. ej. `estado = activo/inactivo`), casi todo el tráfico cae en las mismas particiones. Cada partición tiene su propio límite (unas 3.000 RCU y 1.000 WCU), así que hay **throttling** aunque la tabla tenga capacidad total de sobra. La solución es una clave de alta cardinalidad o añadir un sufijo (write sharding).
   - q: ¿Qué pasa si superas la capacidad provisionada de escritura?
     kind: que-pasa-si
     uses: []
+    a: "Las escrituras de más reciben `ProvisionedThroughputExceededException` (**throttling**); los SDK reintentan con backoff exponencial. La **burst capacity** puede absorber picos cortos. Soluciones: **auto scaling** de la capacidad, modo **on-demand**, o repartir mejor la partition key si el problema es una partición caliente."
   - q: "Compara un GSI y un LSI: ¿cuál puedes crear después de crear la tabla?"
     kind: comparar
     uses: []
+    a: "**GSI**: puedes crearlo **cuando quieras**; tiene otra partition key (y sort key), capacidad propia y solo lecturas eventualmente consistentes. **LSI**: **solo al crear la tabla**; misma partition key con otra sort key; admite lecturas fuertemente consistentes, pero limita a 10 GB los datos por valor de partition key."
   - q: ¿Cuándo pondrías DAX delante y cuándo ElastiCache?
     kind: aplicar
     uses:
       - elasticache
+    a: "**DAX** es una caché en memoria **compatible con la API de DynamoDB**: cambias el cliente y las lecturas repetidas bajan a microsegundos, sin tocar la lógica. Solo sirve para DynamoDB. **ElastiCache** cuando cacheas resultados calculados, datos de varias fuentes o necesitas estructuras de Redis (contadores, rankings, sesiones)."
+  - q: Compara los modos on-demand y provisioned de DynamoDB.
+    kind: comparar
+    a: "**On-demand**: pagas por petición, sin planificar capacidad; ideal para tráfico nuevo, impredecible o con picos bruscos. **Provisioned**: defines RCU/WCU (con auto scaling); **más barato** con tráfico estable y previsible, pero puede haber throttling si te quedas corto."
+    uses: []
+  - q: "Quieres enviar un email cada vez que se crea un pedido en una tabla de DynamoDB: ¿cómo?"
+    kind: aplicar
+    a: Activa **DynamoDB Streams** en la tabla (registra cada inserción, modificación y borrado en orden por clave) y conecta una **Lambda** como trigger que filtre los `INSERT` y envíe el email (p. ej. con SES). No tocas el código que escribe el pedido.
+    uses:
+      - lambda
+  - q: "Necesitas la misma tabla con escrituras en dos continentes y latencia local: ¿qué usas?"
+    kind: aplicar
+    a: "**DynamoDB global tables**: réplicas en varias Regiones, todas aceptan lecturas y escrituras (**multi-activo**) y se replican entre sí en general en menos de un segundo. Cada usuario escribe en su Región cercana, y si una Región cae, las otras siguen."
+    uses: []
 sims: []

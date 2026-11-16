@@ -2,10 +2,25 @@ questions:
   - q: ¿Por qué la memoria de una EC2 no aparece en CloudWatch por defecto?
     kind: por-que
     uses: []
+    a: "Las métricas por defecto las ve el **hipervisor** desde fuera de la instancia: CPU, red, disco a nivel de dispositivo, status checks. La memoria usada (y el espacio libre en disco) es un dato del **sistema operativo**, que el hipervisor no ve. Para tenerlas instalas el **CloudWatch agent**, que las publica como métricas personalizadas."
   - q: ¿Qué pasa con una alarma en estado INSUFFICIENT_DATA?
     kind: que-pasa-si
     uses: []
+    a: "La alarma **no tiene datos suficientes** para evaluar: está recién creada, la métrica no llega o la instancia está parada. No dispara las acciones de ALARM. Con **treat missing data** decides cómo tratar los huecos: `missing`, `notBreaching`, `breaching` o `ignore`."
   - q: ¿Cómo reiniciarías automáticamente una instancia cuando falla su status check?
     kind: aplicar
+    uses: []
+    a: "Una alarma de CloudWatch sobre `StatusCheckFailed_Instance` con la **acción de EC2 Reboot**. Si lo que falla es `StatusCheckFailed_System` (el host de AWS), usa la acción **Recover**: mueve la instancia a otro hardware conservando ID, IP privada, Elastic IP y metadatos."
+  - q: Compara la monitorización estándar y la detallada de EC2.
+    kind: comparar
+    a: "**Estándar** (gratis): métricas cada **5 minutos**. **Detallada** (de pago): cada **1 minuto**. Con detallada, las alarmas y el escalado de un ASG reaccionan antes a un pico. Para métricas personalizadas existe además la alta resolución, de hasta 1 segundo."
+    uses: []
+  - q: "Quieres una alerta cuando aparezcan más de 10 líneas con ERROR en los logs en 5 minutos: ¿cómo?"
+    kind: aplicar
+    a: Un **metric filter** en el log group de CloudWatch Logs que cuente las líneas con `ERROR` y las publique como métrica, más una **alarma** sobre esa métrica (> 10 en 5 min) que notifique a un topic de **SNS**. Para investigar después, **Logs Insights** permite consultar los logs con un lenguaje de consultas.
+    uses: []
+  - q: ¿Qué pasa con el coste de CloudWatch Logs si nunca configuras retención?
+    kind: que-pasa-si
+    a: Por defecto los log groups **guardan los logs para siempre**, así que el almacenamiento crece y lo pagas cada mes. Configura una **retención** (p. ej. 30 días) y, si debes archivarlos años por cumplimiento, expórtalos a **S3** con una lifecycle a Glacier, que es mucho más barato.
     uses: []
 sims: []
