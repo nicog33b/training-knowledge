@@ -62,6 +62,7 @@ _(nada)_
 
 ## Hecho
 
+- [x] T-089 Web mobile first — CSS base = móvil, `min-width` (521/561px) restaura tablet/escritorio igual que antes; tablas desplazables y textareas a 16px en móvil (sin zoom iOS) — 2026-11-18
 - [x] T-084 2026-11-16 Investigación de tipografía, tamaño, medida, color, contraste y polaridad: 19 fuentes y 3 decisiones `proposed` (tipografia-y-medidas-de-lectura, sin-tipografias-milagro, color-con-funcion-y-contraste)
 - [x] T-085 2026-11-16 Aplicado a la web: texto de estudio a 19 px, medida 68ch, interlineado 1,65; tokens de color con contraste ≥4,5:1 en claro y oscuro (antes el ámbar/verde/cian claros daban 3,2–3,7); botón "Aa" en el header (fuente Sistema/Literata/Atkinson Hyperlegible servidas desde el sitio, tamaño 15–26 px, espaciado amplio de WCAG 1.4.12, tema Auto/Claro/Oscuro) guardado por navegador y aplicado antes de pintar · decisión: tipografia-y-medidas-de-lectura, color-con-funcion-y-contraste, sin-tipografias-milagro
 

@@ -100,7 +100,9 @@ const api = import.meta.env.PUBLIC_TUTOR_URL ?? 'http://127.0.0.1:4322';
   .tk-spend-models tr.unused td { color: var(--muted); }
   .tk-spend-note { color: var(--muted); font-size: .72rem; margin: .5rem 0; }
   .tk-spend-reset { font: inherit; font-size: .72rem; border: 1px solid var(--line); background: var(--card); color: var(--muted); border-radius: 6px; padding: .15rem .5rem; cursor: pointer; }
-  @media (max-width: 520px) { .tk-top nav a:not(.tk-brand):nth-child(n+3) { display: none; } }
+  /* Mobile first: base = móvil; desde 521px se restaura el escritorio/tablet. */
+  .tk-top nav a:not(.tk-brand):nth-child(n+3) { display: none; }
+  @media (min-width: 521px) { .tk-top nav a:not(.tk-brand):nth-child(n+3) { display: inline; } }
 </style>
 
 <script>
