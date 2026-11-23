@@ -1,0 +1,57 @@
+questions:
+  - q: ¿Por qué no se puede decir «I have visited Rome in 2019»?
+    kind: error-comun
+    a: "Porque *in 2019* es un **momento terminado**, y el Present Perfect habla de pasado **conectado con ahora, sin momento terminado**. Con fecha se usa Past Simple: *I **visited** Rome in 2019*. Sin fecha sí vale el perfecto como experiencia: *I've visited Rome* (alguna vez en mi vida)."
+    uses: []
+  - q: Compara «He has worked here for 5 years» con «He worked here for 5 years».
+    kind: comparar
+    a: "***He has worked here for 5 years***: empezó hace 5 años y **sigue** trabajando aquí. ***He worked here for 5 years***: trabajó 5 años y **ya no** trabaja aquí; es un periodo cerrado. *For* aparece en ambas; lo que decide el tiempo es si el periodo llega hasta ahora."
+    uses: []
+  - q: ¿Qué diferencia hay entre «She has gone to Paris» y «She has been to Paris»?
+    kind: comparar
+    a: "***has gone***: se fue y **está allí ahora** (o en camino). ***has been***: **fue y volvió**; es una experiencia. Por eso *Have you ever **been** to Paris?* es la pregunta normal por experiencias, y *Where's Ana? — She's **gone** to Paris* explica su ausencia."
+    uses: []
+  - q: ¿Cómo se usan already, yet y just?
+    kind: aplicar
+    a: "***just*** = acabar de, entre *have* y el participio: *I've **just** eaten*. ***already*** = ya (antes de lo esperado), en afirmativas: *She's **already** left*. ***yet*** = ya/todavía, en **preguntas y negativas**, al final: *Have you finished **yet**? / I haven't finished **yet***."
+    uses: []
+  - q: ¿Por qué una conversación pasa de Present Perfect a Past Simple?
+    kind: por-que
+    a: "Porque se empieza preguntando por la **experiencia** sin fecha (*Have you ever been to Peru?*) y, al dar **detalles concretos**, aparece un momento terminado: *Yes, I **went** in 2022. It **was** amazing*. Una vez que el momento está fijado, se sigue en Past Simple."
+    uses: []
+  - q: Di «Llevo tres años estudiando aquí» y «Vivo aquí desde marzo».
+    kind: aplicar
+    a: "*I've **studied** / I've **been studying** here **for** three years* y *I've **lived** here **since** March*. **for** + duración (*three years*), **since** + punto de inicio (*March, 2020, Monday*). El español usa presente; el inglés exige perfecto porque la situación va del pasado hasta ahora."
+    uses: []
+sims:
+  - id: perfect-o-past
+    title: ¿Present Perfect o Past Simple?
+    type: clasificar
+    prompt: Elige el tiempo correcto.
+    categories:
+      - id: perfect
+        label: Present Perfect
+      - id: past
+        label: Past Simple
+    items:
+      - text: I ___ (lose) my keys — I can't get in!
+        category: perfect
+        why: "Resultado ahora: I've lost my keys."
+      - text: We ___ (meet) three years ago.
+        category: past
+        why: "ago = momento terminado: met."
+      - text: ___ you ever ___ (try) sushi?
+        category: perfect
+        why: "Experiencia con ever: Have you ever tried…?"
+      - text: She ___ (live) in Paris from 2010 to 2015.
+        category: past
+        why: "Periodo cerrado: lived."
+      - text: I ___ (know) him since school.
+        category: perfect
+        why: "since, hasta ahora: I've known him."
+      - text: When ___ you ___ (arrive)?
+        category: past
+        why: "when pide momento terminado: When did you arrive?"
+      - text: I ___ (drink) three coffees today.
+        category: perfect
+        why: "Periodo abierto (today): I've drunk."

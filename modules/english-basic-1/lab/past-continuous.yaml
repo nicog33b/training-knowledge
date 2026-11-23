@@ -1,0 +1,54 @@
+questions:
+  - q: Compara «When she arrived, we were having dinner» con «When she arrived, we had dinner».
+    kind: comparar
+    a: "Con **Past Continuous** (*were having*), la cena **ya estaba en marcha** cuando ella llegó: su llegada la interrumpe. Con **Past Simple** (*had*), las acciones son **sucesivas**: llegó y luego cenamos. El aspecto cambia el orden de los hechos aunque las palabras sean casi iguales."
+    uses: []
+  - q: ¿Por qué «while» suele ir con Past Continuous y «when» con Past Simple?
+    kind: por-que
+    a: "***While*** introduce una **acción larga** que sirve de fondo: *While I was driving, …*. ***When*** suele introducir la **acción corta** que interrumpe: *… when the phone rang*. No es una regla absoluta (*when* puede ir con continuo), pero la combinación más natural es *while + continuo* y *when + simple*."
+    uses: []
+  - q: "¿Qué pasa si cuentas todo en Past Continuous: «I was waking up, I was having a shower and I was leaving»?"
+    kind: que-pasa-si
+    a: "Suena raro: el Past Continuous presenta acciones **en progreso**, sin terminar, así que no sirve para una **secuencia** de acciones completas. Para la secuencia se usa Past Simple: *I **woke** up, **had** a shower and **left***. El continuo se reserva para el fondo: *It **was raining** when I left*."
+    uses: []
+  - q: "Describe la escena de inicio de una historia: «Llovía y la gente corría hacia sus coches»."
+    kind: aplicar
+    a: "*It **was raining** and people **were running** to their cars*. El Past Continuous es ideal para **pintar el fondo** de una historia; luego entra la acción principal en Past Simple: *Suddenly, a man **shouted***. Así se traduce el imperfecto descriptivo de acciones en curso."
+    uses: []
+  - q: "Error común: ¿por qué está mal «I was knowing him for years»?"
+    kind: error-comun
+    a: "Porque *know* es **verbo de estado** y no va en continuo ni en pasado ni en presente. Para un estado pasado basta el Past Simple: *I **knew** him*. Si quieres expresar duración hasta un momento pasado: *I **had known** him for years* (Past Perfect)."
+    uses: []
+  - q: ¿Qué estabas haciendo ayer a las 9 de la noche? Responde en inglés.
+    kind: aplicar
+    a: "*At 9 pm yesterday I **was watching** a series* (o *I was having dinner*, *I was studying*…). Una **hora concreta del pasado** + acción en progreso pide Past Continuous. La pregunta sería: *What **were you doing** at 9 pm yesterday?* (were + sujeto + -ing)."
+    uses: []
+sims:
+  - id: when-while
+    title: ¿Simple o continuo en el pasado?
+    type: clasificar
+    prompt: Elige la forma del verbo entre paréntesis.
+    categories:
+      - id: continuo
+        label: Past Continuous
+      - id: simple
+        label: Past Simple
+    items:
+      - text: I ___ (sleep) when the alarm went off.
+        category: continuo
+        why: "Acción de fondo interrumpida: was sleeping."
+      - text: While she was cooking, the lights ___ (go) out.
+        category: simple
+        why: "Acción corta que interrumpe: went out."
+      - text: At midnight we ___ (still dance).
+        category: continuo
+        why: "En progreso a una hora concreta: were still dancing."
+      - text: He got up, ___ (dress) and left.
+        category: simple
+        why: "Secuencia: dressed."
+      - text: While I ___ (study), my brother was playing.
+        category: continuo
+        why: "Dos acciones largas simultáneas: was studying."
+      - text: She ___ (know) the answer.
+        category: simple
+        why: "Verbo de estado: knew."

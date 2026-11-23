@@ -1,0 +1,66 @@
+questions:
+  - q: ¿Por qué «for» no basta para elegir el tiempo?
+    kind: por-que
+    a: "Porque *for* (duración) aparece en varios tiempos: *I **lived** there for 5 years* (periodo terminado, Past Simple), *I'**ve lived** here for 5 years* (llega hasta ahora, Present Perfect), *I'**ll be** away for a week* (futuro). Lo que decide es si el periodo está **terminado o llega hasta ahora**, no la palabra *for*."
+    uses: []
+  - q: Compara «yesterday», «ever» y «by the time» como pistas de tiempo.
+    kind: comparar
+    a: "***yesterday*** marca un momento terminado → Past Simple (*I saw it yesterday*). ***ever*** pregunta por la experiencia en la vida → Present Perfect (*Have you ever…?*). ***by the time*** marca un punto de referencia antes del cual algo terminó → Past Perfect (pasado) o Future Perfect (futuro)."
+    uses: []
+  - q: ¿Qué pasa con «already» y «just» en inglés americano?
+    kind: que-pasa-si
+    a: "En inglés **americano** es muy común usar *already, just* y *yet* con **Past Simple**: *I **just ate***, *Did you eat **yet**?* En británico se prefiere el Present Perfect: *I've just eaten*. Ambas variantes son correctas; elige una y sé consistente, sobre todo al escribir."
+    uses: []
+  - q: Aplica el método de 5 pasos a «Para cuando llegues, ya habré cocinado».
+    kind: aplicar
+    a: "1) ¿Cuándo? **futuro**. 2) ¿En curso? no. 3) ¿Antes de un punto de referencia? sí (*cuando llegues*) → **perfecto**. 4) ¿Duración? no. 5) Futuro + perfecto = *will have* + participio: *By the time you arrive, I'**ll have cooked***. Y tras *by the time* con sentido futuro: Present Simple (*arrive*)."
+    uses: []
+  - q: "Error común: ¿por qué está mal «I've finished it two days ago»?"
+    kind: error-comun
+    a: "Porque ***ago*** marca un **momento terminado** y no se combina con Present Perfect. Va con Past Simple: *I **finished** it two days ago*. Si no quieres dar el momento: *I've already finished it*. Regla: *ago, yesterday, last…, in 2019* → Past Simple."
+    uses: []
+  - q: ¿Qué tiempo piden «at the moment», «used to» y «this time tomorrow»?
+    kind: aplicar
+    a: "***at the moment*** → Present Continuous (*I'm working at the moment*). ***used to*** es en sí la forma del hábito pasado (*I used to work there*). ***this time tomorrow*** → Future Continuous (*This time tomorrow I'll be travelling*). Cada marcador señala un punto de referencia y si la acción está en curso."
+    uses: []
+sims:
+  - id: marcador-tiempo
+    title: ¿Qué tiempo pide el marcador?
+    type: clasificar
+    prompt: Elige el tiempo que mejor encaja con cada frase.
+    categories:
+      - id: past-simple
+        label: Past Simple
+      - id: present-perfect
+        label: Present Perfect
+      - id: past-perfect
+        label: Past Perfect
+      - id: future-perfect
+        label: Future Perfect
+      - id: continuo
+        label: Un continuo (present/past/future)
+    items:
+      - text: I ___ (see) her last Monday.
+        category: past-simple
+        why: "last Monday: saw."
+      - text: ___ you ever ___ (be) to Brazil?
+        category: present-perfect
+        why: "ever: Have you ever been…?"
+      - text: By the time the police came, the thief ___ (escape).
+        category: past-perfect
+        why: "Antes de un momento pasado: had escaped."
+      - text: By next June, we ___ (finish) the house.
+        category: future-perfect
+        why: "by + futuro: will have finished."
+      - text: This time tomorrow I ___ (lie) on the beach.
+        category: continuo
+        why: "Future Continuous: will be lying."
+      - text: She ___ (just / leave) — you missed her!
+        category: present-perfect
+        why: "just + resultado ahora: has just left."
+      - text: While we ___ (wait), it started to snow.
+        category: continuo
+        why: "Past Continuous: were waiting."
+      - text: They got married ten years ___.
+        category: past-simple
+        why: "ago: momento terminado."

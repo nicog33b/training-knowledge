@@ -1,0 +1,57 @@
+questions:
+  - q: ¿Por qué «Does she works?» está mal?
+    kind: error-comun
+    a: "Porque la **-s de tercera persona se pasa al auxiliar**: *does* = do + s. Una vez que *does* la lleva, el verbo vuelve a la **base**: *Does she **work**?* Igual en negativa: *She doesn't **work***. La -s solo aparece en el verbo cuando no hay auxiliar: *She works*."
+    uses: []
+  - q: Compara «What do you do?» con «What are you doing?».
+    kind: comparar
+    a: "***What do you do?*** (Present Simple) pregunta por algo habitual o permanente: «¿a qué te dedicas?». ***What are you doing?*** (Present Continuous) pregunta por **este momento**: «¿qué estás haciendo?». El español usa *¿qué haces?* para ambas; el inglés las separa."
+    uses: []
+  - q: ¿Qué pasa si usas Present Simple para algo que ocurre ahora mismo, como «Look! It rains»?
+    kind: que-pasa-si
+    a: "Suena incorrecto: el Present Simple en inglés **no** describe lo que está pasando en este momento; describe hábitos y hechos generales (*It rains a lot here*). Para «ahora» se usa el Present Continuous: *Look! It's **raining***. Esta es una de las diferencias más importantes con el español."
+    uses: []
+  - q: ¿Por qué «The train leaves at 6» se refiere al futuro y está en presente?
+    kind: por-que
+    a: "Porque el Present Simple se usa para **horarios y programas fijos**, aunque sean futuros: lo que manda es el calendario, no tu intención. *The film starts at 9*, *The shop opens tomorrow at 10*. Para planes personales se usa *going to* o Present Continuous: *I'm leaving at 6*."
+    uses: []
+  - q: Escribe la negativa y la pregunta de «He goes to the gym on Mondays».
+    kind: aplicar
+    a: "Negativa: *He **doesn't go** to the gym on Mondays*. Pregunta: ***Does** he **go** to the gym on Mondays?* La -es de *goes* pasa a *does* y *go* vuelve a la base. Short answers: *Yes, he does / No, he doesn't*."
+    uses: []
+  - q: ¿Dónde va el adverbio de frecuencia en «Ella nunca come carne» y «Ella nunca está cansada»?
+    kind: aplicar
+    a: "Con verbo normal, **antes del verbo**: *She **never** eats meat*. Con *be*, **después**: *She is **never** tired*. Ojo: *never* ya es negativo, así que no se añade *doesn't*: ~~*She doesn't never eat*~~. Las expresiones largas (*every day*, *once a week*) van al final."
+    uses: []
+sims:
+  - id: simple-o-continuo-presente
+    title: ¿Present Simple o Continuous?
+    type: clasificar
+    prompt: Elige el tiempo para cada situación.
+    categories:
+      - id: simple
+        label: Present Simple
+      - id: continuo
+        label: Present Continuous
+    items:
+      - text: "Rutina: café cada mañana."
+        category: simple
+        why: "Hábito: I drink coffee every morning."
+      - text: "Mira por la ventana: está nevando."
+        category: continuo
+        why: "En este momento: It's snowing."
+      - text: Esta semana trabajo desde casa (no es lo normal).
+        category: continuo
+        why: "Temporal: I'm working from home this week."
+      - text: El agua hierve a 100 °C.
+        category: simple
+        why: Verdad general.
+      - text: Saber la respuesta.
+        category: simple
+        why: "know es verbo de estado: I know the answer."
+      - text: Ya he quedado con Ana mañana a las 5.
+        category: continuo
+        why: "Plan acordado: I'm meeting Ana tomorrow at 5."
+      - text: El autobús sale a las 7:15 (horario).
+        category: simple
+        why: "Horario: The bus leaves at 7:15."

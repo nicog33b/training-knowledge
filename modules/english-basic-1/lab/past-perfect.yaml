@@ -1,0 +1,70 @@
+questions:
+  - q: Compara «When I arrived, the film had started» con «When I arrived, the film started».
+    kind: comparar
+    a: "Con ***had started*** (Past Perfect), la película **empezó antes** de que yo llegara: me perdí el principio. Con ***started*** (Past Simple), empezó **cuando** llegué o justo después. El Past Perfect marca que una acción es **anterior a otro momento pasado**."
+    uses: []
+  - q: ¿Cuándo es necesario el Past Perfect y cuándo basta el Past Simple?
+    kind: por-que
+    a: "Es necesario cuando el **orden no es evidente** o cuentas los hechos al revés: *I couldn't get in because I **had lost** my keys*. Si el orden ya lo dejan claro *after, before* o la secuencia lógica, el Past Simple basta: *After he ate, he left*. El inglés hablado lo omite cuando puede."
+    uses: []
+  - q: ¿Qué significa «By the time we got there, everyone had left»?
+    kind: aplicar
+    a: "«Para cuando llegamos, todos **se habían ido**»: la salida de todos ocurrió **antes** de nuestra llegada. ***By the time*** + Past Simple introduce el momento de referencia pasado, y el Past Perfect la acción anterior a él. Es el uso más típico del Past Perfect."
+    uses: []
+  - q: "Error común: ¿por qué está mal usar Past Perfect para algo simplemente lejano: «I had been to Japan in 2005»?"
+    kind: error-comun
+    a: "Porque el Past Perfect no significa «muy pasado» sino **anterior a otro momento pasado**. Si solo cuentas un hecho con fecha, va en Past Simple: *I **went** to Japan in 2005*. Solo usa *had been* si hay otra referencia pasada: *Before 2010 I **had been** to Japan twice*."
+    uses: []
+  - q: Traduce «Llevaba una hora esperando cuando por fin llegó».
+    kind: aplicar
+    a: "*I **had been waiting** for an hour when she finally **arrived***. El **Past Perfect Continuous** (*had been + -ing*) expresa la **duración de una actividad hasta un momento pasado** (su llegada). Es el equivalente de «llevaba … -ando» o «hacía … que»."
+    uses: []
+  - q: ¿Qué pasa con «I'd» en «I'd finished» y en «I'd finish»?
+    kind: que-pasa-si
+    a: "*'d* puede ser **had** o **would**. Lo decide la forma que sigue: con **participio** es *had* (*I'd finished* = I had finished, Past Perfect); con **base** es *would* (*I'd finish* = I would finish, condicional). Con *better* es *had*: *You'd better go*."
+    uses: []
+sims:
+  - id: antes-o-despues
+    title: ¿Había empezado la película?
+    type: predecir-observar
+    context: "Llegas al cine a un minuto concreto y la película empieza a otro (minutos después de las 20:00). Completa: «When I arrived, the film ___»."
+    params:
+      - id: llegada
+        label: Minuto de tu llegada
+        min: 0
+        max: 60
+        step: 5
+        default: 30
+        unit: min
+      - id: inicio
+        label: Minuto en que empieza la película
+        min: 0
+        max: 60
+        step: 5
+        default: 15
+        unit: min
+    predict:
+      question: ¿Qué forma usas?
+      options:
+        - id: had-started
+          label: had started (Past Perfect)
+        - id: started
+          label: started (Past Simple)
+        - id: hadnt-started
+          label: hadn't started yet
+    outcomes:
+      - when: inicio < llegada
+        answer: had-started
+        show: "Empezó antes de tu llegada: the film had started (te perdiste el principio)."
+      - when: inicio == llegada
+        answer: started
+        show: "Empezó justo cuando llegaste: the film started. Acciones simultáneas o sucesivas → Past Simple."
+      - when: "1"
+        answer: hadnt-started
+        show: "Llegaste antes: the film hadn't started yet (aún no había empezado)."
+    explain:
+      prompt: Explica qué marca el Past Perfect respecto a otro momento pasado.
+      rubric:
+        - Past Perfect = anterior a otro momento pasado
+        - Acciones sucesivas o simultáneas van en Past Simple
+        - Se forma con had + participio

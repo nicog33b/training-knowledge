@@ -1,0 +1,56 @@
+questions:
+  - q: ¿Por qué en la pasiva el tiempo lo lleva be y no el verbo principal?
+    kind: por-que
+    a: "Porque la pasiva es **be + participio**, y el participio es fijo. Para cambiar de tiempo solo se conjuga *be*: *is made, was made, has been made, will be made, is being made*. Es la misma lógica de todos los tiempos: el primer elemento marca el tiempo; el resto no cambia."
+    uses: []
+  - q: Traduce «Aquí se habla inglés» y «Se dice que es caro».
+    kind: aplicar
+    a: "*English **is spoken** here* y ***It is said** that it's expensive* (o *People say it's expensive*). El inglés no tiene «se» impersonal: se usa **voz pasiva** o un sujeto genérico (*people, you, they*). *You can't smoke here* = «aquí no se puede fumar»."
+    uses: []
+  - q: Compara «Someone stole my bike» con «My bike was stolen».
+    kind: comparar
+    a: Dicen lo mismo, pero la **pasiva** pone el foco en lo que **recibe** la acción (la bici) y omite al agente, que es **desconocido**. La activa necesita un sujeto, así que hay que inventar *someone*. Por eso las noticias y los textos técnicos usan tanto la pasiva.
+    uses: []
+  - q: "Error común: ¿qué falta en «The letter written yesterday»?"
+    kind: error-comun
+    a: "Falta ***be***: sin él no hay verbo conjugado. *The letter **was** written yesterday*. La pasiva siempre necesita *be* en el tiempo adecuado + participio. *The letter written yesterday* solo vale como frase nominal (*la carta escrita ayer*), no como oración."
+    uses: []
+  - q: Pasa a pasiva «They are repairing the road» y «They have sold the house».
+    kind: aplicar
+    a: "*The road **is being repaired*** (Present Continuous: *is being* + participio) y *The house **has been sold*** (Present Perfect: *has been* + participio). Toma el tiempo de la activa, ponlo en *be* y añade el participio del verbo principal."
+    uses: []
+  - q: ¿Qué pasa si pones el agente con by en todas las pasivas?
+    kind: que-pasa-si
+    a: "Suena forzado y redundante. ***by*** + agente solo se añade cuando el agente es **información importante o nueva**: *This bridge was built by Eiffel*. Si es desconocido, obvio o irrelevante, se omite: ~~*My phone was stolen by someone*~~ → *My phone was stolen*."
+    uses: []
+sims:
+  - id: pasiva-correcta
+    title: ¿Pasiva bien formada?
+    type: clasificar
+    prompt: Encuentra el problema de cada pasiva (si lo hay).
+    categories:
+      - id: correcta
+        label: Correcta
+      - id: falta-be
+        label: Falta be
+      - id: forma-mal
+        label: Verbo no está en participio
+    items:
+      - text: The results were published in May.
+        category: correcta
+        why: were + participio.
+      - text: This house built in 1900.
+        category: falta-be
+        why: This house was built in 1900.
+      - text: The windows are being clean.
+        category: forma-mal
+        why: are being cleaned.
+      - text: The report will be sent tomorrow.
+        category: correcta
+        why: will be + participio.
+      - text: My car has stolen.
+        category: falta-be
+        why: My car has been stolen.
+      - text: The cake was ate by the kids.
+        category: forma-mal
+        why: "Participio de eat: eaten."

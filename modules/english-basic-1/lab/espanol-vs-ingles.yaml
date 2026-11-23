@@ -1,0 +1,61 @@
+questions:
+  - q: ¿Por qué «Vivo aquí desde 2020» no se traduce «I live here since 2020»?
+    kind: error-comun
+    a: "Porque el inglés usa **Present Perfect** para situaciones que empezaron en el pasado y **siguen hasta ahora**: *I **have lived** here since 2020*. El español usa presente porque mira el estado actual; el inglés marca la conexión pasado → presente. Con *for* igual: *I've lived here for three years* («llevo tres años»)."
+    uses: []
+  - q: ¿Qué pasa si traduces siempre «he comido» por «I have eaten»?
+    kind: que-pasa-si
+    a: "Acertarás a veces y fallarás otras. Si hay un **momento terminado**, el inglés exige Past Simple: *Hoy he comido a las dos* → *I **ate** at two*. Present Perfect solo sin momento o con periodo abierto: *He comido demasiado hoy* → *I've eaten too much today*. Traduce la idea (¿momento terminado?), no la forma."
+    uses: []
+  - q: ¿Por qué el imperfecto español no tiene una única traducción?
+    kind: por-que
+    a: "Porque el imperfecto agrupa ideas que el inglés separa: **acción en curso** (*dormía* → *was sleeping*), **hábito pasado** (*jugaba* → *used to play / would play*) y **estado** (*tenía, era* → *had, was*). El inglés no tiene una forma para todo eso, así que hay que decidir qué significa el imperfecto en cada frase."
+    uses: []
+  - q: Traduce «Llámame cuando llegues».
+    kind: aplicar
+    a: "*Call me when you **arrive***. Tras *when, if, before, until, as soon as* con sentido futuro, el inglés usa **Present Simple** donde el español usa **subjuntivo** (*llegues*). Nunca *will* en esa parte: ~~*when you will arrive*~~. El *will* va, si hace falta, en la otra mitad: *I'll call you when I arrive*."
+    uses: []
+  - q: Compara cómo organizan el pasado el español y el inglés.
+    kind: comparar
+    a: "El español se apoya en **indefinido vs imperfecto** (*comí / comía*): acción cerrada vs abierta o de fondo. El inglés se apoya en **aspecto**: **simple** (*ate*), **continuous** (*was eating*) y **perfect** (*had eaten*, *have eaten*). Las correspondencias son aproximadas: el indefinido casi siempre es Past Simple; el imperfecto depende."
+    uses: []
+  - q: ¿Qué tres preguntas te ayudan a elegir el tiempo inglés en vez de traducir la forma española?
+    kind: aplicar
+    a: 1) ¿La acción está **terminada o en curso**? (simple vs continuo). 2) ¿Es **un hecho puntual o un hábito**? (Past Simple vs used to / Present Simple). 3) ¿Tiene un **momento terminado** o llega **hasta ahora**? (Past Simple vs Present Perfect). Con esas respuestas eliges mejor que con la forma española.
+    uses: []
+sims:
+  - id: traduce-la-idea
+    title: Del español al inglés
+    type: clasificar
+    prompt: Elige el tiempo inglés más natural para cada frase.
+    categories:
+      - id: past-simple
+        label: Past Simple
+      - id: present-perfect
+        label: Present Perfect
+      - id: past-continuous
+        label: Past Continuous
+      - id: present-simple
+        label: Present Simple
+    items:
+      - text: Ayer vi a Marta.
+        category: past-simple
+        why: "Momento terminado: I saw Marta yesterday."
+      - text: Trabajo aquí desde 2019.
+        category: present-perfect
+        why: "Sigue hasta ahora: I have worked here since 2019."
+      - text: Cuando entraste, yo leía.
+        category: past-continuous
+        why: "Acción en curso: I was reading."
+      - text: Avísame cuando termines.
+        category: present-simple
+        why: "Subjuntivo futuro tras when → Present Simple: when you finish."
+      - text: ¿Has estado alguna vez en Roma?
+        category: present-perfect
+        why: "Experiencia sin fecha: Have you ever been to Rome?"
+      - text: Esta mañana he desayunado a las siete.
+        category: past-simple
+        why: "Momento concreto: I had breakfast at seven."
+      - text: Llevo dos años en esta empresa.
+        category: present-perfect
+        why: I've been at this company for two years.

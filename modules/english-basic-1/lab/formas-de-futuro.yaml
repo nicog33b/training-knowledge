@@ -1,0 +1,61 @@
+questions:
+  - q: Compara «I'll call her» con «I'm going to call her».
+    kind: comparar
+    a: "***I'll call her*** suele ser una **decisión tomada ahora mismo** o una promesa: *Oh, it's her birthday? I'll call her*. ***I'm going to call her*** es un **plan decidido antes**: *I'm going to call her tonight* (ya lo tenía pensado). La diferencia es cuándo se tomó la decisión."
+    uses: []
+  - q: ¿Por qué «Look at those clouds! It's going to rain» no usa will?
+    kind: por-que
+    a: "Porque la predicción se basa en una **evidencia presente** (las nubes): eso pide *going to*. *Will* se usa para predicciones basadas en **opinión** o conocimiento: *I think it'll rain tomorrow*. Pista: si puedes señalar la prueba, usa *going to*."
+    uses: []
+  - q: "Error común: ¿por qué está mal «I'll call you when I will arrive»?"
+    kind: error-comun
+    a: "Porque tras ***when, if, as soon as, before, until*** con sentido futuro el inglés usa **Present Simple**: *I'll call you when I **arrive***. Es justo donde el español usa subjuntivo (*cuando llegue*). *Will* solo aparece en la otra mitad de la frase."
+    uses: []
+  - q: ¿Cuándo usas Present Continuous para el futuro en vez de going to?
+    kind: aplicar
+    a: "Cuando el plan ya está **acordado o agendado**: hay billete, cita, reserva u otra persona implicada: *I'm **flying** to Lima on Friday*, *We're **having** dinner with Ana tonight*. *Going to* expresa la intención (*I'm going to visit Lima someday*); el continuo, que ya está organizado."
+    uses: []
+  - q: ¿Qué forma usas para «El tren sale a las 7 mañana»?
+    kind: aplicar
+    a: "**Present Simple**: *The train **leaves** at 7 tomorrow*. Para **horarios oficiales y programas** (transporte, cine, clases) se usa presente aunque sea futuro, porque depende del calendario y no de tu voluntad. *The course **starts** on Monday*."
+    uses: []
+  - q: ¿Qué pasa si respondes a «The phone is ringing» con «I'm going to get it»?
+    kind: que-pasa-si
+    a: "Suena raro porque la decisión **se toma en ese momento**: lo natural es ***I'll get it***. *Going to* implicaría que ya lo habías planeado antes de que sonara. Las ofertas espontáneas también llevan *will*: *I'll help you with that bag*."
+    uses: []
+sims:
+  - id: que-futuro
+    title: ¿Qué forma de futuro?
+    type: clasificar
+    prompt: Elige la forma de futuro más natural.
+    categories:
+      - id: will
+        label: will
+      - id: going-to
+        label: going to
+      - id: continuo
+        label: Present Continuous
+      - id: simple
+        label: Present Simple
+    items:
+      - text: Hace frío. — Vale, cierro la ventana (lo decido ahora).
+        category: will
+        why: "Decisión espontánea: I'll close the window."
+      - text: Este año voy a aprender a nadar (intención).
+        category: going-to
+        why: "Plan/intención: I'm going to learn to swim."
+      - text: ¡Cuidado! ¡Te vas a caer!
+        category: going-to
+        why: "Evidencia presente: You're going to fall!"
+      - text: El vuelo sale a las 6:40.
+        category: simple
+        why: "Horario: The flight leaves at 6:40."
+      - text: He quedado con el médico el martes a las 10.
+        category: continuo
+        why: "Cita acordada: I'm seeing the doctor on Tuesday at 10."
+      - text: Creo que ganará el Madrid.
+        category: will
+        why: "Predicción por opinión: I think Madrid will win."
+      - text: Te prometo que no se lo diré.
+        category: will
+        why: "Promesa: I promise I won't tell him."

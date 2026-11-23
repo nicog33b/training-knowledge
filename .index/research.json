@@ -305,6 +305,14 @@
       "summary": "Con visión normal el modo claro rinde mejor casi siempre; el oscuro conviene como opción (preferencia, visión con medios oculares turbios)."
     },
     {
+      "id": "norris-ortega-2000",
+      "title": "Effectiveness of L2 instruction: A research synthesis and quantitative meta-analysis",
+      "year": 2000,
+      "kind": "meta-analysis",
+      "verified": "secondary",
+      "summary": "Meta-análisis de 49 muestras (1980–1998) sobre instrucción en segunda lengua; la instrucción explícita superó a la implícita."
+    },
+    {
       "id": "ollama-openai-compat",
       "title": "Ollama OpenAI compatibility",
       "year": 2026,
@@ -431,6 +439,14 @@
       "kind": "meta-analysis",
       "verified": "abstract",
       "summary": "Intentar el problema antes de la instrucción mejora el aprendizaje conceptual (efecto moderado), con matices de edad y tipo de habilidad."
+    },
+    {
+      "id": "spada-tomita-2010",
+      "title": "Interactions Between Type of Instruction and Type of Language Feature: A Meta-Analysis",
+      "year": 2010,
+      "kind": "meta-analysis",
+      "verified": "secondary",
+      "summary": "Meta-análisis de 41 estudios sobre si la instrucción explícita o implícita funciona distinto con rasgos gramaticales simples y complejos."
     },
     {
       "id": "sundararajan-adesope-2020",
@@ -653,6 +669,21 @@
       "affects": [
         "all",
         "package:practice"
+      ]
+    },
+    {
+      "id": "gramatica-explicita-con-contraste-l1",
+      "title": "Inglés: gramática explícita organizada como tiempo × aspecto y contrastada con el español",
+      "summary": "Enseñar los tiempos con reglas explícitas, la tabla 3×4 y equivalencias con el español, y practicarlos con clasificación de confundibles y predicciones en la línea de tiempo.",
+      "status": "proposed",
+      "confidence": "low",
+      "date": "2026-11-23",
+      "sources": [
+        "norris-ortega-2000",
+        "spada-tomita-2010"
+      ],
+      "affects": [
+        "module:english-basic-1"
       ]
     },
     {

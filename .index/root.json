@@ -2,8 +2,8 @@
   "version": 1,
   "sharedTerms": 3,
   "research": {
-    "sources": 66,
-    "decisions": 17
+    "sources": 68,
+    "decisions": 18
   },
   "modules": [
     {
@@ -15,6 +15,16 @@
       "done": 42,
       "planned": 42,
       "terms": 344
+    },
+    {
+      "id": "english-basic-1",
+      "title": "Basic English · Level 1",
+      "summary": "Las bases del inglés para quien ya tiene vocabulario: orden de la oración, auxiliares, los 12 tiempos verbales comparados con el español, modales, condicionales, pasiva y artículos.",
+      "kind": "topic",
+      "topics": 21,
+      "done": 21,
+      "planned": 21,
+      "terms": 50
     },
     {
       "id": "next-cache",

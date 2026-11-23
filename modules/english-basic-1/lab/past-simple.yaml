@@ -1,0 +1,56 @@
+questions:
+  - q: ¿Por qué «I have seen him yesterday» es un error?
+    kind: error-comun
+    a: "Porque *yesterday* es un **momento terminado** y el inglés exige **Past Simple** con momentos terminados: *I **saw** him yesterday*. El Present Perfect no puede combinarse con *yesterday, last week, ago, in 2019*. En español *lo he visto ayer* se oye en algunas zonas; en inglés nunca."
+    uses: []
+  - q: ¿Qué pasa con el verbo después de did?
+    kind: que-pasa-si
+    a: "Vuelve a la **base**, porque *did* ya lleva el pasado: *Did you **go**?*, *She didn't **buy** it*. Si dejas el pasado (~~*Did you went?*~~, ~~*She didn't bought*~~) marcas el tiempo dos veces. Esto vale para todos los verbos excepto *be*, que no usa *did*: *Were you there?*"
+    uses: []
+  - q: ¿Cómo funciona «ago» y en qué se diferencia de «hace» en español?
+    kind: comparar
+    a: "*Ago* va **después** del periodo: *two days **ago*** (hace dos días), *a long time ago*. Siempre con **Past Simple** porque marca un momento terminado. Pero «hace dos años **que** vivo aquí» no usa *ago*: es duración hasta ahora → *I've lived here **for** two years*."
+    uses: []
+  - q: ¿Por qué «When I was young I played tennis» traduce «jugaba» y no «jugué»?
+    kind: por-que
+    a: Porque el Past Simple también expresa **hábitos y estados del pasado**, no solo acciones únicas. El contexto (*when I was young*) deja claro que era habitual. Para subrayar que ya no ocurre puedes decir *I **used to play** tennis*. El inglés no necesita un imperfecto aparte para esto.
+    uses: []
+  - q: "Cuenta en inglés: «Abrí la puerta, miré alrededor y salí»."
+    kind: aplicar
+    a: "*I **opened** the door, **looked** around and **left***. En una **secuencia** de acciones terminadas, todas van en Past Simple y el orden de las frases es el orden de los hechos. *open* y *look* son regulares (*-ed*); *leave* es irregular (*leave–left–left*)."
+    uses: []
+  - q: Compara «was/were» con las formas de los otros verbos en Past Simple.
+    kind: comparar
+    a: "Casi todos los verbos tienen **una sola forma** de pasado para todas las personas (*I/you/she worked*). *Be* es la excepción: ***was*** con I/he/she/it y ***were*** con you/we/they. Además, *be* no usa *did*: *Was it expensive? / It wasn't expensive*."
+    uses: []
+sims:
+  - id: did-correcto
+    title: ¿did bien usado?
+    type: clasificar
+    prompt: Encuentra el problema de cada frase (si lo hay).
+    categories:
+      - id: correcta
+        label: Correcta
+      - id: doble-pasado
+        label: did + pasado (sobra el pasado)
+      - id: falta-did
+        label: Falta did
+    items:
+      - text: Did you enjoy the party?
+        category: correcta
+        why: did + base.
+      - text: She didn't went to work.
+        category: doble-pasado
+        why: She didn't go to work.
+      - text: Where you bought that?
+        category: falta-did
+        why: Where did you buy that?
+      - text: We didn't see anything.
+        category: correcta
+        why: didn't + base.
+      - text: Did he called you?
+        category: doble-pasado
+        why: Did he call you?
+      - text: Why you left early?
+        category: falta-did
+        why: Why did you leave early?

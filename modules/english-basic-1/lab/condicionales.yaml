@@ -1,0 +1,79 @@
+questions:
+  - q: ¿Por qué está mal «If it will rain, I'll stay home»?
+    kind: error-comun
+    a: "Porque en la parte de ***if*** nunca va *will* (en el uso normal): el condicional 1 es **if + Present Simple, will + base**: *If it **rains**, I'll stay home*. Es la misma regla que con *when*: el español usa subjuntivo o presente (*si llueve*), el inglés presente."
+    uses: []
+  - q: Compara «If I have time, I'll help you» con «If I had time, I'd help you».
+    kind: comparar
+    a: "**Condicional 1** (*have … will*): la condición es **real y posible**; puede que tenga tiempo. **Condicional 2** (*had … would*): la condición es **hipotética o improbable** ahora; en realidad no tengo tiempo. El Past Simple del tipo 2 no habla del pasado: marca distancia de la realidad."
+    uses: []
+  - q: ¿Por qué se dice «If I were you» y no «If I was you»?
+    kind: por-que
+    a: "En el condicional 2 el inglés cuidado usa ***were*** para **todas las personas** con *be*: *If I **were** you*, *If she **were** here*. Es un resto del subjuntivo. *If I was* se oye en conversación informal, pero en exámenes y escritura usa *were*, sobre todo en *If I were you* (consejo)."
+    uses: []
+  - q: Traduce «Si hubiera estudiado, habría aprobado».
+    kind: aplicar
+    a: "*If I **had studied**, I **would have passed***. **Condicional 3**: if + **Past Perfect**, would have + **participio**. Habla de un pasado que **no ocurrió** (no estudié, no aprobé). Contracciones habituales: *If I'd studied, I'd have passed*. Nunca *would* en la parte de *if*."
+    uses: []
+  - q: "¿Qué pasa si mezclas tiempos: «If I had taken the job, I would be rich now»?"
+    kind: que-pasa-si
+    a: "Es un **condicional mixto** y es correcto: la condición es **pasada** (tipo 3: *had taken*) y el resultado es **presente** (tipo 2: *would be … now*). Sirve para decir cómo una decisión pasada cambiaría tu situación actual. Reconócelo aunque no lo uses todavía."
+    uses: []
+  - q: ¿Qué diferencia hay entre el condicional 0 y el 1?
+    kind: comparar
+    a: "El **0** (*if + presente, presente*) expresa **verdades generales** que siempre se cumplen: *If you heat ice, it melts*. El **1** (*if + presente, will*) habla de **una situación futura concreta** posible: *If you heat this ice now, it will melt in two minutes*. En el 0, *if* casi equivale a *when*."
+    uses: []
+sims:
+  - id: que-condicional
+    title: ¿Qué condicional?
+    type: predecir-observar
+    context: Piensa una condición. Elige de qué tiempo habla (0 = verdad general, 1 = futuro, 2 = pasado) y si es probable o real (1) o improbable/imaginaria (0).
+    params:
+      - id: cuando
+        label: Habla de (0 verdad general · 1 futuro · 2 pasado)
+        min: 0
+        max: 2
+        step: 1
+        default: 1
+      - id: probable
+        label: ¿Probable o real? (0 no · 1 sí)
+        min: 0
+        max: 1
+        step: 1
+        default: 1
+    predict:
+      question: ¿Qué estructura usas?
+      options:
+        - id: c0
+          label: "Cero: if + presente, presente"
+        - id: c1
+          label: "Primero: if + presente, will"
+        - id: c2
+          label: "Segundo: if + pasado, would"
+        - id: c3
+          label: "Tercero: if + had + participio, would have"
+        - id: otro
+          label: "Ninguno: pasado real con Past Simple"
+    outcomes:
+      - when: cuando == 0
+        answer: c0
+        show: "Verdad general: If you heat ice, it melts."
+      - when: cuando == 1 && probable == 1
+        answer: c1
+        show: "Futuro posible: If it rains, I'll stay home."
+      - when: cuando == 1
+        answer: c2
+        show: "Presente o futuro imaginario o improbable: If I won the lottery, I'd buy a house."
+      - when: probable == 0
+        answer: c3
+        show: "Pasado que no ocurrió: If I had studied, I would have passed."
+      - when: "1"
+        answer: otro
+        show: "Si de verdad pudo pasar y no sabes si pasó, no es hipotético: If he was at the party, he saw Ana (Past Simple en ambas partes)."
+    explain:
+      prompt: Explica qué decide cada tipo de condicional y qué nunca va en la parte de if.
+      rubric:
+        - Tipo 1 = futuro posible con if + presente
+        - Tipo 2 = hipotético con if + Past Simple y would
+        - Tipo 3 = pasado no ocurrido con Past Perfect y would have
+        - Nunca will ni would en la parte de if

@@ -1,0 +1,59 @@
+questions:
+  - q: ¿Cuál es la regla única para negar cualquier frase en inglés?
+    kind: por-que
+    a: "Poner **not después del primer auxiliar**: *I am **not**…, She has **not**…, They will **not**…* Si la frase no tiene auxiliar (Present Simple o Past Simple), se añade **do/does/did + not** y el verbo vuelve a la base: *He **doesn't like**, We **didn't see***. Una sola regla vale para los 12 tiempos."
+    uses: []
+  - q: Compara «Who called you?» con «Who did you call?».
+    kind: comparar
+    a: "En ***Who called you?***, *who* es el **sujeto** (alguien te llamó): no hay inversión ni *did*, el verbo va en pasado. En ***Who did you call?***, *who* es el **objeto** (tú llamaste a alguien): sujeto *you*, así que hay pregunta normal con *did + base*. Lo mismo con *what*: *What happened?* vs *What did you do?*"
+    uses: []
+  - q: ¿Qué pasa si respondes «Yes, I like» a «Do you like jazz?»?
+    kind: que-pasa-si
+    a: "Suena incompleto: *like* necesita objeto. La **short answer** repite el **auxiliar**, no el verbo: *Yes, I **do*** / *No, I **don't***. Con otros auxiliares: *Have you seen it? — Yes, I **have***. *Can you swim? — No, I **can't***. Decir solo *Yes* también vale, pero suena seco."
+    uses: []
+  - q: "Error común: ¿por qué está mal «Where you live?»?"
+    kind: error-comun
+    a: "Falta el auxiliar. Las preguntas Wh siguen **Wh + auxiliar + sujeto + verbo**. Como *live* va en Present Simple sin auxiliar, hay que añadir *do*: *Where **do** you live?* (y *Where **does** she live?*). En español basta la entonación; en inglés la estructura siempre cambia."
+    uses: []
+  - q: Transforma «She has finished the report» en negativa, pregunta sí/no y pregunta con when.
+    kind: aplicar
+    a: "El primer auxiliar es *has*. Negativa: *She **hasn't** finished the report*. Pregunta: ***Has she** finished the report?* Con *when*… cuidado: *when* pide un momento terminado, así que pasa a Past Simple: ***When did she finish** the report?* (~~*When has she finished?*~~)."
+    uses: []
+  - q: ¿Cómo sabes si «he's» significa «he is» o «he has»?
+    kind: aplicar
+    a: "Por lo que sigue. Si va **-ing** o adjetivo/sustantivo, es *is*: *He's working*, *He's tired*. Si va **participio**, es *has*: *He's finished*, *He's been there*. *He's got* = *he has got* (tiene). Lo mismo con *'d*: *I'd gone* = had; *I'd go* = would."
+    uses: []
+sims:
+  - id: como-se-pregunta
+    title: ¿Cómo se forma la pregunta?
+    type: clasificar
+    prompt: Elige cómo se convierte cada frase en pregunta.
+    categories:
+      - id: invertir
+        label: Mover el auxiliar delante
+      - id: anadir-do
+        label: Añadir do/does/did
+      - id: sin-cambio
+        label: Sin inversión (who/what sujeto)
+    items:
+      - text: They are coming. → ¿Vienen?
+        category: invertir
+        why: Are they coming?
+      - text: She works here. → ¿Trabaja aquí?
+        category: anadir-do
+        why: Does she work here?
+      - text: Something happened. → ¿Qué pasó?
+        category: sin-cambio
+        why: "What es el sujeto: What happened?"
+      - text: You can drive. → ¿Sabes manejar?
+        category: invertir
+        why: Can you drive?
+      - text: He went home. → ¿Se fue a casa?
+        category: anadir-do
+        why: Did he go home? (go vuelve a la base)
+      - text: Someone broke the window. → ¿Quién la rompió?
+        category: sin-cambio
+        why: Who broke the window?
+      - text: We have met before. → ¿Nos conocemos?
+        category: invertir
+        why: Have we met before?

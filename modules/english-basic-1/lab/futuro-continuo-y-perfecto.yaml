@@ -1,0 +1,63 @@
+questions:
+  - q: Compara «This time tomorrow I'll be flying» con «By tomorrow I'll have flown».
+    kind: comparar
+    a: "***I'll be flying*** (Future Continuous): mañana a esta hora la acción estará **en progreso**. ***I'll have flown*** (Future Perfect): para mañana la acción ya estará **terminada**. Son los mismos aspectos que en presente (*am flying / have flown*) con el punto de referencia en el futuro."
+    uses: []
+  - q: ¿Por qué «by» es la pista principal del Future Perfect?
+    kind: por-que
+    a: "Porque *by* + momento significa «**para / como muy tarde**» ese momento, es decir, algo terminado **antes** de un punto futuro: *By Friday I'll have finished the report*. El perfecto siempre mira hacia atrás desde su referencia, y *by* da exactamente esa referencia."
+    uses: []
+  - q: ¿Qué pasa si dices «Don't call at 8, we'll have dinner»?
+    kind: que-pasa-si
+    a: "Se entiende como «a las 8 **empezaremos** a cenar» o «cenaremos» en general. Si quieres decir que a las 8 ya **estaréis en medio** de la cena (y por eso no conviene llamar), lo natural es el Future Continuous: *we'**ll be having** dinner*."
+    uses: []
+  - q: Traduce «En junio hará diez años que trabajo aquí».
+    kind: aplicar
+    a: "*In June **I'll have been working** here for ten years* (Future Perfect Continuous). O, más sencillo: *In June I'll have worked here for ten years*. Es la duración de una actividad **hasta un momento futuro**. Es poco frecuente: basta con reconocerlo y saber armarlo con la tabla."
+    uses: []
+  - q: ¿Para qué sirve «Will you be using the car tonight?»?
+    kind: por-que
+    a: "Es una forma **cortés** de preguntar por los planes de alguien sin presionar: pregunta si la acción estará en marcha, no le pide una decisión. Compara: *Will you use the car?* puede sonar a petición o exigencia; *Will you be using…?* suena neutro, como «¿vas a estar usando…?»."
+    uses: []
+  - q: "Error común: ¿por qué está mal «By 2030 I will finish my degree» si quieres decir «para 2030 habré terminado»?"
+    kind: error-comun
+    a: "Con *by* + momento futuro, para expresar algo ya **terminado antes de ese momento** se usa Future Perfect: *By 2030 I **will have finished** my degree*. *I will finish in 2030* también es correcto, pero significa que terminarás **en** 2030, no **antes** de esa fecha."
+    uses: []
+sims:
+  - id: examen-manana
+    title: Tu examen de mañana
+    type: predecir-observar
+    context: Mañana tienes un examen de 9:00 a 11:00. Elige una hora de mañana y di qué estará pasando con el examen a esa hora.
+    params:
+      - id: hora
+        label: Hora de mañana
+        min: 7
+        max: 14
+        step: 1
+        default: 10
+        unit: h
+    predict:
+      question: ¿Qué frase es correcta a esa hora?
+      options:
+        - id: no-empezado
+          label: I won't have started the exam yet
+        - id: en-curso
+          label: I'll be doing the exam
+        - id: terminado
+          label: I'll have finished the exam
+    outcomes:
+      - when: hora < 9
+        answer: no-empezado
+        show: "Antes de las 9 el examen no ha empezado: I won't have started it yet (Future Perfect negativo)."
+      - when: hora < 11
+        answer: en-curso
+        show: "Entre las 9 y las 11 estará en progreso: I'll be doing the exam (Future Continuous)."
+      - when: "1"
+        answer: terminado
+        show: "Desde las 11 ya habrá terminado: I'll have finished the exam (Future Perfect)."
+    explain:
+      prompt: Explica qué aspecto usas en cada tramo y por qué.
+      rubric:
+        - Future Continuous para acción en progreso en un momento futuro
+        - Future Perfect para acción terminada antes de un momento futuro
+        - will be + -ing / will have + participio

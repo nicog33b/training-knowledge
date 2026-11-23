@@ -59,8 +59,13 @@ _(nada)_
 
 ### Contenido
 - [ ] T-040 Completar el módulo `next-cache` (1 subtema, 0 hechos)
+- [ ] T-090 Leer el texto completo de norris-ortega-2000 y spada-tomita-2010 (solo vistos de forma secundaria; la red bloqueó los DOI) y buscar una fuente sobre contraste L1 (español→inglés) · decisión: gramatica-explicita-con-contraste-l1
+- [ ] T-091 Basic English · Level 2: estilo indirecto, gerundio vs infinitivo, preposiciones, phrasal verbs frecuentes, comparativos, relativos · deps: T-089
+- [ ] T-092 Primitiva `ordenar-pasos` o `completar-hueco` para practicar producción (escribir la forma del verbo) en english-basic-1; hoy solo hay clasificar y predecir · decisión: simulaciones-por-primitivas-y-recetas
 
 ## Hecho
+
+- [x] T-089 2026-11-23 Módulo `english-basic-1` (Basic English · Level 1): 21 subtemas en 7 secciones (bases → mapa tiempo × aspecto y equivalencias con el español → presente, pasado, imperfecto en inglés, perfectos, futuro, marcadores → modales, condicionales, pasiva, artículos), 126 preguntas con respuesta, 21 simulaciones y 50 términos de glosario · decisión: gramatica-explicita-con-contraste-l1
 
 - [x] T-084 2026-11-16 Investigación de tipografía, tamaño, medida, color, contraste y polaridad: 19 fuentes y 3 decisiones `proposed` (tipografia-y-medidas-de-lectura, sin-tipografias-milagro, color-con-funcion-y-contraste)
 - [x] T-085 2026-11-16 Aplicado a la web: texto de estudio a 19 px, medida 68ch, interlineado 1,65; tokens de color con contraste ≥4,5:1 en claro y oscuro (antes el ámbar/verde/cian claros daban 3,2–3,7); botón "Aa" en el header (fuente Sistema/Literata/Atkinson Hyperlegible servidas desde el sitio, tamaño 15–26 px, espaciado amplio de WCAG 1.4.12, tema Auto/Claro/Oscuro) guardado por navegador y aplicado antes de pintar · decisión: tipografia-y-medidas-de-lectura, color-con-funcion-y-contraste, sin-tipografias-milagro

@@ -1,0 +1,406 @@
+- term: Sujeto
+  aliases:
+    - subject
+  definition: "Quién o qué realiza la acción (o del que se dice algo). En inglés
+    es obligatorio: siempre aparece antes del verbo en frases afirmativas."
+  see:
+    - Sujeto vacío
+- term: Sujeto vacío
+  aliases:
+    - dummy it
+    - it impersonal
+  definition: "Un «it» o «there» sin significado que ocupa el lugar del sujeto
+    cuando el español no lo tendría: It is raining, There is a problem."
+  see:
+    - Sujeto
+- term: Objeto
+  aliases:
+    - complemento directo
+    - object
+  definition: "Lo que recibe la acción del verbo. En inglés va pegado al verbo: I
+    like coffee very much."
+  see:
+    - Sujeto
+- term: Verbo auxiliar
+  aliases:
+    - auxiliar
+    - auxiliares
+    - auxiliary verb
+    - verbos auxiliares
+  definition: "Verbo que no aporta significado propio sino gramática (tiempo,
+    aspecto, pregunta, negación). Los principales: do, be, have y will."
+  see:
+    - Verbo principal
+    - Verbo modal
+- term: Verbo principal
+  aliases:
+    - main verb
+  definition: El verbo que lleva el significado de la frase (work, eat, go). En
+    'She has eaten', has es auxiliar y eaten el principal.
+  see:
+    - Verbo auxiliar
+- term: Verbo modal
+  aliases:
+    - modal
+    - modales
+    - verbos modales
+    - modal verb
+  definition: Auxiliar que añade capacidad, posibilidad, obligación o consejo
+    (can, could, must, should, may, might, will, would). Sin -s, sin do y
+    seguido de la forma base.
+  see:
+    - Verbo auxiliar
+    - Forma base
+- term: Adverbio de frecuencia
+  aliases:
+    - adverbios de frecuencia
+  definition: Palabra que dice cada cuánto pasa algo (always, usually, often,
+    sometimes, never). Va antes del verbo principal y después de be.
+  see:
+    - Present Simple
+- term: Forma base
+  aliases:
+    - base del verbo
+    - infinitivo sin to
+    - bare infinitive
+  definition: El verbo tal como aparece en el diccionario, sin to ni terminaciones
+    (work, go). Va tras do/does/did, will y los modales.
+  see:
+    - Participio
+    - Gerundio
+- term: Participio
+  aliases:
+    - participio pasado
+    - past participle
+    - participios
+  definition: "Forma del verbo que usan los tiempos perfectos (have + participio)
+    y la voz pasiva (be + participio): worked, gone, seen, written."
+  see:
+    - Verbo irregular
+    - Aspecto perfecto
+    - Voz pasiva
+- term: Gerundio
+  aliases:
+    - forma -ing
+    - present participle
+  definition: La forma del verbo terminada en -ing (working). Con be forma los
+    tiempos continuos.
+  see:
+    - Aspecto continuo
+- term: Tercera persona
+  aliases:
+    - tercera persona del singular
+  definition: "He, she, it (o un sustantivo singular). En Present Simple añade -s
+    al verbo: she works."
+  see:
+    - Present Simple
+- term: Verbo regular
+  aliases:
+    - verbos regulares
+    - regular verb
+  definition: "Verbo cuyo pasado y participio se forman añadiendo -ed: work,
+    worked, worked."
+  see:
+    - Verbo irregular
+- term: Verbo irregular
+  aliases:
+    - verbos irregulares
+    - irregulares
+    - irregular verb
+  definition: "Verbo cuyo pasado o participio no termina en -ed y hay que
+    aprender: go, went, gone."
+  see:
+    - Verbo regular
+    - Participio
+- term: Tiempo verbal
+  aliases:
+    - tiempos verbales
+    - tense
+  definition: Forma del verbo que sitúa la acción en presente, pasado o futuro. En
+    inglés se combina con el aspecto para dar 12 formas.
+  see:
+    - Aspecto
+- term: Aspecto
+  aliases:
+    - aspectos
+    - aspect
+  definition: "Cómo se mira la acción, independientemente de cuándo ocurre: simple
+    (hecho), continuo (en progreso), perfecto (anterior y conectado) o perfecto
+    continuo (duración)."
+  see:
+    - Tiempo verbal
+    - Aspecto continuo
+    - Aspecto perfecto
+- term: Aspecto simple
+  aliases:
+    - simple aspect
+  definition: "Presenta la acción como un hecho completo o un hábito, sin fijarse
+    en su desarrollo: she works, she worked."
+  see:
+    - Aspecto
+- term: Aspecto continuo
+  aliases:
+    - continuo
+    - tiempos continuos
+    - continuous
+    - progressive
+  definition: Presenta la acción en progreso, sin terminar o temporal. Se forma
+    con be + -ing.
+  see:
+    - Aspecto
+    - Gerundio
+    - Verbo de estado
+- term: Aspecto perfecto
+  aliases:
+    - perfecto
+    - tiempos perfectos
+    - perfect aspect
+  definition: Presenta la acción como anterior a un punto de referencia y
+    conectada con él. Se forma con have + participio.
+  see:
+    - Aspecto
+    - Participio
+    - Punto de referencia
+- term: Punto de referencia
+  aliases:
+    - momento de referencia
+  definition: "El momento desde el que se mira una acción: ahora (presente), un
+    momento pasado o uno futuro. Los perfectos miran hacia atrás desde él."
+  see:
+    - Aspecto perfecto
+- term: Present Simple
+  aliases:
+    - simple present
+    - presente simple
+  definition: "Base (+ -s en tercera persona). Hábitos, verdades, horarios y
+    estados: I work, she works."
+  see:
+    - Present Continuous
+- term: Present Continuous
+  aliases:
+    - present progressive
+    - presente continuo
+  definition: "am/is/are + -ing. Acción en curso o temporal y planes acordados:
+    I'm working."
+  see:
+    - Present Simple
+    - Verbo de estado
+- term: Past Simple
+  aliases:
+    - simple past
+    - pasado simple
+  definition: "Verbo en pasado (-ed o irregular); did en preguntas y negaciones.
+    Acciones terminadas en un momento pasado: I worked."
+  see:
+    - Present Perfect
+- term: Past Continuous
+  aliases:
+    - past progressive
+    - pasado continuo
+  definition: "was/were + -ing. Acción en progreso en un momento pasado o
+    interrumpida: I was working."
+  see:
+    - Past Simple
+- term: Present Perfect
+  aliases:
+    - presente perfecto
+  definition: "have/has + participio. Pasado conectado con el presente, sin
+    momento terminado: I have worked."
+  see:
+    - Past Simple
+    - Present Perfect Continuous
+- term: Present Perfect Continuous
+  aliases:
+    - present perfect progressive
+  definition: "have/has been + -ing. Duración de una actividad hasta ahora o
+    recién terminada con efectos: I have been working."
+  see:
+    - Present Perfect
+- term: Past Perfect
+  aliases:
+    - pasado perfecto
+  definition: "had + participio. Acción anterior a otro momento pasado: I had worked."
+  see:
+    - Pluscuamperfecto
+- term: Past Perfect Continuous
+  aliases:
+    - past perfect progressive
+  definition: "had been + -ing. Duración de una actividad hasta un momento pasado:
+    I had been working."
+  see:
+    - Past Perfect
+- term: Future Continuous
+  aliases:
+    - future progressive
+  definition: "will be + -ing. Acción en progreso en un momento futuro: I will be working."
+  see:
+    - Future Perfect
+- term: Future Perfect
+  aliases:
+    - futuro perfecto
+  definition: "will have + participio. Acción terminada antes de un momento
+    futuro: I will have worked."
+  see:
+    - Future Continuous
+- term: Future Perfect Continuous
+  aliases:
+    - future perfect progressive
+  definition: "will have been + -ing. Duración de una actividad hasta un momento
+    futuro: I will have been working."
+  see:
+    - Future Perfect
+- term: going to
+  aliases:
+    - be going to
+  definition: "be going to + base: futuro de planes ya decididos o predicción
+    basada en evidencia presente: It's going to rain."
+  see: []
+- term: used to
+  aliases: []
+  definition: "used to + base: hábito o estado pasado que ya no ocurre (I used to
+    smoke). En preguntas y negativas: did/didn't use to."
+  see:
+    - Pretérito imperfecto
+- term: Pretérito indefinido
+  aliases:
+    - pretérito perfecto simple
+    - indefinido
+  definition: Tiempo del español para acciones pasadas cerradas (comí, fui). Casi
+    siempre equivale al Past Simple.
+  see:
+    - Past Simple
+    - Pretérito imperfecto
+- term: Pretérito imperfecto
+  aliases:
+    - imperfecto
+  definition: Tiempo del español para acciones pasadas en curso, hábitos o
+    descripciones (comía, era). El inglés no tiene equivalente único.
+  see:
+    - Past Continuous
+    - used to
+- term: Pretérito perfecto compuesto
+  aliases:
+    - pretérito perfecto
+  definition: Tiempo del español «he comido». Se parece al Present Perfect, pero
+    con momento terminado el inglés usa Past Simple.
+  see:
+    - Present Perfect
+- term: Pluscuamperfecto
+  aliases: []
+  definition: Tiempo del español «había comido». Equivale al Past Perfect.
+  see:
+    - Past Perfect
+- term: Subjuntivo
+  aliases:
+    - modo subjuntivo
+  definition: Modo verbal del español (llegues, tuviera). Tras when/if con valor
+    futuro el inglés usa Present Simple; en condicionales, Past Simple o Past
+    Perfect.
+  see:
+    - Condicional
+- term: Verbo de estado
+  aliases:
+    - verbos de estado
+    - stative verb
+    - stative verbs
+  definition: Verbo que expresa un estado y no una acción (know, like, want, own,
+    cost). Normalmente no va en tiempos continuos.
+  see:
+    - Aspecto continuo
+- term: Contracción
+  aliases:
+    - contracciones
+    - contraction
+  definition: "Unión de un auxiliar con el sujeto o con not: I'm, she's, don't,
+    won't, I'd."
+  see:
+    - Verbo auxiliar
+- term: Short answer
+  aliases:
+    - short answers
+    - respuesta corta
+  definition: "Respuesta que repite solo el auxiliar: Do you like it? — Yes, I do."
+  see:
+    - Verbo auxiliar
+- term: Pregunta Wh
+  aliases:
+    - preguntas Wh
+    - Wh-question
+  definition: "Pregunta con what, where, when, why, who, which, whose o how: Wh +
+    auxiliar + sujeto + verbo."
+  see:
+    - Inversión
+- term: Inversión
+  aliases:
+    - inversion
+  definition: "Poner el primer auxiliar delante del sujeto para formar una
+    pregunta: You are → Are you?"
+  see:
+    - Pregunta Wh
+- term: Marcador temporal
+  aliases:
+    - marcadores temporales
+    - marcador de tiempo
+    - marcadores de tiempo
+    - time expression
+  definition: Palabra o expresión que sitúa la acción en el tiempo (yesterday,
+    since, already, by the time) y suele indicar qué tiempo verbal usar.
+  see:
+    - Tiempo verbal
+- term: Condicional
+  aliases:
+    - condicionales
+    - conditional
+  definition: Frase con una condición (if…) y un resultado. El inglés tiene cuatro
+    tipos básicos (0, 1, 2, 3) según lo real o hipotético.
+  see:
+    - Condicional mixto
+- term: Condicional mixto
+  aliases:
+    - mixed conditional
+  definition: "Combina partes de dos tipos de condicional, p. ej. condición pasada
+    y resultado presente: If I had taken the job, I would be rich now."
+  see:
+    - Condicional
+- term: Voz pasiva
+  aliases:
+    - pasiva
+    - passive voice
+  definition: "Estructura be + participio que pone como sujeto lo que recibe la
+    acción: The car was made in Japan."
+  see:
+    - Agente
+    - Participio
+- term: Agente
+  aliases: []
+  definition: "En la voz pasiva, quien realiza la acción; si se menciona va con
+    by: built by Eiffel."
+  see:
+    - Voz pasiva
+- term: Artículo
+  aliases:
+    - artículos
+    - article
+  definition: "Palabra que acompaña al sustantivo: a/an (indefinido), the
+    (definido) o ninguno (artículo cero)."
+  see:
+    - Sustantivo contable
+- term: Sustantivo contable
+  aliases:
+    - contables
+    - sustantivos contables
+    - countable noun
+  definition: Sustantivo que se puede contar (a car, two cars). En singular
+    necesita artículo.
+  see:
+    - Sustantivo incontable
+    - Artículo
+- term: Sustantivo incontable
+  aliases:
+    - incontables
+    - incontable
+    - uncountable noun
+  definition: "Sustantivo que no se cuenta (music, information, advice): no lleva
+    a/an ni plural."
+  see:
+    - Sustantivo contable

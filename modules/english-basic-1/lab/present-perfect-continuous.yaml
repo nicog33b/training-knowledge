@@ -1,0 +1,75 @@
+questions:
+  - q: Compara «I've been writing emails all morning» con «I've written ten emails».
+    kind: comparar
+    a: El **continuo** pone el foco en la **actividad y su duración** (*all morning*), quizá sin terminar. El **simple** pone el foco en el **resultado o la cantidad** (*ten emails*), ya terminados. Por eso *how long* va con continuo (*How long have you been writing?*) y *how many* con simple.
+    uses: []
+  - q: ¿Por qué «You're wet — have you been running?» usa el continuo aunque ya no corre?
+    kind: por-que
+    a: Porque el Present Perfect Continuous también describe una **actividad que acaba de terminar** y deja una **huella visible** ahora (estás mojado, sudado, cansado). Lo mismo con *It's been raining* (el suelo está mojado) o *Your eyes are red — have you been crying?*
+    uses: []
+  - q: "Error común: ¿por qué está mal «I study English since 2020»?"
+    kind: error-comun
+    a: "Porque una actividad que empezó en el pasado y **sigue** exige perfecto, no presente: *I **have been studying** English since 2020* (o *I've studied*). El español dice *estudio desde 2020* o *llevo … estudiando*; el inglés nunca usa Present Simple con *since* para eso."
+    uses: []
+  - q: "¿Qué pasa si usas el continuo con un verbo de estado: «I've been knowing her for years»?"
+    kind: que-pasa-si
+    a: "Es incorrecto: los verbos de estado (*know, like, have* = poseer, *believe*) no van en continuo tampoco en este tiempo. Se usa el **Present Perfect simple**: *I've **known** her for years*. Con *live, work, teach* sí valen ambas formas y significan casi lo mismo."
+    uses: []
+  - q: Traduce «Hace dos horas que te espero».
+    kind: aplicar
+    a: "*I've **been waiting** for you **for** two hours*. «Hace … que» + presente en español = **Present Perfect Continuous** + *for* en inglés cuando la actividad sigue. La pregunta sería: *How long have you been waiting?* No uses *ago* aquí: *ago* es para momentos terminados."
+    uses: []
+  - q: ¿Cuándo valen igual «I've lived here» y «I've been living here»?
+    kind: aplicar
+    a: "Con verbos de **situación larga** como *live, work, teach, study* con *for/since*, ambas formas son correctas y casi iguales: *I've lived / I've been living here since 2019*. El continuo suena algo más **temporal** o reciente; el simple, más **permanente**. Con verbos de estado (*know, be*) solo vale el simple."
+    uses: []
+sims:
+  - id: perfect-o-continuous
+    title: ¿Past Simple, Present Perfect o Perfect Continuous?
+    type: predecir-observar
+    context: "Describes algo que empezó en el pasado. Ajusta tres datos: si el periodo ya terminó (con fecha terminada o ya no ocurre), si te interesa la duración de la actividad (no el resultado) y si el verbo es de estado (know, like, own…)."
+    params:
+      - id: terminado
+        label: ¿Periodo terminado? (0 no · 1 sí)
+        min: 0
+        max: 1
+        step: 1
+        default: 0
+      - id: duracion
+        label: ¿Foco en la duración? (0 no · 1 sí)
+        min: 0
+        max: 1
+        step: 1
+        default: 1
+      - id: estado
+        label: ¿Verbo de estado? (0 no · 1 sí)
+        min: 0
+        max: 1
+        step: 1
+        default: 0
+    predict:
+      question: ¿Qué tiempo usas?
+      options:
+        - id: past-simple
+          label: Past Simple (I worked)
+        - id: present-perfect
+          label: Present Perfect (I have worked)
+        - id: perfect-continuous
+          label: Present Perfect Continuous (I have been working)
+    outcomes:
+      - when: terminado == 1
+        answer: past-simple
+        show: "Periodo cerrado o con momento terminado: Past Simple (I worked there for 5 years / I saw it yesterday)."
+      - when: duracion == 1 && estado == 0
+        answer: perfect-continuous
+        show: "Llega hasta ahora y te interesa la actividad: I've been working here for 5 years."
+      - when: "1"
+        answer: present-perfect
+        show: "Llega hasta ahora; o te interesa el resultado, o es un verbo de estado (que no va en continuo): I've known her for years / I've written ten emails."
+    explain:
+      prompt: Explica qué decide entre los tres tiempos.
+      rubric:
+        - Un momento o periodo terminado pide Past Simple
+        - Hasta ahora pide perfecto
+        - El continuo enfatiza la actividad o la duración
+        - Los verbos de estado no van en continuo
