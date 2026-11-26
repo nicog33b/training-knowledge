@@ -1,0 +1,33 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getData } from '../../lib/data';
+import { courseGraph } from '@tk/views';
+export async function getStaticPaths() {
+  const { modules } = await getData();
+  return modules.map((m) => ({ params: { module: m.manifest.id }, props: { m } }));
+}
+const { m } = Astro.props;
+const sections = m.outline.sections.length
+  ? m.outline.sections.map((s) => ({ id: s.id, title: s.title, topics: s.topics.map((t) => ({ id: t.id, title: t.title })) }))
+  : [{ id: 'todo', title: m.manifest.title, topics: m.topics.map((t) => ({ id: t.id, title: t.title })) }];
+const graph = courseGraph({ sections, requires: Object.fromEntries(m.topics.map((t) => [t.id, t.requires])) });
+---
+<Base title={`Mapa · ${m.manifest.title}`} chat={{ module: m.manifest.id, course: m.manifest.title }}>
+  <p><a href={`/${m.manifest.id}/`}>← {m.manifest.title}</a></p>
+  <h1>Mapa del curso</h1>
+  <p class="muted">Cada bloque es una sección; las flechas llenas son requisitos («hay que saber esto antes») y las punteadas, el orden sugerido. Cada subtema tiene además su propio mapa en «Estudiar como → Mapa».</p>
+  <div class="tk-mermaid map" data-src={graph} data-label={`Mapa del curso ${m.manifest.title}`}></div>
+  <h2>Índice</h2>
+  <ol class="toc">
+    {sections.map((s) => <li><strong>{s.title}</strong><ol>{s.topics.map((t) => <li id={t.id}><a href={`/${m.manifest.id}/${t.id}/`}>{t.title}</a></li>)}</ol></li>)}
+  </ol>
+</Base>
+<style>
+  .map { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: .8rem; }
+  .toc li { margin: .3rem 0; }
+  .toc li:target a { background: color-mix(in srgb, var(--accent) 15%, transparent); border-radius: 4px; }
+</style>
+<script>
+  import { renderMermaid, watchTheme } from '../../lib/mermaid.ts';
+  renderMermaid(); watchTheme();
+</script>

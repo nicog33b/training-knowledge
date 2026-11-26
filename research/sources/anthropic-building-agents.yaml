@@ -1,0 +1,22 @@
+id: anthropic-building-agents
+title: Building effective agents
+authors:
+  - Schluntz
+  - Zhang
+year: 2024
+venue: Anthropic Engineering
+url: https://www.anthropic.com/engineering/building-effective-agents
+kind: docs
+verified: secondary
+retrieved: 2026-11-26
+summary: Distingue workflows (caminos fijos en código) de agentes (el modelo
+  decide) y recomienda empezar por lo simple.
+facts:
+  - "Workflows: LLM y herramientas orquestados por caminos predefinidos en
+    código; agentes: el LLM dirige su propio proceso y uso de herramientas."
+  - Recomienda empezar con llamadas directas a la API y la solución más simple;
+    añadir complejidad (agentes) solo si mejora resultados medibles.
+  - "Patrones de workflow descritos: encadenar prompts, enrutar, paralelizar,
+    orquestador-trabajadores y evaluador-optimizador."
+caveats:
+  - Autores citados de memoria; texto visto parcialmente en resúmenes.

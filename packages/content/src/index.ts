@@ -8,6 +8,8 @@ import { parse as parseYaml } from 'yaml';
 import {
   GlossaryFile,
   LabFile,
+  LearningPath,
+  ToolSpec,
   Outline,
   ModuleManifest,
   SHARED,
@@ -20,6 +22,7 @@ import {
   type RawTopic,
 } from '@tk/contracts';
 import { checkLab } from '@tk/sims';
+import { checkTool } from '@tk/tools';
 
 // ───────── Adaptador de filesystem ─────────
 export class FsContentSource implements ContentSource {
@@ -51,8 +54,17 @@ export class FsContentSource implements ContentSource {
     const p = id === SHARED ? join(this.root, 'shared', 'glossary.yaml') : join(this.root, 'modules', id, 'glossary.yaml');
     return this.yaml(p, []);
   }
-  async listLabs(id: string): Promise<RawSource[]> {
-    const dir = join(this.root, 'modules', id, 'lab');
+  listLabs(id: string) {
+    return this.yamlDir(join(this.root, 'modules', id, 'lab'));
+  }
+  listTools(id: string) {
+    return this.yamlDir(join(this.root, 'modules', id, 'tools'));
+  }
+  listPaths() {
+    return this.yamlDir(join(this.root, 'paths'));
+  }
+  /** Todos los .yaml de una carpeta; un YAML roto se devuelve como { $yamlError } para reportarlo. */
+  private async yamlDir(dir: string): Promise<RawSource[]> {
     let files: string[] = [];
     try {
       files = (await readdir(dir)).filter((f) => f.endsWith('.yaml')).sort();
@@ -92,7 +104,10 @@ export interface LoadedTopic extends TopicFrontmatter {
   /** preguntas sugeridas + simulaciones (modules/<id>/lab/<subtema>.yaml). */
   lab: LabFile;
 }
+export type { ToolSpec, LearningPath };
 export interface LoadedModule {
+  /** herramientas propias del curso (modules/<id>/tools/*.yaml). */
+  tools: ToolSpec[];
   manifest: ModuleManifest;
   topics: LoadedTopic[];
   outline: Outline;
@@ -104,6 +119,8 @@ export interface LoadedModule {
 export interface Loaded {
   shared: GlossaryTerm[];
   modules: LoadedModule[];
+  /** rutas de aprendizaje (paths/*.yaml) */
+  paths: LearningPath[];
   issues: Issue[];
 }
 
@@ -127,7 +144,7 @@ export async function loadAll(source: ContentSource): Promise<Loaded> {
   };
 
   const shared = await parseGlossary(SHARED);
-  const base: { manifest: ModuleManifest; topics: LoadedTopic[]; own: GlossaryTerm[]; outline: Outline }[] = [];
+  const base: { manifest: ModuleManifest; topics: LoadedTopic[]; own: GlossaryTerm[]; outline: Outline; tools: ToolSpec[] }[] = [];
 
   for (const dir of await source.listModuleIds()) {
     const mf = ModuleManifest.safeParse(await source.readManifest(dir));
@@ -167,9 +184,20 @@ export async function loadAll(source: ContentSource): Promise<Loaded> {
       topic.lab = lab.data;
     }
     topics.sort((a, b) => a.order - b.order || a.id.localeCompare(b.id));
+    const tools: ToolSpec[] = [];
+    for (const raw of (await source.listTools?.(dir)) ?? []) {
+      const where = `${dir}/tools/${raw.id}`;
+      const ye = (raw.data as any)?.$yamlError;
+      if (ye) { bad(where, `YAML inválido: ${ye}`); continue; }
+      const r = ToolSpec.safeParse(raw.data ?? {});
+      if (!r.success) { bad(where, r.error.issues.map((i) => `${i.path.join('.')}: ${i.message}`).join('; ')); continue; }
+      if (r.data.id !== raw.id) bad(where, `id "${r.data.id}" != archivo "${raw.id}"`);
+      checkTool(r.data, topicIds).forEach((m) => bad(where, m));
+      tools.push(r.data);
+    }
     const ol = Outline.safeParse((await source.readOutline(dir)) ?? {});
     if (!ol.success) bad(`${dir}/outline.yaml`, ol.error.issues.map((i) => `${i.path.join('.')}: ${i.message}`).join('; '));
-    base.push({ manifest: mf.data, topics, own: await parseGlossary(dir), outline: ol.success ? ol.data : { sections: [] } });
+    base.push({ manifest: mf.data, topics, own: await parseGlossary(dir), outline: ol.success ? ol.data : { sections: [] }, tools });
   }
 
   const byId = new Map(base.map((b) => [b.manifest.id, b]));
@@ -204,10 +232,20 @@ export async function loadAll(source: ContentSource): Promise<Loaded> {
       if (t.status === 'done' && sinRespuesta)
         bad(`${b.manifest.id}/lab/${t.id}`, `status=done exige respuesta escrita (a:) en cada pregunta; faltan ${sinRespuesta}`);
     }
-    return { manifest: b.manifest, topics: b.topics, outline: b.outline, ownGlossary: b.own, glossary: [...merged.values()] };
+    return { manifest: b.manifest, topics: b.topics, outline: b.outline, ownGlossary: b.own, glossary: [...merged.values()], tools: b.tools };
   });
 
-  return { shared, modules, issues };
+  const paths: LearningPath[] = [];
+  for (const raw of (await source.listPaths?.()) ?? []) {
+    const where = `paths/${raw.id}`;
+    const r = LearningPath.safeParse(raw.data ?? {});
+    if (!r.success) { bad(where, (raw.data as any)?.$yamlError ?? r.error.issues.map((i) => `${i.path.join('.')}: ${i.message}`).join('; ')); continue; }
+    if (r.data.id !== raw.id) bad(where, `id "${r.data.id}" != archivo "${raw.id}"`);
+    for (const st of r.data.steps) if (!byId.has(st.module)) bad(where, `módulo inexistente "${st.module}"`);
+    paths.push(r.data);
+  }
+
+  return { shared, modules, paths, issues };
 }
 
 /** Decisión preguntas-sugeridas-y-contexto-minimo: todo subtema terminado trae preguntas con su respuesta. */

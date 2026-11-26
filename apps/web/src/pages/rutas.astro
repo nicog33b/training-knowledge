@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import { getData } from '../lib/data';
+const { modules, paths } = await getData();
+const mod = (id: string) => modules.find((m) => m.manifest.id === id)!;
+---
+<Base title="Rutas de aprendizaje">
+  <h1>Rutas de aprendizaje</h1>
+  <p class="muted">Cursos encadenados: cada paso asume el anterior y hereda su glosario. Avanza cuando puedas resolver el objetivo del paso sin ayuda (las preguntas y simulaciones te lo dicen).</p>
+  {paths.map((p) => (
+    <section class="route" id={p.id}>
+      <h2>{p.title}</h2>
+      <p class="muted">{p.summary}</p>
+      <ol class="steps">
+        {p.steps.map((s, i) => {
+          const m = mod(s.module);
+          const done = m.topics.filter((t) => t.status === 'done').length;
+          return (
+            <li>
+              <span class="n">{i + 1}</span>
+              <div>
+                <a href={`/${s.module}/`}><strong>{m.manifest.title}</strong></a>
+                <p><b>Objetivo:</b> {s.goal}</p>
+                <p class="muted small">{done} subtemas · {m.topics.reduce((n, t) => n + t.lab.questions.length, 0)} preguntas · {m.tools.length} herramientas</p>
+              </div>
+            </li>
+          );
+        })}
+      </ol>
+    </section>
+  ))}
+</Base>
+<style>
+  .route { margin: 2rem 0; }
+  .steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; }
+  .steps li { display: grid; grid-template-columns: 2.4rem 1fr; gap: .8rem; position: relative; padding-bottom: 1.2rem; }
+  .steps li:not(:last-child)::before { content: ''; position: absolute; left: 1.15rem; top: 2.3rem; bottom: 0; width: 2px; background: var(--line); }
+  .n { width: 2.3rem; height: 2.3rem; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: var(--on-accent); font-weight: 700; }
+  .steps p { margin: .2rem 0; }
+  .small { font-size: .8rem; }
+</style>

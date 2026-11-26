@@ -1,0 +1,51 @@
+questions:
+  - q: ¿Por qué la misma pregunta al mismo modelo puede dar dos respuestas distintas?
+    kind: por-que
+    a: Porque en cada paso el modelo calcula probabilidades para el siguiente token y luego **muestrea** uno. Elecciones distintas al principio llevan a textos distintos. Incluso con temperatura 0 hay variación por versiones del modelo y cálculo en paralelo, así que hay que diseñar como si fuera **no determinista**.
+    uses: []
+  - q: "Compara temperatura baja y alta: ¿para qué usarías cada una?"
+    kind: comparar
+    a: "**Baja**: clasificar, extraer datos, responder con formato fijo; quieres lo más probable y previsible. **Alta**: lluvia de ideas, variantes de un texto, nombres creativos; quieres diversidad. Con alta temperatura conviene generar **varias** opciones y elegir, y validar más."
+    uses: []
+  - q: ¿Qué pasa si escribes un test que compara la respuesta del LLM con una cadena exacta?
+    kind: que-pasa-si
+    a: "Fallará de forma intermitente aunque la respuesta sea correcta: cambia una coma, el orden o una palabra. Un buen test comprueba **propiedades**: cumple el esquema, contiene la cifra correcta, no menciona datos prohibidos, no supera la longitud. Eso es una eval, no un test de igualdad."
+    uses: []
+  - q: ¿Por qué no conviene ajustar temperatura y top-p a la vez?
+    kind: por-que
+    a: "Porque los dos recortan o deforman la misma distribución y sus efectos se mezclan: es difícil saber qué cambió el resultado. Lo habitual es fijar uno (casi siempre la **temperatura**) y dejar el otro en su valor por defecto. Algunos modelos de razonamiento ni siquiera permiten cambiarlos."
+    uses: []
+  - q: Necesitas clasificar tickets en 5 categorías de forma consistente. ¿Cómo configuras la llamada?
+    kind: aplicar
+    a: '**Temperatura baja**, **salida estructurada** con un `enum` de las 5 categorías (y quizá "otra"), instrucciones con la definición de cada categoría y 2–3 **ejemplos** variados. Valida la salida en código y mide con un conjunto de tickets etiquetados (eval) antes de ponerlo en producción.'
+    uses: []
+  - q: "Error común: «con temperatura 0 el modelo es determinista, así que cacheo la respuesta como verdad»."
+    kind: error-comun
+    a: "Temperatura 0 reduce la variación pero **no la elimina** ni hace correcta la respuesta: puede ser igual de alucinada todas las veces. Cachear respuestas puede tener sentido por costo, pero validando el contenido y sabiendo que un cambio de versión del modelo puede cambiar la salida."
+    uses: []
+sims:
+  - id: temperatura-por-tarea
+    title: ¿Temperatura baja o alta?
+    type: clasificar
+    prompt: Elige la configuración de muestreo más adecuada para cada tarea.
+    categories:
+      - id: baja
+        label: Temperatura baja (previsible)
+      - id: alta
+        label: Temperatura alta (variedad)
+    items:
+      - text: Extraer el número de factura de un PDF.
+        category: baja
+        why: "Hay una única respuesta correcta: quieres lo más probable."
+      - text: Proponer 10 nombres para una marca.
+        category: alta
+        why: Buscas diversidad; luego eliges.
+      - text: Clasificar tickets en 5 categorías.
+        category: baja
+        why: Consistencia entre peticiones parecidas.
+      - text: Escribir variantes de un titular para un test A/B.
+        category: alta
+        why: Necesitas opciones distintas entre sí.
+      - text: Convertir lenguaje natural a una consulta SQL.
+        category: baja
+        why: Formato estricto y respuesta precisa.

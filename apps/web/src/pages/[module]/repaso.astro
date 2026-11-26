@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+import Flashcards from '../../components/Flashcards.astro';
+import { getData } from '../../lib/data';
+import { courseCards } from '../../lib/cards';
+export async function getStaticPaths() {
+  const { modules } = await getData();
+  return modules.map((m) => ({ params: { module: m.manifest.id }, props: { m } }));
+}
+const { m } = Astro.props;
+const cards = await courseCards(m);
+---
+<Base title={`Repaso · ${m.manifest.title}`} chat={{ module: m.manifest.id, course: m.manifest.title }}>
+  <p><a href={`/${m.manifest.id}/`}>← {m.manifest.title}</a></p>
+  <h1>Repaso de hoy</h1>
+  <div class="srs-sum card" data-srs-sum data-module={m.manifest.id}></div>
+  <p class="muted">Hasta 20 tarjetas: primero las vencidas, luego nuevas, intercalando subtemas. «No» la repite en unos minutos y mañana; «Sí» espacia cada vez más (1, 3, 7, 16, 35, 80 días). Recordar con esfuerzo y espaciado es lo que más retiene.</p>
+  <Flashcards cards={cards} module={m.manifest.id} mode="due" limit={20} />
+</Base>
+<style>.srs-sum { display: flex; gap: 1.4rem; flex-wrap: wrap; } .srs-sum div { display: grid; } .srs-sum b { font-size: 1.4rem; font-variant-numeric: tabular-nums; } .srs-sum span { font-size: .78rem; color: var(--muted); }</style>
+<script>
+  import { summary } from '@tk/practice';
+  import { loadSrs } from '../../lib/srs.ts';
+  const box = document.querySelector<HTMLElement>('[data-srs-sum]')!;
+  const s = summary(loadSrs(box.dataset.module!));
+  box.innerHTML = '';
+  for (const [n, l] of [[s.due, 'para repasar ahora'], [s.learning, 'aprendiendo'], [s.solid, 'consolidadas (≥ 7 días)'], [s.total, 'vistas en total']] as const) {
+    const d = document.createElement('div'); const b = document.createElement('b'); b.textContent = String(n); const sp = document.createElement('span'); sp.textContent = l; d.append(b, sp); box.append(d);
+  }
+</script>

@@ -1,0 +1,105 @@
+id: costo-conversacion
+title: Calculadora de costo de una conversación
+summary: Cuánto cuesta una conversación con historial que crece, y cuánto ahorra
+  el caché del prompt de sistema. Ajusta los precios a tu modelo.
+builder: calculadora
+topics:
+  - costos-latencia-y-cache
+  - tokens-y-contexto
+inputs:
+  - id: sistema
+    label: Prompt de sistema + herramientas
+    type: number
+    min: 500
+    max: 50000
+    step: 500
+    default: 8000
+    unit: tokens
+  - id: por_turno
+    label: Tokens nuevos por turno (pregunta + respuesta)
+    type: number
+    min: 100
+    max: 5000
+    step: 100
+    default: 800
+    unit: tokens
+  - id: salida
+    label: Tokens de salida por respuesta
+    type: number
+    min: 50
+    max: 4000
+    step: 50
+    default: 400
+    unit: tokens
+  - id: turnos
+    label: Turnos de la conversación
+    type: number
+    min: 1
+    max: 60
+    step: 1
+    default: 12
+  - id: precio_in
+    label: Precio de entrada
+    type: number
+    min: 0.1
+    max: 20
+    step: 0.1
+    default: 1
+    unit: USD / M tokens
+  - id: precio_out
+    label: Precio de salida
+    type: number
+    min: 0.5
+    max: 80
+    step: 0.5
+    default: 5
+    unit: USD / M tokens
+  - id: cache
+    label: Caché del prefijo
+    type: select
+    default: 1
+    options:
+      - label: Activado (lectura ≈ 0,1×)
+        value: 1
+      - label: Sin caché
+        value: 0
+outputs:
+  - id: entrada_total
+    label: Tokens de entrada (toda la conversación)
+    expr: turnos * sistema + por_turno * turnos * (turnos - 1) / 2
+  - id: costo_entrada
+    label: Costo de entrada
+    expr: (cache * (sistema * (1 + (turnos - 1) * 0.1)) + (1 - cache) * turnos *
+      sistema + por_turno * turnos * (turnos - 1) / 2) / 1000000 * precio_in
+    unit: USD
+    decimals: 4
+  - id: costo_salida
+    label: Costo de salida
+    expr: turnos * salida / 1000000 * precio_out
+    unit: USD
+    decimals: 4
+  - id: costo
+    label: Costo por conversación
+    expr: costo_entrada + costo_salida
+    unit: USD
+    decimals: 4
+    main: true
+  - id: mil
+    label: Por cada 1.000 conversaciones
+    expr: costo * 1000
+    unit: USD
+    decimals: 2
+notes:
+  - when: turnos > 20
+    text: "Con muchos turnos el historial domina el costo: resume los turnos viejos."
+    tone: warn
+  - when: cache == 0 && turnos > 2
+    text: "Activa el caché: el prompt de sistema se reenvía en cada turno."
+    tone: warn
+  - when: costo_salida > costo_entrada
+    text: "La salida pesa más que la entrada: pide respuestas más concisas."
+    tone: info
+  - when: cache == 1 && turnos > 2
+    text: El caché solo ahorra si el prefijo es idéntico en cada petición (nada de
+      fechas con segundos al principio).
+    tone: ok

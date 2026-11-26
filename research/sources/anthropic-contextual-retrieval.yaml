@@ -1,0 +1,19 @@
+id: anthropic-contextual-retrieval
+title: Introducing Contextual Retrieval
+authors:
+  - Anthropic
+year: 2024
+venue: Anthropic Engineering
+url: https://www.anthropic.com/engineering/contextual-retrieval
+kind: docs
+verified: secondary
+retrieved: 2026-11-26
+summary: Añadir a cada chunk un contexto generado y combinar embeddings + BM25 +
+  reranking reduce mucho los fallos de recuperación.
+facts:
+  - "Embeddings contextuales + BM25 contextual: fallos de recuperación en top-20
+    bajan un 49 % (5,7 % → 2,9 %)."
+  - "Añadiendo reranking: fallos bajan un 67 % (5,7 % → 1,9 %)."
+caveats:
+  - Mide si el chunk correcto aparece en el top-k, no la calidad final de la
+    respuesta.

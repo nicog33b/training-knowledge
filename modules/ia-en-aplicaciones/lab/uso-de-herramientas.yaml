@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Quién ejecuta realmente una herramienta cuando el modelo «la usa»?
+    kind: por-que
+    a: "**Tu código**. El modelo solo devuelve una propuesta: nombre de la herramienta y argumentos en JSON. La app decide si la ejecuta, con qué permisos, y le devuelve el resultado como un mensaje. Por eso la validación, los permisos y las confirmaciones son responsabilidad de la app, no del modelo."
+    uses: []
+  - q: ¿Qué pasa si una herramienta devuelve 5.000 filas de la base de datos?
+    kind: que-pasa-si
+    a: "Llena el contexto: sube el costo y la latencia, puede no caber y el modelo usará peor la información (contexto largo). Diseña resultados **compactos**: pagina, filtra, resume y devuelve lo que la tarea necesita, con una forma de pedir más si hace falta."
+    uses: []
+  - q: Compara una herramienta `ejecutar_sql(consulta)` con `buscar_pedidos(cliente_id, estado)`.
+    kind: comparar
+    a: "`ejecutar_sql` es **poderosa y peligrosa**: el modelo puede leer o borrar lo que quiera, y una inyección se convierte en ataque. `buscar_pedidos` es **acotada**: argumentos validables, permisos claros y menos errores. Prefiere herramientas específicas con mínimo privilegio."
+    uses: []
+  - q: El modelo llama a la herramienta con una fecha en formato incorrecto. ¿Qué debería devolverle tu código?
+    kind: aplicar
+    a: 'Un **error legible** como resultado de la herramienta: "fecha inválida: usa AAAA-MM-DD (p. ej. 2026-03-01)". El modelo puede corregirse y reintentar. Un error opaco o una excepción que corta el bucle obliga a empezar de nuevo. Cuenta los reintentos y pon un **tope**.'
+    uses: []
+  - q: ¿Por qué las descripciones de las herramientas importan tanto?
+    kind: por-que
+    a: "Porque son lo único que el modelo sabe de ellas: con la descripción decide **cuándo** usarla y **cómo** rellenar los argumentos. Una descripción que explica para qué sirve, cuándo no usarla y un ejemplo de argumentos reduce llamadas equivocadas más que cualquier ajuste del prompt."
+    uses: []
+  - q: "Error común: dejar que el agente envíe correos a clientes sin revisión."
+    kind: error-comun
+    a: "Enviar un correo es una acción **irreversible y externa**: un error o una inyección indirecta (un correo entrante con instrucciones) puede mandar información a quien no debe. Para acciones con efecto, que el modelo prepare un **borrador** y una persona lo **confirme**."
+    uses: []
+sims: []

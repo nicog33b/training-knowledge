@@ -1,12 +1,66 @@
 - term: API
   aliases: []
-  definition: Application Programming Interface. Contrato por el cual un programa expone funciones a otro.
+  definition: Application Programming Interface. Contrato por el cual un programa
+    expone funciones a otro.
   see: []
 - term: Latencia
-  aliases: [latency]
+  aliases:
+    - latency
   definition: Tiempo que tarda una petición en recibir respuesta.
   see: []
 - term: TTL
-  aliases: [Time To Live]
+  aliases:
+    - Time To Live
   definition: Time To Live. Duración tras la cual un dato guardado se considera vencido.
+  see: []
+- term: LLM
+  aliases:
+    - LLMs
+    - modelo de lenguaje
+    - modelos de lenguaje
+    - large language model
+  definition: Large Language Model. Modelo entrenado con enormes cantidades de
+    texto que genera texto prediciendo el siguiente token.
+  see: []
+- term: Prompt
+  aliases:
+    - prompts
+  definition: Texto (instrucciones, contexto, ejemplos) que se envía a un modelo
+    de IA para obtener una respuesta.
+  see: []
+- term: JSON
+  aliases: []
+  definition: Formato de texto para datos estructurados (objetos, listas, números,
+    cadenas) que entienden casi todos los lenguajes.
+  see: []
+- term: HTTP
+  aliases:
+    - HTTPS
+  definition: "Protocolo de petición-respuesta de la web: el cliente envía un
+    método (GET, POST…) a una URL y el servidor responde con un código de estado
+    y un cuerpo."
+  see: []
+- term: Repositorio
+  aliases:
+    - repositorios
+    - repo
+    - repos
+  definition: Carpeta de un proyecto bajo control de versiones (normalmente Git)
+    con todo su historial de cambios.
+  see: []
+- term: CI
+  aliases:
+    - integración continua
+    - CI/CD
+  definition: "Integración continua: cada cambio se construye y se prueba
+    automáticamente en un servidor antes de integrarlo."
+  see: []
+- term: PR
+  aliases:
+    - pull request
+    - pull requests
+    - PRs
+    - merge request
+  definition: "Pull request: propuesta de cambio de código que otros revisan y
+    prueban antes de integrarla a la rama principal."
   see: []

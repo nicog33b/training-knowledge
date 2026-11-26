@@ -1,0 +1,66 @@
+questions:
+  - q: ¿Cómo se calcula el costo de una petición a un LLM?
+    kind: por-que
+    a: "**Tokens de entrada × precio de entrada + tokens de salida × precio de salida** (por millón). La salida suele ser varias veces más cara. Si hay caché, los tokens leídos del caché se cobran a una fracción. En conversaciones, la entrada incluye **todo el historial** de cada turno."
+    uses: []
+  - q: ¿Qué pasa con el caché si pones la fecha y hora actual al principio del prompt de sistema?
+    kind: que-pasa-si
+    a: El prefijo **cambia en cada petición**, así que el caché nunca acierta y pagas todo al precio completo. Lo estable (instrucciones, herramientas, documentos base) va al **principio**; lo variable (fecha, pregunta del usuario) al **final**.
+    uses: []
+  - q: Compara reducir latencia acortando la respuesta y cambiando a un modelo más rápido.
+    kind: comparar
+    a: "**Respuestas más cortas**: gratis y casi siempre aplicable; la latencia total depende mucho de los tokens de salida. **Modelo más rápido**: también abarata, pero puede bajar la calidad; hay que medirlo con evals. Suele convenir hacer lo primero antes de lo segundo."
+    uses: []
+  - q: Una función resume 10.000 tickets al día. ¿Qué modelo eliges?
+    kind: aplicar
+    a: "Empieza por un modelo del nivel **rápido/barato**, con salida estructurada y un tope de tokens. Mide con una eval de ~50 tickets frente al modelo equilibrado: si la calidad aguanta, el ahorro a ese volumen es grande. Usa caché para el prompt fijo y procesa por lotes si el proveedor lo permite."
+    uses: []
+  - q: ¿Por qué un historial append-only ayuda al caché?
+    kind: por-que
+    a: "Porque el caché funciona por **prefijo**: si cada turno solo añade al final, todo lo anterior es idéntico y se reutiliza. Si editas o reordenas mensajes antiguos, el prefijo cambia desde ese punto y se pierde el caché de todo lo que viene después."
+    uses: []
+  - q: "Error común: lanzar una función con IA sin registrar tokens ni costo por petición."
+    kind: error-comun
+    a: Sin medición no sabes qué función gasta, si un cambio de prompt duplicó el costo ni si un usuario está abusando. Registra **tokens, modelo, costo y latencia** por petición y pon **topes** por usuario y por día antes de abrirla a todo el mundo.
+    uses: []
+sims:
+  - id: compensa-cache
+    title: ¿Cuánto ahorra el caché de prompts?
+    type: predecir-observar
+    context: Un asistente envía siempre un prompt de sistema de 20.000 tokens (instrucciones + catálogo de herramientas) y después la pregunta del usuario.
+    params:
+      - id: prefijo_estable
+        label: ¿El prefijo es idéntico en cada petición? (1 = sí, 0 = lleva la hora con segundos)
+        min: 0
+        max: 1
+        step: 1
+        default: 1
+      - id: peticiones
+        label: Peticiones dentro de la vida del caché
+        min: 1
+        max: 50
+        step: 1
+        default: 10
+    predict:
+      question: ¿Cuánto se abarata el costo de entrada del prefijo?
+      options:
+        - id: casi-nada
+          label: Casi nada (o incluso cuesta un poco más)
+        - id: mucho
+          label: "Mucho: la mayoría de peticiones lo leen del caché"
+    outcomes:
+      - when: prefijo_estable == 0
+        answer: casi-nada
+        show: "El prefijo cambia en cada petición: el caché nunca acierta y pagas todo al precio completo."
+      - when: peticiones <= 1
+        answer: casi-nada
+        show: "Con una sola petición no hay reutilización: escribir en caché cuesta algo más y nadie lo lee."
+      - when: "1"
+        answer: mucho
+        show: "Cada petición tras la primera lee el prefijo a ~0,1× el precio de entrada: con 10 peticiones el prefijo cuesta ~19 % de lo que costaría sin caché."
+    explain:
+      prompt: Explica qué condiciones necesita el caché de prompts para ahorrar.
+      rubric:
+        - menciona que el prefijo debe ser idéntico
+        - menciona que lo variable va al final
+        - menciona que hace falta reutilización (varias peticiones en poco tiempo)

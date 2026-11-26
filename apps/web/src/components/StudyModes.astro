@@ -1,0 +1,301 @@
+---
+/**
+ * "Estudiar como…": el MISMO subtema transformado en otras formas de estudiar, sin IA ni costo,
+ * para cualquier curso (todo sale del markdown, del glosario y del lab con @tk/views).
+ *   Leer · Esquema · Mapa (+ Haz tu mapa) · Tarjetas · Completar huecos · Explícalo · Pregunta previa
+ * Decisión: research/decisions/vistas-de-estudio-generadas.md
+ */
+import type { GlossaryTerm, LabQuestion } from '@tk/contracts';
+import { termId } from '@tk/contracts';
+import { renderMarkdown } from '@tk/render';
+import { cloze, mindmap, outline, outlineToText, type OutlineNode } from '@tk/views';
+import Flashcards, { type Card } from './Flashcards.astro';
+interface Props { module: string; topic: string; title: string; body: string; usedTerms: string[]; glossary: GlossaryTerm[]; questions: LabQuestion[] }
+const { module, topic, title, body, usedTerms, glossary, questions } = Astro.props;
+
+const tree = outline(body, title);
+const map = mindmap(tree);
+const clozeItems = cloze(body, 12);
+const used = new Set(usedTerms);
+const terms = glossary.filter((g) => used.has(termId(g.term)));
+const answers = await Promise.all(questions.map((q) => (q.a ? renderMarkdown(q.a, glossary).then((r) => r.html) : Promise.resolve(''))));
+const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
+const cards: Card[] = [
+  ...terms.map((g) => ({ key: `t:${termId(g.term)}`, front: esc(g.term), back: `<p>${esc(g.definition)}</p>`, group: topic, label: 'Término' })),
+  ...questions.filter((q) => q.a).map((q, i) => ({ key: `q:${topic}:${q.q}`, front: esc(q.q), back: answers[questions.indexOf(q)], group: topic, label: 'Pregunta' })),
+];
+// Pregunta previa: una de "por qué" y una de "aplicar"/"qué pasa si" (las que más hacen pensar antes de leer).
+const pre = [questions.find((q) => q.kind === 'por-que'), questions.find((q) => q.kind === 'aplicar' || q.kind === 'que-pasa-si')].filter(Boolean) as LabQuestion[];
+const countPoints = (n: OutlineNode): number => n.points.length + n.children.reduce((a, c) => a + countPoints(c), 0);
+const modes = [
+  { id: 'leer', label: 'Leer', icon: '<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 5.5v16"/>' },
+  { id: 'esquema', label: 'Esquema', icon: '<path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/>' },
+  { id: 'mapa', label: 'Mapa', icon: '<circle cx="12" cy="12" r="3"/><circle cx="4.5" cy="5" r="2"/><circle cx="19.5" cy="5" r="2"/><circle cx="4.5" cy="19" r="2"/><circle cx="19.5" cy="19" r="2"/><path d="M6 6.5l3.8 3.6M18 6.5l-3.8 3.6M6 17.5l3.8-3.6M18 17.5l-3.8-3.6"/>' },
+  { id: 'tarjetas', label: 'Tarjetas', icon: '<rect x="3" y="6" width="14" height="12" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v10"/>', n: cards.length },
+  { id: 'huecos', label: 'Huecos', icon: '<path d="M4 7h6M14 7h6M4 12h3M11 12h9M4 17h9M17 17h3"/><path d="M10 5v4M14 5v4" stroke-dasharray="1 2"/>', n: clozeItems.length },
+  { id: 'explicalo', label: 'Explícalo', icon: '<path d="M4 20l1.5-4.5A8 8 0 1 1 8.5 19z"/><path d="M8.5 10.5h7M8.5 13.5h4"/>' },
+];
+const svg = (d: string) => `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+---
+<div class="sm" data-sm data-module={module} data-topic={topic}>
+  {pre.length > 0 && (
+    <aside class="sm-pre" hidden data-pre>
+      <div>
+        <p class="sm-eyebrow">Antes de leer · 1 minuto</p>
+        <p class="sm-pre-lead">Intenta responder aunque no sepas: preguntarse antes ayuda a fijar lo que vas a leer, incluso si fallas.</p>
+        <ol>{pre.map((q) => <li><span>{q.q}</span><textarea rows="2" placeholder="Tu intuición, en una frase…" aria-label={q.q}></textarea></li>)}</ol>
+      </div>
+      <div class="sm-pre-actions">
+        <button type="button" class="sm-btn primary" data-pre-done>Ya lo intenté, a leer</button>
+        <button type="button" class="sm-btn ghost" data-pre-off>No mostrar más</button>
+      </div>
+    </aside>
+  )}
+
+  <nav class="sm-bar" aria-label="Estudiar este tema como (Mayús + 1…6)">
+    <span class="sm-bar-label">Estudiar como</span>
+    <div class="sm-tabs" role="tablist">
+      {modes.map((m, i) => (
+        <button type="button" role="tab" aria-selected={i === 0 ? 'true' : 'false'} data-mode={m.id} disabled={m.n === 0}>
+          <Fragment set:html={svg(m.icon)} /><span>{m.label}</span>{m.n ? <small>{m.n}</small> : null}
+        </button>
+      ))}
+    </div>
+    {pre.length > 0 && <button type="button" class="sm-pre-toggle" data-pre-on title="Mostrar las preguntas previas">Pregunta previa</button>}
+  </nav>
+
+  <section class="sm-panel" data-panel="esquema" hidden>
+    <p class="sm-note">El esquema orienta antes y después de leer; no sustituye la práctica. {countPoints(tree) < 3 && 'Este subtema tiene pocas ideas marcadas en negrita: el esquema es corto.'}</p>
+    <div class="sm-outline">
+      <h3>{tree.title}</h3>
+      {tree.points.length > 0 && <ul class="pts">{tree.points.map((p) => <li>{p}</li>)}</ul>}
+      <ol>
+        {tree.children.map((c) => (
+          <li>
+            <details open>
+              <summary>{c.title}</summary>
+              {c.points.length > 0 && <ul class="pts">{c.points.map((p) => <li>{p}</li>)}</ul>}
+              {c.children.length > 0 && <ol>{c.children.map((g) => <li><strong>{g.title}</strong>{g.points.length > 0 && <ul class="pts">{g.points.map((p) => <li>{p}</li>)}</ul>}</li>)}</ol>}
+            </details>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="sm-panel" data-panel="mapa" hidden>
+    <div class="sm-map-head">
+      <p class="sm-note">Mapa generado del tema. Construir tu propio mapa rinde más que mirar uno hecho: edítalo abajo.</p>
+      <a href={`/${module}/mapa/#${topic}`} class="sm-link">Mapa del curso →</a>
+    </div>
+    <div class="tk-mermaid sm-auto" data-src={map} data-label={`Mapa del tema ${title}`}></div>
+    <h3 class="sm-h">Haz tu mapa</h3>
+    <p class="sm-note">Una idea por línea; con 2 espacios de sangría cuelga de la de arriba. Empieza con los títulos y añade tú las ideas, ejemplos y conexiones sin mirar el texto.</p>
+    <div class="sm-mine">
+      <textarea class="sm-mine-src" rows="12" spellcheck="false" aria-label="Tu mapa en texto" data-seed={outlineToText(tree)}></textarea>
+      <div class="tk-mermaid sm-mine-out" aria-live="polite" data-label="Tu mapa"></div>
+    </div>
+    <div class="sm-row"><button type="button" class="sm-btn ghost" data-mine-reset>Empezar de nuevo</button><button type="button" class="sm-btn ghost" data-mine-ai title="El tutor revisa tu mapa (usa IA)">Revisar mi mapa con el tutor ↗</button></div>
+  </section>
+
+  <section class="sm-panel" data-panel="tarjetas" hidden>
+    <p class="sm-note">Términos del glosario de este tema, preguntas del lab y tus tarjetas. Tus marcas programan el <a href={`/${module}/repaso/`}>repaso del curso</a>.</p>
+    <Flashcards cards={cards} module={module} topic={topic} />
+  </section>
+
+  <section class="sm-panel" data-panel="huecos" hidden>
+    <p class="sm-note">Escribe la idea que falta (sin tildes ni mayúsculas no pasa nada). Recordarla cuesta más que releer, y por eso fija.</p>
+    <ol class="sm-cloze">
+      {clozeItems.map((c, i) => (
+        <li data-answer={c.answer}>
+          {c.context && <small class="sm-ctx">{c.context}</small>}
+          <p>{c.prompt.split('_____')[0]}<input type="text" autocomplete="off" aria-label={`Hueco ${i + 1}`} size={Math.max(8, c.answer.length)} />{c.prompt.split('_____')[1]}</p>
+          <span class="sm-cloze-res" aria-live="polite"></span>
+        </li>
+      ))}
+    </ol>
+    <div class="sm-row"><button type="button" class="sm-btn primary" data-cloze-check>Comprobar</button><button type="button" class="sm-btn ghost" data-cloze-show>Ver respuestas</button><span class="sm-cloze-score muted"></span></div>
+  </section>
+
+  <section class="sm-panel" data-panel="explicalo" hidden>
+    <p class="sm-note">Explícalo como si se lo enseñaras a alguien que empieza. Hazlo sin mirar el texto; luego compara. Se guarda en este navegador.</p>
+    <div class="sm-explain">
+      <label>¿Qué es, en una frase?<textarea rows="2" data-k="que"></textarea></label>
+      <label>¿Por qué funciona así o para qué sirve?<textarea rows="3" data-k="porque"></textarea></label>
+      <label>Un ejemplo concreto (inventado por ti)<textarea rows="3" data-k="ejemplo"></textarea></label>
+      <label>El error típico y cómo evitarlo<textarea rows="2" data-k="error"></textarea></label>
+    </div>
+    <div class="sm-row"><button type="button" class="sm-btn primary" data-explain-compare>Comparar con el texto</button><button type="button" class="sm-btn ghost" data-explain-ai title="Usa IA">Pedir feedback al tutor ↗</button></div>
+  </section>
+</div>
+
+<style is:global>
+  .sm { margin: 0 0 1.5rem; }
+  .sm-bar { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; padding: .45rem 0; margin: 0 0 1.2rem;
+    background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .sm-bar-label { font-size: .7rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); font-weight: 600; }
+  .sm-tabs { display: flex; gap: 2px; overflow-x: auto; background: var(--card); border: 1px solid var(--line); border-radius: 11px; padding: 2px; scrollbar-width: none; }
+  .sm-tabs button { display: inline-flex; align-items: center; gap: .35rem; font: inherit; font-size: .82rem; color: var(--muted); background: none; border: 0; border-radius: 9px; padding: .34rem .62rem; cursor: pointer; white-space: nowrap; }
+  .sm-tabs button:hover:not(:disabled) { color: var(--fg); }
+  .sm-tabs button[aria-selected=true] { background: var(--bg); color: var(--accent); font-weight: 650; box-shadow: 0 1px 3px rgb(0 0 0 / .12); }
+  .sm-tabs button:disabled { opacity: .4; cursor: default; }
+  .sm-tabs button:focus-visible, .sm-btn:focus-visible, .sm-pre-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .sm-tabs small { font-size: .66rem; background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent); border-radius: 99px; padding: 0 .35rem; }
+  @media (max-width: 960px) { .sm-bar-label { display: none; } }
+  .sm-pre-toggle { margin-left: auto; font: inherit; font-size: .76rem; color: var(--muted); background: none; border: 1px dashed var(--line); border-radius: 99px; padding: .2rem .65rem; cursor: pointer; }
+  .sm-pre-toggle:hover { color: var(--accent); border-color: var(--accent); }
+  .sm-panel { animation: sm-in .18s ease-out; }
+  .sm-panel[hidden] { display: none; }
+  @keyframes sm-in { from { opacity: 0; transform: translateY(4px); } }
+  .sm-note { color: var(--muted); font-size: .88rem; margin: 0 0 .8rem; max-width: 70ch; }
+  .sm-h { margin: 1.6rem 0 .3rem; }
+  .sm-link { font-size: .85rem; white-space: nowrap; }
+  .sm-map-head { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; flex-wrap: wrap; }
+  .sm-auto { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: .6rem; }
+  .sm-mine { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: .8rem; align-items: start; }
+  .sm-mine-src { width: 100%; font: .88rem/1.55 ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 12px; padding: .7rem; resize: vertical; tab-size: 2; }
+  .sm-mine-out { margin: 0; min-height: 200px; border: 1px dashed var(--line); border-radius: 12px; padding: .4rem; display: grid; place-items: center; }
+  @media (max-width: 720px) { .sm-mine { grid-template-columns: 1fr; } }
+  .sm-outline { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 1rem 1.2rem; font-size: calc(var(--read-size) * .9); font-family: var(--read-font); }
+  .sm-outline h3 { margin: 0 0 .4rem; }
+  .sm-outline ol { padding-left: 1.2rem; margin: .3rem 0; }
+  .sm-outline > ol > li { margin: .35rem 0; }
+  .sm-outline summary { cursor: pointer; font-weight: 650; }
+  .sm-outline ul.pts { margin: .2rem 0 .4rem; padding-left: 1.1rem; color: var(--fg); }
+  .sm-outline ul.pts li::marker { color: var(--accent); }
+  .sm-cloze { padding-left: 1.2rem; font-family: var(--read-font); font-size: calc(var(--read-size) * .92); line-height: 1.8; }
+  .sm-cloze li { margin: .5rem 0; }
+  .sm-ctx { display: block; font-family: var(--ui-font); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); line-height: 1.2; }
+  .sm-cloze p { margin: 0; }
+  .sm-cloze input { font: inherit; font-size: .92em; border: 0; border-bottom: 2px solid var(--accent); background: color-mix(in srgb, var(--accent) 7%, transparent); color: var(--fg); padding: 0 .3rem; margin: 0 .2rem; border-radius: 4px 4px 0 0; max-width: 100%; }
+  .sm-cloze input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .sm-cloze li.ok input { border-color: var(--ok); }
+  .sm-cloze li.bad input { border-color: var(--bad); }
+  .sm-cloze-res { font-size: .8rem; font-family: var(--ui-font); }
+  .sm-cloze li.ok .sm-cloze-res { color: var(--ok); }
+  .sm-cloze li.bad .sm-cloze-res { color: var(--bad); }
+  .sm-explain { display: grid; gap: .8rem; }
+  .sm-explain label { display: grid; gap: .3rem; font-weight: 600; font-size: .9rem; }
+  .sm-explain textarea, .sm-pre textarea { font: inherit; font-weight: 400; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 10px; padding: .5rem .6rem; resize: vertical; }
+  .sm-row { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; margin-top: .8rem; }
+  .sm-btn { font: inherit; font-size: .86rem; font-weight: 600; border-radius: 10px; padding: .45rem .9rem; border: 1px solid var(--line); background: var(--bg); color: var(--fg); cursor: pointer; }
+  .sm-btn.primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+  .sm-btn.ghost { border-color: transparent; color: var(--muted); }
+  .sm-btn.ghost:hover { color: var(--accent); }
+  .sm-pre { display: grid; gap: .6rem; background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 9%, var(--bg)), var(--card)); border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line)); border-radius: 16px; padding: 1rem 1.2rem; margin-bottom: 1rem; }
+  .sm-pre[hidden] { display: none; }
+  .sm-eyebrow { margin: 0; font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+  .sm-pre-lead { margin: .2rem 0 .6rem; color: var(--muted); font-size: .9rem; }
+  .sm-pre ol { margin: 0; padding-left: 1.2rem; display: grid; gap: .6rem; }
+  .sm-pre li span { display: block; font-weight: 600; margin-bottom: .25rem; }
+  .sm-pre textarea { width: 100%; }
+  .sm-pre-actions { display: flex; gap: .4rem; flex-wrap: wrap; }
+  :root[data-focus="on"] .sm-bar { position: static; }
+</style>
+
+<script>
+  import { clozeMatch, textToMindmap } from '@tk/views';
+  import { renderMermaid, watchTheme } from '../lib/mermaid.ts';
+  import { store } from '../lib/store.ts';
+
+  const root = document.querySelector<HTMLElement>('[data-sm]');
+  if (root) {
+    const { module: mod, topic } = root.dataset as { module: string; topic: string };
+    const article = document.querySelector<HTMLElement>('article.prose');
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role=tab]')];
+    const panels = [...root.querySelectorAll<HTMLElement>('[data-panel]')];
+    const MODE_KEY = 'tk-study-mode';
+    let rendered = false;
+    watchTheme();
+
+    function setMode(m: string, persist = true) {
+      tabs.forEach((t) => t.setAttribute('aria-selected', String(t.dataset.mode === m)));
+      panels.forEach((p) => (p.hidden = p.dataset.panel !== m));
+      if (article) article.hidden = m !== 'leer';
+      if (persist) store.set(MODE_KEY, m);
+      if (m === 'mapa' && !rendered) { rendered = true; paintMine(); renderMermaid(root!); }
+      if (m === 'huecos') root!.querySelector<HTMLInputElement>('.sm-cloze input')?.focus();
+    }
+    tabs.forEach((t) => t.addEventListener('click', () => setMode(t.dataset.mode!)));
+    // Teclas 1–6 cambian de vista cuando no se está escribiendo.
+    document.addEventListener('keydown', (e) => {
+      if (e.altKey || e.ctrlKey || e.metaKey || (e.target as HTMLElement).matches('input, textarea, select, [contenteditable]')) return;
+      // Mayús + 1…6 cambia de vista.
+      const i = e.shiftKey && /^Digit[1-9]$/.test(e.code) ? Number(e.code.slice(5)) - 1 : -1;
+      if (i >= 0 && i < tabs.length && !tabs[i].disabled) { e.preventDefault(); setMode(tabs[i].dataset.mode!); }
+    });
+    const saved = store.get(MODE_KEY, 'leer');
+    if (saved !== 'leer' && tabs.some((t) => t.dataset.mode === saved && !t.disabled)) setMode(saved, false);
+
+    // ───── Pregunta previa ─────
+    const pre = root.querySelector<HTMLElement>('[data-pre]');
+    if (pre) {
+      const seenKey = `tk-pre:${mod}:${topic}`;
+      const off = store.get('tk-pre-off', false);
+      const marks = store.get<Record<string, string>>(`tk-practice:${mod}:${topic}`, {});
+      pre.hidden = off || store.get(seenKey, false) || Object.keys(marks).length > 0;
+      pre.querySelector('[data-pre-done]')!.addEventListener('click', () => { store.set(seenKey, true); pre.hidden = true; article?.querySelector('h2')?.scrollIntoView({ block: 'start' }); });
+      pre.querySelector('[data-pre-off]')!.addEventListener('click', () => { store.set('tk-pre-off', true); pre.hidden = true; });
+      root.querySelector('[data-pre-on]')?.addEventListener('click', () => { store.set('tk-pre-off', false); pre.hidden = false; setMode('leer'); pre.scrollIntoView({ block: 'center' }); });
+    }
+
+    // ───── Haz tu mapa ─────
+    const src = root.querySelector<HTMLTextAreaElement>('.sm-mine-src')!;
+    const out = root.querySelector<HTMLElement>('.sm-mine-out')!;
+    const MAP_KEY = `tk-map:${mod}:${topic}`;
+    src.value = store.get(MAP_KEY, src.dataset.seed ?? '');
+    let t: ReturnType<typeof setTimeout>;
+    function paintMine() {
+      const mm = textToMindmap(src.value);
+      out.dataset.src = mm;
+      delete out.dataset.ok;
+      if (!mm) { out.textContent = 'Escribe a la izquierda para ver tu mapa.'; return; }
+      renderMermaid(out.parentElement!);
+    }
+    src.addEventListener('input', () => { store.set(MAP_KEY, src.value); clearTimeout(t); t = setTimeout(paintMine, 450); });
+    src.addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab') return;
+      e.preventDefault();
+      const { selectionStart: a, selectionEnd: b } = src;
+      const lineStart = src.value.lastIndexOf('\n', a - 1) + 1;
+      if (e.shiftKey) { if (src.value.slice(lineStart, lineStart + 2) === '  ') { src.setRangeText('', lineStart, lineStart + 2, 'preserve'); } }
+      else src.setRangeText('  ', lineStart, lineStart, 'preserve');
+      src.selectionStart = Math.max(lineStart, a + (e.shiftKey ? -2 : 2)); src.selectionEnd = Math.max(lineStart, b + (e.shiftKey ? -2 : 2));
+      src.dispatchEvent(new Event('input'));
+    });
+    root.querySelector('[data-mine-reset]')!.addEventListener('click', () => { src.value = src.dataset.seed ?? ''; store.del(MAP_KEY); paintMine(); });
+    root.querySelector('[data-mine-ai]')!.addEventListener('click', () => document.dispatchEvent(new CustomEvent('tk-ask', { detail: {
+      q: 'Este es mi mapa conceptual del tema (una idea por línea, la sangría indica jerarquía). Dime qué idea importante falta, qué conexión está mal y qué está bien. No me lo reescribas entero.', selection: src.value.slice(0, 1200) } })));
+
+    // ───── Huecos ─────
+    const items = [...root.querySelectorAll<HTMLElement>('.sm-cloze li')];
+    const score = root.querySelector<HTMLElement>('.sm-cloze-score')!;
+    function check(show = false) {
+      let ok = 0;
+      for (const li of items) {
+        const input = li.querySelector('input')!;
+        const good = clozeMatch(input.value, li.dataset.answer!);
+        if (show && !good) input.value = li.dataset.answer!;
+        li.classList.toggle('ok', good);
+        li.classList.toggle('bad', !good && !!input.value && !show);
+        li.querySelector('.sm-cloze-res')!.textContent = good ? ' ✓' : input.value && !show ? ` ✗ era «${li.dataset.answer}»` : '';
+        if (good) ok++;
+      }
+      score.textContent = show ? 'Respuestas a la vista: vuelve a intentarlo mañana.' : `${ok}/${items.length} correctas`;
+    }
+    root.querySelector('[data-cloze-check]')?.addEventListener('click', () => check());
+    root.querySelector('[data-cloze-show]')?.addEventListener('click', () => check(true));
+    items.forEach((li, i) => li.querySelector('input')!.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); items[i + 1]?.querySelector('input')?.focus() ?? check(); } }));
+
+    // ───── Explícalo ─────
+    const EX_KEY = `tk-explain:${mod}:${topic}`;
+    const ex = store.get<Record<string, string>>(EX_KEY, {});
+    const fields = [...root.querySelectorAll<HTMLTextAreaElement>('.sm-explain textarea')];
+    fields.forEach((f) => { f.value = ex[f.dataset.k!] ?? ''; f.addEventListener('input', () => { ex[f.dataset.k!] = f.value; store.set(EX_KEY, ex); }); });
+    root.querySelector('[data-explain-compare]')!.addEventListener('click', () => { setMode('leer'); article?.scrollIntoView({ block: 'start' }); });
+    root.querySelector('[data-explain-ai]')!.addEventListener('click', () => {
+      const text = fields.map((f) => `${f.parentElement!.firstChild!.textContent}: ${f.value || '(vacío)'}`).join('\n');
+      document.dispatchEvent(new CustomEvent('tk-ask', { detail: { q: 'Esta es mi explicación del tema como si se lo enseñara a otro. Señala lo que está mal o incompleto con una pista para cada cosa, sin darme la explicación correcta completa.', selection: text.slice(0, 1200) } }));
+    });
+  }
+</script>

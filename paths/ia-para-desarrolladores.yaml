@@ -1,0 +1,10 @@
+id: ia-para-desarrolladores
+title: "Ruta IA para desarrolladores"
+summary: "De entender cómo se comporta un LLM dentro de una app a construir RAG serio y a trabajar como lo hacen los equipos que publican sus métodos."
+steps:
+  - module: ia-en-aplicaciones
+    goal: "Entender tokens, contexto, herramientas, agentes, costos, evals y seguridad lo bastante como para diseñar una feature con IA."
+  - module: rag
+    goal: "Construir y medir un pipeline de recuperación que responda con citas y no invente."
+  - module: ingenieria-con-ia-pro
+    goal: "Trabajar con agentes de código con contexto curado, verificación automática y métricas, como un equipo profesional."

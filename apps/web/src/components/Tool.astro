@@ -1,0 +1,290 @@
+---
+/**
+ * Render común de herramientas de curso. El CONSTRUCTOR (builder) decide la interfaz; la configuración
+ * viene de modules/<id>/tools/<herramienta>.yaml. Un constructor nuevo = esquema en contracts +
+ * validación en packages/tools + una rama aquí. Decisión: herramientas-por-curso-con-constructores.
+ */
+import type { ToolSpec } from '@tk/contracts';
+import { computeCalc, renderTemplate } from '@tk/tools/run';
+interface Props { tool: ToolSpec; module: string; compact?: boolean; topicTitles?: Record<string, string> }
+const { tool, module, compact = false, topicTitles = {} } = Astro.props;
+const LABEL: Record<string, string> = { calculadora: 'Calculadora', decision: 'Asistente de decisión', checklist: 'Checklist', comparador: 'Comparador', plantilla: 'Plantilla' };
+const calc = tool.builder === 'calculadora' ? computeCalc(tool, {}) : null;
+const tpl = tool.builder === 'plantilla' ? renderTemplate(tool, Object.fromEntries(tool.fields.map((f) => [f.id, f.default ?? '']))) : '';
+const total = tool.builder === 'checklist' ? tool.groups.reduce((n, g) => n + g.items.length, 0) : 0;
+---
+<section class={`tool b-${tool.builder} ${compact ? 'compact' : ''}`} data-tool={tool.builder} data-module={module} data-id={tool.id} id={`tool-${tool.id}`}>
+  <script type="application/json" set:html={JSON.stringify(tool).replace(/</g, '\\u003c')} />
+  <header class="tool-head">
+    <span class="tool-kind">{LABEL[tool.builder]}</span>
+    <h3>{compact ? <a href={`/${module}/herramientas/#tool-${tool.id}`}>{tool.title}</a> : tool.title}</h3>
+    <p class="muted">{tool.summary}</p>
+  </header>
+
+  {tool.builder === 'calculadora' && calc && (
+    <div class="calc">
+      <div class="calc-in">
+        {tool.inputs.map((i) => (
+          <label>
+            <span>{i.label}{i.type === 'number' && <output data-out={i.id}>{i.default.toLocaleString('es')}{i.unit ? ` ${i.unit}` : ''}</output>}</span>
+            {i.type === 'number'
+              ? <input type="range" data-in={i.id} min={i.min} max={i.max} step={i.step} value={i.default} data-unit={i.unit ?? ''} />
+              : <select data-in={i.id}>{i.options.map((o) => <option value={o.value} selected={o.value === i.default}>{o.label}</option>)}</select>}
+            {i.hint && <small class="muted">{i.hint}</small>}
+          </label>
+        ))}
+      </div>
+      <div class="calc-out" aria-live="polite">
+        {calc.outputs.map((o) => <div class={o.main ? 'main' : ''}><span>{o.label}</span><strong data-res={o.id}>{o.text}</strong>{o.unit && <small>{o.unit}</small>}</div>)}
+        <ul class="calc-notes">{calc.notes.map((n) => <li class={n.tone}>{n.text}</li>)}</ul>
+      </div>
+    </div>
+  )}
+
+  {tool.builder === 'decision' && (
+    <div class="dec">
+      <ol class="dec-path"></ol>
+      <div class="dec-node"></div>
+      <div class="dec-result" hidden></div>
+      <script type="application/json" class="dec-titles" set:html={JSON.stringify(topicTitles).replace(/</g, '\\u003c')} />
+    </div>
+  )}
+
+  {tool.builder === 'checklist' && (
+    <div class="chk">
+      <div class="chk-top"><div class="bar"><i style="width:0%"></i></div><span class="chk-count muted">0/{total}</span><button type="button" class="tool-btn ghost" data-chk-reset>Reiniciar</button></div>
+      {tool.groups.map((g, gi) => (
+        <fieldset>
+          <legend>{g.title}</legend>
+          {g.items.map((it, ii) => (
+            <label class="chk-item"><input type="checkbox" data-k={`${gi}.${ii}`} /><span>{it.text}{it.why && <small>{it.why}</small>}</span></label>
+          ))}
+        </fieldset>
+      ))}
+    </div>
+  )}
+
+  {tool.builder === 'comparador' && (
+    <div class="cmp">
+      <div class="cmp-ctl">
+        <input type="search" placeholder="Filtrar criterios…" aria-label="Filtrar criterios" data-cmp-filter />
+        <label><input type="checkbox" data-cmp-diff /> Solo diferencias</label>
+      </div>
+      <div class="cmp-scroll">
+        <table>
+          <thead><tr><th>Criterio</th>{tool.options.map((o) => <th>{o.label}</th>)}</tr></thead>
+          <tbody>
+            {tool.rows.map((r) => (
+              <tr data-same={new Set(r.values).size === 1 ? '1' : ''} data-text={`${r.criterion} ${r.values.join(' ')}`.toLowerCase()}>
+                <th scope="row">{r.group && <small>{r.group}</small>}{r.criterion}</th>
+                {r.values.map((v) => <td>{v}</td>)}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )}
+
+  {tool.builder === 'plantilla' && (
+    <div class="tpl">
+      <div class="tpl-in">
+        {tool.fields.map((f) => (
+          <label>
+            <span>{f.label}</span>
+            {f.kind === 'textarea' ? <textarea rows="3" data-f={f.id} placeholder={f.placeholder}>{f.default}</textarea>
+              : f.kind === 'select' ? <select data-f={f.id}>{(f.options ?? []).map((o) => <option selected={o === f.default}>{o}</option>)}</select>
+              : <input type="text" data-f={f.id} placeholder={f.placeholder} value={f.default ?? ''} />}
+          </label>
+        ))}
+      </div>
+      <div class="tpl-out">
+        <pre data-tpl-out>{tpl}</pre>
+        <button type="button" class="tool-btn" data-tpl-copy>Copiar</button>
+      </div>
+    </div>
+  )}
+</section>
+
+<style is:global>
+  .tool { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 1.1rem 1.2rem 1.2rem; margin: 1.2rem 0; }
+  .tool-head h3 { margin: .1rem 0 .2rem; font-size: 1.15rem; }
+  .tool-head h3 a { color: inherit; text-decoration: none; }
+  .tool-head h3 a:hover { color: var(--accent); }
+  .tool-head p { margin: 0 0 .9rem; }
+  .tool-kind { font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--accent); }
+  .tool-btn { font: inherit; font-size: .84rem; font-weight: 600; border: 1px solid var(--line); background: var(--bg); color: var(--fg); border-radius: 9px; padding: .35rem .8rem; cursor: pointer; }
+  .tool-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .tool-btn.ghost { background: none; border-color: transparent; color: var(--muted); }
+  .tool-btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .tool :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .tool input[type=text], .tool input[type=search], .tool textarea, .tool select { font: inherit; font-size: .9rem; width: 100%; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 9px; padding: .4rem .55rem; }
+  /* Calculadora */
+  .calc { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.2rem; }
+  @media (max-width: 680px) { .calc, .tpl { grid-template-columns: 1fr !important; } }
+  .calc-in { display: grid; gap: .8rem; }
+  .calc-in label { display: grid; gap: .25rem; font-size: .86rem; }
+  .calc-in label > span { display: flex; justify-content: space-between; gap: .5rem; font-weight: 600; }
+  .calc-in output { font-variant-numeric: tabular-nums; color: var(--accent); }
+  .calc-in input[type=range] { width: 100%; accent-color: var(--accent); }
+  .calc-out { display: grid; gap: .45rem; align-content: start; }
+  .calc-out > div { display: flex; align-items: baseline; gap: .4rem; background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: .45rem .7rem; }
+  .calc-out > div span { flex: 1; font-size: .84rem; color: var(--muted); }
+  .calc-out > div strong { font-size: 1.05rem; font-variant-numeric: tabular-nums; }
+  .calc-out > div small { color: var(--muted); }
+  .calc-out > div.main { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); background: color-mix(in srgb, var(--accent) 7%, var(--bg)); }
+  .calc-out > div.main strong { font-size: 1.5rem; color: var(--accent); }
+  .calc-notes { list-style: none; padding: 0; margin: .2rem 0 0; display: grid; gap: .35rem; font-size: .84rem; }
+  .calc-notes li { padding: .4rem .6rem; border-radius: 8px; border-left: 3px solid var(--accent); background: var(--bg); }
+  .calc-notes li.warn { border-color: var(--warn); } .calc-notes li.ok { border-color: var(--ok); }
+  /* Decisión */
+  .dec-path { list-style: none; padding: 0; margin: 0 0 .6rem; display: flex; flex-wrap: wrap; gap: .3rem; }
+  .dec-path li button { font: inherit; font-size: .76rem; border: 1px solid var(--line); background: var(--bg); color: var(--muted); border-radius: 99px; padding: .15rem .6rem; cursor: pointer; }
+  .dec-path li button:hover { color: var(--accent); border-color: var(--accent); }
+  .dec-node p { font-weight: 650; font-size: 1.05rem; margin: 0 0 .2rem; }
+  .dec-node small { display: block; color: var(--muted); margin-bottom: .6rem; }
+  .dec-opts { display: grid; gap: .4rem; }
+  .dec-opts button { font: inherit; text-align: left; border: 1px solid var(--line); background: var(--bg); color: var(--fg); border-radius: 11px; padding: .6rem .8rem; cursor: pointer; }
+  .dec-opts button:hover { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 6%, var(--bg)); }
+  .dec-result { background: var(--bg); border: 1px solid color-mix(in srgb, var(--ok) 50%, var(--line)); border-radius: 12px; padding: .8rem 1rem; }
+  .dec-result h4 { margin: 0 0 .3rem; font-size: 1.1rem; color: var(--ok); }
+  .dec-result p { margin: .3rem 0; }
+  .dec-result .watch { color: var(--warn); font-size: .9rem; }
+  /* Checklist */
+  .chk-top { display: flex; align-items: center; gap: .6rem; margin-bottom: .6rem; }
+  .chk-top .bar { flex: 1; }
+  .chk fieldset { border: 0; padding: 0; margin: 0 0 .8rem; }
+  .chk legend { font-weight: 700; font-size: .9rem; margin-bottom: .3rem; }
+  .chk-item { display: flex; gap: .55rem; align-items: flex-start; padding: .4rem .3rem; border-radius: 8px; cursor: pointer; }
+  .chk-item:hover { background: color-mix(in srgb, var(--accent) 5%, transparent); }
+  .chk-item input { margin-top: .25rem; accent-color: var(--ok); width: 1.05rem; height: 1.05rem; flex: none; }
+  .chk-item small { display: block; color: var(--muted); font-size: .8rem; }
+  .chk-item:has(input:checked) > span { color: var(--muted); }
+  /* Comparador */
+  .cmp-ctl { display: flex; gap: .8rem; align-items: center; margin-bottom: .6rem; flex-wrap: wrap; }
+  .cmp-ctl input[type=search] { max-width: 260px; }
+  .cmp-ctl label { font-size: .84rem; display: flex; gap: .35rem; align-items: center; }
+  .cmp-scroll { overflow-x: auto; }
+  .cmp table { font-size: .86rem; min-width: 520px; background: var(--bg); border-radius: 10px; }
+  .cmp thead th { position: sticky; top: 0; background: var(--bg); color: var(--accent); }
+  .cmp tbody th { font-weight: 600; }
+  .cmp tbody th small { display: block; font-size: .66rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+  .cmp tr[hidden] { display: none; }
+  /* Plantilla */
+  .tpl { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 1rem; }
+  .tpl-in { display: grid; gap: .6rem; }
+  .tpl-in label { display: grid; gap: .2rem; font-size: .84rem; font-weight: 600; }
+  .tpl-out { display: grid; gap: .5rem; align-content: start; }
+  .tpl-out pre { margin: 0; white-space: pre-wrap; font-size: .84rem; line-height: 1.5; min-height: 160px; border: 1px solid var(--line); background: var(--bg); }
+  .tool.compact { padding: .9rem 1rem 1rem; }
+</style>
+
+<script>
+  import { computeCalc, formatNumber, renderTemplate, walkDecision } from '@tk/tools/run';
+  import { store } from '../lib/store.ts';
+
+  const el = (tag: string, text = '', cls = '') => { const n = document.createElement(tag); if (text) n.textContent = text; if (cls) n.className = cls; return n; };
+
+  document.querySelectorAll<HTMLElement>('section.tool').forEach((root) => {
+    if (root.dataset.ready) return;
+    root.dataset.ready = '1';
+    const tool = JSON.parse(root.querySelector('script')!.textContent || '{}');
+    const key = `tk-tool:${root.dataset.module}:${root.dataset.id}`;
+
+    if (tool.builder === 'calculadora') {
+      const inputs = [...root.querySelectorAll<HTMLInputElement | HTMLSelectElement>('[data-in]')];
+      const saved = store.get<Record<string, number>>(key, {});
+      inputs.forEach((i) => { if (saved[i.dataset.in!] !== undefined) i.value = String(saved[i.dataset.in!]); });
+      const update = () => {
+        const vals = Object.fromEntries(inputs.map((i) => [i.dataset.in!, Number(i.value)]));
+        store.set(key, vals);
+        inputs.forEach((i) => { const o = root.querySelector(`[data-out="${i.dataset.in}"]`); if (o) o.textContent = `${Number(i.value).toLocaleString('es')}${(i as HTMLInputElement).dataset.unit ? ` ${(i as HTMLInputElement).dataset.unit}` : ''}`; });
+        const r = computeCalc(tool, vals);
+        r.outputs.forEach((o) => { const s = root.querySelector(`[data-res="${o.id}"]`); if (s) s.textContent = formatNumber(o.value, o.decimals); });
+        root.querySelector('.calc-notes')!.replaceChildren(...r.notes.map((n) => el('li', n.text, n.tone)));
+      };
+      inputs.forEach((i) => i.addEventListener('input', update));
+      update();
+    }
+
+    if (tool.builder === 'decision') {
+      const titles: Record<string, string> = JSON.parse(root.querySelector('.dec-titles')?.textContent || '{}');
+      const pathBox = root.querySelector<HTMLElement>('.dec-path')!;
+      const nodeBox = root.querySelector<HTMLElement>('.dec-node')!;
+      const resBox = root.querySelector<HTMLElement>('.dec-result')!;
+      let choices: number[] = store.get(key, []);
+      const paint = () => {
+        const w = walkDecision(tool, choices);
+        pathBox.replaceChildren(...w.path.map((p, i) => {
+          const li = el('li');
+          const b = el('button', `${p.answer}`);
+          b.title = `${p.question} → ${p.answer} (volver aquí)`;
+          b.addEventListener('click', () => { choices = choices.slice(0, i); store.set(key, choices); paint(); });
+          li.append(b);
+          return li;
+        }));
+        if (w.result) {
+          nodeBox.replaceChildren();
+          resBox.hidden = false;
+          const kids: Node[] = [el('h4', `→ ${w.result.title}`), el('p', w.result.why)];
+          if (w.result.watch) kids.push(el('p', `Ojo: ${w.result.watch}`, 'watch'));
+          if (w.result.see?.length) {
+            const p = el('p', 'Repasa: ');
+            w.result.see.forEach((s: string, i: number) => { const a = el('a', titles[s] ?? s) as HTMLAnchorElement; a.href = `/${root.dataset.module}/${s}/`; p.append(...(i ? [', ', a] : [a])); });
+            kids.push(p);
+          }
+          const again = el('button', 'Empezar de nuevo', 'tool-btn');
+          again.addEventListener('click', () => { choices = []; store.set(key, choices); paint(); });
+          kids.push(again);
+          resBox.replaceChildren(...kids);
+        } else if (w.node) {
+          resBox.hidden = true;
+          const opts = el('div', '', 'dec-opts');
+          w.node.options.forEach((o: { label: string }, i: number) => {
+            const b = el('button', o.label);
+            b.addEventListener('click', () => { choices = [...choices, i]; store.set(key, choices); paint(); });
+            opts.append(b);
+          });
+          nodeBox.replaceChildren(el('p', w.node.question), ...(w.node.help ? [el('small', w.node.help)] : []), opts);
+        } else { choices = []; store.set(key, choices); paint(); }
+      };
+      paint();
+    }
+
+    if (tool.builder === 'checklist') {
+      const boxes = [...root.querySelectorAll<HTMLInputElement>('input[type=checkbox]')];
+      const saved = store.get<Record<string, boolean>>(key, {});
+      const paint = () => {
+        const n = boxes.filter((b) => b.checked).length;
+        root.querySelector('.chk-count')!.textContent = `${n}/${boxes.length}`;
+        root.querySelector<HTMLElement>('.chk-top .bar > i')!.style.width = `${(n / boxes.length) * 100}%`;
+      };
+      boxes.forEach((b) => { b.checked = !!saved[b.dataset.k!]; b.addEventListener('change', () => { saved[b.dataset.k!] = b.checked; store.set(key, saved); paint(); }); });
+      root.querySelector('[data-chk-reset]')!.addEventListener('click', () => { boxes.forEach((b) => (b.checked = false)); store.del(key); for (const k in saved) delete saved[k]; paint(); });
+      paint();
+    }
+
+    if (tool.builder === 'comparador') {
+      const rows = [...root.querySelectorAll<HTMLTableRowElement>('tbody tr')];
+      const f = root.querySelector<HTMLInputElement>('[data-cmp-filter]')!;
+      const d = root.querySelector<HTMLInputElement>('[data-cmp-diff]')!;
+      const apply = () => { const q = f.value.trim().toLowerCase(); rows.forEach((r) => (r.hidden = (!!q && !r.dataset.text!.includes(q)) || (d.checked && r.dataset.same === '1'))); };
+      f.addEventListener('input', apply); d.addEventListener('change', apply);
+    }
+
+    if (tool.builder === 'plantilla') {
+      const fields = [...root.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>('[data-f]')];
+      const out = root.querySelector<HTMLElement>('[data-tpl-out]')!;
+      const saved = store.get<Record<string, string>>(key, {});
+      fields.forEach((x) => { if (saved[x.dataset.f!] !== undefined) x.value = saved[x.dataset.f!]; });
+      const update = () => { const v = Object.fromEntries(fields.map((x) => [x.dataset.f!, x.value])); store.set(key, v); out.textContent = renderTemplate(tool, v); };
+      fields.forEach((x) => x.addEventListener('input', update));
+      root.querySelector('[data-tpl-copy]')!.addEventListener('click', async (e) => {
+        const b = e.currentTarget as HTMLButtonElement;
+        try { await navigator.clipboard.writeText(out.textContent ?? ''); b.textContent = 'Copiado ✓'; } catch { b.textContent = 'No se pudo copiar'; }
+        setTimeout(() => (b.textContent = 'Copiar'), 1800);
+      });
+      update();
+    }
+  });
+</script>

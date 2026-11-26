@@ -1,7 +1,7 @@
 # Basic English · Level 1 [english-basic-1] (topic)
 Las bases del inglés para quien ya tiene vocabulario: orden de la oración, auxiliares, los 12 tiempos verbales comparados con el español, modales, condicionales, pasiva y artículos.
 
-Archivos: modules/english-basic-1/{module.yaml,glossary.yaml,topics/*.md,lab/*.yaml}
+Archivos: modules/english-basic-1/{module.yaml,glossary.yaml,topics/*.md,lab/*.yaml,tools/*.yaml}
 Contexto para IA por subtema: .index/ctx/english-basic-1/<subtema>.md (+ _catalogo.md)
 
 ## Subtemas
@@ -31,6 +31,7 @@ Contexto para IA por subtema: .index/ctx/english-basic-1/<subtema>.md (+ _catalo
 adverbio-de-frecuencia, agente, articulo, aspecto, aspecto-continuo, aspecto-perfecto, aspecto-simple, condicional, condicional-mixto, contraccion, forma-base, future-continuous, future-perfect, future-perfect-continuous, gerundio, going-to, inversion, marcador-temporal, objeto, participio, past-continuous, past-perfect, past-perfect-continuous, past-simple, pluscuamperfecto, pregunta-wh, present-continuous, present-perfect, present-perfect-continuous, present-simple, preterito-imperfecto, preterito-indefinido, preterito-perfecto-compuesto, punto-de-referencia, short-answer, subjuntivo, sujeto, sujeto-vacio, sustantivo-contable, sustantivo-incontable, tercera-persona, tiempo-verbal, used-to, verbo-auxiliar, verbo-de-estado, verbo-irregular, verbo-modal, verbo-principal, verbo-regular, voz-pasiva
 
 ## Decisiones de diseño aplicables (resumen en .index/research.md; razonamiento en research/decisions/<id>.md)
+- accesibilidad-con-evidencia [proposed·medium]: Menú de accesibilidad: solo opciones con evidencia o derecho de acceso
 - color-con-funcion-y-contraste [proposed·medium]: Color para señalar y contrastar, no por psicología del color
 - descartar-tecnicas-de-baja-evidencia [proposed·high]: No basar el producto en releer, subrayar, estilos de aprendizaje ni gamificación de puntos
 - diseno-de-contenido-sin-ruido [proposed·medium]: Explicaciones segmentadas, coherentes y sin detalles decorativos
@@ -38,6 +39,7 @@ adverbio-de-frecuencia, agente, articulo, aspecto, aspecto-continuo, aspecto-per
 - estrategias-generativas-autoexplicacion-y-ensenar [proposed·medium]: Cierre de subtema con autoexplicación, mapa propio y "explícalo a otro"
 - feedback-explicativo-y-calibracion [proposed·medium]: Feedback que explica y medición de calibración, no de "sensación"
 - gramatica-explicita-con-contraste-l1 [proposed·low]: Inglés: gramática explícita organizada como tiempo × aspecto y contrastada con el español
+- herramientas-por-curso-con-constructores [proposed·low]: Herramientas propias de cada curso creadas con constructores comunes
 - intercalar-conceptos-confundibles [proposed·medium]: Intercalar solo conceptos parecidos y confundibles
 - practica-de-recuperacion [proposed·high]: Cada subtema termina en práctica de recuperación con feedback
 - preguntas-sugeridas-y-contexto-minimo [proposed·medium]: Preguntas sugeridas por subtema y contexto mínimo para la IA
@@ -46,3 +48,4 @@ adverbio-de-frecuencia, agente, articulo, aspecto, aspecto-continuo, aspecto-per
 - simulaciones-por-primitivas-y-recetas [proposed·medium]: Simulaciones como primitivas fijas + recetas declarativas por subtema
 - sin-tipografias-milagro [proposed·high]: Nada de fuentes difíciles ni fuentes para dislexia como truco de aprendizaje
 - tipografia-y-medidas-de-lectura [proposed·medium]: Tipografía de lectura: tamaño generoso, línea de ~65 caracteres y ajustes por persona
+- vistas-de-estudio-generadas [proposed·medium]: Vistas de estudio generadas del mismo contenido: esquema, mapa, tarjetas, huecos, explícalo y pregunta previa

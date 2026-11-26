@@ -1,0 +1,26 @@
+questions:
+  - q: Compara un workflow y un agente.
+    kind: comparar
+    a: "En un **workflow** los pasos están escritos en el código (clasificar → buscar → redactar): previsible, barato y fácil de depurar. En un **agente** el modelo decide en bucle qué hacer y qué herramienta usar: flexible para tareas abiertas, pero más caro, lento y difícil de controlar."
+    uses: []
+  - q: ¿Por qué empezar por la solución más simple antes de construir un agente?
+    kind: por-que
+    a: Porque muchas tareas se resuelven con **una llamada bien diseñada** y buen contexto. Cada capa (workflow, agente) suma costo, latencia y fallos que se acumulan. Solo merece la pena si las **evals** muestran que la versión simple se queda corta y la compleja mejora de forma medible.
+    uses: []
+  - q: ¿Qué pasa si un agente no tiene criterio de parada ni tope de pasos?
+    kind: que-pasa-si
+    a: Puede entrar en **bucles** (reintentar lo mismo), desviarse de la tarea y gastar sin límite. Todo agente necesita un **criterio de terminado** verificable (tests pasan, respuesta con fuentes), un **tope** de pasos, tiempo y gasto, y un registro de lo que hizo para depurarlo.
+    uses: []
+  - q: Un chat de soporte recibe preguntas fáciles y difíciles. ¿Qué patrón usarías?
+    kind: aplicar
+    a: "**Enrutar**: una llamada barata clasifica la pregunta; las fáciles van a un modelo rápido con respuestas de la base de conocimiento y las difíciles a uno más potente o a una persona. Ahorra costo sin perder calidad donde importa, y es un workflow sencillo de medir."
+    uses: []
+  - q: ¿Por qué el patrón evaluador-optimizador funciona mejor con criterios claros?
+    kind: por-que
+    a: Porque el evaluador necesita algo **verificable** contra lo que criticar (cumple el esquema, cita fuentes, no supera 100 palabras, los tests pasan). Con criterios vagos ("mejóralo") ambos modelos dan vueltas sin converger y el costo crece sin mejora real.
+    uses: []
+  - q: "Error común: «más agentes en paralelo = mejor resultado»."
+    kind: error-comun
+    a: "Más agentes multiplican **costo** y **coordinación**: se pisan, duplican trabajo y es difícil fusionar resultados. Paralelizar ayuda cuando las subtareas son **independientes** y verificables por separado. Sin eso, un solo flujo bien diseñado suele ganar."
+    uses: []
+sims: []

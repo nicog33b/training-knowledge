@@ -1,0 +1,11 @@
+id: ia-en-aplicaciones
+title: IA dentro de aplicaciones · conceptos complejos
+summary: 'Los conceptos que hay que entender para meter un LLM en un producto: tokens y contexto, muestreo, salidas estructuradas, herramientas, agentes, caché, costos, evals, seguridad y MCP.'
+kind: topic
+locale: es
+tags:
+- ia
+- llm
+- producto
+glossaries: []
+level: avanzado

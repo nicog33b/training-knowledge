@@ -66,6 +66,7 @@ Repasa los glosarios, haz un **examen de práctica completo** (el curso incluye 
 
 ## Glosario usado
 - Latencia: Tiempo que tarda una petición en recibir respuesta.
+- HTTP: Protocolo de petición-respuesta de la web: el cliente envía un método (GET, POST…) a una URL y el servidor responde con un código de estado y un cuerpo.
 - Zona de Disponibilidad: Uno o más centros de datos independientes dentro de una Región, con energía y red propias.
 - Alta disponibilidad: Diseño que tolera fallos de componentes manteniendo el servicio en pie.
 - Access Key: Par Access Key ID + Secret Access Key que firma peticiones a la API de AWS desde CLI/SDK.

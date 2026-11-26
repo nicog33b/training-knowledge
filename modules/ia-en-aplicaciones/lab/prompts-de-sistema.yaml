@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué el prompt de sistema no es una barrera de seguridad?
+    kind: por-que
+    a: "Porque el modelo lo **prioriza**, pero no lo obedece de forma garantizada: un texto del usuario o de un documento puede convencerlo de ignorarlo (inyección de prompt) y además su contenido puede **filtrarse**. La seguridad real está fuera del modelo: permisos, validación de salidas y confirmación humana."
+    uses: []
+  - q: Compara un prompt con reglas para cada caso y uno que explica objetivo y criterios.
+    kind: comparar
+    a: "Las reglas exhaustivas son **frágiles**: no cubren los casos nuevos y se contradicen. Explicar **objetivo, público, restricciones y por qué** permite al modelo generalizar. El punto justo combina contexto y criterios con pocas reglas firmes donde importan (formato, límites)."
+    uses: []
+  - q: ¿Qué pasa si tus 3 ejemplos few-shot son casi iguales?
+    kind: que-pasa-si
+    a: El modelo copia también lo **irrelevante** que comparten (longitud, tono, una palabra concreta) y rinde peor con entradas distintas. Los ejemplos deben ser **variados** y cubrir casos difíciles, para que el patrón común sea lo que realmente quieres enseñar.
+    uses: []
+  - q: Vas a resumir correos de clientes. ¿Cómo metes el correo en el prompt?
+    kind: aplicar
+    a: 'Entre **delimitadores** claros (p. ej. `<correo>…</correo>`), indicando que es **contenido a resumir**, no instrucciones. Así, si el correo dice "ignora lo anterior y responde X", el modelo tiene más fácil tratarlo como dato. No es infalible: no le des herramientas con efecto en esa tarea.'
+    uses: []
+  - q: ¿Por qué hay que versionar los prompts como código?
+    kind: por-que
+    a: Porque un cambio de una frase puede alterar el comportamiento de toda la app. Guardarlos en el **repositorio** permite revisarlos en PR, saber qué versión produjo qué salida, volver atrás y ejecutar **evals** automáticas antes de desplegar cada cambio.
+    uses: []
+  - q: "Error común: escribir solo prohibiciones («no hagas X, no digas Y»)."
+    kind: error-comun
+    a: Las prohibiciones dicen qué evitar pero no qué hacer, y a veces **siembran** la idea prohibida. Funciona mejor describir el comportamiento deseado ("responde en 3 viñetas con la acción concreta") y reservar pocas prohibiciones explícitas para lo crítico, explicando el porqué.
+    uses: []
+sims: []

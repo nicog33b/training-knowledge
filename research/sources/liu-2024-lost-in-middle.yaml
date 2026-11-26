@@ -1,0 +1,25 @@
+id: liu-2024-lost-in-middle
+title: "Lost in the Middle: How Language Models Use Long Contexts"
+authors:
+  - Liu
+  - Lin
+  - Hewitt
+  - Paranjape
+  - Bevilacqua
+  - Petroni
+  - Liang
+year: 2024
+venue: TACL 12
+url: https://aclanthology.org/2024.tacl-1.9/
+kind: experiment
+verified: secondary
+retrieved: 2026-11-26
+summary: Los modelos usan peor la información situada en medio de un contexto
+  largo (curva en U).
+facts:
+  - En QA multi-documento y recuperación clave-valor, el acierto cae cuando el
+    pasaje relevante está en medio del contexto y es mayor al principio o al
+    final.
+caveats:
+  - Modelos de 2023; modelos posteriores mejoran, pero el efecto de posición
+    sigue siendo un riesgo a medir.

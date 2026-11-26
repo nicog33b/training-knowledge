@@ -10,9 +10,10 @@
     "@tk/content": "workspace:*",
     "@tk/contracts": "workspace:*",
     "@tk/indexer": "workspace:*",
-    "@tk/research": "workspace:*",
-    "@tk/tutor": "workspace:*",
     "@tk/llm": "workspace:*",
+    "@tk/research": "workspace:*",
+    "@tk/tools": "workspace:*",
+    "@tk/tutor": "workspace:*",
     "yaml": "^2.9.1"
   }
 }

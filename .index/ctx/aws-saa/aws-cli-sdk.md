@@ -32,6 +32,7 @@ Terminal en el navegador, gratuita, con la CLI preinstalada y las credenciales d
 
 ## Glosario usado
 - API: Application Programming Interface. Contrato por el cual un programa expone funciones a otro.
+- Repositorio: Carpeta de un proyecto bajo control de versiones (normalmente Git) con todo su historial de cambios.
 - Región: Ubicación geográfica de AWS compuesta por varias Zonas de Disponibilidad aisladas.
 - MFA: Segundo factor de autenticación (app, llave FIDO, token hardware) además de la contraseña.
 - Access Key: Par Access Key ID + Secret Access Key que firma peticiones a la API de AWS desde CLI/SDK.

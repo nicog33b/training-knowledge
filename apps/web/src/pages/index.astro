@@ -1,22 +1,69 @@
 ---
 import Base from '../layouts/Base.astro';
 import { getData } from '../lib/data';
-const { modules } = await getData();
+const { modules, paths } = await getData();
+const LEVEL: Record<string, string> = { inicial: 'Inicial', intermedio: 'Intermedio', avanzado: 'Avanzado', experto: 'Experto' };
 const stats = modules.map((m) => {
   const planned = Math.max(m.outline.sections.reduce((n, s) => n + s.topics.length, 0), m.topics.length);
   const done = m.topics.filter((t) => t.status === 'done').length;
-  return { m, planned, done, pct: planned ? Math.round((done / planned) * 100) : 0 };
+  return { m, planned, done, pct: planned ? Math.round((done / planned) * 100) : 0, q: m.topics.reduce((n, t) => n + t.lab.questions.length, 0) };
 });
+const title = (id: string) => modules.find((m) => m.manifest.id === id)?.manifest.title ?? id;
 ---
 <Base title="Training Knowledge">
-  <h1>Sistemas de aprendizaje</h1>
-  {stats.map(({ m, planned, done, pct }) => (
-    <div class="card">
-      <h2 style="margin:0"><a href={`/${m.manifest.id}/`}>{m.manifest.title}</a></h2>
-      <p class="muted" style="margin:.3rem 0 .6rem">{m.manifest.summary}</p>
-      <div class="bar"><i style={`width:${pct}%`}></i></div>
-      <p class="muted" style="margin:.4rem 0 0">{done}/{planned} subtemas · {m.glossary.length} términos · {pct}%</p>
-    </div>
-  ))}
+  <section class="hero">
+    <p class="eyebrow">Aprender con evidencia</p>
+    <h1>Cursos que se estudian practicando</h1>
+    <p class="lead">Cada tema se puede leer, ver como esquema o mapa, repasar con tarjetas, completar huecos o explicar con tus palabras. Las preguntas tienen respuesta, las simulaciones te piden predecir y cada curso trae herramientas propias.</p>
+    <p class="hero-cta"><a class="btn" href="/registro/">Crear perfil</a> <a href="/rutas/">Ver rutas →</a></p>
+  </section>
+
+  {paths.length > 0 && (
+    <section>
+      <h2>Rutas</h2>
+      <div class="paths">
+        {paths.map((p) => (
+          <a class="path-card" href={`/rutas/#${p.id}`}>
+            <strong>{p.title}</strong>
+            <ol>{p.steps.map((s) => <li>{title(s.module)}</li>)}</ol>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <h2>Todos los cursos</h2>
+  <div class="grid">
+    {stats.map(({ m, planned, done, pct, q }) => (
+      <a class="course" href={`/${m.manifest.id}/`}>
+        <span class="tags">{m.manifest.level && <span class="lvl">{LEVEL[m.manifest.level]}</span>}{m.tools.length > 0 && <span>{m.tools.length} herramientas</span>}</span>
+        <strong>{m.manifest.title}</strong>
+        <span class="muted sum">{m.manifest.summary}</span>
+        <div class="bar"><i style={`width:${pct}%`}></i></div>
+        <span class="muted meta">{done}/{planned} subtemas · {q} preguntas · {m.glossary.length} términos</span>
+      </a>
+    ))}
+  </div>
   <p><a href="/progreso/">Ver panel de progreso →</a></p>
 </Base>
+<style>
+  .hero { padding: 1.2rem 0 .6rem; }
+  .eyebrow { margin: 0; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+  .lead { font-size: 1.08rem; max-width: 66ch; color: var(--muted); }
+  .hero-cta { display: flex; gap: 1rem; align-items: center; }
+  .btn { background: var(--accent); color: var(--on-accent); text-decoration: none; font-weight: 650; padding: .55rem 1rem; border-radius: 10px; }
+  h2 { margin-top: 2.2rem; font-size: 1.3rem; }
+  .paths { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: .8rem; }
+  .path-card { display: grid; gap: .3rem; text-decoration: none; color: var(--fg); border: 1px solid var(--line); border-radius: 16px; padding: .9rem 1.1rem;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 8%, var(--bg)), var(--card)); }
+  .path-card:hover { border-color: var(--accent); }
+  .path-card ol { margin: 0; padding-left: 1.2rem; color: var(--muted); font-size: .88rem; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: .8rem; }
+  .course { display: grid; gap: .35rem; align-content: start; text-decoration: none; color: var(--fg); background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 1rem 1.1rem; transition: border-color .15s, transform .15s; }
+  .course:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .course strong { font-size: 1.05rem; }
+  .sum { font-size: .85rem; }
+  .meta { font-size: .76rem; }
+  .tags { display: flex; gap: .4rem; font-size: .66rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .tags .lvl { color: var(--accent); font-weight: 700; }
+</style>

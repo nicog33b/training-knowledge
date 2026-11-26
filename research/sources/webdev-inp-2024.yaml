@@ -1,0 +1,18 @@
+id: webdev-inp-2024
+title: Interaction to Next Paint is officially a Core Web Vital
+authors:
+  - Google Chrome team
+year: 2024
+venue: web.dev
+url: https://web.dev/blog/inp-cwv-launch
+kind: docs
+verified: secondary
+retrieved: 2026-11-26
+summary: Desde el 12-mar-2024 INP reemplaza a FID en Core Web Vitals; bueno ≤200
+  ms en el percentil 75.
+facts:
+  - INP reemplazó a FID el 12-mar-2024. Bueno ≤ 200 ms, malo > 500 ms, medido en
+    el percentil 75 de datos de campo.
+  - FID solo medía la primera interacción; INP mide la latencia completa hasta
+    el siguiente pintado en todas las interacciones.
+caveats: []

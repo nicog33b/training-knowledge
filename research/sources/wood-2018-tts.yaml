@@ -1,0 +1,26 @@
+id: wood-2018-tts
+title: Does Use of Text-to-Speech and Related Read-Aloud Tools Improve Reading
+  Comprehension for Students With Reading Disabilities? A Meta-Analysis
+authors:
+  - Wood
+  - Moxley
+  - Tighe
+  - Wagner
+year: 2018
+venue: Journal of Learning Disabilities 51(1)
+url: https://pmc.ncbi.nlm.nih.gov/articles/PMC5494021/
+kind: meta-analysis
+verified: secondary
+retrieved: 2026-11-26
+summary: Escuchar el texto mientras se lee (texto a voz) mejora algo la
+  comprensión de alumnos con dificultades lectoras.
+facts:
+  - "22 estudios de grupo (1995–2014) con alumnos con dificultades lectoras:
+    efecto medio d = 0,35 (IC 95 % 0,14–0,56) en comprensión al usar texto a voz
+    u otras ayudas de lectura en voz alta."
+  - El diseño del estudio explica parte de la variación; los autores piden más
+    estudios sobre moderadores.
+caveats:
+  - Visto por resúmenes de búsqueda y registro PMC; no se leyó el texto completo.
+  - La población son alumnos con dificultades lectoras (sobre todo escolares);
+    en adultos sin dificultades no está demostrado.

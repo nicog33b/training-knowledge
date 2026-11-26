@@ -30,6 +30,7 @@ SSH (22), **EC2 Instance Connect** (SSH vía navegador con claves temporales) y 
 
 ## Glosario usado
 - Latencia: Tiempo que tarda una petición en recibir respuesta.
+- HTTP: Protocolo de petición-respuesta de la web: el cliente envía un método (GET, POST…) a una URL y el servidor responde con un código de estado y un cuerpo.
 - Región: Ubicación geográfica de AWS compuesta por varias Zonas de Disponibilidad aisladas.
 - Zona de Disponibilidad: Uno o más centros de datos independientes dentro de una Región, con energía y red propias.
 - IAM: Servicio global de AWS para gestionar identidades (usuarios, grupos, roles) y sus permisos mediante políticas.

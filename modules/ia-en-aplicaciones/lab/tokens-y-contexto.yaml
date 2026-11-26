@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué una conversación larga con un chatbot cuesta más en cada turno?
+    kind: por-que
+    a: "Porque el modelo **no recuerda** nada entre peticiones: la app **reenvía todo el historial** en cada turno y cada token de entrada se cobra. El turno 20 paga los 19 anteriores otra vez. Por eso conviene **resumir** el historial viejo, recortar lo irrelevante y aprovechar el **caché de prompts** para el prefijo estable."
+    uses: []
+  - q: ¿Qué pasa si metes 300 páginas en el contexto para responder una pregunta sobre un dato concreto?
+    kind: que-pasa-si
+    a: "Cabe, pero sale **caro**, **lento** y **menos preciso**: al crecer el contexto baja la capacidad de recuperar un dato (*context rot*) y lo que queda **en medio** se usa peor. Es mejor recuperar solo los fragmentos relevantes (RAG) o dejar que el modelo pida detalles con herramientas."
+    uses: []
+  - q: Compara la ventana de contexto con la memoria de una persona.
+    kind: comparar
+    a: 'La ventana es más parecida a **lo que tienes sobre la mesa** que a tu memoria: el modelo solo usa lo que está en ella **en esta petición**. No acumula recuerdos entre llamadas; si la app no vuelve a enviar algo, para el modelo no existe. La "memoria" de un chatbot es código de la app que guarda y reinyecta contexto.'
+    uses: []
+  - q: Tu respuesta se corta a mitad de frase. ¿Qué revisas primero?
+    kind: aplicar
+    a: El **máximo de tokens de salida** y si la respuesta realmente cabía. Si la entrada ocupa casi toda la ventana, queda poco espacio para la salida. Revisa el motivo de parada que devuelve la API (límite de tokens frente a fin natural), sube el tope o pide una respuesta más concisa y por partes.
+    uses: []
+  - q: ¿Por qué el mismo texto puede costar distinto en español, inglés o código?
+    kind: por-que
+    a: "Porque el **vocabulario de tokens** se construyó con mucho texto en inglés: las palabras frecuentes en inglés suelen ser un solo token, mientras que en español o en código (símbolos, nombres raros) se parten en más trozos. Más tokens = más costo y más contexto ocupado. Usa el **contador de tokens** del SDK en lugar de contar palabras."
+    uses: []
+  - q: "Error común: «tengo 1 millón de tokens de contexto, así que no necesito RAG»."
+    kind: error-comun
+    a: "Una ventana enorme no hace gratis ni preciso meterlo todo: pagas cada token **en cada petición**, la latencia sube y la precisión baja con contextos largos. Además los documentos cambian y tienen **permisos** distintos por usuario. RAG sigue siendo la forma de mandar **solo lo relevante** y autorizado."
+    uses: []
+sims: []

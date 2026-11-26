@@ -32,3 +32,6 @@
   opacity: 1;
   visibility: visible;
 }
+
+/* Glosario discreto (ajuste de accesibilidad "Atención"): sin subrayado, la definición sigue al pasar o enfocar. */
+:root[data-glossary="discreto"] .tk-term { text-decoration: none; cursor: inherit; }

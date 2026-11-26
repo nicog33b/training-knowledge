@@ -1,0 +1,21 @@
+id: dora-2025-ai
+title: DORA 2025 State of AI-assisted Software Development Report
+authors:
+  - Google DORA
+year: 2025
+venue: Google Cloud
+url: https://dora.dev/dora-report-2025/
+kind: other
+verified: secondary
+retrieved: 2026-11-26
+summary: Encuesta a ~5.000 profesionales; la IA amplifica lo que el equipo ya
+  hace bien o mal.
+facts:
+  - Cerca del 90 % de los encuestados usa IA en el trabajo; la adopción se
+    asocia a más throughput de entrega, pero sigue afectando a la estabilidad.
+  - Equipos con arquitectura poco acoplada y ciclos de feedback rápidos ganan
+    más; ~30 % confía poco o nada en el código generado.
+  - Propone un modelo de 7 capacidades para amplificar el impacto de la IA.
+caveats:
+  - Encuesta (correlacional), no experimento. Cifras vistas en anuncio y
+    cobertura, no en el PDF.

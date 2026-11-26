@@ -37,6 +37,7 @@ Broker gestionado de **Apache ActiveMQ** y **RabbitMQ**: para migrar aplicacione
 
 ## Glosario usado
 - Latencia: Tiempo que tarda una petición en recibir respuesta.
+- HTTP: Protocolo de petición-respuesta de la web: el cliente envía un método (GET, POST…) a una URL y el servidor responde con un código de estado y un cuerpo.
 - Alta disponibilidad: Diseño que tolera fallos de componentes manteniendo el servicio en pie.
 - SDK: Biblioteca por lenguaje (boto3, JS, Java…) para llamar a la API de AWS desde código.
 - On-Demand: Modelo de compra EC2 de pago por uso sin compromiso.

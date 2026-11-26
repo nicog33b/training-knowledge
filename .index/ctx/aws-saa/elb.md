@@ -28,6 +28,7 @@ Un **load balancer** reparte el tráfico entre múltiples destinos, expone un ú
 
 ## Glosario usado
 - Latencia: Tiempo que tarda una petición en recibir respuesta.
+- HTTP: Protocolo de petición-respuesta de la web: el cliente envía un método (GET, POST…) a una URL y el servidor responde con un código de estado y un cuerpo.
 - Zona de Disponibilidad: Uno o más centros de datos independientes dentro de una Región, con energía y red propias.
 - Security Group: Firewall con estado a nivel de instancia/ENI; solo reglas Allow, entrada bloqueada por defecto.
 - Elastic IP: Dirección IPv4 pública estática que puedes asociar y mover entre instancias.

@@ -50,7 +50,8 @@
         "zona-de-disponibilidad"
       ],
       "questions": 6,
-      "sims": []
+      "sims": [],
+      "tools": []
     },
     {
       "id": "iam",
@@ -78,6 +79,7 @@
         "ec2",
         "iam",
         "iam-access-analyzer",
+        "json",
         "kms",
         "lambda",
         "mfa",
@@ -89,7 +91,8 @@
         "usuario-root"
       ],
       "questions": 6,
-      "sims": []
+      "sims": [],
+      "tools": []
     },
     {
       "id": "aws-cli-sdk",
@@ -120,11 +123,13 @@
         "iam-identity-center",
         "mfa",
         "region",
+        "repositorio",
         "sdk",
         "throttling"
       ],
       "questions": 6,
-      "sims": []
+      "sims": [],
+      "tools": []
     },
     {
       "id": "ec2-instancias",
@@ -146,6 +151,7 @@
         "aws-batch",
         "byol",
         "capacity-reservation",
+        "ci",
         "cloudformation",
         "dedicated-host",
         "dedicated-instances",
@@ -167,7 +173,8 @@
       "questions": 7,
       "sims": [
         "clasificar:modelo-de-compra"
-      ]
+      ],
+      "tools": []
     },
     {
       "id": "ec2-red-y-placement",
@@ -195,6 +202,7 @@
         "emr",
         "eni",
         "hibernate",
+        "http",
         "iam",
         "imds",
         "instance-connect",
@@ -214,7 +222,8 @@
         "zona-de-disponibilidad"
       ],
       "questions": 6,
-      "sims": []
+      "sims": [],
+      "tools": []
     },
     {
       "id": "ebs",
@@ -255,7 +264,8 @@
         "zona-de-disponibilidad"
       ],
       "questions": 7,
-      "sims": []
+      "sims": [],
+      "tools": []
     },
     {
       "id": "efs-y-fsx",
@@ -296,7 +306,8 @@
       "questions": 6,
       "sims": [
         "clasificar:almacenamiento-de-archivos"
-      ]
+      ],
+      "tools": []
     },
     {
       "id": "elb",
@@ -325,6 +336,7 @@
         "geneve",
         "gwlb",
         "health-check",
+        "http",
         "lambda",
         "latencia",
         "load-balancer",
@@ -338,7 +350,8 @@
       "questions": 6,
       "sims": [
         "clasificar:tipo-de-balanceador"
-      ]
+      ],
+      "tools": []
     },
     {
       "id": "asg",
@@ -388,7 +401,8 @@
         "zona-de-disponibilidad"
       ],
       "questions": 6,
-      "sims": []
+      "sims": [],
+      "tools": []
     },
     {
       "id": "rds-aurora",
@@ -432,7 +446,8 @@
       "questions": 7,
       "sims": [
         "clasificar:multi-az-o-replica"
-      ]
+      ],
+      "tools": []
     },
     {
       "id": "elasticache",
@@ -469,7 +484,8 @@
         "write-through"
       ],
       "questions": 6,
-      "sims": []
+      "sims": [],
+      "tools": []
     },
     {
       "id": "route53",
@@ -504,6 +520,7 @@
         "geoproximity",
         "health-check",
         "hosted-zone",
+        "http",
         "latencia",
         "load-balancer",
         "multi-value-answer",
@@ -515,7 +532,8 @@
       "questions": 6,
       "sims": [
         "clasificar:politica-de-enrutamiento"
-      ]
+      ],
+      "tools": []
     },
     {
       "id": "vpc-fundamentos",
@@ -563,7 +581,8 @@
       "questions": 6,
       "sims": [
         "clasificar:sg-o-nacl"
-      ]
+      ],
+      "tools": []
     },
     {
       "id": "vpc-conectividad",
@@ -611,7 +630,8 @@
         "vpc-peering"
       ],
       "questions": 7,
-      "sims": []
+      "sims": [],
+      "tools": []
     },
     {
       "id": "s3-fundamentos",
@@ -639,7 +659,9 @@
         "contenedor",
         "cors",
         "ec2",
+        "http",
         "iam",
+        "json",
         "kms",
         "latencia",
         "multi-part-upload",
@@ -654,7 +676,8 @@
         "versionado"
       ],
       "questions": 6,
-      "sims": []
+      "sims": [],
+      "tools": []
     },
     {
       "id": "s3-clases-y-avanzado",
@@ -707,7 +730,8 @@
       "questions": 6,
       "sims": [
         "clasificar:clase-de-s3"
-      ]
+      ],
+      "tools": []
     },
     {
       "id": "cloudfront",
@@ -738,6 +762,7 @@
         "ec2",
         "edge-location",
         "geo-restriction",
+        "http",
         "invalidacion",
         "lambda-edge",
         "latencia",
@@ -755,7 +780,8 @@
         "waf"
       ],
       "questions": 6,
-      "sims": []
+      "sims": [],
+      "tools": []
     },
     {
       "id": "global-accelerator",
@@ -781,6 +807,7 @@
         "elastic-ip",
         "global-accelerator",
         "health-check",
+        "http",
         "latencia",
         "nlb",
         "region",
@@ -788,7 +815,8 @@
         "ttl"
       ],
       "questions": 6,
-      "sims": []
+      "sims": [],
+      "tools": []
     },
     {
       "id": "snow-y-transferencia",
@@ -827,7 +855,8 @@
         "transfer-family"
       ],
       "questions": 6,
-      "sims": []
+      "sims": [],
+      "tools": []
     },
     {
       "id": "sqs",
@@ -869,7 +898,8 @@
       "questions": 7,
       "sims": [
         "predecir-observar:visibilidad-y-dlq"
-      ]
+      ],
+      "tools": []
     },
     {
       "id": "sns-fanout",
@@ -899,7 +929,9 @@
         "fan-out",
         "filter-policy",
         "firehose",
+        "http",
         "iam",
+        "json",
         "kms",
         "lambda",
         "redshift",
@@ -909,7 +941,8 @@
         "sqs"
       ],
       "questions": 6,
-      "sims": []
+      "sims": [],
+      "tools": []
     },
     {
       "id": "kinesis-mq",
@@ -938,6 +971,7 @@
         "enhanced-fan-out",
         "firehose",
         "hot-partition",
+        "http",
         "kinesis-data-streams",
         "kms",
         "lambda",
@@ -961,7 +995,8 @@
       "sims": [
         "predecir-observar:shards-y-throttling",
         "clasificar:sqs-sns-kinesis"
-      ]
+      ],
+      "tools": []
     },
     {
       "id": "ecs-eks",
@@ -995,7 +1030,9 @@
         "eventbridge",
         "fargate",
         "fsx",
+        "http",
         "iam",
+        "json",
         "kubernetes",
         "multi-az",
         "nlb",
@@ -1010,7 +1047,8 @@
         "versionado"
       ],
       "questions": 6,
-      "sims": []
+      "sims": [],
+      "tools": []
     },
     {
       "id": "lambda",
@@ -1048,6 +1086,7 @@
         "eventbridge",
         "fargate",
         "function-url",
+        "http",
         "iam",
         "kinesis-data-streams",
         "kms",
@@ -1074,7 +1113,8 @@
       "questions": 6,
       "sims": [
         "predecir-observar:concurrencia"
-      ]
+      ],
+      "tools": []
     },
     {
       "id": "dynamodb",
@@ -1126,7 +1166,8 @@
         "zona-de-disponibilidad"
       ],
       "questions": 7,
-      "sims": []
+      "sims": [],
+      "tools": []
     },
     {
       "id": "api-gateway",
@@ -1155,6 +1196,7 @@
         "cloudwatch-synthetics",
         "cognito",
         "cors",
+        "http",
         "iam",
         "jwt",
         "kinesis-data-streams",
@@ -1178,7 +1220,8 @@
         "x-ray"
       ],
       "questions": 6,
-      "sims": []
+      "sims": [],
+      "tools": []
     },
     {
       "id": "cognito-stepfunctions",
@@ -1209,6 +1252,7 @@
         "iam",
         "iam-identity-center",
         "identity-pool",
+        "json",
         "jwt",
         "lambda",
         "mfa",
@@ -1223,7 +1267,8 @@
         "user-pool"
       ],
       "questions": 6,
-      "sims": []
+      "sims": [],
+      "tools": []
     },
     {
       "id": "bases-de-datos-comparativa",
@@ -1271,7 +1316,8 @@
       "questions": 6,
       "sims": [
         "clasificar:elige-base"
-      ]
+      ],
+      "tools": []
     },
     {
       "id": "analitica-datos",
@@ -1308,6 +1354,7 @@
         "etl",
         "firehose",
         "glue",
+        "json",
         "kinesis-data-streams",
         "lake-formation",
         "lambda",
@@ -1329,7 +1376,8 @@
         "vpc"
       ],
       "questions": 6,
-      "sims": []
+      "sims": [],
+      "tools": []
     },
     {
       "id": "machine-learning",
@@ -1367,7 +1415,8 @@
         "translate"
       ],
       "questions": 7,
-      "sims": []
+      "sims": [],
+      "tools": []
     },
     {
       "id": "cloudwatch",
@@ -1420,7 +1469,8 @@
         "x-ray"
       ],
       "questions": 6,
-      "sims": []
+      "sims": [],
+      "tools": []
     },
     {
       "id": "eventbridge-cloudtrail-config",
@@ -1469,7 +1519,8 @@
         "x-ray"
       ],
       "questions": 6,
-      "sims": []
+      "sims": [],
+      "tools": []
     },
     {
       "id": "kms-cifrado",
@@ -1506,6 +1557,7 @@
         "envelope-encryption",
         "eventbridge",
         "global-tables",
+        "http",
         "iam",
         "key-policy",
         "kms",
@@ -1527,7 +1579,8 @@
         "versionado"
       ],
       "questions": 6,
-      "sims": []
+      "sims": [],
+      "tools": []
     },
     {
       "id": "proteccion-amenazas",
@@ -1572,6 +1625,7 @@
         "global-accelerator",
         "guardduty",
         "gwlb",
+        "http",
         "inspector",
         "lambda",
         "load-balancer",
@@ -1598,7 +1652,8 @@
       "questions": 6,
       "sims": [
         "clasificar:servicio-de-seguridad"
-      ]
+      ],
+      "tools": []
     },
     {
       "id": "identidad-organizaciones",
@@ -1637,7 +1692,8 @@
         "usuario-root"
       ],
       "questions": 6,
-      "sims": []
+      "sims": [],
+      "tools": []
     },
     {
       "id": "recuperacion-desastres",
@@ -1687,7 +1743,8 @@
       "questions": 6,
       "sims": [
         "predecir-observar:estrategia-dr"
-      ]
+      ],
+      "tools": []
     },
     {
       "id": "migraciones",
@@ -1731,7 +1788,8 @@
         "vmware-cloud-on-aws"
       ],
       "questions": 6,
-      "sims": []
+      "sims": [],
+      "tools": []
     },
     {
       "id": "cloudformation-y-ops",
@@ -1756,6 +1814,7 @@
         "aws-batch",
         "cdk",
         "change-set",
+        "ci",
         "cloudformation",
         "cloudwatch-synthetics",
         "codedeploy",
@@ -1765,12 +1824,15 @@
         "ecs",
         "elastic-beanstalk",
         "iac",
+        "json",
         "lambda",
         "load-balancer",
         "opsworks",
         "parameter-store",
         "patch-manager",
+        "pr",
         "rds",
+        "repositorio",
         "rol-iam",
         "run-command",
         "sam",
@@ -1782,7 +1844,8 @@
         "systems-manager"
       ],
       "questions": 6,
-      "sims": []
+      "sims": [],
+      "tools": []
     },
     {
       "id": "otros-servicios",
@@ -1837,7 +1900,8 @@
         "workspaces"
       ],
       "questions": 6,
-      "sims": []
+      "sims": [],
+      "tools": []
     },
     {
       "id": "well-architected",
@@ -1889,7 +1953,8 @@
         "x-ray"
       ],
       "questions": 6,
-      "sims": []
+      "sims": [],
+      "tools": []
     },
     {
       "id": "arquitecturas-de-referencia",
@@ -1980,7 +2045,8 @@
         "zona-de-disponibilidad"
       ],
       "questions": 6,
-      "sims": []
+      "sims": [],
+      "tools": []
     },
     {
       "id": "consejos-examen",
@@ -2020,6 +2086,7 @@
         "fan-out",
         "fsx",
         "global-accelerator",
+        "http",
         "instance-store",
         "io2",
         "iops",
@@ -2051,7 +2118,8 @@
         "zona-de-disponibilidad"
       ],
       "questions": 6,
-      "sims": []
+      "sims": [],
+      "tools": []
     }
   ],
   "sections": [
@@ -2563,5 +2631,6 @@
     "write-through",
     "x-ray",
     "zona-de-disponibilidad"
-  ]
+  ],
+  "tools": []
 }

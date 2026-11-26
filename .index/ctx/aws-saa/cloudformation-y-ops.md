@@ -37,6 +37,10 @@ Plantillas declarativas → CloudFormation; simplemente "sube tu código" → Be
 - identidad-organizaciones: Organizations, IAM Identity Center y Control Tower — Multi-cuenta, SCP, federación, Directory Service y gobierno. [secciones: Organizations, IAM Identity Center y Control Tower · AWS Organizations · IAM avanzado · IAM Identity Center (antes AWS SSO) · Directory Service · Control Tower y gobierno]
 
 ## Glosario usado
+- JSON: Formato de texto para datos estructurados (objetos, listas, números, cadenas) que entienden casi todos los lenguajes.
+- Repositorio: Carpeta de un proyecto bajo control de versiones (normalmente Git) con todo su historial de cambios.
+- CI: Integración continua: cada cambio se construye y se prueba automáticamente en un servidor antes de integrarlo.
+- PR: Pull request: propuesta de cambio de código que otros revisan y prueban antes de integrarla a la rama principal.
 - Rol IAM: Identidad sin credenciales permanentes que puede asumir un servicio, otra cuenta o usuario; entrega credenciales temporales.
 - EC2: Servicio de máquinas virtuales (IaaS) bajo demanda de AWS.
 - Session Manager: Acceso a shell de instancias sin SSH ni puertos abiertos, controlado por IAM y con logs.

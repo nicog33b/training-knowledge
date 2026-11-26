@@ -38,6 +38,7 @@ CloudFront: contenido global estático **cacheado** (TTL), ideal para archivos e
 ## Glosario usado
 - Latencia: Tiempo que tarda una petición en recibir respuesta.
 - TTL: Time To Live. Duración tras la cual un dato guardado se considera vencido.
+- HTTP: Protocolo de petición-respuesta de la web: el cliente envía un método (GET, POST…) a una URL y el servidor responde con un código de estado y un cuerpo.
 - Región: Ubicación geográfica de AWS compuesta por varias Zonas de Disponibilidad aisladas.
 - Edge Location: Punto de presencia de AWS cercano al usuario final usado por CloudFront, Route 53 y Global Accelerator para cachear y enrutar tráfico.
 - SDK: Biblioteca por lenguaje (boto3, JS, Java…) para llamar a la API de AWS desde código.

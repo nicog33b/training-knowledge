@@ -1,0 +1,19 @@
+---
+import Base from '../../layouts/Base.astro';
+import Flashcards from '../../components/Flashcards.astro';
+import { getData } from '../../lib/data';
+import { courseCards } from '../../lib/cards';
+export async function getStaticPaths() {
+  const { modules } = await getData();
+  return modules.map((m) => ({ params: { module: m.manifest.id }, props: { m } }));
+}
+const { m } = Astro.props;
+const cards = await courseCards(m);
+---
+<Base title={`Tarjetas · ${m.manifest.title}`} chat={{ module: m.manifest.id, course: m.manifest.title }}>
+  <p><a href={`/${m.manifest.id}/`}>← {m.manifest.title}</a></p>
+  <h1>Tarjetas del curso</h1>
+  <p class="muted">Todas las preguntas con respuesta y los términos del glosario, más las tarjetas que crees desde el menú de selección. Piensa la respuesta antes de girar: ← → para moverte, Espacio para girar, 1 · 2 · 3 para marcar.</p>
+  <Flashcards cards={cards} module={m.manifest.id} />
+  <p class="muted" style="margin-top:1.4rem">¿Prefieres lo que toca hoy? <a href={`/${m.manifest.id}/repaso/`}>Repaso de hoy →</a></p>
+</Base>

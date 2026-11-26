@@ -12,8 +12,9 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 import { parse as parseYaml, stringify as yamlStringify } from 'yaml';
-import { Confidence, DecisionStatus, GlossaryFile, LabFile, ModuleKind, SHARED, Slug, Source, SourceKind, Verification, termId } from '@tk/contracts';
+import { Confidence, DecisionStatus, GlossaryFile, LabFile, ModuleKind, TOOL_BUILDERS, ToolSpec, SHARED, Slug, Source, SourceKind, Verification, termId } from '@tk/contracts';
 import { FsContentSource, loadAll } from '@tk/content';
+import { BUILDERS, checkTool } from '@tk/tools';
 import { buildIndex, writeIndex } from '@tk/indexer';
 import { FsResearchSource, findResearch, loadResearch } from '@tk/research';
 import { ask, buildTutorRequest } from '@tk/tutor';
@@ -54,6 +55,10 @@ const { positionals, values } = parseArgs({
     provider: { type: 'string' },
     reset: { type: 'boolean' },
     dry: { type: 'boolean' },
+    // herramientas y módulos
+    builder: { type: 'string' },
+    level: { type: 'string' },
+    topics: { type: 'string' },
   },
 });
 const [cmd, sub, ...rest] = positionals;
@@ -92,7 +97,7 @@ switch (cmd === 'status' || cmd === 'fill' || cmd === 'ask' || cmd === 'gasto' ?
     await cp(join(ROOT, 'templates', 'module'), dest, { recursive: true });
     await writeFile(
       join(dest, 'module.yaml'),
-      yamlStringify({ id, title: values.title, summary: values.summary, kind: kind.data!, locale: 'es', tags: [], glossaries: [] }),
+      yamlStringify({ id, title: values.title, summary: values.summary, kind: kind.data!, locale: 'es', tags: [], glossaries: [], ...(values.level ? { level: values.level } : {}) }),
     );
     console.log(`✔ modules/${id} creado`);
     await reindex();
@@ -227,6 +232,68 @@ switch (cmd === 'status' || cmd === 'fill' || cmd === 'ask' || cmd === 'gasto' ?
     console.log(`decisiones: ${research.decisions.length} (${research.decisions.filter((d) => d.status === 'accepted').length} accepted · ${research.decisions.filter((d) => d.status === 'proposed').length} proposed)`);
     research.warnings.forEach((w) => console.warn(`⚠ ${w.where}: ${w.message}`));
     issues.forEach((i) => console.error(`✖ ${i.where}: ${i.message}`));
+    break;
+  }
+  case 'tool list': {
+    // tk tool list [módulo]: constructores disponibles y herramientas de cada curso.
+    console.log('Constructores (comunes a todos los cursos):');
+    for (const [b, d] of Object.entries(BUILDERS)) console.log(`  ${b.padEnd(12)} ${d}`);
+    const data = await loadAll(new FsContentSource(ROOT));
+    for (const m of data.modules.filter((x) => !rest[0] || x.manifest.id === rest[0])) {
+      if (!m.tools.length) continue;
+      console.log(`\n${m.manifest.id}:`);
+      for (const t of m.tools) console.log(`  ${t.builder.padEnd(12)} ${t.id} — ${t.title}${t.topics.length ? ` [${t.topics.join(', ')}]` : ''}`);
+    }
+    break;
+  }
+  case 'tool new': {
+    // tk tool new <módulo> <id> --builder <b> --title T --summary S [--topics a,b]: andamiaje válido del constructor.
+    const [mod, id] = rest;
+    const b = values.builder as (typeof TOOL_BUILDERS)[number];
+    if (!mod || !Slug.safeParse(id).success || !TOOL_BUILDERS.includes(b) || !values.title || !values.summary)
+      die(`uso: tk tool new <módulo> <id> --builder ${TOOL_BUILDERS.join('|')} --title T --summary S [--topics a,b]`);
+    const file = join(ROOT, 'modules', mod, 'tools', `${id}.yaml`);
+    if (!(await exists(join(ROOT, 'modules', mod)))) die(`módulo inexistente: ${mod}`);
+    if (await exists(file)) die(`ya existe tools/${id}.yaml`);
+    const base = { id, title: values.title, summary: values.summary, topics: list(values.topics), builder: b };
+    const scaffold: Record<string, object> = {
+      calculadora: { inputs: [{ id: 'cantidad', label: 'Cantidad', type: 'number', min: 1, max: 100, step: 1, default: 10 }], outputs: [{ id: 'doble', label: 'Doble', expr: 'cantidad * 2', main: true }], notes: [{ when: 'doble > 100', text: 'Valor alto', tone: 'warn' }] },
+      decision: { start: 'p1', nodes: [{ id: 'p1', question: '¿Pregunta?', options: [{ label: 'Sí', result: 'a' }, { label: 'No', result: 'b' }] }], results: [{ id: 'a', title: 'Opción A', why: 'Porque…' }, { id: 'b', title: 'Opción B', why: 'Porque…' }] },
+      checklist: { groups: [{ title: 'Grupo', items: [{ text: 'Punto verificable', why: 'Por qué importa' }] }] },
+      comparador: { options: [{ id: 'a', label: 'A' }, { id: 'b', label: 'B' }], rows: [{ criterion: 'Criterio 1', values: ['…', '…'] }, { criterion: 'Criterio 2', values: ['…', '…'] }] },
+      plantilla: { fields: [{ id: 'objetivo', label: 'Objetivo', kind: 'text' }], template: 'Objetivo: {{objetivo}}' },
+    };
+    await mkdir(dirname(file), { recursive: true });
+    await writeFile(file, yamlStringify({ ...base, ...scaffold[b] }));
+    console.log(`✔ modules/${mod}/tools/${id}.yaml creado (constructor ${b}); edítalo y corre pnpm validate`);
+    await reindex();
+    break;
+  }
+  case 'tool import': {
+    // tk tool import <módulo> <bundle.yaml>: lista de herramientas; crea/reemplaza tools/<id>.yaml tras validar.
+    const [mod, path] = rest;
+    if (!mod || !path) die('uso: tk tool import <módulo> <bundle.yaml>');
+    const incoming: unknown = parseYaml(await readFile(resolve(path), 'utf8'));
+    if (!Array.isArray(incoming)) die('el bundle debe ser una lista YAML de herramientas');
+    const data = await loadAll(new FsContentSource(ROOT));
+    const m = data.modules.find((x) => x.manifest.id === mod) ?? die(`módulo inexistente: ${mod}`);
+    const topicIds = new Set(m.topics.map((t) => t.id));
+    const errors: string[] = [];
+    let n = 0;
+    for (const raw of incoming as any[]) {
+      const r = ToolSpec.safeParse(raw);
+      if (!r.success) { errors.push(`${raw?.id ?? '?'}: ${r.error.issues.map((i) => `${i.path.join('.')}: ${i.message}`).join('; ')}`); continue; }
+      const e = checkTool(r.data, topicIds);
+      if (e.length) { errors.push(...e.map((x) => `${r.data.id}: ${x}`)); continue; }
+      const file = join(ROOT, 'modules', mod, 'tools', `${r.data.id}.yaml`);
+      await mkdir(dirname(file), { recursive: true });
+      await writeFile(file, yamlStringify(raw));
+      n++;
+    }
+    errors.forEach((e) => console.error(`✖ ${e}`));
+    console.log(`✔ ${n} herramientas guardadas en ${mod} (${errors.length} con errores)`);
+    if (errors.length) process.exitCode = 1;
+    await reindex();
     break;
   }
   case 'lab import': {
@@ -406,6 +473,7 @@ ${m.manifest.id}: ${done}/${m.topics.length} listos · ${m.ownGlossary.length} t
       'tk ask <módulo> <subtema> "pregunta" [--provider anthropic|openai|gemini|ollama|compatible] [--model] [--dry]\n' +
       'tk gasto [--reset]   (gasto de IA por modelo: hoy, mes, total)\n' +
       'tk lab import <módulo> <bundle.yaml>   (preguntas sugeridas + simulaciones por subtema)\n' +
-      'tk new module <id> --title --summary [--kind]\ntk new topic <módulo> <id> --title --summary [--order]\ntk glossary add <módulo|_shared> "término" --def "..." [--alias a,b] [--see x]\ntk index\ntk validate',
+      'tk tool list [módulo]   (constructores y herramientas)\ntk tool new <módulo> <id> --builder calculadora|decision|checklist|comparador|plantilla --title --summary [--topics a,b]\ntk tool import <módulo> <bundle.yaml>\n' +
+      'tk new module <id> --title --summary [--kind] [--level inicial|intermedio|avanzado|experto]\ntk new topic <módulo> <id> --title --summary [--order]\ntk glossary add <módulo|_shared> "término" --def "..." [--alias a,b] [--see x]\ntk index\ntk validate',
     );
 }

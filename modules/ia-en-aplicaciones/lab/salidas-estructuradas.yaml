@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué hay que validar el JSON aunque el proveedor garantice el esquema?
+    kind: por-que
+    a: Porque la garantía cubre la **forma** en condiciones normales, pero la respuesta puede **cortarse** por límite de tokens, cambiar con una versión o el esquema del código y el de la API pueden divergir. Validar con zod o pydantic convierte un fallo raro en un error controlado con reintento o degradación.
+    uses: []
+  - q: Compara salida estructurada estricta, herramienta falsa y «responde en JSON» en el prompt.
+    kind: comparar
+    a: "**Estricta**: el decodificador solo produce JSON válido contra el esquema; la más fiable. **Herramienta falsa**: el input de una herramienta es el esquema; funciona bien donde no hay modo estricto. **Solo prompt**: suele funcionar pero falla de vez en cuando (texto extra, comillas). En producción, las dos primeras."
+    uses: []
+  - q: El JSON es válido pero el campo `total` no coincide con la suma de líneas. ¿Qué falló?
+    kind: que-pasa-si
+    a: "Nada del esquema: el esquema garantiza **tipos**, no **verdad**. El modelo alucinó o sumó mal. Añade **reglas de negocio** en el código (recalcular el total), pide que cite el fragmento de origen y, si no coincide, reintenta o marca el caso para revisión humana."
+    uses: []
+  - q: Diseña el esquema para extraer datos de una factura.
+    kind: aplicar
+    a: "Campos con nombres claros y **descripción**: `proveedor` (string), `fecha` (formato AAAA-MM-DD), `moneda` (**enum** de ISO), `lineas` (array de concepto, cantidad, precio), `total` (number) y `confianza` o `notas` para lo dudoso. Después, valida y **recalcula** el total en código."
+    uses: []
+  - q: ¿Por qué poner un campo de razonamiento breve antes de la respuesta en el esquema?
+    kind: por-que
+    a: "Porque el modelo genera en orden: si primero escribe por qué elige algo, la decisión final se apoya en ese razonamiento. Si la respuesta va primero, el razonamiento posterior solo la justifica. Mantenlo **breve** (cuesta tokens) y no lo muestres al usuario si no aporta."
+    uses: []
+  - q: "Error común: usar un string libre para un campo que solo admite 4 valores."
+    kind: error-comun
+    a: 'El modelo inventará variantes ("Alta", "alto", "high", "urgente") y tu código tendrá que adivinar. Usa un **enum** con los 4 valores exactos: el modo estricto los impone y la validación es trivial. Lo mismo para estados, categorías y unidades.'
+    uses: []
+sims: []

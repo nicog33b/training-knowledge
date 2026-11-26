@@ -41,6 +41,7 @@ Lambda para eventos cortos (<15 min) y cargas variables; ECS/Fargate para proces
 ## Glosario usado
 - API: Application Programming Interface. Contrato por el cual un programa expone funciones a otro.
 - Latencia: Tiempo que tarda una petición en recibir respuesta.
+- HTTP: Protocolo de petición-respuesta de la web: el cliente envía un método (GET, POST…) a una URL y el servidor responde con un código de estado y un cuerpo.
 - Región: Ubicación geográfica de AWS compuesta por varias Zonas de Disponibilidad aisladas.
 - IAM: Servicio global de AWS para gestionar identidades (usuarios, grupos, roles) y sus permisos mediante políticas.
 - SDK: Biblioteca por lenguaje (boto3, JS, Java…) para llamar a la API de AWS desde código.

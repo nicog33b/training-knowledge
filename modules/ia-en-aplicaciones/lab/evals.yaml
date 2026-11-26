@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué sin evals cambiar de modelo es adivinar?
+    kind: por-que
+    a: 'Porque los LLM no fallan de forma uniforme: un modelo nuevo puede mejorar la media y **empeorar** justo los casos que te importan. Sin un conjunto de casos medido antes y después no sabes qué se rompió. Las evals convierten "parece mejor" en datos.'
+    uses: []
+  - q: Compara métricas deterministas y LLM como juez.
+    kind: comparar
+    a: "**Deterministas** (cumple el esquema, contiene el id, cifra correcta): baratas, reproducibles y fiables; úsalas siempre que puedas. **LLM como juez**: cubre lo difícil de codificar (tono, si responde la pregunta), pero tiene sesgos; necesita rúbrica tipo checklist y validación contra etiquetas humanas."
+    uses: []
+  - q: ¿Qué pasa si ajustas el prompt hasta sacar 100 % en tu único conjunto de casos?
+    kind: que-pasa-si
+    a: "Probablemente **sobreajustaste**: el prompt aprendió esos casos, no el problema. Rendirá peor con entradas nuevas. Separa un conjunto que no uses para ajustar y añade casos reales de producción de forma continua."
+    uses: []
+  - q: Monta la primera eval de un asistente que responde sobre la política de vacaciones.
+    kind: aplicar
+    a: "Recoge 30–50 preguntas reales (y difíciles: casos límite, preguntas fuera de tema). Para cada una, la respuesta esperada o los **hechos que debe contener** y si debe **citar** la sección. Puntúa con reglas (cita la sección correcta) y un juez con checklist. Ejecútala en CI con cada cambio."
+    uses: []
+  - q: ¿Por qué conviene revisar el diff de casos y no solo la puntuación media?
+    kind: por-que
+    a: Porque una media igual puede esconder que mejoraron 10 casos fáciles y **empeoraron 10 críticos**. Ver qué casos cambiaron de resultado te dice si el cambio es aceptable y te da ejemplos concretos para corregir el prompt.
+    uses: []
+  - q: "Error común: pedir al juez «puntúa del 1 al 10 la calidad»."
+    kind: error-comun
+    a: 'Es vago: el juez no es consistente, las notas se agrupan en 7–8 y no sabes qué falló. Usa una **rúbrica tipo checklist** ("menciona el plazo de 30 días", "cita la sección 4", "no inventa importes") con respuestas sí/no y valida contra una muestra corregida por personas.'
+    uses: []
+sims: []
