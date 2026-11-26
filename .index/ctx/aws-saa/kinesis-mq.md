@@ -75,3 +75,6 @@ Broker gestionado de **Apache ActiveMQ** y **RabbitMQ**: para migrar aplicacione
 ## Simulaciones del subtema
 - predecir-observar: ¿Cuántos shards necesito?
 - clasificar: ¿SQS, SNS o Kinesis?
+
+## Herramientas del curso en este subtema
+- comparador: Comparador de mensajería y eventos — SQS, SNS, Kinesis Data Streams y EventBridge lado a lado: el clásico de preguntas de examen con servicios confundibles.

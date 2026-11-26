@@ -60,3 +60,6 @@ Antes de traducir, pregúntate: ¿la acción está **terminada o en curso**? ¿E
 
 ## Simulaciones del subtema
 - clasificar: Del español al inglés
+
+## Herramientas del curso en este subtema
+- decision: ¿Qué tiempo verbal uso? — Asistente que te lleva, con preguntas sobre lo que quieres decir, al tiempo verbal inglés correcto y su fórmula.

@@ -57,6 +57,16 @@ _(nada)_
 - [ ] T-077 Menú del header: añadir entradas (búsqueda, curso actual) cuando haga falta, sin pasar de una línea fina
 - [ ] T-067 Registrar qué preguntas sugeridas se usan y si cambian los aciertos, para validar la decisión · decisión: preguntas-sugeridas-y-contexto-minimo
 
+### Plataforma de estudio (2026-11-26)
+- [ ] T-099 Verificar en texto completo las 19 fuentes nuevas (todas `secondary`): autores de metr-2025-ai-devs y anthropic-building-agents, URL de fiorella-zhang-2018-drawing, URL oficial de OWASP; subir `verified` · decisión: accesibilidad-con-evidencia, ingenieria-con-ia-verificar-antes-que-confiar
+- [ ] T-104 Aviso en `validate` para subtemas con < 3 negritas (esquema y huecos quedan pobres) · decisión: vistas-de-estudio-generadas
+- [ ] T-105 Revisión semestral de los cursos de IA y frontend (herramientas, métricas y prácticas cambian rápido); próxima: 2027-05 · decisión: ingenieria-con-ia-verificar-antes-que-confiar
+- [ ] T-106 Medir uso de herramientas y vistas de estudio (qué se abre, cuánto se completa) para validar las decisiones · deps: T-100
+- [ ] T-107 Backend real de cuentas (auth, sincronizar progreso entre dispositivos) para sustituir el perfil local de presentación · deps: T-100
+- [ ] T-108 Constructores nuevos cuando haya cursos que los pidan: `linea-de-tiempo`, `ordenar-pasos` (compartible con T-063) · decisión: herramientas-por-curso-con-constructores
+- [ ] T-109 Pasar el planificador provisional a FSRS reutilizando la misma firma `review()` · deps: T-015, T-096
+- [ ] T-110 Probar la lectura en voz alta en Safari/iOS y Android y el modo foco con lector de pantalla · deps: T-097
+
 ### Contenido
 - [ ] T-040 Completar el módulo `next-cache` (1 subtema, 0 hechos)
 - [ ] T-090 Leer el texto completo de norris-ortega-2000 y spada-tomita-2010 (solo vistos de forma secundaria; la red bloqueó los DOI) y buscar una fuente sobre contraste L1 (español→inglés) · decisión: gramatica-explicita-con-contraste-l1
@@ -64,6 +74,17 @@ _(nada)_
 - [ ] T-092 Primitiva `ordenar-pasos` o `completar-hueco` para practicar producción (escribir la forma del verbo) en english-basic-1; hoy solo hay clasificar y predecir · decisión: simulaciones-por-primitivas-y-recetas
 
 ## Hecho
+
+- [x] T-093 2026-11-26 Investigación: 19 fuentes nuevas (texto a voz, filtros de color, Bionic Reading, dibujo generativo, productividad con IA —Copilot, METR, DORA 2025—, migraciones de Google, pautas Human-AI de Microsoft, agentes y contexto de Anthropic, MCP, RAG —Lewis, contextual retrieval, lost in the middle, Ragas—, OWASP LLM, INP, ofertas de SpaceX) y 6 decisiones `proposed`: accesibilidad-con-evidencia, vistas-de-estudio-generadas, herramientas-por-curso-con-constructores, ingenieria-con-ia-verificar-antes-que-confiar, rag-hibrido-con-reranking-y-evals, frontend-ruta-por-niveles
+- [x] T-094 2026-11-26 Herramientas por curso con constructores comunes: contrato `ToolSpec` (calculadora, decision, checklist, comparador, plantilla), paquete `packages/tools` (validación semántica + ejecución en navegador), `Tool.astro`, página `/<curso>/herramientas/`, herramientas al final de sus subtemas, `tk tool list|new|import`, índice con `tools`; funciones seguras (min, max, ceil, round…) en el mini-lenguaje de `@tk/sims` · decisión: herramientas-por-curso-con-constructores
+- [x] T-095 2026-11-26 Vistas de estudio para cualquier curso (`packages/views` + `StudyModes.astro`): Leer · Esquema · Mapa (Mermaid) + Haz tu mapa · Tarjetas · Huecos · Explícalo · Pregunta previa; mapa del curso `/<curso>/mapa/`; «Hazlo diagrama» en el chat (Mermaid) · decisión: vistas-de-estudio-generadas
+- [x] T-096 2026-11-26 Repaso espaciado provisional (`packages/practice`, cajas con intervalos 1-3-7-16-35-80 días e intercalado): marcas del lab y de las tarjetas alimentan `/<curso>/repaso/` y `/<curso>/tarjetas/` · decisión: repeticion-espaciada-fsrs (FSRS sigue en T-015)
+- [x] T-097 2026-11-26 Panel de accesibilidad: pestañas Lectura/Visión/Atención/Voz, perfiles (Dislexia, Baja visión, Concentración), ancho de línea, alto contraste, enlaces/foco muy visibles, interfaz grande, modo foco, reducir movimiento, glosario discreto, lectura en voz alta con velocidad y voz, Alt+A, enlace «Saltar al contenido»; tooltips del glosario ya no ensanchan la página en móvil · decisión: accesibilidad-con-evidencia
+- [x] T-098 2026-11-26 Menú de selección rediseñado: píldora con iconos y etiquetas, definición del glosario al instante, crear tarjeta de repaso, escuchar, copiar con fuente, «Hazlo diagrama», preguntas del curso plegables, navegación con flechas y Alt+S
+- [x] T-100 2026-11-26 Entrar / registro / perfil (solo presentación, datos en el navegador, la contraseña no se guarda): perfil con progreso por curso, ajustes de lectura, exportar y borrar datos; avatar en el header
+- [x] T-101 2026-11-26 Rutas de aprendizaje (`paths/*.yaml`, contrato `LearningPath`, `level` en módulos), página `/rutas/` y portada nueva
+- [x] T-102 2026-11-26 Cursos nuevos: `ia-en-aplicaciones` (11 subtemas), `rag` (11), `ingenieria-con-ia-pro` (11), `frontend-junior` (10), `frontend-semi-senior` (9), `frontend-senior` (8): 360 preguntas con respuesta, 12 simulaciones, 20 herramientas, ~260 términos de glosario · decisiones: ingenieria-con-ia-verificar-antes-que-confiar, rag-hibrido-con-reranking-y-evals, frontend-ruta-por-niveles
+- [x] T-103 2026-11-26 Herramientas también en cursos existentes: comparador de mensajería y asistente de almacenamiento (aws-saa), «¿Qué tiempo verbal uso?» y constructor de frases (english-basic-1); `CHANGELOG.md` creado
 
 - [x] T-089 2026-11-23 Módulo `english-basic-1` (Basic English · Level 1): 21 subtemas en 7 secciones (bases → mapa tiempo × aspecto y equivalencias con el español → presente, pasado, imperfecto en inglés, perfectos, futuro, marcadores → modales, condicionales, pasiva, artículos), 126 preguntas con respuesta, 21 simulaciones y 50 términos de glosario · decisión: gramatica-explicita-con-contraste-l1
 

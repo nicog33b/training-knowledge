@@ -134,7 +134,7 @@ const svg = (d: string) => `<svg viewBox="0 0 24 24" width="16" height="16" fill
   .sm-bar { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; padding: .45rem 0; margin: 0 0 1.2rem;
     background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
   .sm-bar-label { font-size: .7rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); font-weight: 600; }
-  .sm-tabs { display: flex; gap: 2px; overflow-x: auto; background: var(--card); border: 1px solid var(--line); border-radius: 11px; padding: 2px; scrollbar-width: none; }
+  .sm-tabs { display: flex; gap: 2px; overflow-x: auto; min-width: 0; max-width: 100%; background: var(--card); border: 1px solid var(--line); border-radius: 11px; padding: 2px; scrollbar-width: none; }
   .sm-tabs button { display: inline-flex; align-items: center; gap: .35rem; font: inherit; font-size: .82rem; color: var(--muted); background: none; border: 0; border-radius: 9px; padding: .34rem .62rem; cursor: pointer; white-space: nowrap; }
   .sm-tabs button:hover:not(:disabled) { color: var(--fg); }
   .sm-tabs button[aria-selected=true] { background: var(--bg); color: var(--accent); font-weight: 650; box-shadow: 0 1px 3px rgb(0 0 0 / .12); }
@@ -142,6 +142,7 @@ const svg = (d: string) => `<svg viewBox="0 0 24 24" width="16" height="16" fill
   .sm-tabs button:focus-visible, .sm-btn:focus-visible, .sm-pre-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
   .sm-tabs small { font-size: .66rem; background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent); border-radius: 99px; padding: 0 .35rem; }
   @media (max-width: 960px) { .sm-bar-label { display: none; } }
+  @media (max-width: 600px) { .sm-tabs button span { display: none; } .sm-tabs button[aria-selected=true] span { display: inline; } .sm-pre-toggle { margin-left: 0; } }
   .sm-pre-toggle { margin-left: auto; font: inherit; font-size: .76rem; color: var(--muted); background: none; border: 1px dashed var(--line); border-radius: 99px; padding: .2rem .65rem; cursor: pointer; }
   .sm-pre-toggle:hover { color: var(--accent); border-color: var(--accent); }
   .sm-panel { animation: sm-in .18s ease-out; }

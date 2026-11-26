@@ -1,0 +1,73 @@
+id: elegir-renderizado
+title: ¿Qué estrategia de renderizado para esta página?
+summary: Asistente para elegir CSR, SSR, SSG/ISR o islas según SEO, frescura,
+  personalización e interactividad.
+builder: decision
+topics:
+  - estrategias-de-renderizado
+  - system-design-frontend
+start: publica
+nodes:
+  - id: publica
+    question: ¿La página es pública y le importa el SEO o el primer pintado rápido?
+    options:
+      - label: Sí
+        next: personal
+      - label: No, está tras login
+        next: interactiva
+  - id: personal
+    question: ¿El contenido es distinto para cada usuario o cambia cada pocos minutos?
+    options:
+      - label: Sí
+        result: ssr
+      - label: No, es igual para todos y cambia poco
+        next: interaccion
+  - id: interaccion
+    question: ¿Tiene mucha interactividad o casi todo es contenido?
+    options:
+      - label: Casi todo es contenido con algún widget
+        result: islas
+      - label: Bastante interactiva
+        result: ssg
+  - id: interactiva
+    question: ¿Es una herramienta muy interactiva (editor, panel en tiempo real)?
+    options:
+      - label: Sí
+        result: csr
+      - label: No, son listados y formularios
+        result: ssr-ligero
+results:
+  - id: ssr
+    title: SSR con streaming
+    why: "Personalizado o muy fresco y debe verse pronto: envía primero lo rápido y
+      transmite lo lento."
+    watch: "Cuida la hidratación (INP): considera Server Components para no enviar
+      JS innecesario."
+    see:
+      - estrategias-de-renderizado
+      - rendimiento-a-escala
+  - id: islas
+    title: Estático con islas
+    why: "Contenido estable: HTML estático desde CDN y solo hidratas los widgets
+      interactivos."
+    see:
+      - estrategias-de-renderizado
+  - id: ssg
+    title: SSG / ISR
+    why: "Igual para todos y cambia poco: genera estático y revalida periódicamente
+      o bajo demanda."
+    see:
+      - estrategias-de-renderizado
+  - id: csr
+    title: CSR
+    why: "Herramienta tras login muy interactiva: SEO irrelevante, prioriza la
+      interactividad; aplica code splitting."
+    watch: Vigila el tamaño del bundle inicial.
+    see:
+      - estrategias-de-renderizado
+  - id: ssr-ligero
+    title: SSR ligero o CSR con datos del servidor bien gestionados
+    why: "Listados y formularios internos: cualquiera funciona; elige lo que tu
+      framework haga más simple y mide."
+    see:
+      - arquitectura-frontend

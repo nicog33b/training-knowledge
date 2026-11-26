@@ -1,0 +1,67 @@
+id: comparar-renderizado
+title: Comparador de estrategias de renderizado
+summary: CSR, SSR, SSG, ISR e islas lado a lado.
+builder: comparador
+topics:
+  - estrategias-de-renderizado
+options:
+  - id: csr
+    label: CSR
+  - id: ssr
+    label: SSR (streaming)
+  - id: ssg
+    label: SSG
+  - id: isr
+    label: ISR
+  - id: islas
+    label: Islas
+rows:
+  - criterion: Dónde se genera el HTML
+    values:
+      - Navegador
+      - Servidor, en cada petición
+      - Al construir
+      - Al construir + regeneración
+      - Al construir o servidor; solo widgets en cliente
+  - criterion: Primer pintado / LCP
+    values:
+      - Lento en móviles
+      - Rápido (depende de datos)
+      - Muy rápido (CDN)
+      - Muy rápido (CDN)
+      - Muy rápido
+  - criterion: Frescura de datos
+    values:
+      - En tiempo real
+      - En tiempo real
+      - De la última build
+      - Revalidación periódica o bajo demanda
+      - Según cómo se genere
+  - criterion: Costo de hidratación (INP)
+    values:
+      - Todo el JS de la app
+      - Alto si hidrata todo
+      - Alto si hidrata todo
+      - Alto si hidrata todo
+      - "Bajo: solo islas"
+  - criterion: SEO
+    values:
+      - Peor
+      - Bueno
+      - Muy bueno
+      - Muy bueno
+      - Muy bueno
+  - criterion: Costo de servidor
+    values:
+      - Bajo
+      - Alto
+      - Mínimo
+      - Bajo
+      - Mínimo
+  - criterion: Ideal para
+    values:
+      - Apps tras login muy interactivas
+      - Contenido personalizado o muy cambiante
+      - Docs, blogs, marketing
+      - Catálogos grandes que cambian
+      - Sitios de contenido con algo de interacción

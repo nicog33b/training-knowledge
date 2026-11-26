@@ -1,1 +1,190 @@
-[]
+- term: CSR
+  aliases:
+    - client-side rendering
+    - renderizado en cliente
+  definition: "Renderizado en el cliente: el servidor envía un HTML casi vacío y
+    JavaScript construye la página en el navegador."
+  see: []
+- term: SSR
+  aliases:
+    - server-side rendering
+    - renderizado en servidor
+  definition: "Renderizado en el servidor: el HTML se genera en cada petición con
+    los datos del momento."
+  see: []
+- term: SSG
+  aliases:
+    - static site generation
+    - generación estática
+  definition: Generar el HTML de las páginas al construir el sitio y servirlo
+    estático desde CDN.
+  see: []
+- term: ISR
+  aliases:
+    - Incremental Static Regeneration
+  definition: Páginas estáticas que se regeneran periódicamente o bajo demanda
+    para mantenerse frescas.
+  see: []
+- term: Hidratación
+  aliases:
+    - hidratar
+  definition: Ejecutar en el navegador los componentes de un HTML renderizado en
+    servidor para conectarles eventos y estado.
+  see: []
+- term: Streaming SSR
+  aliases:
+    - streaming de HTML
+  definition: Enviar el HTML del servidor por partes a medida que los datos están
+    listos, en lugar de esperar a todos.
+  see: []
+- term: Islas
+  aliases:
+    - arquitectura de islas
+  definition: Página mayormente estática en la que solo se hidratan los
+    componentes interactivos.
+  see: []
+- term: Server Components
+  aliases:
+    - React Server Components
+    - RSC
+  definition: Componentes que se ejecutan solo en el servidor y no envían su
+    JavaScript al cliente.
+  see: []
+- term: TTFB
+  aliases:
+    - Time To First Byte
+  definition: Tiempo hasta que llega el primer byte de la respuesta del servidor.
+  see: []
+- term: CDN
+  aliases:
+    - red de distribución de contenidos
+  definition: Red de servidores repartidos geográficamente que sirve contenido
+    desde el punto más cercano al usuario.
+  see: []
+- term: Monolito modular
+  aliases: []
+  definition: Una sola aplicación desplegable organizada en módulos con límites y
+    APIs internas claras.
+  see: []
+- term: Microfrontends
+  aliases:
+    - microfrontend
+  definition: Dividir una aplicación frontend en partes desplegables por separado
+    por equipos distintos.
+  see: []
+- term: Design system
+  aliases:
+    - design systems
+    - sistema de diseño
+  definition: Conjunto de tokens, componentes, patrones y documentación que hace
+    consistente la interfaz de un producto.
+  see: []
+- term: Tokens de diseño
+  aliases:
+    - token de diseño
+    - design tokens
+  definition: Decisiones de diseño con nombre (color, espaciado, tipografía)
+    usadas como fuente común por diseño y código.
+  see: []
+- term: Versionado semántico
+  aliases:
+    - semver
+  definition: "Esquema MAYOR.MENOR.PARCHE: cambios incompatibles suben MAYOR,
+    nuevas funciones MENOR y correcciones PARCHE."
+  see: []
+- term: Codemod
+  aliases:
+    - codemods
+  definition: Script que modifica código automáticamente para migrar a una nueva API.
+  see: []
+- term: Presupuesto de rendimiento
+  aliases:
+    - presupuestos de rendimiento
+    - performance budget
+  definition: Límites medibles (KB de JS, LCP, INP) que un cambio no debe superar,
+    comprobados en CI y producción.
+  see: []
+- term: RUM
+  aliases:
+    - Real User Monitoring
+  definition: Medición del rendimiento y los errores en los navegadores de usuarios reales.
+  see: []
+- term: stale-while-revalidate
+  aliases: []
+  definition: "Estrategia de caché: servir la versión guardada mientras se pide
+    una nueva en segundo plano."
+  see: []
+- term: Error boundary
+  aliases:
+    - error boundaries
+  definition: Componente que captura errores de sus hijos al renderizar y muestra
+    una alternativa en lugar de romper toda la página.
+  see: []
+- term: Breadcrumbs
+  aliases: []
+  definition: Registro de las acciones previas del usuario que acompaña a un
+    informe de error.
+  see: []
+- term: Feature flag
+  aliases:
+    - feature flags
+    - flag
+  definition: Interruptor que activa o desactiva una funcionalidad en producción
+    sin desplegar código.
+  see: []
+- term: Despliegue gradual
+  aliases:
+    - canary
+    - rollout gradual
+  definition: Activar un cambio para un porcentaje creciente de usuarios vigilando
+    métricas para revertir a tiempo.
+  see: []
+- term: ADR
+  aliases:
+    - Architecture Decision Record
+    - ADRs
+  definition: "Documento corto que registra una decisión de arquitectura:
+    contexto, opciones, decisión y consecuencias."
+  see: []
+- term: Deuda técnica
+  aliases: []
+  definition: Costo futuro de atajos o diseños que ya no encajan; se paga en
+    lentitud y bugs hasta que se corrige.
+  see: []
+- term: Spike
+  aliases: []
+  definition: Investigación o prototipo acotado en el tiempo para reducir una
+    incógnita antes de estimar o decidir.
+  see: []
+- term: Virtualización
+  aliases:
+    - lista virtualizada
+    - virtualizar
+  definition: Renderizar solo los elementos visibles de una lista larga para
+    ahorrar DOM y trabajo.
+  see: []
+- term: Paginación por cursor
+  aliases:
+    - cursor
+  definition: Paginar con un marcador del último elemento visto en lugar de un
+    número de página; estable ante inserciones.
+  see: []
+- term: SSE
+  aliases:
+    - Server-Sent Events
+  definition: Canal HTTP en el que el servidor envía eventos al cliente de forma
+    continua (una sola dirección).
+  see: []
+- term: WebSocket
+  aliases:
+    - WebSockets
+  definition: Conexión persistente y bidireccional entre navegador y servidor para
+    tiempo real.
+  see: []
+- term: Normalizar
+  aliases:
+    - normalizados
+    - datos normalizados
+  definition: Guardar entidades una sola vez por id y referenciarlas, en lugar de
+    duplicarlas anidadas.
+  see: []

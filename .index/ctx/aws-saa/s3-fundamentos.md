@@ -71,3 +71,6 @@ Requiere versionado en origen y destino.
 - (que-pasa-si) ¿Qué pasa si Block Public Access está activado y añades una bucket policy que hace público el bucket?
 - (comparar) Compara bucket policies y ACL para dar acceso a S3.
 - (por-que) ¿Por qué después de escribir un objeto en S3 puedes leerlo al instante con su contenido nuevo?
+
+## Herramientas del curso en este subtema
+- decision: ¿Qué almacenamiento de AWS? — Asistente para elegir entre S3, EBS, EFS y FSx según el tipo de acceso y quién lo comparte.

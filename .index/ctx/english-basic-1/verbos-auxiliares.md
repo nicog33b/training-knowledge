@@ -50,3 +50,6 @@ Ese primer auxiliar es también el que se mueve en preguntas y recibe *not* en n
 
 ## Simulaciones del subtema
 - clasificar: ¿do, be o have?
+
+## Herramientas del curso en este subtema
+- plantilla: Constructor de frases (afirmativa, negativa y pregunta) — Escribe las piezas de una frase y verás las tres formas con el auxiliar en su sitio: la regla única del primer auxiliar.

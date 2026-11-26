@@ -1,0 +1,60 @@
+id: elegir-almacenamiento
+title: ¿Qué almacenamiento de AWS?
+summary: Asistente para elegir entre S3, EBS, EFS y FSx según el tipo de acceso
+  y quién lo comparte.
+builder: decision
+topics:
+  - ebs
+  - efs-y-fsx
+  - s3-fundamentos
+start: tipo
+nodes:
+  - id: tipo
+    question: ¿Cómo accede la aplicación a los datos?
+    options:
+      - label: Por HTTP/API como objetos (archivos completos con clave)
+        result: s3
+      - label: Como un disco de bloques montado en una instancia
+        result: ebs
+      - label: Como sistema de archivos compartido por varias instancias
+        next: so
+  - id: so
+    question: ¿Qué sistema operativo o protocolo necesitas?
+    options:
+      - label: Linux (NFS)
+        result: efs
+      - label: Windows (SMB, Active Directory)
+        result: fsx-windows
+      - label: Alto rendimiento para HPC/ML
+        result: fsx-lustre
+results:
+  - id: s3
+    title: Amazon S3
+    why: Almacenamiento de objetos prácticamente ilimitado, duradero y barato, con
+      clases por frecuencia de acceso.
+    see:
+      - s3-fundamentos
+      - s3-clases-y-avanzado
+  - id: ebs
+    title: Amazon EBS
+    why: Volumen de bloques para una instancia (en una AZ); baja latencia para bases
+      de datos y sistemas de archivos de una sola máquina.
+    watch: Multi-Attach solo en io1/io2 y casos concretos.
+    see:
+      - ebs
+  - id: efs
+    title: Amazon EFS
+    why: NFS gestionado y elástico, compartido entre muchas instancias Linux y
+      varias AZ.
+    see:
+      - efs-y-fsx
+  - id: fsx-windows
+    title: FSx for Windows File Server
+    why: SMB nativo con integración con Active Directory para cargas Windows.
+    see:
+      - efs-y-fsx
+  - id: fsx-lustre
+    title: FSx for Lustre
+    why: Sistema de archivos de alto rendimiento para HPC y ML, integrable con S3.
+    see:
+      - efs-y-fsx

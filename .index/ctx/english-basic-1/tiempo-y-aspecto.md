@@ -57,3 +57,6 @@ Ejemplo: pasado + perfect continuous = *had* (pasado de have) + *been* + *workin
 
 ## Simulaciones del subtema
 - predecir-observar: ¿Cuántas palabras tiene el verbo?
+
+## Herramientas del curso en este subtema
+- decision: ¿Qué tiempo verbal uso? — Asistente que te lleva, con preguntas sobre lo que quieres decir, al tiempo verbal inglés correcto y su fórmula.

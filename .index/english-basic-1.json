@@ -37,7 +37,9 @@
       "sims": [
         "clasificar:orden-correcto"
       ],
-      "tools": []
+      "tools": [
+        "plantilla:constructor-de-frases"
+      ]
     },
     {
       "id": "verbos-auxiliares",
@@ -70,7 +72,9 @@
       "sims": [
         "clasificar:que-auxiliar"
       ],
-      "tools": []
+      "tools": [
+        "plantilla:constructor-de-frases"
+      ]
     },
     {
       "id": "preguntas-y-negaciones",
@@ -104,7 +108,9 @@
       "sims": [
         "clasificar:como-se-pregunta"
       ],
-      "tools": []
+      "tools": [
+        "plantilla:constructor-de-frases"
+      ]
     },
     {
       "id": "formas-del-verbo",
@@ -178,7 +184,9 @@
       "sims": [
         "predecir-observar:cuantas-palabras"
       ],
-      "tools": []
+      "tools": [
+        "decision:que-tiempo-uso"
+      ]
     },
     {
       "id": "espanol-vs-ingles",
@@ -219,7 +227,9 @@
       "sims": [
         "clasificar:traduce-la-idea"
       ],
-      "tools": []
+      "tools": [
+        "decision:que-tiempo-uso"
+      ]
     },
     {
       "id": "present-simple",
@@ -576,7 +586,9 @@
       "sims": [
         "clasificar:marcador-tiempo"
       ],
-      "tools": []
+      "tools": [
+        "decision:que-tiempo-uso"
+      ]
     },
     {
       "id": "modales",
@@ -826,5 +838,8 @@
     "verbo-regular",
     "voz-pasiva"
   ],
-  "tools": []
+  "tools": [
+    "plantilla:constructor-de-frases",
+    "decision:que-tiempo-uso"
+  ]
 }

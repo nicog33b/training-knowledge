@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué organizar por dominio y no por tipo técnico?
+    kind: por-que
+    a: 'Porque los cambios suelen ser **por funcionalidad**: tocar "checkout" afecta a sus componentes, estado y API a la vez. Si están juntos, el cambio es local y el equipo dueño es claro. Organizado por tipo (`components/`, `hooks/`), cada cambio salta por todo el árbol.'
+    uses: []
+  - q: ¿Qué pasa si cualquier módulo puede importar los internos de otro?
+    kind: que-pasa-si
+    a: "Se forma una **telaraña de dependencias**: cambiar un interno rompe módulos lejanos, nadie se atreve a borrar código y no se puede extraer ni dividir nada. Expón una API pública por módulo y **haz cumplir** los límites con reglas del linter o del monorepo."
+    uses: []
+  - q: Compara un monolito modular con microfrontends.
+    kind: comparar
+    a: "**Monolito modular**: un despliegue, módulos con límites claros; simple de operar y consistente. **Microfrontends**: despliegues independientes por equipo; resuelven la **coordinación** de muchos equipos, a costa de rendimiento, consistencia y complejidad. Con pocos equipos, monolito modular."
+    uses: []
+  - q: ¿Cómo detectas antes del despliegue que la API cambió un campo?
+    kind: aplicar
+    a: Generando los **tipos del frontend desde el esquema** de la API (OpenAPI, GraphQL) o compartiendo esquemas (zod) en el monorepo, y ejecutando el typecheck en CI. Un campo renombrado rompe la compilación, no la producción.
+    uses: []
+  - q: ¿Por qué un monorepo necesita CI que construya «solo lo afectado»?
+    kind: por-que
+    a: Porque con decenas de paquetes, construir y probar todo en cada PR se vuelve lento y caro. Las herramientas de monorepo calculan el **grafo de dependencias** y ejecutan solo los paquetes afectados por el cambio, manteniendo el feedback rápido.
+    uses: []
+  - q: "Error común: adoptar microfrontends con un solo equipo para «estar preparados»."
+    kind: error-comun
+    a: "Pagas todos los costos (bundles duplicados, consistencia, orquestación, rendimiento) sin el beneficio, que es **organizativo**. Empieza con un monolito modular con límites claros: si algún día hay muchos equipos, extraer un módulo bien delimitado es viable."
+    uses: []
+sims: []

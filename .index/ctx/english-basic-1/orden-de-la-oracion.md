@@ -46,3 +46,6 @@ Todas las preguntas, negaciones y tiempos son **cambios sobre este orden**: una 
 
 ## Simulaciones del subtema
 - clasificar: ¿Orden correcto?
+
+## Herramientas del curso en este subtema
+- plantilla: Constructor de frases (afirmativa, negativa y pregunta) — Escribe las piezas de una frase y verás las tres formas con el auxiliar en su sitio: la regla única del primer auxiliar.

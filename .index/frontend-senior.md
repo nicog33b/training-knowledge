@@ -5,9 +5,20 @@ Archivos: modules/frontend-senior/{module.yaml,glossary.yaml,topics/*.md,lab/*.y
 Contexto para IA por subtema: .index/ctx/frontend-senior/<subtema>.md (+ _catalogo.md)
 
 ## Subtemas
+- estrategias-de-renderizado (arquitectura): Estrategias de renderizado — CSR, SSR, SSG, ISR, streaming, hidratación, islas y Server Components: qué gana y qué cuesta cada una, y cómo elegir por página. [términos: cdn,csr,hidratacion,inp,islas,isr,lcp,re-render,revalidacion,seo,server-components,ssg,ssr,streaming-ssr,ttfb] [lab: 6 preguntas, sims clasificar:estrategia-por-pagina] [tools: comparador:comparar-renderizado,decision:elegir-renderizado]
+- arquitectura-frontend (arquitectura): Arquitectura frontend a escala — Organizar por dominio, límites entre módulos, monorepos, contratos y cuándo (casi nunca) compensan los microfrontends. [términos: api,ci,conflicto,design-system,http,microfrontends,monolito-modular,zod] [lab: 6 preguntas]
+- design-systems (arquitectura): Design systems — Tokens, componentes accesibles, documentación, versionado y gobierno: el producto interno que hace consistente y rápido a todo el equipo. [términos: api,aria,codemod,design-system,foco,props,tokens-de-diseno,versionado-semantico] [lab: 6 preguntas]
+- rendimiento-a-escala (produccion): Rendimiento a escala — Presupuestos de rendimiento, RUM, perfilado del hilo principal, caché y CDN, y una cultura que evita que la web se degrade con cada release. [términos: cdn,ci,cls,code-splitting,hilo-principal,inp,islas,lcp,lighthouse,percentil-75,pr,presupuesto-de-rendimiento,react,rum,server-components,tarea-larga] [lab: 6 preguntas] [tools: checklist:lanzamiento-seguro]
+- observabilidad-frontend (produccion): Observabilidad en el frontend — Errores con contexto y source maps, RUM, logs de eventos, feature flags y lanzamientos graduales para detectar y revertir problemas rápido. [términos: api,breadcrumbs,core-web-vitals,despliegue-gradual,error-boundary,feature-flag,promesa,rum,source-map] [lab: 6 preguntas] [tools: checklist:lanzamiento-seguro]
+- decisiones-y-adr (liderazgo): Decisiones técnicas y ADR — Cómo decidir con compromisos explícitos, documentar en Architecture Decision Records y revisar decisiones cuando cambia el contexto. [términos: adr,pr,repositorio] [lab: 6 preguntas] [tools: plantilla:adr]
+- liderazgo-tecnico (liderazgo): Liderazgo técnico sin cargo — Revisiones de código que enseñan, mentoría, estimación con incertidumbre, deuda técnica negociada y hacer crecer al equipo. [términos: api,deuda-tecnica,pr,promesa,spike] [lab: 6 preguntas]
+- system-design-frontend (liderazgo): System design de frontend — Cómo abordar el diseño de un sistema frontend (feed, autocompletar, editor): requisitos, modelo de datos, API, estado, rendimiento, accesibilidad y fallos. [términos: apg,api,code-splitting,conflicto,csr,datos-del-servidor,debounce,foco,lector-de-pantalla,paginacion-por-cursor,sse,ssr,virtualizacion,websocket,xss] [lab: 6 preguntas] [tools: decision:elegir-renderizado]
 
-## Glosario propio (0)
-(vacío)
+## Herramientas del curso (4)
+plantilla:adr, comparador:comparar-renderizado, decision:elegir-renderizado, checklist:lanzamiento-seguro
+
+## Glosario propio (31)
+adr, breadcrumbs, cdn, codemod, csr, design-system, despliegue-gradual, deuda-tecnica, error-boundary, feature-flag, hidratacion, islas, isr, microfrontends, monolito-modular, normalizar, paginacion-por-cursor, presupuesto-de-rendimiento, rum, server-components, spike, sse, ssg, ssr, stale-while-revalidate, streaming-ssr, tokens-de-diseno, ttfb, versionado-semantico, virtualizacion, websocket
 
 ## Decisiones de diseño aplicables (resumen en .index/research.md; razonamiento en research/decisions/<id>.md)
 - accesibilidad-con-evidencia [proposed·medium]: Menú de accesibilidad: solo opciones con evidencia o derecho de acceso

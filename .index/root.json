@@ -15,7 +15,7 @@
       "done": 42,
       "planned": 42,
       "terms": 344,
-      "tools": 0
+      "tools": 2
     },
     {
       "id": "english-basic-1",
@@ -26,7 +26,7 @@
       "done": 21,
       "planned": 21,
       "terms": 50,
-      "tools": 0
+      "tools": 2
     },
     {
       "id": "frontend-junior",
@@ -55,11 +55,11 @@
       "title": "Frontend Developer · Senior",
       "summary": "Criterio de senior: estrategias de renderizado, arquitectura frontend y design systems, observabilidad, rendimiento a escala, decisiones técnicas documentadas y liderazgo técnico.",
       "kind": "framework",
-      "topics": 0,
-      "done": 0,
-      "planned": 0,
-      "terms": 0,
-      "tools": 0
+      "topics": 8,
+      "done": 8,
+      "planned": 8,
+      "terms": 31,
+      "tools": 4
     },
     {
       "id": "ia-en-aplicaciones",

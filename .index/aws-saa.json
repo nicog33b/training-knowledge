@@ -265,7 +265,9 @@
       ],
       "questions": 7,
       "sims": [],
-      "tools": []
+      "tools": [
+        "decision:elegir-almacenamiento"
+      ]
     },
     {
       "id": "efs-y-fsx",
@@ -307,7 +309,9 @@
       "sims": [
         "clasificar:almacenamiento-de-archivos"
       ],
-      "tools": []
+      "tools": [
+        "decision:elegir-almacenamiento"
+      ]
     },
     {
       "id": "elb",
@@ -677,7 +681,9 @@
       ],
       "questions": 6,
       "sims": [],
-      "tools": []
+      "tools": [
+        "decision:elegir-almacenamiento"
+      ]
     },
     {
       "id": "s3-clases-y-avanzado",
@@ -899,7 +905,9 @@
       "sims": [
         "predecir-observar:visibilidad-y-dlq"
       ],
-      "tools": []
+      "tools": [
+        "comparador:mensajeria"
+      ]
     },
     {
       "id": "sns-fanout",
@@ -942,7 +950,9 @@
       ],
       "questions": 6,
       "sims": [],
-      "tools": []
+      "tools": [
+        "comparador:mensajeria"
+      ]
     },
     {
       "id": "kinesis-mq",
@@ -996,7 +1006,9 @@
         "predecir-observar:shards-y-throttling",
         "clasificar:sqs-sns-kinesis"
       ],
-      "tools": []
+      "tools": [
+        "comparador:mensajeria"
+      ]
     },
     {
       "id": "ecs-eks",
@@ -1520,7 +1532,9 @@
       ],
       "questions": 6,
       "sims": [],
-      "tools": []
+      "tools": [
+        "comparador:mensajeria"
+      ]
     },
     {
       "id": "kms-cifrado",
@@ -2632,5 +2646,8 @@
     "x-ray",
     "zona-de-disponibilidad"
   ],
-  "tools": []
+  "tools": [
+    "decision:elegir-almacenamiento",
+    "comparador:mensajeria"
+  ]
 }

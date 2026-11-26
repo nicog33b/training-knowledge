@@ -22,15 +22,13 @@
   font-weight: 400;
   line-height: 1.4;
   box-shadow: 0 4px 16px rgb(0 0 0 / 0.3);
-  opacity: 0;
-  visibility: hidden;
+  /* Oculto con display:none (no solo visibility): así no ensancha la página en móvil. */
+  display: none;
   pointer-events: none;
-  transition: opacity 0.12s;
 }
 .tk-term:hover::after,
 .tk-term:focus::after {
-  opacity: 1;
-  visibility: visible;
+  display: block;
 }
 
 /* Glosario discreto (ajuste de accesibilidad "Atención"): sin subrayado, la definición sigue al pasar o enfocar. */

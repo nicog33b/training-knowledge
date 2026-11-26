@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué separar tokens primitivos y semánticos?
+    kind: por-que
+    a: Porque los componentes deben usar **intenciones** (`color-accion`, `color-texto-suave`), no valores concretos (`azul-600`). Para cambiar de tema oscuro, de marca o aumentar el contraste, solo cambias el **mapa** semántico → primitivo, sin tocar componentes.
+    uses: []
+  - q: ¿Qué pasa si un componente acumula 40 props para cubrir cada caso?
+    kind: que-pasa-si
+    a: 'Se vuelve imposible de entender, probar y mantener ("prop soup"), y las combinaciones generan estados raros. Mejor **composición**: piezas pequeñas que se combinan (`Card`, `Card.Header`, `Card.Actions`) y unos pocos props bien pensados.'
+    uses: []
+  - q: Compara un design system con una librería de componentes.
+    kind: comparar
+    a: "La **librería** son solo componentes de código. El **design system** incluye además tokens, patrones de uso, guías de accesibilidad y contenido, documentación de cuándo usar cada cosa y un proceso de **gobierno** y versionado. Es un producto interno con usuarios: los equipos."
+    uses: []
+  - q: Vas a cambiar la API del componente Botón. ¿Cómo lo haces sin romper a todos?
+    kind: aplicar
+    a: Versión **mayor** con semver, la API antigua marcada como **deprecated** con aviso, un **codemod** que migra automáticamente los usos, guía de migración, un periodo de convivencia y medir la adopción por equipo antes de eliminar lo viejo.
+    uses: []
+  - q: ¿Por qué los componentes del sistema deben ser accesibles por defecto?
+    kind: por-que
+    a: "Porque se usan en **cientos de pantallas**: un diálogo sin gestión de foco replica el problema en todas; uno accesible lo arregla en todas. El design system es la palanca más eficiente para la accesibilidad de un producto."
+    uses: []
+  - q: "Error común: un design system que solo mantiene un equipo central sin contribuciones."
+    kind: error-comun
+    a: "Se convierte en **cuello de botella**: los equipos esperan meses y acaban creando componentes propios, fragmentando la interfaz. Un núcleo pequeño + contribuciones revisadas de los equipos de producto mantiene el sistema vivo y adoptado."
+    uses: []
+sims: []

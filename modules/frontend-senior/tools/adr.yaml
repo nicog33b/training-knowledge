@@ -1,0 +1,58 @@
+id: adr
+title: Plantilla de ADR
+summary: "Escribe un Architecture Decision Record de una página: contexto,
+  opciones, decisión y consecuencias, listo para guardar en el repositorio."
+builder: plantilla
+topics:
+  - decisiones-y-adr
+fields:
+  - id: numero
+    label: Número
+    placeholder: "0007"
+  - id: titulo
+    label: Título (la decisión en una frase)
+    placeholder: Usar SSR con streaming en la ficha de producto
+  - id: estado
+    label: Estado
+    kind: select
+    options:
+      - Propuesto
+      - Aceptado
+      - Reemplazado
+    default: Propuesto
+  - id: contexto
+    label: Contexto y problema
+    kind: textarea
+    placeholder: El LCP en móvil es 4,1 s (p75); el stock debe estar fresco…
+  - id: opciones
+    label: Opciones consideradas
+    kind: textarea
+    placeholder: 1. SSG + stock en cliente  2. SSR con streaming  3. No hacer nada
+  - id: decision
+    label: Decisión
+    kind: textarea
+  - id: consecuencias
+    label: Consecuencias (lo que ganamos y lo que aceptamos)
+    kind: textarea
+  - id: revision
+    label: Cuándo revisarla
+    placeholder: Si el costo de servidor supera X o en 6 meses
+template: |-
+  # ADR {{numero}}: {{titulo}}
+
+  Estado: {{estado}}
+
+  ## Contexto
+  {{contexto}}
+
+  ## Opciones consideradas
+  {{opciones}}
+
+  ## Decisión
+  {{decision}}
+
+  ## Consecuencias
+  {{consecuencias}}
+
+  ## Revisión
+  {{revision}}

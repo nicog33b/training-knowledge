@@ -57,3 +57,6 @@ EventBridge ofrece enrutamiento por reglas de contenido, esquemas, SaaS partners
 - (comparar) Compara SNS y EventBridge para enrutar eventos por contenido.
 - (aplicar) Necesitas fan-out a varias colas manteniendo el orden de los mensajes: ¿cómo?
 - (error-comun) Error común: ¿por qué un topic SNS no consigue entregar en una cola SQS recién suscrita?
+
+## Herramientas del curso en este subtema
+- comparador: Comparador de mensajería y eventos — SQS, SNS, Kinesis Data Streams y EventBridge lado a lado: el clásico de preguntas de examen con servicios confundibles.

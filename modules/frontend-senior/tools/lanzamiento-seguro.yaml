@@ -1,0 +1,34 @@
+id: lanzamiento-seguro
+title: Checklist de lanzamiento seguro en frontend
+summary: Antes de abrir una funcionalidad importante a todos los usuarios.
+builder: checklist
+topics:
+  - observabilidad-frontend
+  - rendimiento-a-escala
+groups:
+  - title: Detectar
+    items:
+      - text: Errores capturados con source maps, versión y flags en el contexto.
+        why: Depurar en producción.
+      - text: RUM de LCP/INP/CLS segmentado por la nueva funcionalidad.
+        why: Regresiones de rendimiento.
+      - text: Eventos del embudo clave instrumentados.
+        why: Fallos que no lanzan errores.
+  - title: Limitar el impacto
+    items:
+      - text: Funcionalidad detrás de un feature flag.
+        why: Apagar sin desplegar.
+      - text: Plan de despliegue gradual (1 % → 10 % → 100 %).
+        why: Exposición controlada.
+      - text: Criterios de rollback definidos antes de empezar.
+        why: Decidir con datos, no con prisa.
+      - text: API compatible con clientes que tienen el JS anterior.
+        why: Pestañas abiertas.
+  - title: Calidad
+    items:
+      - text: Presupuesto de rendimiento respetado en CI.
+        why: Evitar degradación.
+      - text: Revisión de accesibilidad con teclado y lector de pantalla.
+        why: WCAG 2.2.
+      - text: Sin datos personales en logs ni grabaciones.
+        why: Privacidad.

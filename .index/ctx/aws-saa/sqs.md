@@ -64,3 +64,6 @@ Una **ASG** escala según la métrica `ApproximateNumberOfMessages` (CloudWatch 
 
 ## Simulaciones del subtema
 - predecir-observar: Visibility timeout y DLQ
+
+## Herramientas del curso en este subtema
+- comparador: Comparador de mensajería y eventos — SQS, SNS, Kinesis Data Streams y EventBridge lado a lado: el clásico de preguntas de examen con servicios confundibles.

@@ -1,0 +1,56 @@
+id: mensajeria
+title: Comparador de mensajería y eventos
+summary: "SQS, SNS, Kinesis Data Streams y EventBridge lado a lado: el clásico
+  de preguntas de examen con servicios confundibles."
+builder: comparador
+topics:
+  - sqs
+  - sns-fanout
+  - kinesis-mq
+  - eventbridge-cloudtrail-config
+options:
+  - id: sqs
+    label: SQS
+  - id: sns
+    label: SNS
+  - id: kinesis
+    label: Kinesis Data Streams
+  - id: eventbridge
+    label: EventBridge
+rows:
+  - criterion: Modelo
+    values:
+      - "Cola (pull): un consumidor procesa cada mensaje"
+      - Pub/sub (push) a muchos suscriptores
+      - Stream ordenado por shard, varios consumidores releen
+      - Bus de eventos con reglas de enrutado
+  - criterion: Retención
+    values:
+      - Hasta 14 días
+      - Sin retención (entrega inmediata)
+      - 24 h por defecto, ampliable hasta 365 días
+      - Archivo y reproducción opcionales
+  - criterion: Orden
+    values:
+      - "FIFO: estricto por grupo; estándar: no"
+      - FIFO con SNS FIFO
+      - Por shard (clave de partición)
+      - No garantizado
+  - criterion: Relectura (replay)
+    values:
+      - No (se borra al procesar)
+      - No
+      - Sí, varios consumidores independientes
+      - Sí, con archivo
+  - criterion: Escala típica
+    values:
+      - Ilimitada (estándar)
+      - Muy alta
+      - Por shards (capacidad aprovisionada o bajo demanda)
+      - Alta, con cuotas por cuenta
+  - criterion: Pista de examen
+    values:
+      - Desacoplar y absorber picos
+      - Fan-out a varios destinos
+      - Tiempo real, analítica, orden y replay
+      - Integrar servicios AWS/SaaS con reglas
