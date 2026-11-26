@@ -1,0 +1,75 @@
+id: capacidad-revision
+title: ¿Cuántos agentes en paralelo puede absorber tu equipo?
+summary: "Compara los PR que generan los agentes con la capacidad de revisión
+  del equipo: el paralelismo útil lo limita la revisión."
+builder: calculadora
+topics:
+  - agentes-en-paralelo
+  - productividad-medida
+inputs:
+  - id: agentes
+    label: Agentes en paralelo
+    type: number
+    min: 1
+    max: 30
+    step: 1
+    default: 4
+  - id: pr_agente
+    label: PR por agente y día
+    type: number
+    min: 0.5
+    max: 10
+    step: 0.5
+    default: 2
+  - id: min_revision
+    label: Minutos de revisión por PR
+    type: number
+    min: 5
+    max: 120
+    step: 5
+    default: 25
+    unit: min
+  - id: revisores
+    label: Personas que revisan
+    type: number
+    min: 1
+    max: 20
+    step: 1
+    default: 2
+  - id: horas_rev
+    label: Horas al día dedicadas a revisar (por persona)
+    type: number
+    min: 0.5
+    max: 6
+    step: 0.5
+    default: 1.5
+    unit: h
+outputs:
+  - id: pr_dia
+    label: PR generados al día
+    expr: agentes * pr_agente
+    decimals: 1
+  - id: capacidad
+    label: PR que el equipo puede revisar al día
+    expr: floor(revisores * horas_rev * 60 / min_revision)
+  - id: cola
+    label: Cola que crece cada día
+    expr: max(pr_dia - capacidad, 0)
+    decimals: 1
+    main: true
+    unit: PR
+  - id: agentes_utiles
+    label: Agentes que el equipo puede absorber
+    expr: floor(capacidad / pr_agente)
+notes:
+  - when: cola > 0
+    text: "La revisión es el cuello de botella: más agentes solo alargan la cola (o
+      empujan a aprobar sin leer)."
+    tone: warn
+  - when: cola == 0
+    text: La revisión absorbe la producción. Mide la calidad (retrabajo, bugs) antes
+      de añadir más agentes.
+    tone: ok
+  - when: min_revision < 10
+    text: "Menos de 10 minutos por PR: ¿se está revisando de verdad o aprobando?"
+    tone: warn

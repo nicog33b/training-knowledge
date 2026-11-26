@@ -77,11 +77,11 @@
       "title": "Ingeniería de software con IA · nivel pro",
       "summary": "Cómo trabajan con IA los equipos de ingeniería que lo documentan (Google, Microsoft, Anthropic; SpaceX solo lo público): contexto, specs, agentes, verificación, métricas y gobierno.",
       "kind": "topic",
-      "topics": 0,
-      "done": 0,
-      "planned": 0,
-      "terms": 0,
-      "tools": 0
+      "topics": 11,
+      "done": 11,
+      "planned": 11,
+      "terms": 21,
+      "tools": 4
     },
     {
       "id": "next-cache",

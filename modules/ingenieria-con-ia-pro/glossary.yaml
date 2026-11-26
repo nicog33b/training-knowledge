@@ -1,1 +1,136 @@
-[]
+- term: Agente de código
+  aliases:
+    - agentes de código
+    - coding agent
+    - coding agents
+  definition: "LLM en un bucle con herramientas sobre un repositorio: lee, busca,
+    edita archivos y ejecuta comandos hasta cumplir una tarea."
+  see: []
+- term: Context engineering
+  aliases:
+    - ingeniería de contexto
+  definition: "Curar el conjunto mínimo de información de alta señal que el modelo
+    necesita en cada momento: qué se carga siempre, qué bajo demanda y qué
+    nunca."
+  see: []
+- term: CLAUDE.md
+  aliases:
+    - AGENTS.md
+    - archivo de instrucciones
+    - archivos de instrucciones
+  definition: Archivo en el repositorio con instrucciones persistentes para
+    agentes (comandos, arquitectura, convenciones) que se carga en cada sesión.
+  see: []
+- term: Spec-driven development
+  aliases:
+    - desarrollo guiado por especificaciones
+    - spec
+    - specs
+  definition: Acordar primero la especificación (qué, por qué, criterios de
+    aceptación) y el plan, y generar código después, tarea a tarea.
+  see: []
+- term: Criterios de aceptación
+  aliases:
+    - criterio de aceptación
+  definition: Condiciones verificables que debe cumplir un cambio para
+    considerarse terminado; idealmente se convierten en tests.
+  see: []
+- term: Oráculo
+  aliases:
+    - oráculo de pruebas
+  definition: Mecanismo que decide si un resultado es correcto (tests, tipado,
+    validaciones); le dice al agente cuándo ha terminado.
+  see: []
+- term: TDD
+  aliases:
+    - Test-Driven Development
+    - desarrollo guiado por pruebas
+  definition: Escribir primero un test que falla, después el código mínimo para
+    que pase, y luego refactorizar.
+  see: []
+- term: Slopsquatting
+  aliases: []
+  definition: Ataque que registra nombres de paquetes que los modelos de IA
+    inventan, para que quien instale la sugerencia descargue código malicioso.
+  see: []
+- term: Worktree
+  aliases:
+    - worktrees
+    - git worktree
+  definition: Copia de trabajo adicional de un repositorio git en otra carpeta y
+    rama, que permite trabajar en paralelo sin interferir.
+  see: []
+- term: Subagente
+  aliases:
+    - subagentes
+  definition: Agente lanzado por otro para una subtarea con su propio contexto;
+    devuelve solo la conclusión.
+  see: []
+- term: Sandbox
+  aliases:
+    - entorno aislado
+    - entornos aislados
+  definition: Entorno restringido (contenedor, máquina aislada, red limitada)
+    donde ejecutar código o agentes para contener daños.
+  see: []
+- term: Monorepo
+  aliases:
+    - monorepos
+  definition: Un único repositorio que contiene muchos proyectos o servicios de
+    una organización.
+  see: []
+- term: DORA
+  aliases:
+    - métricas DORA
+  definition: "Programa de investigación (Google) y sus métricas de entrega:
+    frecuencia de despliegue, tiempo de entrega, tasa de fallos y tiempo de
+    recuperación."
+  see: []
+- term: Throughput
+  aliases: []
+  definition: Cantidad de trabajo entregado por unidad de tiempo (p. ej. cambios
+    desplegados por semana).
+  see: []
+- term: Ensayo controlado aleatorizado
+  aliases:
+    - ECA
+    - RCT
+    - ensayo controlado
+  definition: Experimento que asigna al azar quién recibe el tratamiento (p. ej.
+    usar IA) para medir su efecto causal.
+  see: []
+- term: Migración de código
+  aliases:
+    - migraciones
+    - migración
+  definition: Cambio sistemático de muchos archivos para adoptar otra API,
+    librería o versión.
+  see: []
+- term: Teaching to the test
+  aliases: []
+  definition: Hacer que el código pase los tests concretos (casos especiales) sin
+    implementar el comportamiento general.
+  see: []
+- term: Modos de permiso
+  aliases:
+    - modo de permiso
+  definition: Configuración de qué acciones puede hacer un agente sin preguntar y
+    cuáles requieren aprobación humana.
+  see: []
+- term: Linter
+  aliases:
+    - linters
+  definition: Herramienta que analiza el código sin ejecutarlo para detectar
+    errores y malas prácticas de estilo.
+  see: []
+- term: Análisis estático
+  aliases: []
+  definition: Examinar el código sin ejecutarlo (tipos, flujos, patrones) para
+    encontrar errores o vulnerabilidades.
+  see: []
+- term: Compactar
+  aliases:
+    - compactación
+  definition: Resumir el historial de una sesión de agente para liberar contexto
+    sin perder lo importante.
+  see: []

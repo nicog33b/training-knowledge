@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Qué debería ir en un CLAUDE.md o AGENTS.md y qué no?
+    kind: aplicar
+    a: '**Sí**: comandos exactos de build, test y validación; arquitectura en pocas líneas; convenciones que el código no muestra; protocolos ("empieza por el índice"). **No**: documentación larga, historia del proyecto o detalles que solo importan a veces: eso va en documentos que se leen **cuando hace falta**.'
+    uses: []
+  - q: ¿Por qué cada línea del archivo de instrucciones «se paga»?
+    kind: por-que
+    a: Porque se carga en **cada sesión** y ocupa contexto (y tokens) siempre, se use o no. Instrucciones largas también diluyen las importantes. Por eso deben ser **cortas, concretas y de alta señal**, y lo ocasional debe cargarse bajo demanda.
+    uses: []
+  - q: Compara cargar todo al inicio con recuperación justo a tiempo.
+    kind: comparar
+    a: "**Todo al inicio**: simple, pero caro, lento y con peor precisión cuando crece. **Justo a tiempo**: el agente sabe **qué existe** (índice, mapa) y lee lo que necesita con herramientas cuando lo necesita. Escala mejor y mantiene el contexto enfocado."
+    uses: []
+  - q: El agente pregunta en cada sesión cómo se ejecutan los tests. ¿Qué haces?
+    kind: aplicar
+    a: "Escribirlo **una vez** en el archivo de instrucciones del repo con el comando exacto (y variantes, p. ej. un solo test). Cada pregunta repetida o convención rota es una señal de contexto que falta: conviértela en una línea de instrucciones o en un índice."
+    uses: []
+  - q: ¿Qué pasa si no tienes un índice o mapa del repositorio en un monorepo grande?
+    kind: que-pasa-si
+    a: "El agente **explora a ciegas** en cada sesión: lista directorios, abre archivos irrelevantes y gasta contexto antes de empezar. Un índice generado (módulos, responsabilidades, puntos de entrada) le permite ir directo a lo relevante."
+    uses: []
+  - q: "Error común: escribir el archivo de instrucciones una vez y no tocarlo más."
+    kind: error-comun
+    a: "El repo cambia: comandos, estructura y convenciones quedan **obsoletos**, y un agente que sigue instrucciones viejas rompe cosas con confianza. Trátalo como código: se actualiza en el mismo PR que cambia lo que describe."
+    uses: []
+sims: []
