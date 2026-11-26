@@ -1,0 +1,56 @@
+questions:
+  - q: ¿Por qué INP sustituyó a FID?
+    kind: por-que
+    a: Porque FID solo medía el **retraso de la primera** interacción, no el procesamiento ni el pintado, y casi todas las webs aprobaban. **INP** mide la latencia completa (entrada → manejadores → siguiente pintado) de las interacciones **de toda la visita**. Es Core Web Vital desde el 12-mar-2024.
+    uses: []
+  - q: Indica los umbrales de «bueno» de LCP, INP y CLS.
+    kind: aplicar
+    a: "**LCP ≤ 2,5 s**, **INP ≤ 200 ms** y **CLS ≤ 0,1**, medidos en el **percentil 75** de usuarios reales. Es decir, el 75 % de las visitas debe estar dentro del umbral."
+    uses: []
+  - q: ¿Qué pasa con el CLS si cargas imágenes sin width y height?
+    kind: que-pasa-si
+    a: "El navegador no sabe cuánto espacio reservar: pinta el texto, llega la imagen y **empuja** todo hacia abajo. Ese salto suma al CLS (y hace que el usuario pulse lo que no quería). Pon `width`/`height` o `aspect-ratio`."
+    uses: []
+  - q: Compara datos de laboratorio (Lighthouse) y de campo (RUM/CrUX).
+    kind: comparar
+    a: "**Laboratorio**: un dispositivo y red simulados, reproducible, ideal para **depurar**, pero no mide INP real ni la variedad de tus usuarios. **Campo**: usuarios reales, la verdad de cómo va, pero ruidoso. Usa campo para saber si hay problema y laboratorio para encontrar por qué."
+    uses: []
+  - q: Tu LCP es 4 s y el elemento LCP es la imagen principal. ¿Qué revisas?
+    kind: aplicar
+    a: Que la imagen esté **optimizada** (formato moderno, tamaño adecuado con srcset), que **no** tenga carga diferida, que tenga `fetchpriority="high"` o precarga, que se descubra en el HTML (no inyectada por JS), el tiempo de respuesta del servidor y CSS/JS que bloqueen el renderizado.
+    uses: []
+  - q: "Error común: optimizar solo para la puntuación de Lighthouse."
+    kind: error-comun
+    a: Puedes sacar 100 en un portátil potente y tener usuarios reales con INP malo en móviles. La puntuación es un diagnóstico de laboratorio; lo que cuenta son los datos de **campo** en el percentil 75.
+    uses: []
+sims:
+  - id: que-metrica-empeora
+    title: ¿Qué métrica empeora?
+    type: clasificar
+    prompt: Indica qué Core Web Vital empeora principalmente cada problema.
+    categories:
+      - id: lcp
+        label: LCP (carga)
+      - id: inp
+        label: INP (respuesta)
+      - id: cls
+        label: CLS (estabilidad)
+    items:
+      - text: La imagen principal tiene loading=lazy.
+        category: lcp
+        why: Se retrasa la carga del elemento más grande.
+      - text: Al pulsar un filtro se recalcula una lista de 10.000 filas en el hilo principal.
+        category: inp
+        why: Tarea larga que retrasa el siguiente pintado.
+      - text: Un banner de cookies aparece y empuja el contenido hacia abajo.
+        category: cls
+        why: Desplazamiento inesperado.
+      - text: El servidor tarda 1,8 s en devolver el HTML.
+        category: lcp
+        why: Todo empieza tarde.
+      - text: La fuente web cambia el tamaño del texto al cargarse.
+        category: cls
+        why: Las métricas distintas mueven el diseño.
+      - text: Un manejador de input hace una petición síncrona pesada en cada tecla.
+        category: inp
+        why: Cada interacción bloquea el hilo.

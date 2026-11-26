@@ -1,0 +1,19 @@
+sections:
+  - id: lenguaje-y-modelo
+    title: 1 · TypeScript y el modelo mental de React
+    topics:
+      - {id: typescript-practico, title: "TypeScript práctico", summary: "Tipos que aportan: inferencia, uniones y estrechamiento, genéricos, tipos de utilidad, unknown frente a any y validar en el borde (zod)."}
+      - {id: react-modelo-mental, title: "El modelo mental de React", summary: "UI = f(estado): renderizado, props y estado, inmutabilidad, keys en listas y qué provoca un re-render."}
+      - {id: efectos-y-sincronizacion, title: "Efectos: sincronizar con el exterior", summary: "useEffect sirve para sincronizar con sistemas externos, no para derivar datos; dependencias, limpieza y cuándo no necesitas un efecto."}
+  - id: datos-y-calidad
+    title: 2 · Datos, estado y calidad
+    topics:
+      - {id: estado-y-datos-del-servidor, title: "Estado de la UI y datos del servidor", summary: "Distinguir estado local, compartido y datos del servidor; caché, revalidación, estados de carga y por qué no meterlo todo en un store global."}
+      - {id: testing-frontend, title: "Testing en frontend", summary: "Probar comportamiento como lo usa una persona (Testing Library), qué cubrir con unitarios, integración y extremo a extremo, y tests que no se rompen al refactorizar."}
+      - {id: build-y-bundling, title: "Build, bundling y módulos", summary: "Qué hace el bundler (Vite, esbuild, Rollup): módulos ES, tree shaking, code splitting, carga diferida y medir el peso del bundle."}
+  - id: rendimiento-y-seguridad
+    title: 3 · Rendimiento, seguridad y accesibilidad avanzada
+    topics:
+      - {id: core-web-vitals, title: "Core Web Vitals: LCP, INP y CLS", summary: "Las tres métricas de experiencia (umbrales en el percentil 75), qué las causa y cómo mejorarlas; INP sustituyó a FID en 2024."}
+      - {id: seguridad-web, title: "Seguridad web para frontend", summary: "XSS y cómo lo evitan los frameworks, CSP, CSRF y cookies SameSite, CORS, dónde guardar tokens y dependencias vulnerables."}
+      - {id: accesibilidad-avanzada, title: "Accesibilidad avanzada: ARIA y foco", summary: "Patrones accesibles (diálogo, menú, pestañas), gestión del foco en SPA, regiones live y probar con lectores de pantalla."}

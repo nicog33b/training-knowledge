@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué textContent es más seguro que innerHTML con datos del usuario?
+    kind: por-que
+    a: "Porque `textContent` trata el valor como **texto**: `<script>` se muestra literalmente. `innerHTML` lo interpreta como **HTML**: un comentario con `<img onerror=…>` ejecutaría código en el navegador de otros usuarios (**XSS**)."
+    uses: []
+  - q: Explica la delegación de eventos y cuándo usarla.
+    kind: aplicar
+    a: "Un solo listener en el **contenedor** (p. ej. la lista) y, con `event.target.closest('li')`, averiguas qué hijo se pulsó. Útil con muchos elementos o elementos que se añaden después: menos listeners, menos memoria y no hay que reasignar al cambiar la lista."
+    uses: []
+  - q: ¿Qué pasa si un clic dispara un cálculo de 400 ms en el hilo principal?
+    kind: que-pasa-si
+    a: "La página se **congela** durante ese tiempo: no pinta ni responde a otros clics, y la métrica **INP** empeora. Divide el trabajo en trozos cediendo el control, muestra feedback inmediato o mueve el cálculo a un **Web Worker**."
+    uses: []
+  - q: Compara escuchar el click del botón y el submit del formulario.
+    kind: comparar
+    a: Escuchar **submit** en el `form` captura también el envío con **Enter** y respeta la validación nativa. Escuchar el click del botón deja fuera esos casos. Para formularios, `submit` + `event.preventDefault()` si lo gestionas con JavaScript.
+    uses: []
+  - q: ¿Por qué agrupar muchos cambios en el DOM?
+    kind: por-que
+    a: Porque cada cambio puede forzar al navegador a **recalcular estilos y diseño**; alternar lecturas (medir) y escrituras en bucle provoca recálculos repetidos. Construir en un `DocumentFragment` o preparar todo y escribir de una vez es mucho más rápido.
+    uses: []
+  - q: "Error común: crear un menú desplegable con divs que solo funciona con ratón."
+    kind: error-comun
+    a: Deja fuera a quien usa teclado o lector de pantalla. Parte de elementos nativos (`button` con `aria-expanded`, `details/summary`, `dialog`) y asegúrate de que se abre y cierra con teclado, que el foco se gestiona y que Escape lo cierra.
+    uses: []
+sims: []

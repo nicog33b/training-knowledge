@@ -33,22 +33,22 @@
       "title": "Frontend Developer · Junior",
       "summary": "Lo que un frontend junior debe dominar para trabajar en un equipo: HTML semántico, CSS de maquetación, JavaScript del navegador, asincronía, HTTP, Git y accesibilidad básica.",
       "kind": "framework",
-      "topics": 0,
-      "done": 0,
-      "planned": 0,
-      "terms": 0,
-      "tools": 0
+      "topics": 10,
+      "done": 10,
+      "planned": 10,
+      "terms": 41,
+      "tools": 3
     },
     {
       "id": "frontend-semi-senior",
       "title": "Frontend Developer · Semi Senior",
       "summary": "El salto a semi senior: TypeScript, el modelo mental de React, estado y datos del servidor, testing, herramientas de build, rendimiento (Core Web Vitals) y seguridad web.",
       "kind": "framework",
-      "topics": 0,
-      "done": 0,
-      "planned": 0,
-      "terms": 0,
-      "tools": 0
+      "topics": 9,
+      "done": 9,
+      "planned": 9,
+      "terms": 45,
+      "tools": 3
     },
     {
       "id": "frontend-senior",

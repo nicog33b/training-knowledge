@@ -1,0 +1,26 @@
+questions:
+  - q: Entre `#menu a` y `.nav a`, ¿cuál gana y por qué?
+    kind: aplicar
+    a: "Gana **`#menu a`**: su especificidad es (1,0,1) frente a (0,1,1). Un id pesa más que cualquier cantidad de clases. Por eso conviene evitar ids en los estilos: obligan a escalar la especificidad para sobrescribirlos."
+    uses: []
+  - q: "¿Por qué casi todos los proyectos aplican box-sizing: border-box a todo?"
+    kind: por-que
+    a: "Porque con el valor por defecto (`content-box`) el **padding y el borde se suman** al width: una caja de `width: 100%` con padding se desborda. Con `border-box`, width incluye padding y borde: los tamaños son predecibles."
+    uses: []
+  - q: ¿Qué pasa si usas !important para ganar una regla?
+    kind: que-pasa-si
+    a: "Ganas hoy y pierdes mañana: la siguiente persona necesitará **otro !important** con más especificidad para cambiarlo, y el CSS entra en una guerra difícil de mantener. Suele indicar selectores demasiado específicos o una arquitectura (capas, orden) mal pensada."
+    uses: []
+  - q: Compara propiedades heredadas y no heredadas.
+    kind: comparar
+    a: "**Heredadas**: color, font-family, font-size, line-height… pasan de padre a hijos, por eso basta con ponerlas en `body`. **No heredadas**: margin, padding, border, background, width. `inherit`, `initial` y `unset` permiten forzar el comportamiento."
+    uses: []
+  - q: ¿Por qué :where() es útil para estilos base?
+    kind: por-que
+    a: "Porque su especificidad es **cero**: `:where(.btn) { … }` se puede sobrescribir con cualquier clase sin pelear. Es ideal para resets y estilos por defecto de componentes que el usuario del componente debe poder personalizar."
+    uses: []
+  - q: "Error común: añadir más reglas sin mirar por qué la tuya no aplica."
+    kind: error-comun
+    a: Las herramientas de desarrollo muestran qué reglas aplican al elemento y cuáles están **tachadas** porque perdieron (especificidad, orden, capa). Mirar eso primero te dice la causa; añadir reglas a ciegas acumula CSS muerto y conflictos.
+    uses: []
+sims: []

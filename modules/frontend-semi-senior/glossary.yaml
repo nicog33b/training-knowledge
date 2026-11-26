@@ -1,1 +1,264 @@
-[]
+- term: TypeScript
+  aliases: []
+  definition: Superconjunto de JavaScript con tipos estáticos que se comprueban al
+    compilar y desaparecen en ejecución.
+  see: []
+- term: Unión discriminada
+  aliases:
+    - uniones discriminadas
+    - uniones
+  definition: "Tipo que es una de varias formas, distinguidas por un campo común
+    (p. ej. tipo: 'ok' | 'error')."
+  see: []
+- term: Estrechamiento
+  aliases:
+    - narrowing
+    - estrecha
+  definition: Cuando TypeScript reduce un tipo amplio a uno concreto tras una
+    comprobación (if, switch, in).
+  see: []
+- term: Genérico
+  aliases:
+    - genéricos
+    - generics
+  definition: Tipo o función con parámetros de tipo (T) que permite reutilizarla
+    sin perder información de tipos.
+  see: []
+- term: unknown
+  aliases: []
+  definition: "Tipo de TypeScript para valores de origen incierto: obliga a
+    comprobarlos antes de usarlos (a diferencia de any)."
+  see: []
+- term: zod
+  aliases:
+    - valibot
+  definition: Librería para declarar esquemas que validan datos en ejecución y de
+    los que se deriva el tipo de TypeScript.
+  see: []
+- term: React
+  aliases: []
+  definition: Librería para construir interfaces como funciones del estado, con
+    componentes y reconciliación del DOM.
+  see: []
+- term: Props
+  aliases:
+    - prop
+  definition: Datos de solo lectura que un componente recibe de su padre.
+  see: []
+- term: Re-render
+  aliases:
+    - re-renders
+    - renderizado
+  definition: Volver a ejecutar un componente para obtener la nueva descripción de
+    la UI tras un cambio.
+  see: []
+- term: Reconciliación
+  aliases: []
+  definition: Proceso por el que React compara la nueva descripción de la UI con
+    la anterior y solo cambia lo necesario en el DOM.
+  see: []
+- term: Key
+  aliases:
+    - keys
+  definition: Identificador estable de cada elemento de una lista para que React
+    conserve su estado entre renders.
+  see: []
+- term: Context
+  aliases:
+    - React context
+  definition: Mecanismo de React para pasar datos a muchos componentes sin
+    pasarlos por props nivel a nivel.
+  see: []
+- term: useEffect
+  aliases:
+    - efecto
+    - efectos
+  definition: Hook de React para sincronizar un componente con un sistema externo,
+    con dependencias y función de limpieza.
+  see: []
+- term: Closure obsoleta
+  aliases:
+    - stale closure
+    - closures obsoletas
+  definition: Función que recuerda un valor antiguo porque se creó en un render
+    anterior (típico al omitir dependencias).
+  see: []
+- term: Datos del servidor
+  aliases:
+    - server state
+    - estado del servidor
+  definition: "Copia en caché de datos que viven en el servidor: necesita
+    revalidación, invalidación y deduplicación."
+  see: []
+- term: Revalidación
+  aliases:
+    - revalidar
+  definition: Volver a pedir datos cacheados para comprobar si cambiaron,
+    mostrando mientras tanto los anteriores.
+  see: []
+- term: Actualización optimista
+  aliases:
+    - optimista
+  definition: Mostrar el resultado de una acción antes de que el servidor
+    confirme, revirtiendo si falla.
+  see: []
+- term: Testing Library
+  aliases: []
+  definition: "Familia de librerías para probar componentes buscando elementos
+    como un usuario: por rol, label o texto."
+  see: []
+- term: Test de extremo a extremo
+  aliases:
+    - e2e
+    - tests e2e
+    - extremo a extremo
+  definition: Prueba que recorre un flujo completo en un navegador real
+    (Playwright, Cypress).
+  see: []
+- term: MSW
+  aliases:
+    - Mock Service Worker
+  definition: Herramienta que intercepta peticiones de red para simular la API en
+    tests y desarrollo.
+  see: []
+- term: Regresión visual
+  aliases: []
+  definition: Test que compara capturas de la interfaz con una referencia para
+    detectar cambios visuales no deseados.
+  see: []
+- term: Bundler
+  aliases:
+    - bundlers
+    - empaquetador
+  definition: Herramienta que transforma, resuelve y empaqueta módulos para el
+    navegador (Vite, Rollup, esbuild, webpack).
+  see: []
+- term: Tree shaking
+  aliases: []
+  definition: Eliminar del bundle los exports que nadie importa, posible gracias a
+    los módulos ES estáticos.
+  see: []
+- term: Code splitting
+  aliases:
+    - chunk de código
+  definition: Dividir el JavaScript en partes que se cargan cuando se necesitan
+    (por ruta o con import dinámico).
+  see: []
+- term: Módulos ES
+  aliases:
+    - ESM
+    - módulos ES nativos
+  definition: Sistema estándar de módulos de JavaScript con import/export estáticos.
+  see: []
+- term: Source map
+  aliases:
+    - source maps
+  definition: Archivo que relaciona el código generado con el original para
+    depurar y leer errores.
+  see: []
+- term: Core Web Vitals
+  aliases: []
+  definition: "Métricas de experiencia de Google: LCP (carga), INP (respuesta) y
+    CLS (estabilidad), medidas en campo al percentil 75."
+  see: []
+- term: LCP
+  aliases:
+    - Largest Contentful Paint
+  definition: Tiempo hasta que se pinta el elemento más grande visible; bueno ≤ 2,5 s.
+  see: []
+- term: INP
+  aliases:
+    - Interaction to Next Paint
+  definition: Latencia de las interacciones hasta el siguiente pintado durante
+    toda la visita; bueno ≤ 200 ms. Sustituyó a FID en 2024.
+  see: []
+- term: CLS
+  aliases:
+    - Cumulative Layout Shift
+  definition: Medida de cuánto se mueve el contenido de forma inesperada; bueno ≤ 0,1.
+  see: []
+- term: FID
+  aliases:
+    - First Input Delay
+  definition: Métrica antigua (retraso de la primera interacción) reemplazada por
+    INP en marzo de 2024.
+  see: []
+- term: Percentil 75
+  aliases:
+    - p75
+  definition: Valor por debajo del cual está el 75 % de las mediciones; umbral
+    usado en Core Web Vitals.
+  see: []
+- term: Tarea larga
+  aliases:
+    - tareas largas
+    - long task
+  definition: Trabajo en el hilo principal de más de 50 ms que impide responder a
+    la interacción.
+  see: []
+- term: Lighthouse
+  aliases: []
+  definition: Herramienta de laboratorio que audita rendimiento, accesibilidad y
+    buenas prácticas de una página.
+  see: []
+- term: CrUX
+  aliases:
+    - Chrome UX Report
+  definition: Conjunto público de datos de campo de usuarios de Chrome sobre Core
+    Web Vitals.
+  see: []
+- term: CSP
+  aliases:
+    - Content Security Policy
+  definition: Cabecera que limita qué scripts, estilos y recursos puede cargar una
+    página; mitiga XSS.
+  see: []
+- term: CSRF
+  aliases:
+    - Cross-Site Request Forgery
+  definition: Ataque en el que otra web hace que el navegador de la víctima envíe
+    peticiones a tu sitio con sus cookies.
+  see: []
+- term: SameSite
+  aliases: []
+  definition: Atributo de cookie que limita su envío en peticiones desde otros
+    sitios (Lax, Strict, None).
+  see: []
+- term: HttpOnly
+  aliases: []
+  definition: Atributo de cookie que impide leerla desde JavaScript.
+  see: []
+- term: SRI
+  aliases:
+    - Subresource Integrity
+  definition: Hash en una etiqueta script o link que garantiza que el archivo de
+    un tercero no fue alterado.
+  see: []
+- term: DOMPurify
+  aliases: []
+  definition: Librería que sanea HTML no confiable eliminando lo que pueda ejecutar código.
+  see: []
+- term: SPA
+  aliases:
+    - Single Page Application
+  definition: Aplicación que cambia de vista en el navegador sin recargar la
+    página completa.
+  see: []
+- term: APG
+  aliases:
+    - ARIA Authoring Practices Guide
+  definition: Guía del W3C con patrones accesibles (diálogo, pestañas, combobox) y
+    su comportamiento de teclado.
+  see: []
+- term: Roving tabindex
+  aliases: []
+  definition: Técnica en la que solo un elemento de un grupo es tabulable y las
+    flechas mueven el foco dentro del grupo.
+  see: []
+- term: Región live
+  aliases:
+    - aria-live
+    - regiones live
+  definition: Zona cuyo cambio de contenido anuncia el lector de pantalla sin
+    mover el foco.
+  see: []

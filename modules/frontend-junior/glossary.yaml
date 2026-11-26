@@ -1,1 +1,207 @@
-[]
+- term: HTML semántico
+  aliases:
+  - semántica
+  definition: Usar cada elemento HTML por su significado (nav, main, button, label…) y no solo por su aspecto.
+  see: []
+- term: Landmark
+  aliases:
+  - landmarks
+  - regiones
+  definition: Región principal de la página (header, nav, main, aside, footer) por la que se puede navegar con lector de pantalla.
+  see: []
+- term: Lector de pantalla
+  aliases:
+  - lectores de pantalla
+  - screen reader
+  definition: 'Software que lee en voz alta (o en braille) la interfaz usando el árbol de accesibilidad: NVDA, JAWS, VoiceOver, TalkBack.'
+  see: []
+- term: Árbol de accesibilidad
+  aliases: []
+  definition: 'Versión del DOM que el navegador expone a tecnologías de apoyo: rol, nombre y estado de cada elemento.'
+  see: []
+- term: ARIA
+  aliases:
+  - WAI-ARIA
+  - atributos ARIA
+  definition: Atributos (role, aria-label, aria-expanded…) que añaden semántica cuando HTML no alcanza; mal usados empeoran la accesibilidad.
+  see: []
+- term: Cascada
+  aliases: []
+  definition: 'Algoritmo de CSS que decide qué declaración gana cuando varias aplican: origen e importancia, capas, especificidad y orden.'
+  see: []
+- term: Especificidad
+  aliases: []
+  definition: Peso de un selector CSS (ids, clases/atributos/pseudoclases, elementos) que decide qué regla gana a igual origen y capa.
+  see: []
+- term: Box model
+  aliases:
+  - modelo de caja
+  definition: Cada elemento es una caja de contenido + padding + border + margin; box-sizing decide qué mide width.
+  see: []
+- term: Flexbox
+  aliases:
+  - flex
+  definition: Modelo de maquetación de CSS para distribuir elementos en una dimensión (fila o columna).
+  see: []
+- term: Grid
+  aliases:
+  - CSS Grid
+  definition: Modelo de maquetación de CSS en dos dimensiones (filas y columnas) con plantillas y la unidad fr.
+  see: []
+- term: Media query
+  aliases:
+  - media queries
+  definition: Regla CSS que aplica estilos según características de la ventana o del dispositivo (ancho, tema, movimiento).
+  see: []
+- term: Container query
+  aliases:
+  - container queries
+  definition: Regla CSS que aplica estilos según el tamaño del contenedor del componente, no de la ventana.
+  see: []
+- term: Mobile first
+  aliases: []
+  definition: Escribir primero los estilos para pantallas pequeñas y añadir con min-width los de pantallas grandes.
+  see: []
+- term: Viewport
+  aliases: []
+  definition: Área visible de la página en el navegador; la meta viewport controla cómo se escala en móviles.
+  see: []
+- term: DOM
+  aliases:
+  - Document Object Model
+  definition: Árbol de objetos que representa la página y que JavaScript puede leer y modificar.
+  see: []
+- term: Closure
+  aliases:
+  - closures
+  - clausura
+  definition: Función que recuerda las variables del ámbito donde se creó aunque ese ámbito haya terminado.
+  see: []
+- term: Ámbito
+  aliases:
+  - scope
+  - ámbito léxico
+  - ámbito de bloque
+  definition: Zona del código donde una variable existe y es accesible.
+  see: []
+- term: Event loop
+  aliases:
+  - bucle de eventos
+  definition: Mecanismo que, cuando la pila queda vacía, ejecuta las microtareas pendientes y luego la siguiente tarea, dejando pintar entre medias.
+  see: []
+- term: Promesa
+  aliases:
+  - promesas
+  - Promise
+  definition: 'Objeto que representa un valor futuro: pendiente, cumplida con un valor o rechazada con un error.'
+  see: []
+- term: Microtarea
+  aliases:
+  - microtareas
+  definition: Callback de alta prioridad (then de promesas, código tras await) que se ejecuta antes de la siguiente tarea.
+  see: []
+- term: async/await
+  aliases:
+  - await
+  - async
+  definition: Sintaxis para escribir código con promesas como si fuera secuencial; await pausa la función, no el hilo.
+  see: []
+- term: Delegación de eventos
+  aliases: []
+  definition: Escuchar un evento en un ancestro y averiguar con event.target qué hijo lo originó.
+  see: []
+- term: Hilo principal
+  aliases:
+  - main thread
+  definition: Hilo del navegador donde corre el JavaScript de la página y que además pinta y responde a la interacción.
+  see: []
+- term: Web Worker
+  aliases:
+  - Web Workers
+  - worker
+  definition: Hilo aparte del navegador para ejecutar JavaScript pesado sin bloquear el hilo principal.
+  see: []
+- term: XSS
+  aliases:
+  - Cross-Site Scripting
+  definition: Ataque que inyecta código en una página (p. ej. vía innerHTML con datos del usuario) para ejecutarlo en el navegador de otros.
+  see: []
+- term: fetch
+  aliases: []
+  definition: API del navegador para hacer peticiones HTTP que devuelve una promesa con la respuesta.
+  see: []
+- term: Código de estado
+  aliases:
+  - códigos de estado
+  - status code
+  definition: 'Número de tres cifras de una respuesta HTTP: 2xx éxito, 3xx redirección, 4xx error del cliente, 5xx error del servidor.'
+  see: []
+- term: CORS
+  aliases:
+  - Cross-Origin Resource Sharing
+  definition: Mecanismo por el que un servidor permite, con cabeceras, que páginas de otro origen lean sus respuestas.
+  see: []
+- term: Mismo origen
+  aliases:
+  - otro origen
+  - política del mismo origen
+  definition: Combinación de esquema, dominio y puerto de una URL; la base de las reglas de seguridad del navegador.
+  see: []
+- term: Debounce
+  aliases: []
+  definition: Esperar a que pare una ráfaga de eventos (p. ej. teclear) antes de ejecutar la acción.
+  see: []
+- term: AbortController
+  aliases: []
+  definition: API para cancelar operaciones asíncronas como peticiones fetch que ya no interesan.
+  see: []
+- term: Git
+  aliases: []
+  definition: Sistema de control de versiones distribuido que guarda la historia de un proyecto como commits.
+  see: []
+- term: Commit
+  aliases:
+  - commits
+  definition: Instantánea de cambios en Git con autor, fecha y mensaje.
+  see: []
+- term: Rama
+  aliases:
+  - ramas
+  - branch
+  definition: Línea de desarrollo independiente en Git que luego se integra en otra.
+  see: []
+- term: Conflicto
+  aliases:
+  - conflictos
+  - conflicto de merge
+  definition: Situación en la que dos ramas cambian las mismas líneas y Git necesita que una persona decida el resultado.
+  see: []
+- term: WCAG
+  aliases:
+  - WCAG 2.2
+  definition: Pautas de Accesibilidad para el Contenido Web del W3C; el nivel AA es el exigido habitualmente.
+  see: []
+- term: Contraste
+  aliases:
+  - relación de contraste
+  definition: Diferencia de luminancia entre texto y fondo; WCAG AA pide 4,5:1 en texto normal y 3:1 en grande.
+  see: []
+- term: Foco
+  aliases:
+  - foco visible
+  - focus
+  definition: Indicador del elemento que recibe la entrada del teclado; debe verse siempre.
+  see: []
+- term: SEO
+  aliases: []
+  definition: 'Optimización para buscadores: que las páginas se entiendan e indexen bien.'
+  see: []
+- term: srcset
+  aliases:
+  - sizes
+  definition: Atributos de img que ofrecen varias resoluciones para que el navegador descargue la adecuada.
+  see: []
+- term: rem
+  aliases: []
+  definition: Unidad CSS relativa al tamaño de letra raíz; respeta el tamaño que elige el usuario.
+  see: []

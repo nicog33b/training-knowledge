@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué no hay que guardar en estado algo que se puede calcular?
+    kind: por-que
+    a: "Porque tendrías **dos fuentes de verdad** que sincronizar: si cambia la lista y olvidas actualizar el total, la UI muestra datos incoherentes. Calcularlo al renderizar (`const total = items.reduce(...)`) siempre está al día. Optimiza con `useMemo` solo si mides que es caro."
+    uses: []
+  - q: ¿Qué pasa si usas el índice del array como key y luego insertas un elemento al principio?
+    kind: que-pasa-si
+    a: "Todos los índices se desplazan: React cree que el elemento 0 sigue siendo el mismo y le **conserva el estado** del antiguo. Inputs con el texto de otra fila, checkboxes marcados en el elemento equivocado. Usa un **id estable** del dato."
+    uses: []
+  - q: ¿Por qué `items.push(x); setItems(items)` puede no re-renderizar?
+    kind: por-que
+    a: "Porque el array es **el mismo objeto** (misma referencia): React compara referencias y concluye que no cambió. Hay que crear uno nuevo: `setItems([...items, x])`. Lo mismo con objetos: `setUser({ ...user, nombre })`."
+    uses: []
+  - q: Compara props y estado.
+    kind: comparar
+    a: "**Props**: datos que vienen del **padre**, de solo lectura para el hijo. **Estado**: datos **propios** del componente que cambian con el tiempo y provocan re-render. Si dos componentes necesitan el mismo estado, se sube al padre común y se pasa por props."
+    uses: []
+  - q: Dos componentes hermanos necesitan el filtro seleccionado. ¿Dónde lo pones?
+    kind: aplicar
+    a: En el **padre común** más cercano, que lo pasa por props a ambos (y el setter al que lo cambia). Si además debe compartirse o recargarse, en la **URL**. Context solo si muchos componentes lejanos lo necesitan.
+    uses: []
+  - q: "Error común: llenar el código de memo y useMemo «por rendimiento»."
+    kind: error-comun
+    a: Re-renderizar es normal y suele ser barato; la memoización añade complejidad, memoria y bugs por dependencias mal puestas. Mide con el **profiler** y memoiza solo lo que demuestre ser caro.
+    uses: []
+sims: []
