@@ -1,0 +1,44 @@
+id: diagnostico-rag
+title: Checklist de diagnóstico de un RAG que responde mal
+summary: "Recorre las etapas en orden: casi siempre el fallo está antes de lo
+  que parece."
+builder: checklist
+topics:
+  - evaluacion-rag
+  - rag-en-produccion
+groups:
+  - title: 1 · Datos
+    items:
+      - text: El documento que tiene la respuesta está indexado y en su versión vigente.
+        why: Ningún modelo encuentra lo que no está.
+      - text: El texto extraído es limpio (sin menús, tablas rotas ni duplicados).
+        why: La ingesta decide la calidad.
+      - text: Los chunks tienen título/sección como contexto.
+        why: Chunks ambiguos no se encuentran.
+  - title: 2 · Recuperación
+    items:
+      - text: Medí recall@k con preguntas reales y fragmentos marcados.
+        why: Separa recuperación de generación.
+      - text: Uso búsqueda híbrida (BM25 + embeddings).
+        why: Códigos y nombres exactos.
+      - text: Recupero muchos candidatos y rerankeo.
+        why: Recall primero, precisión después.
+      - text: La consulta se reescribe con el historial en chats.
+        why: «¿Y para el anual?» no se puede buscar.
+  - title: 3 · Generación
+    items:
+      - text: Lo más relevante va al principio del contexto.
+        why: Lost in the middle.
+      - text: Pido citas por id y las verifico en código.
+        why: Citas inventadas.
+      - text: El prompt permite decir «no lo sé» y la eval lo comprueba.
+        why: Evita inventar.
+  - title: 4 · Seguridad y operación
+    items:
+      - text: Los permisos se filtran al recuperar.
+        why: Fuga de datos.
+      - text: Los documentos se tratan como datos (delimitadores), sin herramientas de
+          escritura.
+        why: Inyección indirecta.
+      - text: La reindexación es incremental y borra lo eliminado.
+        why: Frescura.

@@ -1,0 +1,54 @@
+questions:
+  - q: ¿Por qué combinar BM25 y embeddings recupera más que cualquiera de los dos solos?
+    kind: por-que
+    a: "Porque **fallan en casos distintos**: BM25 acierta con códigos, nombres y palabras exactas pero no entiende sinónimos; los embeddings entienden paráfrasis pero confunden identificadores y negaciones. Al fusionar, cada uno rescata lo que el otro pierde."
+    uses: []
+  - q: ¿Por qué no se suman directamente la puntuación de BM25 y la similitud coseno?
+    kind: por-que
+    a: "Porque están en **escalas distintas** (BM25 puede valer 12,7; el coseno, 0,83) que además varían por consulta. **RRF** evita el problema usando solo la **posición** en cada lista: suma 1/(k + posición) y premia lo que aparece alto en ambas."
+    uses: []
+  - q: "Calcula con RRF (k=60): un documento está 1.º en BM25 y 3.º en densa; otro, 2.º en ambas."
+    kind: aplicar
+    a: "Primero: 1/61 + 1/63 ≈ 0,01639 + 0,01587 = **0,03226**. Segundo: 1/62 + 1/62 ≈ **0,03226**. Prácticamente **empatan**: RRF premia la consistencia en ambas listas casi tanto como un primer puesto. Por eso es robusto sin calibrar pesos."
+    uses: []
+  - q: ¿Qué aporta añadir una frase de contexto a cada chunk antes de indexar?
+    kind: que-pasa-si
+    a: El chunk deja de ser ambiguo ("el plazo es de 30 días" pasa a decir **de qué política y año**), lo que ayuda tanto a los embeddings como a BM25. En las pruebas de Anthropic, los fallos en el top-20 bajaron un **49 %** (y un 67 % con reranking). Cuesta una llamada al LLM por chunk al indexar.
+    uses: []
+  - q: Compara recuperar 10 candidatos y mandarlos al modelo frente a recuperar 100 y rerankear a 10.
+    kind: comparar
+    a: Con 10 directos, si el correcto estaba en la posición 25, **se pierde**. Con 100 candidatos el **recall** es mucho mayor y el reranker, más preciso, sube el correcto al top-10. Cuesta más latencia y cómputo, pero suele mejorar claramente las respuestas.
+    uses: []
+  - q: "Error común: «la búsqueda semántica es moderna, BM25 está obsoleto»."
+    kind: error-comun
+    a: BM25 sigue siendo muy competitivo y es **imbatible** en coincidencias exactas (códigos, siglas, nombres). Además es barato y explicable. Los mejores sistemas lo **combinan** con búsqueda densa; quitarlo suele empeorar las consultas con identificadores.
+    uses: []
+sims:
+  - id: lexica-o-semantica
+    title: ¿Qué búsqueda acierta mejor?
+    type: clasificar
+    prompt: Para cada consulta, ¿qué tipo de búsqueda tiene más probabilidad de traer el documento correcto?
+    categories:
+      - id: lexica
+        label: Léxica (BM25)
+      - id: densa
+        label: Semántica (embeddings)
+    items:
+      - text: «error ORA-01555 snapshot too old»
+        category: lexica
+        why: "Código exacto: BM25 lo encuentra literalmente."
+      - text: «¿cómo hago para dejar de pagar el plan?»
+        category: densa
+        why: Paráfrasis de «cancelar suscripción».
+      - text: «SKU 88-1203-B»
+        category: lexica
+        why: Identificador sin significado semántico.
+      - text: «how do I reset my password» (documentos en español)
+        category: densa
+        why: Un modelo multilingüe acerca idiomas; BM25 no.
+      - text: «política de teletrabajo para contratistas»
+        category: densa
+        why: Puede estar redactado como «trabajo remoto de proveedores externos».
+      - text: «función parseISODate»
+        category: lexica
+        why: Nombre exacto de código.

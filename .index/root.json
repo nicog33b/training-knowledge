@@ -99,11 +99,11 @@
       "title": "RAG · Generación aumentada por recuperación",
       "summary": "Cómo construir, medir y operar sistemas RAG: embeddings, chunking, índices vectoriales, búsqueda híbrida, reranking, prompts con citas, evaluación por etapas y seguridad.",
       "kind": "topic",
-      "topics": 0,
-      "done": 0,
-      "planned": 0,
-      "terms": 0,
-      "tools": 0
+      "topics": 11,
+      "done": 11,
+      "planned": 11,
+      "terms": 32,
+      "tools": 3
     }
   ],
   "paths": [

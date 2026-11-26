@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué un RAG de una sola búsqueda falla con preguntas multi-paso?
+    kind: por-que
+    a: Porque la respuesta necesita información que **solo se sabe buscar después** de leer el primer resultado (primero qué clientes tuvo el incidente, luego cuáles son premium). Una búsqueda única con la pregunta completa rara vez trae ambos fragmentos.
+    uses: []
+  - q: Compara RAG agéntico y GraphRAG.
+    kind: comparar
+    a: "**RAG agéntico**: el modelo decide en bucle qué buscar y en qué fuente; flexible, más latencia y costo por consulta. **GraphRAG**: preconstruye un **grafo** de entidades y relaciones (y resúmenes por comunidad); bueno para relaciones y visiones globales, pero caro de construir y mantener."
+    uses: []
+  - q: ¿Qué pasa si un agente de búsqueda no tiene tope de pasos?
+    kind: que-pasa-si
+    a: Puede seguir buscando variantes sin converger, disparando **latencia** y **costo**, o desviarse del tema. Necesita un criterio de "evidencia suficiente", un **tope** de búsquedas y registro de cada paso para depurarlo.
+    uses: []
+  - q: Te piden «¿cuáles son los temas más repetidos en las 20.000 quejas del año?». ¿Qué enfoque?
+    kind: aplicar
+    a: "Es una pregunta **global**: buscar el top-k no sirve porque necesitas ver todo el corpus. Enfoques: agrupar (clustering) y resumir por grupo, o GraphRAG con resúmenes por comunidad. Un RAG clásico solo vería 10 quejas."
+    uses: []
+  - q: ¿Por qué mejorar primero chunking, híbrida y reranking antes de pasar a un agente?
+    kind: por-que
+    a: Porque muchas fallas atribuidas a "RAG simple" son de esas etapas, y arreglarlas es más **barato** y deja un sistema más **predecible**. Un agente sobre una recuperación mala multiplica búsquedas malas. Añade complejidad cuando la eval de preguntas multi-paso lo justifique.
+    uses: []
+  - q: "Error común: construir GraphRAG para responder preguntas de un FAQ."
+    kind: error-comun
+    a: "Un FAQ tiene preguntas **directas** con respuestas en un fragmento: un RAG híbrido con reranking lo resuelve. GraphRAG cuesta muchas llamadas al LLM para extraer entidades y mantenerlas actualizadas, sin beneficio para este tipo de pregunta."
+    uses: []
+sims: []

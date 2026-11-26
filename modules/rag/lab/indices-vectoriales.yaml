@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué no se usa siempre búsqueda exacta (comparar con todos los vectores)?
+    kind: por-que
+    a: "Porque su costo crece **linealmente** con el número de vectores: con millones de chunks y muchas consultas por segundo se vuelve lenta y cara. Con miles, la búsqueda exacta es perfectamente válida. Los índices **ANN** cambian un poco de recall por mucha velocidad."
+    uses: []
+  - q: Compara HNSW e IVF.
+    kind: comparar
+    a: "**HNSW**: grafo por capas; excelente recall y latencia, pero consume **más memoria**. **IVF**: agrupa en clústeres y busca solo en los cercanos; menos memoria, recall según cuántos clústeres revisas, y se combina bien con **cuantización**. La elección depende de tamaño, memoria y latencia objetivo."
+    uses: []
+  - q: ¿Qué pasa si aplicas un filtro estricto de permisos DESPUÉS de una búsqueda ANN con k=10?
+    kind: que-pasa-si
+    a: Puede que de los 10 resultados ninguno sea visible para el usuario y te quedes **sin resultados**, aunque haya chunks relevantes permitidos más abajo. Para filtros estrictos conviene filtrar **durante** o **antes** de la búsqueda, o pedir muchos más candidatos antes de filtrar.
+    uses: []
+  - q: ¿Cómo compruebas si tu índice aproximado está perdiendo resultados importantes?
+    kind: aplicar
+    a: Toma una **muestra** de consultas, calcula los k vecinos con búsqueda **exacta** y con el índice ANN, y mide qué proporción coincide (recall del índice). Ajusta los parámetros de búsqueda (p. ej. tamaño de búsqueda en HNSW o clústeres revisados en IVF) hasta un recall aceptable para tu latencia.
+    uses: []
+  - q: ¿Por qué quizá no necesitas una base de datos vectorial nueva?
+    kind: por-que
+    a: Porque muchas bases que ya operas (PostgreSQL con extensión vectorial, Elasticsearch/OpenSearch) hacen búsqueda vectorial e **híbrida** con filtros. Menos sistemas = menos operación, copias de seguridad y sincronización de permisos. Una base dedicada compensa a gran escala o con requisitos especiales.
+    uses: []
+  - q: "Error común: subir los parámetros del índice al máximo «para tener el mejor recall»."
+    kind: error-comun
+    a: "Recall, **latencia** y **memoria** son un triángulo: subirlo todo dispara la latencia y el costo, a menudo por una mejora de recall que no cambia las respuestas. Fija un objetivo (p. ej. recall del índice ≥ 0,95 a < 50 ms) y ajusta midiendo."
+    uses: []
+sims: []

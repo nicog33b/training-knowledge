@@ -1,0 +1,26 @@
+questions:
+  - q: Compara chunks de 150 tokens y de 1.200 tokens.
+    kind: comparar
+    a: '**150**: embeddings precisos y prompts baratos, pero cada chunk tiene poco contexto ("el plazo es 30 días": ¿de qué?). **1.200**: mucho contexto pero el embedding se diluye y cada fragmento enviado gasta más. Un punto de partida es **300–800** tokens, ajustado con evals, o el patrón **padre-hijo**.'
+    uses: []
+  - q: ¿Por qué conviene cortar por estructura (secciones, párrafos) y no cada N caracteres?
+    kind: por-que
+    a: Porque cortar cada N caracteres parte frases, tablas y listas por la mitad y mezcla secciones distintas en un chunk. Cortar por **estructura** mantiene cada idea entera y permite añadir el **título** de la sección como contexto, lo que mejora tanto la búsqueda como la cita.
+    uses: []
+  - q: ¿Qué pasa si indexas el mismo PDF tres veces (versiones distintas)?
+    kind: que-pasa-si
+    a: El top-k se llena de **casi duplicados** y desplaza a otros fragmentos útiles; además, el modelo puede citar la versión antigua. Detecta duplicados (hash del contenido), quédate con la versión **vigente** y guarda la fecha y la versión como metadatos.
+    uses: []
+  - q: Aplica el patrón padre-hijo a un manual con secciones largas.
+    kind: aplicar
+    a: Indexa **párrafos** (hijos) para que la búsqueda sea precisa, pero guarda para cada uno el id de su **sección** (padre). Al recuperar un párrafo, envía al modelo la sección completa (o una ventana alrededor), deduplicando si varios hijos comparten padre. Precisión al buscar y contexto al generar.
+    uses: []
+  - q: ¿Por qué guardar los permisos como metadatos desde la ingesta?
+    kind: por-que
+    a: "Porque el control de acceso debe aplicarse **al recuperar**: el índice tiene que saber quién puede ver cada chunk para filtrar por el usuario que pregunta. Añadirlo después obliga a reindexar, y filtrar tras generar es tarde: el modelo ya habría leído datos ajenos."
+    uses: []
+  - q: "Error común: indexar el HTML de la web tal cual, con menú y pie de página."
+    kind: error-comun
+    a: "El menú y el pie se repiten en **cada** página: contaminan todos los chunks, los hacen parecerse entre sí y suben a la cima de búsquedas irrelevantes. Extrae el **contenido principal** limpio, conserva títulos y estructura, y descarta navegación y repeticiones."
+    uses: []
+sims: []

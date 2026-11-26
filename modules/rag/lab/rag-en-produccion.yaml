@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué los permisos deben aplicarse en la recuperación y no después de generar?
+    kind: por-que
+    a: "Porque si el modelo recibe un fragmento que el usuario no puede ver, ya lo **leyó**: puede resumirlo, citarlo o filtrarlo en la respuesta. Filtrar al recuperar garantiza que el contexto solo contenga lo **autorizado** para ese usuario."
+    uses: []
+  - q: ¿Qué pasa si borras un documento de la wiki pero no del índice?
+    kind: que-pasa-si
+    a: El RAG seguirá respondiendo con información **eliminada** (quizá incorrecta o confidencial) y citando una fuente que ya no existe. La reindexación debe detectar **bajas** además de altas y cambios, y borrar sus chunks.
+    uses: []
+  - q: Diseña la reindexación de 50.000 documentos que cambian a diario.
+    kind: aplicar
+    a: "**Incremental**: guarda un hash o fecha de modificación por documento; cada día procesa solo los nuevos, cambiados y borrados. Recalcula sus chunks y embeddings, elimina los antiguos y actualiza permisos. Reindexar todo cada día sería caro y lento."
+    uses: []
+  - q: Compara inyección indirecta y envenenamiento en RAG.
+    kind: comparar
+    a: "**Inyección indirecta**: un documento contiene **instrucciones** que intentan manipular al modelo al leerlo. **Envenenamiento**: alguien introduce **contenido falso** en las fuentes para que el sistema dé respuestas erróneas. Ambas vienen de fuentes con escritura poco controlada."
+    uses: []
+  - q: ¿Por qué monitorizar las respuestas «no lo sé»?
+    kind: por-que
+    a: "Porque señalan **huecos del corpus**: preguntas reales que tus documentos no cubren. Agrupadas por tema, son la lista de documentación que falta escribir o indexar, y casos nuevos para la eval."
+    uses: []
+  - q: "Error común: dar herramientas de escritura al modelo dentro del flujo de RAG."
+    kind: error-comun
+    a: Cualquier documento recuperado puede traer instrucciones (inyección indirecta). Si el modelo puede enviar correos o modificar datos en ese flujo, un documento malicioso puede **disparar acciones**. Mantén el RAG de **solo lectura** y separa las acciones con confirmación humana.
+    uses: []
+sims: []
