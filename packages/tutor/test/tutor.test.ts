@@ -12,6 +12,7 @@ const topic = (id: string, body: string, extra: Partial<LoadedModule['topics'][n
 const m: LoadedModule = {
   manifest: { id: 'aws', title: 'AWS', summary: 's', kind: 'certification', locale: 'es', tags: [], glossaries: [] },
   outline: { sections: [] },
+  tools: [],
   ownGlossary: [],
   glossary: [{ term: 'Visibility Timeout', aliases: [], definition: 'Tiempo invisible.', see: [] }],
   topics: [

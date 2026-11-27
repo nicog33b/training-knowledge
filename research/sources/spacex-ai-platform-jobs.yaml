@@ -1,0 +1,23 @@
+id: spacex-ai-platform-jobs
+title: "SpaceX job postings: Software Engineer (Platform Team) / AI Software
+  Engineer (Vehicle Engineering)"
+authors:
+  - SpaceX
+year: 2026
+venue: Greenhouse
+url: https://job-boards.greenhouse.io/spacex/jobs/8560537002
+kind: other
+verified: secondary
+retrieved: 2026-11-26
+summary: "Única evidencia pública de cómo SpaceX trabaja con IA en software:
+  ofertas de empleo, no prácticas documentadas."
+facts:
+  - "Equipo de plataforma: gateways seguros para que ingenieros escriban código
+    más rápido con IA, revisión de código y automatización de PR con IA,
+    guardarraíles de seguridad."
+  - "Vehicle Engineering: IA para acelerar desarrollo y pruebas de software,
+    diseño de aviónica, revisión de datos de vuelo; modelos internos, RAG y
+    herramientas agénticas."
+caveats:
+  - "Son ofertas de empleo: describen intenciones, no prácticas verificadas. No
+    hay publicación oficial de SpaceX sobre su metodología con IA."

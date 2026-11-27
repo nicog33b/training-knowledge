@@ -1,0 +1,123 @@
+id: que-tiempo-uso
+title: ¿Qué tiempo verbal uso?
+summary: Asistente que te lleva, con preguntas sobre lo que quieres decir, al
+  tiempo verbal inglés correcto y su fórmula.
+builder: decision
+topics:
+  - tiempo-y-aspecto
+  - marcadores-de-tiempo
+  - espanol-vs-ingles
+start: cuando
+nodes:
+  - id: cuando
+    question: ¿De cuándo hablas?
+    options:
+      - label: Del presente o de algo habitual
+        next: presente
+      - label: Del pasado
+        next: pasado
+      - label: Del futuro
+        next: futuro
+  - id: presente
+    question: ¿Qué quieres expresar?
+    options:
+      - label: Un hábito, una verdad o un horario
+        result: present-simple
+      - label: Algo en curso ahora o temporal
+        result: present-continuous
+      - label: Algo del pasado conectado con ahora (experiencia, resultado, «ya»,
+          «todavía»)
+        result: present-perfect
+      - label: Cuánto tiempo llevo haciendo algo que sigue
+        result: present-perfect-continuous
+  - id: pasado
+    question: ¿Qué quieres expresar del pasado?
+    options:
+      - label: Una acción terminada en un momento concreto (yesterday, in 2020)
+        result: past-simple
+      - label: Algo que estaba en progreso en un momento del pasado
+        result: past-continuous
+      - label: Algo anterior a otro momento del pasado
+        result: past-perfect
+      - label: Un hábito pasado («solía»)
+        result: used-to
+  - id: futuro
+    question: ¿Qué tipo de futuro?
+    options:
+      - label: Una decisión del momento, promesa o predicción
+        result: will
+      - label: Un plan o intención ya decidido, o evidencia presente
+        result: going-to
+      - label: Un plan fijado con hora y lugar
+        result: present-continuous-futuro
+      - label: Algo terminado antes de un momento futuro
+        result: future-perfect
+results:
+  - id: present-simple
+    title: Present Simple
+    why: "sujeto + verbo (-s en 3.ª persona). Preguntas y negaciones con do/does:
+      She works here. Does she work here?"
+    see:
+      - present-simple
+  - id: present-continuous
+    title: Present Continuous
+    why: "am/is/are + -ing: I'm working now. Ojo con los verbos de estado (know,
+      want) que no suelen ir en continuo."
+    see:
+      - present-continuous
+  - id: present-perfect
+    title: Present Perfect
+    why: "have/has + participio: I've finished. Sin momento pasado concreto; con
+      ever, already, yet, just, for, since."
+    watch: Con yesterday o ago se usa Past Simple.
+    see:
+      - present-perfect
+  - id: present-perfect-continuous
+    title: Present Perfect Continuous
+    why: "have/has been + -ing: I've been studying for two hours."
+    see:
+      - present-perfect-continuous
+  - id: past-simple
+    title: Past Simple
+    why: "verbo en pasado (-ed o irregular); did en preguntas y negaciones: I saw
+      her yesterday. Did you see her?"
+    see:
+      - past-simple
+  - id: past-continuous
+    title: Past Continuous
+    why: "was/were + -ing: I was cooking when you called."
+    see:
+      - past-continuous
+  - id: past-perfect
+    title: Past Perfect
+    why: "had + participio: When I arrived, the train had left."
+    see:
+      - past-perfect
+  - id: used-to
+    title: used to + base (o would)
+    why: "Hábitos o estados pasados que ya no ocurren: I used to live in Madrid.
+      Equivale a menudo al imperfecto español."
+    see:
+      - imperfecto-en-ingles
+  - id: will
+    title: will + base
+    why: "Decisiones espontáneas, promesas y predicciones: I'll help you. It will
+      rain."
+    see:
+      - formas-de-futuro
+  - id: going-to
+    title: be going to + base
+    why: "Planes ya decididos o predicción con evidencia: I'm going to study
+      medicine. Look, it's going to rain."
+    see:
+      - formas-de-futuro
+  - id: present-continuous-futuro
+    title: Present Continuous para el futuro
+    why: "Planes fijados (agenda): I'm meeting Ana at six."
+    see:
+      - formas-de-futuro
+  - id: future-perfect
+    title: Future Perfect
+    why: "will have + participio: By 2030 I will have finished."
+    see:
+      - futuro-continuo-y-perfecto

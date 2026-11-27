@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué los errores del frontend necesitan source maps?
+    kind: por-que
+    a: 'Porque en producción el código está **minificado**: el error dice "a is not a function en main.3f2a.js:1:48213". Con source maps, la herramienta lo traduce a tu archivo, función y línea originales, y puedes depurarlo.'
+    uses: []
+  - q: Compara feature flags y ramas largas para lanzar una funcionalidad.
+    kind: comparar
+    a: "**Ramas largas**: el código diverge, integración dolorosa y lanzamiento todo o nada. **Feature flags**: el código se integra pronto apagado, se enciende para un porcentaje y se apaga al instante si falla. Requieren limpiar los flags viejos."
+    uses: []
+  - q: Planifica el lanzamiento de un nuevo checkout.
+    kind: aplicar
+    a: Detrás de un **flag**, primero para el equipo interno, luego **1 % → 10 % → 50 % → 100 %**, vigilando tasa de errores, conversión del embudo y Core Web Vitals por grupo. Criterios de **rollback** decididos antes; apagar el flag si se superan.
+    uses: []
+  - q: ¿Qué pasa con usuarios que tienen la pestaña abierta cuando despliegas una API incompatible?
+    kind: que-pasa-si
+    a: "Siguen ejecutando el **JavaScript viejo**, que llama a la API nueva con la forma antigua: errores raros difíciles de reproducir. Mantén la API **compatible hacia atrás** durante una transición, versiona o fuerza la recarga cuando sea seguro."
+    uses: []
+  - q: ¿Por qué medir eventos de producto además de errores?
+    kind: por-que
+    a: "Porque muchos fallos **no lanzan errores**: un botón tapado por un banner, un formulario que no valida bien. Solo los ves como **caída del embudo** (menos compras completadas). Los eventos de producto detectan lo que el monitor de errores no ve."
+    uses: []
+  - q: "Error común: registrar el contenido de los formularios para depurar."
+    kind: error-comun
+    a: "Acabas guardando **datos personales** (direcciones, tarjetas, contraseñas) en herramientas de terceros: un problema legal y de seguridad. Registra el evento y el error, enmascara los valores y cumple el consentimiento."
+    uses: []
+sims: []

@@ -65,3 +65,6 @@ Los **marcadores temporales** son palabras que casi eligen el tiempo por ti. Ús
 
 ## Simulaciones del subtema
 - clasificar: ¿Qué tiempo pide el marcador?
+
+## Herramientas del curso en este subtema
+- decision: ¿Qué tiempo verbal uso? — Asistente que te lleva, con preguntas sobre lo que quieres decir, al tiempo verbal inglés correcto y su fórmula.

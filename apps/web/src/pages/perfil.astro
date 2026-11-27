@@ -1,0 +1,162 @@
+---
+import Base from '../layouts/Base.astro';
+import { getData } from '../lib/data';
+const { modules } = await getData();
+const courses = modules.map((m) => ({ id: m.manifest.id, title: m.manifest.title, questions: m.topics.reduce((n, t) => n + t.lab.questions.length, 0), topics: m.topics.length }));
+---
+<Base title="Tu perfil">
+  <div id="profile" data-courses={JSON.stringify(courses)}>
+    <div class="p-empty card" hidden>
+      <h1>Tu perfil</h1>
+      <p>Todavía no has creado un perfil en este navegador.</p>
+      <p><a class="btn-primary" href="/registro/">Crear perfil</a> · <a href="/entrar/">Entrar</a></p>
+    </div>
+    <div class="p-main" hidden>
+      <header class="p-head">
+        <span class="p-avatar" aria-hidden="true"></span>
+        <div>
+          <h1 class="p-name"></h1>
+          <p class="muted p-meta"></p>
+        </div>
+        <button type="button" class="p-btn" data-logout>Salir</button>
+      </header>
+      <p class="auth-demo" role="note">Vista previa: el perfil y tu progreso viven solo en este navegador. Puedes exportarlos o borrarlos abajo.</p>
+
+      <section class="p-grid">
+        <div class="p-card"><span>Preguntas respondidas</span><b data-k="answered">0</b></div>
+        <div class="p-card"><span>Para repasar hoy</span><b data-k="due">0</b></div>
+        <div class="p-card"><span>Consolidadas</span><b data-k="solid">0</b></div>
+        <div class="p-card"><span>Tarjetas propias</span><b data-k="cards">0</b></div>
+      </section>
+
+      <h2>Tus cursos</h2>
+      <div class="p-courses"></div>
+
+      <h2>Datos del perfil</h2>
+      <form class="form p-form">
+        <div class="row">
+          <label>Nombre<input name="name" maxlength="60" /></label>
+          <label>Objetivo
+            <select name="goal">
+              <option value="empleo">Conseguir trabajo o subir de nivel</option>
+              <option value="certificacion">Aprobar una certificación</option>
+              <option value="proyecto">Aplicarlo en un proyecto</option>
+              <option value="curiosidad">Aprender por interés</option>
+            </select>
+          </label>
+        </div>
+        <label>Minutos al día<select name="minutes"><option>10</option><option>20</option><option>40</option><option>60</option></select></label>
+        <button type="submit">Guardar</button>
+        <span class="muted p-saved" aria-live="polite"></span>
+      </form>
+
+      <h2>Lectura y accesibilidad</h2>
+      <p class="p-a11y muted"></p>
+      <button type="button" class="p-btn" data-a11y>Abrir ajustes (Alt+A)</button>
+
+      <h2>Tus datos</h2>
+      <p class="muted">Todo lo que la app guarda de ti en este navegador: marcas de práctica, repaso, mapas, explicaciones, tarjetas, ajustes y chats.</p>
+      <div class="p-row"><button type="button" class="p-btn" data-export>Exportar (JSON)</button><button type="button" class="p-btn danger" data-wipe>Borrar todo</button></div>
+    </div>
+  </div>
+</Base>
+<style is:global>
+  .p-head { display: flex; align-items: center; gap: 1rem; margin-top: 1rem; }
+  .p-head h1 { margin: 0; }
+  .p-head p { margin: .1rem 0 0; }
+  .p-head .p-btn { margin-left: auto; }
+  .p-avatar { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; font-size: 1.4rem; font-weight: 800; color: #fff; background: radial-gradient(120% 120% at 0% 0%, #6d64ff, #4338ca 55%, #1e1b4b); flex: none; }
+  .auth-demo { font-size: .78rem; color: var(--warn); background: color-mix(in srgb, var(--warn) 10%, var(--bg)); border: 1px solid color-mix(in srgb, var(--warn) 35%, var(--line)); border-radius: 10px; padding: .45rem .65rem; }
+  .p-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: .6rem; margin: 1rem 0; }
+  .p-card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: .7rem .9rem; display: grid; }
+  .p-card span { font-size: .76rem; color: var(--muted); }
+  .p-card b { font-size: 1.6rem; font-variant-numeric: tabular-nums; }
+  .p-courses { display: grid; gap: .5rem; }
+  .p-course { display: grid; grid-template-columns: 1fr auto; gap: .2rem 1rem; align-items: center; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: .6rem .9rem; }
+  .p-course .bar { grid-column: 1 / -1; }
+  .p-course small { color: var(--muted); }
+  .p-btn { font: inherit; font-size: .86rem; border: 1px solid var(--line); background: var(--bg); color: var(--fg); border-radius: 10px; padding: .45rem .9rem; cursor: pointer; }
+  .p-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .p-btn.danger:hover { border-color: var(--bad); color: var(--bad); }
+  .p-row { display: flex; gap: .5rem; }
+  .btn-primary { background: var(--accent); color: var(--on-accent); padding: .5rem .9rem; border-radius: 10px; text-decoration: none; font-weight: 650; }
+  .form { display: grid; gap: .8rem; max-width: 560px; }
+  .form label { display: grid; gap: .3rem; font-size: .86rem; font-weight: 600; }
+  .form input, .form select { font: inherit; font-weight: 400; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 10px; padding: .55rem .7rem; }
+  .form .row { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+  .form button { justify-self: start; font: inherit; font-weight: 650; background: var(--accent); color: var(--on-accent); border: 0; border-radius: 10px; padding: .55rem 1rem; cursor: pointer; }
+  @media (max-width: 600px) { .form .row { grid-template-columns: 1fr; } }
+</style>
+<script>
+  import { summary } from '@tk/practice';
+  import { store, userCardsKey } from '../lib/store.ts';
+  import { loadSrs } from '../lib/srs.ts';
+
+  type User = { name: string; email: string; goal?: string; minutes?: number; courses?: string[]; created?: string };
+  const root = document.getElementById('profile')!;
+  const courses: { id: string; title: string; questions: number; topics: number }[] = JSON.parse(root.dataset.courses!);
+  const user = store.get<User | null>('tk-user', null);
+  const $ = <T extends HTMLElement>(s: string) => root.querySelector<T>(s)!;
+  if (!user) $('.p-empty').hidden = false;
+  else {
+    $('.p-main').hidden = false;
+    $('.p-avatar').textContent = user.name.split(/\s+/).map((w) => w[0]).slice(0, 2).join('').toUpperCase();
+    $('.p-name').textContent = user.name;
+    $('.p-meta').textContent = `${user.email} · desde ${new Date(user.created ?? Date.now()).toLocaleDateString('es')} · ${user.minutes ?? 20} min/día`;
+
+    let answered = 0, due = 0, solid = 0, cards = 0;
+    const rows = courses.map((c) => {
+      const marks = store.keys(`tk-practice:${c.id}:`).reduce((n, k) => n + Object.keys(store.get<Record<string, string>>(k, {})).length, 0);
+      const s = summary(loadSrs(c.id));
+      const mine = store.get<unknown[]>(userCardsKey(c.id), []).length;
+      answered += marks; due += s.due; solid += s.solid; cards += mine;
+      return { c, marks, s, mine, fav: user.courses?.includes(c.id) };
+    }).filter((r) => r.fav || r.marks || r.s.total || r.mine);
+    for (const [k, v] of Object.entries({ answered, due, solid, cards })) $(`[data-k=${k}]`).textContent = String(v);
+    const box = $('.p-courses');
+    if (!rows.length) box.innerHTML = '<p class="muted">Aún no has practicado. Elige un curso en la <a href="/">portada</a>.</p>';
+    for (const r of rows) {
+      const pct = r.c.questions ? Math.round((r.marks / r.c.questions) * 100) : 0;
+      const d = document.createElement('div');
+      d.className = 'p-course';
+      const a = document.createElement('a'); a.href = `/${r.c.id}/`; a.textContent = r.c.title;
+      const rep = document.createElement('a'); rep.href = `/${r.c.id}/repaso/`; rep.textContent = r.s.due ? `Repasar ${r.s.due} →` : 'Repaso al día ✓';
+      const bar = document.createElement('div'); bar.className = 'bar'; bar.innerHTML = `<i style="width:${pct}%"></i>`;
+      const sm = document.createElement('small'); sm.textContent = `${r.marks}/${r.c.questions} preguntas · ${r.s.solid} consolidadas · ${r.mine} tarjetas propias`;
+      d.append(a, rep, bar, sm);
+      box.append(d);
+    }
+
+    const form = $<HTMLFormElement>('.p-form');
+    (form.elements.namedItem('name') as HTMLInputElement).value = user.name;
+    (form.elements.namedItem('goal') as HTMLSelectElement).value = user.goal ?? 'empleo';
+    (form.elements.namedItem('minutes') as HTMLSelectElement).value = String(user.minutes ?? 20);
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const next = { ...user, name: String(fd.get('name') || user.name).trim(), goal: String(fd.get('goal')), minutes: Number(fd.get('minutes')) };
+      store.set('tk-user', next); store.set('tk-user-saved', next);
+      $('.p-saved').textContent = 'Guardado ✓';
+      $('.p-name').textContent = next.name;
+    });
+
+    const LABEL: Record<string, string> = { font: 'fuente', size: 'tamaño', measure: 'ancho de línea', spacing: 'espaciado', theme: 'tema', contrast: 'contraste', links: 'enlaces', ui: 'interfaz', focus: 'modo foco', motion: 'movimiento', glossary: 'glosario' };
+    const read = store.get<Record<string, unknown>>('tk-read', {});
+    $('.p-a11y').textContent = Object.keys(read).length ? 'Activo: ' + Object.entries(read).map(([k, v]) => `${LABEL[k] ?? k} ${v}`).join(' · ') : 'Usas los ajustes por defecto.';
+    $('[data-a11y]').addEventListener('click', (e) => { e.stopPropagation(); document.dispatchEvent(new CustomEvent('tk-open-a11y')); });
+    $('[data-logout]').addEventListener('click', () => { store.del('tk-user'); location.href = '/'; });
+    $('[data-export]').addEventListener('click', () => {
+      const data: Record<string, unknown> = {};
+      for (const k of store.keys('tk-')) data[k] = store.get(k, null);
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }));
+      a.download = 'training-knowledge-datos.json';
+      a.click();
+    });
+    $('[data-wipe]').addEventListener('click', () => {
+      if (!confirm('¿Borrar perfil, progreso, tarjetas, mapas y ajustes de este navegador? No se puede deshacer.')) return;
+      for (const k of store.keys('tk-')) store.del(k);
+      location.href = '/';
+    });
+  }
+</script>

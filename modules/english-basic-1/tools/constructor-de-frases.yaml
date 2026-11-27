@@ -1,0 +1,35 @@
+id: constructor-de-frases
+title: Constructor de frases (afirmativa, negativa y pregunta)
+summary: "Escribe las piezas de una frase y verás las tres formas con el
+  auxiliar en su sitio: la regla única del primer auxiliar."
+builder: plantilla
+topics:
+  - preguntas-y-negaciones
+  - verbos-auxiliares
+  - orden-de-la-oracion
+fields:
+  - id: sujeto
+    label: Sujeto
+    default: She
+  - id: auxiliar
+    label: Auxiliar (do/does/did, am/is/are, have/has, will, can…)
+    default: does
+  - id: verbo
+    label: Verbo en la forma que pide el auxiliar
+    default: work
+  - id: verbo_afirmativo
+    label: Verbo en la afirmativa (si el auxiliar es do/does/did, la forma conjugada)
+    default: works
+  - id: resto
+    label: Complemento
+    default: at a hospital
+template: >-
+  Afirmativa: {{sujeto}} {{verbo_afirmativo}} {{resto}}.
+
+  Negativa:   {{sujeto}} {{auxiliar}} not {{verbo}} {{resto}}.
+
+  Pregunta:   {{auxiliar}} {{sujeto}} {{verbo}} {{resto}}?
+
+
+  Regla: el primer auxiliar lleva el «not» o se mueve delante del sujeto. Con
+  do/does/did, el verbo principal vuelve a la base.

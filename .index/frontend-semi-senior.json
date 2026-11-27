@@ -1,0 +1,382 @@
+{
+  "id": "frontend-semi-senior",
+  "title": "Frontend Developer · Semi Senior",
+  "summary": "El salto a semi senior: TypeScript, el modelo mental de React, estado y datos del servidor, testing, herramientas de build, rendimiento (Core Web Vitals) y seguridad web.",
+  "kind": "framework",
+  "tags": [
+    "frontend",
+    "react",
+    "typescript"
+  ],
+  "topics": [
+    {
+      "id": "typescript-practico",
+      "title": "TypeScript práctico",
+      "summary": "Tipos que aportan: inferencia, uniones y estrechamiento, genéricos, tipos de utilidad, unknown frente a any y validar en el borde (zod).",
+      "order": 1,
+      "requires": [],
+      "section": "lenguaje-y-modelo",
+      "status": "done",
+      "words": 262,
+      "headings": [
+        "TypeScript práctico",
+        "Deja que infiera",
+        "Uniones y estrechamiento",
+        "Genéricos",
+        "Tipos de utilidad",
+        "any frente a unknown",
+        "Validar en el borde",
+        "Configuración"
+      ],
+      "terms": [
+        "api",
+        "estrechamiento",
+        "generico",
+        "props",
+        "typescript",
+        "union-discriminada",
+        "unknown",
+        "zod"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": []
+    },
+    {
+      "id": "react-modelo-mental",
+      "title": "El modelo mental de React",
+      "summary": "UI = f(estado): renderizado, props y estado, inmutabilidad, keys en listas y qué provoca un re-render.",
+      "order": 2,
+      "requires": [],
+      "section": "lenguaje-y-modelo",
+      "status": "done",
+      "words": 315,
+      "headings": [
+        "El modelo mental de React",
+        "Componentes, props y estado",
+        "Inmutabilidad",
+        "Renderizar no es pintar",
+        "Keys en listas",
+        "Estado: dónde vive",
+        "Qué provoca re-renders"
+      ],
+      "terms": [
+        "context",
+        "dom",
+        "key",
+        "props",
+        "re-render",
+        "react",
+        "reconciliacion"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": [
+        "decision:donde-va-el-estado"
+      ]
+    },
+    {
+      "id": "efectos-y-sincronizacion",
+      "title": "Efectos: sincronizar con el exterior",
+      "summary": "useEffect sirve para sincronizar con sistemas externos, no para derivar datos; dependencias, limpieza y cuándo no necesitas un efecto.",
+      "order": 3,
+      "requires": [],
+      "section": "lenguaje-y-modelo",
+      "status": "done",
+      "words": 263,
+      "headings": [
+        "Efectos: sincronizar con el exterior",
+        "Anatomía",
+        "Cuándo NO necesitas un efecto",
+        "Carreras al cargar datos",
+        "Señal de alarma"
+      ],
+      "terms": [
+        "closure-obsoleta",
+        "datos-del-servidor",
+        "props",
+        "react",
+        "useeffect"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": []
+    },
+    {
+      "id": "estado-y-datos-del-servidor",
+      "title": "Estado de la UI y datos del servidor",
+      "summary": "Distinguir estado local, compartido y datos del servidor; caché, revalidación, estados de carga y por qué no meterlo todo en un store global.",
+      "order": 4,
+      "requires": [],
+      "section": "datos-y-calidad",
+      "status": "done",
+      "words": 258,
+      "headings": [
+        "Estado de la UI y datos del servidor",
+        "Tipos de estado",
+        "Datos del servidor necesitan otra cosa",
+        "Mutaciones",
+        "Estados de carga",
+        "Regla práctica"
+      ],
+      "terms": [
+        "actualizacion-optimista",
+        "context",
+        "datos-del-servidor",
+        "revalidacion"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": [
+        "decision:donde-va-el-estado"
+      ]
+    },
+    {
+      "id": "testing-frontend",
+      "title": "Testing en frontend",
+      "summary": "Probar comportamiento como lo usa una persona (Testing Library), qué cubrir con unitarios, integración y extremo a extremo, y tests que no se rompen al refactorizar.",
+      "order": 5,
+      "requires": [],
+      "section": "datos-y-calidad",
+      "status": "done",
+      "words": 260,
+      "headings": [
+        "Testing en frontend",
+        "Probar como un usuario",
+        "Qué tipo de test",
+        "Buenas prácticas",
+        "Lo que no se prueba con tests"
+      ],
+      "terms": [
+        "ci",
+        "lector-de-pantalla",
+        "lighthouse",
+        "msw",
+        "regresion-visual",
+        "test-de-extremo-a-extremo",
+        "testing-library"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": [
+        "comparador:comparar-tests"
+      ]
+    },
+    {
+      "id": "build-y-bundling",
+      "title": "Build, bundling y módulos",
+      "summary": "Qué hace el bundler (Vite, esbuild, Rollup): módulos ES, tree shaking, code splitting, carga diferida y medir el peso del bundle.",
+      "order": 6,
+      "requires": [],
+      "section": "datos-y-calidad",
+      "status": "done",
+      "words": 276,
+      "headings": [
+        "Build, bundling y módulos",
+        "Qué hace un bundler",
+        "Módulos ES y tree shaking",
+        "Code splitting",
+        "Medir el peso",
+        "Source maps"
+      ],
+      "terms": [
+        "bundler",
+        "ci",
+        "code-splitting",
+        "inp",
+        "lcp",
+        "modulos-es",
+        "source-map",
+        "tree-shaking",
+        "typescript",
+        "useeffect"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": [
+        "calculadora:presupuesto-js"
+      ]
+    },
+    {
+      "id": "core-web-vitals",
+      "title": "Core Web Vitals: LCP, INP y CLS",
+      "summary": "Las tres métricas de experiencia (umbrales en el percentil 75), qué las causa y cómo mejorarlas; INP sustituyó a FID en 2024.",
+      "order": 7,
+      "requires": [],
+      "section": "rendimiento-y-seguridad",
+      "status": "done",
+      "words": 269,
+      "headings": [
+        "Core Web Vitals: LCP, INP y CLS",
+        "Las tres métricas",
+        "Qué las estropea y cómo se arreglan",
+        "Laboratorio frente a campo"
+      ],
+      "terms": [
+        "cls",
+        "core-web-vitals",
+        "crux",
+        "fid",
+        "hilo-principal",
+        "inp",
+        "latencia",
+        "lcp",
+        "lighthouse",
+        "percentil-75",
+        "re-render",
+        "tarea-larga"
+      ],
+      "questions": 6,
+      "sims": [
+        "clasificar:que-metrica-empeora"
+      ],
+      "tools": [
+        "calculadora:presupuesto-js"
+      ]
+    },
+    {
+      "id": "seguridad-web",
+      "title": "Seguridad web para frontend",
+      "summary": "XSS y cómo lo evitan los frameworks, CSP, CSRF y cookies SameSite, CORS, dónde guardar tokens y dependencias vulnerables.",
+      "order": 8,
+      "requires": [],
+      "section": "rendimiento-y-seguridad",
+      "status": "done",
+      "words": 278,
+      "headings": [
+        "Seguridad web para frontend",
+        "XSS",
+        "CSP",
+        "CSRF y cookies",
+        "¿Dónde guardo el token?",
+        "CORS no es seguridad del servidor",
+        "Dependencias"
+      ],
+      "terms": [
+        "api",
+        "cors",
+        "csp",
+        "csrf",
+        "dompurify",
+        "react",
+        "sri",
+        "xss"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": []
+    },
+    {
+      "id": "accesibilidad-avanzada",
+      "title": "Accesibilidad avanzada: ARIA y foco",
+      "summary": "Patrones accesibles (diálogo, menú, pestañas), gestión del foco en SPA, regiones live y probar con lectores de pantalla.",
+      "order": 9,
+      "requires": [],
+      "section": "rendimiento-y-seguridad",
+      "status": "done",
+      "words": 292,
+      "headings": [
+        "Accesibilidad avanzada: ARIA y foco",
+        "ARIA: rol, nombre, estado",
+        "Patrones clave",
+        "Gestión del foco en SPA",
+        "Regiones live",
+        "Probar de verdad"
+      ],
+      "terms": [
+        "apg",
+        "aria",
+        "foco",
+        "lector-de-pantalla",
+        "region-live",
+        "roving-tabindex",
+        "spa",
+        "testing-library"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": []
+    }
+  ],
+  "sections": [
+    {
+      "id": "lenguaje-y-modelo",
+      "title": "1 · TypeScript y el modelo mental de React",
+      "topics": [
+        "typescript-practico",
+        "react-modelo-mental",
+        "efectos-y-sincronizacion"
+      ]
+    },
+    {
+      "id": "datos-y-calidad",
+      "title": "2 · Datos, estado y calidad",
+      "topics": [
+        "estado-y-datos-del-servidor",
+        "testing-frontend",
+        "build-y-bundling"
+      ]
+    },
+    {
+      "id": "rendimiento-y-seguridad",
+      "title": "3 · Rendimiento, seguridad y accesibilidad avanzada",
+      "topics": [
+        "core-web-vitals",
+        "seguridad-web",
+        "accesibilidad-avanzada"
+      ]
+    }
+  ],
+  "ownTerms": [
+    "actualizacion-optimista",
+    "apg",
+    "bundler",
+    "closure-obsoleta",
+    "cls",
+    "code-splitting",
+    "context",
+    "core-web-vitals",
+    "crux",
+    "csp",
+    "csrf",
+    "datos-del-servidor",
+    "dompurify",
+    "estrechamiento",
+    "fid",
+    "generico",
+    "httponly",
+    "inp",
+    "key",
+    "lcp",
+    "lighthouse",
+    "modulos-es",
+    "msw",
+    "percentil-75",
+    "props",
+    "re-render",
+    "react",
+    "reconciliacion",
+    "region-live",
+    "regresion-visual",
+    "revalidacion",
+    "roving-tabindex",
+    "samesite",
+    "source-map",
+    "spa",
+    "sri",
+    "tarea-larga",
+    "test-de-extremo-a-extremo",
+    "testing-library",
+    "tree-shaking",
+    "typescript",
+    "union-discriminada",
+    "unknown",
+    "useeffect",
+    "zod"
+  ],
+  "tools": [
+    "comparador:comparar-tests",
+    "decision:donde-va-el-estado",
+    "calculadora:presupuesto-js"
+  ]
+}

@@ -9,6 +9,7 @@
   "dependencies": {
     "@tk/contracts": "workspace:*",
     "@tk/sims": "workspace:*",
+    "@tk/tools": "workspace:*",
     "yaml": "^2.9.1"
   }
 }

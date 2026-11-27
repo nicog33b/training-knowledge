@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué el rendimiento empeora solo si nadie lo vigila?
+    kind: por-que
+    a: "Porque cada feature añade un poco de JS, una imagen o un script de terceros: cada cambio parece pequeño y aceptable, pero se **acumulan**. Sin presupuestos en CI y RUM con alertas, la degradación solo se nota cuando ya es grave."
+    uses: []
+  - q: Define un presupuesto de rendimiento para la página de producto.
+    kind: aplicar
+    a: "Ejemplo: ≤ 170 KB de JS comprimido en la ruta inicial, **LCP ≤ 2,5 s** e **INP ≤ 200 ms** en el p75 de campo, imagen LCP ≤ 150 KB. Comprobación de tamaño y Lighthouse en CI que falla el PR si se excede, y alertas de RUM por release."
+    uses: []
+  - q: Compara optimizar por intuición y optimizar por perfil.
+    kind: comparar
+    a: '**Intuición**: memoizar componentes, cambiar librerías "lentas"; a menudo no toca el problema real. **Perfil**: el panel de rendimiento muestra qué tareas largas, renders o scripts consumen el tiempo; optimizas lo que más pesa y mides la mejora.'
+    uses: []
+  - q: ¿Qué pasa si añades un chat de soporte de terceros a todas las páginas?
+    kind: que-pasa-si
+    a: "Suele traer **cientos de KB** de JS que se ejecuta en el hilo principal: peor INP y a veces LCP, en todas las páginas. Cárgalo diferido (tras interacción o al estar inactivo), solo donde se necesita, y mide su costo en RUM."
+    uses: []
+  - q: ¿Por qué el RUM debe registrar la versión desplegada?
+    kind: por-que
+    a: "Para ver **regresiones por release**: si el INP empeora tras el despliegue de ayer, sabes qué cambios revisar. Sin la versión, solo ves una línea que sube sin saber por qué."
+    uses: []
+  - q: "Error común: confiar en que «el CDN lo hace rápido»."
+    kind: error-comun
+    a: El CDN acelera la **entrega** de archivos, pero no reduce el costo de **ejecutar** JavaScript en el dispositivo, que suele ser el cuello de botella en móviles (INP). Menos JS y menos trabajo en el hilo principal siguen siendo necesarios.
+    uses: []
+sims: []

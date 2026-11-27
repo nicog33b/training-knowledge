@@ -1,0 +1,191 @@
+- term: Embedding
+  aliases:
+    - embeddings
+    - modelo de embeddings
+    - modelos de embeddings
+    - vector de embedding
+  definition: Vector numérico que representa el significado de un texto; textos
+    parecidos quedan cerca en ese espacio.
+  see: []
+- term: Chunk
+  aliases:
+    - chunks
+    - fragmento indexado
+  definition: Fragmento de un documento que se indexa y se recupera como unidad en
+    un sistema RAG.
+  see: []
+- term: Chunking
+  aliases: []
+  definition: Partir documentos en chunks (por tamaño, solapamiento o estructura)
+    antes de indexarlos.
+  see: []
+- term: Solapamiento
+  aliases:
+    - overlap
+  definition: Parte del final de un chunk que se repite al inicio del siguiente
+    para no cortar ideas.
+  see: []
+- term: Metadatos
+  aliases:
+    - metadato
+  definition: Datos sobre un documento o chunk (fuente, fecha, sección, permisos)
+    usados para filtrar, citar y controlar acceso.
+  see: []
+- term: Similitud coseno
+  aliases:
+    - coseno
+  definition: "Medida de cercanía entre dos vectores según el ángulo que forman: 1
+    = misma dirección."
+  see: []
+- term: Búsqueda densa
+  aliases:
+    - búsqueda semántica
+    - recuperación densa
+  definition: "Búsqueda por cercanía de embeddings: encuentra textos de
+    significado parecido aunque no compartan palabras."
+  see: []
+- term: BM25
+  aliases:
+    - búsqueda léxica
+  definition: Algoritmo clásico de búsqueda por palabras que pesa más los términos
+    raros y penaliza documentos largos.
+  see: []
+- term: Búsqueda híbrida
+  aliases:
+    - híbrida
+  definition: Combinar búsqueda léxica (BM25) y semántica (embeddings) y fusionar
+    sus rankings.
+  see: []
+- term: RRF
+  aliases:
+    - Reciprocal Rank Fusion
+  definition: Fusión de rankings que suma 1/(k + posición) de cada lista; no
+    necesita escalas comparables.
+  see: []
+- term: ANN
+  aliases:
+    - Approximate Nearest Neighbors
+    - búsqueda aproximada
+  definition: "Búsqueda de vecinos más cercanos aproximada: mucho más rápida que
+    la exacta a cambio de perder algunos resultados."
+  see: []
+- term: HNSW
+  aliases: []
+  definition: "Hierarchical Navigable Small World: índice ANN basado en un grafo
+    por capas; buen recall y latencia, más memoria."
+  see: []
+- term: IVF
+  aliases: []
+  definition: "Inverted File: índice ANN que agrupa vectores en clústeres y solo
+    busca en los más cercanos a la consulta."
+  see: []
+- term: Cuantización
+  aliases: []
+  definition: Comprimir vectores (menos bits por número) para ahorrar memoria y
+    acelerar, perdiendo algo de precisión.
+  see: []
+- term: Recall@k
+  aliases:
+    - recall
+  definition: Proporción de consultas cuyo elemento relevante aparece entre los k
+    primeros resultados.
+  see: []
+- term: MRR
+  aliases:
+    - Mean Reciprocal Rank
+  definition: Media de 1/posición del primer resultado relevante; premia que
+    aparezca arriba.
+  see: []
+- term: Precisión@k
+  aliases: []
+  definition: Proporción de los k resultados recuperados que son relevantes.
+  see: []
+- term: Reranking
+  aliases:
+    - reranker
+    - rerankear
+    - reordenar
+  definition: Segunda etapa que reordena los candidatos recuperados con un modelo
+    más preciso y caro.
+  see: []
+- term: Cross-encoder
+  aliases:
+    - cross-encoders
+  definition: Modelo que lee consulta y documento juntos para puntuar su
+    relevancia; preciso pero no precalculable.
+  see: []
+- term: Bi-encoder
+  aliases: []
+  definition: Modelo que codifica consulta y documento por separado (embeddings);
+    rápido porque los documentos se precalculan.
+  see: []
+- term: Contextual retrieval
+  aliases:
+    - búsqueda contextual
+  definition: "Técnica de Anthropic: añadir a cada chunk, antes de indexar, una
+    frase de contexto generada por un LLM."
+  see: []
+- term: HyDE
+  aliases:
+    - Hypothetical Document Embeddings
+  definition: Buscar con el embedding de una respuesta hipotética escrita por el
+    LLM en lugar del de la pregunta.
+  see: []
+- term: Multi-consulta
+  aliases:
+    - multi-query
+  definition: Generar varias variantes de la consulta, buscar con todas y fusionar
+    resultados.
+  see: []
+- term: Fidelidad
+  aliases:
+    - faithfulness
+    - groundedness
+  definition: Grado en que cada afirmación de la respuesta está respaldada por los
+    fragmentos recuperados.
+  see: []
+- term: Ragas
+  aliases: []
+  definition: Framework de evaluación de RAG con métricas sin referencia
+    (fidelidad, relevancia) basadas en LLM como juez.
+  see: []
+- term: Lost in the middle
+  aliases: []
+  definition: Efecto por el que los modelos usan peor la información situada en
+    medio de un contexto largo.
+  see: []
+- term: Fine-tuning
+  aliases:
+    - ajuste fino
+  definition: Seguir entrenando un modelo con datos propios para cambiar su
+    comportamiento, estilo o formato.
+  see: []
+- term: Envenenamiento
+  aliases:
+    - envenenamiento de datos
+  definition: Introducir contenido malicioso en las fuentes que un sistema indexa
+    para manipular sus respuestas.
+  see: []
+- term: RAG agéntico
+  aliases:
+    - agentic RAG
+  definition: RAG en el que un agente decide en varios pasos qué buscar, dónde y
+    cuándo tiene suficiente evidencia.
+  see: []
+- term: GraphRAG
+  aliases:
+    - grafo de conocimiento
+  definition: RAG que construye y recorre un grafo de entidades y relaciones
+    extraídas de los documentos.
+  see: []
+- term: Padre-hijo
+  aliases:
+    - chunk padre
+  definition: Indexar chunks pequeños para buscar, pero enviar al modelo la
+    sección mayor (padre) que los contiene.
+  see: []
+- term: Top-k
+  aliases:
+    - k primeros
+  definition: Los k resultados mejor puntuados que devuelve una búsqueda.
+  see: []

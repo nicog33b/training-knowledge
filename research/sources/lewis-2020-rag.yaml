@@ -1,0 +1,29 @@
+id: lewis-2020-rag
+title: Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks
+authors:
+  - Lewis
+  - Perez
+  - Piktus
+  - Petroni
+  - Karpukhin
+  - Goyal
+  - Küttler
+  - Lewis
+  - Yih
+  - Rocktäschel
+  - Riedel
+  - Kiela
+year: 2020
+venue: NeurIPS 2020 / arXiv 2005.11401
+url: https://arxiv.org/abs/2005.11401
+kind: experiment
+verified: secondary
+retrieved: 2026-11-26
+summary: Artículo que acuña RAG; combina memoria paramétrica (seq2seq) con un
+  índice denso de Wikipedia.
+facts:
+  - Generador seq2seq preentrenado + recuperador denso sobre Wikipedia; dos
+    variantes (mismos pasajes para toda la salida o distintos por token).
+  - Estado del arte en 3 tareas de QA abierta; texto más específico, diverso y
+    factual que el modelo solo paramétrico.
+caveats: []

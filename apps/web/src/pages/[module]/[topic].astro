@@ -3,6 +3,8 @@ import Base from '../../layouts/Base.astro';
 import { renderMarkdown } from '@tk/render';
 import { getData } from '../../lib/data';
 import Lab from '../../components/Lab.astro';
+import StudyModes from '../../components/StudyModes.astro';
+import Tool from '../../components/Tool.astro';
 export async function getStaticPaths() {
   const { modules } = await getData();
   return modules.flatMap((m) =>
@@ -10,11 +12,39 @@ export async function getStaticPaths() {
   );
 }
 const { m, t } = Astro.props;
-const { html } = await renderMarkdown(t.body, m.glossary);
+const { html, usedTerms } = await renderMarkdown(t.body, m.glossary);
+const tools = m.tools.filter((x) => x.topics.includes(t.id));
+const titles = Object.fromEntries(m.topics.map((x) => [x.id, x.title]));
+const i = m.topics.findIndex((x) => x.id === t.id);
+const prev = m.topics[i - 1], next = m.topics[i + 1];
+const section = m.outline.sections.find((s) => s.id === t.section);
 ---
 <Base title={t.title} chat={{ module: m.manifest.id, course: m.manifest.title, topic: t.id, topicTitle: t.title, questions: t.lab.questions }}>
-  <p><a href={`/${m.manifest.id}/`}>← {m.manifest.title}</a></p>
+  <p class="crumbs"><a href={`/${m.manifest.id}/`}>← {m.manifest.title}</a>{section && <span class="muted"> · {section.title}</span>}</p>
   <h1>{t.title}</h1>
+  <StudyModes module={m.manifest.id} topic={t.id} title={t.title} body={t.body} usedTerms={usedTerms} glossary={m.glossary} questions={t.lab.questions} />
   <article class="prose" set:html={html} />
   <Lab lab={t.lab} moduleId={m.manifest.id} topicId={t.id} glossary={m.glossary} />
+  {tools.length > 0 && (
+    <section class="topic-tools">
+      <p class="eyebrow">Herramientas del curso</p>
+      <h2>Úsalo en un caso</h2>
+      {tools.map((x) => <Tool tool={x} module={m.manifest.id} compact topicTitles={titles} />)}
+    </section>
+  )}
+  <nav class="pager" aria-label="Subtemas">
+    {prev ? <a href={`/${m.manifest.id}/${prev.id}/`}><small>Anterior</small>{prev.title}</a> : <span></span>}
+    {next ? <a href={`/${m.manifest.id}/${next.id}/`} class="next"><small>Siguiente</small>{next.title}</a> : <span></span>}
+  </nav>
 </Base>
+<style>
+  .crumbs { margin: 0; font-size: .9rem; }
+  .topic-tools { margin: 3rem 0 1rem; }
+  .topic-tools .eyebrow { margin: 0; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+  .topic-tools h2 { margin: .15rem 0 .4rem; font-size: 1.55rem; }
+  .pager { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; margin-top: 3rem; }
+  .pager a { display: grid; gap: .1rem; text-decoration: none; border: 1px solid var(--line); border-radius: 12px; padding: .7rem .9rem; color: var(--fg); }
+  .pager a:hover { border-color: var(--accent); }
+  .pager a.next { text-align: right; }
+  .pager small { color: var(--muted); font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; }
+</style>

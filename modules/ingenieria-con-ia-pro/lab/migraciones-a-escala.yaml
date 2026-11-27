@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Qué parte del trabajo hizo el LLM en las migraciones de Google y qué parte no?
+    kind: aplicar
+    a: El LLM **generó** ~74 % de los cambios en 39 migraciones. **No** encontraba los sitios a cambiar (búsqueda y análisis estático deterministas), ni decidía qué es correcto (build y tests automáticos), ni integraba sin control (revisión humana). Es una pieza de un pipeline.
+    uses: []
+  - q: ¿Por qué los autores dicen que prompts simples no bastan para migraciones?
+    kind: por-que
+    a: Porque sin **descubrimiento** fiable se olvidan sitios, sin **validación** automática se cuelan cambios que no compilan o rompen tests, y sin **reintentos con el error** muchos archivos quedan a medias. El valor está en el sistema completo, no en el prompt.
+    uses: []
+  - q: Compara descubrir los sitios a migrar con un LLM o con herramientas deterministas.
+    kind: comparar
+    a: "**Deterministas** (grep, análisis estático, índices de código): exhaustivas, reproducibles y baratas. **LLM**: puede perder sitios o inventarlos y cuesta por archivo. Usa el LLM para **transformar**, no para **encontrar**."
+    uses: []
+  - q: Planifica migrar 400 archivos de una API interna antigua a la nueva.
+    kind: aplicar
+    a: Script que **lista** los usos de la API vieja → el agente migra en **lotes** de 10–20 archivos con un ejemplo del cambio correcto → build y tests por lote, reintento con el error → PR por lote revisado por una persona → al final, regla de linter que **prohíbe** la API vieja. Mide cuánto necesitó corrección humana.
+    uses: []
+  - q: ¿Qué pasa si migras todo en un único PR gigante?
+    kind: que-pasa-si
+    a: Nadie puede revisarlo de verdad, un fallo bloquea todo y revertir es todo o nada. Los lotes permiten revisar, integrar y revertir por partes, y aprender del primer lote para mejorar el prompt de los siguientes.
+    uses: []
+  - q: "Error común: tomar el «50 % menos de tiempo» de Google como la ganancia esperada para cualquier tarea."
+    kind: error-comun
+    a: "Las migraciones son tareas **mecánicas, repetitivas y verificables**: el caso ideal para LLM. Además es una estimación de un caso interno sin grupo de control. En trabajo creativo o poco verificable, la ganancia puede ser mucho menor."
+    uses: []
+sims: []

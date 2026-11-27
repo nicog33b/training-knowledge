@@ -1,68 +1,158 @@
 ---
 /**
- * Menú propio al seleccionar texto de la página: acciones del tutor sobre ESE fragmento
- * (explicar, ejemplo, por qué, pregúntame, preguntar libre) + las preguntas del laboratorio
- * del subtema que tienen que ver con lo seleccionado. Todo se manda al chat flotante
- * con el evento 'tk-ask' (Chat.astro), con el fragmento adjunto como contexto.
+ * Menú al seleccionar texto: una píldora minimalista con iconos (etiqueta al pasar o enfocar).
+ *  · Gratis, sin IA: definición del glosario si lo seleccionado es un término, escuchar (voz del navegador),
+ *    crear tarjeta de repaso (convierte el fragmento en práctica de recuperación, no en subrayado),
+ *    copiar con la cita, y las preguntas del laboratorio relacionadas (llevan a su tarjeta con respuesta).
+ *  · Con el tutor (cuesta): explicar, ejemplo, por qué, pregúntame, hazlo diagrama, preguntar libre.
+ * Todo lo del tutor va al chat con el evento 'tk-ask' (Chat.astro) y el fragmento adjunto.
+ * Decisiones: preguntas-sugeridas-y-contexto-minimo, vistas-de-estudio-generadas, accesibilidad-con-evidencia,
+ *             descartar-tecnicas-de-baja-evidencia (por eso no hay "resaltar").
  */
 import type { LabQuestion } from '@tk/contracts';
-interface Props { questions?: LabQuestion[] }
-const { questions = [] } = Astro.props;
+interface Props { questions?: LabQuestion[]; module?: string; topic?: string }
+const { questions = [], module = '', topic = '' } = Astro.props;
+const I = {
+  spark: '<path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/>',
+  example: '<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.8V16h5v-.3c0-.7.4-1.4 1-1.8A6 6 0 0 0 12 3z"/>',
+  why: '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.2a2.6 2.6 0 0 1 5 .9c0 1.8-2.5 2.3-2.5 4"/><circle cx="12" cy="17.2" r=".6" fill="currentColor"/>',
+  quiz: '<path d="M4 5h16v11H8l-4 4z"/><path d="M9 9.5h6M9 12.5h4"/>',
+  diagram: '<rect x="3" y="3" width="7" height="6" rx="1.5"/><rect x="14" y="15" width="7" height="6" rx="1.5"/><path d="M6.5 9v3.5a2 2 0 0 0 2 2H14"/>',
+  listen: '<path d="M4 10v4h3l5 4V6L7 10z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/>',
+  card: '<rect x="3" y="6" width="14" height="12" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v10"/><path d="M10 10v4M8 12h4"/>',
+  copy: '<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>',
+  ask: '<path d="M4 20l1.5-4.5A8 8 0 1 1 8.5 19z"/><path d="M12 9v6M9 12h6"/>',
+};
+const svg = (d: string) => `<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const icons = Object.fromEntries(Object.entries(I).map(([k, v]) => [k, svg(v)]));
 ---
-<div id="tk-selmenu" class="tk-selmenu" role="toolbar" aria-label="Preguntar al tutor sobre el texto seleccionado" hidden>
-  <script type="application/json" set:html={JSON.stringify(questions.map((q) => q.q)).replace(/</g, '\\u003c')} />
-  <div class="tk-sel-actions"></div>
+<div id="tk-selmenu" class="tk-selmenu" role="toolbar" aria-label="Acciones sobre el texto seleccionado" data-module={module} data-topic={topic} hidden>
+  <script type="application/json" class="tk-sel-data" set:html={JSON.stringify({ qs: questions.map((q) => q.q), icons }).replace(/</g, '\\u003c')} />
+  <div class="tk-sel-def" hidden><strong></strong><span></span></div>
+  <div class="tk-sel-row"></div>
   <div class="tk-sel-related" hidden>
-    <span>Preguntas del curso sobre esto (con respuesta, abajo)</span>
-    <div class="tk-sel-qs"></div>
+    <button type="button" class="tk-sel-more" aria-expanded="false"></button>
+    <div class="tk-sel-qs" hidden></div>
   </div>
 </div>
+<div class="tk-toast" role="status" aria-live="polite" hidden></div>
 
 <style is:global>
-  .tk-selmenu { position: fixed; z-index: 60; max-width: min(460px, calc(100vw - 32px)); background: var(--fg); color: var(--bg);
-    border-radius: 10px; box-shadow: 0 6px 24px rgb(0 0 0 / .25); padding: .3rem; font-size: .8rem; line-height: 1.35; }
-  .tk-selmenu[hidden] { display: none; }
-  .tk-sel-actions { display: flex; flex-wrap: wrap; gap: .15rem; }
-  .tk-selmenu button { font: inherit; color: inherit; background: none; border: 0; border-radius: 7px; padding: .3rem .55rem; cursor: pointer; text-align: left; }
-  .tk-selmenu button:hover, .tk-selmenu button:focus-visible { background: color-mix(in srgb, var(--bg) 18%, transparent); outline: none; }
-  .tk-selmenu button.main { font-weight: 600; }
-  .tk-sel-related { border-top: 1px solid color-mix(in srgb, var(--bg) 25%, transparent); margin-top: .25rem; padding-top: .25rem; }
-  .tk-sel-related > span { display: block; padding: .1rem .55rem; font-size: .68rem; opacity: .7; }
-  .tk-sel-qs button { display: block; width: 100%; }
+  .tk-selmenu { position: fixed; z-index: 60; max-width: min(440px, calc(100vw - 32px)); background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(10px); color: var(--fg); border: 1px solid var(--line); border-radius: 14px; font-size: .8rem; line-height: 1.35;
+    box-shadow: 0 1px 2px rgb(0 0 0 / .06), 0 10px 30px -6px rgb(0 0 0 / .22); padding: 4px; transform-origin: 50% 100%; animation: tk-pop .13s ease-out; }
+  .tk-selmenu.below { transform-origin: 50% 0; }
+  @keyframes tk-pop { from { opacity: 0; transform: translateY(4px) scale(.97); } }
+  .tk-selmenu[hidden], .tk-toast[hidden] { display: none; }
+  .tk-sel-row { display: flex; align-items: center; gap: 1px; flex-wrap: wrap; }
+  .tk-sel-row .sep { width: 1px; height: 20px; background: var(--line); margin: 0 3px; }
+  .tk-selmenu button { font: inherit; color: inherit; background: none; border: 0; border-radius: 9px; cursor: pointer; }
+  .tk-sel-row button { position: relative; display: inline-grid; place-items: center; width: 34px; height: 34px; color: var(--muted); }
+  .tk-sel-row button.main { width: auto; display: inline-flex; gap: .35rem; padding: 0 .7rem 0 .55rem; color: var(--accent); font-weight: 650;
+    background: color-mix(in srgb, var(--accent) 10%, transparent); }
+  .tk-sel-row button:hover, .tk-sel-row button:focus-visible { color: var(--fg); background: color-mix(in srgb, var(--fg) 8%, transparent); outline: none; }
+  .tk-sel-row button.main:hover, .tk-sel-row button.main:focus-visible { color: var(--accent); background: color-mix(in srgb, var(--accent) 18%, transparent); }
+  .tk-sel-row button:focus-visible { box-shadow: 0 0 0 2px var(--accent); }
+  .tk-sel-row button.ai::after { content: ''; position: absolute; top: 6px; right: 6px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); opacity: .7; }
+  .tk-sel-row button.main.ai::after { display: none; }
+  /* Etiqueta (tooltip) al pasar o enfocar */
+  .tk-sel-row button[data-tip]:not(.main):hover::before, .tk-sel-row button[data-tip]:not(.main):focus-visible::before {
+    content: attr(data-tip); position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); white-space: nowrap;
+    background: var(--fg); color: var(--bg); font-size: .72rem; font-weight: 500; padding: .25rem .5rem; border-radius: 6px; pointer-events: none; }
+  .tk-selmenu.below .tk-sel-row button[data-tip]:not(.main):hover::before, .tk-selmenu.below .tk-sel-row button[data-tip]:not(.main):focus-visible::before { bottom: auto; top: calc(100% + 8px); }
+  .tk-sel-def { padding: .45rem .6rem .5rem; margin-bottom: 3px; border-bottom: 1px solid var(--line); max-width: 52ch; }
+  .tk-sel-def[hidden] { display: none; }
+  .tk-sel-def strong { display: block; font-size: .72rem; letter-spacing: .04em; color: var(--accent); margin-bottom: .1rem; }
+  .tk-sel-def span { color: var(--fg); }
+  .tk-sel-related { border-top: 1px solid var(--line); margin-top: 3px; padding-top: 3px; }
+  .tk-sel-more { width: 100%; text-align: left; padding: .3rem .55rem; color: var(--muted); font-size: .74rem; display: flex; justify-content: space-between; gap: .5rem; }
+  .tk-sel-more:hover, .tk-sel-more:focus-visible { color: var(--fg); background: color-mix(in srgb, var(--fg) 6%, transparent); outline: none; }
+  .tk-sel-more::after { content: '▾'; transition: transform .15s; }
+  .tk-sel-more[aria-expanded=true]::after { transform: rotate(180deg); }
+  .tk-sel-qs button { display: block; width: 100%; text-align: left; padding: .38rem .55rem; border-radius: 8px; }
+  .tk-sel-qs button:hover, .tk-sel-qs button:focus-visible { background: color-mix(in srgb, var(--accent) 10%, transparent); outline: none; }
+  .tk-sel-qs button::before { content: '↳ '; color: var(--accent); }
+  .tk-toast { position: fixed; z-index: 70; left: 50%; bottom: 84px; transform: translateX(-50%); background: var(--fg); color: var(--bg); font-size: .82rem;
+    padding: .5rem .9rem; border-radius: 99px; box-shadow: 0 8px 24px rgb(0 0 0 / .25); }
+  .tk-toast a { color: inherit; font-weight: 700; margin-left: .5rem; }
+  :root[data-ui="grande"] .tk-sel-row button { width: 44px; height: 44px; }
 </style>
 
 <script>
+  import { store, userCardsKey, type UserCard } from '../lib/store.ts';
+  import { readText, speechSupported } from '../lib/speech.ts';
+
   const menu = document.getElementById('tk-selmenu')!;
-  const actionsBox = menu.querySelector<HTMLElement>('.tk-sel-actions')!;
+  const row = menu.querySelector<HTMLElement>('.tk-sel-row')!;
+  const defBox = menu.querySelector<HTMLElement>('.tk-sel-def')!;
   const related = menu.querySelector<HTMLElement>('.tk-sel-related')!;
+  const moreBtn = menu.querySelector<HTMLButtonElement>('.tk-sel-more')!;
   const qsBox = menu.querySelector<HTMLElement>('.tk-sel-qs')!;
-  const labQuestions: string[] = JSON.parse(menu.querySelector('script')!.textContent || '[]');
+  const toast = document.querySelector<HTMLElement>('.tk-toast')!;
+  const { qs: labQuestions, icons } = JSON.parse(menu.querySelector('.tk-sel-data')!.textContent || '{}') as { qs: string[]; icons: Record<string, string> };
+  const { module: mod, topic } = menu.dataset;
   const coarse = matchMedia('(pointer: coarse)').matches; // táctil: debajo, para no tapar el menú nativo
 
-  type Action = { label: string; q?: string; main?: boolean };
-  const actionsFor = (sel: string): Action[] => {
+  type Action = { id: string; icon: string; tip: string; label?: string; ai?: boolean; run: () => void };
+  let current = '';
+  let currentDef = '';
+
+  const ask = (detail: { q?: string; selection: string; send?: boolean }) => { hide(); document.dispatchEvent(new CustomEvent('tk-ask', { detail })); };
+  const tutor = (q: string) => () => ask({ q, selection: current });
+
+  function showToast(html: string) {
+    toast.innerHTML = html;
+    toast.hidden = false;
+    clearTimeout((showToast as any).t);
+    (showToast as any).t = setTimeout(() => (toast.hidden = true), 3200);
+  }
+
+  function makeCard() {
+    if (!mod) return;
+    const short = current.split(/\s+/).length <= 5;
+    const card: UserCard = {
+      id: `u${Date.now().toString(36)}`,
+      front: short ? `¿Qué es «${current}»?` : `Explica con tus palabras: «${current.length > 110 ? current.slice(0, 107) + '…' : current}»`,
+      back: short ? (currentDef || 'Escribe aquí tu respuesta al repasar.') : current,
+      topic,
+      created: Date.now(),
+    };
+    store.set(userCardsKey(mod), [...store.get<UserCard[]>(userCardsKey(mod), []), card]);
+    hide();
+    getSelection()?.removeAllRanges();
+    showToast(`Tarjeta creada para repasar <a href="/${mod}/tarjetas/">Ver tarjetas</a>`);
+  }
+
+  function actionsFor(sel: string): Action[] {
     const short = sel.length <= 40 && sel.split(/\s+/).length <= 4;
     return [
-      ...(short ? [{ label: `¿Qué es «${sel}»?`, q: `¿Qué es «${sel}» y para qué sirve en este tema?`, main: true }] : []),
-      { label: 'Explícame esto', q: 'Explícame este fragmento con otras palabras, más simple.', main: !short },
-      { label: 'Dame un ejemplo', q: 'Dame un ejemplo concreto de esto en un caso real.' },
-      { label: '¿Por qué?', q: '¿Por qué es así? Explícame la razón de fondo.' },
-      { label: 'Pregúntame', q: 'Hazme una pregunta corta para comprobar si entendí este fragmento. No me des la respuesta todavía.' },
-      { label: 'Preguntar…' }, // adjunta el fragmento y deja escribir
+      short
+        ? { id: 'what', icon: icons.spark, tip: `¿Qué es «${sel}»?`, label: currentDef ? 'Profundizar' : '¿Qué es?', ai: true, run: tutor(`¿Qué es «${sel}» y para qué sirve en este tema?`) }
+        : { id: 'explain', icon: icons.spark, tip: 'Explícame esto', label: 'Explicar', ai: true, run: tutor('Explícame este fragmento con otras palabras, más simple.') },
+      { id: 'example', icon: icons.example, tip: 'Dame un ejemplo', ai: true, run: tutor('Dame un ejemplo concreto de esto en un caso real.') },
+      { id: 'why', icon: icons.why, tip: '¿Por qué?', ai: true, run: tutor('¿Por qué es así? Explícame la razón de fondo.') },
+      { id: 'quiz', icon: icons.quiz, tip: 'Pregúntame', ai: true, run: tutor('Hazme una pregunta corta para comprobar si entendí este fragmento. No me des la respuesta todavía.') },
+      { id: 'diagram', icon: icons.diagram, tip: 'Hazlo diagrama', ai: true, run: tutor('Convierte este fragmento en un diagrama Mermaid (flowchart o mindmap, máximo 12 nodos, textos cortos sin paréntesis). Responde con el bloque ```mermaid y una frase que explique cómo leerlo.') },
+      { id: '-', icon: '', tip: '', run: () => {} },
+      ...(speechSupported() ? [{ id: 'listen', icon: icons.listen, tip: 'Escuchar', run: () => { hide(); readText(current); } }] : []),
+      ...(mod ? [{ id: 'card', icon: icons.card, tip: 'Crear tarjeta de repaso', run: makeCard }] : []),
+      { id: 'copy', icon: icons.copy, tip: 'Copiar con la fuente', run: async () => {
+        const text = `«${current}» — ${document.title} (${location.href})`;
+        try { await navigator.clipboard.writeText(text); showToast('Copiado con la fuente'); } catch { showToast('No se pudo copiar'); }
+        hide();
+      } },
+      { id: 'ask', icon: icons.ask, tip: 'Preguntar al tutor…', ai: true, run: () => ask({ selection: current, send: false }) },
     ];
-  };
+  }
 
-  // Preguntas del laboratorio que comparten palabras significativas con la selección.
+  // ───── Preguntas del laboratorio relacionadas (palabras raras compartidas con la selección y su sección) ─────
   const STOP = new Set('para como esto esta este estos estas cuando donde entre sobre desde hasta porque pero tiene tienen puede pueden cada otro otra otros otras mismo misma solo también todos todas cual cuales hace hacer sido será sería usar usas'.split(' '));
-  const words = (s: string) => new Set((s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().match(/[a-z0-9]{4,}/g) ?? []).filter((w) => !STOP.has(w)));
-  // Peso por rareza en la página: "mensaje" en el subtema de SQS aparece en todas partes y no distingue;
-  // "visibility" o "timeout" sí. Raíz de 6 letras para emparejar singular/plural y variantes.
+  const norm = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  const words = (s: string) => new Set((norm(s).match(/[a-z0-9]{4,}/g) ?? []).filter((w) => !STOP.has(w)));
   const stem = (w: string) => w.slice(0, 6);
   const freq = new Map<string, number>();
-  for (const w of (document.querySelector('main')?.textContent ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().match(/[a-z0-9]{4,}/g) ?? [])
-    freq.set(stem(w), (freq.get(stem(w)) ?? 0) + 1);
+  for (const w of norm(document.querySelector('main')?.textContent ?? '').match(/[a-z0-9]{4,}/g) ?? []) freq.set(stem(w), (freq.get(stem(w)) ?? 0) + 1);
   const weight = (w: string) => 1 / Math.log2(2 + (freq.get(stem(w)) ?? 0));
-  /** Título de la sección (h2–h4 anterior) donde está la selección: da el tema aunque el párrafo no lo nombre. */
   function sectionHeading(node: Element | null): string {
     let block: Element | null = node;
     while (block && block.parentElement && !block.parentElement.matches('article, main, section')) block = block.parentElement;
@@ -73,49 +163,84 @@ const { questions = [] } = Astro.props;
     const ws = new Set([...words(`${sel} ${heading}`)].map(stem));
     return labQuestions
       .map((q) => ({ q, score: [...new Set([...words(q)].map(stem))].filter((s) => ws.has(s)).reduce((a, s) => a + weight(s), 0) }))
-      .filter((x) => x.score > 0)
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 3)
-      .map((x) => x.q);
+      .filter((x) => x.score > 0).sort((a, b) => b.score - a.score).slice(0, 3).map((x) => x.q);
   }
 
-  let current = '';
-  const ask = (detail: { q?: string; selection: string; send?: boolean }) => {
-    hide();
-    document.dispatchEvent(new CustomEvent('tk-ask', { detail }));
-  };
-  const button = (label: string, onClick: () => void, cls = '') => {
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.textContent = label;
-    if (cls) b.className = cls;
-    b.addEventListener('click', onClick);
-    return b;
-  };
+  /** Definición del glosario si la selección es (o está dentro de) un término subrayado de la página. */
+  function glossaryDef(sel: string, node: Element): string {
+    const term = node.closest<HTMLElement>('.tk-term');
+    if (term?.dataset.def) return term.dataset.def;
+    const n = norm(sel);
+    for (const t of document.querySelectorAll<HTMLElement>('.tk-term[data-def]')) if (norm(t.textContent ?? '') === n) return t.dataset.def!;
+    return '';
+  }
 
   function hide() { menu.hidden = true; current = ''; }
 
-  function show(sel: string, rect: DOMRect, heading: string) {
+  function show(sel: string, rect: DOMRect, heading: string, node: Element) {
     current = sel;
-    actionsBox.replaceChildren(...actionsFor(sel).map((a) =>
-      button(a.label, () => ask(a.q ? { q: a.q, selection: current } : { selection: current, send: false }), a.main ? 'main' : '')));
+    currentDef = sel.length <= 40 ? glossaryDef(sel, node) : '';
+    defBox.hidden = !currentDef;
+    if (currentDef) { defBox.querySelector('strong')!.textContent = sel; defBox.querySelector('span')!.textContent = currentDef; }
+    row.replaceChildren(...actionsFor(sel).map((a) => {
+      if (a.id === '-') return Object.assign(document.createElement('span'), { className: 'sep' });
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = `${a.label ? 'main' : ''} ${a.ai ? 'ai' : ''}`.trim();
+      b.dataset.tip = a.tip + (a.ai && !a.label ? ' · tutor' : '');
+      b.setAttribute('aria-label', a.tip + (a.ai ? ' (usa el tutor IA)' : ''));
+      b.innerHTML = a.icon + (a.label ? `<span>${a.label}</span>` : '');
+      b.tabIndex = -1;
+      b.addEventListener('click', a.run);
+      return b;
+    }));
+    const btns = [...row.querySelectorAll('button')];
+    if (btns[0]) btns[0].tabIndex = 0;
     const rel = relatedTo(sel, heading);
     related.hidden = !rel.length;
-    // Las preguntas del curso ya tienen respuesta escrita: se lleva al alumno a la tarjeta (gratis), no al chat.
-    qsBox.replaceChildren(...rel.map((q) => button(q, () => {
-      hide();
-      getSelection()?.removeAllRanges();
-      document.dispatchEvent(new CustomEvent('tk-show-q', { detail: q }));
-    })));
+    moreBtn.textContent = `${rel.length} ${rel.length === 1 ? 'pregunta' : 'preguntas'} del curso sobre esto`;
+    moreBtn.setAttribute('aria-expanded', 'false');
+    qsBox.hidden = true;
+    qsBox.replaceChildren(...rel.map((q) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = q;
+      b.addEventListener('click', () => { hide(); getSelection()?.removeAllRanges(); document.dispatchEvent(new CustomEvent('tk-show-q', { detail: q })); });
+      return b;
+    }));
     menu.hidden = false;
-    // Posición: encima de la selección (debajo en táctil o si no cabe), dentro de la pantalla con 16 px de margen.
+    place(rect);
+  }
+
+  function place(rect: DOMRect) {
     const m = menu.getBoundingClientRect();
-    const above = rect.top - m.height - 8;
-    const top = !coarse && above > 42 ? above : Math.min(rect.bottom + 8, innerHeight - m.height - 8);
+    const above = rect.top - m.height - 10;
+    const below = coarse || above < 42;
+    const top = below ? Math.min(rect.bottom + 10, innerHeight - m.height - 8) : above;
     const left = Math.max(16, Math.min(rect.left + rect.width / 2 - m.width / 2, innerWidth - m.width - 16));
+    menu.classList.toggle('below', below);
     menu.style.top = `${Math.max(8, top)}px`;
     menu.style.left = `${left}px`;
   }
+
+  moreBtn.addEventListener('click', () => {
+    const open = qsBox.hidden;
+    qsBox.hidden = !open;
+    moreBtn.setAttribute('aria-expanded', String(open));
+    const s = getSelection();
+    if (s?.rangeCount) place(s.getRangeAt(0).getBoundingClientRect());
+  });
+
+  // Teclado: flechas recorren la barra (roving tabindex), Escape cierra.
+  row.addEventListener('keydown', (e) => {
+    const btns = [...row.querySelectorAll<HTMLButtonElement>('button')];
+    const i = btns.indexOf(document.activeElement as HTMLButtonElement);
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft' && e.key !== 'Home' && e.key !== 'End') return;
+    e.preventDefault();
+    const j = e.key === 'Home' ? 0 : e.key === 'End' ? btns.length - 1 : (i + (e.key === 'ArrowRight' ? 1 : -1) + btns.length) % btns.length;
+    btns.forEach((b, k) => (b.tabIndex = k === j ? 0 : -1));
+    btns[j].focus();
+  });
 
   /** Selección válida: dentro del contenido (main), fuera del chat, del menú y de campos de texto. */
   function check() {
@@ -123,19 +248,23 @@ const { questions = [] } = Astro.props;
     const text = s?.toString().replace(/\s+/g, ' ').trim() ?? '';
     if (!s || s.isCollapsed || text.length < 2 || !s.rangeCount) return hide();
     const node = s.anchorNode instanceof Element ? s.anchorNode : s.anchorNode?.parentElement;
-    if (!node || !node.closest('main') || node.closest('#tk-chat, #tk-selmenu, textarea, input')) return hide();
+    if (!node || !node.closest('main') || node.closest('#tk-chat, #tk-selmenu, textarea, input, .tool, .sm-panel [contenteditable]')) return hide();
     const rect = s.getRangeAt(0).getBoundingClientRect();
     if (!rect.width && !rect.height) return hide();
-    show(text.slice(0, 1200), rect, sectionHeading(node));
+    show(text.slice(0, 1200), rect, sectionHeading(node), node);
   }
 
-  const later = () => setTimeout(check, 10); // deja que el navegador termine la selección
+  const later = () => setTimeout(check, 10);
   document.addEventListener('mouseup', (e) => { if (!menu.contains(e.target as Node)) later(); });
   document.addEventListener('touchend', () => setTimeout(check, 350));
-  document.addEventListener('keyup', (e) => { if (e.key === 'Escape') hide(); else if (e.shiftKey || e.key === 'Shift') later(); });
-  document.addEventListener('selectionchange', () => { if (!menu.hidden && getSelection()?.isCollapsed) hide(); });
+  document.addEventListener('keyup', (e) => {
+    if (e.key === 'Escape') hide();
+    else if (e.shiftKey || e.key === 'Shift') later();
+  });
+  // Alt+S: saltar del texto seleccionado a la barra con el teclado.
+  document.addEventListener('keydown', (e) => { if (e.altKey && (e.key === 's' || e.key === 'S') && !menu.hidden) { e.preventDefault(); row.querySelector<HTMLButtonElement>('button')?.focus(); } });
+  document.addEventListener('selectionchange', () => { if (!menu.hidden && getSelection()?.isCollapsed && !menu.contains(document.activeElement)) hide(); });
   addEventListener('scroll', () => { if (!menu.hidden) hide(); }, { passive: true });
   addEventListener('resize', hide);
-  // Clic en el menú: no perder la selección antes de leerla.
-  menu.addEventListener('mousedown', (e) => e.preventDefault());
+  menu.addEventListener('mousedown', (e) => e.preventDefault()); // no perder la selección
 </script>

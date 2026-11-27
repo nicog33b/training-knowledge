@@ -1,0 +1,25 @@
+id: metr-2025-ai-devs
+title: Measuring the Impact of Early-2025 AI on Experienced Open-Source
+  Developer Productivity
+authors:
+  - Becker
+  - Rush
+  - Barnes
+  - Rein
+year: 2025
+venue: METR / arXiv 2507.09089
+url: https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/
+kind: rct
+verified: secondary
+retrieved: 2026-11-26
+summary: En un ECA, desarrolladores expertos en sus propios repos tardaron un 19
+  % más con IA, aunque creían ir más rápido.
+facts:
+  - "16 desarrolladores, 246 tareas (~2 h cada una) en repositorios maduros que
+    conocían: con IA permitida tardaron un 19 % más."
+  - Antes esperaban un 24 % de aceleración y después seguían creyendo que la IA
+    les había acelerado un 20 %.
+caveats:
+  - Los autores lo presentan como foto de herramientas de principios de 2025 y
+    de un contexto concreto (expertos en repos grandes que conocen).
+  - Autores listados desde memoria; confirmar en el paper (T-099).

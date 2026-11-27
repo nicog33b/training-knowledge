@@ -4,44 +4,19 @@
  * Izquierda: menú mínimo. Derecha: contador de gasto de IA (de apps/tutor-api, GET /gasto):
  * cada respuesta suma sus tokens × el precio del modelo que respondió (Haiku, Opus, GPT-6 Luna…).
  */
+import A11yPanel from './A11yPanel.astro';
 const api = import.meta.env.PUBLIC_TUTOR_URL ?? 'http://127.0.0.1:4322';
 ---
+<a class="tk-skip" href="#contenido">Saltar al contenido</a>
 <header class="tk-top" data-api={api}>
   <nav>
     <a href="/" class="tk-brand" title="Training Knowledge">TK</a>
     <a href="/">Cursos</a>
+    <a href="/rutas/">Rutas</a>
     <a href="/progreso/">Progreso</a>
   </nav>
   <div class="tk-right">
-  <div class="tk-read">
-    <button type="button" class="tk-read-btn" aria-expanded="false" aria-controls="tk-read-pop" title="Ajustes de lectura">Aa</button>
-    <div id="tk-read-pop" class="tk-read-pop" hidden>
-      <p class="tk-read-h">Fuente</p>
-      <div class="tk-seg" data-pref="font">
-        <button type="button" data-v="" style="font-family: system-ui, sans-serif">Sistema</button>
-        <button type="button" data-v="literata" style="font-family: 'Literata Variable', Georgia, serif">Literata</button>
-        <button type="button" data-v="atkinson" style="font-family: 'Atkinson Hyperlegible', sans-serif">Atkinson</button>
-      </div>
-      <p class="tk-read-h">Tamaño <span class="tk-size-val"></span></p>
-      <div class="tk-seg tk-size">
-        <button type="button" data-step="-1" aria-label="Letra más pequeña">A−</button>
-        <button type="button" data-step="0">Normal</button>
-        <button type="button" data-step="1" aria-label="Letra más grande">A+</button>
-      </div>
-      <p class="tk-read-h">Espaciado</p>
-      <div class="tk-seg" data-pref="spacing">
-        <button type="button" data-v="">Normal</button>
-        <button type="button" data-v="amplio">Amplio</button>
-      </div>
-      <p class="tk-read-h">Tema</p>
-      <div class="tk-seg" data-pref="theme">
-        <button type="button" data-v="">Auto</button>
-        <button type="button" data-v="light">Claro</button>
-        <button type="button" data-v="dark">Oscuro</button>
-      </div>
-      <p class="tk-read-note">La fuente que mejor lee cada persona varía: prueba y quédate con la que te deje leer más cómodo. Se guarda en este navegador.</p>
-    </div>
-  </div>
+  <A11yPanel />
   <div class="tk-spend">
     <button type="button" class="tk-spend-btn" aria-expanded="false" aria-controls="tk-spend-pop" title="Gasto de IA">
       <span class="tk-spend-label">gasto …</span>
@@ -56,6 +31,7 @@ const api = import.meta.env.PUBLIC_TUTOR_URL ?? 'http://127.0.0.1:4322';
       <button type="button" class="tk-spend-reset">Reiniciar contador</button>
     </div>
   </div>
+  <a class="tk-user" href="/entrar/" title="Entrar o crear cuenta"><span class="tk-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7z"/></svg></span><span class="tk-user-name">Entrar</span></a>
   </div>
 </header>
 
@@ -69,19 +45,7 @@ const api = import.meta.env.PUBLIC_TUTOR_URL ?? 'http://127.0.0.1:4322';
   .tk-top nav a:hover { color: var(--fg); }
   .tk-top .tk-brand { font-weight: 700; color: var(--fg); letter-spacing: .04em; }
   .tk-right { display: flex; align-items: center; gap: .3rem; }
-  .tk-read, .tk-spend { position: relative; }
-  .tk-read-btn { font: inherit; font-weight: 700; font-family: Georgia, serif; color: var(--muted); background: none; border: 1px solid transparent; border-radius: 99px; padding: .05rem .5rem; cursor: pointer; }
-  .tk-read-btn:hover, .tk-read-btn[aria-expanded=true] { border-color: var(--line); color: var(--fg); }
-  .tk-read-pop { position: absolute; right: 0; top: calc(100% + 6px); width: min(300px, calc(100vw - 32px)); background: var(--bg); color: var(--fg);
-    border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 8px 28px rgb(0 0 0 / .18); padding: .4rem .8rem .7rem; font-size: .8rem; }
-  .tk-read-pop[hidden] { display: none; }
-  .tk-read-h { margin: .6rem 0 .3rem; font-size: .7rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
-  .tk-seg { display: flex; gap: 2px; background: var(--card); border: 1px solid var(--line); border-radius: 9px; padding: 2px; }
-  .tk-seg button { flex: 1; font: inherit; font-size: .82rem; color: var(--fg); background: none; border: 0; border-radius: 7px; padding: .3rem .4rem; cursor: pointer; }
-  .tk-seg button:hover { background: color-mix(in srgb, var(--accent) 10%, transparent); }
-  .tk-seg button[aria-pressed=true] { background: var(--bg); box-shadow: 0 1px 3px rgb(0 0 0 / .15); font-weight: 700; color: var(--accent); }
-  .tk-seg button:focus-visible, .tk-read-btn:focus-visible, .tk-spend-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
-  .tk-read-note { margin: .7rem 0 0; color: var(--muted); font-size: .72rem; line-height: 1.45; }
+  .tk-spend { position: relative; }
   .tk-spend-btn { font: inherit; color: var(--muted); background: none; border: 1px solid transparent; border-radius: 99px; padding: .1rem .55rem; cursor: pointer; white-space: nowrap; font-variant-numeric: tabular-nums; }
   .tk-spend-btn:hover, .tk-spend-btn[aria-expanded=true] { border-color: var(--line); color: var(--fg); }
   .tk-spend-btn b { font-weight: 600; color: var(--fg); }
@@ -100,55 +64,28 @@ const api = import.meta.env.PUBLIC_TUTOR_URL ?? 'http://127.0.0.1:4322';
   .tk-spend-models tr.unused td { color: var(--muted); }
   .tk-spend-note { color: var(--muted); font-size: .72rem; margin: .5rem 0; }
   .tk-spend-reset { font: inherit; font-size: .72rem; border: 1px solid var(--line); background: var(--card); color: var(--muted); border-radius: 6px; padding: .15rem .5rem; cursor: pointer; }
-  @media (max-width: 520px) { .tk-top nav a:not(.tk-brand):nth-child(n+3) { display: none; } }
+  .tk-spend-btn:focus-visible, .tk-user:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .tk-skip { position: absolute; left: 8px; top: -60px; z-index: 100; background: var(--accent); color: var(--on-accent); padding: .5rem .8rem; border-radius: 8px; }
+  .tk-skip:focus { top: 6px; }
+  .tk-user { display: inline-flex; align-items: center; gap: .35rem; color: var(--muted); text-decoration: none; border: 1px solid transparent; border-radius: 99px; padding: .05rem .45rem .05rem .1rem; white-space: nowrap; }
+  .tk-user:hover { color: var(--fg); border-color: var(--line); }
+  .tk-avatar { width: 22px; height: 22px; border-radius: 50%; display: inline-grid; place-items: center; font-size: .66rem; font-weight: 700; color: var(--on-accent);
+    background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 50%, var(--k-comparar))); }
+  @media (max-width: 620px) { .tk-top nav a:not(.tk-brand):nth-child(n+3) { display: none; } .tk-user-name, .tk-spend-label { display: none; } .tk-spend-btn::before { content: '$'; } }
 </style>
 
 <script>
-  // ───── Ajustes de lectura (decisiones tipografia-y-medidas-de-lectura, color-con-funcion-y-contraste) ─────
-  // Se aplican como data-* en <html>; Base.astro los restaura antes de pintar.
-  {
-    type Prefs = { font?: string; spacing?: string; theme?: string; size?: number };
-    const KEY = 'tk-read';
-    const DEFAULT_SIZE = 19, MIN = 15, MAX = 26;
-    const root = document.documentElement;
-    const rbtn = document.querySelector<HTMLButtonElement>('.tk-read-btn')!;
-    const rpop = document.getElementById('tk-read-pop')!;
-    let prefs: Prefs = {};
-    try { prefs = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch {}
-    const save = () => { try { localStorage.setItem(KEY, JSON.stringify(prefs)); } catch {} };
-    function apply() {
-      for (const k of ['font', 'spacing', 'theme'] as const) prefs[k] ? (root.dataset[k] = prefs[k]) : delete root.dataset[k];
-      prefs.size ? root.style.setProperty('--read-size', `${prefs.size}px`) : root.style.removeProperty('--read-size');
-      rpop.querySelectorAll<HTMLElement>('[data-pref]').forEach((g) =>
-        g.querySelectorAll<HTMLButtonElement>('button').forEach((b) => b.setAttribute('aria-pressed', String((prefs[g.dataset.pref as keyof Prefs] ?? '') === b.dataset.v))));
-      rpop.querySelector('.tk-size-val')!.textContent = `· ${prefs.size ?? DEFAULT_SIZE} px`;
+  // Usuario (solo presentación: perfil local, ver /perfil/).
+  try {
+    const u = JSON.parse(localStorage.getItem('tk-user') || 'null');
+    if (u?.name) {
+      const a = document.querySelector<HTMLAnchorElement>('.tk-user')!;
+      a.href = '/perfil/';
+      a.title = 'Tu perfil';
+      a.querySelector('.tk-user-name')!.textContent = u.name.split(' ')[0];
+      a.querySelector('.tk-avatar')!.textContent = u.name.split(/\s+/).map((w: string) => w[0]).slice(0, 2).join('').toUpperCase();
     }
-    rpop.querySelectorAll<HTMLElement>('[data-pref]').forEach((g) => g.addEventListener('click', (e) => {
-      const b = (e.target as HTMLElement).closest('button');
-      if (!b) return;
-      const k = g.dataset.pref as 'font' | 'spacing' | 'theme';
-      b.dataset.v ? (prefs[k] = b.dataset.v) : delete prefs[k];
-      save(); apply();
-    }));
-    rpop.querySelector('.tk-size')!.addEventListener('click', (e) => {
-      const b = (e.target as HTMLElement).closest<HTMLButtonElement>('button');
-      if (!b) return;
-      const step = Number(b.dataset.step);
-      const next = step ? Math.max(MIN, Math.min(MAX, (prefs.size ?? DEFAULT_SIZE) + step)) : DEFAULT_SIZE;
-      next === DEFAULT_SIZE ? delete prefs.size : (prefs.size = next);
-      save(); apply();
-    });
-    rbtn.addEventListener('click', () => {
-      const open = rpop.hidden;
-      rpop.hidden = !open;
-      rbtn.setAttribute('aria-expanded', String(open));
-    });
-    document.addEventListener('click', (e) => {
-      if (!rpop.hidden && !rpop.contains(e.target as Node) && e.target !== rbtn) { rpop.hidden = true; rbtn.setAttribute('aria-expanded', 'false'); }
-    });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !rpop.hidden) { rpop.hidden = true; rbtn.setAttribute('aria-expanded', 'false'); rbtn.focus(); } });
-    apply();
-  }
+  } catch {}
 
   const top = document.querySelector<HTMLElement>('.tk-top')!;
   const api = top.dataset.api!;

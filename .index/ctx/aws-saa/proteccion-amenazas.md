@@ -39,6 +39,7 @@ DDoS → Shield. Inyecciones/XSS/rate limit → WAF. Política multi-cuenta → 
 
 ## Glosario usado
 - API: Application Programming Interface. Contrato por el cual un programa expone funciones a otro.
+- HTTP: Protocolo de petición-respuesta de la web: el cliente envía un método (GET, POST…) a una URL y el servidor responde con un código de estado y un cuerpo.
 - EC2: Servicio de máquinas virtuales (IaaS) bajo demanda de AWS.
 - Security Group: Firewall con estado a nivel de instancia/ENI; solo reglas Allow, entrada bloqueada por defecto.
 - EBS: Disco de red persistente para EC2, atado a una AZ.

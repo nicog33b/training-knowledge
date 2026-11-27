@@ -1,0 +1,24 @@
+---
+import Base from '../../layouts/Base.astro';
+import Tool from '../../components/Tool.astro';
+import { getData } from '../../lib/data';
+export async function getStaticPaths() {
+  const { modules } = await getData();
+  return modules.map((m) => ({ params: { module: m.manifest.id }, props: { m } }));
+}
+const { m } = Astro.props;
+const titles = Object.fromEntries(m.topics.map((x) => [x.id, x.title]));
+---
+<Base title={`Herramientas · ${m.manifest.title}`} chat={{ module: m.manifest.id, course: m.manifest.title }}>
+  <p><a href={`/${m.manifest.id}/`}>← {m.manifest.title}</a></p>
+  <h1>Herramientas del curso</h1>
+  <p class="muted">Herramientas propias de este curso, hechas con los constructores comunes de la plataforma (calculadora, asistente de decisión, checklist, comparador y plantilla). Tus valores se guardan en este navegador.</p>
+  {m.tools.length === 0 && <p class="card">Este curso todavía no tiene herramientas. Créalas con <code>pnpm tk tool new {m.manifest.id} &lt;id&gt; --builder …</code>.</p>}
+  {m.tools.map((t) => (
+    <>
+      <Tool tool={t} module={m.manifest.id} topicTitles={titles} />
+      {t.topics.length > 0 && <p class="muted rel">En: {t.topics.map((s, i) => <>{i > 0 && ', '}<a href={`/${m.manifest.id}/${s}/`}>{titles[s] ?? s}</a></>)}</p>}
+    </>
+  ))}
+</Base>
+<style>.rel { margin: -.6rem 0 1.6rem .3rem; font-size: .82rem; }</style>

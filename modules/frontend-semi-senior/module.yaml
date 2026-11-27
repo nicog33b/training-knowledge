@@ -1,0 +1,12 @@
+id: frontend-semi-senior
+title: Frontend Developer · Semi Senior
+summary: 'El salto a semi senior: TypeScript, el modelo mental de React, estado y datos del servidor, testing, herramientas de build, rendimiento (Core Web Vitals) y seguridad web.'
+kind: framework
+locale: es
+tags:
+- frontend
+- react
+- typescript
+glossaries:
+- frontend-junior
+level: intermedio

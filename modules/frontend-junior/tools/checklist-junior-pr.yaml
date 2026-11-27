@@ -1,0 +1,34 @@
+id: checklist-junior-pr
+title: Checklist antes de pedir revisión de tu PR
+summary: Lo que un buen junior revisa en su propio cambio antes de pedir a otros
+  que lo miren.
+builder: checklist
+topics:
+  - git-y-colaboracion
+  - accesibilidad-basica
+  - html-semantico
+groups:
+  - title: El cambio
+    items:
+      - text: Revisé el diff línea a línea y no hay cambios ajenos a la tarea.
+        why: PR pequeños y enfocados.
+      - text: No hay console.log, código comentado ni archivos generados.
+        why: Ruido para el revisor.
+      - text: El mensaje de commit y la descripción explican el porqué.
+        why: Historia útil.
+  - title: Funciona
+    items:
+      - text: Probé los estados de carga, vacío y error.
+        why: No solo el camino feliz.
+      - text: Probé en móvil (o modo dispositivo) y con zoom al 200 %.
+        why: Responsive real.
+      - text: Los tests pasan en local.
+        why: CI no es tu primer test.
+  - title: Accesible
+    items:
+      - text: Se puede usar todo solo con teclado y el foco se ve.
+        why: WCAG 2.2.
+      - text: Imágenes con alt adecuado y campos con label.
+        why: Lectores de pantalla.
+      - text: Uso elementos nativos (button, a, input) en vez de divs clicables.
+        why: Semántica gratis.

@@ -1,0 +1,104 @@
+id: dimensionar-indice
+title: Dimensionar el índice y el costo por consulta
+summary: Cuántos chunks salen de tu corpus según tamaño y solapamiento, cuánta
+  memoria ocupan los vectores y cuántos tokens manda cada consulta al modelo.
+builder: calculadora
+topics:
+  - ingesta-y-chunking
+  - indices-vectoriales
+  - prompt-con-citas
+inputs:
+  - id: documentos
+    label: Documentos
+    type: number
+    min: 100
+    max: 200000
+    step: 100
+    default: 5000
+  - id: tokens_doc
+    label: Tokens medios por documento
+    type: number
+    min: 200
+    max: 50000
+    step: 200
+    default: 3000
+    unit: tokens
+  - id: chunk
+    label: Tamaño de chunk
+    type: number
+    min: 100
+    max: 2000
+    step: 50
+    default: 500
+    unit: tokens
+  - id: solape
+    label: Solapamiento
+    type: number
+    min: 0
+    max: 40
+    step: 5
+    default: 15
+    unit: "%"
+  - id: dims
+    label: Dimensiones del embedding
+    type: select
+    default: 1024
+    options:
+      - label: "384"
+        value: 384
+      - label: "768"
+        value: 768
+      - label: "1024"
+        value: 1024
+      - label: "1536"
+        value: 1536
+      - label: "3072"
+        value: 3072
+  - id: k
+    label: Fragmentos enviados al modelo (k)
+    type: number
+    min: 1
+    max: 40
+    step: 1
+    default: 8
+outputs:
+  - id: paso
+    label: Avance efectivo por chunk
+    expr: chunk * (1 - solape / 100)
+    unit: tokens
+  - id: chunks
+    label: Chunks totales
+    expr: documentos * ceil(max(tokens_doc - chunk, 0) / paso + 1)
+    main: true
+  - id: memoria_gb
+    label: Memoria de vectores (float32, sin índice)
+    expr: chunks * dims * 4 / 1000000000
+    unit: GB
+    decimals: 2
+  - id: tokens_indexar
+    label: Tokens a embeber al indexar
+    expr: chunks * chunk
+    unit: tokens
+  - id: tokens_contexto
+    label: Tokens de contexto por consulta
+    expr: k * chunk
+    unit: tokens
+notes:
+  - when: chunk > 1000
+    text: "Chunks grandes diluyen el embedding: considera el patrón padre-hijo
+      (buscar pequeño, enviar grande)."
+    tone: warn
+  - when: chunk < 200
+    text: "Chunks muy pequeños pierden contexto: añade el título de la sección a
+      cada uno."
+    tone: warn
+  - when: tokens_contexto > 12000
+    text: "Mucho contexto por consulta: más costo y riesgo de lost in the middle.
+      Rerankea y manda menos."
+    tone: warn
+  - when: memoria_gb > 32
+    text: "Muchos GB de vectores: valora cuantización o un índice IVF."
+    tone: info
+  - when: chunks < 20000
+    text: Con pocos chunks, la búsqueda exacta puede bastar (sin índice aproximado).
+    tone: ok

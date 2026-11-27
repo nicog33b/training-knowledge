@@ -1,0 +1,58 @@
+id: contraste
+title: Calculadora de contraste (luminancia aproximada)
+summary: Introduce la luminancia relativa aproximada de texto y fondo (0 =
+  negro, 100 = blanco) y comprueba los mínimos de WCAG.
+builder: calculadora
+topics:
+  - accesibilidad-basica
+inputs:
+  - id: l_texto
+    label: Luminancia relativa del texto
+    type: number
+    min: 0
+    max: 100
+    step: 1
+    default: 15
+    unit: "%"
+    hint: Negro = 0, gris medio ≈ 21, blanco = 100
+  - id: l_fondo
+    label: Luminancia relativa del fondo
+    type: number
+    min: 0
+    max: 100
+    step: 1
+    default: 100
+    unit: "%"
+  - id: grande
+    label: Tamaño del texto
+    type: select
+    default: 0
+    options:
+      - label: Normal
+        value: 0
+      - label: Grande (≥ 24 px o ≥ 18,66 px negrita)
+        value: 1
+outputs:
+  - id: ratio
+    label: Relación de contraste
+    expr: (max(l_texto, l_fondo) / 100 + 0.05) / (min(l_texto, l_fondo) / 100 + 0.05)
+    decimals: 2
+    main: true
+    unit: ": 1"
+  - id: minimo
+    label: Mínimo AA para este tamaño
+    expr: 3 * grande + 4.5 * (1 - grande)
+    decimals: 1
+notes:
+  - when: ratio >= 7
+    text: "Cumple AAA (7:1): excelente para lectura prolongada."
+    tone: ok
+  - when: ratio >= 4.5 && ratio < 7
+    text: Cumple AA para texto normal.
+    tone: ok
+  - when: ratio < 4.5 && grande == 1 && ratio >= 3
+    text: Válido solo porque el texto es grande.
+    tone: info
+  - when: ratio < 3 || (ratio < 4.5 && grande == 0)
+    text: "No cumple WCAG AA: oscurece el texto o aclara el fondo."
+    tone: warn

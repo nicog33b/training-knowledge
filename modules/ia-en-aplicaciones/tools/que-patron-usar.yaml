@@ -1,0 +1,86 @@
+id: que-patron-usar
+title: ¿Una llamada, un workflow o un agente?
+summary: Asistente para elegir la arquitectura más simple que resuelve tu caso,
+  siguiendo la regla de empezar por lo simple y añadir complejidad solo si
+  mejora algo medible.
+builder: decision
+topics:
+  - agentes-y-workflows
+  - uso-de-herramientas
+start: pasos
+nodes:
+  - id: pasos
+    question: ¿Puedes escribir de antemano los pasos para resolver la tarea?
+    help: "Por ejemplo: clasificar → buscar en la base → redactar respuesta."
+    options:
+      - label: Sí, siempre son los mismos pasos
+        next: una-llamada
+      - label: No, dependen de lo que se vaya encontrando
+        next: verificable
+  - id: una-llamada
+    question: ¿Una sola llamada con buen contexto da resultados aceptables en tus evals?
+    options:
+      - label: Sí
+        result: llamada
+      - label: No, hay que dividirlo o revisar
+        result: workflow
+      - label: Aún no lo he medido
+        result: medir
+  - id: verificable
+    question: ¿Hay una forma automática de comprobar si el resultado es correcto
+      (tests, validaciones, datos de una herramienta)?
+    options:
+      - label: Sí
+        next: riesgo
+      - label: No
+        result: humano
+  - id: riesgo
+    question: ¿Las acciones del agente tienen efectos difíciles de deshacer (enviar,
+      pagar, borrar)?
+    options:
+      - label: No, solo lee o trabaja en un entorno aislado
+        result: agente
+      - label: Sí
+        result: agente-con-confirmacion
+results:
+  - id: llamada
+    title: Una llamada bien diseñada
+    why: Es lo más barato, rápido y fácil de depurar. Invierte en el prompt, el
+      contexto y la salida estructurada.
+    see:
+      - prompts-de-sistema
+      - salidas-estructuradas
+  - id: workflow
+    title: Un workflow
+    why: "Los pasos son conocidos: encadénalos en código (encadenar, enrutar,
+      paralelizar o evaluador-optimizador) y valida entre pasos."
+    watch: Mide cada paso por separado para saber dónde falla.
+    see:
+      - agentes-y-workflows
+  - id: medir
+    title: Primero, una eval
+    why: Sin medir no sabes si necesitas más complejidad. Junta 20–50 casos reales y
+      prueba la llamada simple.
+    see:
+      - evals
+  - id: humano
+    title: Asistente con una persona en el bucle
+    why: Si nada verifica el resultado, un agente autónomo acumulará errores sin que
+      nadie lo note. Que la IA proponga y una persona decida.
+    see:
+      - streaming-y-ux
+  - id: agente
+    title: Un agente (con topes)
+    why: "Pasos imprevisibles y verificación automática: el caso ideal. Dale
+      herramientas bien descritas, criterio de parada y topes de pasos y gasto."
+    see:
+      - agentes-y-workflows
+      - uso-de-herramientas
+  - id: agente-con-confirmacion
+    title: Un agente con confirmación humana
+    why: Puede trabajar solo, pero las acciones irreversibles deben pasar por una
+      persona y con mínimo privilegio.
+    watch: La inyección indirecta convierte cualquier dato leído en posible
+      instrucción.
+    see:
+      - seguridad-y-guardrails

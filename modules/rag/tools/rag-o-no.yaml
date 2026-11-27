@@ -1,0 +1,66 @@
+id: rag-o-no
+title: ¿RAG, fine-tuning o contexto largo?
+summary: Asistente para decidir cómo darle conocimiento a un LLM según cuánto
+  cambia, cuánto ocupa y qué necesitas (citas, permisos, estilo).
+builder: decision
+topics:
+  - que-es-rag
+start: que-quieres
+nodes:
+  - id: que-quieres
+    question: ¿Qué quieres cambiar del modelo?
+    options:
+      - label: Que conozca hechos o documentos concretos
+        next: tamano
+      - label: Su estilo, formato o forma de razonar en una tarea
+        result: prompt-o-finetuning
+  - id: tamano
+    question: ¿Cuánto ocupa todo el material?
+    options:
+      - label: "Poco: cabe holgado en el contexto (decenas de páginas)"
+        next: cambia
+      - label: "Mucho: cientos o miles de documentos"
+        next: permisos
+  - id: cambia
+    question: ¿Cambia a menudo o distintos usuarios pueden ver partes distintas?
+    options:
+      - label: "No: estable y común para todos"
+        result: contexto-largo
+      - label: Sí
+        result: rag
+  - id: permisos
+    question: ¿Las preguntas necesitan ver todo el corpus (resúmenes globales,
+      tendencias)?
+    options:
+      - label: No, la respuesta está en unos pocos fragmentos
+        result: rag
+      - label: Sí, preguntas globales o de relaciones entre entidades
+        result: global
+results:
+  - id: contexto-largo
+    title: Contexto largo + caché de prompts
+    why: "Si cabe y no cambia, mete los documentos enteros: sin pipeline, sin
+      errores de recuperación. El caché abarata el prefijo repetido."
+    see:
+      - que-es-rag
+  - id: rag
+    title: RAG
+    why: "Corpus grande o cambiante, con citas y permisos: recupera solo lo
+      relevante y autorizado."
+    watch: Empieza con híbrida + reranking y una eval por etapas.
+    see:
+      - busqueda-hibrida
+      - reranking
+      - evaluacion-rag
+  - id: global
+    title: RAG + agregación (o GraphRAG)
+    why: Un top-k no ve todo el corpus. Agrupa y resume por temas, o construye un
+      grafo de entidades si importan las relaciones.
+    watch: "Es caro de construir y mantener: justifícalo con preguntas reales."
+    see:
+      - rag-agentico
+  - id: prompt-o-finetuning
+    title: Prompt (y quizá fine-tuning)
+    why: Para estilo y formato, prueba primero instrucciones y ejemplos; el
+      fine-tuning compensa con mucho volumen y casos muy repetidos, no para
+      hechos que cambian.

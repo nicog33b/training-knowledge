@@ -1,0 +1,237 @@
+---
+/**
+ * Panel de accesibilidad y lectura (botón "Aa" del header).
+ * Cada ajuste es un data-* en <html> (Base.astro lo restaura antes de pintar) y se guarda en
+ * localStorage 'tk-read'. Los perfiles son atajos: aplican varios ajustes y luego se pueden retocar.
+ * Decisiones: accesibilidad-con-evidencia, tipografia-y-medidas-de-lectura, sin-tipografias-milagro,
+ *             color-con-funcion-y-contraste. NO hay filtros de color ni Bionic Reading (sin evidencia).
+ */
+---
+<div class="tk-read">
+  <button type="button" class="tk-read-btn" aria-expanded="false" aria-controls="tk-read-pop" title="Accesibilidad y lectura (Alt+A)">Aa</button>
+  <div id="tk-read-pop" class="tk-read-pop" role="dialog" aria-label="Accesibilidad y lectura" hidden>
+    <div class="tk-a11y-tabs" role="tablist">
+      <button type="button" role="tab" aria-selected="true" data-tab="lectura">Lectura</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="vision">Visión</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="atencion">Atención</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="voz">Voz</button>
+    </div>
+
+    <p class="tk-read-h">Perfiles rápidos</p>
+    <div class="tk-presets">
+      <button type="button" data-preset="dislexia" title="Atkinson, espaciado amplio, línea estrecha y voz más lenta">Dislexia</button>
+      <button type="button" data-preset="baja-vision" title="Letra 24 px, alto contraste y enlaces subrayados">Baja visión</button>
+      <button type="button" data-preset="concentracion" title="Modo foco, sin animaciones y glosario discreto">Concentración</button>
+      <button type="button" data-preset="reset" class="ghost" title="Volver a los valores por defecto">Restablecer</button>
+    </div>
+
+    <section data-panel="lectura">
+      <p class="tk-read-h">Fuente</p>
+      <div class="tk-seg" data-pref="font">
+        <button type="button" data-v="" style="font-family: system-ui, sans-serif">Sistema</button>
+        <button type="button" data-v="literata" style="font-family: 'Literata Variable', Georgia, serif">Literata</button>
+        <button type="button" data-v="atkinson" style="font-family: 'Atkinson Hyperlegible', sans-serif">Atkinson</button>
+      </div>
+      <p class="tk-read-h">Tamaño <span class="tk-size-val"></span></p>
+      <div class="tk-seg tk-size">
+        <button type="button" data-step="-1" aria-label="Letra más pequeña">A−</button>
+        <button type="button" data-step="0">Normal</button>
+        <button type="button" data-step="1" aria-label="Letra más grande">A+</button>
+      </div>
+      <p class="tk-read-h">Ancho de línea</p>
+      <div class="tk-seg" data-pref="measure">
+        <button type="button" data-v="estrecho" title="~55 caracteres">Estrecho</button>
+        <button type="button" data-v="" title="~68 caracteres">Normal</button>
+        <button type="button" data-v="ancho" title="~80 caracteres">Ancho</button>
+      </div>
+      <p class="tk-read-h">Espaciado</p>
+      <div class="tk-seg" data-pref="spacing">
+        <button type="button" data-v="">Normal</button>
+        <button type="button" data-v="amplio" title="Valores de WCAG 1.4.12">Amplio</button>
+      </div>
+    </section>
+
+    <section data-panel="vision" hidden>
+      <p class="tk-read-h">Tema</p>
+      <div class="tk-seg" data-pref="theme">
+        <button type="button" data-v="">Auto</button>
+        <button type="button" data-v="light">Claro</button>
+        <button type="button" data-v="dark">Oscuro</button>
+      </div>
+      <p class="tk-read-h">Contraste</p>
+      <div class="tk-seg" data-pref="contrast">
+        <button type="button" data-v="">Normal</button>
+        <button type="button" data-v="alto" title="Texto y bordes a ≥ 7:1">Alto</button>
+      </div>
+      <p class="tk-read-h">Enlaces y foco</p>
+      <div class="tk-seg" data-pref="links">
+        <button type="button" data-v="">Estándar</button>
+        <button type="button" data-v="marcados" title="Enlaces subrayados y foco de teclado grueso">Muy visibles</button>
+      </div>
+      <p class="tk-read-h">Interfaz</p>
+      <div class="tk-seg" data-pref="ui">
+        <button type="button" data-v="">Normal</button>
+        <button type="button" data-v="grande" title="Botones y menús más grandes (objetivos táctiles de ≥ 44 px)">Grande</button>
+      </div>
+    </section>
+
+    <section data-panel="atencion" hidden>
+      <p class="tk-read-h">Modo foco</p>
+      <div class="tk-seg" data-pref="focus">
+        <button type="button" data-v="">No</button>
+        <button type="button" data-v="on" title="Oculta header y chat; atenúa todo salvo el párrafo que lees">Sí</button>
+      </div>
+      <p class="tk-read-h">Movimiento</p>
+      <div class="tk-seg" data-pref="motion">
+        <button type="button" data-v="">Según el sistema</button>
+        <button type="button" data-v="reducir">Reducir</button>
+      </div>
+      <p class="tk-read-h">Glosario en el texto</p>
+      <div class="tk-seg" data-pref="glossary">
+        <button type="button" data-v="">Subrayado</button>
+        <button type="button" data-v="discreto" title="Sin subrayado; la definición sigue al pasar o enfocar">Discreto</button>
+      </div>
+    </section>
+
+    <section data-panel="voz" hidden>
+      <p class="tk-read-h">Leer en voz alta</p>
+      <div class="tk-seg tk-tts">
+        <button type="button" data-tts="page">▶ Leer el tema</button>
+        <button type="button" data-tts="stop">■ Parar</button>
+      </div>
+      <p class="tk-read-h">Velocidad <span class="tk-rate-val"></span></p>
+      <input class="tk-rate" type="range" min="0.6" max="1.6" step="0.1" value="1" aria-label="Velocidad de la voz" />
+      <p class="tk-read-h">Voz</p>
+      <select class="tk-voice" aria-label="Voz"></select>
+      <p class="tk-read-note tk-tts-none" hidden>Este navegador no ofrece lectura en voz alta.</p>
+    </section>
+
+    <p class="tk-read-note">Basado en evidencia: tamaño, ancho de línea, espaciado y voz pueden ayudar. No incluimos filtros de color ni “lectura biónica”: los estudios no muestran mejora. Se guarda en este navegador.</p>
+  </div>
+</div>
+
+<style is:global>
+  .tk-read { position: relative; }
+  .tk-read-btn { font: inherit; font-weight: 700; font-family: Georgia, serif; color: var(--muted); background: none; border: 1px solid transparent; border-radius: 99px; padding: .05rem .5rem; cursor: pointer; }
+  .tk-read-btn:hover, .tk-read-btn[aria-expanded=true] { border-color: var(--line); color: var(--fg); }
+  .tk-read-pop { position: absolute; right: 0; top: calc(100% + 6px); width: min(340px, calc(100vw - 32px)); max-height: calc(100vh - 60px); overflow: auto; background: var(--bg); color: var(--fg);
+    border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 12px 36px rgb(0 0 0 / .2); padding: .6rem .8rem .8rem; font-size: .8rem; }
+  .tk-read-pop[hidden], .tk-read-pop section[hidden] { display: none; }
+  .tk-a11y-tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--line); margin: 0 -.8rem .2rem; padding: 0 .6rem; }
+  .tk-a11y-tabs button { font: inherit; font-size: .78rem; background: none; border: 0; border-bottom: 2px solid transparent; color: var(--muted); padding: .35rem .55rem .45rem; cursor: pointer; }
+  .tk-a11y-tabs button[aria-selected=true] { color: var(--accent); border-bottom-color: var(--accent); font-weight: 700; }
+  .tk-presets { display: flex; flex-wrap: wrap; gap: .3rem; }
+  .tk-presets button { font: inherit; font-size: .76rem; border: 1px solid var(--line); background: var(--card); color: var(--fg); border-radius: 99px; padding: .25rem .65rem; cursor: pointer; }
+  .tk-presets button:hover { border-color: var(--accent); color: var(--accent); }
+  .tk-presets button.ghost { background: none; color: var(--muted); }
+  .tk-read-h { margin: .7rem 0 .3rem; font-size: .68rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+  .tk-seg { display: flex; gap: 2px; background: var(--card); border: 1px solid var(--line); border-radius: 9px; padding: 2px; }
+  .tk-seg button { flex: 1; font: inherit; font-size: .8rem; color: var(--fg); background: none; border: 0; border-radius: 7px; padding: .32rem .4rem; cursor: pointer; }
+  .tk-seg button:hover { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+  .tk-seg button[aria-pressed=true] { background: var(--bg); box-shadow: 0 1px 3px rgb(0 0 0 / .15); font-weight: 700; color: var(--accent); }
+  .tk-seg button:focus-visible, .tk-read-btn:focus-visible, .tk-a11y-tabs button:focus-visible, .tk-presets button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .tk-rate { width: 100%; accent-color: var(--accent); }
+  .tk-voice { width: 100%; font: inherit; font-size: .8rem; background: var(--card); color: var(--fg); border: 1px solid var(--line); border-radius: 8px; padding: .3rem; }
+  .tk-read-note { margin: .8rem 0 0; color: var(--muted); font-size: .72rem; line-height: 1.45; }
+</style>
+
+<script>
+  import { store } from '../lib/store.ts';
+  import { readBlocks, speechSupported, stop as stopSpeech } from '../lib/speech.ts';
+
+  type Prefs = Partial<Record<'font' | 'spacing' | 'theme' | 'measure' | 'contrast' | 'links' | 'ui' | 'focus' | 'motion' | 'glossary', string>> & { size?: number };
+  const KEY = 'tk-read';
+  const DATA_KEYS = ['font', 'spacing', 'theme', 'measure', 'contrast', 'links', 'ui', 'focus', 'motion', 'glossary'] as const;
+  const DEFAULT_SIZE = 19, MIN = 15, MAX = 28;
+  const PRESETS: Record<string, Prefs & { rate?: number }> = {
+    dislexia: { font: 'atkinson', spacing: 'amplio', measure: 'estrecho', size: 21, rate: 0.9 },
+    'baja-vision': { size: 24, contrast: 'alto', links: 'marcados', ui: 'grande' },
+    concentracion: { focus: 'on', motion: 'reducir', glossary: 'discreto' },
+  };
+  const root = document.documentElement;
+  const btn = document.querySelector<HTMLButtonElement>('.tk-read-btn')!;
+  const pop = document.getElementById('tk-read-pop')!;
+  let prefs: Prefs = store.get(KEY, {});
+
+  function apply() {
+    for (const k of DATA_KEYS) prefs[k] ? (root.dataset[k] = prefs[k]) : delete root.dataset[k];
+    prefs.size ? root.style.setProperty('--read-size', `${prefs.size}px`) : root.style.removeProperty('--read-size');
+    pop.querySelectorAll<HTMLElement>('[data-pref]').forEach((g) =>
+      g.querySelectorAll<HTMLButtonElement>('button').forEach((b) => b.setAttribute('aria-pressed', String((prefs[g.dataset.pref as keyof Prefs] ?? '') === b.dataset.v))));
+    pop.querySelector('.tk-size-val')!.textContent = `· ${prefs.size ?? DEFAULT_SIZE} px`;
+    document.dispatchEvent(new CustomEvent('tk-prefs', { detail: prefs }));
+  }
+  const save = () => { store.set(KEY, prefs); apply(); };
+
+  pop.querySelectorAll<HTMLElement>('[data-pref]').forEach((g) => g.addEventListener('click', (e) => {
+    const b = (e.target as HTMLElement).closest('button');
+    if (!b) return;
+    const k = g.dataset.pref as (typeof DATA_KEYS)[number];
+    b.dataset.v ? (prefs[k] = b.dataset.v) : delete prefs[k];
+    save();
+  }));
+  pop.querySelector('.tk-size')!.addEventListener('click', (e) => {
+    const b = (e.target as HTMLElement).closest<HTMLButtonElement>('button');
+    if (!b) return;
+    const step = Number(b.dataset.step);
+    const next = step ? Math.max(MIN, Math.min(MAX, (prefs.size ?? DEFAULT_SIZE) + step)) : DEFAULT_SIZE;
+    next === DEFAULT_SIZE ? delete prefs.size : (prefs.size = next);
+    save();
+  });
+  pop.querySelector('.tk-presets')!.addEventListener('click', (e) => {
+    const b = (e.target as HTMLElement).closest<HTMLButtonElement>('button');
+    if (!b) return;
+    if (b.dataset.preset === 'reset') { prefs = {}; store.set('tk-voice', {}); }
+    else {
+      const { rate, ...p } = PRESETS[b.dataset.preset!];
+      prefs = { ...prefs, ...p };
+      if (rate) store.set('tk-voice', { ...store.get('tk-voice', {}), rate });
+    }
+    save(); paintVoice();
+  });
+
+  // Pestañas
+  const tabs = [...pop.querySelectorAll<HTMLButtonElement>('[role=tab]')];
+  tabs.forEach((t) => t.addEventListener('click', () => {
+    tabs.forEach((x) => x.setAttribute('aria-selected', String(x === t)));
+    pop.querySelectorAll<HTMLElement>('[data-panel]').forEach((p) => (p.hidden = p.dataset.panel !== t.dataset.tab));
+    store.set('tk-read-tab', t.dataset.tab);
+  }));
+  const lastTab = store.get('tk-read-tab', 'lectura');
+  tabs.find((t) => t.dataset.tab === lastTab)?.click();
+
+  // Voz
+  const rate = pop.querySelector<HTMLInputElement>('.tk-rate')!;
+  const voiceSel = pop.querySelector<HTMLSelectElement>('.tk-voice')!;
+  function paintVoice() {
+    const v = store.get<{ rate?: number; voice?: string }>('tk-voice', {});
+    rate.value = String(v.rate ?? 1);
+    pop.querySelector('.tk-rate-val')!.textContent = `· ${Number(rate.value).toFixed(1)}×`;
+    if (!speechSupported()) return;
+    const voices = speechSynthesis.getVoices().filter((x) => /^(es|en)/.test(x.lang));
+    voiceSel.replaceChildren(new Option('Automática', ''), ...voices.map((x) => new Option(`${x.name} (${x.lang})`, x.name, false, x.name === v.voice)));
+  }
+  if (speechSupported()) speechSynthesis.addEventListener?.('voiceschanged', paintVoice);
+  else { pop.querySelector<HTMLElement>('.tk-tts-none')!.hidden = false; pop.querySelector<HTMLElement>('.tk-tts')!.hidden = true; }
+  rate.addEventListener('input', () => { store.set('tk-voice', { ...store.get('tk-voice', {}), rate: Number(rate.value) }); paintVoice(); });
+  voiceSel.addEventListener('change', () => store.set('tk-voice', { ...store.get('tk-voice', {}), voice: voiceSel.value || undefined }));
+  pop.querySelector('.tk-tts')!.addEventListener('click', (e) => {
+    const b = (e.target as HTMLElement).closest<HTMLButtonElement>('button');
+    if (!b) return;
+    if (b.dataset.tts === 'stop') return stopSpeech();
+    const art = document.querySelector('article.prose') ?? document.querySelector('main');
+    if (art) readBlocks(art);
+  });
+  paintVoice();
+
+  // Abrir/cerrar
+  const setOpen = (open: boolean) => { pop.hidden = !open; btn.setAttribute('aria-expanded', String(open)); if (open) pop.querySelector<HTMLElement>('[role=tab][aria-selected=true]')?.focus(); };
+  btn.addEventListener('click', () => setOpen(pop.hidden));
+  document.addEventListener('click', (e) => { if (!pop.hidden && !pop.contains(e.target as Node) && e.target !== btn) setOpen(false); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !pop.hidden) { setOpen(false); btn.focus(); }
+    if (e.altKey && (e.key === 'a' || e.key === 'A')) { e.preventDefault(); setOpen(pop.hidden); }
+  });
+  document.addEventListener('tk-open-a11y', () => setOpen(true));
+  apply();
+</script>

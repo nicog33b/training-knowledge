@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué los datos del servidor no deberían tratarse como estado de cliente normal?
+    kind: por-que
+    a: Porque son una **copia en caché** de algo que vive en el servidor y cambia sin que tu app lo sepa. Necesitan deduplicación, revalidación, invalidación tras mutaciones y reintentos. Un `useState` o un store global no hacen nada de eso por sí solos.
+    uses: []
+  - q: Compara poner el filtro en useState o en la URL.
+    kind: comparar
+    a: "En **useState**: se pierde al recargar y no se puede compartir el enlace. En la **URL** (query params): sobrevive a recargas, funciona el botón atrás y el enlace muestra lo mismo a otra persona. Filtros, paginación y pestañas suelen pertenecer a la URL."
+    uses: []
+  - q: Tras crear un pedido, la lista no muestra el nuevo. ¿Qué falta?
+    kind: aplicar
+    a: "**Invalidar** (o actualizar) la caché de la consulta de pedidos tras la mutación, para que se vuelva a pedir. Con una librería de datos del servidor es una línea; también puedes hacer una **actualización optimista** que lo muestre al instante."
+    uses: []
+  - q: ¿Qué pasa si ocultas los datos con un spinner en cada revalidación?
+    kind: que-pasa-si
+    a: La interfaz **parpadea** cada vez que el usuario vuelve a la pestaña o cada X segundos, y pierde el scroll. Muestra los datos viejos mientras llegan los nuevos (quizá con un indicador discreto) y reserva el esqueleto para la **primera carga**.
+    uses: []
+  - q: ¿Cuándo sí tiene sentido un store global?
+    kind: aplicar
+    a: "Para **estado de cliente** realmente global y que cambia con frecuencia desde muchos sitios: un editor complejo, un carrito offline, preferencias. No para datos del servidor (librería de datos) ni para estado que solo usa un componente."
+    uses: []
+  - q: "Error común: copiar en useEffect la respuesta de la API a un store global."
+    kind: error-comun
+    a: "Reinventas mal una caché: sin deduplicación, sin saber si está obsoleta, con carreras entre peticiones y sin invalidación. Una librería como TanStack Query o SWR (o los datos del framework) resuelve todo eso."
+    uses: []
+sims: []

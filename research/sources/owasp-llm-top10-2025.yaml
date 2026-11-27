@@ -1,0 +1,21 @@
+id: owasp-llm-top10-2025
+title: OWASP Top 10 for LLM Applications 2025
+authors:
+  - OWASP GenAI Security Project
+year: 2024
+venue: OWASP
+url: https://genai.owasp.org/llm-top-10/
+kind: docs
+verified: secondary
+retrieved: 2026-11-26
+summary: Lista de riesgos de seguridad de apps con LLM; la inyección de prompt
+  (directa o indirecta) es LLM01.
+facts:
+  - "LLM01 Prompt Injection: entradas manipuladas, directas o indirectas (p. ej.
+    una web que el LLM resume), alteran el comportamiento del modelo."
+  - "Mitigaciones: mínimo privilegio en herramientas y backends, separar
+    contenido externo del prompt del usuario, aprobación humana para acciones
+    sensibles; el prompt de sistema no basta."
+caveats:
+  - Visto por blogs de proveedores (HackerOne, Trend Micro); URL oficial no
+    abierta.

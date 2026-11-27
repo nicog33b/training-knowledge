@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué el tree shaking necesita módulos ES?
+    kind: por-que
+    a: "Porque `import`/`export` son **estáticos**: el bundler sabe sin ejecutar nada qué se importa de cada módulo y puede eliminar lo que no se usa. Con `require` dinámico o paquetes con efectos al importar, no puede garantizar que eliminar sea seguro."
+    uses: []
+  - q: Compara importar todo lodash y `import { debounce } from 'lodash-es'`.
+    kind: comparar
+    a: "Importar el paquete completo (CommonJS) mete **toda la librería** en el bundle. Con la versión ES y un import concreto, el tree shaking deja solo `debounce` y sus dependencias: decenas de KB menos."
+    uses: []
+  - q: Tu editor de texto enriquecido pesa 300 KB y solo se usa en una página. ¿Qué haces?
+    kind: aplicar
+    a: "**Code splitting**: cárgalo con import dinámico (`const Editor = lazy(() => import('./Editor'))`) o por ruta, para que solo lo descargue quien entra en esa página. Muestra un estado de carga mientras llega."
+    uses: []
+  - q: ¿Qué pasa con INP si mandas 1 MB de JavaScript a un móvil de gama baja?
+    kind: que-pasa-si
+    a: "Aparte de descargarlo, el móvil tiene que **parsear y ejecutar** ese JavaScript en el hilo principal: tareas largas que retrasan la respuesta a las interacciones (peor **INP**) y el pintado (LCP). Menos JavaScript es la optimización más eficaz."
+    uses: []
+  - q: ¿Para qué sirven los nombres de archivo con hash?
+    kind: por-que
+    a: "Para cachear los archivos **para siempre**: si el contenido cambia, cambia el hash y el nombre, así que el navegador pide el nuevo. Sin hash tendrías que elegir entre caché corta (más descargas) o usuarios con versiones viejas."
+    uses: []
+  - q: "Error común: añadir una dependencia enorme para una función pequeña sin mirar el peso."
+    kind: error-comun
+    a: Una librería de fechas o iconos completa puede duplicar el bundle. Antes de añadirla, mira su peso y si hace tree shaking; usa un **analizador de bundle** y presupuestos de tamaño en CI para detectarlo pronto.
+    uses: []
+sims: []

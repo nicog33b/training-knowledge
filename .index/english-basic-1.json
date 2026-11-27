@@ -36,6 +36,9 @@
       "questions": 6,
       "sims": [
         "clasificar:orden-correcto"
+      ],
+      "tools": [
+        "plantilla:constructor-de-frases"
       ]
     },
     {
@@ -68,6 +71,9 @@
       "questions": 6,
       "sims": [
         "clasificar:que-auxiliar"
+      ],
+      "tools": [
+        "plantilla:constructor-de-frases"
       ]
     },
     {
@@ -101,6 +107,9 @@
       "questions": 6,
       "sims": [
         "clasificar:como-se-pregunta"
+      ],
+      "tools": [
+        "plantilla:constructor-de-frases"
       ]
     },
     {
@@ -136,7 +145,8 @@
       "questions": 6,
       "sims": [
         "clasificar:que-forma-pide"
-      ]
+      ],
+      "tools": []
     },
     {
       "id": "tiempo-y-aspecto",
@@ -173,6 +183,9 @@
       "questions": 6,
       "sims": [
         "predecir-observar:cuantas-palabras"
+      ],
+      "tools": [
+        "decision:que-tiempo-uso"
       ]
     },
     {
@@ -213,6 +226,9 @@
       "questions": 6,
       "sims": [
         "clasificar:traduce-la-idea"
+      ],
+      "tools": [
+        "decision:que-tiempo-uso"
       ]
     },
     {
@@ -244,7 +260,8 @@
       "questions": 6,
       "sims": [
         "clasificar:simple-o-continuo-presente"
-      ]
+      ],
+      "tools": []
     },
     {
       "id": "present-continuous",
@@ -271,7 +288,8 @@
       "questions": 6,
       "sims": [
         "clasificar:estado-o-accion"
-      ]
+      ],
+      "tools": []
     },
     {
       "id": "past-simple",
@@ -301,7 +319,8 @@
       "questions": 6,
       "sims": [
         "clasificar:did-correcto"
-      ]
+      ],
+      "tools": []
     },
     {
       "id": "past-continuous",
@@ -333,7 +352,8 @@
       "questions": 6,
       "sims": [
         "clasificar:when-while"
-      ]
+      ],
+      "tools": []
     },
     {
       "id": "imperfecto-en-ingles",
@@ -362,7 +382,8 @@
       "questions": 6,
       "sims": [
         "clasificar:que-imperfecto"
-      ]
+      ],
+      "tools": []
     },
     {
       "id": "present-perfect",
@@ -391,7 +412,8 @@
       "questions": 6,
       "sims": [
         "clasificar:perfect-o-past"
-      ]
+      ],
+      "tools": []
     },
     {
       "id": "present-perfect-continuous",
@@ -420,7 +442,8 @@
       "questions": 6,
       "sims": [
         "predecir-observar:perfect-o-continuous"
-      ]
+      ],
+      "tools": []
     },
     {
       "id": "past-perfect",
@@ -454,7 +477,8 @@
       "questions": 6,
       "sims": [
         "predecir-observar:antes-o-despues"
-      ]
+      ],
+      "tools": []
     },
     {
       "id": "formas-de-futuro",
@@ -483,7 +507,8 @@
       "questions": 6,
       "sims": [
         "clasificar:que-futuro"
-      ]
+      ],
+      "tools": []
     },
     {
       "id": "futuro-continuo-y-perfecto",
@@ -518,7 +543,8 @@
       "questions": 6,
       "sims": [
         "predecir-observar:examen-manana"
-      ]
+      ],
+      "tools": []
     },
     {
       "id": "marcadores-de-tiempo",
@@ -559,6 +585,9 @@
       "questions": 6,
       "sims": [
         "clasificar:marcador-tiempo"
+      ],
+      "tools": [
+        "decision:que-tiempo-uso"
       ]
     },
     {
@@ -586,7 +615,8 @@
       "questions": 6,
       "sims": [
         "clasificar:obligacion-prohibicion"
-      ]
+      ],
+      "tools": []
     },
     {
       "id": "condicionales",
@@ -620,7 +650,8 @@
       "questions": 6,
       "sims": [
         "predecir-observar:que-condicional"
-      ]
+      ],
+      "tools": []
     },
     {
       "id": "voz-pasiva",
@@ -656,7 +687,8 @@
       "questions": 6,
       "sims": [
         "clasificar:pasiva-correcta"
-      ]
+      ],
+      "tools": []
     },
     {
       "id": "articulos",
@@ -685,7 +717,8 @@
       "questions": 6,
       "sims": [
         "clasificar:que-articulo"
-      ]
+      ],
+      "tools": []
     }
   ],
   "sections": [
@@ -804,5 +837,9 @@
     "verbo-principal",
     "verbo-regular",
     "voz-pasiva"
+  ],
+  "tools": [
+    "plantilla:constructor-de-frases",
+    "decision:que-tiempo-uso"
   ]
 }

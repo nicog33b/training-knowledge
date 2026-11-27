@@ -1,0 +1,50 @@
+id: instrucciones-repo
+title: Esqueleto de CLAUDE.md / AGENTS.md
+summary: "Un archivo de instrucciones corto y de alta señal para tu repositorio:
+  comandos exactos, arquitectura, convenciones y protocolo."
+builder: plantilla
+topics:
+  - context-engineering
+fields:
+  - id: proyecto
+    label: Qué es el proyecto (1 frase)
+    placeholder: API de pagos en TypeScript + PostgreSQL
+  - id: comandos
+    label: Comandos (build, test, lint, un solo test)
+    kind: textarea
+    placeholder: |-
+      pnpm build
+      pnpm test
+      pnpm test -- ruta/al/test
+  - id: arquitectura
+    label: Arquitectura en 3–5 líneas
+    kind: textarea
+    placeholder: src/api → src/domain → src/db (dependencias solo hacia abajo)
+  - id: convenciones
+    label: Convenciones que el código no muestra
+    kind: textarea
+    placeholder: Fechas en UTC; nada de any; errores con Result
+  - id: prohibido
+    label: Nunca hagas
+    kind: textarea
+    placeholder: No toques migrations/ ya aplicadas; no hagas push a main
+  - id: protocolo
+    label: Protocolo al terminar
+    placeholder: pnpm test && pnpm lint; actualiza CHANGELOG.md
+template: |-
+  # {{proyecto}}
+
+  ## Comandos
+  {{comandos}}
+
+  ## Arquitectura
+  {{arquitectura}}
+
+  ## Convenciones
+  {{convenciones}}
+
+  ## Nunca
+  {{prohibido}}
+
+  ## Antes de terminar
+  {{protocolo}}

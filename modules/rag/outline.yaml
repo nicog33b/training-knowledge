@@ -1,0 +1,27 @@
+sections:
+  - id: fundamentos
+    title: 1 · Qué es RAG y cuándo usarlo
+    topics:
+      - {id: que-es-rag, title: "Qué es RAG y cuándo conviene", summary: "Recuperar antes de generar: qué problema resuelve, el pipeline completo y cuándo elegir RAG, fine-tuning o simplemente contexto largo."}
+      - {id: embeddings-y-similitud, title: "Embeddings y similitud", summary: "Cómo un modelo convierte texto en vectores, qué mide la similitud coseno, por qué funciona para significado y dónde falla (nombres, códigos, negaciones)."}
+  - id: indexar
+    title: 2 · Preparar e indexar los documentos
+    topics:
+      - {id: ingesta-y-chunking, title: "Ingesta y chunking", summary: "Extraer texto limpio, partirlo en fragmentos (tamaño, solapamiento, por estructura) y guardar metadatos; el chunking decide más calidad que el modelo."}
+      - {id: indices-vectoriales, title: "Índices vectoriales y búsqueda aproximada", summary: "Búsqueda exacta frente a ANN (HNSW, IVF), el compromiso recall-latencia-memoria y los filtros por metadatos."}
+  - id: recuperar
+    title: 3 · Recuperar lo relevante
+    topics:
+      - {id: busqueda-hibrida, title: "Búsqueda híbrida: BM25 + embeddings", summary: "Por qué combinar búsqueda léxica y semántica, cómo fusionar rankings con RRF y qué aporta el contexto añadido a cada chunk."}
+      - {id: reranking, title: "Reranking con cross-encoders", summary: "Recuperar muchos candidatos baratos y reordenarlos con un modelo que lee consulta y fragmento juntos; costo, latencia y ganancia."}
+      - {id: transformar-consultas, title: "Transformar la consulta", summary: "Reescritura, multi-consulta, HyDE y descomposición: adaptar la pregunta del usuario al índice cuando las palabras no coinciden."}
+  - id: generar-y-medir
+    title: 4 · Generar con fuentes y medir
+    topics:
+      - {id: prompt-con-citas, title: "Construir el prompt: orden, citas y «no lo sé»", summary: "Cuántos fragmentos mandar, en qué orden (lost in the middle), cómo pedir citas verificables y cuándo responder que no hay información."}
+      - {id: evaluacion-rag, title: "Evaluar RAG por etapas", summary: "Medir la recuperación (recall@k, MRR) y la generación (fidelidad, relevancia) por separado; conjuntos de prueba y jueces automáticos."}
+  - id: produccion
+    title: 5 · RAG en producción
+    topics:
+      - {id: rag-en-produccion, title: "Operar RAG: frescura, permisos, costo y seguridad", summary: "Reindexar cuando cambian los documentos, permisos por documento, caché, costos y la inyección indirecta que llega por los documentos."}
+      - {id: rag-agentico, title: "RAG agéntico y GraphRAG", summary: "Cuando una sola búsqueda no basta: el modelo decide qué buscar en varios pasos, o se navega un grafo de entidades; beneficios y costo."}

@@ -1,0 +1,70 @@
+questions:
+  - q: ¿Por qué evaluar la recuperación por separado de la respuesta final?
+    kind: por-que
+    a: Porque una respuesta mala puede venir de que **no se recuperó** el fragmento correcto o de que el modelo lo **usó mal**. Si solo mides la respuesta, no sabes si tocar el chunking/índice o el prompt/modelo. Recall@k para la recuperación y fidelidad para la generación separan las causas.
+    uses: []
+  - q: Compara recall@k y MRR.
+    kind: comparar
+    a: "**Recall@k**: ¿está el fragmento correcto entre los k primeros? (sí/no por consulta). **MRR**: media de 1/posición del primero correcto; premia que esté **arriba**. Un sistema puede tener buen recall@20 y mal MRR: lo encuentra, pero en la posición 15, donde quizá el modelo lo ignore."
+    uses: []
+  - q: Una respuesta tiene fidelidad baja pero recall@10 alto. ¿Dónde está el problema?
+    kind: aplicar
+    a: 'En la **generación**: el fragmento correcto llegó al contexto, pero el modelo añadió cosas no respaldadas o lo malinterpretó. Revisa el **prompt** (citas, "no lo sé"), el orden y número de fragmentos, y quizá el modelo. Tocar el índice no lo arreglaría.'
+    uses: []
+  - q: ¿Por qué incluir preguntas SIN respuesta en el conjunto de evaluación?
+    kind: por-que
+    a: 'Porque comprueban el **rechazo correcto**: un buen RAG dice "no está en los documentos" en vez de inventar. Sin esos casos, un sistema que alucina con seguridad puede sacar buena nota en las preguntas con respuesta y fallar en producción.'
+    uses: []
+  - q: ¿Qué pasa si confías ciegamente en las métricas de Ragas sin revisarlas?
+    kind: que-pasa-si
+    a: "Ragas usa un **LLM como juez**: útil, pero con sesgos y errores (los jueces automáticos fallan incluso en casos fáciles para humanos). Podrías optimizar hacia lo que le gusta al juez. Valida con una **muestra corregida por personas** y combina con métricas deterministas."
+    uses: []
+  - q: "Error común: evaluar con 5 preguntas escritas por el propio equipo."
+    kind: error-comun
+    a: Cinco preguntas no detectan regresiones y las del equipo usan **las palabras de los documentos**, así que la búsqueda acierta fácil. Usa **50–100 preguntas reales** de usuarios, con casos difíciles, ambiguos y sin respuesta, y amplíalas con cada fallo de producción.
+    uses: []
+sims:
+  - id: donde-falla-el-rag
+    title: ¿Dónde está el fallo?
+    type: predecir-observar
+    context: "Tienes las métricas por etapa de un RAG para un conjunto de 80 preguntas: recall@10 de la recuperación y fidelidad (respuestas respaldadas por los fragmentos)."
+    params:
+      - id: recall
+        label: Recall@10 de la recuperación
+        min: 0
+        max: 100
+        step: 5
+        default: 90
+        unit: "%"
+      - id: fidelidad
+        label: Fidelidad de las respuestas
+        min: 0
+        max: 100
+        step: 5
+        default: 60
+        unit: "%"
+    predict:
+      question: ¿Qué arreglarías primero?
+      options:
+        - id: recuperacion
+          label: La recuperación (chunking, híbrida, reranking)
+        - id: generacion
+          label: La generación (prompt, orden, citas, modelo)
+        - id: nada
+          label: "Nada urgente: ambas etapas van bien"
+    outcomes:
+      - when: recall < 70
+        answer: recuperacion
+        show: "Con recall bajo, en muchas preguntas el fragmento correcto ni siquiera llega al modelo: ningún prompt lo arregla."
+      - when: fidelidad < 80
+        answer: generacion
+        show: "Los fragmentos llegan, pero el modelo añade cosas no respaldadas: revisa prompt, citas, «no lo sé» y orden."
+      - when: "1"
+        answer: nada
+        show: "Ambas etapas están bien: busca los casos concretos que fallan y amplía la eval."
+    explain:
+      prompt: Explica por qué el orden de prioridad es ese.
+      rubric:
+        - menciona que si no se recupera el fragmento el modelo no puede usarlo
+        - distingue recuperación de generación
+        - menciona revisar el prompt o las citas cuando la fidelidad es baja

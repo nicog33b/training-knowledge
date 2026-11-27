@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué el orden de los fragmentos en el prompt importa?
+    kind: por-que
+    a: "Porque los modelos usan peor la información **en medio** de contextos largos (*lost in the middle*: curva en U). Si el fragmento clave queda enterrado entre otros quince, puede ignorarse. Pon lo **más relevante al principio** (o al final) y manda menos fragmentos tras un buen reranking."
+    uses: []
+  - q: ¿Qué pasa si no instruyes al modelo para decir «no lo sé»?
+    kind: que-pasa-si
+    a: Cuando los fragmentos no contienen la respuesta, el modelo tiende a **completar** con conocimiento general o inventar, con tono seguro. Instruye explícitamente el rechazo y añade a la eval **preguntas sin respuesta** en los documentos para comprobar que lo hace.
+    uses: []
+  - q: Diseña el formato de los fragmentos para obtener citas verificables.
+    kind: aplicar
+    a: 'Cada fragmento con **id** y fuente: `<doc id="3" fuente="Viajes §4" fecha="2025-02">…</doc>`. Instruye citar "[3]" tras cada afirmación y, si hace falta, la frase literal. En código, verifica que los ids existen y que la cita aparece en el fragmento; en la UI, cita clicable a la fuente.'
+    uses: []
+  - q: Compara mandar 5 y 30 fragmentos al modelo.
+    kind: comparar
+    a: "**5**: barato, poco ruido, pero si el correcto no está, falla. **30**: más probable incluirlo, pero más costo, más confusión y riesgo de *lost in the middle*. Con buen reranking, pocos fragmentos de **alta precisión** suelen ganar. Decide con evals, no por intuición."
+    uses: []
+  - q: ¿Por qué hay que verificar en código las citas que da el modelo?
+    kind: por-que
+    a: "Porque el modelo también puede **inventar citas**: un id que no existe o una frase que no está en el fragmento. Una cita falsa da una falsa sensación de rigor. Comprobar que el id existe y que el texto citado aparece convierte las citas en algo fiable."
+    uses: []
+  - q: "Error común: poner los fragmentos recuperados como si fueran instrucciones del sistema."
+    kind: error-comun
+    a: 'Si un documento contiene "ignora lo anterior y…", el modelo podría obedecerlo (**inyección indirecta**). Los fragmentos son **datos**: van delimitados, en el mensaje de usuario o una sección marcada, con la instrucción de usarlos solo como fuente.'
+    uses: []
+sims: []

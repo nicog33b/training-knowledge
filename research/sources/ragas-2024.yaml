@@ -1,0 +1,21 @@
+id: ragas-2024
+title: "Ragas: Automated Evaluation of Retrieval Augmented Generation"
+authors:
+  - Es
+  - James
+  - Espinosa-Anke
+  - Schockaert
+year: 2024
+venue: EACL 2024 demos / arXiv 2309.15217
+url: https://arxiv.org/abs/2309.15217
+kind: other
+verified: secondary
+retrieved: 2026-11-26
+summary: Métricas de evaluación de RAG sin respuestas de referencia (fidelidad,
+  relevancia de respuesta y de contexto).
+facts:
+  - Propone métricas sin referencia humana para evaluar las dimensiones de un
+    pipeline RAG (recuperación y generación por separado).
+caveats:
+  - Definiciones exactas de las métricas no verificadas; las métricas basadas en
+    LLM heredan sus sesgos (ver hardy-2026-autoscoring).

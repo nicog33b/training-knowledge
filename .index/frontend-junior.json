@@ -1,0 +1,375 @@
+{
+  "id": "frontend-junior",
+  "title": "Frontend Developer · Junior",
+  "summary": "Lo que un frontend junior debe dominar para trabajar en un equipo: HTML semántico, CSS de maquetación, JavaScript del navegador, asincronía, HTTP, Git y accesibilidad básica.",
+  "kind": "framework",
+  "tags": [
+    "frontend",
+    "html",
+    "css",
+    "javascript"
+  ],
+  "topics": [
+    {
+      "id": "html-semantico",
+      "title": "HTML semántico",
+      "summary": "Elegir el elemento por su significado (header, nav, main, button, label…): accesibilidad, SEO y comportamiento gratis del navegador.",
+      "order": 1,
+      "requires": [],
+      "section": "web-base",
+      "status": "done",
+      "words": 237,
+      "headings": [
+        "HTML semántico",
+        "Estructura de la página",
+        "Elementos interactivos de verdad",
+        "Imágenes y medios",
+        "Por qué importa"
+      ],
+      "terms": [
+        "arbol-de-accesibilidad",
+        "aria",
+        "html-semantico",
+        "landmark",
+        "lector-de-pantalla",
+        "seo"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": [
+        "checklist:checklist-junior-pr"
+      ]
+    },
+    {
+      "id": "cascada-y-especificidad",
+      "title": "La cascada, la especificidad y el box model",
+      "summary": "Por qué un estilo gana a otro (origen, especificidad, orden), herencia, box-sizing y cómo evitar guerras de !important.",
+      "order": 2,
+      "requires": [],
+      "section": "web-base",
+      "status": "done",
+      "words": 260,
+      "headings": [
+        "La cascada, la especificidad y el box model",
+        "Quién gana",
+        "Mantenerla baja",
+        "Herencia",
+        "El box model",
+        "Depurar"
+      ],
+      "terms": [
+        "box-model",
+        "cascada",
+        "especificidad"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": []
+    },
+    {
+      "id": "flexbox-y-grid",
+      "title": "Maquetación con Flexbox y Grid",
+      "summary": "Flexbox para una dimensión, Grid para dos; alinear, repartir espacio y plantillas sin hacks.",
+      "order": 3,
+      "requires": [],
+      "section": "web-base",
+      "status": "done",
+      "words": 225,
+      "headings": [
+        "Maquetación con Flexbox y Grid",
+        "Flexbox: una dimensión",
+        "Grid: dos dimensiones",
+        "Cuál usar",
+        "Errores típicos"
+      ],
+      "terms": [
+        "flexbox",
+        "grid",
+        "media-query"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": [
+        "decision:flex-o-grid"
+      ]
+    },
+    {
+      "id": "responsive",
+      "title": "Diseño responsive",
+      "summary": "Mobile first, viewport, unidades relativas, media queries y container queries, imágenes adaptables.",
+      "order": 4,
+      "requires": [],
+      "section": "web-base",
+      "status": "done",
+      "words": 236,
+      "headings": [
+        "Diseño responsive",
+        "La base",
+        "Media queries y container queries",
+        "Imágenes",
+        "Probar"
+      ],
+      "terms": [
+        "container-query",
+        "flexbox",
+        "grid",
+        "media-query",
+        "mobile-first"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": []
+    },
+    {
+      "id": "javascript-esencial",
+      "title": "JavaScript esencial: valores, ámbito y closures",
+      "summary": "Tipos y comparación, let/const, ámbito de bloque, funciones como valores, closures y referencias frente a copias.",
+      "order": 5,
+      "requires": [],
+      "section": "javascript",
+      "status": "done",
+      "words": 241,
+      "headings": [
+        "JavaScript esencial: valores, ámbito y closures",
+        "Tipos y comparación",
+        "Declarar variables",
+        "Ámbito",
+        "Closures",
+        "Funciones como valores"
+      ],
+      "terms": [
+        "ambito",
+        "closure"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": []
+    },
+    {
+      "id": "dom-y-eventos",
+      "title": "DOM y eventos",
+      "summary": "Seleccionar y modificar el DOM, escuchar eventos, propagación y delegación, y no bloquear el hilo principal.",
+      "order": 6,
+      "requires": [],
+      "section": "javascript",
+      "status": "done",
+      "words": 268,
+      "headings": [
+        "DOM y eventos",
+        "Seleccionar y modificar",
+        "Eventos",
+        "Propagación y delegación",
+        "No bloquear el hilo principal",
+        "Accesibilidad"
+      ],
+      "terms": [
+        "delegacion-de-eventos",
+        "dom",
+        "hilo-principal",
+        "web-worker",
+        "xss"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": []
+    },
+    {
+      "id": "asincronia-y-event-loop",
+      "title": "Asincronía: event loop, promesas y async/await",
+      "summary": "Cómo JavaScript hace varias cosas con un solo hilo: pila, cola de tareas y microtareas; promesas, async/await y manejo de errores.",
+      "order": 7,
+      "requires": [],
+      "section": "javascript",
+      "status": "done",
+      "words": 247,
+      "headings": [
+        "Asincronía: event loop, promesas y async/await",
+        "El modelo",
+        "Promesas",
+        "async/await"
+      ],
+      "terms": [
+        "async-await",
+        "event-loop",
+        "microtarea",
+        "promesa"
+      ],
+      "questions": 6,
+      "sims": [
+        "clasificar:tarea-o-microtarea"
+      ],
+      "tools": []
+    },
+    {
+      "id": "http-y-fetch",
+      "title": "HTTP y fetch",
+      "summary": "Métodos, códigos de estado, cabeceras y JSON; consumir una API con fetch, manejar errores, estados de carga y CORS a nivel básico.",
+      "order": 8,
+      "requires": [],
+      "section": "javascript",
+      "status": "done",
+      "words": 239,
+      "headings": [
+        "HTTP y fetch",
+        "HTTP en cinco ideas",
+        "fetch",
+        "Estados en la interfaz",
+        "Cancelar y limitar",
+        "CORS en una frase"
+      ],
+      "terms": [
+        "codigo-de-estado",
+        "cors",
+        "debounce",
+        "fetch",
+        "http",
+        "json",
+        "mismo-origen"
+      ],
+      "questions": 6,
+      "sims": [
+        "clasificar:que-codigo-es"
+      ],
+      "tools": []
+    },
+    {
+      "id": "git-y-colaboracion",
+      "title": "Git y colaboración",
+      "summary": "Commits pequeños con buenos mensajes, ramas, pull requests, resolver conflictos y revisar código de otros.",
+      "order": 9,
+      "requires": [],
+      "section": "oficio",
+      "status": "done",
+      "words": 272,
+      "headings": [
+        "Git y colaboración",
+        "Commits",
+        "Ramas y pull requests",
+        "Conflictos",
+        "Revisar y ser revisado",
+        "Comandos que te salvan"
+      ],
+      "terms": [
+        "commit",
+        "conflicto",
+        "git",
+        "pr",
+        "rama"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": [
+        "checklist:checklist-junior-pr"
+      ]
+    },
+    {
+      "id": "accesibilidad-basica",
+      "title": "Accesibilidad básica (WCAG 2.2)",
+      "summary": "Teclado, foco visible, textos alternativos, contraste, formularios con label y probar con lector de pantalla: lo mínimo que todo junior debe cumplir.",
+      "order": 10,
+      "requires": [],
+      "section": "oficio",
+      "status": "done",
+      "words": 285,
+      "headings": [
+        "Accesibilidad básica (WCAG 2.2)",
+        "Lo mínimo que un junior debe cumplir",
+        "Cómo probar",
+        "ARIA con cuidado"
+      ],
+      "terms": [
+        "aria",
+        "contraste",
+        "foco",
+        "lector-de-pantalla",
+        "wcag"
+      ],
+      "questions": 6,
+      "sims": [
+        "clasificar:criterio-wcag"
+      ],
+      "tools": [
+        "checklist:checklist-junior-pr",
+        "calculadora:contraste"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": "web-base",
+      "title": "1 · HTML y CSS que aguantan",
+      "topics": [
+        "html-semantico",
+        "cascada-y-especificidad",
+        "flexbox-y-grid",
+        "responsive"
+      ]
+    },
+    {
+      "id": "javascript",
+      "title": "2 · JavaScript del navegador",
+      "topics": [
+        "javascript-esencial",
+        "dom-y-eventos",
+        "asincronia-y-event-loop",
+        "http-y-fetch"
+      ]
+    },
+    {
+      "id": "oficio",
+      "title": "3 · El oficio en equipo",
+      "topics": [
+        "git-y-colaboracion",
+        "accesibilidad-basica"
+      ]
+    }
+  ],
+  "ownTerms": [
+    "abortcontroller",
+    "ambito",
+    "arbol-de-accesibilidad",
+    "aria",
+    "async-await",
+    "box-model",
+    "cascada",
+    "closure",
+    "codigo-de-estado",
+    "commit",
+    "conflicto",
+    "container-query",
+    "contraste",
+    "cors",
+    "debounce",
+    "delegacion-de-eventos",
+    "dom",
+    "especificidad",
+    "event-loop",
+    "fetch",
+    "flexbox",
+    "foco",
+    "git",
+    "grid",
+    "hilo-principal",
+    "html-semantico",
+    "landmark",
+    "lector-de-pantalla",
+    "media-query",
+    "microtarea",
+    "mismo-origen",
+    "mobile-first",
+    "promesa",
+    "rama",
+    "rem",
+    "seo",
+    "srcset",
+    "viewport",
+    "wcag",
+    "web-worker",
+    "xss"
+  ],
+  "tools": [
+    "checklist:checklist-junior-pr",
+    "calculadora:contraste",
+    "decision:flex-o-grid"
+  ]
+}

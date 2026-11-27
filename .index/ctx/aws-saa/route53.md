@@ -35,6 +35,7 @@ Puedes comprar el dominio en otro registrador y usar Route 53 como DNS cambiando
 ## Glosario usado
 - Latencia: Tiempo que tarda una petición en recibir respuesta.
 - TTL: Time To Live. Duración tras la cual un dato guardado se considera vencido.
+- HTTP: Protocolo de petición-respuesta de la web: el cliente envía un método (GET, POST…) a una URL y el servidor responde con un código de estado y un cuerpo.
 - Alta disponibilidad: Diseño que tolera fallos de componentes manteniendo el servicio en pie.
 - EC2: Servicio de máquinas virtuales (IaaS) bajo demanda de AWS.
 - Load Balancer: Reparte el tráfico entrante entre varios destinos sanos y expone un único punto de entrada.

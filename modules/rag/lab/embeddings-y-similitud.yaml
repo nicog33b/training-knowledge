@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué la búsqueda por embeddings encuentra «dar de baja el plan» al buscar «cancelar suscripción»?
+    kind: por-que
+    a: Porque el modelo de embeddings se entrenó para colocar **cerca** textos con **significado parecido**, aunque no compartan palabras. Ambos vectores apuntan en direcciones similares y la **similitud coseno** es alta. Es la gran ventaja frente a la búsqueda por palabras.
+    uses: []
+  - q: ¿Qué pasa si buscas el código de error «E-4012» solo con embeddings?
+    kind: que-pasa-si
+    a: "Es probable que traiga documentos sobre **errores en general** o con códigos parecidos, no el exacto: los embeddings captan significado, no cadenas exactas. Para identificadores, SKUs o nombres raros, la búsqueda **léxica** (BM25) acierta mejor. Por eso se usa **búsqueda híbrida**."
+    uses: []
+  - q: Cambiaste de modelo de embeddings y los resultados son basura. ¿Por qué?
+    kind: error-comun
+    a: "Probablemente consultas con el **modelo nuevo** contra vectores indexados con el **viejo**: viven en espacios distintos y las distancias no significan nada. Al cambiar de modelo hay que **reindexar todo** el corpus. Guarda en los metadatos qué modelo generó cada vector."
+    uses: []
+  - q: Compara similitud coseno y producto escalar.
+    kind: comparar
+    a: El **coseno** mide solo el ángulo (la dirección), ignorando la longitud del vector. El **producto escalar** combina ángulo y longitud. Si los vectores están **normalizados** (longitud 1), dan el mismo orden. Usa la métrica recomendada para el modelo que usas.
+    uses: []
+  - q: ¿Por qué un chunk muy largo da peores resultados en búsqueda densa?
+    kind: por-que
+    a: "Porque un embedding resume **todo** el chunk en un vector: si mezcla varios temas, el vector queda en un punto **intermedio** que no se parece mucho a ninguna pregunta concreta. El significado se **diluye**. Chunks centrados en una idea dan vectores más nítidos."
+    uses: []
+  - q: ¿Cómo eliges un modelo de embeddings para documentación técnica en español?
+    kind: aplicar
+    a: Preselecciona modelos **multilingües** con buen soporte de español y código, y compáralos con **tu** conjunto de evaluación (50–100 preguntas con sus fragmentos relevantes) midiendo recall@k. Considera también dimensiones (memoria), costo y latencia. Los rankings públicos orientan, pero no deciden.
+    uses: []
+sims: []

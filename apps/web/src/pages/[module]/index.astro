@@ -2,28 +2,46 @@
 import Base from '../../layouts/Base.astro';
 import { getData } from '../../lib/data';
 export async function getStaticPaths() {
-  const { modules } = await getData();
-  return modules.map((m) => ({ params: { module: m.manifest.id }, props: { m } }));
+  const { modules, paths } = await getData();
+  return modules.map((m) => ({ params: { module: m.manifest.id }, props: { m, path: paths.find((p) => p.steps.some((s) => s.module === m.manifest.id)), all: modules } }));
 }
-const { m } = Astro.props;
+const { m, path, all } = Astro.props;
 const byId = new Map(m.topics.map((t) => [t.id, t]));
 const used = new Set(m.outline.sections.flatMap((s) => s.topics.map((t) => t.id)));
 const groups = [
   ...m.outline.sections.map((s) => ({ title: s.title, topics: s.topics.map((o) => byId.get(o.id)).filter(Boolean) })),
   ...(m.topics.some((t) => !used.has(t.id)) ? [{ title: 'Otros', topics: m.topics.filter((t) => !used.has(t.id)) }] : []),
 ];
+const LEVEL: Record<string, string> = { inicial: 'Nivel inicial', intermedio: 'Nivel intermedio', avanzado: 'Nivel avanzado', experto: 'Nivel experto' };
+const step = path ? path.steps.findIndex((s) => s.module === m.manifest.id) : -1;
+const title = (id: string) => all.find((x) => x.manifest.id === id)?.manifest.title ?? id;
+const nq = m.topics.reduce((n, t) => n + t.lab.questions.length, 0);
+const id = m.manifest.id;
 ---
-<Base title={m.manifest.title} chat={{ module: m.manifest.id, course: m.manifest.title }}>
+<Base title={m.manifest.title} chat={{ module: id, course: m.manifest.title }}>
+  {m.manifest.level && <span class="lvl">{LEVEL[m.manifest.level]}</span>}
   <h1>{m.manifest.title}</h1>
-  <p>{m.manifest.summary}</p>
-  <p><a href={`/${m.manifest.id}/glosario/`}>Glosario ({m.glossary.length} términos)</a></p>
+  <p class="lead">{m.manifest.summary}</p>
+  {path && (
+    <p class="path muted">Ruta <a href="/rutas/">{path.title}</a> · paso {step + 1} de {path.steps.length}
+      {step > 0 && <> · antes: <a href={`/${path.steps[step - 1].module}/`}>{title(path.steps[step - 1].module)}</a></>}
+      {step < path.steps.length - 1 && <> · después: <a href={`/${path.steps[step + 1].module}/`}>{title(path.steps[step + 1].module)}</a></>}
+    </p>
+  )}
+  <nav class="hub" aria-label="Herramientas de estudio del curso">
+    <a href={`/${id}/repaso/`}><b>Repaso de hoy</b><span>Lo que toca repasar, intercalado</span></a>
+    <a href={`/${id}/tarjetas/`}><b>Tarjetas</b><span>{m.glossary.length} términos + {nq} preguntas</span></a>
+    <a href={`/${id}/mapa/`}><b>Mapa del curso</b><span>Secciones y requisitos</span></a>
+    {m.tools.length > 0 && <a href={`/${id}/herramientas/`}><b>Herramientas</b><span>{m.tools.length} propias de este curso</span></a>}
+    <a href={`/${id}/glosario/`}><b>Glosario</b><span>{m.glossary.length} términos</span></a>
+  </nav>
   {groups.map((g) => (
     <section class="card">
       <h3 style="margin:0 0 .4rem">{g.title}</h3>
       <ul class="clean">
         {g.topics.map((t) => (
           <li>
-            <a href={`/${m.manifest.id}/${t.id}/`}>{t.title}</a>
+            <a href={`/${id}/${t.id}/`}>{t.title}</a>
             {t.status !== 'done' && <> <span class={`badge ${t.status}`}>{t.status}</span></>}
             <div class="muted">{t.summary}</div>
           </li>
@@ -32,3 +50,13 @@ const groups = [
     </section>
   ))}
 </Base>
+<style>
+  .lvl { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+  .lead { font-size: 1.05rem; max-width: 70ch; }
+  .path { margin-top: -.4rem; }
+  .hub { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: .6rem; margin: 1.2rem 0 1.6rem; }
+  .hub a { display: grid; gap: .15rem; text-decoration: none; color: var(--fg); background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: .75rem .9rem; transition: border-color .15s, transform .15s; }
+  .hub a:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .hub b { font-size: .95rem; }
+  .hub span { font-size: .78rem; color: var(--muted); }
+</style>

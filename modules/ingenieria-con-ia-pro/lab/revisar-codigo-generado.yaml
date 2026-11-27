@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Qué es el slopsquatting y cómo te proteges?
+    kind: aplicar
+    a: "Los modelos a veces **inventan nombres de paquetes**; un atacante registra ese nombre con código malicioso y quien instala la sugerencia lo descarga. Protección: verificar cada dependencia nueva (existe, es la oficial, mantenida), usar lockfiles y escáneres de dependencias en CI."
+    uses: []
+  - q: ¿Por qué el código generado necesita una revisión de seguridad específica?
+    kind: por-que
+    a: Porque los modelos reproducen **patrones frecuentes** de su entrenamiento, incluidos los inseguros (concatenar SQL, desactivar verificaciones TLS, criptografía casera). El código parece correcto y profesional, lo que baja la guardia. Revisa entradas, inyecciones, secretos y permisos.
+    uses: []
+  - q: Compara la revisión automatizada y la humana de un PR generado.
+    kind: comparar
+    a: "**Automatizada** (linters, análisis estático, escáneres, incluso otra IA): barata y consistente para lo **mecánico**. **Humana**: diseño, lógica de negocio, alcance y si el cambio es el correcto. Automatiza lo primero para dedicar la atención humana a lo segundo; la IA revisora no sustituye la aprobación."
+    uses: []
+  - q: ¿Qué pasa si el agente «aprovecha» para refactorizar archivos que no tenían que ver?
+    kind: que-pasa-si
+    a: El PR crece, mezcla cambios de comportamiento con limpiezas, se vuelve difícil de revisar y aumenta el riesgo de regresiones fuera del alcance. Pide **alcance estricto** y deja las refactorizaciones para PR propios.
+    uses: []
+  - q: ¿Por qué nadie del equipo debería integrar código que no sabe explicar?
+    kind: por-que
+    a: "Porque la responsabilidad del código es del equipo: en un incidente habrá que **depurarlo** y mantenerlo. Código que nadie entiende no está revisado, está aceptado; pide al autor (humano o agente) que explique las decisiones no obvias en el PR."
+    uses: []
+  - q: "Error común: aprobar un PR del agente porque «los tests pasan»."
+    kind: error-comun
+    a: "Los tests pueden ser **débiles**, haber sido **modificados** o no cubrir seguridad, rendimiento ni mantenibilidad. Los tests verdes son necesarios, no suficientes: revisa también qué tests cambiaron, dependencias nuevas y el diseño."
+    uses: []
+sims: []

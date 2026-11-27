@@ -1,0 +1,32 @@
+id: revisar-pr-ia
+title: Checklist de revisión de un PR generado por IA
+summary: Lo que hay que mirar especialmente cuando el código lo escribió un agente.
+builder: checklist
+topics:
+  - revisar-codigo-generado
+  - tests-como-oraculo
+groups:
+  - title: Alcance y tests
+    items:
+      - text: El PR hace solo lo pedido (sin refactors colaterales).
+        why: Revisable y reversible.
+      - text: No se modificaron ni omitieron tests existentes sin motivo explicado.
+        why: El oráculo no se toca.
+      - text: Los tests nuevos comprueban valores y casos límite, no solo «no falla».
+        why: Tests débiles.
+  - title: Seguridad
+    items:
+      - text: Entradas validadas; sin SQL/comandos/HTML construidos por concatenación.
+        why: Inyecciones y XSS.
+      - text: Sin secretos ni credenciales en el código o la config.
+        why: Fuga de secretos.
+      - text: Cada dependencia nueva existe, es la oficial y está mantenida.
+        why: Slopsquatting.
+  - title: Diseño y mantenimiento
+    items:
+      - text: Reutiliza lo que ya existe en el repo (sin duplicar utilidades).
+        why: Duplicación.
+      - text: Las APIs usadas existen en la versión del proyecto.
+        why: APIs inventadas u obsoletas.
+      - text: Alguien del equipo puede explicar cada decisión no obvia.
+        why: Responsabilidad humana.

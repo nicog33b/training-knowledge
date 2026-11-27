@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué el mensaje de commit debe explicar el porqué?
+    kind: por-que
+    a: Porque el **qué** ya está en el diff. Dentro de seis meses, quien investigue un bug necesitará saber **por qué** se hizo el cambio. "Evita el doble envío al pulsar Enter en el pago" ahorra horas frente a "fix".
+    uses: []
+  - q: Compara git revert y git reset en una rama compartida.
+    kind: comparar
+    a: "`revert` crea un **commit nuevo** que deshace otro: la historia se conserva y nadie se ve afectado. `reset` **reescribe** la historia: si ya la compartiste, obligará a otros a arreglar sus copias. En ramas compartidas, revert."
+    uses: []
+  - q: Te sale un conflicto en un archivo. ¿Cómo lo resuelves?
+    kind: aplicar
+    a: Lee **ambas versiones** y entiende qué buscaba cada cambio; combina el resultado correcto (pregunta a quien hizo el otro cambio si dudas), quita las marcas de conflicto, **compila y ejecuta los tests**, y haz commit. Nunca elijas "lo mío" por defecto.
+    uses: []
+  - q: ¿Qué pasa si trabajas dos semanas en una rama sin integrar la principal?
+    kind: que-pasa-si
+    a: "Acumulas divergencia: al final aparecen **muchos conflictos** a la vez, difíciles de resolver, y tu PR gigante cuesta revisarlo. Integra la principal a menudo y abre PR pequeños para que los problemas aparezcan de a poco."
+    uses: []
+  - q: ¿Qué debe incluir la descripción de un pull request?
+    kind: aplicar
+    a: "**Qué** cambia, **por qué**, **cómo probarlo** (pasos o tests), capturas si hay interfaz y cualquier riesgo o decisión discutible. Un PR pequeño con buena descripción se revisa rápido y bien."
+    uses: []
+  - q: "Error común: hacer git add . sin revisar."
+    kind: error-comun
+    a: Puedes subir archivos generados, configuraciones locales, cambios no relacionados o incluso **secretos** (.env). Revisa con `git status` y `git diff` y añade solo lo que pertenece al cambio; mantén un `.gitignore` adecuado.
+    uses: []
+sims: []

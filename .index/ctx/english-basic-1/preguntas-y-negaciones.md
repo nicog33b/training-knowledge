@@ -51,3 +51,6 @@ Se responde repitiendo el auxiliar, no el verbo: *Do you like it? — Yes, I **d
 
 ## Simulaciones del subtema
 - clasificar: ¿Cómo se forma la pregunta?
+
+## Herramientas del curso en este subtema
+- plantilla: Constructor de frases (afirmativa, negativa y pregunta) — Escribe las piezas de una frase y verás las tres formas con el auxiliar en su sitio: la regla única del primer auxiliar.

@@ -1,0 +1,52 @@
+id: comparar-tests
+title: Comparador de tipos de test
+summary: Qué te da y qué cuesta cada tipo de prueba en frontend.
+builder: comparador
+topics:
+  - testing-frontend
+options:
+  - id: unit
+    label: Unitario
+  - id: integ
+    label: Integración / componente
+  - id: e2e
+    label: Extremo a extremo
+  - id: visual
+    label: Regresión visual
+rows:
+  - criterion: Qué prueba
+    values:
+      - Una función o módulo aislado
+      - Pantalla o componente con hijos reales y red simulada
+      - Flujo completo en navegador real
+      - Que el aspecto no cambie sin querer
+  - criterion: Velocidad
+    values:
+      - Milisegundos
+      - Rápido
+      - Lento (segundos)
+      - Medio
+  - criterion: Fragilidad
+    values:
+      - Baja
+      - Baja si consulta por rol
+      - Media-alta
+      - Alta (cambios de diseño intencionados)
+  - criterion: Confianza que da
+    values:
+      - Lógica correcta
+      - "Alta: cómo lo usa el usuario"
+      - Muy alta en el flujo probado
+      - Solo visual
+  - criterion: Herramientas típicas
+    values:
+      - Vitest, Jest
+      - Testing Library + MSW
+      - Playwright, Cypress
+      - Capturas comparadas (Playwright, Chromatic)
+  - criterion: Cuántos
+    values:
+      - Para lógica pura
+      - La mayoría
+      - "Pocos: caminos críticos"
+      - Componentes clave del design system

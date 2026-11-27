@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "sharedTerms": 3,
+  "sharedTerms": 10,
   "research": {
-    "sources": 68,
-    "decisions": 18
+    "sources": 87,
+    "decisions": 24
   },
   "modules": [
     {
@@ -14,7 +14,8 @@
       "topics": 42,
       "done": 42,
       "planned": 42,
-      "terms": 344
+      "terms": 344,
+      "tools": 2
     },
     {
       "id": "english-basic-1",
@@ -24,7 +25,63 @@
       "topics": 21,
       "done": 21,
       "planned": 21,
-      "terms": 50
+      "terms": 50,
+      "tools": 2
+    },
+    {
+      "id": "frontend-junior",
+      "title": "Frontend Developer · Junior",
+      "summary": "Lo que un frontend junior debe dominar para trabajar en un equipo: HTML semántico, CSS de maquetación, JavaScript del navegador, asincronía, HTTP, Git y accesibilidad básica.",
+      "kind": "framework",
+      "topics": 10,
+      "done": 10,
+      "planned": 10,
+      "terms": 41,
+      "tools": 3
+    },
+    {
+      "id": "frontend-semi-senior",
+      "title": "Frontend Developer · Semi Senior",
+      "summary": "El salto a semi senior: TypeScript, el modelo mental de React, estado y datos del servidor, testing, herramientas de build, rendimiento (Core Web Vitals) y seguridad web.",
+      "kind": "framework",
+      "topics": 9,
+      "done": 9,
+      "planned": 9,
+      "terms": 45,
+      "tools": 3
+    },
+    {
+      "id": "frontend-senior",
+      "title": "Frontend Developer · Senior",
+      "summary": "Criterio de senior: estrategias de renderizado, arquitectura frontend y design systems, observabilidad, rendimiento a escala, decisiones técnicas documentadas y liderazgo técnico.",
+      "kind": "framework",
+      "topics": 8,
+      "done": 8,
+      "planned": 8,
+      "terms": 31,
+      "tools": 4
+    },
+    {
+      "id": "ia-en-aplicaciones",
+      "title": "IA dentro de aplicaciones · conceptos complejos",
+      "summary": "Los conceptos que hay que entender para meter un LLM en un producto: tokens y contexto, muestreo, salidas estructuradas, herramientas, agentes, caché, costos, evals, seguridad y MCP.",
+      "kind": "topic",
+      "topics": 11,
+      "done": 11,
+      "planned": 11,
+      "terms": 32,
+      "tools": 3
+    },
+    {
+      "id": "ingenieria-con-ia-pro",
+      "title": "Ingeniería de software con IA · nivel pro",
+      "summary": "Cómo trabajan con IA los equipos de ingeniería que lo documentan (Google, Microsoft, Anthropic; SpaceX solo lo público): contexto, specs, agentes, verificación, métricas y gobierno.",
+      "kind": "topic",
+      "topics": 11,
+      "done": 11,
+      "planned": 11,
+      "terms": 21,
+      "tools": 4
     },
     {
       "id": "next-cache",
@@ -34,7 +91,39 @@
       "topics": 1,
       "done": 0,
       "planned": 1,
-      "terms": 3
+      "terms": 3,
+      "tools": 0
+    },
+    {
+      "id": "rag",
+      "title": "RAG · Generación aumentada por recuperación",
+      "summary": "Cómo construir, medir y operar sistemas RAG: embeddings, chunking, índices vectoriales, búsqueda híbrida, reranking, prompts con citas, evaluación por etapas y seguridad.",
+      "kind": "topic",
+      "topics": 11,
+      "done": 11,
+      "planned": 11,
+      "terms": 32,
+      "tools": 3
+    }
+  ],
+  "paths": [
+    {
+      "id": "frontend",
+      "title": "Ruta Frontend: de junior a senior",
+      "modules": [
+        "frontend-junior",
+        "frontend-semi-senior",
+        "frontend-senior"
+      ]
+    },
+    {
+      "id": "ia-para-desarrolladores",
+      "title": "Ruta IA para desarrolladores",
+      "modules": [
+        "ia-en-aplicaciones",
+        "rag",
+        "ingenieria-con-ia-pro"
+      ]
     }
   ]
 }

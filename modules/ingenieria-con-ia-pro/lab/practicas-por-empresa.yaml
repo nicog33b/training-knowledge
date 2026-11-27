@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Qué se sabe públicamente de cómo SpaceX trabaja con IA en software?
+    kind: aplicar
+    a: "Solo lo que dicen sus **ofertas de empleo**: una plataforma interna para escribir código más rápido con IA mediante gateways seguros, revisión de código y automatización de PR con IA, guardarraíles, y IA en ingeniería de vehículos (pruebas, aviónica, datos de vuelo). Son intenciones, **no prácticas verificadas**."
+    uses: []
+  - q: Compara lo que aportan las publicaciones de Google, Microsoft y Anthropic.
+    kind: comparar
+    a: "**Google**: casos industriales medidos (migraciones con LLM) e investigación de equipos (DORA). **Microsoft**: un ensayo controlado (Copilot) y pautas de diseño humano-IA. **Anthropic**: guías de construcción (agentes, contexto) y un estándar (MCP). Juntas cubren evidencia, diseño de producto y arquitectura."
+    uses: []
+  - q: ¿Por qué desconfiar de un curso que enseña «el método SpaceX para programar con IA»?
+    kind: por-que
+    a: "Porque **no hay fuente pública** que lo describa: SpaceX no ha publicado esa metodología. Probablemente mezcla opiniones o frases de entrevistas con prácticas genéricas. Pregunta siempre por la fuente y su tipo (estudio, caso interno, oferta de empleo, opinión)."
+    uses: []
+  - q: ¿Qué tienen en común las prácticas que sí están documentadas?
+    kind: por-que
+    a: '**Contexto curado**, **verificación automática**, **revisión humana**, **seguridad por diseño** (mínimo privilegio, sandbox) y **medir** el efecto. Ninguna publica "dejar que la IA lo haga sola"; todas tratan al modelo como una pieza dentro de un sistema con controles.'
+    uses: []
+  - q: ¿Qué pasa si aplicas en tu startup el pipeline de migraciones de Google tal cual?
+    kind: que-pasa-si
+    a: "Puede ser excesivo: Google tiene herramientas internas de análisis de código y un monorepo enorme. La **idea** sí se traslada (descubrimiento determinista + generación + validación + revisión), con herramientas simples: un grep o script, lotes pequeños, CI y PR por lote."
+    uses: []
+  - q: "Error común: citar «la IA ya escribe la mayoría del código en las grandes empresas» como objetivo para tu equipo."
+    kind: error-comun
+    a: "Esas cifras miden **líneas generadas aceptadas** en contextos concretos (autocompletado, migraciones), no valor entregado ni calidad. Copiar el porcentaje como meta empuja a aceptar código sin revisar. Mide resultados: flujo, estabilidad y defectos."
+    uses: []
+sims: []

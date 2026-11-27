@@ -70,3 +70,6 @@ Registra la **configuración de recursos** a lo largo del tiempo y evalúa su **
 - (que-pasa-si) ¿Qué pasa con el historial de CloudTrail si no creas ningún trail?
 - (aplicar) Quieres un aviso inmediato cada vez que alguien inicia sesión con el usuario root: ¿cómo?
 - (aplicar) ¿Cómo demuestras que nadie alteró los logs de CloudTrail?
+
+## Herramientas del curso en este subtema
+- comparador: Comparador de mensajería y eventos — SQS, SNS, Kinesis Data Streams y EventBridge lado a lado: el clásico de preguntas de examen con servicios confundibles.

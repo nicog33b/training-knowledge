@@ -28,6 +28,7 @@ Ambos usan la red global de AWS y las edge locations y protegen frente a DDoS.
 ## Glosario usado
 - Latencia: Tiempo que tarda una petición en recibir respuesta.
 - TTL: Time To Live. Duración tras la cual un dato guardado se considera vencido.
+- HTTP: Protocolo de petición-respuesta de la web: el cliente envía un método (GET, POST…) a una URL y el servidor responde con un código de estado y un cuerpo.
 - Región: Ubicación geográfica de AWS compuesta por varias Zonas de Disponibilidad aisladas.
 - Edge Location: Punto de presencia de AWS cercano al usuario final usado por CloudFront, Route 53 y Global Accelerator para cachear y enrutar tráfico.
 - EC2: Servicio de máquinas virtuales (IaaS) bajo demanda de AWS.

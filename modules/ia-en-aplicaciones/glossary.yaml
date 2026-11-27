@@ -1,0 +1,215 @@
+- term: Token
+  aliases:
+    - tokens
+  definition: Unidad mínima de texto que procesa un LLM (un trozo de palabra,
+    signo o espacio). Precio, límites y velocidad se miden en tokens.
+  see: []
+- term: Ventana de contexto
+  aliases:
+    - ventanas de contexto
+    - context window
+  definition: "Máximo de tokens que un modelo considera a la vez: sistema,
+    historial, documentos, herramientas y la respuesta en curso."
+  see: []
+- term: Context rot
+  aliases: []
+  definition: Pérdida de precisión del modelo para usar información concreta a
+    medida que el contexto crece.
+  see:
+    - Ventana de contexto
+- term: Temperatura
+  aliases:
+    - temperature
+  definition: "Parámetro de muestreo: baja = elige casi siempre los tokens más
+    probables (previsible); alta = más variedad y más riesgo."
+  see:
+    - Top-p
+- term: Top-p
+  aliases:
+    - nucleus sampling
+  definition: Muestreo que solo considera los tokens más probables cuya
+    probabilidad acumulada llega a p (p. ej. 0,9).
+  see:
+    - Temperatura
+- term: Muestreo
+  aliases:
+    - muestrea
+    - sampling
+  definition: Elegir el siguiente token al azar según la distribución de
+    probabilidad que calcula el modelo.
+  see: []
+- term: Prompt de sistema
+  aliases:
+    - system prompt
+    - prompts de sistema
+  definition: Instrucciones de nivel superior que fijan rol, reglas y formato del
+    asistente para toda la conversación.
+  see: []
+- term: Few-shot
+  aliases:
+    - few shot
+  definition: Incluir unos pocos ejemplos de entrada→salida en el prompt para
+    enseñar formato y criterio.
+  see: []
+- term: Salida estructurada
+  aliases:
+    - salidas estructuradas
+    - structured output
+    - structured outputs
+  definition: Respuesta del modelo en un formato verificable por código,
+    normalmente JSON que cumple un esquema.
+  see:
+    - JSON Schema
+- term: JSON Schema
+  aliases:
+    - esquema JSON
+  definition: Estándar para describir la forma de un JSON (campos, tipos, valores
+    permitidos) y validarlo.
+  see: []
+- term: Alucinación
+  aliases:
+    - alucinaciones
+    - alucinar
+    - alucina
+  definition: Contenido que el modelo genera con seguridad aparente pero que es
+    falso o no está respaldado por las fuentes.
+  see: []
+- term: Uso de herramientas
+  aliases:
+    - tool use
+    - function calling
+    - llamada a herramienta
+    - llamadas a herramienta
+  definition: Capacidad del modelo de proponer llamadas a funciones (nombre +
+    argumentos JSON) que el código de la app ejecuta y le devuelve.
+  see: []
+- term: Agente
+  aliases:
+    - agentes
+    - agentic
+  definition: Sistema en el que el LLM decide en bucle el siguiente paso y qué
+    herramientas usar hasta cumplir el objetivo.
+  see:
+    - Workflow
+- term: Workflow
+  aliases:
+    - workflows
+  definition: Sistema donde LLM y herramientas siguen caminos predefinidos en el
+    código (encadenar, enrutar, paralelizar…).
+  see:
+    - Agente
+- term: Sistema agéntico
+  aliases:
+    - sistemas agénticos
+  definition: "Término paraguas para workflows y agentes: cualquier sistema que
+    combina LLM, herramientas y pasos."
+  see: []
+- term: Orquestador-trabajadores
+  aliases: []
+  definition: Patrón donde un modelo divide una tarea en subtareas, las reparte a
+    otros y combina los resultados.
+  see: []
+- term: Evaluador-optimizador
+  aliases: []
+  definition: Patrón donde un modelo genera y otro critica contra criterios,
+    iterando hasta cumplirlos.
+  see: []
+- term: MCP
+  aliases:
+    - Model Context Protocol
+    - servidor MCP
+    - servidores MCP
+  definition: "Model Context Protocol: estándar abierto (2024) para que apps de IA
+    usen herramientas, recursos y prompts expuestos por servidores."
+  see: []
+- term: Caché de prompts
+  aliases:
+    - prompt caching
+    - caché de prefijos
+  definition: El proveedor guarda un prefijo de prompt repetido y lo cobra mucho
+    más barato (y más rápido) en las siguientes peticiones.
+  see: []
+- term: TTFT
+  aliases:
+    - tiempo hasta el primer token
+  definition: "Time To First Token: tiempo desde que se envía la petición hasta
+    que llega el primer token de la respuesta."
+  see: []
+- term: Streaming
+  aliases: []
+  definition: Recibir la respuesta en trozos mientras se genera, en lugar de
+    esperar a que termine.
+  see: []
+- term: Eval
+  aliases:
+    - evals
+    - evaluaciones
+  definition: Conjunto de casos de prueba con criterios de acierto que mide la
+    calidad de un sistema con LLM y detecta regresiones.
+  see: []
+- term: LLM como juez
+  aliases:
+    - LLM-as-judge
+    - juez automático
+    - jueces automáticos
+  definition: Usar un modelo para puntuar salidas de otro contra una rúbrica; útil
+    pero con sesgos que hay que validar con humanos.
+  see: []
+- term: Rúbrica
+  aliases:
+    - rúbricas
+  definition: Lista de criterios concretos y verificables para evaluar una respuesta.
+  see: []
+- term: Inyección de prompt
+  aliases:
+    - prompt injection
+    - inyección indirecta
+    - inyección directa
+  definition: Ataque en el que un texto (del usuario o escondido en datos) hace
+    que el modelo siga instrucciones no autorizadas.
+  see: []
+- term: OWASP Top 10 para LLM
+  aliases:
+    - OWASP Top 10 para aplicaciones LLM
+    - OWASP LLM Top 10
+  definition: Lista de OWASP de los 10 riesgos de seguridad más importantes en
+    aplicaciones con LLM; LLM01 es la inyección de prompt.
+  see: []
+- term: Mínimo privilegio
+  aliases:
+    - principio de mínimo privilegio
+  definition: Dar a un componente solo los permisos imprescindibles para su tarea,
+    para limitar el daño si falla o lo atacan.
+  see: []
+- term: Guardarraíl
+  aliases:
+    - guardarraíles
+    - guardrails
+  definition: "Control que limita lo que un sistema de IA puede hacer o decir:
+    validaciones, filtros, topes, confirmaciones."
+  see: []
+- term: Agencia excesiva
+  aliases:
+    - excessive agency
+  definition: Riesgo de dar a un LLM herramientas o permisos de más, de modo que
+    un error o ataque cause daños grandes.
+  see: []
+- term: Delimitadores
+  aliases:
+    - delimitador
+  definition: Marcas (etiquetas XML, comillas triples) que separan en el prompt
+    los datos de las instrucciones.
+  see: []
+- term: RAG
+  aliases:
+    - Retrieval-Augmented Generation
+    - generación aumentada por recuperación
+  definition: Recuperar fragmentos relevantes de una base de documentos y dárselos
+    al modelo como contexto para responder.
+  see: []
+- term: Decodificador
+  aliases:
+    - decodificación restringida
+  definition: Parte que elige los tokens de salida; restringirlo permite
+    garantizar que el texto cumpla una gramática o esquema.
+  see: []

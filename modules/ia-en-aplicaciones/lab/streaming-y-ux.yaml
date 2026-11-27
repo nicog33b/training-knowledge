@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué el streaming mejora la experiencia aunque la respuesta tarde lo mismo?
+    kind: por-que
+    a: Porque el usuario **empieza a leer** en cientos de milisegundos en vez de mirar un spinner varios segundos. La espera percibida baja y puede detener la generación si va por mal camino. El tiempo total no cambia; lo que cambia es el **tiempo hasta el primer token** visible.
+    uses: []
+  - q: Según las pautas de Microsoft, ¿qué debe hacer la app cuando la IA se equivoca?
+    kind: aplicar
+    a: 'Facilitar **descartar**, **corregir** y **deshacer** con poco esfuerzo, y explicar **por qué** hizo lo que hizo. Por ejemplo: una sugerencia que se ignora con una tecla, un campo editable antes de aplicar y un "ver fuentes". Las pautas son 18, agrupadas en inicio, durante, cuando falla y con el tiempo.'
+    uses: []
+  - q: Compara mostrar «Pensando…» con mostrar «Buscando en 3 documentos…».
+    kind: comparar
+    a: '"Pensando…" no informa. Mostrar **qué está haciendo** (buscar, usar una herramienta, leer un archivo) da sensación de progreso, permite detectar errores ("¿por qué busca ahí?") y ayuda a confiar con criterio. Es una forma barata de transparencia.'
+    uses: []
+  - q: ¿Qué pasa si una app con IA responde siempre con tono muy seguro?
+    kind: que-pasa-si
+    a: "El usuario tiende a **sobreconfiar**: un texto fluido parece correcto aunque esté inventado. Para decisiones importantes, muestra **evidencia y fuentes**, señala lo incierto y pide revisión. Dejar claro desde el inicio **qué tan bien** lo hace el sistema es una de las pautas de Microsoft."
+    uses: []
+  - q: ¿Por qué el feedback 👍/👎 debería alimentar las evals?
+    kind: por-que
+    a: Porque es la fuente más directa de **casos reales donde falla** el sistema. Un 👎 con motivo se convierte en un caso de prueba; así cada cambio de prompt o modelo se mide contra los errores que de verdad vieron los usuarios.
+    uses: []
+  - q: "Error común: ejecutar directamente la acción que propone la IA para «ahorrar un clic»."
+    kind: error-comun
+    a: "Ahorra un clic y cuesta errores caros: correos enviados a quien no era, datos borrados, compras. Mostrar un **borrador editable** y pedir confirmación en acciones con efecto respeta la pauta de permitir corregir y protege contra la inyección indirecta."
+    uses: []
+sims: []

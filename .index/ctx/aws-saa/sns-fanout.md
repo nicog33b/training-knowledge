@@ -30,6 +30,8 @@ EventBridge ofrece enrutamiento por reglas de contenido, esquemas, SaaS partners
 - eventbridge-cloudtrail-config: EventBridge, CloudTrail y Config — Eventos, auditoría de API y cumplimiento de configuración; X-Ray y Health. [secciones: EventBridge, CloudTrail y Config · Amazon EventBridge (antes CloudWatch Events) · CloudTrail · AWS Config · Diferencias · Otros]
 
 ## Glosario usado
+- JSON: Formato de texto para datos estructurados (objetos, listas, números, cadenas) que entienden casi todos los lenguajes.
+- HTTP: Protocolo de petición-respuesta de la web: el cliente envía un método (GET, POST…) a una URL y el servidor responde con un código de estado y un cuerpo.
 - IAM: Servicio global de AWS para gestionar identidades (usuarios, grupos, roles) y sus permisos mediante políticas.
 - SDK: Biblioteca por lenguaje (boto3, JS, Java…) para llamar a la API de AWS desde código.
 - Auto Scaling Group: Grupo de instancias EC2 con tamaño mínimo/deseado/máximo que se autorrepara y escala.
@@ -55,3 +57,6 @@ EventBridge ofrece enrutamiento por reglas de contenido, esquemas, SaaS partners
 - (comparar) Compara SNS y EventBridge para enrutar eventos por contenido.
 - (aplicar) Necesitas fan-out a varias colas manteniendo el orden de los mensajes: ¿cómo?
 - (error-comun) Error común: ¿por qué un topic SNS no consigue entregar en una cola SQS recién suscrita?
+
+## Herramientas del curso en este subtema
+- comparador: Comparador de mensajería y eventos — SQS, SNS, Kinesis Data Streams y EventBridge lado a lado: el clásico de preguntas de examen con servicios confundibles.

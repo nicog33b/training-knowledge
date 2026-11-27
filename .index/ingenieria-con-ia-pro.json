@@ -1,0 +1,428 @@
+{
+  "id": "ingenieria-con-ia-pro",
+  "title": "Ingeniería de software con IA · nivel pro",
+  "summary": "Cómo trabajan con IA los equipos de ingeniería que lo documentan (Google, Microsoft, Anthropic; SpaceX solo lo público): contexto, specs, agentes, verificación, métricas y gobierno.",
+  "kind": "topic",
+  "tags": [
+    "ia",
+    "ingenieria",
+    "agentes"
+  ],
+  "topics": [
+    {
+      "id": "productividad-medida",
+      "title": "Productividad con IA: lo que se ha medido",
+      "summary": "Los resultados que hay que conocer: Copilot 55,8 % más rápido en una tarea nueva, METR 19 % más lento en repos maduros, DORA 2025 (la IA amplifica). Cómo medir en tu equipo.",
+      "order": 1,
+      "requires": [],
+      "section": "evidencia",
+      "status": "done",
+      "words": 281,
+      "headings": [
+        "Productividad con IA: lo que se ha medido",
+        "Tres resultados que hay que conocer",
+        "Qué se deduce",
+        "Cómo medir en tu equipo"
+      ],
+      "terms": [
+        "agente",
+        "dora",
+        "ensayo-controlado-aleatorizado",
+        "http",
+        "pr",
+        "repositorio",
+        "throughput"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": [
+        "calculadora:capacidad-revision"
+      ]
+    },
+    {
+      "id": "como-funciona-un-agente-de-codigo",
+      "title": "Cómo funciona un agente de código",
+      "summary": "El bucle leer-pensar-actuar-verificar, las herramientas (leer, buscar, editar, ejecutar), el contexto que consume y por qué falla.",
+      "order": 2,
+      "requires": [],
+      "section": "evidencia",
+      "status": "done",
+      "words": 261,
+      "headings": [
+        "Cómo funciona un agente de código",
+        "El bucle",
+        "El contexto es el recurso escaso",
+        "Por qué falla",
+        "La consecuencia práctica"
+      ],
+      "terms": [
+        "agente",
+        "agente-de-codigo",
+        "context-rot",
+        "linter",
+        "llm",
+        "repositorio",
+        "subagente"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": []
+    },
+    {
+      "id": "context-engineering",
+      "title": "Context engineering en un repositorio",
+      "summary": "Archivos de instrucciones (CLAUDE.md, AGENTS.md), índices, convenciones y recuperación justo a tiempo: darle al agente el contexto mínimo de alta señal.",
+      "order": 3,
+      "requires": [],
+      "section": "contexto",
+      "status": "done",
+      "words": 249,
+      "headings": [
+        "Context engineering en un repositorio",
+        "Instrucciones persistentes del repo",
+        "Contexto justo a tiempo",
+        "Señales que el contexto está mal",
+        "Higiene de sesión"
+      ],
+      "terms": [
+        "agente",
+        "claude-md",
+        "compactar",
+        "context-engineering",
+        "repositorio"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": [
+        "plantilla:instrucciones-repo"
+      ]
+    },
+    {
+      "id": "specs-antes-que-codigo",
+      "title": "Specs antes que código",
+      "summary": "Desarrollo guiado por especificaciones: requisitos, plan y tareas pequeñas y verificables antes de pedir código; el humano decide el qué, el agente propone el cómo.",
+      "order": 4,
+      "requires": [],
+      "section": "contexto",
+      "status": "done",
+      "words": 245,
+      "headings": [
+        "Specs antes que código",
+        "Las piezas",
+        "Por qué funciona",
+        "Reparto de responsabilidades",
+        "Tamaño adecuado"
+      ],
+      "terms": [
+        "agente",
+        "criterios-de-aceptacion",
+        "pr",
+        "spec-driven-development"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": [
+        "plantilla:spec-para-agente"
+      ]
+    },
+    {
+      "id": "explorar-planificar-implementar-verificar",
+      "title": "Explorar → planificar → implementar → verificar",
+      "summary": "El ciclo que usan los equipos con agentes: entender antes de tocar, plan revisable, cambios pequeños y verificación automática en cada paso.",
+      "order": 5,
+      "requires": [],
+      "section": "flujo",
+      "status": "done",
+      "words": 247,
+      "headings": [
+        "Explorar → planificar → implementar → verificar",
+        "1. Explorar",
+        "2. Planificar",
+        "3. Implementar",
+        "4. Verificar",
+        "5. Integrar",
+        "Antipatrón"
+      ],
+      "terms": [
+        "agente",
+        "agente-de-codigo",
+        "ci",
+        "linter",
+        "pr",
+        "repositorio",
+        "subagente"
+      ],
+      "questions": 6,
+      "sims": [
+        "clasificar:fase-del-ciclo"
+      ],
+      "tools": [
+        "plantilla:spec-para-agente"
+      ]
+    },
+    {
+      "id": "tests-como-oraculo",
+      "title": "Tests como oráculo: TDD con agentes",
+      "summary": "Los tests le dicen al agente cuándo terminó: escribirlos antes, que fallen, implementar hasta verde y no dejar que el agente toque el oráculo.",
+      "order": 6,
+      "requires": [],
+      "section": "flujo",
+      "status": "done",
+      "words": 261,
+      "headings": [
+        "Tests como oráculo: TDD con agentes",
+        "El flujo",
+        "Por qué funciona tan bien con agentes",
+        "Trampas",
+        "Más allá de los tests"
+      ],
+      "terms": [
+        "agente",
+        "criterios-de-aceptacion",
+        "eval",
+        "linter",
+        "oraculo",
+        "tdd",
+        "teaching-to-the-test"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": [
+        "checklist:revisar-pr-ia"
+      ]
+    },
+    {
+      "id": "revisar-codigo-generado",
+      "title": "Revisar código generado por IA",
+      "summary": "Qué mirar en un PR de un agente: seguridad, dependencias inventadas, tests débiles, duplicación y mantenibilidad; la responsabilidad sigue siendo humana.",
+      "order": 7,
+      "requires": [],
+      "section": "flujo",
+      "status": "done",
+      "words": 242,
+      "headings": [
+        "Revisar código generado por IA",
+        "Qué mirar especialmente",
+        "Cómo revisar a escala",
+        "Señal de alarma"
+      ],
+      "terms": [
+        "agente",
+        "analisis-estatico",
+        "linter",
+        "pr",
+        "repositorio",
+        "slopsquatting"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": [
+        "checklist:revisar-pr-ia"
+      ]
+    },
+    {
+      "id": "migraciones-a-escala",
+      "title": "Migraciones a escala con LLM (caso Google)",
+      "summary": "Cómo Google migra miles de archivos con LLM: buscar los sitios, generar cambios, validar con build y tests, y revisión humana; qué porcentaje hizo el modelo.",
+      "order": 8,
+      "requires": [],
+      "section": "escala",
+      "status": "done",
+      "words": 269,
+      "headings": [
+        "Migraciones a escala con LLM (caso Google)",
+        "Qué migraron",
+        "Cómo lo hacen (el patrón)",
+        "La lección principal",
+        "Cómo aplicarlo en tu equipo"
+      ],
+      "terms": [
+        "agente",
+        "analisis-estatico",
+        "api",
+        "linter",
+        "llm",
+        "migracion-de-codigo",
+        "monorepo",
+        "pr",
+        "prompt"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": []
+    },
+    {
+      "id": "agentes-en-paralelo",
+      "title": "Agentes en paralelo y subagentes",
+      "summary": "Varias tareas a la vez con worktrees y entornos aislados, subagentes para explorar sin ensuciar el contexto y cuándo paralelizar no compensa.",
+      "order": 9,
+      "requires": [],
+      "section": "escala",
+      "status": "done",
+      "words": 248,
+      "headings": [
+        "Agentes en paralelo y subagentes",
+        "Aislar el trabajo",
+        "Subagentes",
+        "Cuándo compensa paralelizar",
+        "Cuándo no",
+        "Coordinación"
+      ],
+      "terms": [
+        "agente",
+        "pr",
+        "repositorio",
+        "sandbox",
+        "subagente",
+        "worktree"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": [
+        "calculadora:capacidad-revision"
+      ]
+    },
+    {
+      "id": "gobierno-y-seguridad",
+      "title": "Gobierno: permisos, sandbox, secretos y métricas",
+      "summary": "Modos de permiso, entornos aislados, secretos fuera del alcance del agente, auditoría y métricas de equipo (DORA) para adoptar IA sin perder estabilidad.",
+      "order": 10,
+      "requires": [],
+      "section": "organizacion",
+      "status": "done",
+      "words": 269,
+      "headings": [
+        "Gobierno: permisos, sandbox, secretos y métricas",
+        "Permisos y sandbox",
+        "Secretos",
+        "Inyección por el contexto",
+        "Auditoría",
+        "Métricas de adopción",
+        "Política del equipo"
+      ],
+      "terms": [
+        "agente",
+        "ci",
+        "dora",
+        "inyeccion-de-prompt",
+        "minimo-privilegio",
+        "modos-de-permiso",
+        "pr",
+        "prompt",
+        "repositorio",
+        "sandbox",
+        "token"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": []
+    },
+    {
+      "id": "practicas-por-empresa",
+      "title": "Qué hacen Google, Microsoft, Anthropic y SpaceX",
+      "summary": "Lo publicado por cada empresa sobre trabajar con IA, con su fuente y su límite; y lo que NO se sabe (SpaceX solo tiene ofertas de empleo públicas).",
+      "order": 11,
+      "requires": [],
+      "section": "organizacion",
+      "status": "done",
+      "words": 332,
+      "headings": [
+        "Qué hacen Google, Microsoft, Anthropic y SpaceX",
+        "Google",
+        "Microsoft",
+        "Anthropic",
+        "SpaceX",
+        "Lo común"
+      ],
+      "terms": [
+        "agente",
+        "context-engineering",
+        "dora",
+        "ensayo-controlado-aleatorizado",
+        "guardarrail",
+        "llm",
+        "mcp",
+        "migracion-de-codigo",
+        "monorepo",
+        "pr",
+        "rag",
+        "workflow"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": []
+    }
+  ],
+  "sections": [
+    {
+      "id": "evidencia",
+      "title": "1 · Qué dice la evidencia",
+      "topics": [
+        "productividad-medida",
+        "como-funciona-un-agente-de-codigo"
+      ]
+    },
+    {
+      "id": "contexto",
+      "title": "2 · Contexto y especificación",
+      "topics": [
+        "context-engineering",
+        "specs-antes-que-codigo"
+      ]
+    },
+    {
+      "id": "flujo",
+      "title": "3 · El flujo de trabajo",
+      "topics": [
+        "explorar-planificar-implementar-verificar",
+        "tests-como-oraculo",
+        "revisar-codigo-generado"
+      ]
+    },
+    {
+      "id": "escala",
+      "title": "4 · A escala",
+      "topics": [
+        "migraciones-a-escala",
+        "agentes-en-paralelo"
+      ]
+    },
+    {
+      "id": "organizacion",
+      "title": "5 · Organización y gobierno",
+      "topics": [
+        "gobierno-y-seguridad",
+        "practicas-por-empresa"
+      ]
+    }
+  ],
+  "ownTerms": [
+    "agente-de-codigo",
+    "analisis-estatico",
+    "claude-md",
+    "compactar",
+    "context-engineering",
+    "criterios-de-aceptacion",
+    "dora",
+    "ensayo-controlado-aleatorizado",
+    "linter",
+    "migracion-de-codigo",
+    "modos-de-permiso",
+    "monorepo",
+    "oraculo",
+    "sandbox",
+    "slopsquatting",
+    "spec-driven-development",
+    "subagente",
+    "tdd",
+    "teaching-to-the-test",
+    "throughput",
+    "worktree"
+  ],
+  "tools": [
+    "calculadora:capacidad-revision",
+    "plantilla:instrucciones-repo",
+    "checklist:revisar-pr-ia",
+    "plantilla:spec-para-agente"
+  ]
+}

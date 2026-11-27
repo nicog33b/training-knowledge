@@ -1,0 +1,12 @@
+id: frontend-junior
+title: Frontend Developer · Junior
+summary: 'Lo que un frontend junior debe dominar para trabajar en un equipo: HTML semántico, CSS de maquetación, JavaScript del navegador, asincronía, HTTP, Git y accesibilidad básica.'
+kind: framework
+locale: es
+tags:
+- frontend
+- html
+- css
+- javascript
+glossaries: []
+level: inicial

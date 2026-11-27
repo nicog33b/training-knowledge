@@ -1,0 +1,351 @@
+{
+  "id": "frontend-senior",
+  "title": "Frontend Developer · Senior",
+  "summary": "Criterio de senior: estrategias de renderizado, arquitectura frontend y design systems, observabilidad, rendimiento a escala, decisiones técnicas documentadas y liderazgo técnico.",
+  "kind": "framework",
+  "tags": [
+    "frontend",
+    "arquitectura",
+    "liderazgo"
+  ],
+  "topics": [
+    {
+      "id": "estrategias-de-renderizado",
+      "title": "Estrategias de renderizado",
+      "summary": "CSR, SSR, SSG, ISR, streaming, hidratación, islas y Server Components: qué gana y qué cuesta cada una, y cómo elegir por página.",
+      "order": 1,
+      "requires": [],
+      "section": "arquitectura",
+      "status": "done",
+      "words": 298,
+      "headings": [
+        "Estrategias de renderizado",
+        "Las opciones",
+        "Hidratación y su costo",
+        "Cómo elegir"
+      ],
+      "terms": [
+        "cdn",
+        "csr",
+        "hidratacion",
+        "inp",
+        "islas",
+        "isr",
+        "lcp",
+        "re-render",
+        "revalidacion",
+        "seo",
+        "server-components",
+        "ssg",
+        "ssr",
+        "streaming-ssr",
+        "ttfb"
+      ],
+      "questions": 6,
+      "sims": [
+        "clasificar:estrategia-por-pagina"
+      ],
+      "tools": [
+        "comparador:comparar-renderizado",
+        "decision:elegir-renderizado"
+      ]
+    },
+    {
+      "id": "arquitectura-frontend",
+      "title": "Arquitectura frontend a escala",
+      "summary": "Organizar por dominio, límites entre módulos, monorepos, contratos y cuándo (casi nunca) compensan los microfrontends.",
+      "order": 2,
+      "requires": [],
+      "section": "arquitectura",
+      "status": "done",
+      "words": 253,
+      "headings": [
+        "Arquitectura frontend a escala",
+        "Organizar por dominio",
+        "Límites explícitos",
+        "Monorepos",
+        "Contratos",
+        "Microfrontends",
+        "Señales de que la arquitectura falla"
+      ],
+      "terms": [
+        "api",
+        "ci",
+        "conflicto",
+        "design-system",
+        "http",
+        "microfrontends",
+        "monolito-modular",
+        "zod"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": []
+    },
+    {
+      "id": "design-systems",
+      "title": "Design systems",
+      "summary": "Tokens, componentes accesibles, documentación, versionado y gobierno: el producto interno que hace consistente y rápido a todo el equipo.",
+      "order": 3,
+      "requires": [],
+      "section": "arquitectura",
+      "status": "done",
+      "words": 246,
+      "headings": [
+        "Design systems",
+        "Capas",
+        "Ingeniería del sistema",
+        "Gobierno",
+        "Errores típicos"
+      ],
+      "terms": [
+        "api",
+        "aria",
+        "codemod",
+        "design-system",
+        "foco",
+        "props",
+        "tokens-de-diseno",
+        "versionado-semantico"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": []
+    },
+    {
+      "id": "rendimiento-a-escala",
+      "title": "Rendimiento a escala",
+      "summary": "Presupuestos de rendimiento, RUM, perfilado del hilo principal, caché y CDN, y una cultura que evita que la web se degrade con cada release.",
+      "order": 4,
+      "requires": [],
+      "section": "produccion",
+      "status": "done",
+      "words": 272,
+      "headings": [
+        "Rendimiento a escala",
+        "Presupuestos",
+        "Medir en campo",
+        "Perfilar",
+        "Palancas grandes",
+        "Cultura"
+      ],
+      "terms": [
+        "cdn",
+        "ci",
+        "cls",
+        "code-splitting",
+        "hilo-principal",
+        "inp",
+        "islas",
+        "lcp",
+        "lighthouse",
+        "percentil-75",
+        "pr",
+        "presupuesto-de-rendimiento",
+        "react",
+        "rum",
+        "server-components",
+        "tarea-larga"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": [
+        "checklist:lanzamiento-seguro"
+      ]
+    },
+    {
+      "id": "observabilidad-frontend",
+      "title": "Observabilidad en el frontend",
+      "summary": "Errores con contexto y source maps, RUM, logs de eventos, feature flags y lanzamientos graduales para detectar y revertir problemas rápido.",
+      "order": 5,
+      "requires": [],
+      "section": "produccion",
+      "status": "done",
+      "words": 254,
+      "headings": [
+        "Observabilidad en el frontend",
+        "Errores",
+        "Rendimiento y comportamiento",
+        "Lanzar con red",
+        "Privacidad",
+        "Lo que cambia ser senior"
+      ],
+      "terms": [
+        "api",
+        "breadcrumbs",
+        "core-web-vitals",
+        "despliegue-gradual",
+        "error-boundary",
+        "feature-flag",
+        "promesa",
+        "rum",
+        "source-map"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": [
+        "checklist:lanzamiento-seguro"
+      ]
+    },
+    {
+      "id": "decisiones-y-adr",
+      "title": "Decisiones técnicas y ADR",
+      "summary": "Cómo decidir con compromisos explícitos, documentar en Architecture Decision Records y revisar decisiones cuando cambia el contexto.",
+      "order": 6,
+      "requires": [],
+      "section": "liderazgo",
+      "status": "done",
+      "words": 238,
+      "headings": [
+        "Decisiones técnicas y ADR",
+        "Decidir con compromisos explícitos",
+        "ADR",
+        "Evidencia",
+        "Revisar decisiones"
+      ],
+      "terms": [
+        "adr",
+        "pr",
+        "repositorio"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": [
+        "plantilla:adr"
+      ]
+    },
+    {
+      "id": "liderazgo-tecnico",
+      "title": "Liderazgo técnico sin cargo",
+      "summary": "Revisiones de código que enseñan, mentoría, estimación con incertidumbre, deuda técnica negociada y hacer crecer al equipo.",
+      "order": 7,
+      "requires": [],
+      "section": "liderazgo",
+      "status": "done",
+      "words": 244,
+      "headings": [
+        "Liderazgo técnico sin cargo",
+        "Revisiones de código que enseñan",
+        "Mentoría",
+        "Estimar con incertidumbre",
+        "Deuda técnica",
+        "Multiplicar"
+      ],
+      "terms": [
+        "api",
+        "deuda-tecnica",
+        "pr",
+        "promesa",
+        "spike"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": []
+    },
+    {
+      "id": "system-design-frontend",
+      "title": "System design de frontend",
+      "summary": "Cómo abordar el diseño de un sistema frontend (feed, autocompletar, editor): requisitos, modelo de datos, API, estado, rendimiento, accesibilidad y fallos.",
+      "order": 8,
+      "requires": [],
+      "section": "liderazgo",
+      "status": "done",
+      "words": 267,
+      "headings": [
+        "System design de frontend",
+        "Un marco para cualquier problema",
+        "Ejemplo: autocompletar",
+        "Cómo comunicarlo"
+      ],
+      "terms": [
+        "apg",
+        "api",
+        "code-splitting",
+        "conflicto",
+        "csr",
+        "datos-del-servidor",
+        "debounce",
+        "foco",
+        "lector-de-pantalla",
+        "paginacion-por-cursor",
+        "sse",
+        "ssr",
+        "virtualizacion",
+        "websocket",
+        "xss"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": [
+        "decision:elegir-renderizado"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": "arquitectura",
+      "title": "1 · Arquitectura y renderizado",
+      "topics": [
+        "estrategias-de-renderizado",
+        "arquitectura-frontend",
+        "design-systems"
+      ]
+    },
+    {
+      "id": "produccion",
+      "title": "2 · Producción",
+      "topics": [
+        "rendimiento-a-escala",
+        "observabilidad-frontend"
+      ]
+    },
+    {
+      "id": "liderazgo",
+      "title": "3 · Criterio y liderazgo técnico",
+      "topics": [
+        "decisiones-y-adr",
+        "liderazgo-tecnico",
+        "system-design-frontend"
+      ]
+    }
+  ],
+  "ownTerms": [
+    "adr",
+    "breadcrumbs",
+    "cdn",
+    "codemod",
+    "csr",
+    "design-system",
+    "despliegue-gradual",
+    "deuda-tecnica",
+    "error-boundary",
+    "feature-flag",
+    "hidratacion",
+    "islas",
+    "isr",
+    "microfrontends",
+    "monolito-modular",
+    "normalizar",
+    "paginacion-por-cursor",
+    "presupuesto-de-rendimiento",
+    "rum",
+    "server-components",
+    "spike",
+    "sse",
+    "ssg",
+    "ssr",
+    "stale-while-revalidate",
+    "streaming-ssr",
+    "tokens-de-diseno",
+    "ttfb",
+    "versionado-semantico",
+    "virtualizacion",
+    "websocket"
+  ],
+  "tools": [
+    "plantilla:adr",
+    "comparador:comparar-renderizado",
+    "decision:elegir-renderizado",
+    "checklist:lanzamiento-seguro"
+  ]
+}

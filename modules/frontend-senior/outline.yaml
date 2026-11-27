@@ -1,0 +1,18 @@
+sections:
+  - id: arquitectura
+    title: 1 · Arquitectura y renderizado
+    topics:
+      - {id: estrategias-de-renderizado, title: "Estrategias de renderizado", summary: "CSR, SSR, SSG, ISR, streaming, hidratación, islas y Server Components: qué gana y qué cuesta cada una, y cómo elegir por página."}
+      - {id: arquitectura-frontend, title: "Arquitectura frontend a escala", summary: "Organizar por dominio, límites entre módulos, monorepos, contratos y cuándo (casi nunca) compensan los microfrontends."}
+      - {id: design-systems, title: "Design systems", summary: "Tokens, componentes accesibles, documentación, versionado y gobierno: el producto interno que hace consistente y rápido a todo el equipo."}
+  - id: produccion
+    title: 2 · Producción
+    topics:
+      - {id: rendimiento-a-escala, title: "Rendimiento a escala", summary: "Presupuestos de rendimiento, RUM, perfilado del hilo principal, caché y CDN, y una cultura que evita que la web se degrade con cada release."}
+      - {id: observabilidad-frontend, title: "Observabilidad en el frontend", summary: "Errores con contexto y source maps, RUM, logs de eventos, feature flags y lanzamientos graduales para detectar y revertir problemas rápido."}
+  - id: liderazgo
+    title: 3 · Criterio y liderazgo técnico
+    topics:
+      - {id: decisiones-y-adr, title: "Decisiones técnicas y ADR", summary: "Cómo decidir con compromisos explícitos, documentar en Architecture Decision Records y revisar decisiones cuando cambia el contexto."}
+      - {id: liderazgo-tecnico, title: "Liderazgo técnico sin cargo", summary: "Revisiones de código que enseñan, mentoría, estimación con incertidumbre, deuda técnica negociada y hacer crecer al equipo."}
+      - {id: system-design-frontend, title: "System design de frontend", summary: "Cómo abordar el diseño de un sistema frontend (feed, autocompletar, editor): requisitos, modelo de datos, API, estado, rendimiento, accesibilidad y fallos."}

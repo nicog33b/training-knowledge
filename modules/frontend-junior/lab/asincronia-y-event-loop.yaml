@@ -1,0 +1,56 @@
+questions:
+  - q: ¿Por qué setTimeout(fn, 0) no se ejecuta inmediatamente?
+    kind: por-que
+    a: 'Porque encola `fn` como **tarea**: solo se ejecutará cuando la pila esté vacía y se hayan procesado **todas las microtareas** pendientes (promesas). "0 ms" significa "lo antes posible después de lo actual", no "ahora".'
+    uses: []
+  - q: "¿En qué orden se imprime: log('A'); setTimeout(()=>log('B')); Promise.resolve().then(()=>log('C')); log('D')?"
+    kind: aplicar
+    a: "**A, D, C, B**. A y D son código síncrono en la pila. Al vaciarse la pila, se ejecutan las **microtareas** (el `then` → C) y después la siguiente **tarea** (el `setTimeout` → B)."
+    uses: []
+  - q: Compara Promise.all y Promise.allSettled.
+    kind: comparar
+    a: "`Promise.all` espera todas en paralelo y **falla en cuanto una falla** (pierdes los demás resultados). `allSettled` espera a todas y te da el estado de cada una (éxito o error). Usa `all` cuando todas son imprescindibles y `allSettled` cuando puedes mostrar resultados parciales."
+    uses: []
+  - q: ¿Qué pasa si haces await dentro de un for para 10 peticiones independientes?
+    kind: que-pasa-si
+    a: "Se hacen **una tras otra**: si cada una tarda 300 ms, esperas 3 s. Si son independientes, lánzalas a la vez y espera con `Promise.all(ids.map(id => fetch(...)))`: ~300 ms. Solo serializa cuando una depende de la anterior o necesitas limitar la concurrencia."
+    uses: []
+  - q: ¿Por qué await no bloquea la página?
+    kind: por-que
+    a: "Porque `await` pausa **solo la función async**: devuelve el control al event loop, que sigue procesando eventos y pintando. Cuando la promesa se resuelve, el resto de la función se reanuda como microtarea."
+    uses: []
+  - q: "Error común: no manejar el error de una promesa."
+    kind: error-comun
+    a: "Una promesa rechazada sin `catch` (o sin `try/catch` alrededor del `await`) deja la interfaz en un estado roto sin avisar: spinner eterno o datos a medias. Maneja siempre el error y muestra un estado de error con opción de reintentar."
+    uses: []
+sims:
+  - id: tarea-o-microtarea
+    title: ¿Tarea o microtarea?
+    type: clasificar
+    prompt: ¿En qué cola entra cada callback?
+    categories:
+      - id: sincrono
+        label: Se ejecuta ya (síncrono)
+      - id: micro
+        label: Microtarea
+      - id: tarea
+        label: Tarea (macrotarea)
+    items:
+      - text: El cuerpo de new Promise((resolve) => { ... })
+        category: sincrono
+        why: El ejecutor de una promesa corre de inmediato.
+      - text: El callback de .then() de una promesa ya resuelta
+        category: micro
+        why: Los then van a la cola de microtareas.
+      - text: setTimeout(fn, 0)
+        category: tarea
+        why: Los temporizadores encolan tareas.
+      - text: El código después de un await
+        category: micro
+        why: Se reanuda como microtarea.
+      - text: Un manejador de click
+        category: tarea
+        why: Los eventos del usuario son tareas.
+      - text: queueMicrotask(fn)
+        category: micro
+        why: Encola explícitamente una microtarea.

@@ -24,10 +24,9 @@ const { title, chat } = Astro.props;
       try {
         const p = JSON.parse(localStorage.getItem('tk-read') || '{}');
         const r = document.documentElement;
-        if (p.theme === 'light' || p.theme === 'dark') r.dataset.theme = p.theme;
-        if (p.font) r.dataset.font = p.font;
-        if (p.spacing) r.dataset.spacing = p.spacing;
-        if (p.size) r.style.setProperty('--read-size', p.size + 'px');
+        for (const k of ['font', 'spacing', 'theme', 'measure', 'contrast', 'links', 'ui', 'focus', 'motion', 'glossary'])
+          if (typeof p[k] === 'string' && /^[a-z-]{1,20}$/.test(p[k])) r.dataset[k] = p[k];
+        if (p.size) r.style.setProperty('--read-size', Number(p.size) + 'px');
       } catch {}
     </script>
     <style is:global>
@@ -61,6 +60,40 @@ const { title, chat } = Astro.props;
       :root[data-font="atkinson"] { --read-font: 'Atkinson Hyperlegible', system-ui, sans-serif; }
       /* Espaciado amplio: valores de WCAG 1.4.12 (ayuda sobre todo con dislexia; decisión sin-tipografias-milagro). */
       :root[data-spacing="amplio"] { --read-lh: 1.9; --read-ls: .08em; --read-ws: .16em; }
+      /* Ancho de línea (dyson-2004): estrecho ~55, normal ~68, ancho ~80 caracteres. */
+      :root[data-measure="estrecho"] { --measure: 55ch; }
+      :root[data-measure="ancho"] { --measure: 80ch; }
+      /* Alto contraste: objetivo 7:1 (WCAG AAA) en texto y bordes. */
+      :root[data-contrast="alto"] { --fg:#000; --muted:#262b36; --line:#4a5163; --card:#fff; --accent:#2e1fbf; --ok:#0b5a28; --warn:#7a3c00; --bad:#8a0f0f;
+        --k-por-que:#2e1fbf; --k-que-pasa-si:#7a3c00; --k-comparar:#0a4d5e; --k-aplicar:#0b5a28; --k-error-comun:#8a0f0f; }
+      :root[data-contrast="alto"][data-theme="dark"] { --bg:#000; --fg:#fff; --muted:#e1e5ee; --line:#9aa3b5; --card:#0b0d12; --accent:#b9b9ff; --on-accent:#000; --ok:#8ff0b0; --warn:#ffd36b; --bad:#ffbdbd;
+        --k-por-que:#c7d0ff; --k-que-pasa-si:#ffd36b; --k-comparar:#9ff2ff; --k-aplicar:#b4f5c8; --k-error-comun:#ffbdbd; }
+      @media (prefers-color-scheme: dark) {
+        :root[data-contrast="alto"]:not([data-theme="light"]) { --bg:#000; --fg:#fff; --muted:#e1e5ee; --line:#9aa3b5; --card:#0b0d12; --accent:#b9b9ff; --on-accent:#000; --ok:#8ff0b0; --warn:#ffd36b; --bad:#ffbdbd;
+          --k-por-que:#c7d0ff; --k-que-pasa-si:#ffd36b; --k-comparar:#9ff2ff; --k-aplicar:#b4f5c8; --k-error-comun:#ffbdbd; }
+      }
+      /* Enlaces y foco muy visibles. */
+      :root[data-links="marcados"] a { text-decoration: underline !important; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+      :root[data-links="marcados"] :focus-visible { outline: 3px solid var(--accent) !important; outline-offset: 3px !important; box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 25%, transparent); }
+      /* Interfaz grande: objetivos táctiles cómodos. */
+      :root[data-ui="grande"] { font-size: 112.5%; }
+      :root[data-ui="grande"] button, :root[data-ui="grande"] .chip { min-height: 40px; }
+      /* Reducir movimiento aunque el sistema no lo pida. */
+      :root[data-motion="reducir"] *, :root[data-motion="reducir"] *::before, :root[data-motion="reducir"] *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+      /* Modo foco: sin header/chat, el resto atenuado salvo el bloque bajo el puntero o con foco. */
+      :root[data-focus="on"] .tk-top { transform: translateY(-100%); }
+      :root[data-focus="on"] .tk-top:hover, :root[data-focus="on"] .tk-top:focus-within { transform: none; }
+      :root[data-focus="on"] #tk-chat .tk-fab { opacity: .35; }
+      :root[data-focus="on"] .prose > * { opacity: .38; transition: opacity .2s; }
+      :root[data-focus="on"] .prose > *:hover, :root[data-focus="on"] .prose > *:focus-within, :root[data-focus="on"] .prose > .tk-reading { opacity: 1; }
+      @media (hover: none) { :root[data-focus="on"] .prose > * { opacity: 1; } }
+      /* Bloque que se está leyendo en voz alta. */
+      .tk-reading { background: color-mix(in srgb, var(--accent) 12%, transparent); border-radius: 6px; box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 12%, transparent); }
+      /* Diagramas */
+      .tk-mermaid { margin: 1rem 0; overflow-x: auto; text-align: center; }
+      .tk-mermaid svg { max-width: 100%; height: auto; }
+      .tk-mermaid:not([data-ok]) { min-height: 3rem; }
+      .tk-mermaid-err { color: var(--bad); font-size: .85rem; }
       * { box-sizing: border-box; }
       body { background:var(--bg); color:var(--fg); font-family: var(--ui-font); margin:0; line-height:1.6; -webkit-font-smoothing: antialiased; }
       main { max-width: 860px; margin: 0 auto; padding: 1.5rem 16px 4rem; }
@@ -91,8 +124,8 @@ const { title, chat } = Astro.props;
   </head>
   <body>
     <Header />
-    <main><slot /></main>
+    <main id="contenido" tabindex="-1"><slot /></main>
     {chat && <Chat module={chat.module} course={chat.course} topic={chat.topic} topicTitle={chat.topicTitle} />}
-    {chat && <SelectionMenu questions={chat.questions} />}
+    {chat && <SelectionMenu questions={chat.questions} module={chat.module} topic={chat.topic} />}
   </body>
 </html>

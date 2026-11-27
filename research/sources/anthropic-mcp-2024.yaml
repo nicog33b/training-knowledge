@@ -1,0 +1,17 @@
+id: anthropic-mcp-2024
+title: Introducing the Model Context Protocol
+authors:
+  - Anthropic
+year: 2024
+venue: Anthropic News
+url: https://www.anthropic.com/news/model-context-protocol
+kind: docs
+verified: secondary
+retrieved: 2026-11-26
+summary: MCP es un estándar abierto (nov 2024) para conectar asistentes de IA
+  con datos y herramientas mediante servidores.
+facts:
+  - "Publicado y liberado como código abierto el 25-nov-2024: especificación,
+    SDK (TypeScript y Python) y servidores de referencia."
+  - Funciona con cualquier modelo, no solo Claude.
+caveats: []

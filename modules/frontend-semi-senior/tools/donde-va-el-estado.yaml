@@ -1,0 +1,72 @@
+id: donde-va-el-estado
+title: ¿Dónde debería vivir este estado?
+summary: Asistente para decidir entre estado local, padre común, URL, librería
+  de datos del servidor o store global.
+builder: decision
+topics:
+  - estado-y-datos-del-servidor
+  - react-modelo-mental
+start: origen
+nodes:
+  - id: origen
+    question: ¿El dato viene del servidor (pedidos, productos, perfil)?
+    options:
+      - label: Sí
+        result: servidor
+      - label: No, es estado de la interfaz
+        next: compartir
+  - id: compartir
+    question: ¿Debe sobrevivir a una recarga o poder compartirse con un enlace
+      (filtros, página, pestaña)?
+    options:
+      - label: Sí
+        result: url
+      - label: No
+        next: quien
+  - id: quien
+    question: ¿Quién lo necesita?
+    options:
+      - label: Un solo componente
+        result: local
+      - label: Varios componentes cercanos
+        result: padre
+      - label: Muchos componentes lejanos en toda la app
+        next: frecuencia
+  - id: frecuencia
+    question: ¿Cambia a menudo y desde muchos sitios?
+    options:
+      - label: No (tema, usuario, idioma)
+        result: context
+      - label: Sí (editor complejo, carrito offline)
+        result: store
+results:
+  - id: servidor
+    title: Librería de datos del servidor
+    why: "Necesita caché, revalidación, deduplicación e invalidación tras
+      mutaciones: TanStack Query, SWR o los datos de tu framework."
+    see:
+      - estado-y-datos-del-servidor
+  - id: url
+    title: La URL (query params)
+    why: Sobrevive a recargas, funciona el botón atrás y el enlace se comparte.
+    see:
+      - estado-y-datos-del-servidor
+  - id: local
+    title: useState en ese componente
+    why: "Lo más simple: el estado vive donde se usa."
+    see:
+      - react-modelo-mental
+  - id: padre
+    title: Estado en el padre común
+    why: Sube el estado al ancestro común más cercano y pásalo por props.
+    see:
+      - react-modelo-mental
+  - id: context
+    title: Context
+    why: Para datos globales que cambian poco; evita pasar props por muchos niveles.
+    watch: Cada cambio re-renderiza a todos los consumidores.
+  - id: store
+    title: Un store de cliente
+    why: "Estado de cliente global y muy dinámico: un store con selectores evita
+      re-renders masivos."
+    watch: No metas aquí datos del servidor.

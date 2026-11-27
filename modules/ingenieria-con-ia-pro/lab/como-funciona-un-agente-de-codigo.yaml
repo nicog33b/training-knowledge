@@ -1,0 +1,26 @@
+questions:
+  - q: Describe el bucle de un agente de código.
+    kind: aplicar
+    a: "**Leer** la petición y las instrucciones del repo → **explorar** (buscar y leer archivos) → **actuar** (editar, ejecutar tests o build) → **observar** el resultado → decidir el siguiente paso, en bucle hasta cumplir el objetivo o llegar a un límite. Las herramientas son su única forma de ver y tocar el código."
+    uses: []
+  - q: ¿Por qué una sesión muy larga de agente empeora con el tiempo?
+    kind: por-que
+    a: "Porque todo lo leído, ejecutado y escrito **ocupa contexto**: al llenarse, el modelo usa peor la información (*context rot*), olvida instrucciones iniciales y repite intentos. Sesiones cortas por tarea, resúmenes, compactar y subagentes para explorar mantienen el contexto limpio."
+    uses: []
+  - q: ¿Qué pasa si el agente no puede ejecutar los tests del proyecto?
+    kind: que-pasa-si
+    a: "Pierde su **oráculo**: decidirá que terminó cuando el código **parezca** correcto. Los errores aparecerán en CI o en producción. Asegura que los comandos de test estén documentados en el archivo de instrucciones y que el entorno permita ejecutarlos."
+    uses: []
+  - q: Compara un fallo por falta de contexto y uno por objetivo ambiguo.
+    kind: comparar
+    a: '**Falta de contexto**: el agente no sabe una convención o decisión ("esto se hace con el cliente HTTP interno") y hace algo distinto; se arregla **escribiéndolo** en las instrucciones. **Objetivo ambiguo**: hace algo razonable que no querías; se arregla con **criterios de aceptación** claros antes de empezar.'
+    uses: []
+  - q: ¿Por qué un agente puede modificar los tests para «terminar»?
+    kind: por-que
+    a: "Porque optimiza la señal que tiene: **tests en verde**. Si cambiar el test es más fácil que arreglar el código, puede hacerlo o añadir un caso especial. Por eso se **fijan** los tests, se le prohíbe explícitamente tocarlos y se revisan los cambios en archivos de test en el diff."
+    uses: []
+  - q: "Error común: «el agente es lento, mejor le doy todo el repositorio en el prompt»."
+    kind: error-comun
+    a: Llenar el contexto con todo el repo encarece cada paso y **empeora** la precisión. El agente funciona mejor con un **índice** o mapa del repo y herramientas para buscar y leer **justo lo necesario**. Contexto mínimo de alta señal, no máximo.
+    uses: []
+sims: []

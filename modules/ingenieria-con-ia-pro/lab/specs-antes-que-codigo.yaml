@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué escribir la spec antes de pedir código a un agente?
+    kind: por-que
+    a: Porque las **ambigüedades** salen cuando corregirlas cuesta una frase, no una refactorización. Los **criterios de aceptación** se convierten en tests y el agente sabe cuándo ha terminado. Sin spec, el agente implementa **una** interpretación razonable que puede no ser la tuya.
+    uses: []
+  - q: Compara spec, plan técnico y tareas.
+    kind: comparar
+    a: "**Spec**: el qué y el porqué (comportamiento, criterios de aceptación, fuera de alcance). **Plan**: el cómo (componentes, contratos, riesgos, pruebas). **Tareas**: pasos pequeños y ordenados, cada uno con su verificación. El humano fija la spec; el agente puede proponer plan y tareas."
+    uses: []
+  - q: Escribe criterios de aceptación para «permitir exportar el informe a CSV».
+    kind: aplicar
+    a: "Ejemplos: el botón Exportar descarga un `.csv` con las mismas columnas y filas que la tabla filtrada; los separadores decimales y las comillas se escapan correctamente; con 0 filas se descarga solo la cabecera; con más de 100.000 filas se avisa. Cada uno se puede convertir en un test."
+    uses: []
+  - q: ¿Qué pasa si delegas al agente también el «qué» construir?
+    kind: que-pasa-si
+    a: "Obtienes muy rápido algo **coherente pero no pedido**: funcionalidades de más, supuestos de negocio inventados o un alcance distinto. Decidir qué construir y qué significa terminado es responsabilidad humana; el agente es excelente proponiendo el cómo."
+    uses: []
+  - q: ¿Por qué tareas pequeñas en vez de un gran cambio?
+    kind: por-que
+    a: "Porque cada una se puede **verificar** y **revisar** de verdad. Un PR de 2.000 líneas generadas no se revisa: se acepta. Las tareas pequeñas también limitan cuánto se desvía el agente antes de que lo detectes."
+    uses: []
+  - q: "Error común: escribir una spec formal para arreglar un typo."
+    kind: error-comun
+    a: "El proceso debe ser **proporcional**: un bug con reproducción clara basta con el test que falla; un typo, con el cambio. Las specs completas valen para features, cambios de comportamiento y cambios que cruzan módulos."
+    uses: []
+sims: []
