@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué React previene la mayoría de XSS y dónde deja de hacerlo?
+    kind: por-que
+    a: "Porque **escapa** por defecto el texto que pones en JSX: `<script>` se muestra como texto. Deja de protegerte en las salidas de emergencia: `dangerouslySetInnerHTML`, URLs `javascript:` en `href`, refs que escriben `innerHTML` o librerías que insertan HTML."
+    uses: []
+  - q: Compara guardar el token de sesión en localStorage o en una cookie HttpOnly.
+    kind: comparar
+    a: "**localStorage**: cómodo, pero **cualquier XSS** puede leerlo y llevárselo. **Cookie HttpOnly; Secure; SameSite**: JavaScript no puede leerla, así que un XSS no la roba (aunque puede actuar mientras está en la página). Para sesiones suele ser más segura; requiere pensar en CSRF."
+    uses: []
+  - q: ¿Qué pasa si confías en CORS para proteger tu API?
+    kind: que-pasa-si
+    a: "Nada impide llamar a la API con curl, Postman o un script: CORS solo limita qué **páginas** pueden **leer** respuestas desde un navegador. La autenticación y autorización deben estar en el **servidor**."
+    uses: []
+  - q: Tienes que mostrar comentarios en markdown escritos por usuarios. ¿Cómo lo haces seguro?
+    kind: aplicar
+    a: Convierte el markdown a HTML y **sanéalo** con una librería probada (DOMPurify) antes de insertarlo, con una lista de etiquetas y atributos permitidos y sin `javascript:` en enlaces. Añade una **CSP** estricta como segunda capa.
+    uses: []
+  - q: ¿Por qué una CSP estricta reduce el impacto de un XSS?
+    kind: por-que
+    a: "Porque aunque el atacante logre inyectar `<script>`, el navegador **no lo ejecuta** si no tiene el nonce o hash permitido, ni carga scripts de dominios no autorizados. Es una defensa en profundidad: no evita el bug, pero lo vuelve inofensivo."
+    uses: []
+  - q: "Error común: añadir scripts de terceros sin revisar."
+    kind: error-comun
+    a: "Un script de terceros se ejecuta con los **mismos privilegios** que tu código: puede leer formularios, cookies no HttpOnly y el DOM. Si el proveedor es comprometido, tú también. Minimiza terceros, usa SRI cuando sea posible y restringe con CSP."
+    uses: []
+sims: []

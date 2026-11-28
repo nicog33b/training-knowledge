@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Qué secciones tiene un ADR?
+    kind: aplicar
+    a: "**Título**, fecha y **estado** (propuesto, aceptado, reemplazado); **contexto** (problema y restricciones); **decisión**; **alternativas** consideradas con sus pros y contras; y **consecuencias** (lo que ganamos y lo que aceptamos). Una página, en el repositorio."
+    uses: []
+  - q: ¿Por qué no se edita un ADR cuando la decisión cambia?
+    kind: por-que
+    a: "Porque su valor es la **historia**: por qué se decidió así con la información de entonces. Se escribe un ADR **nuevo** que reemplaza al anterior y se marca el viejo como reemplazado. Así se entiende la evolución y no se repiten debates."
+    uses: []
+  - q: Compara decisiones reversibles e irreversibles.
+    kind: comparar
+    a: "**Reversibles** (una librería de utilidades, un patrón interno): decide rápido, mide y cambia si hace falta. **Irreversibles o caras** (framework principal, modelo de datos público, proveedor con lock-in): más análisis, prototipo y más opiniones. Tratar todo igual paraliza o arriesga."
+    uses: []
+  - q: ¿Qué pasa si una decisión técnica se toma en una reunión sin dejar registro?
+    kind: que-pasa-si
+    a: "En unos meses nadie recuerda **por qué**: los nuevos la cuestionan, se repite el debate o se revierte sin conocer las razones. Un ADR de una página evita perder ese contexto."
+    uses: []
+  - q: ¿Por qué incluir «no hacer nada» como opción?
+    kind: por-que
+    a: Porque obliga a explicitar el **costo de no actuar** y evita cambios por entusiasmo. A veces la mejor decisión es posponer hasta tener más información; si no, sirve de línea base para justificar la opción elegida.
+    uses: []
+  - q: "Error común: elegir tecnología por popularidad sin criterios."
+    kind: error-comun
+    a: Lo popular puede no encajar con tu equipo, escala o restricciones. Define **criterios** antes de mirar opciones (rendimiento, curva de aprendizaje, mantenimiento, costo operativo, reversibilidad), haz un prototipo y documenta la decisión.
+    uses: []
+sims: []

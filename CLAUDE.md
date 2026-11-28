@@ -28,7 +28,7 @@ Toda decisión de diseño que se apoye en información externa debe quedar traza
 - Actualízalo en la misma sesión en que ocurre el cambio, no después.
 
 ## Comandos (nunca crees archivos de módulo a mano si hay comando)
-- `pnpm tk new module <id> --title T --summary S [--kind certification|topic|framework|other]`
+- `pnpm tk new module <id> --title T --summary S [--kind certification|topic|framework|other] [--level inicial|intermedio|avanzado|experto]`
 - `pnpm tk new topic <módulo> <id> --title T --summary S [--order N]`
 - `pnpm tk glossary add <módulo|_shared> "Término" --def "..." [--alias a,b] [--see x]`
 - `pnpm tk plan sync <módulo>` — crea andamiaje (status: todo) de cada subtema de `modules/<id>/outline.yaml`
@@ -37,6 +37,7 @@ Toda decisión de diseño que se apoye en información externa debe quedar traza
 - `pnpm tk lab import <módulo> <bundle.yaml>` — preguntas sugeridas + simulaciones por subtema (mapa `<subtema>: {questions, sims}`; fusiona sin duplicar)
 - `pnpm tk ask <módulo> <subtema> "pregunta" [--provider anthropic|openai|gemini|ollama|compatible] [--dry] [--model]` — tutor IA con contexto mínimo (`--dry` muestra el prompt sin gastar; real requiere clave en `.env`)
 - `pnpm tk gasto [--reset]` — gasto de IA medido por esta app: hoy, mes, total y por modelo con su precio (`.data/gasto.json`; precios en `PRICES` de `packages/llm`)
+- `pnpm tk tool list [módulo]` · `tk tool new <módulo> <id> --builder calculadora|decision|checklist|comparador|plantilla --title --summary [--topics a,b]` · `tk tool import <módulo> <bundle.yaml>` — herramientas propias de un curso (ver Reglas de contenido)
 - `pnpm tk status [módulo]` — progreso por sección
 - Evidencia: `pnpm tk research find <texto>` · `research status` · `source add` · `source import <yaml>` · `decision new` (ver Protocolo de evidencia)
 - `pnpm index` · `pnpm validate` · `pnpm test`
@@ -47,7 +48,9 @@ Toda decisión de diseño que se apoye en información externa debe quedar traza
 2. Escribir bundles de contenido + YAML de glosario → `tk fill` + `tk glossary import`.
 3. Escribir el bundle de lab (preguntas sugeridas de cada subtema + simulaciones donde haya conceptos confundibles o parámetros) → `tk lab import`.
    Se hace AL CREAR el curso (con la suscripción, costo 0 en uso), no al vuelo con la API.
-4. `tk status` hasta 100 %, `pnpm validate`, ver panel en `/progreso` (`pnpm dev`).
+4. Herramientas propias del curso (si hay cálculos, decisiones, checklists, comparaciones o plantillas del oficio) → `tk tool import`.
+5. `tk status` hasta 100 %, `pnpm validate`, ver panel en `/progreso` (`pnpm dev`). Si el curso forma parte de una ruta, añádelo a `paths/<ruta>.yaml`.
+6. Anota el cambio en `CHANGELOG.md` (visible para personas) y en `tasks.md`.
    Frontmatter nuevo: `section` (id del outline) y `status` (todo|draft|done; done exige ≥60 palabras y ≥6 preguntas en el lab, todas con respuesta `a`).
    Cada comando que cambia contenido regenera `.index/`, incluido el contexto para IA de cada subtema (`.index/ctx/<módulo>/`).
 
@@ -62,6 +65,11 @@ Toda decisión de diseño que se apoye en información externa debe quedar traza
   Las reglas `when` usan un mini-lenguaje seguro (variables de `params`, + - * / %, comparaciones, && || !); `validate` comprueba variables, cobertura (pon un `when: "1"` final) y que haya algo que predecir.
   Rúbricas = ideas concretas verificables ("menciona ChangeMessageVisibility"), no criterios vagos. Ver `research/decisions/simulaciones-por-primitivas-y-recetas.md`.
   Una primitiva nueva (p. ej. ordenar pasos) = esquema en `contracts` + validación en `sims` + render en `apps/web/src/components/Lab.astro`.
+- Herramientas: `tools/<id>.yaml` con `builder` (calculadora | decision | checklist | comparador | plantilla) + configuración; `topics:` las muestra al final de esos subtemas.
+  Las expresiones de la calculadora y los `when` usan el mismo mini-lenguaje seguro (+ funciones min, max, ceil, floor, round, abs, sqrt, pow, log2, log10; sin ternario: usa `a * cond + b * (1 - cond)`).
+  Un constructor nuevo = esquema en `contracts` (`ToolSpec`) + `checkTool` en `packages/tools` + rama en `apps/web/src/components/Tool.astro`. Ver `research/decisions/herramientas-por-curso-con-constructores.md`.
+- Vistas de estudio (esquema, mapa, huecos) salen de los títulos `##/###` y de las **negritas** del subtema: marca en negrita las ideas clave (2–6 palabras).
+- YAML: entrecomilla todo texto con `: ` (o usa `>-`); un bundle de lab no puede repetir la clave de un subtema (usa dos archivos).
 - Subtemas: `topics/<id>.md` con frontmatter (`title`, `summary` ≤240, `order`, `requires`). Resumen conciso: el índice lo usa como contexto.
 
 ## Arquitectura (desacoplada; dependencias solo hacia abajo)
@@ -71,12 +79,15 @@ glossary   ← motor de detección + plugin rehype (agnóstico de framework)
 content    ← adaptador FS del puerto + loadAll() + validación
 research   ← evidencia: fuentes + decisiones (research/), validación, búsqueda e índice
 sims       ← evaluador de reglas seguro + validación semántica de recetas + corrección determinista
+tools      ← constructores de herramientas por curso: validación + ejecución (./run, sin Node)
+views      ← vistas de estudio desde markdown: esquema, mindmap/flowchart Mermaid, huecos (sin dependencias)
+practice   ← planificador de repaso (provisional, Leitner; FSRS en T-015)
 indexer    ← genera .index/ (root.json, <id>.json, <id>.md, research.{json,md}, ctx/<id>/{_catalogo,<subtema>}.md)
 llm        ← proveedores (Claude SDK; ChatGPT/compatibles vía Chat Completions), modelo por FUNCIÓN y nivel, precios, contador de gasto
 tutor      ← tutor IA barato: catálogo del curso (prefijo cacheado) + contexto del subtema + herramienta leer_subtema
 render     ← markdown → HTML con términos subrayados (+ term.css)
 cli (tk)   ← harness de scaffolding
-apps/web   ← vista Astro (una de muchas posibles; solo consume content+render) + chat flotante que habla con tutor-api + menú al seleccionar texto (acciones y preguntas del lab → chat, evento `tk-ask`)
+apps/web   ← vista Astro (una de muchas posibles; consume content+render+tools+views+practice): estudiar como…, herramientas, repaso, tarjetas, mapa, rutas, perfil local, panel de accesibilidad + chat flotante que habla con tutor-api + menú al seleccionar texto (acciones y preguntas del lab → chat, evento `tk-ask`)
 apps/tutor-api ← servidor local (127.0.0.1) del chat: valida, llama a @tk/tutor; la clave nunca llega al navegador
 ```
 - Cambiar una forma de datos = cambiar `packages/contracts` primero.

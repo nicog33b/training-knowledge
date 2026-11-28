@@ -1,0 +1,21 @@
+id: brysbaert-2024-bionic
+title: No, Bionic Reading does not work
+authors:
+  - Brysbaert
+year: 2024
+venue: Acta Psychologica
+url: https://pubmed.ncbi.nlm.nih.gov/38723450/
+kind: experiment
+verified: secondary
+retrieved: 2026-11-26
+summary: Poner en negrita el inicio de cada palabra (Bionic Reading) no acelera
+  la lectura.
+facts:
+  - "Lectura de 100 párrafos en formato Bionic o normal: sin diferencia
+    significativa en tiempos de lectura."
+  - Una prueba informal de Readwise con 2.074 voluntarios tampoco halló mejora
+    de velocidad (no revisada por pares).
+caveats:
+  - Visto por resumen de búsqueda; un estudio turco de 2024 con alumnos de 6.º
+    afirmó beneficio, con diseño no revisado.
+  - La comprensión casi no se ha medido con buen diseño.

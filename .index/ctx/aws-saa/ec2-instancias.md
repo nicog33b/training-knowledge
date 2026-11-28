@@ -33,6 +33,7 @@ Las instancias **T** son *burstable*: acumulan créditos de CPU y gastan al nece
 > **Tip de examen**: carga estable de largo plazo → Reserved/Savings Plans; tolera interrupciones → Spot; licencias por núcleo → Dedicated Host; carga impredecible y corta → On-Demand.
 
 ## Glosario usado
+- CI: Integración continua: cada cambio se construye y se prueba automáticamente en un servidor antes de integrarlo.
 - Zona de Disponibilidad: Uno o más centros de datos independientes dentro de una Región, con energía y red propias.
 - Usuario root: Identidad creada con la cuenta de AWS con acceso total e irrestricto; debe protegerse con MFA y usarse lo mínimo.
 - EC2: Servicio de máquinas virtuales (IaaS) bajo demanda de AWS.

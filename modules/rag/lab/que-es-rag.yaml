@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué RAG reduce las alucinaciones sobre datos concretos, pero no las elimina?
+    kind: por-que
+    a: Porque le da al modelo el **texto fuente** en el contexto en lugar de depender de lo que recuerda del entrenamiento. Pero el modelo puede **ignorar** el fragmento, malinterpretarlo, mezclarlo con su conocimiento general o la recuperación puede traer el fragmento equivocado. Por eso se piden **citas verificables** y se mide la **fidelidad**.
+    uses: []
+  - q: Compara RAG y fine-tuning para que un asistente conozca la política de vacaciones de la empresa.
+    kind: comparar
+    a: "**RAG**: la política se recupera del documento vigente, se puede **citar** y actualizar con solo reindexar. **Fine-tuning**: habría que reentrenar con cada cambio, no hay citas y el modelo puede mezclar versiones. Para **hechos que cambian**, RAG; el fine-tuning sirve para **comportamiento y formato**."
+    uses: []
+  - q: Tienes 3 documentos estables de 20 páginas. ¿Necesitas un pipeline de RAG?
+    kind: aplicar
+    a: "Probablemente no: caben en el **contexto** con holgura. Mételos enteros con **caché de prompts** (el prefijo no cambia) y te ahorras chunking, índice y reranking. Cuando el corpus crezca, cambie a menudo o necesites **permisos** por usuario, entonces sí monta RAG."
+    uses: []
+  - q: ¿Qué pasa si el corpus tiene información desactualizada mezclada con la vigente?
+    kind: que-pasa-si
+    a: El modelo puede responder con la **versión vieja** y citarla con seguridad. Hay que gestionar **versiones** en la ingesta (borrar o marcar lo obsoleto), guardar la **fecha** como metadato y preferir o filtrar lo vigente. La calidad de un RAG depende de la calidad del corpus.
+    uses: []
+  - q: ¿Por qué las citas son una de las mayores ventajas de RAG?
+    kind: por-que
+    a: 'Porque permiten **verificar**: el usuario puede abrir la fuente y comprobar, y tu código puede validar que la cita existe. Convierte una respuesta "confía en mí" en una respuesta **auditable**, y ayuda a detectar fallos de recuperación o de interpretación.'
+    uses: []
+  - q: "Error común: «uso RAG, así que no necesito evaluar»."
+    kind: error-comun
+    a: "RAG añade **más** puntos de fallo: ingesta, chunking, embeddings, índice, reranking, prompt. Sin evaluación por etapas no sabrás si una mala respuesta viene de que no se recuperó el fragmento o de que el modelo lo usó mal. Mide recuperación (recall@k) y generación (fidelidad)."
+    uses: []
+sims: []

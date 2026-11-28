@@ -1,0 +1,10 @@
+id: frontend
+title: "Ruta Frontend: de junior a senior"
+summary: "Tres cursos encadenados. Cada nivel asume el anterior y hereda su glosario; avanza cuando puedas resolver las tareas del nivel sin ayuda."
+steps:
+  - module: frontend-junior
+    goal: "Maquetar accesible y responsive, programar la interacción con JavaScript y consumir una API sin bloquear la página."
+  - module: frontend-semi-senior
+    goal: "Construir features completas en React + TypeScript con tests, datos del servidor bien gestionados y buenas Core Web Vitals."
+  - module: frontend-senior
+    goal: "Decidir arquitectura y estrategia de renderizado, medir en producción, documentar decisiones y hacer crecer al equipo."

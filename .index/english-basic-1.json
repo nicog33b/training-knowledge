@@ -1,0 +1,845 @@
+{
+  "id": "english-basic-1",
+  "title": "Basic English · Level 1",
+  "summary": "Las bases del inglés para quien ya tiene vocabulario: orden de la oración, auxiliares, los 12 tiempos verbales comparados con el español, modales, condicionales, pasiva y artículos.",
+  "kind": "topic",
+  "tags": [
+    "english",
+    "grammar",
+    "idiomas"
+  ],
+  "topics": [
+    {
+      "id": "orden-de-la-oracion",
+      "title": "El orden de la oración",
+      "summary": "Sujeto + verbo + complemento: por qué el inglés no omite el sujeto, dónde van adjetivos y adverbios y cómo el orden sustituye a las terminaciones del español.",
+      "order": 1,
+      "requires": [],
+      "section": "bases",
+      "status": "done",
+      "words": 242,
+      "headings": [
+        "El orden de la oración",
+        "La fórmula base: S + V + O",
+        "El sujeto es obligatorio",
+        "Adjetivos y adverbios",
+        "Por qué es una base"
+      ],
+      "terms": [
+        "adverbio-de-frecuencia",
+        "objeto",
+        "sujeto",
+        "sujeto-vacio",
+        "verbo-auxiliar",
+        "verbo-principal"
+      ],
+      "questions": 6,
+      "sims": [
+        "clasificar:orden-correcto"
+      ],
+      "tools": [
+        "plantilla:constructor-de-frases"
+      ]
+    },
+    {
+      "id": "verbos-auxiliares",
+      "title": "Los auxiliares do, be y have",
+      "summary": "Los tres verbos que arman todos los tiempos, preguntas y negaciones; cuándo son auxiliares y cuándo verbos principales.",
+      "order": 2,
+      "requires": [
+        "orden-de-la-oracion"
+      ],
+      "section": "bases",
+      "status": "done",
+      "words": 237,
+      "headings": [
+        "Los auxiliares do, be y have",
+        "Auxiliar vs verbo principal",
+        "La regla de oro: solo el primer auxiliar cambia"
+      ],
+      "terms": [
+        "aspecto",
+        "going-to",
+        "participio",
+        "past-simple",
+        "present-simple",
+        "verbo-auxiliar",
+        "verbo-modal",
+        "verbo-principal",
+        "voz-pasiva"
+      ],
+      "questions": 6,
+      "sims": [
+        "clasificar:que-auxiliar"
+      ],
+      "tools": [
+        "plantilla:constructor-de-frases"
+      ]
+    },
+    {
+      "id": "preguntas-y-negaciones",
+      "title": "Preguntas y negaciones",
+      "summary": "La regla única: el primer auxiliar se mueve o lleva not. Preguntas sí/no, preguntas Wh, short answers y contracciones.",
+      "order": 3,
+      "requires": [
+        "verbos-auxiliares"
+      ],
+      "section": "bases",
+      "status": "done",
+      "words": 279,
+      "headings": [
+        "Preguntas y negaciones",
+        "Negación: not después del primer auxiliar",
+        "Pregunta sí/no: inversión",
+        "Preguntas Wh",
+        "Short answers",
+        "Contracciones frecuentes"
+      ],
+      "terms": [
+        "contraccion",
+        "inversion",
+        "participio",
+        "pregunta-wh",
+        "short-answer",
+        "sujeto",
+        "verbo-auxiliar"
+      ],
+      "questions": 6,
+      "sims": [
+        "clasificar:como-se-pregunta"
+      ],
+      "tools": [
+        "plantilla:constructor-de-frases"
+      ]
+    },
+    {
+      "id": "formas-del-verbo",
+      "title": "Las cinco formas del verbo",
+      "summary": "Base, -s, -ing, pasado y participio: cómo se forman, verbos irregulares y qué forma pide cada auxiliar.",
+      "order": 4,
+      "requires": [
+        "verbos-auxiliares"
+      ],
+      "section": "bases",
+      "status": "done",
+      "words": 254,
+      "headings": [
+        "Las cinco formas del verbo",
+        "Qué forma pide cada auxiliar (memorízalo)",
+        "Ortografía",
+        "Verbos irregulares"
+      ],
+      "terms": [
+        "aspecto-continuo",
+        "aspecto-perfecto",
+        "gerundio",
+        "participio",
+        "past-simple",
+        "present-simple",
+        "tercera-persona",
+        "verbo-auxiliar",
+        "verbo-irregular",
+        "verbo-modal",
+        "voz-pasiva"
+      ],
+      "questions": 6,
+      "sims": [
+        "clasificar:que-forma-pide"
+      ],
+      "tools": []
+    },
+    {
+      "id": "tiempo-y-aspecto",
+      "title": "Tiempo × aspecto: la tabla de 12",
+      "summary": "Los 12 tiempos salen de combinar 3 tiempos (presente, pasado, futuro) con 4 aspectos (simple, continuous, perfect, perfect continuous), con una fórmula fija.",
+      "order": 5,
+      "requires": [
+        "verbos-auxiliares",
+        "formas-del-verbo"
+      ],
+      "section": "mapa-de-tiempos",
+      "status": "done",
+      "words": 274,
+      "headings": [
+        "Tiempo × aspecto: la tabla de 12",
+        "La tabla (verbo *work*, sujeto *she*)",
+        "Cómo se arma cualquier tiempo",
+        "Para qué sirve el mapa"
+      ],
+      "terms": [
+        "aspecto",
+        "aspecto-continuo",
+        "aspecto-perfecto",
+        "going-to",
+        "participio",
+        "past-continuous",
+        "past-simple",
+        "present-continuous",
+        "present-perfect",
+        "present-simple",
+        "punto-de-referencia",
+        "sujeto"
+      ],
+      "questions": 6,
+      "sims": [
+        "predecir-observar:cuantas-palabras"
+      ],
+      "tools": [
+        "decision:que-tiempo-uso"
+      ]
+    },
+    {
+      "id": "espanol-vs-ingles",
+      "title": "Español vs inglés: equivalencias",
+      "summary": "Qué tiempo inglés corresponde a cada tiempo del español (indefinido, imperfecto, pretérito perfecto, pluscuamperfecto…) y dónde no hay traducción directa.",
+      "order": 6,
+      "requires": [
+        "tiempo-y-aspecto"
+      ],
+      "section": "mapa-de-tiempos",
+      "status": "done",
+      "words": 285,
+      "headings": [
+        "Español vs inglés: equivalencias",
+        "Las cuatro trampas principales",
+        "Regla práctica"
+      ],
+      "terms": [
+        "aspecto-continuo",
+        "condicional",
+        "future-perfect",
+        "gerundio",
+        "going-to",
+        "past-continuous",
+        "past-perfect",
+        "past-simple",
+        "pluscuamperfecto",
+        "present-continuous",
+        "present-perfect",
+        "present-simple",
+        "preterito-imperfecto",
+        "preterito-indefinido",
+        "preterito-perfecto-compuesto",
+        "subjuntivo",
+        "used-to"
+      ],
+      "questions": 6,
+      "sims": [
+        "clasificar:traduce-la-idea"
+      ],
+      "tools": [
+        "decision:que-tiempo-uso"
+      ]
+    },
+    {
+      "id": "present-simple",
+      "title": "Present Simple",
+      "summary": "Hábitos, verdades y horarios; la -s de tercera persona y do/does en preguntas y negaciones.",
+      "order": 7,
+      "requires": [
+        "preguntas-y-negaciones",
+        "tiempo-y-aspecto"
+      ],
+      "section": "presente",
+      "status": "done",
+      "words": 215,
+      "headings": [
+        "Present Simple",
+        "Usos",
+        "Marcadores típicos",
+        "El verbo be (irregular)",
+        "Diferencia clave con el español"
+      ],
+      "terms": [
+        "present-continuous",
+        "present-simple",
+        "sujeto",
+        "verbo-auxiliar",
+        "verbo-de-estado"
+      ],
+      "questions": 6,
+      "sims": [
+        "clasificar:simple-o-continuo-presente"
+      ],
+      "tools": []
+    },
+    {
+      "id": "present-continuous",
+      "title": "Present Continuous y verbos de estado",
+      "summary": "Acciones en curso o temporales (am/is/are + -ing) y los verbos de estado que no suelen ir en continuo.",
+      "order": 8,
+      "requires": [
+        "present-simple"
+      ],
+      "section": "presente",
+      "status": "done",
+      "words": 222,
+      "headings": [
+        "Present Continuous y verbos de estado",
+        "Usos",
+        "Verbos de estado (stative verbs)"
+      ],
+      "terms": [
+        "aspecto-continuo",
+        "present-continuous",
+        "present-simple",
+        "verbo-de-estado"
+      ],
+      "questions": 6,
+      "sims": [
+        "clasificar:estado-o-accion"
+      ],
+      "tools": []
+    },
+    {
+      "id": "past-simple",
+      "title": "Past Simple",
+      "summary": "Acciones terminadas en un momento pasado: -ed, irregulares y did en preguntas y negaciones.",
+      "order": 9,
+      "requires": [
+        "formas-del-verbo",
+        "preguntas-y-negaciones"
+      ],
+      "section": "pasado",
+      "status": "done",
+      "words": 220,
+      "headings": [
+        "Past Simple",
+        "Usos",
+        "Marcadores típicos",
+        "Equivale a",
+        "Error frecuente"
+      ],
+      "terms": [
+        "past-simple",
+        "present-perfect",
+        "preterito-imperfecto",
+        "preterito-indefinido"
+      ],
+      "questions": 6,
+      "sims": [
+        "clasificar:did-correcto"
+      ],
+      "tools": []
+    },
+    {
+      "id": "past-continuous",
+      "title": "Past Continuous",
+      "summary": "Acción en progreso en un momento del pasado (was/were + -ing) y su combinación con Past Simple usando when y while.",
+      "order": 10,
+      "requires": [
+        "past-simple",
+        "present-continuous"
+      ],
+      "section": "pasado",
+      "status": "done",
+      "words": 187,
+      "headings": [
+        "Past Continuous",
+        "Usos",
+        "When vs while",
+        "Cuidado con el orden de los hechos",
+        "Relación con el español"
+      ],
+      "terms": [
+        "aspecto-continuo",
+        "gerundio",
+        "past-continuous",
+        "past-simple",
+        "preterito-imperfecto",
+        "verbo-de-estado"
+      ],
+      "questions": 6,
+      "sims": [
+        "clasificar:when-while"
+      ],
+      "tools": []
+    },
+    {
+      "id": "imperfecto-en-ingles",
+      "title": "El pretérito imperfecto en inglés",
+      "summary": "El inglés no tiene imperfecto: según el sentido se dice con Past Continuous, used to, would o Past Simple.",
+      "order": 11,
+      "requires": [
+        "past-continuous",
+        "espanol-vs-ingles"
+      ],
+      "section": "pasado",
+      "status": "done",
+      "words": 295,
+      "headings": [
+        "El pretérito imperfecto en inglés",
+        "used to",
+        "would (hábito)",
+        "Cómo decidir en tres preguntas"
+      ],
+      "terms": [
+        "past-continuous",
+        "past-simple",
+        "preterito-imperfecto",
+        "used-to"
+      ],
+      "questions": 6,
+      "sims": [
+        "clasificar:que-imperfecto"
+      ],
+      "tools": []
+    },
+    {
+      "id": "present-perfect",
+      "title": "Present Perfect",
+      "summary": "have/has + participio: pasado conectado con el presente; for/since, already, yet, just, ever y el contraste con Past Simple.",
+      "order": 12,
+      "requires": [
+        "past-simple",
+        "formas-del-verbo"
+      ],
+      "section": "perfectos",
+      "status": "done",
+      "words": 271,
+      "headings": [
+        "Present Perfect",
+        "Usos",
+        "Marcadores",
+        "Present Perfect vs Past Simple",
+        "been vs gone"
+      ],
+      "terms": [
+        "participio",
+        "past-simple",
+        "present-perfect"
+      ],
+      "questions": 6,
+      "sims": [
+        "clasificar:perfect-o-past"
+      ],
+      "tools": []
+    },
+    {
+      "id": "present-perfect-continuous",
+      "title": "Present Perfect Continuous",
+      "summary": "have/has been + -ing: duración de una actividad que empezó antes y sigue o acaba de terminar con efectos visibles.",
+      "order": 13,
+      "requires": [
+        "present-perfect",
+        "present-continuous"
+      ],
+      "section": "perfectos",
+      "status": "done",
+      "words": 208,
+      "headings": [
+        "Present Perfect Continuous",
+        "Usos",
+        "vs Present Perfect simple",
+        "Equivale a"
+      ],
+      "terms": [
+        "aspecto-continuo",
+        "present-perfect",
+        "present-perfect-continuous",
+        "verbo-de-estado"
+      ],
+      "questions": 6,
+      "sims": [
+        "predecir-observar:perfect-o-continuous"
+      ],
+      "tools": []
+    },
+    {
+      "id": "past-perfect",
+      "title": "Past Perfect (y su continuo)",
+      "summary": "had + participio: el pasado del pasado; cuándo hace falta y cuándo basta el Past Simple.",
+      "order": 14,
+      "requires": [
+        "present-perfect",
+        "past-simple"
+      ],
+      "section": "perfectos",
+      "status": "done",
+      "words": 240,
+      "headings": [
+        "Past Perfect (y su continuo)",
+        "Uso: el pasado del pasado",
+        "Cuándo es necesario",
+        "Past Perfect Continuous",
+        "Equivale a"
+      ],
+      "terms": [
+        "aspecto-continuo",
+        "condicional",
+        "contraccion",
+        "participio",
+        "past-perfect",
+        "past-perfect-continuous",
+        "past-simple",
+        "pluscuamperfecto"
+      ],
+      "questions": 6,
+      "sims": [
+        "predecir-observar:antes-o-despues"
+      ],
+      "tools": []
+    },
+    {
+      "id": "formas-de-futuro",
+      "title": "Las formas de futuro",
+      "summary": "will, going to, Present Continuous y Present Simple para el futuro: cuál elegir según decisión, plan, evidencia u horario.",
+      "order": 15,
+      "requires": [
+        "present-continuous",
+        "present-simple"
+      ],
+      "section": "futuro",
+      "status": "done",
+      "words": 232,
+      "headings": [
+        "Las formas de futuro",
+        "Claves",
+        "Decidir en una pregunta",
+        "Español"
+      ],
+      "terms": [
+        "going-to",
+        "present-continuous",
+        "present-simple",
+        "subjuntivo"
+      ],
+      "questions": 6,
+      "sims": [
+        "clasificar:que-futuro"
+      ],
+      "tools": []
+    },
+    {
+      "id": "futuro-continuo-y-perfecto",
+      "title": "Future Continuous y Future Perfect",
+      "summary": "will be + -ing (en progreso en un momento futuro) y will have + participio (terminado antes de un momento futuro).",
+      "order": 16,
+      "requires": [
+        "formas-de-futuro",
+        "present-perfect"
+      ],
+      "section": "futuro",
+      "status": "done",
+      "words": 216,
+      "headings": [
+        "Future Continuous y Future Perfect",
+        "Future Continuous: will be + -ing",
+        "Future Perfect: will have + participio",
+        "Future Perfect Continuous: will have been + -ing",
+        "Equivalencias",
+        "Comparación con la tabla"
+      ],
+      "terms": [
+        "aspecto",
+        "aspecto-continuo",
+        "aspecto-perfecto",
+        "future-continuous",
+        "future-perfect",
+        "future-perfect-continuous",
+        "participio",
+        "punto-de-referencia"
+      ],
+      "questions": 6,
+      "sims": [
+        "predecir-observar:examen-manana"
+      ],
+      "tools": []
+    },
+    {
+      "id": "marcadores-de-tiempo",
+      "title": "Marcadores de tiempo: el repaso de los 12",
+      "summary": "Las palabras que delatan el tiempo correcto (yesterday, ago, since, yet, by the time, while…) y un repaso cruzado de todos los tiempos.",
+      "order": 17,
+      "requires": [
+        "tiempo-y-aspecto",
+        "futuro-continuo-y-perfecto",
+        "past-perfect"
+      ],
+      "section": "futuro",
+      "status": "done",
+      "words": 296,
+      "headings": [
+        "Marcadores de tiempo: el repaso de los 12",
+        "Cuidado con los marcadores ambiguos",
+        "Método para cualquier frase"
+      ],
+      "terms": [
+        "aspecto",
+        "aspecto-continuo",
+        "aspecto-perfecto",
+        "future-continuous",
+        "future-perfect",
+        "going-to",
+        "marcador-temporal",
+        "past-continuous",
+        "past-perfect",
+        "past-simple",
+        "present-continuous",
+        "present-perfect",
+        "present-simple",
+        "punto-de-referencia",
+        "used-to",
+        "verbo-auxiliar"
+      ],
+      "questions": 6,
+      "sims": [
+        "clasificar:marcador-tiempo"
+      ],
+      "tools": [
+        "decision:que-tiempo-uso"
+      ]
+    },
+    {
+      "id": "modales",
+      "title": "Verbos modales",
+      "summary": "can, could, must, have to, should, may, might y will/would: sin -s, sin do y seguidos de la base del verbo.",
+      "order": 18,
+      "requires": [
+        "verbos-auxiliares"
+      ],
+      "section": "otras-bases",
+      "status": "done",
+      "words": 249,
+      "headings": [
+        "Verbos modales",
+        "Trampas",
+        "Modal + have + participio (pasado)"
+      ],
+      "terms": [
+        "condicional",
+        "participio",
+        "verbo-auxiliar",
+        "verbo-modal"
+      ],
+      "questions": 6,
+      "sims": [
+        "clasificar:obligacion-prohibicion"
+      ],
+      "tools": []
+    },
+    {
+      "id": "condicionales",
+      "title": "Condicionales 0, 1, 2 y 3",
+      "summary": "Las cuatro estructuras con if: verdades, futuro posible, presente hipotético y pasado que no ocurrió.",
+      "order": 19,
+      "requires": [
+        "formas-de-futuro",
+        "past-perfect",
+        "modales"
+      ],
+      "section": "otras-bases",
+      "status": "done",
+      "words": 218,
+      "headings": [
+        "Condicionales 0, 1, 2 y 3",
+        "Reglas que fallan los hispanohablantes",
+        "Equivalencias con el español",
+        "Mixto (para reconocerlo)"
+      ],
+      "terms": [
+        "condicional",
+        "participio",
+        "past-perfect",
+        "past-simple",
+        "pluscuamperfecto",
+        "present-simple",
+        "preterito-imperfecto",
+        "subjuntivo"
+      ],
+      "questions": 6,
+      "sims": [
+        "predecir-observar:que-condicional"
+      ],
+      "tools": []
+    },
+    {
+      "id": "voz-pasiva",
+      "title": "Voz pasiva",
+      "summary": "be + participio en cualquier tiempo: cuándo se usa y cómo traduce el «se» impersonal del español.",
+      "order": 20,
+      "requires": [
+        "formas-del-verbo",
+        "tiempo-y-aspecto"
+      ],
+      "section": "otras-bases",
+      "status": "done",
+      "words": 213,
+      "headings": [
+        "Voz pasiva",
+        "Cuándo usarla",
+        "El «se» del español",
+        "Error común"
+      ],
+      "terms": [
+        "agente",
+        "objeto",
+        "participio",
+        "past-simple",
+        "present-continuous",
+        "present-perfect",
+        "present-simple",
+        "sujeto",
+        "verbo-modal",
+        "verbo-principal",
+        "voz-pasiva"
+      ],
+      "questions": 6,
+      "sims": [
+        "clasificar:pasiva-correcta"
+      ],
+      "tools": []
+    },
+    {
+      "id": "articulos",
+      "title": "Artículos a, an, the y sin artículo",
+      "summary": "Cuándo usar a/an, the o nada; los errores típicos del hispanohablante con generalizaciones, profesiones y lugares.",
+      "order": 21,
+      "requires": [
+        "orden-de-la-oracion"
+      ],
+      "section": "otras-bases",
+      "status": "done",
+      "words": 242,
+      "headings": [
+        "Artículos a, an, the y sin artículo",
+        "a / an (indefinido)",
+        "the (definido)",
+        "Sin artículo (cero)",
+        "Regla práctica"
+      ],
+      "terms": [
+        "articulo",
+        "preterito-indefinido",
+        "sustantivo-contable",
+        "sustantivo-incontable"
+      ],
+      "questions": 6,
+      "sims": [
+        "clasificar:que-articulo"
+      ],
+      "tools": []
+    }
+  ],
+  "sections": [
+    {
+      "id": "bases",
+      "title": "1 · Las bases que sostienen todo",
+      "topics": [
+        "orden-de-la-oracion",
+        "verbos-auxiliares",
+        "preguntas-y-negaciones",
+        "formas-del-verbo"
+      ]
+    },
+    {
+      "id": "mapa-de-tiempos",
+      "title": "2 · El mapa de los tiempos",
+      "topics": [
+        "tiempo-y-aspecto",
+        "espanol-vs-ingles"
+      ]
+    },
+    {
+      "id": "presente",
+      "title": "3 · Presente",
+      "topics": [
+        "present-simple",
+        "present-continuous"
+      ]
+    },
+    {
+      "id": "pasado",
+      "title": "4 · Pasado",
+      "topics": [
+        "past-simple",
+        "past-continuous",
+        "imperfecto-en-ingles"
+      ]
+    },
+    {
+      "id": "perfectos",
+      "title": "5 · Los tiempos perfectos",
+      "topics": [
+        "present-perfect",
+        "present-perfect-continuous",
+        "past-perfect"
+      ]
+    },
+    {
+      "id": "futuro",
+      "title": "6 · Futuro",
+      "topics": [
+        "formas-de-futuro",
+        "futuro-continuo-y-perfecto",
+        "marcadores-de-tiempo"
+      ]
+    },
+    {
+      "id": "otras-bases",
+      "title": "7 · Otras bases imprescindibles",
+      "topics": [
+        "modales",
+        "condicionales",
+        "voz-pasiva",
+        "articulos"
+      ]
+    }
+  ],
+  "ownTerms": [
+    "adverbio-de-frecuencia",
+    "agente",
+    "articulo",
+    "aspecto",
+    "aspecto-continuo",
+    "aspecto-perfecto",
+    "aspecto-simple",
+    "condicional",
+    "condicional-mixto",
+    "contraccion",
+    "forma-base",
+    "future-continuous",
+    "future-perfect",
+    "future-perfect-continuous",
+    "gerundio",
+    "going-to",
+    "inversion",
+    "marcador-temporal",
+    "objeto",
+    "participio",
+    "past-continuous",
+    "past-perfect",
+    "past-perfect-continuous",
+    "past-simple",
+    "pluscuamperfecto",
+    "pregunta-wh",
+    "present-continuous",
+    "present-perfect",
+    "present-perfect-continuous",
+    "present-simple",
+    "preterito-imperfecto",
+    "preterito-indefinido",
+    "preterito-perfecto-compuesto",
+    "punto-de-referencia",
+    "short-answer",
+    "subjuntivo",
+    "sujeto",
+    "sujeto-vacio",
+    "sustantivo-contable",
+    "sustantivo-incontable",
+    "tercera-persona",
+    "tiempo-verbal",
+    "used-to",
+    "verbo-auxiliar",
+    "verbo-de-estado",
+    "verbo-irregular",
+    "verbo-modal",
+    "verbo-principal",
+    "verbo-regular",
+    "voz-pasiva"
+  ],
+  "tools": [
+    "plantilla:constructor-de-frases",
+    "decision:que-tiempo-uso"
+  ]
+}

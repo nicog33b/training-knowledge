@@ -1,0 +1,70 @@
+id: presupuesto-js
+title: Presupuesto de JavaScript para INP y LCP
+summary: Estima cuánto tarda un móvil en descargar, parsear y ejecutar tu
+  JavaScript inicial, y si cabe en un presupuesto razonable.
+builder: calculadora
+topics:
+  - build-y-bundling
+  - core-web-vitals
+inputs:
+  - id: kb
+    label: JavaScript inicial (comprimido)
+    type: number
+    min: 20
+    max: 2000
+    step: 10
+    default: 350
+    unit: KB
+  - id: ratio
+    label: Factor de descompresión
+    type: number
+    min: 2
+    max: 6
+    step: 0.5
+    default: 3.5
+    hint: El JS sin comprimir suele ocupar 3–5× más
+  - id: dispositivo
+    label: Dispositivo
+    type: select
+    default: 1
+    options:
+      - label: Escritorio potente (~1 ms/KB)
+        value: 0.3
+      - label: Móvil de gama media (~3 ms/KB)
+        value: 1
+      - label: Móvil de gama baja (~6 ms/KB)
+        value: 2
+  - id: mbps
+    label: Red
+    type: number
+    min: 1
+    max: 100
+    step: 1
+    default: 10
+    unit: Mbps
+outputs:
+  - id: descarga_ms
+    label: Descarga
+    expr: kb * 8 / mbps
+    unit: ms
+  - id: cpu_ms
+    label: Parseo + ejecución (estimado)
+    expr: kb * ratio * dispositivo
+    unit: ms
+  - id: total_ms
+    label: Costo total aproximado
+    expr: descarga_ms + cpu_ms
+    unit: ms
+    main: true
+notes:
+  - when: cpu_ms > 1000
+    text: "Más de 1 s de CPU en el hilo principal: interacciones bloqueadas al
+      cargar (INP) y LCP tardío si el contenido depende del JS."
+    tone: warn
+  - when: kb > 300
+    text: "Supera un presupuesto habitual de ~300 KB comprimidos para la ruta
+      inicial: aplica code splitting y revisa dependencias pesadas."
+    tone: warn
+  - when: total_ms < 500
+    text: Dentro de lo razonable. Mantén un presupuesto en CI para que no crezca.
+    tone: ok

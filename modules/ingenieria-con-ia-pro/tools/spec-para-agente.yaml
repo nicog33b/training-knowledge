@@ -1,0 +1,74 @@
+id: spec-para-agente
+title: Generador de spec para un agente
+summary: Rellena el qué, el porqué y cómo se comprobará; obtienes una
+  especificación lista para pegar al agente (o en un issue) antes de pedir
+  código.
+builder: plantilla
+topics:
+  - specs-antes-que-codigo
+  - explorar-planificar-implementar-verificar
+fields:
+  - id: titulo
+    label: Título del cambio
+    placeholder: Exportar el informe a CSV
+  - id: problema
+    label: Problema y para quién
+    kind: textarea
+    placeholder: Los analistas copian la tabla a mano a Excel…
+  - id: comportamiento
+    label: Comportamiento esperado
+    kind: textarea
+    placeholder: Un botón Exportar descarga…
+  - id: criterios
+    label: Criterios de aceptación (uno por línea)
+    kind: textarea
+    placeholder: "- Con 0 filas se descarga solo la cabecera"
+  - id: fuera
+    label: Fuera de alcance
+    kind: textarea
+    placeholder: Exportar a Excel nativo
+  - id: verificacion
+    label: Cómo se verifica
+    placeholder: pnpm test && pnpm typecheck
+  - id: modo
+    label: Cómo quieres que trabaje el agente
+    kind: select
+    options:
+      - Explora y propón un plan; no implementes hasta que lo apruebe
+      - "Implementa con TDD: tests primero, no los modifiques"
+      - Implementa en pasos pequeños y para tras cada uno
+    default: Explora y propón un plan; no implementes hasta que lo apruebe
+template: >-
+  # {{titulo}}
+
+
+  ## Problema
+
+  {{problema}}
+
+
+  ## Comportamiento esperado
+
+  {{comportamiento}}
+
+
+  ## Criterios de aceptación
+
+  {{criterios}}
+
+
+  ## Fuera de alcance
+
+  {{fuera}}
+
+
+  ## Verificación
+
+  Ejecuta `{{verificacion}}` y pega la salida antes de dar la tarea por
+  terminada.
+
+
+  ## Cómo trabajar
+
+  {{modo}}. Sigue las convenciones del repositorio (archivo de instrucciones),
+  no amplíes el alcance y explica en el PR cualquier decisión no obvia.

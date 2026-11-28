@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué un div con onclick no es un buen botón?
+    kind: por-que
+    a: Porque no recibe **foco** con Tab, no se activa con **Enter** ni **Espacio** y no anuncia que es un botón al lector de pantalla. Tendrías que añadir tabindex, role y manejadores de teclado a mano. Un `button` trae todo eso gratis.
+    uses: []
+  - q: Compara un enlace y un botón.
+    kind: comparar
+    a: "Un **enlace** (`a href`) **navega** a otra URL: se puede abrir en otra pestaña, copiar y aparece en el historial. Un **botón** **ejecuta una acción** en la página (enviar, abrir un menú). Usar uno por otro confunde a usuarios de teclado y lector de pantalla."
+    uses: []
+  - q: ¿Qué pasa si saltas de h1 a h4 porque el h4 «se ve del tamaño correcto»?
+    kind: que-pasa-si
+    a: "Rompes el **índice** de la página: quien navega por encabezados con lector de pantalla cree que falta contenido. Los encabezados expresan **jerarquía**; el tamaño se cambia con CSS. Mantén el orden lógico y estiliza aparte."
+    uses: []
+  - q: Escribe el alt para el logo de la empresa que enlaza al inicio.
+    kind: aplicar
+    a: 'Describe la **función**, no el dibujo: `alt="Acme, ir al inicio"`. Si la imagen es puramente decorativa, `alt=""` para que se ignore. Un alt como "logo.png" o "imagen" no ayuda a nadie.'
+    uses: []
+  - q: ¿Por qué cada input necesita una label asociada?
+    kind: por-que
+    a: "Porque la `label` da el **nombre accesible** que lee el lector de pantalla y, al hacer clic en ella, enfoca el campo (objetivo más grande). Un placeholder no la sustituye: desaparece al escribir y suele tener poco contraste."
+    uses: []
+  - q: "Error común: usar div y span para todo y arreglarlo luego con ARIA."
+    kind: error-comun
+    a: "ARIA solo añade semántica, **no comportamiento**: sigues teniendo que programar teclado y foco. Y un ARIA mal puesto empeora la accesibilidad. La primera regla es usar el **elemento nativo** (`button`, `nav`, `dialog`) y añadir ARIA solo cuando HTML no alcance."
+    uses: []
+sims: []

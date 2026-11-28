@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Para qué sirven los worktrees al trabajar con varios agentes?
+    kind: por-que
+    a: "Cada **worktree** es una copia de trabajo del repo en otra carpeta y rama: cada agente edita la suya sin pisar archivos de los demás ni mezclar cambios. Cada tarea termina en su propia rama y PR, integrables por separado."
+    uses: []
+  - q: Compara un subagente con abrir otra sesión de agente.
+    kind: comparar
+    a: "Un **subagente** lo lanza el agente principal para una subtarea y le devuelve **solo la conclusión**: protege el contexto principal. Otra **sesión** es trabajo independiente que tú coordinas e integras. Subagentes para explorar o revisar; sesiones para tareas paralelas completas."
+    uses: []
+  - q: ¿Qué pasa si lanzas 5 agentes que tocan los mismos archivos?
+    kind: que-pasa-si
+    a: "**Conflictos** de integración, decisiones contradictorias y trabajo duplicado: resolverlo puede costar más que hacerlo en serie. Paraleliza solo tareas **independientes**, con verificación automática propia."
+    uses: []
+  - q: ¿Cuándo compensa lanzar varias soluciones en paralelo al mismo problema?
+    kind: aplicar
+    a: "En problemas **difíciles** con varias estrategias posibles y una forma **automática** de comparar (tests, benchmark): lanzas 2–3 enfoques, comparas resultados y te quedas con el mejor. Sin criterio automático, multiplicas lo que tienes que revisar."
+    uses: []
+  - q: ¿Por qué la revisión humana limita el paralelismo útil?
+    kind: por-que
+    a: Porque cada agente produce PR que alguien debe **revisar e integrar**. Si generas más de lo que el equipo puede revisar, la cola crece y la calidad baja. El paralelismo útil lo fija tu capacidad de decidir, no el número de agentes que puedes lanzar.
+    uses: []
+  - q: "Error común: dar a todos los agentes paralelos acceso a la rama principal."
+    kind: error-comun
+    a: Cualquier error o inyección puede romper la rama de todos. Cada agente trabaja en **su rama**, con permisos mínimos, y solo un humano integra a la principal tras revisión y CI verde.
+    uses: []
+sims: []

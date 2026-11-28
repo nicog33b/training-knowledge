@@ -1,0 +1,22 @@
+id: anthropic-context-engineering
+title: Effective context engineering for AI agents
+authors:
+  - Anthropic
+year: 2025
+venue: Anthropic Engineering
+url: https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
+kind: docs
+verified: secondary
+retrieved: 2026-11-26
+summary: El contexto es un recurso finito; buscar el conjunto mínimo de tokens
+  de alta señal y cargar el resto justo a tiempo.
+facts:
+  - Define context engineering como curar y mantener el conjunto óptimo de
+    tokens durante la inferencia; extensión del prompt engineering.
+  - "Describe 'context rot': al crecer los tokens en la ventana, baja la
+    capacidad del modelo de recordar con precisión."
+  - Recomienda herramientas eficientes en tokens, prompts de sistema a la
+    'altitud' justa y recuperación just-in-time (p. ej. Claude Code lee archivos
+    con herramientas).
+caveats:
+  - Publicado ~1 oct 2025; visto por cobertura secundaria.

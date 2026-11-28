@@ -1,0 +1,39 @@
+id: flex-o-grid
+title: ¿Flexbox o Grid?
+summary: Asistente rápido para elegir el modelo de maquetación según lo que
+  estés construyendo.
+builder: decision
+topics:
+  - flexbox-y-grid
+start: dimension
+nodes:
+  - id: dimension
+    question: ¿Necesitas controlar filas y columnas a la vez (alinear en ambas
+      direcciones)?
+    options:
+      - label: Sí, es una rejilla o el layout de la página
+        result: grid
+      - label: No, es una fila o una columna de cosas
+        next: manda
+  - id: manda
+    question: "¿Quién debe mandar en el tamaño: el contenido o una estructura fija?"
+    options:
+      - label: El contenido (cada elemento ocupa lo suyo)
+        result: flex
+      - label: Una estructura (columnas iguales, áreas fijas)
+        result: grid
+results:
+  - id: flex
+    title: Flexbox
+    why: "Una dimensión y el contenido manda: barras, filas de botones, centrar,
+      listas que hacen wrap."
+    see:
+      - flexbox-y-grid
+  - id: grid
+    title: Grid
+    why: "Dos dimensiones o estructura fija: layouts de página, rejillas de tarjetas
+      con repeat(auto-fill, minmax())."
+    watch: Dentro de cada celda puedes seguir usando Flexbox.
+    see:
+      - flexbox-y-grid
+      - responsive

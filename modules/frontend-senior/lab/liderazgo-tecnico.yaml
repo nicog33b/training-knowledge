@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué marcar los comentarios de revisión como «nit» u «opcional»?
+    kind: por-que
+    a: Para distinguir lo **bloqueante** (bug, riesgo de seguridad) de lo **sugerido** (estilo, preferencia). Sin esa distinción, el autor no sabe qué es obligatorio, las revisiones se alargan y cada comentario parece una orden.
+    uses: []
+  - q: Da una estimación para una feature con una API que aún no existe.
+    kind: aplicar
+    a: 'En **rango con supuestos**: "3–5 días si la API está lista el lunes con este contrato; +2–4 si hay que construirla o cambia". Señala la mayor **incógnita** y propón un **spike** de un día para reducirla. Actualiza en cuanto cambie algo.'
+    uses: []
+  - q: Compara mentorizar dando la solución y guiando con preguntas.
+    kind: comparar
+    a: "**Dar la solución**: rápido hoy, pero la persona no aprende a llegar sola y vuelve con el siguiente problema. **Guiar con preguntas**: más lento al principio, construye criterio. Ajusta: ejemplos completos para quien empieza y retira ayuda a medida que crece."
+    uses: []
+  - q: ¿Qué pasa si presentas la deuda técnica como «el código es feo»?
+    kind: que-pasa-si
+    a: 'Nadie fuera de ingeniería lo prioriza frente a features. Conéctala con el negocio con **datos**: "este módulo causa el 40 % de los bugs y duplica el tiempo de cada cambio". Propón un plan incremental con costo y beneficio.'
+    uses: []
+  - q: ¿Por qué revisar PR pronto es parte del trabajo senior?
+    kind: por-que
+    a: Porque un PR esperando **bloquea** a su autor (cambio de contexto, ramas que divergen) y frena al equipo. Reducir el tiempo de revisión mejora el flujo de todos más que escribir un PR más propio.
+    uses: []
+  - q: "Error común: ser el único que sabe cómo funciona una parte crítica."
+    kind: error-comun
+    a: "Te conviertes en **cuello de botella** y en riesgo (vacaciones, salida). El trabajo senior incluye **repartir** el conocimiento: documentar, emparejar, rotar responsabilidades y automatizar lo que solo tú sabes hacer."
+    uses: []
+sims: []

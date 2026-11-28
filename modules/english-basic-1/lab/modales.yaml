@@ -1,0 +1,58 @@
+questions:
+  - q: ¿Por qué «She cans swim» y «You must to go» están mal?
+    kind: error-comun
+    a: "Porque los modales tienen tres reglas fijas: **sin -s** en tercera persona (*she **can***), **seguidos de la base sin *to*** (*you **must go***) y **sin *do*** en preguntas y negaciones (*Can she swim? / She can't swim*). Son auxiliares, no verbos normales."
+    uses: []
+  - q: Compara «You mustn't tell him» con «You don't have to tell him».
+    kind: comparar
+    a: "***mustn't*** = **prohibición**: no debes decírselo (está prohibido). ***don't have to*** = **no es necesario**: puedes decírselo o no, como quieras. En afirmativa *must* y *have to* son parecidos (obligación), pero en negativa significan cosas muy distintas."
+    uses: []
+  - q: ¿Qué pasa si quieres decir «Tuve que trabajar ayer» con must?
+    kind: que-pasa-si
+    a: "*Must* no tiene pasado para obligación: ~~*I musted*~~. Se usa ***had to***: *I **had to** work yesterday*. Del mismo modo, el futuro de *can* es ***will be able to***: *I'll be able to come tomorrow*. Los modales son defectivos: les faltan formas y se suplen con equivalentes."
+    uses: []
+  - q: ¿Por qué «Could you help me?» es más cortés que «Can you help me?»?
+    kind: por-que
+    a: "Porque *could* (y *would*) añade **distancia**, como el condicional en español: *¿podrías ayudarme?* frente a *¿puedes ayudarme?* Ambas son correctas; *could* suena más suave y es la opción segura con desconocidos o en el trabajo. *Would you mind helping me?* es aún más formal."
+    uses: []
+  - q: Traduce «Deberías haber ido» y «Seguro que se olvidó».
+    kind: aplicar
+    a: "*You **should have gone*** y *He **must have forgotten***. **Modal + have + participio** habla del pasado: *should have* = crítica o arrepentimiento, *must have* = deducción segura, *could have* = posibilidad no realizada, *might have* = puede que. En habla suena «should've», «must've»."
+    uses: []
+  - q: Compara may y might para hablar de posibilidad.
+    kind: comparar
+    a: "Ambos expresan **posibilidad** y van con la base: *It may rain / It might rain*. *Might* suena un poco **menos seguro** y es más común en conversación. *May* también se usa para **permiso formal**: *May I come in?* Para posibilidad en pasado: *might have* + participio."
+    uses: []
+sims:
+  - id: obligacion-prohibicion
+    title: Obligación, prohibición o consejo
+    type: clasificar
+    prompt: Elige el modal que expresa la idea de cada frase.
+    categories:
+      - id: must
+        label: must / have to (obligación)
+      - id: mustnt
+        label: mustn't (prohibido)
+      - id: dont-have-to
+        label: don't have to (no es necesario)
+      - id: should
+        label: should (consejo)
+    items:
+      - text: Está prohibido fumar en el avión.
+        category: mustnt
+        why: You mustn't smoke on the plane.
+      - text: "Mañana es sábado: no hace falta madrugar."
+        category: dont-have-to
+        why: I don't have to get up early.
+      - text: "Tienes fiebre: te convendría ir al médico."
+        category: should
+        why: You should see a doctor.
+      - text: Hay que llevar pasaporte para viajar a EE. UU.
+        category: must
+        why: You have to / must have a passport.
+      - text: "La entrada es gratis: no tienes que pagar."
+        category: dont-have-to
+        why: You don't have to pay.
+      - text: "No toques el cable: es peligroso."
+        category: mustnt
+        why: You mustn't touch the cable.

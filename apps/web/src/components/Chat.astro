@@ -77,6 +77,7 @@ const api = import.meta.env.PUBLIC_TUTOR_URL ?? 'http://127.0.0.1:4322';
 </style>
 
 <script>
+  import { renderMermaid } from '../lib/mermaid.ts';
   type View = { role: 'user' | 'bot' | 'err' | 'sys'; text: string; quote?: string; meta?: string };
   type State = { messages: any[]; view: View[] };
 
@@ -110,13 +111,25 @@ const api = import.meta.env.PUBLIC_TUTOR_URL ?? 'http://127.0.0.1:4322';
   function md(text: string) {
     const out: string[] = [];
     let list: string[] = [];
+    let fence: { lang: string; lines: string[] } | null = null;
     const flush = () => { if (list.length) out.push(`<ul>${list.map((l) => `<li>${l}</li>`).join('')}</ul>`); list = []; };
     for (const line of text.split('\n')) {
+      // Bloques ``` (```mermaid se dibuja como diagrama: acción "Hazlo diagrama" del menú de selección).
+      const f = line.match(/^\s*```\s*([a-z]*)\s*$/);
+      if (f && !fence) { flush(); fence = { lang: f[1], lines: [] }; continue; }
+      if (f && fence) {
+        const src = fence.lines.join('\n');
+        out.push(fence.lang === 'mermaid' ? `<div class="tk-mermaid" data-src="${esc(src)}" data-label="Diagrama del tutor"></div>` : `<pre><code>${esc(src)}</code></pre>`);
+        fence = null;
+        continue;
+      }
+      if (fence) { fence.lines.push(line); continue; }
       const m = line.match(/^\s*(?:[-*•]|\d+\.)\s+(.*)$/);
       if (m) list.push(inline(m[1]));
       else { flush(); if (line.trim()) out.push(`<p>${inline(line.replace(/^#+\s*/, ''))}</p>`); }
     }
     flush();
+    if (fence) out.push(`<pre><code>${esc(fence.lines.join('\n'))}</code></pre>`);
     return out.join('');
   }
 
@@ -133,6 +146,7 @@ const api = import.meta.env.PUBLIC_TUTOR_URL ?? 'http://127.0.0.1:4322';
       return li;
     }));
     log.scrollTop = log.scrollHeight;
+    if (log.querySelector('.tk-mermaid')) renderMermaid(log).then(() => (log.scrollTop = log.scrollHeight));
   }
   function save() { store.set(key, state); }
   function setOpen(open: boolean) {

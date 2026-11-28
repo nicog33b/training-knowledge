@@ -38,6 +38,7 @@ Construye y securiza **data lakes** en S3 en días: ingesta, limpieza, catálogo
 - Ingesta a DWH: **S3 → COPY → Redshift**.
 
 ## Glosario usado
+- JSON: Formato de texto para datos estructurados (objetos, listas, números, cadenas) que entienden casi todos los lenguajes.
 - Región: Ubicación geográfica de AWS compuesta por varias Zonas de Disponibilidad aisladas.
 - Alta disponibilidad: Diseño que tolera fallos de componentes manteniendo el servicio en pie.
 - Spot Instances: Capacidad sobrante de EC2 con hasta ~90 % de descuento que AWS puede reclamar con 2 minutos de aviso.

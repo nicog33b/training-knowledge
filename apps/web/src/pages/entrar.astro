@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import AuthShell from '../components/AuthShell.astro';
+---
+<Base title="Entrar">
+  <AuthShell title="Entrar" subtitle="Sigue donde lo dejaste: tu repaso, tus mapas y tus ajustes de lectura.">
+    <form class="form" id="login" novalidate>
+      <label>Correo<input type="email" name="email" autocomplete="email" required placeholder="tu@correo.com" /></label>
+      <label>Contraseña<input type="password" name="password" autocomplete="current-password" required minlength="8" /></label>
+      <p class="err" aria-live="polite"></p>
+      <button type="submit">Entrar</button>
+      <p class="alt">o</p>
+      <div class="oauth"><button type="button" disabled title="Próximamente">Continuar con Google</button><button type="button" disabled title="Próximamente">Continuar con GitHub</button></div>
+      <p class="muted">¿No tienes perfil? <a href="/registro/">Créalo en 1 minuto</a></p>
+    </form>
+  </AuthShell>
+</Base>
+<script>
+  import { store } from '../lib/store.ts';
+  const f = document.getElementById('login') as HTMLFormElement;
+  const err = f.querySelector('.err')!;
+  f.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = (f.elements.namedItem('email') as HTMLInputElement).value.trim().toLowerCase();
+    const pass = (f.elements.namedItem('password') as HTMLInputElement).value;
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return void (err.textContent = 'Escribe un correo válido.');
+    if (pass.length < 8) return void (err.textContent = 'La contraseña tiene al menos 8 caracteres.');
+    const saved = store.get<{ email?: string } | null>('tk-user-saved', null);
+    if (!saved || saved.email !== email) return void (err.textContent = 'No hay un perfil con ese correo en este navegador. Créalo en Registro.');
+    store.set('tk-user', saved); // demo: la contraseña no se comprueba ni se guarda
+    location.href = '/perfil/';
+  });
+</script>

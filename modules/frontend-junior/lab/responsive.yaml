@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Qué pasa si olvidas la meta viewport?
+    kind: que-pasa-si
+    a: "El móvil simula un escritorio de ~980px y **encoge** toda la página: letra diminuta, hay que hacer zoom y tus media queries para móvil no se aplican. La meta `width=device-width, initial-scale=1` es obligatoria en cualquier web responsive."
+    uses: []
+  - q: ¿Por qué mobile first produce CSS más simple?
+    kind: por-que
+    a: Porque el diseño móvil suele ser el más simple (una columna). Escribes ese como **base** y vas **añadiendo** complejidad con `min-width` para pantallas mayores. Al revés acabas deshaciendo estilos de escritorio para el móvil, con más reglas y sobrescrituras.
+    uses: []
+  - q: Compara media queries y container queries.
+    kind: comparar
+    a: "**Media queries** reaccionan a la **ventana**; **container queries**, al **contenedor** del componente. Una tarjeta con container queries se adapta al hueco donde la pongas (lateral estrecho o zona principal), lo que la hace realmente reutilizable."
+    uses: []
+  - q: ¿Por qué usar rem en vez de px para la letra?
+    kind: por-que
+    a: Porque `rem` es relativo al tamaño de letra raíz, que el **usuario puede cambiar** en su navegador. Con px fijos ignoras esa preferencia y fallas a quien necesita letra grande. Para espaciados relacionados con el texto también conviene rem.
+    uses: []
+  - q: Optimiza una foto de cabecera para móvil y escritorio.
+    kind: aplicar
+    a: "`srcset` con varias anchuras (480w, 960w, 1600w) y `sizes` según el diseño para que el navegador descargue la adecuada; formatos modernos (AVIF/WebP) con `picture`; `width` y `height` (o `aspect-ratio`) para reservar el espacio; y no la cargues en diferido si es la imagen principal visible."
+    uses: []
+  - q: "Error común: probar solo con el modo dispositivo del navegador."
+    kind: error-comun
+    a: El modo dispositivo simula el **tamaño**, no el rendimiento del móvil, el táctil real, el teclado virtual ni el zoom del sistema. Prueba también con zoom al 200 % y en al menos un móvil real de gama media.
+    uses: []
+sims: []

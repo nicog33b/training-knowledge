@@ -1,0 +1,465 @@
+{
+  "id": "rag",
+  "title": "RAG · Generación aumentada por recuperación",
+  "summary": "Cómo construir, medir y operar sistemas RAG: embeddings, chunking, índices vectoriales, búsqueda híbrida, reranking, prompts con citas, evaluación por etapas y seguridad.",
+  "kind": "topic",
+  "tags": [
+    "ia",
+    "rag",
+    "llm"
+  ],
+  "topics": [
+    {
+      "id": "que-es-rag",
+      "title": "Qué es RAG y cuándo conviene",
+      "summary": "Recuperar antes de generar: qué problema resuelve, el pipeline completo y cuándo elegir RAG, fine-tuning o simplemente contexto largo.",
+      "order": 1,
+      "requires": [],
+      "section": "fundamentos",
+      "status": "done",
+      "words": 257,
+      "headings": [
+        "Qué es RAG y cuándo conviene",
+        "El pipeline",
+        "Qué resuelve",
+        "RAG, fine-tuning o contexto largo"
+      ],
+      "terms": [
+        "alucinacion",
+        "busqueda-hibrida",
+        "cache-de-prompts",
+        "chunk",
+        "embedding",
+        "fine-tuning",
+        "llm",
+        "metadatos",
+        "prompt",
+        "rag",
+        "reranking"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": [
+        "decision:rag-o-no"
+      ]
+    },
+    {
+      "id": "embeddings-y-similitud",
+      "title": "Embeddings y similitud",
+      "summary": "Cómo un modelo convierte texto en vectores, qué mide la similitud coseno, por qué funciona para significado y dónde falla (nombres, códigos, negaciones).",
+      "order": 2,
+      "requires": [],
+      "section": "fundamentos",
+      "status": "done",
+      "words": 218,
+      "headings": [
+        "Embeddings y similitud",
+        "Medir cercanía",
+        "Dónde brillan y dónde fallan",
+        "Elegir y usar el modelo"
+      ],
+      "terms": [
+        "bm25",
+        "busqueda-densa",
+        "chunk",
+        "embedding",
+        "latencia",
+        "similitud-coseno"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": []
+    },
+    {
+      "id": "ingesta-y-chunking",
+      "title": "Ingesta y chunking",
+      "summary": "Extraer texto limpio, partirlo en fragmentos (tamaño, solapamiento, por estructura) y guardar metadatos; el chunking decide más calidad que el modelo.",
+      "order": 3,
+      "requires": [],
+      "section": "indexar",
+      "status": "done",
+      "words": 235,
+      "headings": [
+        "Ingesta y chunking",
+        "Ingesta",
+        "Chunking: partir en fragmentos",
+        "Padre-hijo"
+      ],
+      "terms": [
+        "bm25",
+        "chunk",
+        "chunking",
+        "contextual-retrieval",
+        "embedding",
+        "eval",
+        "metadatos",
+        "padre-hijo",
+        "prompt",
+        "rag",
+        "solapamiento",
+        "token",
+        "top-k"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": [
+        "calculadora:dimensionar-indice"
+      ]
+    },
+    {
+      "id": "indices-vectoriales",
+      "title": "Índices vectoriales y búsqueda aproximada",
+      "summary": "Búsqueda exacta frente a ANN (HNSW, IVF), el compromiso recall-latencia-memoria y los filtros por metadatos.",
+      "order": 4,
+      "requires": [],
+      "section": "indexar",
+      "status": "done",
+      "words": 262,
+      "headings": [
+        "Índices vectoriales y búsqueda aproximada",
+        "Dos familias",
+        "El triángulo",
+        "Filtros por metadatos",
+        "¿Base de datos vectorial dedicada?"
+      ],
+      "terms": [
+        "ann",
+        "busqueda-hibrida",
+        "chunk",
+        "cuantizacion",
+        "hnsw",
+        "ivf",
+        "latencia",
+        "metadatos",
+        "recall-k"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": [
+        "calculadora:dimensionar-indice"
+      ]
+    },
+    {
+      "id": "busqueda-hibrida",
+      "title": "Búsqueda híbrida: BM25 + embeddings",
+      "summary": "Por qué combinar búsqueda léxica y semántica, cómo fusionar rankings con RRF y qué aporta el contexto añadido a cada chunk.",
+      "order": 5,
+      "requires": [],
+      "section": "recuperar",
+      "status": "done",
+      "words": 260,
+      "headings": [
+        "Búsqueda híbrida: BM25 + embeddings",
+        "Dos maneras de buscar",
+        "Fusionar rankings: RRF",
+        "Contexto en cada chunk",
+        "Cuántos recuperar"
+      ],
+      "terms": [
+        "bm25",
+        "busqueda-hibrida",
+        "cache-de-prompts",
+        "chunk",
+        "contextual-retrieval",
+        "embedding",
+        "llm",
+        "reranking",
+        "rrf",
+        "similitud-coseno",
+        "top-k"
+      ],
+      "questions": 6,
+      "sims": [
+        "clasificar:lexica-o-semantica"
+      ],
+      "tools": []
+    },
+    {
+      "id": "reranking",
+      "title": "Reranking con cross-encoders",
+      "summary": "Recuperar muchos candidatos baratos y reordenarlos con un modelo que lee consulta y fragmento juntos; costo, latencia y ganancia.",
+      "order": 6,
+      "requires": [],
+      "section": "recuperar",
+      "status": "done",
+      "words": 228,
+      "headings": [
+        "Reranking con cross-encoders",
+        "Dos tipos de modelo",
+        "Recuperar barato, ordenar caro",
+        "Por qué compensa",
+        "Costos y alternativas"
+      ],
+      "terms": [
+        "bi-encoder",
+        "busqueda-hibrida",
+        "contextual-retrieval",
+        "cross-encoder",
+        "embedding",
+        "latencia",
+        "llm",
+        "prompt",
+        "recall-k",
+        "reranking"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": []
+    },
+    {
+      "id": "transformar-consultas",
+      "title": "Transformar la consulta",
+      "summary": "Reescritura, multi-consulta, HyDE y descomposición: adaptar la pregunta del usuario al índice cuando las palabras no coinciden.",
+      "order": 7,
+      "requires": [],
+      "section": "recuperar",
+      "status": "done",
+      "words": 226,
+      "headings": [
+        "Transformar la consulta",
+        "Técnicas",
+        "Precio"
+      ],
+      "terms": [
+        "embedding",
+        "eval",
+        "hyde",
+        "latencia",
+        "llm",
+        "metadatos",
+        "multi-consulta",
+        "recall-k",
+        "rrf"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": []
+    },
+    {
+      "id": "prompt-con-citas",
+      "title": "Construir el prompt: orden, citas y «no lo sé»",
+      "summary": "Cuántos fragmentos mandar, en qué orden (lost in the middle), cómo pedir citas verificables y cuándo responder que no hay información.",
+      "order": 8,
+      "requires": [],
+      "section": "generar-y-medir",
+      "status": "done",
+      "words": 234,
+      "headings": [
+        "Construir el prompt: orden, citas y «no lo sé»",
+        "Cuántos fragmentos",
+        "Orden",
+        "Formato de los fragmentos",
+        "Citas verificables",
+        "Permitir «no lo sé»"
+      ],
+      "terms": [
+        "chunk",
+        "delimitadores",
+        "eval",
+        "inyeccion-de-prompt",
+        "lost-in-the-middle",
+        "prompt",
+        "rag",
+        "reranking"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": [
+        "calculadora:dimensionar-indice"
+      ]
+    },
+    {
+      "id": "evaluacion-rag",
+      "title": "Evaluar RAG por etapas",
+      "summary": "Medir la recuperación (recall@k, MRR) y la generación (fidelidad, relevancia) por separado; conjuntos de prueba y jueces automáticos.",
+      "order": 9,
+      "requires": [],
+      "section": "generar-y-medir",
+      "status": "done",
+      "words": 221,
+      "headings": [
+        "Evaluar RAG por etapas",
+        "Recuperación",
+        "Generación",
+        "Cómo montarlo"
+      ],
+      "terms": [
+        "alucinacion",
+        "chunking",
+        "ci",
+        "embedding",
+        "fidelidad",
+        "llm",
+        "llm-como-juez",
+        "mrr",
+        "precision-k",
+        "prompt",
+        "rag",
+        "ragas",
+        "recall-k",
+        "reranking",
+        "top-k"
+      ],
+      "questions": 6,
+      "sims": [
+        "predecir-observar:donde-falla-el-rag"
+      ],
+      "tools": [
+        "checklist:diagnostico-rag"
+      ]
+    },
+    {
+      "id": "rag-en-produccion",
+      "title": "Operar RAG: frescura, permisos, costo y seguridad",
+      "summary": "Reindexar cuando cambian los documentos, permisos por documento, caché, costos y la inyección indirecta que llega por los documentos.",
+      "order": 10,
+      "requires": [],
+      "section": "produccion",
+      "status": "done",
+      "words": 246,
+      "headings": [
+        "Operar RAG: frescura, permisos, costo y seguridad",
+        "Frescura",
+        "Permisos",
+        "Costo y latencia",
+        "Seguridad",
+        "Observabilidad"
+      ],
+      "terms": [
+        "cache-de-prompts",
+        "chunk",
+        "delimitadores",
+        "embedding",
+        "envenenamiento",
+        "eval",
+        "inyeccion-de-prompt",
+        "latencia",
+        "metadatos",
+        "prompt",
+        "rag",
+        "reranking",
+        "token"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": [
+        "checklist:diagnostico-rag"
+      ]
+    },
+    {
+      "id": "rag-agentico",
+      "title": "RAG agéntico y GraphRAG",
+      "summary": "Cuando una sola búsqueda no basta: el modelo decide qué buscar en varios pasos, o se navega un grafo de entidades; beneficios y costo.",
+      "order": 11,
+      "requires": [],
+      "section": "produccion",
+      "status": "done",
+      "words": 231,
+      "headings": [
+        "RAG agéntico y GraphRAG",
+        "RAG agéntico",
+        "GraphRAG",
+        "Criterio"
+      ],
+      "terms": [
+        "agente",
+        "busqueda-hibrida",
+        "chunking",
+        "eval",
+        "graphrag",
+        "latencia",
+        "llm",
+        "prompt",
+        "rag",
+        "rag-agentico",
+        "reranking",
+        "token"
+      ],
+      "questions": 6,
+      "sims": [],
+      "tools": []
+    }
+  ],
+  "sections": [
+    {
+      "id": "fundamentos",
+      "title": "1 · Qué es RAG y cuándo usarlo",
+      "topics": [
+        "que-es-rag",
+        "embeddings-y-similitud"
+      ]
+    },
+    {
+      "id": "indexar",
+      "title": "2 · Preparar e indexar los documentos",
+      "topics": [
+        "ingesta-y-chunking",
+        "indices-vectoriales"
+      ]
+    },
+    {
+      "id": "recuperar",
+      "title": "3 · Recuperar lo relevante",
+      "topics": [
+        "busqueda-hibrida",
+        "reranking",
+        "transformar-consultas"
+      ]
+    },
+    {
+      "id": "generar-y-medir",
+      "title": "4 · Generar con fuentes y medir",
+      "topics": [
+        "prompt-con-citas",
+        "evaluacion-rag"
+      ]
+    },
+    {
+      "id": "produccion",
+      "title": "5 · RAG en producción",
+      "topics": [
+        "rag-en-produccion",
+        "rag-agentico"
+      ]
+    }
+  ],
+  "ownTerms": [
+    "ann",
+    "bi-encoder",
+    "bm25",
+    "busqueda-densa",
+    "busqueda-hibrida",
+    "chunk",
+    "chunking",
+    "contextual-retrieval",
+    "cross-encoder",
+    "cuantizacion",
+    "embedding",
+    "envenenamiento",
+    "fidelidad",
+    "fine-tuning",
+    "graphrag",
+    "hnsw",
+    "hyde",
+    "ivf",
+    "lost-in-the-middle",
+    "metadatos",
+    "mrr",
+    "multi-consulta",
+    "padre-hijo",
+    "precision-k",
+    "rag-agentico",
+    "ragas",
+    "recall-k",
+    "reranking",
+    "rrf",
+    "similitud-coseno",
+    "solapamiento",
+    "top-k"
+  ],
+  "tools": [
+    "checklist:diagnostico-rag",
+    "calculadora:dimensionar-indice",
+    "decision:rag-o-no"
+  ]
+}

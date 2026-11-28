@@ -1,0 +1,59 @@
+questions:
+  - q: ¿Por qué en «Did you saw it?» sobra el pasado?
+    kind: error-comun
+    a: "Porque **did ya marca el pasado** y siempre va seguido de la **base**: *Did you **see** it?* Lo mismo con *does* (ya lleva la -s): *Does she **work**?* Y con *will* y los modales: *will **go**, can **swim***. El tiempo se marca una sola vez, en el primer elemento."
+    uses: []
+  - q: "Compara el pasado y el participio: ¿cuándo se usa cada uno?"
+    kind: comparar
+    a: "El **pasado** (*went, saw, worked*) se usa solo, en el **Past Simple afirmativo**: *I went*. El **participio** (*gone, seen, worked*) nunca va solo: va con **have** (perfectos: *I have gone*) o con **be** (pasiva: *It was seen*). En los regulares coinciden (*worked*); en muchos irregulares no."
+    uses: []
+  - q: ¿Qué forma del verbo va detrás de be, de have y de will?
+    kind: aplicar
+    a: "**be + -ing** para continuos (*is working*) o **be + participio** para pasiva (*is made*). **have + participio** para perfectos (*has worked*). **will**, **do/does/did** y modales + **base** (*will work*, *did work*, *can work*). Si recuerdas estos tres pares, puedes armar cualquier tiempo."
+    uses: []
+  - q: ¿Qué pasa con la ortografía de «stop», «study» y «make» al añadir -ing y -ed?
+    kind: aplicar
+    a: "*stop*: sílaba corta acentuada con consonante final → se dobla: *stopping, stopped*. *study*: consonante + y → *-ied* en pasado pero la *y* se mantiene con -ing: *studied, studying*. *make*: pierde la *e* con -ing (*making*); es irregular en pasado (*made*)."
+    uses: []
+  - q: ¿Por qué conviene aprender los irregulares en grupos y no en lista alfabética?
+    kind: por-que
+    a: "Porque los grupos muestran patrones y reducen lo que hay que memorizar: **iguales en las tres** (*put, cut, cost*), **pasado = participio** (*buy-bought-bought, make-made-made*) y **las tres distintas** (*go-went-gone, see-saw-seen*). Saber en qué grupo está un verbo te dice si el participio será igual al pasado."
+    uses: []
+  - q: ¿Cómo se pronuncia la -ed en «worked», «played» y «wanted»?
+    kind: comparar
+    a: "Depende del último sonido del verbo. Tras sonido **sordo** (/k/, /p/, /s/…) suena **/t/**: *worked* «workt». Tras sonido **sonoro** suena **/d/**: *played* «pleid». Solo tras **t** o **d** se añade una sílaba **/ɪd/**: *wanted*, *needed*. Pronunciar siempre «-ed» como sílaba es un error muy común."
+    uses: []
+sims:
+  - id: que-forma-pide
+    title: ¿Qué forma pide el auxiliar?
+    type: clasificar
+    prompt: Elige la forma del verbo que va en el hueco.
+    categories:
+      - id: base
+        label: Base
+      - id: ing
+        label: -ing
+      - id: participio
+        label: Participio
+    items:
+      - text: She doesn't ___ (eat) meat.
+        category: base
+        why: "does + base: eat."
+      - text: They have ___ (go) home.
+        category: participio
+        why: "have + participio: gone."
+      - text: I'm ___ (write) an email.
+        category: ing
+        why: "be + -ing: writing."
+      - text: You must ___ (be) careful.
+        category: base
+        why: "modal + base: be."
+      - text: The house was ___ (build) in 1950.
+        category: participio
+        why: "Pasiva be + participio: built."
+      - text: We will ___ (see) you soon.
+        category: base
+        why: "will + base: see."
+      - text: He had been ___ (run).
+        category: ing
+        why: "been + -ing: running."

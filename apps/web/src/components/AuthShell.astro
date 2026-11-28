@@ -1,0 +1,53 @@
+---
+/** Marco visual común de entrar / registro (solo presentación: no hay servidor de cuentas). */
+interface Props { title: string; subtitle: string }
+const { title, subtitle } = Astro.props;
+---
+<div class="auth">
+  <aside class="auth-side" aria-hidden="true">
+    <p class="auth-brand">TK</p>
+    <p class="auth-quote">«Recordar con esfuerzo, espaciar y explicar con tus palabras: así se aprende.»</p>
+    <ul>
+      <li>Repaso espaciado por curso</li>
+      <li>Esquemas, mapas, tarjetas y huecos de cada tema</li>
+      <li>Herramientas propias de cada curso</li>
+      <li>Ajustes de lectura y accesibilidad</li>
+    </ul>
+  </aside>
+  <div class="auth-main">
+    <p class="auth-demo" role="note">Vista previa: aún no hay servidor de cuentas. Tu perfil se guarda solo en este navegador y la contraseña no se guarda en ningún sitio.</p>
+    <h1>{title}</h1>
+    <p class="muted">{subtitle}</p>
+    <slot />
+  </div>
+</div>
+<style is:global>
+  .auth { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 0; border: 1px solid var(--line); border-radius: 20px; overflow: hidden; margin-top: 1rem; background: var(--bg); }
+  .auth-side { padding: 2rem 1.6rem; color: #fff; background: radial-gradient(120% 120% at 0% 0%, #6d64ff 0%, #4338ca 45%, #1e1b4b 100%); display: grid; align-content: start; gap: .8rem; }
+  .auth-brand { font-weight: 800; letter-spacing: .08em; font-size: 1.2rem; margin: 0; }
+  .auth-quote { font-size: 1.15rem; line-height: 1.45; margin: 1rem 0; font-family: 'Literata Variable', Georgia, serif; }
+  .auth-side ul { margin: 0; padding-left: 1.1rem; opacity: .92; font-size: .9rem; display: grid; gap: .3rem; }
+  .auth-main { padding: 1.6rem 1.8rem 2rem; }
+  .auth-main h1 { margin: .8rem 0 .2rem; }
+  .auth-demo { font-size: .78rem; color: var(--warn); background: color-mix(in srgb, var(--warn) 10%, var(--bg)); border: 1px solid color-mix(in srgb, var(--warn) 35%, var(--line)); border-radius: 10px; padding: .45rem .65rem; margin: 0; }
+  .form { display: grid; gap: .85rem; margin-top: 1.2rem; }
+  .form label { display: grid; gap: .3rem; font-size: .86rem; font-weight: 600; }
+  .form input:not([type=checkbox]):not([type=radio]), .form select, .form textarea { font: inherit; font-weight: 400; font-size: .95rem; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 10px; padding: .6rem .7rem; }
+  .form input:focus, .form select:focus, .form textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+  .form .row { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+  .form .hint { font-weight: 400; font-size: .76rem; color: var(--muted); }
+  .form .err { font-weight: 500; font-size: .8rem; color: var(--bad); min-height: 1em; }
+  .form button[type=submit], .btn-primary { font: inherit; font-weight: 650; background: var(--accent); color: var(--on-accent); border: 0; border-radius: 11px; padding: .7rem 1rem; cursor: pointer; }
+  .form button[type=submit]:hover { filter: brightness(1.08); }
+  .alt { display: flex; align-items: center; gap: .6rem; color: var(--muted); font-size: .78rem; margin: .4rem 0; }
+  .alt::before, .alt::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+  .oauth { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
+  .oauth button { font: inherit; font-size: .86rem; border: 1px solid var(--line); background: var(--bg); color: var(--fg); border-radius: 10px; padding: .55rem; cursor: not-allowed; opacity: .7; }
+  .chips { display: flex; flex-wrap: wrap; gap: .4rem; }
+  .chips label { display: inline-flex; flex-direction: row; align-items: center; gap: .35rem; font-weight: 500; border: 1px solid var(--line); border-radius: 99px; padding: .25rem .7rem; cursor: pointer; }
+  .chips label:has(input:checked) { border-color: var(--accent); color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, var(--bg)); }
+  .chips input { accent-color: var(--accent); }
+  .meter { height: 6px; border-radius: 99px; background: var(--line); overflow: hidden; }
+  .meter i { display: block; height: 100%; width: 0; transition: width .2s, background .2s; }
+  @media (max-width: 760px) { .auth { grid-template-columns: 1fr; } .auth-side { display: none; } .form .row { grid-template-columns: 1fr; } }
+</style>

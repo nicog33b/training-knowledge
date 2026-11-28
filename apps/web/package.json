@@ -14,8 +14,12 @@
     "@fontsource/atkinson-hyperlegible": "5.2.5",
     "@tk/content": "workspace:*",
     "@tk/contracts": "workspace:*",
+    "@tk/practice": "workspace:*",
     "@tk/render": "workspace:*",
     "@tk/sims": "workspace:*",
-    "astro": "^7.4.10"
+    "@tk/tools": "workspace:*",
+    "@tk/views": "workspace:*",
+    "astro": "^7.4.10",
+    "mermaid": "^11.17.2"
   }
 }

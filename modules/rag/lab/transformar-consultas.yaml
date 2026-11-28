@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué en un chat hay que reescribir la consulta antes de buscar?
+    kind: por-que
+    a: 'Porque los mensajes dependen de la conversación: "¿y para el anual?" no contiene el tema. Si buscas con eso, el índice no sabe de qué hablas. Un LLM rápido reescribe la pregunta como **autónoma** ("precio de cancelación del plan anual") usando el historial.'
+    uses: []
+  - q: Explica HyDE y cuándo puede salir mal.
+    kind: que-pasa-si
+    a: "**HyDE** pide al LLM una respuesta hipotética y busca con su embedding, que se parece más a un documento real que una pregunta corta. Sale mal si la hipótesis es **errónea** o inventa términos: la búsqueda se sesga hacia documentos equivocados. Úsalo cuando las evals muestren mejora."
+    uses: []
+  - q: Compara multi-consulta y descomposición.
+    kind: comparar
+    a: '**Multi-consulta**: varias formulaciones de **la misma** pregunta para subir el recall en preguntas ambiguas; se fusiona con RRF. **Descomposición**: dividir una pregunta **compuesta** en subpreguntas distintas ("política 2024" y "política 2025") que se buscan por separado y se combinan al generar.'
+    uses: []
+  - q: "Pregunta: «¿qué incidentes de seguridad hubo el último trimestre en el producto Pagos?». ¿Qué transformación aplicas?"
+    kind: aplicar
+    a: 'Extraer **filtros de metadatos**: fecha (último trimestre) y producto (Pagos), y buscar "incidentes de seguridad" solo dentro de ese subconjunto. Es más preciso que confiar en que la búsqueda semántica entienda las fechas, que maneja mal.'
+    uses: []
+  - q: ¿Por qué registrar la consulta transformada?
+    kind: por-que
+    a: Porque muchos fallos no están en el índice sino en una **reescritura mala** (perdió un nombre, cambió el sentido). Sin registrarla, ves una búsqueda fallida y no sabes por qué. Con ella, puedes reproducir y crear un caso de eval.
+    uses: []
+  - q: "Error común: aplicar todas las transformaciones a todas las consultas."
+    kind: error-comun
+    a: "Cada transformación es una **llamada más** al LLM: suma latencia y costo, y alguna (HyDE) puede empeorar consultas que ya iban bien. Aplica solo las que tus evals demuestren útiles, y quizá solo para ciertos tipos de consulta (enrutamiento)."
+    uses: []
+sims: []

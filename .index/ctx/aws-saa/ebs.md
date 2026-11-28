@@ -63,3 +63,6 @@ Disco **físicamente unido** al host: IOPS extremos y latencia mínima, pero **e
 - (que-pasa-si) ¿Qué pasa con los volúmenes EBS cuando terminas la instancia?
 - (comparar) Compara st1 y sc1: ¿para qué sirve cada HDD?
 - (aplicar) ¿Cómo cifras un volumen EBS existente que se creó sin cifrar?
+
+## Herramientas del curso en este subtema
+- decision: ¿Qué almacenamiento de AWS? — Asistente para elegir entre S3, EBS, EFS y FSx según el tipo de acceso y quién lo comparte.

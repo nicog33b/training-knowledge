@@ -36,6 +36,7 @@ Lambda (la más común), HTTP (backend on-premises/ALB), servicios AWS (publicar
 ## Glosario usado
 - API: Application Programming Interface. Contrato por el cual un programa expone funciones a otro.
 - TTL: Time To Live. Duración tras la cual un dato guardado se considera vencido.
+- HTTP: Protocolo de petición-respuesta de la web: el cliente envía un método (GET, POST…) a una URL y el servidor responde con un código de estado y un cuerpo.
 - Región: Ubicación geográfica de AWS compuesta por varias Zonas de Disponibilidad aisladas.
 - IAM: Servicio global de AWS para gestionar identidades (usuarios, grupos, roles) y sus permisos mediante políticas.
 - ALB: Balanceador de capa 7 (HTTP/HTTPS/gRPC) con enrutamiento por ruta, host y headers.

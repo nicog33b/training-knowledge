@@ -1,0 +1,21 @@
+id: peng-2023-copilot
+title: "The Impact of AI on Developer Productivity: Evidence from GitHub Copilot"
+authors:
+  - Peng
+  - Kalliamvakou
+  - Cihon
+  - Demirer
+year: 2023
+venue: arXiv 2302.06590
+url: https://arxiv.org/abs/2302.06590
+kind: rct
+verified: secondary
+retrieved: 2026-11-26
+summary: En una tarea acotada (servidor HTTP en JavaScript), quienes usaron
+  Copilot terminaron un 55,8 % más rápido.
+facts:
+  - "95 programadores de Upwork (mayo–junio 2022): el grupo con Copilot terminó
+    un 55,8 % más rápido (IC 95 % 21–89 %); 71 min frente a 161 min."
+caveats:
+  - "Tarea única, nueva y bien especificada: no representa trabajo en bases de
+    código grandes (ver metr-2025-ai-devs)."

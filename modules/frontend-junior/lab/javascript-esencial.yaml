@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué `const lista = []; lista.push(1)` no da error?
+    kind: por-que
+    a: Porque `const` impide **reasignar** la variable (`lista = otra`), no **mutar** el objeto al que apunta. El array sigue siendo el mismo objeto; solo cambia su contenido. Si quieres inmutabilidad, crea copias (`[...lista, 1]`) o usa `Object.freeze`.
+    uses: []
+  - q: ¿Qué pasa al hacer `const b = a` con un objeto y luego cambiar `b.nombre`?
+    kind: que-pasa-si
+    a: "Cambia también `a.nombre`: `b` y `a` son **la misma referencia**. Para trabajar sobre una copia: `{...a}` (copia superficial, los objetos anidados siguen compartidos) o `structuredClone(a)` (copia profunda)."
+    uses: []
+  - q: Compara `||` y `??` para valores por defecto.
+    kind: comparar
+    a: "`||` usa el valor por defecto con **cualquier falsy** (0, '', false…): `cantidad || 10` convierte un 0 válido en 10. `??` solo actúa con **null o undefined**: `cantidad ?? 10` respeta el 0. Para valores por defecto, casi siempre `??`."
+    uses: []
+  - q: Explica qué es una closure con un ejemplo.
+    kind: aplicar
+    a: "Una función que **recuerda** variables de su ámbito de creación: `function contador(){ let n = 0; return () => ++n; }`. Cada llamada a la función devuelta incrementa el mismo `n`, que sigue vivo aunque `contador` ya terminó. Así se crea estado privado."
+    uses: []
+  - q: ¿Por qué no usar var?
+    kind: por-que
+    a: 'Porque tiene ámbito de **función** (no de bloque) y se "eleva" (*hoisting*): una variable declarada en un `if` existe en toda la función y un bucle con `var` comparte la misma variable entre iteraciones, causando bugs clásicos con callbacks. `let` y `const` evitan todo eso.'
+    uses: []
+  - q: "Error común: comparar con `==`."
+    kind: error-comun
+    a: "`==` convierte tipos antes de comparar con reglas difíciles de recordar: `0 == ''` y `null == undefined` son true, `'1' == 1` también. Usa siempre `===`, que compara valor y tipo, y convierte explícitamente si lo necesitas."
+    uses: []
+sims: []

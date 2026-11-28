@@ -1,0 +1,56 @@
+questions:
+  - q: ¿Por qué una página con SSR puede verse rápido y aun así tener mal INP?
+    kind: por-que
+    a: Porque el HTML llega pronto (buen LCP), pero hasta que el navegador descarga y ejecuta el JavaScript para **hidratar**, la página **no responde** a clics o responde tarde. Mucho JS de hidratación = tareas largas = mal INP. Islas o Server Components reducen ese costo.
+    uses: []
+  - q: Compara SSG con ISR.
+    kind: comparar
+    a: "**SSG** genera todo al construir: rapidísimo, pero los datos son de la última build. **ISR** sirve igual de estático pero **regenera** páginas cada cierto tiempo o bajo demanda, manteniendo frescura sin reconstruir todo el sitio."
+    uses: []
+  - q: "Elige estrategia para: blog, ficha de producto con stock y panel interno."
+    kind: aplicar
+    a: "**Blog**: SSG o islas (contenido estable, SEO, CDN). **Ficha con stock**: SSR con streaming o ISR corto, con el stock en un componente que se actualiza aparte. **Panel interno tras login**: CSR o SSR ligero; SEO irrelevante y mucha interactividad."
+    uses: []
+  - q: ¿Qué pasa si renderizas todo en el servidor pero una consulta tarda 3 s?
+    kind: que-pasa-si
+    a: Sin streaming, **toda la página** espera 3 s (mal TTFB y LCP). Con **streaming SSR**, envías primero lo rápido y la parte lenta llega después dentro de un límite de Suspense con un estado de carga. También puedes cachear esa consulta.
+    uses: []
+  - q: ¿Por qué los Server Components reducen el JavaScript del cliente?
+    kind: por-que
+    a: "Porque se ejecutan **solo en el servidor**: su código (y librerías pesadas que usen, como formateo o markdown) no se envía al navegador ni se hidrata. Solo los componentes marcados como cliente, los interactivos, cargan JS."
+    uses: []
+  - q: "Error común: elegir una estrategia de renderizado para toda la app por moda."
+    kind: error-comun
+    a: Cada página tiene necesidades distintas (SEO, frescura, interactividad, personalización). Los frameworks modernos permiten **mezclar** por ruta. Decide por página y valida con LCP e INP de **campo**, no con lo que esté de moda.
+    uses: []
+sims:
+  - id: estrategia-por-pagina
+    title: ¿Qué estrategia de renderizado?
+    type: clasificar
+    prompt: Elige la estrategia más adecuada para cada página.
+    categories:
+      - id: ssg
+        label: SSG / ISR (estático)
+      - id: ssr
+        label: SSR con streaming
+      - id: csr
+        label: CSR
+    items:
+      - text: Documentación técnica pública que cambia una vez por semana.
+        category: ssg
+        why: Contenido estable, SEO, CDN.
+      - text: Resultados de búsqueda personalizados de una tienda.
+        category: ssr
+        why: Personalizado y fresco, debe verse rápido.
+      - text: Editor de diagramas tras login.
+        category: csr
+        why: Muy interactivo, sin necesidad de SEO.
+      - text: Página de marketing de un lanzamiento.
+        category: ssg
+        why: Estática y con mucho tráfico.
+      - text: Feed de noticias con contenido por usuario.
+        category: ssr
+        why: Datos frescos y personalizados, streaming para lo lento.
+      - text: Panel de administración interno.
+        category: csr
+        why: Tras login y muy interactivo.

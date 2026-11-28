@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué buscar elementos por rol y nombre en lugar de por clase CSS?
+    kind: por-que
+    a: "Porque así el test describe **cómo lo usa una persona**: sobrevive a cambios de estilos y estructura, y de paso comprueba la **accesibilidad** (si no encuentras el botón por su rol y nombre, un lector de pantalla tampoco)."
+    uses: []
+  - q: Compara tests unitarios, de integración y e2e en frontend.
+    kind: comparar
+    a: "**Unitarios**: lógica pura, muy rápidos. **Integración**: componente o pantalla con hijos reales y red simulada; dan la mayor confianza por costo. **E2E**: flujo completo en navegador real; lentos y algo frágiles, para los caminos críticos."
+    uses: []
+  - q: ¿Qué pasa si tus tests dependen de detalles internos del componente?
+    kind: que-pasa-si
+    a: Se **rompen al refactorizar** aunque el comportamiento no cambie (falsos positivos) y a la vez pueden pasar con la funcionalidad rota. El equipo deja de confiar en ellos y los ignora. Prueba comportamiento observable.
+    uses: []
+  - q: Escribe los casos de test para un formulario de registro.
+    kind: aplicar
+    a: Muestra error si el email es inválido; muestra error si la contraseña es corta; deshabilita el envío mientras se envía; con éxito navega o muestra confirmación; si la API devuelve "email ya registrado", lo muestra junto al campo. Red simulada con MSW, consultas por rol y label.
+    uses: []
+  - q: ¿Por qué usar findBy en vez de esperar 500 ms?
+    kind: por-que
+    a: "Porque `findBy…` **espera hasta que aparece** el elemento (con un límite): rápido cuando la respuesta llega pronto y estable cuando tarda. Una espera fija es lenta y aun así falla si un día la respuesta tarda más."
+    uses: []
+  - q: "Error común: mockear tus propios módulos en todos los tests."
+    kind: error-comun
+    a: "Acabas probando que tu código llama a tus mocks, no que las piezas funcionan juntas: todo verde y la integración rota. Simula los **límites externos** (la red con MSW) y deja reales tus componentes y módulos."
+    uses: []
+sims: []

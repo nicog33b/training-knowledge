@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Qué problema resuelve MCP?
+    kind: por-que
+    a: "El de **N apps × M integraciones**: sin estándar, cada app de IA integraba cada servicio a su manera. Con MCP, un servicio publica **un servidor** y cualquier cliente compatible (IDE, chat, agente) puede usar sus herramientas y recursos, con cualquier modelo."
+    uses: []
+  - q: Compara herramientas, recursos y prompts en un servidor MCP.
+    kind: comparar
+    a: "**Herramientas**: acciones que el modelo puede invocar (crear un issue). **Recursos**: datos que el cliente puede leer y meter en contexto (un archivo, una tabla). **Prompts**: plantillas reutilizables que el usuario elige. Las herramientas tienen efectos; por eso son las que más control necesitan."
+    uses: []
+  - q: ¿Qué pasa si instalas un servidor MCP de origen desconocido con tu token de GitHub con todos los permisos?
+    kind: que-pasa-si
+    a: Le das a código ajeno **acceso total** a tus repositorios, y sus descripciones y resultados entran al contexto del modelo (posible **inyección**). Usa servidores de confianza, **tokens con permisos mínimos** (solo lectura si basta) y confirmación para herramientas con efecto.
+    uses: []
+  - q: Quieres que tu agente consulte la base de datos interna. ¿MCP o herramienta propia?
+    kind: aplicar
+    a: Si solo la usará **tu app**, una herramienta propia basta. Si quieres que la usen **varios clientes** (el IDE del equipo, otro agente), un **servidor MCP** la reutiliza. En ambos casos expón consultas **acotadas** y de solo lectura, no SQL libre.
+    uses: []
+  - q: ¿Por qué MCP no hace seguro por sí solo usar herramientas?
+    kind: por-que
+    a: "Porque es un **protocolo de conexión**, no un sistema de permisos inteligente: estandariza cómo se describen y llaman herramientas, pero quién puede qué, qué datos se exponen y qué necesita confirmación lo decides tú al configurar servidor y cliente."
+    uses: []
+  - q: "Error común: pensar que MCP solo funciona con Claude."
+    kind: error-comun
+    a: "MCP es un **estándar abierto** publicado con especificación y SDK; cualquier cliente y modelo puede implementarlo. Lo publicó Anthropic, pero el valor está precisamente en que no depende de un proveedor: el mismo servidor sirve a distintos clientes."
+    uses: []
+sims: []

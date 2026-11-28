@@ -1,0 +1,34 @@
+id: amershi-2019-hai
+title: Guidelines for Human-AI Interaction
+authors:
+  - Amershi
+  - Weld
+  - Vorvoreanu
+  - Fourney
+  - Nushi
+  - Collisson
+  - Suh
+  - Iqbal
+  - Bennett
+  - Inkpen
+  - Teevan
+  - Kikin-Gil
+  - Horvitz
+year: 2019
+venue: CHI 2019 (Microsoft Research)
+url: https://www.microsoft.com/en-us/research/publication/guidelines-for-human-ai-interaction/
+kind: theory
+verified: secondary
+retrieved: 2026-11-26
+summary: 18 pautas de Microsoft para diseñar productos con IA, agrupadas en
+  inicio, durante, cuando se equivoca y con el tiempo.
+facts:
+  - "18 pautas validadas con 49 profesionales de diseño sobre 20 productos con
+    IA; agrupadas en 4 momentos: al inicio, durante la interacción, cuando la IA
+    se equivoca y con el tiempo."
+  - "Ejemplos: dejar claro qué puede hacer el sistema y qué tan bien (1–2),
+    permitir corregir con facilidad cuando falla, pedir feedback granular (15),
+    avisar de cambios (18)."
+caveats:
+  - Los autores advierten que no son una checklist simple. Lista completa no
+    verificada.

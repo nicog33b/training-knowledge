@@ -1,0 +1,58 @@
+questions:
+  - q: ¿Por qué el momento de mayor palanca es revisar el plan?
+    kind: por-que
+    a: Porque corregir un plan cuesta **minutos** y una frase; corregir una implementación basada en un mal plan cuesta horas y a menudo se tira. Revisar el plan detecta malentendidos del problema, archivos equivocados y riesgos antes de que existan como código.
+    uses: []
+  - q: Compara pedir «implementa la feature» con el ciclo explorar-planificar-implementar-verificar.
+    kind: comparar
+    a: "**Directo**: el agente actúa sobre suposiciones y entrega un cambio grande que hay que revisar entero. **Ciclo**: entiende el código, propone un plan revisable, implementa en pasos pequeños verificados y se integra en PR pequeños. Más lento al principio, mucho menos retrabajo."
+    uses: []
+  - q: En la fase de exploración, ¿qué le pides al agente?
+    kind: aplicar
+    a: "Que **lea y explique sin tocar nada**: dónde está la lógica relevante, qué patrones usa el repo, qué tests existen y qué podría romperse. En exploraciones amplias, que lance **subagentes** y te traiga solo conclusiones para no llenar el contexto."
+    uses: []
+  - q: ¿Qué pasa si dejas que el agente siga cuando ves que se desvía del plan?
+    kind: que-pasa-si
+    a: "Acumula cambios sobre una dirección equivocada: más código que deshacer, más contexto gastado y más probabilidad de que lo arregle con parches. **Interrumpe pronto**, explica la corrección y, si el contexto está muy sucio, empieza una sesión nueva con lo aprendido."
+    uses: []
+  - q: ¿Por qué «debería funcionar» no es verificación?
+    kind: por-que
+    a: Porque es una **predicción**, no una observación. Verificar es ejecutar tests, tipado, linter y validaciones del proyecto (y en interfaces, comprobar visualmente) y leer la salida. Tanto el agente como el humano deben mostrar evidencia de que funciona.
+    uses: []
+  - q: "Error común: integrar los cambios del agente en un único commit enorme al final."
+    kind: error-comun
+    a: Se pierde la historia de **por qué** se hizo cada cosa, no se puede revertir una parte y la revisión se vuelve imposible. Commits pequeños con mensajes que explican el porqué, y PR por tarea, mantienen el cambio auditable.
+    uses: []
+sims:
+  - id: fase-del-ciclo
+    title: ¿En qué fase estás?
+    type: clasificar
+    prompt: Clasifica cada acción en la fase del ciclo a la que pertenece.
+    categories:
+      - id: explorar
+        label: Explorar
+      - id: planificar
+        label: Planificar
+      - id: implementar
+        label: Implementar
+      - id: verificar
+        label: Verificar
+    items:
+      - text: «Explícame cómo se calcula el descuento hoy, sin cambiar nada.»
+        category: explorar
+        why: Entender antes de tocar.
+      - text: «Propón qué archivos cambiarías y cómo lo probarías.»
+        category: planificar
+        why: Plan revisable antes del código.
+      - text: «Haz solo el paso 1 del plan y para.»
+        category: implementar
+        why: Pasos pequeños.
+      - text: «Ejecuta los tests y el typecheck y pégame la salida.»
+        category: verificar
+        why: Evidencia, no predicción.
+      - text: «¿Qué tests existen para este módulo?»
+        category: explorar
+        why: Conocer la red de seguridad.
+      - text: «Dame dos alternativas y sus compromisos.»
+        category: planificar
+        why: Decidir el enfoque.

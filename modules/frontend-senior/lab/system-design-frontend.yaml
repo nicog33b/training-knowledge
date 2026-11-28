@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué empezar un system design preguntando requisitos?
+    kind: por-que
+    a: "Porque el diseño correcto **depende** de ellos: un feed para 100 usuarios en escritorio no se diseña igual que uno para millones en móviles con red lenta, offline y lector de pantalla. Diseñar sin requisitos es resolver otro problema."
+    uses: []
+  - q: Compara paginación por offset y por cursor para un feed.
+    kind: comparar
+    a: "**Offset** (página 3 = saltar 40): simple, pero si llegan elementos nuevos se **duplican o saltan** resultados, y es lenta en páginas profundas. **Cursor** (después del id X): estable ante inserciones y eficiente. Para feeds infinitos, cursor."
+    uses: []
+  - q: Diseña un autocompletar accesible y eficiente.
+    kind: aplicar
+    a: "**Debounce** (~200 ms), mínimo de caracteres, **cancelar** o ignorar respuestas viejas, caché por término, límite de resultados; patrón **combobox** de la APG (flechas, Enter, Escape, opción activa anunciada); estados de carga, vacío y error."
+    uses: []
+  - q: ¿Qué pasa si renderizas 10.000 elementos en un feed sin virtualizar?
+    kind: que-pasa-si
+    a: "El DOM se vuelve enorme: scroll a tirones, memoria alta y cada actualización tarda (mal INP). La **virtualización** solo pinta los elementos visibles (y un margen), manteniendo el DOM pequeño. Cuida la accesibilidad (posición y foco)."
+    uses: []
+  - q: ¿Por qué normalizar los datos en el cliente?
+    kind: por-que
+    a: Porque una misma entidad (un usuario) aparece en muchos sitios (posts, comentarios). Si está **duplicada**, al actualizarla en uno queda desactualizada en otros. Normalizada por id, se actualiza una vez y todos la ven.
+    uses: []
+  - q: "Error común: saltar directo a elegir el framework en una entrevista de system design."
+    kind: error-comun
+    a: "El framework es lo menos importante. Lo evaluado es el **razonamiento**: requisitos, modelo de datos, API, estado, rendimiento, accesibilidad, fallos y compromisos explicados. Empieza por ahí y menciona tecnologías solo como ejemplos."
+    uses: []
+sims: []

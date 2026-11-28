@@ -1,0 +1,83 @@
+---
+import Base from '../layouts/Base.astro';
+import AuthShell from '../components/AuthShell.astro';
+import { getData } from '../lib/data';
+const { modules } = await getData();
+---
+<Base title="Crear perfil">
+  <AuthShell title="Crear perfil" subtitle="Cuéntanos qué quieres aprender para recomendarte la ruta y ajustar la lectura a ti.">
+    <form class="form" id="signup" novalidate>
+      <div class="row">
+        <label>Nombre<input name="name" autocomplete="name" required maxlength="60" /></label>
+        <label>Correo<input type="email" name="email" autocomplete="email" required /></label>
+      </div>
+      <label>Contraseña
+        <input type="password" name="password" autocomplete="new-password" required minlength="8" aria-describedby="pw-hint" />
+        <span class="meter" aria-hidden="true"><i></i></span>
+        <span class="hint" id="pw-hint">Mínimo 8 caracteres. Mejor una frase larga que símbolos raros.</span>
+      </label>
+      <div class="row">
+        <label>Tu objetivo
+          <select name="goal">
+            <option value="empleo">Conseguir trabajo o subir de nivel</option>
+            <option value="certificacion">Aprobar una certificación</option>
+            <option value="proyecto">Aplicarlo en un proyecto</option>
+            <option value="curiosidad">Aprender por interés</option>
+          </select>
+        </label>
+        <label>Minutos al día
+          <select name="minutes"><option>10</option><option selected>20</option><option>40</option><option>60</option></select>
+        </label>
+      </div>
+      <fieldset class="chips" aria-label="Cursos de interés">
+        <legend class="hint" style="width:100%;margin-bottom:.3rem">Cursos de interés</legend>
+        {modules.map((m) => <label><input type="checkbox" name="courses" value={m.manifest.id} />{m.manifest.title}</label>)}
+      </fieldset>
+      <fieldset class="chips" aria-label="Ajustes de lectura de partida">
+        <legend class="hint" style="width:100%;margin-bottom:.3rem">¿Quieres empezar con algún ajuste de lectura? (se cambia cuando quieras en «Aa»)</legend>
+        <label><input type="radio" name="a11y" value="" checked />Ninguno</label>
+        <label><input type="radio" name="a11y" value="dislexia" />Me cuesta leer / dislexia</label>
+        <label><input type="radio" name="a11y" value="baja-vision" />Veo mal la letra pequeña</label>
+        <label><input type="radio" name="a11y" value="concentracion" />Me distraigo fácil</label>
+      </fieldset>
+      <label class="chips"><span style="font-weight:400"><input type="checkbox" name="terms" required /> Entiendo que es una vista previa y que los datos quedan en este navegador.</span></label>
+      <p class="err" aria-live="polite"></p>
+      <button type="submit">Crear perfil</button>
+      <p class="muted">¿Ya tienes perfil? <a href="/entrar/">Entrar</a></p>
+    </form>
+  </AuthShell>
+</Base>
+<script>
+  import { store } from '../lib/store.ts';
+  const PRESETS: Record<string, Record<string, unknown>> = {
+    dislexia: { font: 'atkinson', spacing: 'amplio', measure: 'estrecho', size: 21 },
+    'baja-vision': { size: 24, contrast: 'alto', links: 'marcados', ui: 'grande' },
+    concentracion: { focus: 'on', motion: 'reducir', glossary: 'discreto' },
+  };
+  const f = document.getElementById('signup') as HTMLFormElement;
+  const err = f.querySelector('.err')!;
+  const pw = f.elements.namedItem('password') as HTMLInputElement;
+  const meter = f.querySelector<HTMLElement>('.meter i')!;
+  pw.addEventListener('input', () => {
+    const v = pw.value;
+    const score = Math.min(4, (v.length >= 8 ? 1 : 0) + (v.length >= 12 ? 1 : 0) + (v.length >= 16 ? 1 : 0) + (/[^a-zA-Z]/.test(v) && /[a-zA-Z]/.test(v) ? 1 : 0));
+    meter.style.width = `${(score / 4) * 100}%`;
+    meter.style.background = ['var(--bad)', 'var(--bad)', 'var(--warn)', 'var(--ok)', 'var(--ok)'][score];
+  });
+  f.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const fd = new FormData(f);
+    const name = String(fd.get('name') || '').trim();
+    const email = String(fd.get('email') || '').trim().toLowerCase();
+    if (name.length < 2) return void (err.textContent = 'Escribe tu nombre.');
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return void (err.textContent = 'Escribe un correo válido.');
+    if (String(fd.get('password') || '').length < 8) return void (err.textContent = 'La contraseña necesita al menos 8 caracteres.');
+    if (!fd.get('terms')) return void (err.textContent = 'Marca la casilla de vista previa para continuar.');
+    const user = { name, email, goal: fd.get('goal'), minutes: Number(fd.get('minutes')), courses: fd.getAll('courses'), created: new Date().toISOString() };
+    store.set('tk-user', user);
+    store.set('tk-user-saved', user); // sin contraseña
+    const preset = String(fd.get('a11y') || '');
+    if (preset) store.set('tk-read', { ...store.get('tk-read', {}), ...PRESETS[preset] });
+    location.href = '/perfil/';
+  });
+</script>

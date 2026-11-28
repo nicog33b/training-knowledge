@@ -1,0 +1,44 @@
+id: lanzar-feature-ia
+title: Checklist para lanzar una feature con IA
+summary: Lo mínimo que debería estar resuelto antes de abrir a usuarios una
+  función con un LLM.
+builder: checklist
+topics:
+  - evals
+  - seguridad-y-guardrails
+  - streaming-y-ux
+groups:
+  - title: Calidad
+    items:
+      - text: Hay una eval con ≥ 30 casos reales que corre en CI.
+        why: Cada cambio de prompt o modelo se mide antes de desplegar.
+      - text: Las salidas que lee el código usan salida estructurada y se validan.
+        why: Un JSON roto no debe llegar al usuario.
+      - text: Existe un plan para cuando el modelo falla o no responde (degradación).
+        why: Proveedores caídos, límites de uso, timeouts.
+  - title: Seguridad
+    items:
+      - text: Las herramientas tienen mínimo privilegio y topes.
+        why: Limita el daño de una inyección.
+      - text: Acciones con efecto piden confirmación humana.
+        why: Enviar, pagar, borrar o publicar.
+      - text: La salida del modelo se escapa antes de renderizarla.
+        why: Evita XSS.
+      - text: No hay secretos en prompts y se aplican permisos por documento.
+        why: Fuga de datos.
+  - title: Costo y operación
+    items:
+      - text: Se registran tokens, costo y latencia por petición.
+        why: Sin medición no hay optimización.
+      - text: Hay topes de gasto por usuario y día.
+        why: Consumo ilimitado es un riesgo del OWASP Top 10.
+      - text: El prefijo estable aprovecha el caché de prompts.
+        why: Ahorra costo y latencia.
+  - title: Experiencia
+    items:
+      - text: La respuesta llega en streaming y se puede detener.
+        why: Latencia percibida.
+      - text: Se explica qué puede hacer el sistema y qué tan bien.
+        why: Pautas Human-AI 1 y 2.
+      - text: El usuario puede corregir, descartar y dar feedback.
+        why: Alimenta las evals.

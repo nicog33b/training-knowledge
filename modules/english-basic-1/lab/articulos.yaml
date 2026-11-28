@@ -1,0 +1,62 @@
+questions:
+  - q: ¿Por qué «The dogs are loyal» no significa lo que suele querer decir el hispanohablante?
+    kind: por-que
+    a: "Porque en inglés las **generalizaciones** con plurales o incontables van **sin artículo**: *Dogs are loyal* (los perros en general). *The dogs* se refiere a **unos perros concretos** que ambos conocemos. El español usa *los perros* para ambos casos; el inglés los distingue."
+    uses: []
+  - q: "Error común: ¿qué falta en «She is doctor»?"
+    kind: error-comun
+    a: "Falta ***a***: en inglés las **profesiones** en singular llevan artículo indefinido: *She is **a** doctor*, *I'm **an** engineer*. El español dice *es médica* sin artículo, por eso este error es tan frecuente. En plural no hay artículo: *They are doctors*."
+    uses: []
+  - q: Compara «a university» con «an hour».
+    kind: comparar
+    a: "*a/an* depende del **sonido**, no de la letra. *university* empieza con sonido /ju/ (consonante) → ***a** university*. *hour* empieza con h muda, sonido vocal → ***an** hour*. Igual: *a European*, *an honest man*, *an MBA* (suena «em»)."
+    uses: []
+  - q: ¿Qué pasa con el artículo en «go to school», «go to bed» y «at home»?
+    kind: que-pasa-si
+    a: "Van **sin artículo** cuando se usan en su **función típica**: *go to school* (a estudiar), *go to bed* (a dormir), *be at home*, *go to work*. Si es el edificio concreto, sí lleva: *I went to **the** school to talk to the teacher*. El español usa artículo en casi todos estos casos."
+    uses: []
+  - q: Traduce «Me lavé las manos» y «El lunes juego al fútbol».
+    kind: aplicar
+    a: "*I washed **my** hands* y *On Monday I play football*. Con **partes del cuerpo** el inglés usa posesivo, no *the*. Con **días, meses, deportes, comidas e idiomas** no hay artículo: *in May, I speak English, I had breakfast*. Fíjate también en la preposición: *on Monday*."
+    uses: []
+  - q: ¿Cuándo se usa the y cuándo a con un mismo sustantivo?
+    kind: aplicar
+    a: "***a/an*** al **mencionarlo por primera vez** o si es «uno cualquiera»: *I bought **a** car*. ***the*** cuando **ya se mencionó** o ambos sabéis cuál es: ***The** car is red*. Regla práctica: ¿concreto y conocido? → *the*. ¿Uno cualquiera, singular contable? → *a/an*. ¿General, plural o incontable? → nada."
+    uses: []
+sims:
+  - id: que-articulo
+    title: ¿a, an, the o nada?
+    type: clasificar
+    prompt: Elige el artículo que va en el hueco.
+    categories:
+      - id: a-an
+        label: a / an
+      - id: the
+        label: the
+      - id: nada
+        label: Sin artículo
+    items:
+      - text: I love ___ music.
+        category: nada
+        why: Generalización con incontable.
+      - text: He's ___ engineer.
+        category: a-an
+        why: "Profesión: an engineer."
+      - text: ___ sun is very strong today.
+        category: the
+        why: Algo único.
+      - text: We play football on ___ Sundays.
+        category: nada
+        why: Días sin artículo.
+      - text: I saw a film. ___ film was boring.
+        category: the
+        why: Ya mencionado.
+      - text: Can you play ___ piano?
+        category: the
+        why: "Instrumentos: the piano."
+      - text: She waited for ___ hour.
+        category: a-an
+        why: an hour (h muda).
+      - text: ___ cats are independent.
+        category: nada
+        why: Generalización con plural.

@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Qué debe pasar con el foco al abrir y cerrar un diálogo modal?
+    kind: aplicar
+    a: Al abrir, el foco **entra** al diálogo (primer elemento o título); mientras está abierto queda **atrapado** dentro; Escape lo cierra; al cerrar, el foco **vuelve** al botón que lo abrió. El elemento `<dialog>` con `showModal()` hace gran parte.
+    uses: []
+  - q: ¿Por qué ARIA no añade comportamiento?
+    kind: por-que
+    a: 'Porque ARIA solo cambia lo que se **anuncia** al lector de pantalla (rol, nombre, estado). Poner `role="tab"` no hace que las flechas funcionen: el teclado lo programas tú siguiendo los patrones de la APG. Anunciar sin comportamiento es peor que nada.'
+    uses: []
+  - q: ¿Qué pasa en una SPA si al cambiar de ruta no gestionas el foco?
+    kind: que-pasa-si
+    a: El usuario de lector de pantalla **no se entera** de que la página cambió y el foco se queda en el enlace pulsado (o en el body). Mueve el foco al título de la nueva vista o anúncialo, y actualiza `document.title`.
+    uses: []
+  - q: Compara aria-live polite y assertive.
+    kind: comparar
+    a: '**polite**: el lector anuncia el cambio cuando termina lo que está leyendo; para "Guardado" o "3 resultados". **assertive**: interrumpe al momento; solo para lo urgente (errores críticos). Abusar de assertive hace la página agotadora.'
+    uses: []
+  - q: ¿Por qué un menú de navegación desplegable no debería usar role=menu?
+    kind: por-que
+    a: Porque `role="menu"` promete el comportamiento de un menú de **aplicación** (flechas, typeahead, sin Tab dentro) y cambia cómo lo maneja el lector de pantalla. Para enlaces de navegación basta un **botón con aria-expanded** que muestra una lista de enlaces (patrón disclosure).
+    uses: []
+  - q: "Error común: implementar un combobox de autocompletar desde cero sin probarlo."
+    kind: error-comun
+    a: Es de los patrones más difíciles (foco activo, opciones anunciadas, teclado, estados) y varía entre lectores. Usa una librería accesible probada y verifícala con NVDA y VoiceOver; si lo haces tú, sigue la APG paso a paso.
+    uses: []
+sims: []

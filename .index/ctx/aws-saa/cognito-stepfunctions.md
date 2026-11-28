@@ -24,6 +24,7 @@ Orquestador **serverless de flujos** de trabajo con máquinas de estado en JSON 
 - s3-fundamentos: S3: fundamentos y seguridad — Buckets, objetos, bucket policies, versionado, replicación y cifrado. [secciones: S3: fundamentos y seguridad · Buckets y objetos · Seguridad y acceso · Versionado · Replicación · Cifrado]
 
 ## Glosario usado
+- JSON: Formato de texto para datos estructurados (objetos, listas, números, cadenas) que entienden casi todos los lenguajes.
 - IAM: Servicio global de AWS para gestionar identidades (usuarios, grupos, roles) y sus permisos mediante políticas.
 - MFA: Segundo factor de autenticación (app, llave FIDO, token hardware) además de la contraseña.
 - STS: Servicio que emite credenciales temporales de acceso a AWS (AssumeRole, GetSessionToken, federación).

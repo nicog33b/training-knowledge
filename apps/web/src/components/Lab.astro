@@ -225,6 +225,7 @@ const kinds = Object.keys(KIND).filter((k) => lab.questions.some((q) => q.kind =
 
 <script>
   import { pickOutcome } from '@tk/sims/rule';
+  import { recordReview } from '../lib/srs.ts';
 
   // Constructor de DOM con textContent (las recetas y lo que devuelve la IA son datos, nunca HTML).
   function el<K extends keyof HTMLElementTagNameMap>(tag: K, attrs: Record<string, any> = {}, ...kids: (Node | string)[]) {
@@ -277,6 +278,7 @@ const kinds = Object.keys(KIND).filter((k) => lab.questions.some((q) => q.kind =
       card.querySelectorAll<HTMLButtonElement>('[data-rate]').forEach((b) => b.addEventListener('click', () => {
         const q = card.dataset.q!;
         marks[q] === b.dataset.rate ? delete marks[q] : (marks[q] = b.dataset.rate as Rate);
+        if (marks[q]) recordReview(mod, `q:${topic}:${q}`, marks[q]); // alimenta /<curso>/repaso/
         save(); paint(card); stats();
       }));
       card.querySelector('[data-deep]')?.addEventListener('click', () => {

@@ -60,3 +60,6 @@ Sistemas de archivos de terceros gestionados:
 
 ## Simulaciones del subtema
 - clasificar: ¿EBS, EFS, FSx o S3?
+
+## Herramientas del curso en este subtema
+- decision: ¿Qué almacenamiento de AWS? — Asistente para elegir entre S3, EBS, EFS y FSx según el tipo de acceso y quién lo comparte.

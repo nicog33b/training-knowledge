@@ -29,7 +29,8 @@
         "ttl"
       ],
       "questions": 3,
-      "sims": []
+      "sims": [],
+      "tools": []
     }
   ],
   "sections": [],
@@ -37,5 +38,6 @@
     "data-cache",
     "revalidacion",
     "router-cache"
-  ]
+  ],
+  "tools": []
 }

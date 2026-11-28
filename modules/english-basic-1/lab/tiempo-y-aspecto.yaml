@@ -1,0 +1,80 @@
+questions:
+  - q: ¿Por qué es más fácil pensar en 3 tiempos × 4 aspectos que en 12 tiempos sueltos?
+    kind: por-que
+    a: "Porque cada aspecto significa **lo mismo en presente, pasado y futuro**: el continuo es «en progreso», el perfecto es «anterior a un punto de referencia». Si entiendes *is working* entiendes *was working* y *will be working*: solo cambia el punto de referencia. Así aprendes 4 ideas y 3 marcas de tiempo en vez de 12 reglas."
+    uses: []
+  - q: Construye «pasado + perfect continuous» con el verbo study y el sujeto they.
+    kind: aplicar
+    a: "Perfect continuous = **have + been + -ing**. En pasado, *have* → **had**. Resultado: *They **had been studying***. Siempre igual: el tiempo va en el primer auxiliar (*had*), y detrás las piezas fijas del aspecto (*been* + *studying*). En futuro sería *They will have been studying*."
+    uses: []
+  - q: Compara el aspecto simple y el continuo con «she works» y «she is working».
+    kind: comparar
+    a: "El **simple** presenta el hecho completo o habitual: *She works* (trabaja, es su rutina). El **continuo** presenta la acción **en progreso** o temporal: *She is working* (está trabajando ahora o estos días). La diferencia no es de tiempo (ambas son presente) sino de **cómo se mira la acción**."
+    uses: []
+  - q: ¿Qué tiene en común el perfecto en presente, pasado y futuro?
+    kind: comparar
+    a: "Los tres miran **hacia atrás** desde un punto de referencia: *has finished* (antes de ahora), *had finished* (antes de un momento pasado), *will have finished* (antes de un momento futuro). Siempre es **have + participio**; solo cambia la forma de *have* y, con ello, el punto desde el que miras."
+    uses: []
+  - q: ¿Qué pasa si te saltas el be en un tiempo continuo, como en «I working now»?
+    kind: error-comun
+    a: "La frase queda sin verbo conjugado: *working* solo no lleva tiempo ni persona. El continuo **siempre** es **be + -ing**: *I **am** working*, *They **were** working*, *It **will be** working*. El *be* es el que dice si es presente, pasado o futuro y el que se mueve en preguntas."
+    uses: []
+  - q: ¿Qué tiempos de la tabla conviene dominar primero y cuáles basta con reconocer?
+    kind: aplicar
+    a: "Domina primero los de mayor uso: **Present Simple, Present Continuous, Past Simple, Present Perfect, will / going to y Past Continuous**. Luego Past Perfect y Present Perfect Continuous. Los **perfect continuous de pasado y futuro** y el Future Perfect son menos frecuentes: basta con reconocerlos y saber armarlos con la fórmula."
+    uses: []
+sims:
+  - id: cuantas-palabras
+    title: ¿Cuántas palabras tiene el verbo?
+    type: predecir-observar
+    context: Arma un tiempo verbal con el verbo work y el sujeto she. Elige el tiempo (0 = pasado, 1 = presente, 2 = futuro) y si lleva aspecto continuo y/o perfecto (0 = no, 1 = sí).
+    params:
+      - id: tiempo
+        label: Tiempo (0 pasado · 1 presente · 2 futuro)
+        min: 0
+        max: 2
+        step: 1
+        default: 1
+      - id: continuo
+        label: Continuo (be + -ing)
+        min: 0
+        max: 1
+        step: 1
+        default: 0
+      - id: perfecto
+        label: Perfecto (have + participio)
+        min: 0
+        max: 1
+        step: 1
+        default: 0
+    predict:
+      question: ¿Cuántas palabras tiene el verbo (sin contar she)?
+      options:
+        - id: una
+          label: Una (works / worked)
+        - id: dos
+          label: Dos
+        - id: tres
+          label: Tres
+        - id: cuatro
+          label: Cuatro
+    outcomes:
+      - when: 1 + (tiempo == 2) + continuo + perfecto == 1
+        answer: una
+        show: "Simple de presente o pasado: una sola palabra (works / worked). El tiempo va en la terminación."
+      - when: 1 + (tiempo == 2) + continuo + perfecto == 2
+        answer: dos
+        show: "Dos palabras: will work, is/was working o has/had worked. Cada pieza (will, be, have) añade una palabra."
+      - when: 1 + (tiempo == 2) + continuo + perfecto == 3
+        answer: tres
+        show: "Tres palabras: will be working, will have worked o has/had been working."
+      - when: "1"
+        answer: cuatro
+        show: "El máximo: will have been working (futuro + perfecto + continuo)."
+    explain:
+      prompt: Explica de dónde sale cada palabra del verbo y cuál lleva el tiempo.
+      rubric:
+        - El futuro añade will
+        - El perfecto añade have + participio
+        - El continuo añade be + -ing
+        - Solo el primer elemento marca presente o pasado

@@ -1,0 +1,56 @@
+questions:
+  - q: ¿Por qué nunca hay que quitar el outline del foco sin reemplazarlo?
+    kind: por-que
+    a: "Porque quien navega con **teclado** pierde la referencia de dónde está: es como quitar el cursor del ratón. Si el outline por defecto no encaja con el diseño, se sustituye por otro estilo de foco **visible** con buen contraste (`:focus-visible`), nunca se elimina."
+    uses: []
+  - q: ¿Qué contraste mínimo pide WCAG AA para texto normal y grande?
+    kind: aplicar
+    a: "**4,5:1** para texto normal y **3:1** para texto grande (≥ 24px, o ≥ 18,66px en negrita). Iconos y bordes de componentes necesarios para entender la interfaz, 3:1. Se comprueba con las herramientas del navegador o un comprobador de contraste."
+    uses: []
+  - q: ¿Qué pasa si los errores del formulario solo se marcan en rojo?
+    kind: que-pasa-si
+    a: Quien no distingue el rojo, o usa lector de pantalla, no sabe qué falló. Añade **texto** del error junto al campo, asócialo al input (`aria-describedby`), mueve el foco o un resumen al principio, y no dependas solo del color.
+    uses: []
+  - q: Compara un validador automático con probar a mano.
+    kind: comparar
+    a: El **validador** detecta rápido problemas mecánicos (contraste, alt vacío, labels) pero solo una parte. **A mano** (teclado, lector de pantalla, zoom) descubres orden de foco ilógico, textos confusos o componentes inusables. Se necesitan ambos.
+    uses: []
+  - q: ¿Qué añadió WCAG 2.2 que afecta al trabajo diario de un frontend?
+    kind: por-que
+    a: "Entre otros: el foco **no puede quedar tapado** por elementos fijos (cabeceras, banners), los objetivos táctiles deben medir al menos **24×24 px** o tener espacio suficiente, y alternativas a gestos de **arrastre**. Son fáciles de cumplir si se tienen en cuenta al diseñar."
+    uses: []
+  - q: "Error común: añadir role=button y aria-label a todo «por si acaso»."
+    kind: error-comun
+    a: "ARIA mal usado **miente** al lector de pantalla: anuncia un botón que no responde al teclado o pisa un texto visible con otro nombre. La regla: elemento nativo primero, ARIA solo cuando HTML no alcance y probando con un lector."
+    uses: []
+sims:
+  - id: criterio-wcag
+    title: ¿Qué problema de accesibilidad es?
+    type: clasificar
+    prompt: Clasifica cada problema según lo que rompe.
+    categories:
+      - id: teclado
+        label: Teclado y foco
+      - id: percepcion
+        label: Percepción (contraste, color, alt)
+      - id: formularios
+        label: Formularios y nombres
+    items:
+      - text: El modal se abre pero el foco se queda detrás, en la página.
+        category: teclado
+        why: La gestión del foco es parte del uso con teclado.
+      - text: Texto gris claro sobre blanco con 2,8:1.
+        category: percepcion
+        why: No llega a 4,5:1.
+      - text: Un input solo tiene placeholder, sin label.
+        category: formularios
+        why: Sin nombre accesible persistente.
+      - text: Una gráfica sin texto alternativo ni resumen.
+        category: percepcion
+        why: Información solo visual.
+      - text: Un div clicable que no responde a Enter.
+        category: teclado
+        why: No operable con teclado.
+      - text: Errores del formulario indicados solo con borde rojo.
+        category: percepcion
+        why: Depende solo del color (y además debería asociarse al campo).

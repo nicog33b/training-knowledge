@@ -17,12 +17,52 @@
       "summary": "Comparar casos lado a lado supera a los métodos tradicionales; funciona mejor si el principio se da después de comparar."
     },
     {
+      "id": "amershi-2019-hai",
+      "title": "Guidelines for Human-AI Interaction",
+      "year": 2019,
+      "kind": "theory",
+      "verified": "secondary",
+      "summary": "18 pautas de Microsoft para diseñar productos con IA, agrupadas en inicio, durante, cuando se equivoca y con el tiempo."
+    },
+    {
       "id": "anthropic-admin-cost-api",
       "title": "Anthropic Admin API: Usage and Cost (analytics/cost y cost_report)",
       "year": 2026,
       "kind": "docs",
       "verified": "secondary",
       "summary": "Anthropic informa gasto e uso de la organización con clave de administrador, pero no expone el saldo de créditos restante."
+    },
+    {
+      "id": "anthropic-building-agents",
+      "title": "Building effective agents",
+      "year": 2024,
+      "kind": "docs",
+      "verified": "secondary",
+      "summary": "Distingue workflows (caminos fijos en código) de agentes (el modelo decide) y recomienda empezar por lo simple."
+    },
+    {
+      "id": "anthropic-context-engineering",
+      "title": "Effective context engineering for AI agents",
+      "year": 2025,
+      "kind": "docs",
+      "verified": "secondary",
+      "summary": "El contexto es un recurso finito; buscar el conjunto mínimo de tokens de alta señal y cargar el resto justo a tiempo."
+    },
+    {
+      "id": "anthropic-contextual-retrieval",
+      "title": "Introducing Contextual Retrieval",
+      "year": 2024,
+      "kind": "docs",
+      "verified": "secondary",
+      "summary": "Añadir a cada chunk un contexto generado y combinar embeddings + BM25 + reranking reduce mucho los fallos de recuperación."
+    },
+    {
+      "id": "anthropic-mcp-2024",
+      "title": "Introducing the Model Context Protocol",
+      "year": 2024,
+      "kind": "docs",
+      "verified": "secondary",
+      "summary": "MCP es un estándar abierto (nov 2024) para conectar asistentes de IA con datos y herramientas mediante servidores."
     },
     {
       "id": "anthropic-pricing-docs",
@@ -81,6 +121,14 @@
       "summary": "Intercalar ayuda (g≈0.42) sobre todo cuando las categorías son parecidas entre sí; con texto expositivo y palabras, con cautela."
     },
     {
+      "id": "brysbaert-2024-bionic",
+      "title": "No, Bionic Reading does not work",
+      "year": 2024,
+      "kind": "experiment",
+      "verified": "secondary",
+      "summary": "Poner en negrita el inicio de cada palabra (Bionic Reading) no acelera la lectura."
+    },
+    {
       "id": "cepeda-2008",
       "title": "Spacing effects in learning: A temporal ridgeline of optimal retention",
       "year": 2008,
@@ -121,6 +169,14 @@
       "summary": "Con aprendizaje activo se aprende más pero se SIENTE aprender menos; la sensación de aprendizaje no es un buen indicador."
     },
     {
+      "id": "dora-2025-ai",
+      "title": "DORA 2025 State of AI-assisted Software Development Report",
+      "year": 2025,
+      "kind": "other",
+      "verified": "secondary",
+      "summary": "Encuesta a ~5.000 profesionales; la IA amplifica lo que el equipo ya hace bien o mal."
+    },
+    {
       "id": "dunlosky-2013",
       "title": "Improving Students' Learning With Effective Learning Techniques: Promising Directions From Cognitive and Educational Psychology",
       "year": 2013,
@@ -151,6 +207,14 @@
       "kind": "review",
       "verified": "secondary",
       "summary": "Catálogo de 8 estrategias generativas (resumir, mapear, dibujar, imaginar, autoevaluarse, autoexplicar, enseñar, actuar)."
+    },
+    {
+      "id": "fiorella-zhang-2018-drawing",
+      "title": "Drawing boundary conditions for learning by drawing",
+      "year": 2018,
+      "kind": "review",
+      "verified": "secondary",
+      "summary": "Dibujar uno mismo lo que se aprende ayuda, pero depende de cuánta guía tenga el dibujo."
     },
     {
       "id": "freeman-2014",
@@ -191,6 +255,22 @@
       "kind": "meta-analysis",
       "verified": "abstract",
       "summary": "El supuesto efecto del rojo sobre el rendimiento intelectual desaparece al corregir sesgo de publicación."
+    },
+    {
+      "id": "google-2025-llm-migrations",
+      "title": "Migrating Code At Scale With LLMs At Google",
+      "year": 2025,
+      "kind": "experiment",
+      "verified": "secondary",
+      "summary": "Google migra código a gran escala con LLM dentro de un pipeline con verificación automática y revisión humana."
+    },
+    {
+      "id": "griffiths-2016-overlays",
+      "title": "The effect of coloured overlays and lenses on reading: a systematic review of the literature",
+      "year": 2016,
+      "kind": "systematic-review",
+      "verified": "secondary",
+      "summary": "Las superposiciones o lentes de color no tienen evidencia sólida para mejorar la lectura en dislexia."
     },
     {
       "id": "hardy-2026-autoscoring",
@@ -265,6 +345,14 @@
       "summary": "Por encima del tamaño crítico la velocidad de lectura es máxima en un rango amplio; la altura de x (no el cuerpo en puntos) es lo que cuenta."
     },
     {
+      "id": "lewis-2020-rag",
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+      "year": 2020,
+      "kind": "experiment",
+      "verified": "secondary",
+      "summary": "Artículo que acuña RAG; combina memoria paramétrica (seq2seq) con un índice denso de Wikipedia."
+    },
+    {
       "id": "literata-typetogether",
       "title": "Literata — tipografía serif para lectura larga en pantalla (OFL)",
       "year": 2019,
@@ -273,12 +361,28 @@
       "summary": "Serif gratuita (SIL OFL 1.1), variable, creada como fuente de lectura de Google Play Books para leer en cualquier pantalla y tamaño."
     },
     {
+      "id": "liu-2024-lost-in-middle",
+      "title": "Lost in the Middle: How Language Models Use Long Contexts",
+      "year": 2024,
+      "kind": "experiment",
+      "verified": "secondary",
+      "summary": "Los modelos usan peor la información situada en medio de un contexto largo (curva en U)."
+    },
+    {
       "id": "mayer-multimedia-chartered",
       "title": "How multimedia can improve learning and instruction (Chartered College of Teaching)",
       "year": 2021,
       "kind": "review",
       "verified": "secondary",
       "summary": "Resumen de principios multimedia de Mayer con medianas de tamaño de efecto; diseño sin ruido, segmentado y señalizado."
+    },
+    {
+      "id": "metr-2025-ai-devs",
+      "title": "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity",
+      "year": 2025,
+      "kind": "rct",
+      "verified": "secondary",
+      "summary": "En un ECA, desarrolladores expertos en sus propios repos tardaron un 19 % más con IA, aunque creían ir más rápido."
     },
     {
       "id": "moore-herzog-perkins-2013",
@@ -303,6 +407,14 @@
       "kind": "review",
       "verified": "full-text",
       "summary": "Con visión normal el modo claro rinde mejor casi siempre; el oscuro conviene como opción (preferencia, visión con medios oculares turbios)."
+    },
+    {
+      "id": "norris-ortega-2000",
+      "title": "Effectiveness of L2 instruction: A research synthesis and quantitative meta-analysis",
+      "year": 2000,
+      "kind": "meta-analysis",
+      "verified": "secondary",
+      "summary": "Meta-análisis de 49 muestras (1980–1998) sobre instrucción en segunda lengua; la instrucción explícita superó a la implícita."
     },
     {
       "id": "ollama-openai-compat",
@@ -337,6 +449,14 @@
       "summary": "Tabla oficial de precios de OpenAI: gpt-6-luna cuesta lo mismo que Claude Haiku 5.5 y gpt-6.1-sol lo mismo que Claude Sonnet 5.5."
     },
     {
+      "id": "owasp-llm-top10-2025",
+      "title": "OWASP Top 10 for LLM Applications 2025",
+      "year": 2024,
+      "kind": "docs",
+      "verified": "secondary",
+      "summary": "Lista de riesgos de seguridad de apps con LLM; la inyección de prompt (directa o indirecta) es LLM01."
+    },
+    {
       "id": "pan-carpenter-2023",
       "title": "Prequestioning and pretesting effects: a review of empirical research, theoretical perspectives, and implications for educational practice",
       "year": 2023,
@@ -369,6 +489,14 @@
       "summary": "Usar bancos de preguntas hechos por compañeros tiene un efecto pequeño-positivo o nulo en exámenes de medicina."
     },
     {
+      "id": "peng-2023-copilot",
+      "title": "The Impact of AI on Developer Productivity: Evidence from GitHub Copilot",
+      "year": 2023,
+      "kind": "rct",
+      "verified": "secondary",
+      "summary": "En una tarea acotada (servidor HTTP en JavaScript), quienes usaron Copilot terminaron un 55,8 % más rápido."
+    },
+    {
       "id": "piepenbrock-2013-polarity",
       "title": "Positive display polarity is advantageous for both younger and older adults",
       "year": 2013,
@@ -383,6 +511,14 @@
       "kind": "theory",
       "verified": "abstract",
       "summary": "Marco de diseño de PhET: guiar la exploración con affordances, restricciones, señales y feedback del propio simulador, sin instrucciones explícitas."
+    },
+    {
+      "id": "ragas-2024",
+      "title": "Ragas: Automated Evaluation of Retrieval Augmented Generation",
+      "year": 2024,
+      "kind": "other",
+      "verified": "secondary",
+      "summary": "Métricas de evaluación de RAG sin respuestas de referencia (fidelidad, relevancia de respuesta y de contexto)."
     },
     {
       "id": "rawson-dunlosky-successive-relearning",
@@ -433,6 +569,22 @@
       "summary": "Intentar el problema antes de la instrucción mejora el aprendizaje conceptual (efecto moderado), con matices de edad y tipo de habilidad."
     },
     {
+      "id": "spacex-ai-platform-jobs",
+      "title": "SpaceX job postings: Software Engineer (Platform Team) / AI Software Engineer (Vehicle Engineering)",
+      "year": 2026,
+      "kind": "other",
+      "verified": "secondary",
+      "summary": "Única evidencia pública de cómo SpaceX trabaja con IA en software: ofertas de empleo, no prácticas documentadas."
+    },
+    {
+      "id": "spada-tomita-2010",
+      "title": "Interactions Between Type of Instruction and Type of Language Feature: A Meta-Analysis",
+      "year": 2010,
+      "kind": "meta-analysis",
+      "verified": "secondary",
+      "summary": "Meta-análisis de 41 estudios sobre si la instrucción explícita o implícita funciona distinto con rasgos gramaticales simples y complejos."
+    },
+    {
       "id": "sundararajan-adesope-2020",
       "title": "Keep it Coherent: A Meta-Analysis of the Seductive Details Effect",
       "year": 2020,
@@ -473,6 +625,14 @@
       "summary": "Contraste mínimo 4,5:1 (texto grande 3:1; nivel AAA 7:1) y el diseño no debe romperse si el usuario sube el espaciado."
     },
     {
+      "id": "webdev-inp-2024",
+      "title": "Interaction to Next Paint is officially a Core Web Vital",
+      "year": 2024,
+      "kind": "docs",
+      "verified": "secondary",
+      "summary": "Desde el 12-mar-2024 INP reemplaza a FID en Core Web Vitals; bueno ≤200 ms en el percentil 75."
+    },
+    {
       "id": "weissgerber-brunmair-rummer-2021",
       "title": "Null and Void? Errors in Meta-analysis on Perceptual Disfluency and Recommendations to Improve Meta-analytical Reproducibility",
       "year": 2021,
@@ -495,6 +655,14 @@
       "kind": "meta-analysis",
       "verified": "abstract",
       "summary": "El feedback tiene efecto medio (d≈0.48) y depende mucho de qué información contiene."
+    },
+    {
+      "id": "wood-2018-tts",
+      "title": "Does Use of Text-to-Speech and Related Read-Aloud Tools Improve Reading Comprehension for Students With Reading Disabilities? A Meta-Analysis",
+      "year": 2018,
+      "kind": "meta-analysis",
+      "verified": "secondary",
+      "summary": "Escuchar el texto mientras se lee (texto a voz) mejora algo la comprensión de alumnos con dificultades lectoras."
     },
     {
       "id": "xie-zhou-liu-2018-disfluency",
@@ -530,6 +698,27 @@
     }
   ],
   "decisions": [
+    {
+      "id": "accesibilidad-con-evidencia",
+      "title": "Menú de accesibilidad: solo opciones con evidencia o derecho de acceso",
+      "summary": "Ajustes por persona (fuente, tamaño, medida, espaciado, contraste, movimiento, foco, lectura en voz alta, perfiles); sin superposiciones de color ni Bionic Reading.",
+      "status": "proposed",
+      "confidence": "medium",
+      "date": "2026-11-26",
+      "sources": [
+        "wood-2018-tts",
+        "griffiths-2016-overlays",
+        "brysbaert-2024-bionic",
+        "dyson-2004",
+        "wcag-22-contrast-spacing",
+        "zorzi-2012-letter-spacing",
+        "mayer-multimedia-chartered"
+      ],
+      "affects": [
+        "all",
+        "app:web"
+      ]
+    },
     {
       "id": "color-con-funcion-y-contraste",
       "title": "Color para señalar y contrastar, no por psicología del color",
@@ -656,6 +845,83 @@
       ]
     },
     {
+      "id": "frontend-ruta-por-niveles",
+      "title": "Ruta frontend junior → semi senior → senior con tareas completas y métricas actuales",
+      "summary": "Tres cursos encadenados (ruta) con heredado de glosario; cada nivel se organiza por tareas reales del puesto y usa métricas vigentes (INP, WCAG 2.2).",
+      "status": "proposed",
+      "confidence": "low",
+      "date": "2026-11-26",
+      "sources": [
+        "costa-2022-4cid",
+        "webdev-inp-2024",
+        "wcag-22-contrast-spacing",
+        "kirschner-sweller-clark-2006"
+      ],
+      "affects": [
+        "module:frontend-junior",
+        "module:frontend-semi-senior",
+        "module:frontend-senior"
+      ]
+    },
+    {
+      "id": "gramatica-explicita-con-contraste-l1",
+      "title": "Inglés: gramática explícita organizada como tiempo × aspecto y contrastada con el español",
+      "summary": "Enseñar los tiempos con reglas explícitas, la tabla 3×4 y equivalencias con el español, y practicarlos con clasificación de confundibles y predicciones en la línea de tiempo.",
+      "status": "proposed",
+      "confidence": "low",
+      "date": "2026-11-23",
+      "sources": [
+        "norris-ortega-2000",
+        "spada-tomita-2010"
+      ],
+      "affects": [
+        "module:english-basic-1"
+      ]
+    },
+    {
+      "id": "herramientas-por-curso-con-constructores",
+      "title": "Herramientas propias de cada curso creadas con constructores comunes",
+      "summary": "Un curso declara en YAML herramientas (calculadora, asistente de decisión, checklist, comparador, plantilla) que un constructor genérico valida y pinta; nada de HTML por curso.",
+      "status": "proposed",
+      "confidence": "low",
+      "date": "2026-11-26",
+      "sources": [
+        "podolefsky-moore-perkins-2013",
+        "chernikova-2020",
+        "costa-2022-4cid",
+        "kirschner-sweller-clark-2006"
+      ],
+      "affects": [
+        "all",
+        "package:tools",
+        "app:web"
+      ]
+    },
+    {
+      "id": "ingenieria-con-ia-verificar-antes-que-confiar",
+      "title": "Cursos de IA para desarrolladores: verificación, contexto y medición antes que confianza",
+      "summary": "Enseñar a trabajar con IA como lo documentan Google, Microsoft y Anthropic: contexto curado, workflows simples, verificación automática y medir; la sensación de rapidez engaña.",
+      "status": "proposed",
+      "confidence": "medium",
+      "date": "2026-11-26",
+      "sources": [
+        "metr-2025-ai-devs",
+        "peng-2023-copilot",
+        "dora-2025-ai",
+        "google-2025-llm-migrations",
+        "amershi-2019-hai",
+        "anthropic-building-agents",
+        "anthropic-context-engineering",
+        "anthropic-mcp-2024",
+        "spacex-ai-platform-jobs",
+        "owasp-llm-top10-2025"
+      ],
+      "affects": [
+        "module:ingenieria-con-ia-pro",
+        "module:ia-en-aplicaciones"
+      ]
+    },
+    {
       "id": "intercalar-conceptos-confundibles",
       "title": "Intercalar solo conceptos parecidos y confundibles",
       "summary": "Sesiones de práctica mezclan servicios/conceptos similares (SQS/SNS/Kinesis); no intercalar material no relacionado.",
@@ -758,6 +1024,24 @@
       ]
     },
     {
+      "id": "rag-hibrido-con-reranking-y-evals",
+      "title": "RAG: recuperación híbrida + reranking, contexto corto y bien ordenado, y evaluación por etapas",
+      "summary": "El curso de RAG enseña a medir recuperación y generación por separado, combinar BM25 y embeddings, rerankear y no confiar en meter más contexto.",
+      "status": "proposed",
+      "confidence": "medium",
+      "date": "2026-11-26",
+      "sources": [
+        "lewis-2020-rag",
+        "anthropic-contextual-retrieval",
+        "liu-2024-lost-in-middle",
+        "ragas-2024",
+        "owasp-llm-top10-2025"
+      ],
+      "affects": [
+        "module:rag"
+      ]
+    },
+    {
       "id": "repeticion-espaciada-fsrs",
       "title": "Repaso espaciado con planificador FSRS y relearning sucesivo",
       "summary": "Los ítems se reprograman con un algoritmo de repetición espaciada; el intervalo crece con el tiempo de retención deseado.",
@@ -854,6 +1138,28 @@
       ],
       "affects": [
         "package:practice"
+      ]
+    },
+    {
+      "id": "vistas-de-estudio-generadas",
+      "title": "Vistas de estudio generadas del mismo contenido: esquema, mapa, tarjetas, huecos, explícalo y pregunta previa",
+      "summary": "Cada subtema se puede transformar sin IA en vistas que obligan a recuperar o generar; el mapa automático es punto de partida y el alumno construye el suyo.",
+      "status": "proposed",
+      "confidence": "medium",
+      "date": "2026-11-26",
+      "sources": [
+        "schroeder-2018",
+        "fiorella-zhang-2018-drawing",
+        "fiorella-mayer-2016",
+        "dunlosky-2013",
+        "pan-carpenter-2023",
+        "bisra-2018",
+        "mayer-multimedia-chartered"
+      ],
+      "affects": [
+        "all",
+        "app:web",
+        "package:views"
       ]
     }
   ]

@@ -1,0 +1,13 @@
+id: frontend-senior
+title: Frontend Developer · Senior
+summary: 'Criterio de senior: estrategias de renderizado, arquitectura frontend y design systems, observabilidad, rendimiento a escala, decisiones técnicas documentadas y liderazgo técnico.'
+kind: framework
+locale: es
+tags:
+- frontend
+- arquitectura
+- liderazgo
+glossaries:
+- frontend-junior
+- frontend-semi-senior
+level: avanzado

@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué los tipos de TypeScript no te protegen de una API que devuelve otra forma?
+    kind: por-que
+    a: "Porque los tipos **desaparecen al compilar**: en ejecución nadie comprueba que el JSON coincida con tu interfaz. Si declaras `as Pedido`, solo silencias al compilador. Hay que **validar en el borde** con un esquema (zod) y derivar el tipo del esquema."
+    uses: []
+  - q: Compara any y unknown.
+    kind: comparar
+    a: "`any` **apaga** el compilador: puedes hacer cualquier cosa y los errores se propagan en silencio. `unknown` acepta cualquier valor pero **obliga a comprobarlo** antes de usarlo. Para datos de origen incierto, `unknown` + validación."
+    uses: []
+  - q: Modela con tipos el estado de una petición para que «datos y error a la vez» sea imposible.
+    kind: aplicar
+    a: "Una **unión discriminada**: `{ tipo: 'cargando' } | { tipo: 'ok'; datos: Pedido[] } | { tipo: 'error'; mensaje: string }`. Un `switch (estado.tipo)` estrecha el tipo en cada rama y TypeScript avisa si olvidas un caso. Con campos opcionales sueltos podrías representar estados absurdos."
+    uses: []
+  - q: ¿Qué pasa si activas strict en un proyecto grande que nunca lo tuvo?
+    kind: que-pasa-si
+    a: Aparecen cientos o miles de errores (nulls no comprobados, any implícitos) y arreglarlos cuesta semanas. Por eso se activa **desde el principio**; en proyectos existentes, por partes (por carpeta o regla a regla) con un plan.
+    uses: []
+  - q: ¿Por qué no anotar el tipo de cada variable?
+    kind: por-que
+    a: Porque TypeScript **infiere** la mayoría y las anotaciones redundantes son ruido que hay que mantener. Anota en los **bordes** (funciones públicas, props, respuestas de API, retornos de módulos), donde el tipo documenta un contrato.
+    uses: []
+  - q: "Error común: duplicar a mano un tipo que ya existe en otro sitio."
+    kind: error-comun
+    a: "Dos tipos que deberían ser iguales **divergen** con el tiempo sin que nadie se entere. Deriva con tipos de utilidad (`Pick`, `Omit`, `Partial`), `typeof` o `z.infer` desde el esquema: una sola fuente de verdad."
+    uses: []
+sims: []

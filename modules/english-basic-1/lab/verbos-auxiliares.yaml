@@ -1,0 +1,56 @@
+questions:
+  - q: ¿Por qué decimos que el inglés construye todos los tiempos con solo tres auxiliares?
+    kind: por-que
+    a: "Porque cada aspecto usa una pieza fija: **do** para preguntas y negaciones de los tiempos simples, **be** + -ing para los continuos (y be + participio para la pasiva), **have** + participio para los perfectos. Con *will* para el futuro, combinando esas piezas salen los 12 tiempos: *she has been working* = have + be + -ing."
+    uses: []
+  - q: En «Do you do your homework?», ¿qué hace cada do?
+    kind: comparar
+    a: "El primer **do** es **auxiliar**: no significa nada, solo forma la pregunta del Present Simple. El segundo **do** es el **verbo principal** (= hacer). Lo mismo con *have*: *Do you **have** a car?* (have = tener). En cambio, *be* como verbo principal nunca usa *do*: *Is she a doctor?*"
+    uses: []
+  - q: ¿Qué pasa con el resto del verbo cuando pasas «She has been working» al pasado?
+    kind: que-pasa-si
+    a: "Solo cambia el **primer auxiliar**: *has → had*. El resto (*been working*) queda igual: *She **had** been working*. Es la regla de oro: el primer elemento lleva el tiempo y la persona. Por eso basta mirar el primer auxiliar para saber si la frase está en presente, pasado o futuro."
+    uses: []
+  - q: "Error común: ¿por qué está mal «Does she is a teacher?»?"
+    kind: error-comun
+    a: "Porque **be** nunca necesita *do*: ya es un auxiliar y se invierte solo. La pregunta es ***Is** she a teacher?* y la negativa *She **isn't** a teacher*. *Do/does/did* solo aparece cuando la frase **no tiene ningún auxiliar** (Present Simple y Past Simple con verbos normales)."
+    uses: []
+  - q: ¿Qué auxiliar necesitas para decir «Ella está durmiendo», «Ella ha dormido» y «¿Ella duerme?»?
+    kind: aplicar
+    a: "*Está durmiendo* = continuo → **be**: *She **is** sleeping*. *Ha dormido* = perfecto → **have**: *She **has** slept*. *¿Duerme?* = Present Simple sin auxiliar → aparece **do** (con la -s): ***Does** she sleep?* Cada aspecto tiene su auxiliar y su forma del verbo detrás."
+    uses: []
+  - q: ¿Cuándo aparece do/does/did y cuándo no?
+    kind: por-que
+    a: "Aparece solo para **preguntas, negaciones y énfasis** cuando la frase **no tiene otro auxiliar**: Present Simple y Past Simple con verbos normales (*Do you work? / I didn't go*). Si ya hay *be*, *have*, *will* o un modal, ese auxiliar hace el trabajo: *Are you…? / Have you…? / Can you…?*"
+    uses: []
+sims:
+  - id: que-auxiliar
+    title: ¿do, be o have?
+    type: clasificar
+    prompt: Elige el auxiliar que falta en cada frase.
+    categories:
+      - id: do
+        label: do / does / did
+      - id: be
+        label: be (am, is, are, was…)
+      - id: have
+        label: have / has / had
+    items:
+      - text: ___ you like pizza?
+        category: do
+        why: "Present Simple sin auxiliar: Do you like…?"
+      - text: She ___ watching TV right now.
+        category: be
+        why: "Continuo: is + -ing."
+      - text: We ___ never seen snow.
+        category: have
+        why: "Perfecto: have + participio (seen)."
+      - text: He ___ not call me yesterday.
+        category: do
+        why: "Negativa de Past Simple: did not call."
+      - text: The car ___ made in Japan.
+        category: be
+        why: "Pasiva: was + participio."
+      - text: ___ they finished yet?
+        category: have
+        why: "Present Perfect: Have they finished?"

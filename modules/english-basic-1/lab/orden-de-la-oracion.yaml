@@ -1,0 +1,57 @@
+questions:
+  - q: ¿Por qué el inglés no puede omitir el sujeto como el español?
+    kind: por-que
+    a: "Porque el verbo inglés casi no tiene terminaciones: *work* sirve para I, you, we y they. En español *comemos* ya dice quién come; en inglés, sin sujeto no se sabe. Por eso hasta el clima o la hora llevan un sujeto vacío: ***It** is raining*, ***It** is late*. Y «hay» se dice ***There is / There are***."
+    uses: []
+  - q: ¿Qué pasa si dices «I like very much coffee»?
+    kind: que-pasa-si
+    a: "Se entiende, pero suena claramente extranjero: rompe el orden S + V + O, que exige que el **objeto vaya pegado al verbo**. Los adverbios como *very much* van después del objeto: *I like coffee **very much***. Lo mismo con *I speak English well* (no ~~*I speak well English*~~)."
+    uses: []
+  - q: Compara la posición de los adverbios de frecuencia con un verbo normal y con be.
+    kind: comparar
+    a: "Con un verbo normal, el adverbio va **antes** del verbo: *She **always** arrives late*. Con *be*, va **después**: *She is **always** late*. Con auxiliares, entre el auxiliar y el verbo: *I have **never** seen it*. Una regla rápida: después del primer auxiliar o de *be*, antes de cualquier otro verbo."
+    uses: []
+  - q: "Error común: ¿qué falla en «Is very important to practise»?"
+    kind: error-comun
+    a: "Falta el sujeto. El español dice *Es muy importante*, pero el inglés necesita un sujeto vacío: ***It** is very important to practise*. Este *it* no significa nada; solo ocupa el lugar del sujeto. Igual con *It's cold*, *It's 5 o'clock*, *It's 10 km from here*."
+    uses: []
+  - q: ¿Cómo ordenas «en el parque», «los domingos» y «juego al fútbol» en inglés?
+    kind: aplicar
+    a: "Sujeto + verbo + objeto + **lugar** + **tiempo**: *I play football in the park on Sundays*. El lugar va antes que el tiempo. Puedes adelantar el tiempo para darle énfasis (*On Sundays, I play football in the park*), pero el objeto nunca se separa del verbo."
+    uses: []
+  - q: ¿Por qué decimos «two red cars» y no «two reds cars» ni «two cars red»?
+    kind: por-que
+    a: "En inglés el adjetivo va **antes** del sustantivo y **no concuerda** en número ni género: es invariable. *A red car, two red cars, a red house*. El plural lo lleva solo el sustantivo. Es otra consecuencia de que el inglés casi no usa terminaciones y confía en el orden."
+    uses: []
+sims:
+  - id: orden-correcto
+    title: ¿Orden correcto?
+    type: clasificar
+    prompt: Decide si cada frase respeta el orden inglés.
+    categories:
+      - id: correcta
+        label: Correcta
+      - id: incorrecta
+        label: Incorrecta
+    items:
+      - text: I drink coffee every morning.
+        category: correcta
+        why: S + V + O + tiempo.
+      - text: Is raining in London.
+        category: incorrecta
+        why: "Falta el sujeto vacío: It is raining."
+      - text: She speaks very well English.
+        category: incorrecta
+        why: "El objeto va pegado al verbo: She speaks English very well."
+      - text: They are always happy.
+        category: correcta
+        why: Con be, el adverbio de frecuencia va después.
+      - text: We usually eat at home on Fridays.
+        category: correcta
+        why: Adverbio antes del verbo; lugar antes que tiempo.
+      - text: I have a car blue.
+        category: incorrecta
+        why: "El adjetivo va antes: a blue car."
+      - text: Are many people here.
+        category: incorrecta
+        why: "«Hay» es There are: There are many people here."

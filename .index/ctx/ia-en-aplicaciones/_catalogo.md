@@ -1,0 +1,14 @@
+# Catálogo del curso IA dentro de aplicaciones · conceptos complejos [ia-en-aplicaciones]
+Los conceptos que hay que entender para meter un LLM en un producto: tokens y contexto, muestreo, salidas estructuradas, herramientas, agentes, caché, costos, evals, seguridad y MCP.
+Subtemas (id: título — resumen). Pide uno con leer_subtema solo si la pregunta lo necesita.
+- tokens-y-contexto (1 · Cómo se comporta un LLM): Tokens y ventana de contexto — Qué es un token, por qué todo se cobra y se limita en tokens, qué cabe en la ventana de contexto y por qué más contexto no siempre es mejor (context rot).
+- muestreo-y-determinismo (1 · Cómo se comporta un LLM): Muestreo: temperatura, top-p y determinismo — Cómo elige el modelo el siguiente token, qué cambian temperatura y top-p, por qué la misma entrada da salidas distintas y cómo diseñar para eso.
+- prompts-de-sistema (1 · Cómo se comporta un LLM): Prompt de sistema e instrucciones — Roles (system, user, assistant), cómo escribir instrucciones a la altura justa, ejemplos (few-shot) y separar datos de instrucciones.
+- salidas-estructuradas (2 · Integrar el modelo en la app): Salidas estructuradas (JSON Schema) — Pedir JSON válido contra un esquema, validarlo siempre en el código y qué hacer cuando falla; por qué el formato estructurado no garantiza contenido correcto.
+- uso-de-herramientas (2 · Integrar el modelo en la app): Uso de herramientas (tool use / function calling) — El modelo no ejecuta nada: propone llamadas a funciones que tu código ejecuta. Diseño de herramientas, bucle de llamadas y errores típicos.
+- agentes-y-workflows (2 · Integrar el modelo en la app): Workflows y agentes — Workflows (caminos fijos en código) frente a agentes (el modelo decide el siguiente paso); patrones comunes y cuándo compensa cada uno.
+- mcp (2 · Integrar el modelo en la app): MCP: Model Context Protocol — Estándar abierto para conectar asistentes con herramientas y datos mediante servidores; qué expone un servidor (herramientas, recursos, prompts) y sus riesgos.
+- costos-latencia-y-cache (3 · Llevarlo a producción): Costos, latencia y caché de prompts — Cómo se calcula el costo por petición, qué pesa en la latencia, el caché de prefijos y cómo elegir modelo por función.
+- streaming-y-ux (3 · Llevarlo a producción): Streaming y experiencia de usuario con IA — Mostrar la respuesta mientras se genera, comunicar incertidumbre, permitir corregir y las pautas de interacción humano-IA de Microsoft.
+- evals (3 · Llevarlo a producción): Evals: medir una app con LLM — Conjuntos de prueba, métricas deterministas y LLM como juez, regresiones al cambiar prompt o modelo; por qué sin evals no hay ingeniería.
+- seguridad-y-guardrails (3 · Llevarlo a producción): Seguridad: inyección de prompt y guardarraíles — Inyección directa e indirecta (OWASP LLM01), fuga de datos, mínimo privilegio en herramientas y confirmación humana para acciones con efecto.

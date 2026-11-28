@@ -1,0 +1,62 @@
+questions:
+  - q: ¿Por qué fetch no lanza error con un 404?
+    kind: por-que
+    a: Porque para `fetch` una respuesta 404 o 500 **es una respuesta válida** del servidor; solo rechaza la promesa si falla la **red** (sin conexión, CORS bloqueado). Hay que comprobar `response.ok` o `response.status` y tratar los errores HTTP a mano.
+    uses: []
+  - q: Compara 401 y 403.
+    kind: comparar
+    a: "**401 Unauthorized**: el servidor no sabe **quién eres** (falta o caducó la autenticación): pide iniciar sesión. **403 Forbidden**: sabe quién eres pero **no tienes permiso**: volver a iniciar sesión no lo arregla."
+    uses: []
+  - q: Diseña los estados de una lista que carga datos de una API.
+    kind: aplicar
+    a: '**Cargando** (esqueleto o spinner), **éxito** con datos, **vacío** ("Aún no hay pedidos" con una acción) y **error** (mensaje claro + reintentar). Además, desactiva acciones mientras se envía para evitar duplicados.'
+    uses: []
+  - q: ¿Qué pasa si un buscador hace una petición por cada tecla sin cancelar las anteriores?
+    kind: que-pasa-si
+    a: "Muchas peticiones innecesarias y **condiciones de carrera**: una respuesta antigua puede llegar después de la nueva y mostrar resultados equivocados. Usa **debounce** y `AbortController` para cancelar la petición anterior."
+    uses: []
+  - q: Te sale un error de CORS. ¿Dónde se arregla?
+    kind: por-que
+    a: "En el **servidor**: debe responder con cabeceras CORS (`Access-Control-Allow-Origin`…) que permitan tu origen, o se usa un proxy del mismo origen. El navegador bloquea por seguridad; desactivarlo en tu navegador solo esconde el problema a ti."
+    uses: []
+  - q: "Error común: usar GET para una acción que modifica datos."
+    kind: error-comun
+    a: 'GET debe ser **seguro** (sin efectos): navegadores, cachés y prefetch pueden repetirlo o lanzarlo solos. Un enlace "borrar" con GET puede ejecutarse sin querer. Para crear, cambiar o borrar, usa POST, PUT/PATCH o DELETE.'
+    uses: []
+sims:
+  - id: que-codigo-es
+    title: ¿Qué código de estado devolverías?
+    type: clasificar
+    prompt: Elige el código HTTP más adecuado para cada respuesta de la API.
+    categories:
+      - id: c200
+        label: 200 OK
+      - id: c201
+        label: 201 Created
+      - id: c400
+        label: 400 Bad Request
+      - id: c401
+        label: 401 Unauthorized
+      - id: c403
+        label: 403 Forbidden
+      - id: c404
+        label: 404 Not Found
+    items:
+      - text: POST /pedidos creó el pedido y devuelve su id.
+        category: c201
+        why: Se creó un recurso.
+      - text: El email enviado no tiene formato válido.
+        category: c400
+        why: Datos de entrada incorrectos.
+      - text: El token de sesión caducó.
+        category: c401
+        why: "No autenticado: volver a iniciar sesión."
+      - text: Un usuario normal intenta borrar a otro usuario.
+        category: c403
+        why: Autenticado pero sin permiso.
+      - text: GET /productos/999 y ese producto no existe.
+        category: c404
+        why: Recurso inexistente.
+      - text: GET /productos devuelve la lista.
+        category: c200
+        why: Lectura correcta.

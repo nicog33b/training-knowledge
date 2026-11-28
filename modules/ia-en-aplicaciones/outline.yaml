@@ -1,0 +1,21 @@
+sections:
+  - id: fundamentos
+    title: 1 · Cómo se comporta un LLM
+    topics:
+      - {id: tokens-y-contexto, title: "Tokens y ventana de contexto", summary: "Qué es un token, por qué todo se cobra y se limita en tokens, qué cabe en la ventana de contexto y por qué más contexto no siempre es mejor (context rot)."}
+      - {id: muestreo-y-determinismo, title: "Muestreo: temperatura, top-p y determinismo", summary: "Cómo elige el modelo el siguiente token, qué cambian temperatura y top-p, por qué la misma entrada da salidas distintas y cómo diseñar para eso."}
+      - {id: prompts-de-sistema, title: "Prompt de sistema e instrucciones", summary: "Roles (system, user, assistant), cómo escribir instrucciones a la altura justa, ejemplos (few-shot) y separar datos de instrucciones."}
+  - id: integracion
+    title: 2 · Integrar el modelo en la app
+    topics:
+      - {id: salidas-estructuradas, title: "Salidas estructuradas (JSON Schema)", summary: "Pedir JSON válido contra un esquema, validarlo siempre en el código y qué hacer cuando falla; por qué el formato estructurado no garantiza contenido correcto."}
+      - {id: uso-de-herramientas, title: "Uso de herramientas (tool use / function calling)", summary: "El modelo no ejecuta nada: propone llamadas a funciones que tu código ejecuta. Diseño de herramientas, bucle de llamadas y errores típicos."}
+      - {id: agentes-y-workflows, title: "Workflows y agentes", summary: "Workflows (caminos fijos en código) frente a agentes (el modelo decide el siguiente paso); patrones comunes y cuándo compensa cada uno."}
+      - {id: mcp, title: "MCP: Model Context Protocol", summary: "Estándar abierto para conectar asistentes con herramientas y datos mediante servidores; qué expone un servidor (herramientas, recursos, prompts) y sus riesgos."}
+  - id: produccion
+    title: 3 · Llevarlo a producción
+    topics:
+      - {id: costos-latencia-y-cache, title: "Costos, latencia y caché de prompts", summary: "Cómo se calcula el costo por petición, qué pesa en la latencia, el caché de prefijos y cómo elegir modelo por función."}
+      - {id: streaming-y-ux, title: "Streaming y experiencia de usuario con IA", summary: "Mostrar la respuesta mientras se genera, comunicar incertidumbre, permitir corregir y las pautas de interacción humano-IA de Microsoft."}
+      - {id: evals, title: "Evals: medir una app con LLM", summary: "Conjuntos de prueba, métricas deterministas y LLM como juez, regresiones al cambiar prompt o modelo; por qué sin evals no hay ingeniería."}
+      - {id: seguridad-y-guardrails, title: "Seguridad: inyección de prompt y guardarraíles", summary: "Inyección directa e indirecta (OWASP LLM01), fuga de datos, mínimo privilegio en herramientas y confirmación humana para acciones con efecto."}

@@ -1,0 +1,26 @@
+questions:
+  - q: Compara bi-encoder y cross-encoder.
+    kind: comparar
+    a: "El **bi-encoder** codifica consulta y documento por separado: los documentos se precalculan y la búsqueda es rapidísima, pero no ve la interacción entre palabras. El **cross-encoder** lee ambos juntos: mucho más preciso, pero hay que ejecutarlo por cada par, así que solo se usa sobre pocos candidatos."
+    uses: []
+  - q: ¿Por qué el reranking va después de una recuperación amplia y no en su lugar?
+    kind: por-que
+    a: Porque el cross-encoder es demasiado caro para puntuar todo el corpus en cada consulta. La primera etapa barata asegura **recall** (que el correcto esté entre los candidatos) y el reranker aporta **precisión** sobre esos 50–150. Cada etapa hace lo que mejor sabe hacer.
+    uses: []
+  - q: ¿Qué pasa si el fragmento correcto no está entre los 100 candidatos?
+    kind: que-pasa-si
+    a: "El reranker **no puede rescatarlo**: solo reordena lo que recibe. Hay que mejorar la primera etapa (híbrida, chunking, contexto en chunks, transformar consultas) y medir el **recall@100** por separado del resultado final."
+    uses: []
+  - q: El reranker añade 300 ms y tu objetivo de latencia es estricto. ¿Qué ajustas?
+    kind: aplicar
+    a: Reduce el número de **candidatos** a rerankear (de 150 a 50), prueba un reranker más **ligero**, ejecuta la reescritura de consulta en paralelo y usa caché para consultas repetidas. Mide con evals cuánto recall/precisión pierdes con cada ajuste antes de decidir.
+    uses: []
+  - q: ¿Por qué el reranking puede abaratar las respuestas aunque cueste por consulta?
+    kind: por-que
+    a: Porque con mejor **precisión** puedes mandar **menos fragmentos** al LLM (5 en vez de 20) sin perder el correcto. Menos tokens de entrada en el modelo grande, menos ruido y, a menudo, respuestas mejores. El costo del reranker se compensa con el ahorro en el prompt.
+    uses: []
+  - q: "Error común: usar un LLM grande como reranker de 200 candidatos en cada consulta."
+    kind: error-comun
+    a: "Funciona, pero es **lento y caro**: miles de tokens por consulta y segundos de latencia. Un **cross-encoder** dedicado suele dar precisión similar a una fracción del costo. El LLM como reranker tiene sentido con pocos candidatos o criterios muy específicos."
+    uses: []
+sims: []

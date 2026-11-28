@@ -1,0 +1,54 @@
+questions:
+  - q: ¿Por qué «I'm knowing the answer» suena mal?
+    kind: error-comun
+    a: "Porque *know* es un **verbo de estado**: describe un estado mental, no una acción en progreso, y normalmente no va en continuo. Se dice *I **know** the answer*. Lo mismo con *like, want, need, believe, understand, own, cost*: ~~*I'm wanting a coffee*~~ → *I **want** a coffee*."
+    uses: []
+  - q: Compara «I think it's good» con «I'm thinking about it».
+    kind: comparar
+    a: "*Think* tiene dos sentidos. ***I think*** = **opino** (estado): no va en continuo. ***I'm thinking*** = **estoy pensando**, considerando algo (actividad): sí va en continuo. Pasa lo mismo con *have*: *I have a car* (poseer) vs *I'm having lunch* (actividad)."
+    uses: []
+  - q: ¿Qué cambia entre «I work in a bank» y «I'm working in a bank»?
+    kind: comparar
+    a: "***I work in a bank*** presenta tu trabajo como algo **permanente o habitual**. ***I'm working in a bank*** lo presenta como **temporal**: por ahora, quizá un contrato de unos meses. El continuo no solo significa «en este segundo»; también significa «situación temporal alrededor de ahora»."
+    uses: []
+  - q: ¿Por qué el Present Continuous puede hablar del futuro?
+    kind: por-que
+    a: "Porque se usa para **planes ya acordados**, con fecha, hora o con otra persona: *I'm meeting Ana tomorrow*, *We're flying to Lima on Friday*. La idea es que el plan «ya está en marcha» (reservado, agendado). Sin marcador de tiempo futuro, se entiende como «ahora»."
+    uses: []
+  - q: ¿Qué transmite «You're always losing your keys!»?
+    kind: que-pasa-si
+    a: "Una **queja** por un hábito que molesta. *Always* con Present Continuous expresa irritación, no solo frecuencia. Compara: *You always lose your keys* (hecho neutro) vs *You're always losing your keys!* (me molesta). Es frecuente en conversación."
+    uses: []
+  - q: Di en inglés «Ahora mismo estoy cocinando y mis hijos están viendo la tele».
+    kind: aplicar
+    a: "*Right now **I'm cooking** and my kids **are watching** TV*. Cada sujeto lleva su forma de *be* (*am* / *are*) + **-ing**. Fíjate en la ortografía: *cook → cooking*, *watch → watching*. Si fuera una costumbre (*cocino y ellos ven la tele por las tardes*), sería Present Simple."
+    uses: []
+sims:
+  - id: estado-o-accion
+    title: ¿Puede ir en continuo?
+    type: clasificar
+    prompt: Decide si cada frase en continuo es correcta.
+    categories:
+      - id: correcta
+        label: Correcta en continuo
+      - id: estado
+        label: "Incorrecta: verbo de estado"
+    items:
+      - text: I'm having dinner with my parents.
+        category: correcta
+        why: have = comer/tomar es actividad.
+      - text: She's owning two houses.
+        category: estado
+        why: "own es posesión: She owns two houses."
+      - text: We're thinking of moving.
+        category: correcta
+        why: think = considerar es actividad.
+      - text: This bag is costing 50 dollars.
+        category: estado
+        why: "cost es estado: It costs 50 dollars."
+      - text: He's being very rude today.
+        category: correcta
+        why: be en continuo = comportarse así ahora.
+      - text: I'm not understanding you.
+        category: estado
+        why: "understand es estado mental: I don't understand you."

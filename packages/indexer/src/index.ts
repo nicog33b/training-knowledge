@@ -45,6 +45,7 @@ export function buildIndex(data: Loaded, research?: LoadedResearch): BuiltIndex 
       terms: [...new Set(findTerms(stripCode(t.body), matcher).map((h) => h.id))].sort(),
       questions: t.lab.questions.length,
       sims: t.lab.sims.map((s) => `${s.type}:${s.id}`),
+      tools: m.tools.filter((x) => x.topics.includes(t.id)).map((x) => `${x.builder}:${x.id}`),
     }));
     const idx: ModuleIndex = {
       id: m.manifest.id,
@@ -55,6 +56,7 @@ export function buildIndex(data: Loaded, research?: LoadedResearch): BuiltIndex 
       topics,
       sections: m.outline.sections.map((s) => ({ id: s.id, title: s.title, topics: s.topics.map((t) => t.id) })),
       ownTerms: m.ownGlossary.map((t) => termId(t.term)).sort(),
+      tools: m.tools.map((x) => `${x.builder}:${x.id}`),
     };
     modules[idx.id] = idx;
     contexts[idx.id] = renderContext(idx, research ? decisionsFor(research, idx.id) : []);
@@ -75,7 +77,9 @@ export function buildIndex(data: Loaded, research?: LoadedResearch): BuiltIndex 
       done: m.topics.filter((t) => t.status === 'done').length,
       planned: Math.max(m.sections.reduce((n, s) => n + s.topics.length, 0), m.topics.length),
       terms: m.ownTerms.length,
+      tools: m.tools.length,
     })),
+    paths: (data.paths ?? []).map((p) => ({ id: p.id, title: p.title, modules: p.steps.map((s) => s.module) })),
   };
   return { root, modules, contexts, catalogs, topicContexts, research: research && buildResearchIndex(research) };
 }
@@ -127,6 +131,8 @@ export function buildTopicContext(m: LoadedModule, topicId: string): string {
   if (terms.length) out.push('## Glosario usado', ...terms.map((g) => `- ${g.term}: ${g.definition}`), '');
   if (t.lab.questions.length) out.push('## Preguntas sugeridas al alumno', ...t.lab.questions.map((q) => `- (${q.kind}) ${q.q}`), '');
   if (t.lab.sims.length) out.push('## Simulaciones del subtema', ...t.lab.sims.map((s) => `- ${s.type}: ${s.title}`), '');
+  const tools = m.tools.filter((x) => x.topics.includes(t.id));
+  if (tools.length) out.push('## Herramientas del curso en este subtema', ...tools.map((x) => `- ${x.builder}: ${x.title} — ${x.summary}`), '');
   return out.join('\n');
 }
 
@@ -135,7 +141,7 @@ function renderContext(m: ModuleIndex, decisions: { id: string; status: string; 
     `# ${m.title} [${m.id}] (${m.kind})`,
     m.summary,
     '',
-    `Archivos: modules/${m.id}/{module.yaml,glossary.yaml,topics/*.md,lab/*.yaml}`,
+    `Archivos: modules/${m.id}/{module.yaml,glossary.yaml,topics/*.md,lab/*.yaml,tools/*.yaml}`,
     `Contexto para IA por subtema: .index/ctx/${m.id}/<subtema>.md (+ _catalogo.md)`,
     '',
     '## Subtemas',
@@ -145,9 +151,11 @@ function renderContext(m: ModuleIndex, decisions: { id: string; status: string; 
         (t.status !== 'done' ? ` {${t.status}}` : '') +
         (t.requires.length ? ` [req: ${t.requires.join(',')}]` : '') +
         (t.terms.length ? ` [términos: ${t.terms.join(',')}]` : '') +
-        (t.questions || t.sims.length ? ` [lab: ${t.questions} preguntas${t.sims.length ? `, sims ${t.sims.join(',')}` : ''}]` : ''),
+        (t.questions || t.sims.length ? ` [lab: ${t.questions} preguntas${t.sims.length ? `, sims ${t.sims.join(',')}` : ''}]` : '') +
+        (t.tools.length ? ` [tools: ${t.tools.join(',')}]` : ''),
     ),
     '',
+    ...(m.tools.length ? [`## Herramientas del curso (${m.tools.length})`, m.tools.join(', '), ''] : []),
     `## Glosario propio (${m.ownTerms.length})`,
     m.ownTerms.join(', ') || '(vacío)',
     '',

@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué confirmar que el test falla antes de implementar?
+    kind: por-que
+    a: "Porque un test que **pasa sin implementación** no prueba nada: puede estar mal escrito, probar otra cosa o no ejecutarse. Verlo fallar por la razón esperada demuestra que el oráculo detecta la ausencia del comportamiento."
+    uses: []
+  - q: ¿Qué pasa si no fijas los tests y el agente no consigue el verde?
+    kind: que-pasa-si
+    a: Puede **modificar los tests**, saltarlos o añadir casos especiales que detectan la entrada del test. El verde ya no significa nada. Prohíbe explícitamente tocar los tests y revisa en el diff cualquier cambio en archivos de test.
+    uses: []
+  - q: Compara un test que comprueba «no lanza error» con uno que comprueba valores concretos.
+    kind: comparar
+    a: '"No lanza error" pasa con casi cualquier implementación, incluida una vacía. Comprobar **valores concretos**, casos límite y propiedades obliga a implementar el comportamiento real. Los tests generados por IA tienden a lo primero: revísalos.'
+    uses: []
+  - q: Te piden arreglar un bug reportado. ¿Cómo usas al agente con TDD?
+    kind: aplicar
+    a: 1) Pide un test que **reproduzca** el bug y comprueba que falla. 2) Fija el test. 3) Pide el arreglo mínimo hasta verde, ejecutando toda la suite para no romper otra cosa. 4) Revisa el diff. El test queda como protección contra regresiones.
+    uses: []
+  - q: ¿Por qué los tests hacen convergente el bucle del agente?
+    kind: por-que
+    a: Porque cada ejecución da **feedback preciso** (qué falla y dónde) que el agente usa para el siguiente intento. Sin oráculo, el bucle no tiene dirección; con él, cada iteración se acerca al objetivo, lo que permite delegar tareas más largas.
+    uses: []
+  - q: "Error común: llenar todo de mocks para que los tests del agente pasen rápido."
+    kind: error-comun
+    a: "Con mocks excesivos los tests prueban que el código llama a los mocks, no que el sistema funciona: **todo verde y nada integrado**. Combina tests unitarios con tests de integración reales en los puntos críticos."
+    uses: []
+sims: []

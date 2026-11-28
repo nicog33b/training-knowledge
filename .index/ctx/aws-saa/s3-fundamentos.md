@@ -41,6 +41,8 @@ Requiere versionado en origen y destino.
 
 ## Glosario usado
 - Latencia: Tiempo que tarda una petición en recibir respuesta.
+- JSON: Formato de texto para datos estructurados (objetos, listas, números, cadenas) que entienden casi todos los lenguajes.
+- HTTP: Protocolo de petición-respuesta de la web: el cliente envía un método (GET, POST…) a una URL y el servidor responde con un código de estado y un cuerpo.
 - Región: Ubicación geográfica de AWS compuesta por varias Zonas de Disponibilidad aisladas.
 - IAM: Servicio global de AWS para gestionar identidades (usuarios, grupos, roles) y sus permisos mediante políticas.
 - Rol IAM: Identidad sin credenciales permanentes que puede asumir un servicio, otra cuenta o usuario; entrega credenciales temporales.
@@ -69,3 +71,6 @@ Requiere versionado en origen y destino.
 - (que-pasa-si) ¿Qué pasa si Block Public Access está activado y añades una bucket policy que hace público el bucket?
 - (comparar) Compara bucket policies y ACL para dar acceso a S3.
 - (por-que) ¿Por qué después de escribir un objeto en S3 puedes leerlo al instante con su contenido nuevo?
+
+## Herramientas del curso en este subtema
+- decision: ¿Qué almacenamiento de AWS? — Asistente para elegir entre S3, EBS, EFS y FSx según el tipo de acceso y quién lo comparte.

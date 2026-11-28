@@ -1,0 +1,20 @@
+sections:
+  - id: web-base
+    title: 1 · HTML y CSS que aguantan
+    topics:
+      - {id: html-semantico, title: "HTML semántico", summary: "Elegir el elemento por su significado (header, nav, main, button, label…): accesibilidad, SEO y comportamiento gratis del navegador."}
+      - {id: cascada-y-especificidad, title: "La cascada, la especificidad y el box model", summary: "Por qué un estilo gana a otro (origen, especificidad, orden), herencia, box-sizing y cómo evitar guerras de !important."}
+      - {id: flexbox-y-grid, title: "Maquetación con Flexbox y Grid", summary: "Flexbox para una dimensión, Grid para dos; alinear, repartir espacio y plantillas sin hacks."}
+      - {id: responsive, title: "Diseño responsive", summary: "Mobile first, viewport, unidades relativas, media queries y container queries, imágenes adaptables."}
+  - id: javascript
+    title: 2 · JavaScript del navegador
+    topics:
+      - {id: javascript-esencial, title: "JavaScript esencial: valores, ámbito y closures", summary: "Tipos y comparación, let/const, ámbito de bloque, funciones como valores, closures y referencias frente a copias."}
+      - {id: dom-y-eventos, title: "DOM y eventos", summary: "Seleccionar y modificar el DOM, escuchar eventos, propagación y delegación, y no bloquear el hilo principal."}
+      - {id: asincronia-y-event-loop, title: "Asincronía: event loop, promesas y async/await", summary: "Cómo JavaScript hace varias cosas con un solo hilo: pila, cola de tareas y microtareas; promesas, async/await y manejo de errores."}
+      - {id: http-y-fetch, title: "HTTP y fetch", summary: "Métodos, códigos de estado, cabeceras y JSON; consumir una API con fetch, manejar errores, estados de carga y CORS a nivel básico."}
+  - id: oficio
+    title: 3 · El oficio en equipo
+    topics:
+      - {id: git-y-colaboracion, title: "Git y colaboración", summary: "Commits pequeños con buenos mensajes, ramas, pull requests, resolver conflictos y revisar código de otros."}
+      - {id: accesibilidad-basica, title: "Accesibilidad básica (WCAG 2.2)", summary: "Teclado, foco visible, textos alternativos, contraste, formularios con label y probar con lector de pantalla: lo mínimo que todo junior debe cumplir."}

@@ -1,0 +1,61 @@
+questions:
+  - q: ¿Por qué el inglés no tiene una forma de pretérito imperfecto?
+    kind: por-que
+    a: "Porque el inglés reparte esas ideas entre **aspecto y expresiones**: la acción **en curso** va en Past Continuous (*was sleeping*), el **hábito pasado** con *used to* o *would* (*used to play*) y los **estados** en Past Simple (*was, had*). El imperfecto español junta todo eso en una forma; el inglés obliga a elegir según el significado."
+    uses: []
+  - q: Compara «used to» y «would» para hábitos pasados.
+    kind: comparar
+    a: "***used to*** sirve para **acciones y estados** y subraya que **ya no** ocurre: *I used to live in Quito*, *I used to smoke*. ***would*** solo sirve para **acciones repetidas**, no estados (~~*I would live in Quito*~~), y suele aparecer en narraciones nostálgicas cuando el contexto pasado ya está claro: *Every summer we would go to the beach*."
+    uses: []
+  - q: ¿Qué cambia entre «I used to get up early» y «I'm used to getting up early»?
+    kind: comparar
+    a: "***used to + base*** = hábito pasado que ya no existe: «antes me levantaba temprano». ***be used to + -ing*** = **estar acostumbrado** (ahora): «estoy acostumbrado a levantarme temprano». La segunda puede ir en cualquier tiempo: *I'll get used to it* (me acostumbraré)."
+    uses: []
+  - q: "Error común: ¿por qué está mal «Did you used to play?»?"
+    kind: error-comun
+    a: "Porque tras *did* el verbo va en base, y la base es ***use to*** (sin d): *Did you **use to** play?* y *I didn't **use to** play*. En la afirmativa sí es *used to*: *I used to play*. En la pronunciación casi no se nota, pero en la escritura sí."
+    uses: []
+  - q: Traduce «Cuando era niño, vivía en el campo y cada mañana iba al colegio en bici».
+    kind: aplicar
+    a: "*When I **was** a child, I **used to live** (o I **lived**) in the countryside and every morning I **would ride** (o I **rode** / **used to ride**) my bike to school*. *era* = estado → *was*. *vivía* = estado habitual → *used to live / lived* (no *would*). *iba* = acción repetida → *would ride / used to ride / rode*."
+    uses: []
+  - q: ¿Qué pasa si traduces «Cuando llamaste, me duchaba» con used to?
+    kind: que-pasa-si
+    a: "Cambias el significado: *used to* indica **costumbre**, no una acción en curso en un momento concreto. Aquí el imperfecto significa «estaba en medio de»: *When you called, I **was having** a shower*. La pregunta clave: ¿estaba en progreso en ese momento? → Past Continuous."
+    uses: []
+sims:
+  - id: que-imperfecto
+    title: ¿Cómo se dice este imperfecto?
+    type: clasificar
+    prompt: Elige la forma inglesa más natural para el verbo en negrita (imperfecto).
+    categories:
+      - id: continuo
+        label: Past Continuous
+      - id: used-to
+        label: used to
+      - id: would
+        label: would
+      - id: simple
+        label: Past Simple
+    items:
+      - text: Cuando sonó el teléfono, «dormía».
+        category: continuo
+        why: "Acción en curso: I was sleeping."
+      - text: Antes «fumaba», pero lo dejé.
+        category: used-to
+        why: "Hábito que ya no ocurre: I used to smoke."
+      - text: Los domingos el abuelo nos «contaba» cuentos (recuerdo nostálgico).
+        category: would
+        why: "Acción repetida en narración: he would tell us stories."
+      - text: La casa «era» enorme.
+        category: simple
+        why: "Estado/descripción: The house was huge."
+      - text: Mientras «cocinaba», escuchaba la radio.
+        category: continuo
+        why: "Acciones simultáneas en curso: While I was cooking…"
+      - text: «Tenía» el pelo largo de joven (ya no).
+        category: used-to
+        why: "Estado pasado que ya no es así; would no sirve con estados: I used to have long hair."
+      - text: «Quería» preguntarte algo (cortesía).
+        category: simple
+        why: "Cortesía: I wanted to ask you something."

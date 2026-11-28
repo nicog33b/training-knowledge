@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Para qué sirve realmente useEffect?
+    kind: por-que
+    a: "Para **sincronizar** el componente con un sistema **externo a React**: suscripciones, conexiones, temporizadores, widgets de terceros. No es para derivar datos ni para reaccionar a eventos del usuario: eso va en el render o en el manejador."
+    uses: []
+  - q: ¿Qué pasa si omites una dependencia que el efecto usa?
+    kind: que-pasa-si
+    a: "El efecto se queda con el **valor antiguo** (closure obsoleta) y no se vuelve a ejecutar cuando cambia: datos de otro usuario, conexión a la sala equivocada. Las dependencias deben incluir todo lo reactivo; si eso dispara demasiado, el problema es el diseño del efecto."
+    uses: []
+  - q: Compara filtrar una lista con un efecto + estado o al renderizar.
+    kind: comparar
+    a: "Con **efecto**: render con datos viejos, efecto, setState, otro render; dos fuentes de verdad. **Al renderizar**: `const filtrados = items.filter(...)`, un solo render y siempre coherente. Derivar datos nunca necesita efecto."
+    uses: []
+  - q: Al hacer clic en «Comprar» hay que enviar un evento de analítica. ¿Efecto o manejador?
+    kind: aplicar
+    a: 'En el **manejador** del clic: es la consecuencia de una **acción del usuario**, no de mostrar algo en pantalla. Un efecto que vigila un estado "comprado" se dispararía también al volver a montar y es más difícil de razonar.'
+    uses: []
+  - q: ¿Por qué React monta, desmonta y vuelve a montar en desarrollo?
+    kind: por-que
+    a: "Para **revelar efectos sin limpieza**: si conectar dos veces deja dos conexiones abiertas, falta la función de limpieza. En producción solo monta una vez, pero un efecto sin limpieza fallará igualmente al cambiar dependencias o al navegar."
+    uses: []
+  - q: "Error común: cadenas de efectos que actualizan estados que disparan otros efectos."
+    kind: error-comun
+    a: Producen renders extra, estados intermedios incoherentes y bugs difíciles de seguir. Casi siempre se puede **calcular** en el render o hacer todo en el **manejador** del evento que inició el cambio.
+    uses: []
+sims: []

@@ -50,6 +50,7 @@ Puedes exigir longitud mínima, caracteres, rotación y reutilización. **MFA** 
 - s3-fundamentos: S3: fundamentos y seguridad — Buckets, objetos, bucket policies, versionado, replicación y cifrado. [secciones: S3: fundamentos y seguridad · Buckets y objetos · Seguridad y acceso · Versionado · Replicación · Cifrado]
 
 ## Glosario usado
+- JSON: Formato de texto para datos estructurados (objetos, listas, números, cadenas) que entienden casi todos los lenguajes.
 - Región: Ubicación geográfica de AWS compuesta por varias Zonas de Disponibilidad aisladas.
 - IAM: Servicio global de AWS para gestionar identidades (usuarios, grupos, roles) y sus permisos mediante políticas.
 - Usuario root: Identidad creada con la cuenta de AWS con acceso total e irrestricto; debe protegerse con MFA y usarse lo mínimo.

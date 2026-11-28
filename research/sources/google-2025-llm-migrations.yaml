@@ -1,0 +1,26 @@
+id: google-2025-llm-migrations
+title: Migrating Code At Scale With LLMs At Google
+authors:
+  - Ziftci
+  - Nikolov
+  - Sjövall
+  - Kim
+  - Codecasa
+year: 2025
+venue: FSE 2025 / arXiv 2504.09691
+url: https://arxiv.org/abs/2504.09691
+kind: experiment
+verified: secondary
+retrieved: 2026-11-26
+summary: Google migra código a gran escala con LLM dentro de un pipeline con
+  verificación automática y revisión humana.
+facts:
+  - "39 migraciones de 3 desarrolladores en 12 meses: el LLM generó el 74,45 %
+    de los cambios y el 69,46 % de las ediciones."
+  - "Informe previo (arXiv 2501.06972): JUnit3→JUnit4 de 5.359 archivos y
+    149.000 líneas en 3 meses; estiman la mitad de tiempo pese a revisar todo."
+  - "Los autores afirman que un LLM con prompts simples no basta salvo para las
+    migraciones más simples: hace falta tooling de búsqueda, validación y
+    revisión."
+caveats:
+  - Estudio de caso interno, sin grupo de control.

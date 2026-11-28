@@ -1,0 +1,27 @@
+sections:
+  - id: evidencia
+    title: 1 · Qué dice la evidencia
+    topics:
+      - {id: productividad-medida, title: "Productividad con IA: lo que se ha medido", summary: "Los resultados que hay que conocer: Copilot 55,8 % más rápido en una tarea nueva, METR 19 % más lento en repos maduros, DORA 2025 (la IA amplifica). Cómo medir en tu equipo."}
+      - {id: como-funciona-un-agente-de-codigo, title: "Cómo funciona un agente de código", summary: "El bucle leer-pensar-actuar-verificar, las herramientas (leer, buscar, editar, ejecutar), el contexto que consume y por qué falla."}
+  - id: contexto
+    title: 2 · Contexto y especificación
+    topics:
+      - {id: context-engineering, title: "Context engineering en un repositorio", summary: "Archivos de instrucciones (CLAUDE.md, AGENTS.md), índices, convenciones y recuperación justo a tiempo: darle al agente el contexto mínimo de alta señal."}
+      - {id: specs-antes-que-codigo, title: "Specs antes que código", summary: "Desarrollo guiado por especificaciones: requisitos, plan y tareas pequeñas y verificables antes de pedir código; el humano decide el qué, el agente propone el cómo."}
+  - id: flujo
+    title: 3 · El flujo de trabajo
+    topics:
+      - {id: explorar-planificar-implementar-verificar, title: "Explorar → planificar → implementar → verificar", summary: "El ciclo que usan los equipos con agentes: entender antes de tocar, plan revisable, cambios pequeños y verificación automática en cada paso."}
+      - {id: tests-como-oraculo, title: "Tests como oráculo: TDD con agentes", summary: "Los tests le dicen al agente cuándo terminó: escribirlos antes, que fallen, implementar hasta verde y no dejar que el agente toque el oráculo."}
+      - {id: revisar-codigo-generado, title: "Revisar código generado por IA", summary: "Qué mirar en un PR de un agente: seguridad, dependencias inventadas, tests débiles, duplicación y mantenibilidad; la responsabilidad sigue siendo humana."}
+  - id: escala
+    title: 4 · A escala
+    topics:
+      - {id: migraciones-a-escala, title: "Migraciones a escala con LLM (caso Google)", summary: "Cómo Google migra miles de archivos con LLM: buscar los sitios, generar cambios, validar con build y tests, y revisión humana; qué porcentaje hizo el modelo."}
+      - {id: agentes-en-paralelo, title: "Agentes en paralelo y subagentes", summary: "Varias tareas a la vez con worktrees y entornos aislados, subagentes para explorar sin ensuciar el contexto y cuándo paralelizar no compensa."}
+  - id: organizacion
+    title: 5 · Organización y gobierno
+    topics:
+      - {id: gobierno-y-seguridad, title: "Gobierno: permisos, sandbox, secretos y métricas", summary: "Modos de permiso, entornos aislados, secretos fuera del alcance del agente, auditoría y métricas de equipo (DORA) para adoptar IA sin perder estabilidad."}
+      - {id: practicas-por-empresa, title: "Qué hacen Google, Microsoft, Anthropic y SpaceX", summary: "Lo publicado por cada empresa sobre trabajar con IA, con su fuente y su límite; y lo que NO se sabe (SpaceX solo tiene ofertas de empleo públicas)."}

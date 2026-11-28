@@ -1,0 +1,26 @@
+questions:
+  - q: ¿Por qué el ensayo de Copilot (55,8 % más rápido) y el de METR (19 % más lento) no se contradicen?
+    kind: por-que
+    a: "Porque miden **contextos distintos**: Copilot, una tarea **nueva, pequeña y bien especificada** con programadores contratados; METR, **expertos** en sus **propios repositorios maduros**, donde el contexto implícito pesa mucho y revisar lo generado cuesta. La ganancia depende de la tarea y del contexto."
+    uses: []
+  - q: ¿Qué pasa si mides la productividad con IA preguntando al equipo si se siente más rápido?
+    kind: que-pasa-si
+    a: "Puedes obtener lo contrario de la realidad: en METR los desarrolladores **creían** haber ido un 20 % más rápido cuando en realidad fueron un 19 % más lentos. Mide con datos: tiempo real de tareas comparables, métricas DORA, retrabajo y bugs escapados."
+    uses: []
+  - q: Según DORA 2025, ¿qué equipos aprovechan más la IA?
+    kind: aplicar
+    a: "Los que ya tienen **arquitectura poco acoplada** y **ciclos de feedback rápidos** (tests, CI, despliegues frecuentes). La IA **amplifica** lo existente: acelera a los equipos sanos y añade poco (o inestabilidad) a los acoplados y lentos. Invertir en esas capacidades multiplica el efecto de la IA."
+    uses: []
+  - q: Compara cómo cambia el cuello de botella al adoptar agentes.
+    kind: comparar
+    a: Antes, **escribir** código era lo caro. Con agentes, escribir se abarata y lo caro pasa a ser **especificar bien**, **revisar** e **integrar** con seguridad. Si el proceso de revisión no escala, la cola de PR crece y la ganancia se pierde.
+    uses: []
+  - q: ¿Por qué la adopción de IA puede subir el throughput y bajar la estabilidad a la vez?
+    kind: por-que
+    a: Porque se entregan **más cambios** y más grandes, pero si la verificación y la revisión no crecen al mismo ritmo, se cuelan **más defectos**. DORA observa ese patrón. La respuesta es reforzar tests, PR pequeños y métricas de estabilidad, no frenar la herramienta.
+    uses: []
+  - q: "Error común: extrapolar «55 % más rápido» a la productividad de todo el equipo."
+    kind: error-comun
+    a: Ese dato es de **una tarea** pequeña y nueva, medida en minutos. El trabajo real incluye entender código existente, coordinar, revisar y depurar, donde el efecto puede ser menor o negativo. Usa el dato como posibilidad, no como promesa, y mide en tu contexto.
+    uses: []
+sims: []

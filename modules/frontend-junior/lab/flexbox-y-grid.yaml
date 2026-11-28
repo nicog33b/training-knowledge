@@ -1,0 +1,26 @@
+questions:
+  - q: Compara Flexbox y Grid.
+    kind: comparar
+    a: "**Flexbox** distribuye en **una dimensión** (fila o columna) y el tamaño del contenido manda: barras, filas de botones, centrar. **Grid** organiza **filas y columnas** a la vez con una plantilla que manda sobre el contenido: layouts de página y rejillas. Se combinan."
+    uses: []
+  - q: Haz una rejilla de tarjetas que se adapte sola sin media queries.
+    kind: aplicar
+    a: "`display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem;`. Caben tantas columnas como sea posible de al menos 240px, y el sobrante se reparte con `1fr`. En móvil queda una columna y en escritorio tres o cuatro."
+    uses: []
+  - q: ¿Por qué gap es mejor que márgenes para separar elementos?
+    kind: por-que
+    a: Porque `gap` solo pone espacio **entre** elementos, sin sobrar al principio ni al final y sin márgenes negativos ni excepciones para el último hijo. Funciona igual en Flexbox y Grid y se ajusta solo al hacer wrap.
+    uses: []
+  - q: ¿Qué pasa si fijas la altura de una tarjeta a 200px?
+    kind: que-pasa-si
+    a: Cuando el texto crece (traducciones más largas, usuario con letra grande o zoom), el contenido **se desborda** o se corta. Deja que la altura dependa del contenido; si necesitas filas iguales, Grid alinea las alturas por fila automáticamente.
+    uses: []
+  - q: ¿Cómo centras un elemento vertical y horizontalmente?
+    kind: aplicar
+    a: "En el contenedor: `display: grid; place-items: center;` o con Flexbox `display: flex; justify-content: center; align-items: center;`. El contenedor necesita una altura (p. ej. `min-height: 100vh`) para que exista espacio donde centrar."
+    uses: []
+  - q: "Error común: confundir justify-content y align-items en Flexbox."
+    kind: error-comun
+    a: '`justify-content` alinea en el **eje principal** (el de `flex-direction`) y `align-items` en el **transversal**. Si cambias a `flex-direction: column`, el eje principal pasa a ser vertical y los dos "se intercambian". Piensa en ejes, no en horizontal y vertical.'
+    uses: []
+sims: []

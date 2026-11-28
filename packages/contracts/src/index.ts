@@ -29,6 +29,8 @@ export const ModuleManifest = z
     tags: z.array(z.string()).default([]),
     /** ids de OTROS módulos cuyo glosario se hereda (además del compartido). */
     glossaries: z.array(Slug).default([]),
+    /** nivel orientativo del curso (para rutas y para la portada). */
+    level: z.enum(['inicial', 'intermedio', 'avanzado', 'experto']).optional(),
   })
   .strict();
 export type ModuleManifest = z.infer<typeof ModuleManifest>;
@@ -143,6 +145,94 @@ export const LabFile = z
   .strict();
 export type LabFile = z.infer<typeof LabFile>;
 
+// ───────── Herramientas por curso: constructores comunes + configuración del curso ─────────
+// modules/<id>/tools/<herramienta>.yaml. El CONSTRUCTOR (builder) es general; la configuración es del curso.
+// Ver research/decisions/herramientas-por-curso-con-constructores.md. Un constructor nuevo =
+// esquema aquí + validación en packages/tools + render en apps/web/src/components/Tool.astro.
+const ToolBase = {
+  id: Slug,
+  title: z.string().min(1),
+  /** para qué sirve (una o dos frases). */
+  summary: z.string().min(1).max(280),
+  /** subtemas donde se muestra la herramienta (al final de la página). */
+  topics: z.array(Slug).default([]),
+};
+const VarId = z.string().regex(/^[a-z_][a-z0-9_]*$/, 'snake_case');
+
+export const CalcInput = z.discriminatedUnion('type', [
+  z.object({ id: VarId, label: z.string().min(1), type: z.literal('number'), min: z.number(), max: z.number(), step: z.number().positive().default(1), default: z.number(), unit: z.string().optional(), hint: z.string().optional() }).strict(),
+  z.object({ id: VarId, label: z.string().min(1), type: z.literal('select'), options: z.array(z.object({ label: z.string().min(1), value: z.number() }).strict()).min(2), default: z.number(), hint: z.string().optional() }).strict(),
+]);
+export const CalculatorTool = z
+  .object({
+    ...ToolBase,
+    builder: z.literal('calculadora'),
+    inputs: z.array(CalcInput).min(1),
+    /** expresiones del mini-lenguaje seguro de @tk/sims (variables = ids de inputs u outputs anteriores). */
+    outputs: z.array(z.object({ id: VarId, label: z.string().min(1), expr: z.string().min(1), unit: z.string().optional(), decimals: z.number().int().min(0).max(6).default(0), main: z.boolean().default(false) }).strict()).min(1),
+    /** avisos condicionales: la primera o todas las que cumplan `when`. */
+    notes: z.array(z.object({ when: z.string().min(1), text: z.string().min(1), tone: z.enum(['info', 'ok', 'warn']).default('info') }).strict()).default([]),
+  })
+  .strict();
+
+export const DecisionTool = z
+  .object({
+    ...ToolBase,
+    builder: z.literal('decision'),
+    start: Slug,
+    nodes: z.array(z.object({ id: Slug, question: z.string().min(1), help: z.string().optional(), options: z.array(z.object({ label: z.string().min(1), next: Slug.optional(), result: Slug.optional() }).strict()).min(2) }).strict()).min(1),
+    results: z.array(z.object({ id: Slug, title: z.string().min(1), why: z.string().min(1), watch: z.string().optional(), see: z.array(Slug).default([]) }).strict()).min(2),
+  })
+  .strict();
+
+export const ChecklistTool = z
+  .object({
+    ...ToolBase,
+    builder: z.literal('checklist'),
+    groups: z.array(z.object({ title: z.string().min(1), items: z.array(z.object({ text: z.string().min(1), why: z.string().optional() }).strict()).min(1) }).strict()).min(1),
+  })
+  .strict();
+
+export const CompareTool = z
+  .object({
+    ...ToolBase,
+    builder: z.literal('comparador'),
+    options: z.array(z.object({ id: Slug, label: z.string().min(1) }).strict()).min(2),
+    /** cada fila = un criterio; `values` en el mismo orden que `options`. */
+    rows: z.array(z.object({ criterion: z.string().min(1), values: z.array(z.string()).min(2), group: z.string().optional() }).strict()).min(2),
+  })
+  .strict();
+
+export const TemplateTool = z
+  .object({
+    ...ToolBase,
+    builder: z.literal('plantilla'),
+    fields: z.array(z.object({ id: VarId, label: z.string().min(1), kind: z.enum(['text', 'textarea', 'select']).default('text'), placeholder: z.string().optional(), options: z.array(z.string()).optional(), default: z.string().optional() }).strict()).min(1),
+    /** texto con {{campo}}; las líneas con un campo vacío se omiten. */
+    template: z.string().min(1),
+  })
+  .strict();
+
+export const ToolSpec = z.discriminatedUnion('builder', [CalculatorTool, DecisionTool, ChecklistTool, CompareTool, TemplateTool]);
+export type ToolSpec = z.infer<typeof ToolSpec>;
+export type CalculatorTool = z.infer<typeof CalculatorTool>;
+export type DecisionTool = z.infer<typeof DecisionTool>;
+export type ChecklistTool = z.infer<typeof ChecklistTool>;
+export type CompareTool = z.infer<typeof CompareTool>;
+export type TemplateTool = z.infer<typeof TemplateTool>;
+export const TOOL_BUILDERS = ['calculadora', 'decision', 'checklist', 'comparador', 'plantilla'] as const;
+
+// ───────── Rutas de aprendizaje: varios cursos encadenados (paths/<id>.yaml) ─────────
+export const LearningPath = z
+  .object({
+    id: Slug,
+    title: z.string().min(1),
+    summary: z.string().min(1).max(280),
+    steps: z.array(z.object({ module: Slug, goal: z.string().min(1) }).strict()).min(1),
+  })
+  .strict();
+export type LearningPath = z.infer<typeof LearningPath>;
+
 // ───────── Índices generados (lo que leen agentes y UIs) ─────────
 export const TopicIndexEntry = z.object({
   id: Slug,
@@ -159,6 +249,8 @@ export const TopicIndexEntry = z.object({
   /** nº de preguntas sugeridas y simulaciones en lab/<subtema>.yaml. */
   questions: z.number().default(0),
   sims: z.array(z.string()).default([]),
+  /** herramientas del curso asociadas a este subtema ("<builder>:<id>"). */
+  tools: z.array(z.string()).default([]),
 });
 export type TopicIndexEntry = z.infer<typeof TopicIndexEntry>;
 
@@ -172,6 +264,8 @@ export const ModuleIndex = z.object({
   sections: z.array(z.object({ id: z.string(), title: z.string(), topics: z.array(z.string()) })),
   /** ids de términos propios del módulo. */
   ownTerms: z.array(z.string()),
+  /** herramientas del curso ("<builder>:<id>"). */
+  tools: z.array(z.string()).default([]),
 });
 export type ModuleIndex = z.infer<typeof ModuleIndex>;
 
@@ -284,8 +378,10 @@ export const RootIndex = z.object({
       done: z.number(),
       planned: z.number(),
       terms: z.number(),
+      tools: z.number().default(0),
     }),
   ),
+  paths: z.array(z.object({ id: Slug, title: z.string(), modules: z.array(z.string()) })).default([]),
 });
 export type RootIndex = z.infer<typeof RootIndex>;
 
@@ -306,6 +402,10 @@ export interface ContentSource {
   readOutline(moduleId: string): Promise<unknown>;
   /** lab/<subtema>.yaml del módulo (opcional en adaptadores). */
   listLabs?(moduleId: string): Promise<RawSource[]>;
+  /** tools/<herramienta>.yaml del módulo (opcional). */
+  listTools?(moduleId: string): Promise<RawSource[]>;
+  /** paths/<ruta>.yaml (opcional). */
+  listPaths?(): Promise<RawSource[]>;
 }
 
 export const SHARED = '_shared';

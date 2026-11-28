@@ -1,0 +1,43 @@
+sections:
+  - id: bases
+    title: 1 · Las bases que sostienen todo
+    topics:
+      - {id: orden-de-la-oracion, title: "El orden de la oración", summary: "Sujeto + verbo + complemento: por qué el inglés no omite el sujeto, dónde van adjetivos y adverbios y cómo el orden sustituye a las terminaciones del español."}
+      - {id: verbos-auxiliares, title: "Los auxiliares do, be y have", summary: "Los tres verbos que arman todos los tiempos, preguntas y negaciones; cuándo son auxiliares y cuándo verbos principales."}
+      - {id: preguntas-y-negaciones, title: "Preguntas y negaciones", summary: "La regla única: el primer auxiliar se mueve o lleva not. Preguntas sí/no, preguntas Wh, short answers y contracciones."}
+      - {id: formas-del-verbo, title: "Las cinco formas del verbo", summary: "Base, -s, -ing, pasado y participio: cómo se forman, verbos irregulares y qué forma pide cada auxiliar."}
+  - id: mapa-de-tiempos
+    title: 2 · El mapa de los tiempos
+    topics:
+      - {id: tiempo-y-aspecto, title: "Tiempo × aspecto: la tabla de 12", summary: "Los 12 tiempos salen de combinar 3 tiempos (presente, pasado, futuro) con 4 aspectos (simple, continuous, perfect, perfect continuous), con una fórmula fija."}
+      - {id: espanol-vs-ingles, title: "Español vs inglés: equivalencias", summary: "Qué tiempo inglés corresponde a cada tiempo del español (indefinido, imperfecto, pretérito perfecto, pluscuamperfecto…) y dónde no hay traducción directa."}
+  - id: presente
+    title: 3 · Presente
+    topics:
+      - {id: present-simple, title: "Present Simple", summary: "Hábitos, verdades y horarios; la -s de tercera persona y do/does en preguntas y negaciones."}
+      - {id: present-continuous, title: "Present Continuous y verbos de estado", summary: "Acciones en curso o temporales (am/is/are + -ing) y los verbos de estado que no suelen ir en continuo."}
+  - id: pasado
+    title: 4 · Pasado
+    topics:
+      - {id: past-simple, title: "Past Simple", summary: "Acciones terminadas en un momento pasado: -ed, irregulares y did en preguntas y negaciones."}
+      - {id: past-continuous, title: "Past Continuous", summary: "Acción en progreso en un momento del pasado (was/were + -ing) y su combinación con Past Simple usando when y while."}
+      - {id: imperfecto-en-ingles, title: "El pretérito imperfecto en inglés", summary: "El inglés no tiene imperfecto: según el sentido se dice con Past Continuous, used to, would o Past Simple."}
+  - id: perfectos
+    title: 5 · Los tiempos perfectos
+    topics:
+      - {id: present-perfect, title: "Present Perfect", summary: "have/has + participio: pasado conectado con el presente; for/since, already, yet, just, ever y el contraste con Past Simple."}
+      - {id: present-perfect-continuous, title: "Present Perfect Continuous", summary: "have/has been + -ing: duración de una actividad que empezó antes y sigue o acaba de terminar con efectos visibles."}
+      - {id: past-perfect, title: "Past Perfect (y su continuo)", summary: "had + participio: el pasado del pasado; cuándo hace falta y cuándo basta el Past Simple."}
+  - id: futuro
+    title: 6 · Futuro
+    topics:
+      - {id: formas-de-futuro, title: "Las formas de futuro", summary: "will, going to, Present Continuous y Present Simple para el futuro: cuál elegir según decisión, plan, evidencia u horario."}
+      - {id: futuro-continuo-y-perfecto, title: "Future Continuous y Future Perfect", summary: "will be + -ing (en progreso en un momento futuro) y will have + participio (terminado antes de un momento futuro)."}
+      - {id: marcadores-de-tiempo, title: "Marcadores de tiempo: el repaso de los 12", summary: "Las palabras que delatan el tiempo correcto (yesterday, ago, since, yet, by the time, while…) y un repaso cruzado de todos los tiempos."}
+  - id: otras-bases
+    title: 7 · Otras bases imprescindibles
+    topics:
+      - {id: modales, title: "Verbos modales", summary: "can, could, must, have to, should, may, might y will/would: sin -s, sin do y seguidos de la base del verbo."}
+      - {id: condicionales, title: "Condicionales 0, 1, 2 y 3", summary: "Las cuatro estructuras con if: verdades, futuro posible, presente hipotético y pasado que no ocurrió."}
+      - {id: voz-pasiva, title: "Voz pasiva", summary: "be + participio en cualquier tiempo: cuándo se usa y cómo traduce el «se» impersonal del español."}
+      - {id: articulos, title: "Artículos a, an, the y sin artículo", summary: "Cuándo usar a/an, the o nada; los errores típicos del hispanohablante con generalizaciones, profesiones y lugares."}
