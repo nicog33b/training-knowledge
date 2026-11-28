@@ -34,10 +34,11 @@ const api = import.meta.env.PUBLIC_TUTOR_URL ?? 'http://127.0.0.1:4322';
 </div>
 
 <style is:global>
-  #tk-chat { position: fixed; right: 16px; bottom: 16px; z-index: 50; font-size: .93rem; }
+  #tk-chat { position: fixed; right: 8px; left: 8px; bottom: 8px; z-index: 50; font-size: .93rem; }
   #tk-chat button { font: inherit; cursor: pointer; }
   .tk-fab { border: 0; border-radius: 99px; padding: .65rem 1.1rem; background: var(--accent); color: #fff; box-shadow: 0 4px 16px rgb(0 0 0 / .2); }
-  .tk-panel { width: min(400px, calc(100vw - 32px)); height: min(560px, calc(100vh - 32px)); display: flex; flex-direction: column;
+  .tk-fab { float: right; }
+  .tk-panel { width: 100%; height: min(560px, calc(100dvh - 16px)); display: flex; flex-direction: column;
     background: var(--bg); border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 8px 32px rgb(0 0 0 / .22); overflow: hidden; }
   .tk-panel[hidden] { display: none; }
   .tk-panel header { display: flex; justify-content: space-between; align-items: center; gap: .5rem; padding: .6rem .8rem; background: var(--card); border-bottom: 1px solid var(--line); }
@@ -65,7 +66,14 @@ const api = import.meta.env.PUBLIC_TUTOR_URL ?? 'http://127.0.0.1:4322';
   .tk-form button { border: 0; border-radius: 10px; padding: 0 .9rem; background: var(--accent); color: #fff; }
   .tk-form button:disabled { opacity: .5; cursor: default; }
   .tk-hint { margin: 0; padding: .2rem .8rem .6rem; color: var(--muted); font-size: .72rem; }
-  @media (max-width: 520px) { #tk-chat { right: 8px; left: 8px; bottom: 8px; } .tk-fab { float: right; } .tk-panel { width: 100%; } }
+  /* Móvil: 16px en el textarea evita el zoom automático de iOS al enfocar. */
+  .tk-form textarea { font-size: 16px; }
+  @media (min-width: 521px) {
+    #tk-chat { right: 16px; left: auto; bottom: 16px; }
+    .tk-fab { float: none; }
+    .tk-panel { width: min(400px, calc(100vw - 32px)); height: min(560px, calc(100vh - 32px)); }
+    .tk-form textarea { font-size: inherit; }
+  }
 </style>
 
 <script>

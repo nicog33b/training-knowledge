@@ -71,7 +71,13 @@ const api = import.meta.env.PUBLIC_TUTOR_URL ?? 'http://127.0.0.1:4322';
   .tk-user:hover { color: var(--fg); border-color: var(--line); }
   .tk-avatar { width: 22px; height: 22px; border-radius: 50%; display: inline-grid; place-items: center; font-size: .66rem; font-weight: 700; color: var(--on-accent);
     background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 50%, var(--k-comparar))); }
-  @media (max-width: 620px) { .tk-top nav a:not(.tk-brand):nth-child(n+3) { display: none; } .tk-user-name, .tk-spend-label { display: none; } .tk-spend-btn::before { content: '$'; } }
+  /* Mobile first: base = móvil; desde 621px se restaura tablet/escritorio. */
+  .tk-top nav a:not(.tk-brand):nth-child(n+3), .tk-user-name, .tk-spend-label { display: none; }
+  .tk-spend-btn::before { content: '$'; }
+  @media (min-width: 621px) {
+    .tk-top nav a:not(.tk-brand):nth-child(n+3), .tk-user-name, .tk-spend-label { display: inline; }
+    .tk-spend-btn::before { content: none; }
+  }
 </style>
 
 <script>

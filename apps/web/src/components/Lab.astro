@@ -128,7 +128,7 @@ const kinds = Object.keys(KIND).filter((k) => lab.questions.some((q) => q.kind =
   .pr-head { display: flex; gap: 1.5rem; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; }
   .pr-head > div:first-child { flex: 1 1 320px; }
   .pr-lead { margin: 0; color: var(--muted); max-width: 52ch; }
-  .pr-progress { display: flex; align-items: center; gap: .9rem; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: .7rem 1rem; }
+  .pr-progress { width: 100%; display: flex; align-items: center; gap: .9rem; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: .7rem 1rem; }
   .pr-ring { position: relative; width: 58px; height: 58px; flex: none; }
   .pr-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
   .pr-ring circle { fill: none; stroke: var(--line); stroke-width: 3.2; }
@@ -144,12 +144,12 @@ const kinds = Object.keys(KIND).filter((k) => lab.questions.some((q) => q.kind =
   .lab .chip { font: inherit; font-size: .8rem; border: 1px solid var(--line); background: var(--bg); color: var(--muted); border-radius: 99px; padding: .28rem .8rem; cursor: pointer; transition: all .15s; }
   .lab .chip:hover { color: var(--fg); border-color: color-mix(in srgb, var(--k) 50%, var(--line)); }
   .lab .chip.on { background: color-mix(in srgb, var(--k) 14%, var(--bg)); border-color: color-mix(in srgb, var(--k) 55%, transparent); color: var(--k); font-weight: 600; }
-  .lab .chip.reset { margin-left: auto; border-style: dashed; }
+  .lab .chip.reset { margin-left: 0; border-style: dashed; }
   .pr-filters .sep { width: 1px; height: 1.2rem; background: var(--line); margin: 0 .2rem; }
 
   /* Tarjetas de pregunta */
   .qcards { list-style: none; padding: 0; margin: 0; display: grid; gap: .8rem; }
-  .qcard { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem 1.15rem 1rem 1.3rem; overflow: hidden;
+  .qcard { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: .9rem .9rem .9rem 1.1rem; overflow: hidden;
     transition: border-color .2s, box-shadow .2s; }
   .qcard::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 4px; background: var(--k); opacity: .75; }
   .qcard:hover { box-shadow: 0 4px 18px rgb(0 0 0 / .06); }
@@ -185,7 +185,7 @@ const kinds = Object.keys(KIND).filter((k) => lab.questions.some((q) => q.kind =
   /* Generar con IA */
   .gen { margin-top: 1.6rem; border: 1px dashed color-mix(in srgb, var(--accent) 40%, var(--line)); border-radius: var(--radius); padding: 1rem 1.15rem;
     background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 6%, var(--bg)), var(--bg)); }
-  .gen-head { display: flex; justify-content: space-between; gap: 1rem; align-items: flex-start; }
+  .gen-head { display: flex; flex-direction: column; justify-content: space-between; gap: .4rem; align-items: flex-start; }
   .gen-head p { margin: .25rem 0 0; }
   .cost-pill { flex: none; font-size: .7rem; font-weight: 700; color: var(--warn); border: 1px solid color-mix(in srgb, var(--warn) 50%, transparent); border-radius: 99px; padding: .15rem .55rem; white-space: nowrap; }
   .gen-list:not(:empty) { margin-top: 1rem; }
@@ -211,11 +211,15 @@ const kinds = Object.keys(KIND).filter((k) => lab.questions.some((q) => q.kind =
   .sim .why { flex-basis: 100%; font-size: .88rem; color: var(--muted); }
   .sim .score { font-size: 1.05rem; }
 
-  @media (max-width: 560px) {
-    .pr-progress { width: 100%; }
-    .lab .chip.reset { margin-left: 0; }
-    .qcard { padding: .9rem .9rem .9rem 1.1rem; }
-    .gen-head { flex-direction: column; gap: .4rem; }
+  .sim textarea { font-size: 16px; }
+
+  /* Mobile first: lo anterior es la base móvil; desde 561px, tablet/escritorio como antes. */
+  @media (min-width: 561px) {
+    .pr-progress { width: auto; }
+    .lab .chip.reset { margin-left: auto; }
+    .qcard { padding: 1rem 1.15rem 1rem 1.3rem; }
+    .gen-head { flex-direction: row; gap: 1rem; }
+    .sim textarea { font-size: inherit; }
   }
 </style>
 
