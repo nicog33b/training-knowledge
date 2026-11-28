@@ -120,8 +120,9 @@ const total = tool.builder === 'checklist' ? tool.groups.reduce((n, g) => n + g.
   .tool :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   .tool input[type=text], .tool input[type=search], .tool textarea, .tool select { font: inherit; font-size: .9rem; width: 100%; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 9px; padding: .4rem .55rem; }
   /* Calculadora */
-  .calc { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.2rem; }
-  @media (max-width: 680px) { .calc, .tpl { grid-template-columns: 1fr !important; } }
+  .calc { display: grid; grid-template-columns: 1fr; gap: 1.2rem; }
+  /* Mobile first: base = móvil; el min-width restaura tablet/escritorio como antes. */
+  @media (min-width: 681px) { .calc { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
   .calc-in { display: grid; gap: .8rem; }
   .calc-in label { display: grid; gap: .25rem; font-size: .86rem; }
   .calc-in label > span { display: flex; justify-content: space-between; gap: .5rem; font-weight: 600; }
@@ -171,7 +172,8 @@ const total = tool.builder === 'checklist' ? tool.groups.reduce((n, g) => n + g.
   .cmp tbody th small { display: block; font-size: .66rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
   .cmp tr[hidden] { display: none; }
   /* Plantilla */
-  .tpl { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 1rem; }
+  .tpl { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+  @media (min-width: 681px) { .tpl { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); } }
   .tpl-in { display: grid; gap: .6rem; }
   .tpl-in label { display: grid; gap: .2rem; font-size: .84rem; font-weight: 600; }
   .tpl-out { display: grid; gap: .5rem; align-content: start; }

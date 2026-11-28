@@ -83,9 +83,10 @@ const courses = modules.map((m) => ({ id: m.manifest.id, title: m.manifest.title
   .form { display: grid; gap: .8rem; max-width: 560px; }
   .form label { display: grid; gap: .3rem; font-size: .86rem; font-weight: 600; }
   .form input, .form select { font: inherit; font-weight: 400; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 10px; padding: .55rem .7rem; }
-  .form .row { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+  .form .row { display: grid; grid-template-columns: 1fr; gap: .8rem; }
   .form button { justify-self: start; font: inherit; font-weight: 650; background: var(--accent); color: var(--on-accent); border: 0; border-radius: 10px; padding: .55rem 1rem; cursor: pointer; }
-  @media (max-width: 600px) { .form .row { grid-template-columns: 1fr; } }
+  /* Mobile first: base = móvil; el min-width restaura tablet/escritorio como antes. */
+  @media (min-width: 601px) { .form .row { grid-template-columns: 1fr 1fr; } }
 </style>
 <script>
   import { summary } from '@tk/practice';
